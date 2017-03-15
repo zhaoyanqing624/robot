@@ -1,0 +1,42 @@
+﻿.rdolist, .chklist {
+    display: none;
+}
+
+.rdobox, .chkbox {
+    display: inline-block;
+    padding: 10px;
+    height: 35px;
+    width:60px;
+    line-height: 16px;
+    background: #eee;
+    border-radius: 3px;
+    color: #666;
+    font-family: 'Microsoft YaHei';
+}
+
+.check-image {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-top: -4px;
+    background: url(zhao/radio&check/images/input-unchecked.png) no-repeat;
+    vertical-align: middle;
+}
+
+.unchecked {
+    background: #ECF0F1;
+    color: #666;
+    transition-property: background;
+    transition-delay: 0s;
+    transition-duration: .1s;
+    transition-timing-function: linear;
+}
+
+    .unchecked:hover {
+        background: #dedfe0;
+    }
+
+.checked {
+    background: #3498DB;
+    color: #fff;
+}

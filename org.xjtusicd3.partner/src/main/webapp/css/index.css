@@ -1,0 +1,115 @@
+@charset 'utf-8'; 
+
+#quickAsk {
+	font-size: 14px;
+	width: 820px;
+	height: 140px;
+	padding: 0 30px;
+	border-bottom: 1px solid #ebebeb
+}
+
+#quickAsk p {
+	font-size: 16px;
+	line-height: 30px;
+	height: 30px;
+	margin: 0 0 11px 10px;
+	color: #5b5b5b
+}
+
+#quickAsk p:before {
+	position: relative;
+	top: -4px;
+	left: -10px;
+	content: url(../images/leftquote.png)
+}
+
+#quickAsk p:after {
+	position: relative;
+	top: -4px;
+	left: 10px;
+	content: url(../images/rightquote.png)
+}
+
+#quickAsk input {
+	font-size: 13px;
+	display: block;
+	box-sizing: border-box;
+	width: 650px;
+	height: 36px;
+	padding: 5px 10px;
+	border: 1px solid #87a5b7;
+	border-radius: 5px;
+	background: #e9f3f9
+}
+
+#quickAsk input:focus {
+	border: 1px solid #888
+}
+
+#quickAsk button {
+	font-size: 14px;
+	line-height: 28px;
+	float: right;
+	width: 55px;
+	height: 28px;
+	margin: -32px 105px;
+	color: #fff;
+	border: 1px solid #5d7d90;
+	border-radius: 2px;
+	background: #579dc5
+}
+
+#quickAsk button:hover {
+	background: #94d0f2
+}
+
+#tagFilter a.selected, #tagFilter a:hover {
+	background: #d7f1ff
+}
+
+#wenba {
+	width: 238px;
+	margin-top: 3px;
+	border-radius: 5px
+}
+
+#mainR #topic {
+	margin-top: 30px
+}
+
+#mainR #topicTitle {
+	margin: 20px 0
+}
+
+#mainR #topicTitle img {
+	margin-right: 10px
+}
+
+#tagFilter {
+	padding-bottom: 20px
+}
+
+#tagFilter li {
+	font-size: 14px;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 115px;
+	margin-bottom: 10px;
+	color: #3472af
+}
+
+#tagFilter a {
+	line-height: 24px;
+	padding: 5px 10px;
+	border-radius: 24px
+}
+
+#tagFilter a:hover {
+	-webkit-transition: background .4s;
+	transition: background .4s
+}
+
+#tagFilter a.selected:after {
+	margin-left: 3px;
+	content: url(../img/X.png)
+}

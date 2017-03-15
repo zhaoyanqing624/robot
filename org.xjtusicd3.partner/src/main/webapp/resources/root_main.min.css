@@ -1,0 +1,303 @@
+a, button, input, select, textarea {
+	outline: 0
+}
+
+.font_set_div, .font_set_div2 {
+	padding-left: 8px;
+	font-size: 12px;
+	float: left
+}
+
+.font_set_div a, .font_set_div2 a, .font_show a {
+	text-decoration: none;
+	color: #000
+}
+
+#shortcutDiv img:hover, .font_set_div, .send_left_btn, .setting-head {
+	cursor: pointer
+}
+
+a {
+	blr: expression(this . onFocus = this . blur())
+}
+
+a:focus {
+	-moz-outline-style: none
+}
+
+.lhead {
+	width: 48px;
+	height: 48px;
+	background-image: url(/org.xjtusicd3.partner/static/image/xiaoduo.png)
+}
+
+.rhead, .setting-head {
+	width: 50px;
+	height: 50px
+}
+
+.thinkHead {
+	background-image: url(images/think_head2.png)
+}
+
+.rhead {
+	background-image: url(/org.xjtusicd3.partner/static/image/user.png);
+	border-radius: 15px
+}
+
+.setting-head {
+	border-radius: 75px
+}
+
+.font_set_div {
+	background-color: transparent
+}
+
+.font_set_div a {
+	font-size: 12px;
+	margin-left: 3px
+}
+
+.font_set_div2 {
+	margin: auto 5px
+}
+
+.font_set_div2 a {
+	font-size: 12px;
+	margin-left: 3px
+}
+
+.font_show {
+	text-indent: 4px;
+	border: 1px solid #D3D3D3;
+	font-size: 13px;
+	width: 60px;
+	background-color: #fff;
+	position: absolute;
+	z-index: 1000;
+	line-height: 17px
+}
+
+.font_show a {
+	width: 100%;
+	display: block
+}
+
+.font_show a:hover {
+	background-color: #40A2F3;
+	color: #fff
+}
+
+.button_div {
+	border-top: 1px soild #D3D3D3;
+	border-bottom: 1px soild #D3D3D3;
+	width: 100%;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 10px
+}
+
+.send_left_btn {
+	width: 72px;
+	height: 29px;
+	background: url(/org.xjtusicd3.partner/static/image/icon_home.png) -176px 0 no-repeat;
+	display: block;
+	float: left
+}
+
+body, div, h1, h2, h3, h4, h5, h6, li, ol, p, table, ul {
+	margin: 0 auto;
+	padding: 0;
+	border: 0
+}
+
+body {
+	font-size: 14px
+}
+
+.lenovo_l_title, .lenovo_lcn2, .lenovo_lcn3, .lenovo_lcn4, .lenovo_lcn5,
+	.lenovo_lcn6, .lenovo_lcn7, .lenovo_lcn8, .lenovo_r_title, .lenovo_rcn2,
+	.lenovo_rcn3, .lenovo_rcn4, .lenovo_rcn5, .lenovo_rcn6, .lenovo_rcn7,
+	.lenovo_rcn8 {
+	width: 100%
+}
+
+.lenovo_lcn1 .f_l {
+	float: left;
+	background-color: #CFE8FC
+}
+
+.f_r {
+	float: right
+}
+
+.lenovo_lcn1, .lenovo_rcn1 {
+	width: auto;
+	*width: 100%
+}
+
+.lenovo_lcn2 {
+	background: url(images/new/new/white_top_bg.jpg) left top repeat-x
+}
+
+.lenovo_lcn3 {
+	background: url(images/new/new/white_.right_bg.jpg) right top repeat-y
+}
+
+.lenovo_lcn4 {
+	background: url(images/new/new/white_bottom_bg.jpg) left bottom repeat-x
+}
+
+.lenovo_lcn5 {
+	background: url(images/new/new/white_left_top.jpg) left top no-repeat
+}
+
+.lenovo_lcn6 {
+	background: url(images/new/new/white_right_top.jpg) right top no-repeat
+}
+
+.lenovo_lcn7 {
+	background: url(images/new/new/white_right_bottom.jpg) right bottom
+		no-repeat
+}
+
+.lenovo_lcn8 {
+	background: url(images/new/new/white_left_bottom.jpg) left bottom
+		no-repeat
+}
+
+.lenovo_lcn9 {
+	background: url(images/new/new/white_left_arrow.jpg) 0 18px no-repeat
+}
+
+.lenovo_lcn {
+	padding: 12px 15px 12px 7px;
+	*padding: 12px 15px
+}
+
+.lenovo_lcn h2, .lenovo_rcn h2 {
+	font-size: 14px;
+	color: #0865c4;
+	text-align: left;
+	width: 100%;
+	line-height: 22px;
+	border: 0;
+	padding-bottom: 5px
+}
+
+.lenovo_rcn h2 {
+	font-weight: 400
+}
+
+.lenovo_lcontent, .lenovo_rcontent {
+	width: 100%;
+	text-align: left;
+	line-height: 20px
+}
+
+.lenovo_rcn2 {
+	background: url(images/new/new/blue_bottom_bg.jpg) left bottom repeat-x
+}
+
+.lenovo_rcn3 {
+	background: url(images/new/new/blue_left_bg.jpg) left top repeat-y
+}
+
+.lenovo_rcn4 {
+	background: url(images/new/new/blue_top_bg.jpg) left top repeat-x
+}
+
+.lenovo_rcn5 {
+	background: url(images/new/new/blue_left_top.jpg) left top no-repeat
+}
+
+.lenovo_rcn6 {
+	background: url(images/new/new/blue_right_top.jpg) right top no-repeat
+}
+
+.lenovo_rcn7 {
+	background: url(images/new/new/blue_right_bottom.jpg) right bottom
+		no-repeat
+}
+
+.lenovo_rcn8 {
+	background: url(images/new/new/blue_left_bottom.jpg) left bottom
+		no-repeat
+}
+
+.lenovo_rcn9 {
+	background: url(images/new/new/blue_arrow.jpg) 100% 50% no-repeat
+}
+
+.lenovo_rcn {
+	padding: 12px 22px 16px 20px
+}
+
+.lenovo_l_title, .lenovo_r_title {
+	height: 34px;
+	overflow: hidden;
+	padding-bottom: 3px
+}
+
+.lenovo_l_title h2, .lenovo_l_title p, .lenovo_r_title h2,
+	.lenovo_r_title p {
+	line-height: 34px
+}
+
+.lenovo_l_title h2, .lenovo_r_title h2 {
+	font-size: 12px;
+	font-weight: 700;
+	color: #53bdbe
+}
+
+.lenovo_l_title h2 {
+	padding-left: 42px;
+	background: url(images/new/new/header_icon.gif) 12px center no-repeat
+}
+
+.lenovo_r_title h2 {
+	padding-right: 12px
+}
+
+.lenovo_l_title p, .lenovo_r_title p {
+	height: 34px;
+	line-height: 34px;
+	font-size: 12px;
+	color: #999;
+	padding: 0 10px
+}
+
+.lenovo_lcn1 {
+	background: #fff;
+	border-radius: 5px;
+	margin: 5px 0 5px 15px;
+	position: relative
+}
+
+.blue_arrow, .white_left_arrow {
+	display: inline-block;
+	height: 22px;
+	position: absolute;
+	width: 18px
+}
+
+.white_left_arrow {
+	left: -13px;
+	top: 16px;
+	background: url(images/new/new/white_left_arrow.jpg) left top no-repeat
+}
+
+.blue_arrow {
+	right: -9px;
+	top: 14px;
+	background: url(images/new/new/blue_arrow.jpg) left top no-repeat
+}
+
+.lenovo_rcn1 {
+	background: #cfe8fc;
+	margin: 5px 10px 5px 15px;
+	position: relative;
+	border-radius: 5px
+}
