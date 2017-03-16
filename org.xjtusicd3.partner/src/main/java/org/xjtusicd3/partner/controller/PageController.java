@@ -42,8 +42,7 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("personal");
 		return mv;
 	}
-<<<<<<< HEAD
-=======
+
 	@RequestMapping(value="personal2",method=RequestMethod.GET)
 	public ModelAndView personal2(){
 		ModelAndView mv = new ModelAndView("personal2");
@@ -54,7 +53,6 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("personal3");
 		return mv;
 	}
->>>>>>> branch 'master' of https://github.com/zhaoyanqing624/robot.git
 	@RequestMapping(value="question",method=RequestMethod.GET)
 	public ModelAndView question(){
 		ModelAndView mv = new ModelAndView("question");

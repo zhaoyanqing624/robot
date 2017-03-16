@@ -8,23 +8,14 @@ import us.codecraft.webmagic.processor.PageProcessor;
 
 public class FAQSpider implements PageProcessor {
 
-    // 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
 
     @Override
-    // process是定制爬虫逻辑的核心接口，在这里编写抽取逻辑
     public void process(Page page) {
-        // 部分二：定义如何抽取页面信息，并保存下来
-        page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
-        page.putField("name", page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
-        if (page.getResultItems().get("name") == null) {
-            //skip this page
-            page.setSkip(true);
-        }
-        page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()"));
-
-        // 部分三：从页面发现后续的url地址来抓取
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-]+/[\\w\\-]+)").all());
+    	//page.addTargetRequests(page.getHtml().css("div.pager-content").links().all());
+    	page.putField("author", page.getHtml().xpath("//*[@id='knowledgeTopTplWrapper']/div[4]/ul/li[6]/a/text()").toString());
+        //page.putField("content", page.getHtml().xpath("//div[@class='article article-text']/@data-text").toString());
+        //page.putField("time", page.getHtml().xpath("//*[@id='article-40146776']/div[1]/div[2]/div/div[2]/span").toString());
     }
 
     @Override
@@ -35,12 +26,9 @@ public class FAQSpider implements PageProcessor {
     public static void main(String[] args) {
 
         Spider.create(new FAQSpider())
-                //从"https://github.com/code4craft"开始抓
-                .addUrl("https://github.com/code4craft")
-                //开启5个线程抓取
-                .addPipeline(new JsonFilePipeline("D:\\webmagic\\"))
+                .addUrl("http://iknow.lenovo.com/topic/c_1.html")
+                //.addPipeline(new JsonFilePipeline("D:\\webmagic\\"))
                 .thread(5)
-                //启动爬虫
                 .run();
     }
 }
