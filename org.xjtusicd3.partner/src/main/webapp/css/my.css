@@ -1,0 +1,2437 @@
+@CHARSET "UTF-8";
+/*---- heafer ---*/
+.header_top_wrap_left{float: left;}
+.header_top_wrap_left ul li{float: left;line-height: 30px;}
+.header_top_wrap_between{width:12px;padding-left:5px;font-size: 10px;color: #fff;position: relative;}
+.header_top_wrap_left ul li a{float:left;font-size: 14px;color: #fff;}
+.header_top_wrap_left ul li a:hover{text-decoration: none;}
+.header_top_wrap_left ul li a.new_a,.header_top_wrap_left ul li a.chat_link {width: 90px; display: block; text-align: center; color: #ddd; transition: background 0.3s;}
+.header_top_wrap_left ul li a.new_a:hover { background: #f17771; color: #fff;}
+.header_top_wrap_left ul li a.chat_link {position: relative;}
+.header_top_wrap_left ul li a.chat_link .authority_chat_img{width: 90px; height: 127px; display: none; position: absolute; top: 26px; left: 0;background: url(../images/v-header-scan-chat.png) 0 0 no-repeat; z-index: 15;}
+
+.header_top_wrap_right{float: right;}
+.header_top_wrap_right ul li{float: left;line-height: 30px; color: #ddd;}
+.header_top_wrap_right ul li.left_margin {margin-left: 20px;}
+.header_top_wrap_right ul li a{float:left;font-size: 14px;color: #ddd;}
+.header_top_wrap_right ul li a:hover{text-decoration: none;}
+.header_top_wrap_right ul div.unlogin{float: left;}
+.header_top_wrap_right ul li .person_icon {width: 15px; height: 20px; display: inline-block; background: url(../images/v-person-icon.png) 0 5px no-repeat; margin-right: 10px;}
+
+
+.my_center {position: relative;}
+.my_center .v_center_arrow {width: 15px; height: 5px; display: inline-block; background: url(../images/v-header-arrow.png) center 0 no-repeat; margin: 0 0 0 3px;transform:rotate(0deg); transition:transform 0.3s ease-out; cursor: pointer;}
+.my_center:hover .v_center_arrow {transform:rotate(180deg);}
+.my_center .my_service_list {width: 100px;  position: absolute; top: 26px; left: -12px; z-index: 15; display: none;}
+.my_center .my_service_list .top_icon {width: 100%; height: 4px; background: url(../images/v-header-arrow.png) 30px 0 no-repeat; }
+.my_center .my_service_list .ul_list{border: 1px solid #e5e5e5; border-top: 0; background: #fff;  padding: 5px 0; width: 100px; height: 101px;}
+.my_center .my_service_list .ul_list li {float: none;}
+.my_center .my_service_list .ul_list a { width: 100%; display: block; text-align: center; height: 25px; line-height: 25px; text-decoration: none; color:#000; font-size: 12px;}
+.my_center .my_service_list .ul_list a:hover {color: #ffffff; background: #f17771;}
+
+.headContent {
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 18px;
+}
+/*.loginRegistHead .content a {
+    display: inline-block;
+    float: right;
+    padding: 3px 4px;
+    font-size: 14px;
+    color: #fff;
+}
+.loginRegistHead .content .line {
+    display: inline-block;
+    float: right;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #fff;
+}*/
+.queryBox {
+    float: right;
+    margin-top: 14px;
+}
+.queryBox .text {
+    float: left;
+    width: 430px;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #b9b9b9;
+    line-height: 30px;
+    background: #fff;
+}
+.queryBox .queryBtn {
+    display: inline-block;
+    float: left;
+    width: 22px;
+    height: 22px;
+    margin-left: -28px;
+    margin-top: 6px;
+    background: url(../images/queryBg.png) no-repeat;
+}
+a.logoCon {
+    display: block;
+    float: left;
+}
+a.logoCon .logo {
+    float: left;
+    width: 133px;
+    height: 45px;
+}
+a.logoCon span {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 8px;
+    font-size: 22px;
+    color: #333;
+}
+.loginRegistBtn {
+    float: right;
+    margin-top: 10px;
+    width: 122px;
+}
+.loginRegistBtn .userNameText {
+    display: inline-block;
+    position: relative;
+    height: 36px;
+    color: #fff;
+    background: #717271;
+    cursor: pointer;
+    padding: 2px 0;
+}
+.loginRegistBtn #userNameText {
+    display: inline-block;
+    width: 126px;    
+    height: 40px;
+    line-height: 30px;
+    padding-left: 4px;
+}
+.loginRegistBtn #headExit {
+    position: absolute;
+    display: block;
+    z-index: 4;
+    left: 0;
+    top: 40px;
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    background: url("../images/alpha.png") repeat;
+}
+.loginRegistBtn #headExit:hover {
+    font-weight: bold;
+}
+.indexNav {
+    display: inline-block;
+    float: left;
+    height: 50px;   
+    line-height: 50px;
+}
+
+.navList {
+    width: 1050px;
+}
+.navList li.navContent {
+    float: left;
+    position: relative;
+    z-index: 2;
+    padding: 0 16px;
+}
+.navList li.current a {
+    font-weight: bold;
+}
+.navList li.navContent a {
+    display: block;
+    height: 50px;   
+    line-height: 50px;
+}
+.navList .subnav {
+    position: absolute;
+    z-index: 4;
+    left: -20%;
+    top: 51px;
+    width: 130%;
+    padding: 0 8px;
+    /*border: 1px solid #ccc;*/
+    background: url("../images/alpha.png") repeat;
+}
+.navList .subnav span {
+    display: inline-block;
+    width: 12px;
+    height: 7px;
+    margin-left: 40%;
+    margin-top: -7px;
+    background: url("../images/arrow.png");
+}
+.navList .subnav dd {    
+    border-bottom: 1px solid #bbb;
+    text-align: center;
+}
+.navList .subnav dd.last {
+    border-bottom: none;
+}
+.navList .subnav dd a {
+    height: 32px;    
+    line-height: 32px;
+    color: #555151;
+}
+.navList .subnav dd a:hover {
+    font-weight: bold;
+    color: #000;
+}
+.mainContent {
+    padding-top: 20px;
+    background: #ededed;
+}
+.contentWra {
+    width: 1200px;
+    margin: 0 auto
+}
+
+.leftMainWrapper {
+    float: left;
+    width: 800px;
+    margin-right: 40px;
+}
+.rightBarWrapper{
+    position: relative;
+    float: left;
+    width: 360px;
+}
+
+.barBox {
+    position: absolute;
+    /*margin-bottom: 20px; */
+    padding: 18px 0 20px 20px;
+    background: #fff;
+}
+.barBox .box-title {
+    margin-bottom: 16px;
+    padding-left: 6px;
+    border-left : 3px solid #68aae9;
+    color: #3a3a3a;
+    font-size: 16px;
+}
+.barAdBox {
+    position: absolute;
+}
+.barAdBox img {
+    display: block;
+    width: 360px !important;
+    height: 230px;
+}
+
+/*---- 知识专区 ---*/
+.knowledge li {
+    float: left;
+}
+
+.knowledge li a {
+    display: inline-block;
+    height: 22px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    line-height: 22px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: #fff;
+    background: #3f84c6;
+}
+.knowledge li.default a {
+    background: #3f84c6;
+}
+.knowledge li.orange a {
+    background: #eb6a1a;
+}
+.knowledge li.pink a {
+    background: #d968a3;
+}
+.knowledge li.red a {
+    background: #d4291e;
+}
+.knowledge li.blue a {
+    background: #4eb6d3;
+}
+.knowledge li.green a {
+    background: #6ab64b;
+}
+.knowledge li.gray a {
+    background: #c4beb5;
+}
+.knowledge li.black a {
+    background: #717271;
+}
+/*-- 我想贡献 ---*/
+.contribution {
+    height: 218px;
+}
+.contribution .box-title {
+    border-left : 3px solid #fff; 
+    color: #fff;
+}
+.contribution .textp {
+    margin-bottom: 18px;
+    padding-right: 18px;
+    line-height: 22px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.contribution .linkWrapper {
+    padding-left: 6px;
+    margin-left: 90px;
+}
+.contribution .linkWrapper a {
+    display: inline-block;
+    width: 134px;
+    height: 34px;
+    margin-bottom: 14px;
+    margin-right: 24px;
+    line-height: 32px;
+    border: 3px solid #fff;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+}
+.contribution .linkWrapper a.writer {
+    background: url("../images/contribution_1.png") 18px 10px no-repeat;
+}
+.contribution .linkWrapper a.question {
+    background: url("../images/contribution_2.png") 18px 10px no-repeat;
+}
+/*--- 用户动态 ---*/
+.dynamicList {
+    border-left: 1px solid #e5e5e5;
+}
+.dynamicList .dynamicItem {
+    margin-left: -5px;
+}
+.dynamicList .dynamicItem .dynamicTime {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    color: #569de1;
+    background: url(../images/dynamicBg.jpg) left center no-repeat;
+}
+.dynamicList .dynamicItem .dynamicDesc {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+/*---- 轮播banner,推荐 ----*/
+.banner {
+    height: 390px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    width: 800px;
+    margin-bottom: 20px;
+}
+
+.slides {
+    position: relative;
+    z-index: 1;
+}
+.slides li {
+    height: 390px;
+    text-align: center;
+}
+.display {
+    display: block;
+}
+.slides li .display {
+    position: relative;
+}
+.slides li .display span {
+    position: absolute;
+    left: 20px;
+    top: 320px;
+    text-align: left;
+    font-size: 28px;
+    color: #fff;
+}
+.flex-control-nav{position:absolute;bottom:10px;z-index:2;width:100%;text-align:center;}
+.recommendBanner .flex-control-nav {bottom: 0;}
+.flex-control-nav li{display:inline-block;width:60px;height:4px;margin:0 5px;*display:inline;zoom:1;}
+.flex-control-nav a{display:inline-block;width:60px;height:4px;margin-bottom:10px;line-height:40px;overflow:hidden;background:url(../images/normal_dot.png) no-repeat;cursor:pointer;}
+.recommendBanner .flex-control-nav li {width: 11px;height: 11px;}
+.recommendBanner .flex-control-nav a {width: 11px;height:11px; background: url(../images/dot.png) no-repeat 0 0;}
+.flex-control-nav .flex-active{background:url(../images/current_dot.png) no-repeat;}
+.recommendBanner .flex-control-nav .flex-active{background:url(../images/dot.png) no-repeat -11px 0;}
+
+.flex-direction-nav{position:absolute;z-index:3;width:100%;top:36%;}
+.flex-direction-nav li a{display:block;width:38px;height:70px;overflow:hidden;cursor:pointer;position:absolute;}
+.flex-direction-nav li a.flex-prev{left:40px;background:url(../images/prev_btn.png) center center no-repeat;}
+.flex-direction-nav li a.flex-next{right:40px;background:url(../images/next_btn.png) center center no-repeat;}
+/*--- 置顶 ---*/
+.topWrapper .topList,
+.knowledgeList {
+    margin-bottom: 14px;
+    padding: 20px;
+    background: #fff;
+}
+
+.topWrapper .topList .imagesPotion {
+    float: left;
+    width: 170px;
+    margin-right: 18px;
+}
+.topWrapper .imagesPotion  img {
+    display: inline-block;
+    width: 170px;
+    height: 118px;
+}
+
+.topWrapper .topList .topcontent {
+    float: left;
+    width: 570px;
+}
+
+.topWrapper .topList .topcontent li,
+.knowledgeList li {
+    margin-bottom: 20px;
+}
+.topList .topcontent li .title,
+.knowledgeList li .title {
+    color: #111111;
+    font-size: 20px;
+    /*font-weight: bold;*/
+}
+.topList .topcontent li span,
+.knowledgeList li span {
+    float: left;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+}
+.topList .topcontent li .tags,
+.knowledgeList li .tags{
+    float:none;
+    margin-left:10px;
+    width:55px;
+    height:19px;
+    line-height: 0px;
+}
+.topList .topcontent li .yuanchuang,
+.knowledgeList li .yuanchuang{
+    background:url("../images/doc2.png") no-repeat;
+}
+.topList .topcontent li .zhuanzai,
+.knowledgeList li .zhuanzai{
+    background:url("../images/doc1.png") no-repeat;
+}
+.topList .topcontent li span.userPic img,
+.knowledgeList li span.userPic img {    
+    width: 30px;
+    height: 28px;
+    margin-right: 8px;
+}
+.topList .topcontent li span.username,
+.topList .topcontent li span.dot,
+.topList .topcontent li span.time,
+.knowledgeList li span.username,
+.knowledgeList li span.dot,
+.knowledgeList li span.time{
+    color: #569de1;
+}
+.topList .topcontent li span.line,
+.topList .topcontent li span.showCount,
+.topList .topcontent li span.message,
+.topList .topcontent li span.collection,
+.knowledgeList li span.line,
+.knowledgeList li span.showCount,
+.knowledgeList li span.message,
+.knowledgeList li span.collection {
+    margin-left: 4px;
+    color: #bdbdbd;
+}
+.topList .topcontent li span.line,
+.knowledgeList li span.line {
+    margin: 0 10px;
+}
+.topList .topcontent li span.showCount,
+.knowledgeList li span.showCount {
+    margin-right: 10px;
+    padding-left: 24px;
+    background: url("../images/eye.png") 0 8px no-repeat;
+}
+.topList .topcontent li span.message,
+.knowledgeList li span.message {
+    margin-right: 10px;
+    padding-left: 20px;
+    background: url("../images/write.png") 0 8px no-repeat;
+}
+.topList .topcontent li span.collection,
+.knowledgeList li span.collection {
+    padding-left: 20px;
+    background: url("../images/heart.png") 0 8px no-repeat;
+}
+.topMoreTop {
+    height: 60px;
+    margin-bottom: 18px;
+    text-align: center;
+    background: #fff;
+}
+.topMoreTop a {
+    display: inline-block;
+    margin-top: 14px;
+    padding-left: 26px;
+    font-size: 20px;
+    color: #878787;
+    background: url("../images/refresh.png") 0 6px no-repeat;
+}
+/*--- 搜索页面CSS ----*/
+
+.searchListWrapper em {
+    color: red;
+}
+.searchResult {
+    height: 40px;
+    margin-bottom: 14px;
+    padding: 0 20px;
+    line-height: 40px;
+    color: #a0a0a0;
+    background: #fff;
+}
+
+.searchResult label {
+    color: #ff4438;
+}
+
+.searchListWrapper .knowledgeList li.content {
+    /*height: 70px;*/
+    overflow-y: hidden;
+}
+
+.searchListWrapper .otherTitle {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+}
+.searchListWrapper .knowledgeotherList li {
+    margin-bottom: 10px;
+    background: #fff;
+}
+.searchListWrapper .knowledgeotherList li a {
+    display: block;    
+    padding: 10px;
+}
+/*--- 知识详情页面CSS ----*/
+.countList {
+    padding-left: 10px;
+}
+.countList li {
+    height: 30px;
+    line-height: 30px;
+}
+.countList label {
+    font-size: 14px;
+    color: #a7a7a7;
+}
+.countList li span {
+    font-size: 14px;
+    color: #626262;
+}
+.countList li .creatUser {
+    color: #569de1;
+}
+.countList li a.attention {
+    display: inline-block;
+    height: 22px;
+    margin-left: 10px;
+    padding: 0 6px;
+    line-height: 22px;
+    border: 1px solid #cacaca;
+    color: #8a8a8a;
+}
+.countList li a.overAttention {
+    cursor: default;
+}
+.countList li a.showHistory {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #68aae9;
+}
+.relateKnowledgeList {
+    padding-right: 24px;
+}
+.relateKnowledgeList li {
+    border-bottom: 1px dashed #d3d3d3;
+    width: 310px;
+    height: 40px;
+    overflow: hidden;
+    line-height: 40px;
+}
+.relateKnowledgeList li a {
+    color: #111111;
+    font-size: 14px;
+    font-weight: bold;
+}
+.knowledgeotherList li a.icontype_baidu {
+    padding-left: 40px;
+    background: url(../images/icon_baidu.png) no-repeat 4px 4px;
+    background-size: 4%;
+}
+
+.knowledgeotherList li a.icontype_microsoft {
+    padding-left: 40px;
+    background: url(../images/icon_mic.png) no-repeat 4px 4px;
+    background-size: 4%;
+}
+.knowledgeotherList li a.icontype_baiduzhidao {
+    padding-left: 40px;
+    background: url(../images/icon_baiduzhidao.png) no-repeat 4px 4px;
+    background-size: 4%;
+}
+.knowledgeotherList li a.icontype_baiduwenku {
+    padding-left: 40px;
+    background: url(../images/icon_baiduwenku.png) no-repeat 4px 4px;
+    background-size: 4%;
+}
+.knowledgeotherList li a.icontype_jiaoben {
+    padding-left: 40px;
+    background: url(../images/icon_jiaoben.png) no-repeat 4px 4px;
+    background-size: 4%;
+}
+.comment {
+    padding: 24px 30px ;
+    background: #fff;
+}
+.comment h3 {
+    margin-bottom: 24px;
+    padding-left: 10px;
+    border-left: 3px solid #68aae9;
+    font-size: 18px;
+    color: #3a3a3a;
+}
+.comment .textarea{
+    width: 722px;
+    height: 72px;
+    margin-bottom: 24px;
+    padding: 5px;
+    border: 0 none;
+    background: #f4f4f4 none repeat scroll 0 0;    
+}
+.commentScoreBtn {
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.commentScoreBtn .publishCommentBtn {
+    float: right;
+    background: #68aef0 none repeat scroll 0 0;
+    border: 0 none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    width: 80px;
+}
+.scoreContent {
+    float: left;
+    width: 200px;
+    height: 22px;
+    line-height: 22px;
+}
+.scoreContent span {
+    color: #808080;
+}
+.score-icon {
+    display: inline-block;
+    padding-left: 10px;
+}
+.score-star {
+    background: url("../images/kb_index_img.fw.png") no-repeat scroll -274px -96px;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    margin-top: 4px;
+}
+.score-icon .current {
+    background: url("../images/kb_index_img.fw.png") no-repeat -274px -114px;
+}
+.scoreResult .current {
+    background: url("../images/kb_index_img.fw.png") no-repeat -274px -114px;
+}
+.commentLiContent {
+    padding: 10px;
+    border-bottom: 1px dashed #e9e9e9;
+}
+.commentLiContent .userContent span {
+    display: inline-block;
+    float: left;
+    padding-right: 10px;
+    color: #8a8a8a;
+}
+.commentLiContent .content {
+    margin: 10px 0;
+}
+.commentLiContent .content .commentReplay {
+    float: right;
+    color: #569de1;
+}
+.commentLiContent .content .text {
+    float: left;
+    width: 90%;
+}
+.subCommentList {
+    margin-left: 40px;
+    padding: 10px;
+    background: #f5f5f5;
+}
+.querymorecomment {
+    margin-top: 10px;
+    display: inline-block;
+}
+.commentReplayText {
+    border: 1px solid #ccc;
+    height: 30px;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding: 6px;
+    width: 600px;
+}
+.replayBtn {
+    background: #68aef0;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    width: 80px;
+    margin: 10px 0;
+}
+
+/*---- 一级知识页面CSS ---*/
+.allFristTypeWrapper .allFristType {
+    margin-bottom: 12px;
+}
+.allFristTypeWrapper .allFristType #productionName {
+    color: #3f84c6;
+}
+.allFristTypeWrapper .typeContent {
+    padding: 0 10px;
+    line-height: 38px;
+    background: #f7f7f7;
+}
+
+.allFristTypeWrapper .typeContent li {
+    float: left;
+    margin-right: 20px;
+}
+.fristKnowledgeWra .recommendWrapper,
+.fristKnowledgeWra .allFristTypeWrapper {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+}
+.fristTypeKnowledgeWra {
+    width:858px;
+    height:1130px;
+    background: #f7f7f7;
+}
+.fristKnowledgeWra .banner {
+    height: 160px;
+}
+.fristTypeKnowledgeWra .knowledgeBox {
+    float: left;
+    width: 390px;
+    min-height: 356px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding: 16px 10px;
+    padding-bottom: 0;
+    background: #fff;
+}
+.fristTypeKnowledgeWra .knowledgeBox  p.knowledgeType,
+.fristKnowledgeWra .recommendWrapper p.knowledgeType {
+    border-bottom: 1px solid #dfdfdf;
+}
+.fristTypeKnowledgeWra .knowledgeBox .type,
+.fristKnowledgeWra .recommendWrapper .type,
+.fristKnowledgeWra .allFristTypeWrapper .type {
+    display: inline-block;
+    padding: 0 6px;
+    border-bottom: 3px solid #3f84c6;
+    font-size: 18px;
+    color: #3a3a3a;
+}
+.fristKnowledgeWra .allFristTypeWrapper .type {
+    font-size: 14px;
+}
+.fristTypeKnowledgeWra .typeKnowledgeList li {
+    width: 370px;
+    height: 42px;
+    overflow: hidden;
+    line-height: 42px;
+    border-bottom: 1px dashed #d3d3d3;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.fristTypeKnowledgeWra .typeKnowledgeList li a {
+    font-size: 14px;
+    color: #111111;
+}
+.fristTypeKnowledgeWra .typeKnowledgeList li.fristList {
+    min-height: 90px;
+    padding: 10px 0;
+    line-height: 0;
+    white-space: normal;
+}
+.fristTypeKnowledgeWra .typeKnowledgeList li .topImage {
+    float: left;
+    width: 126px;
+    height: 90px;
+}
+.fristTypeKnowledgeWra .typeKnowledgeList li .topList {
+    float: left;
+    width: 220px;
+    margin-left: 10px;
+}
+.fristTypeKnowledgeWra .typeKnowledgeList li .topTitle a {
+    display: block;
+    width: 210px;
+    height: 40px;
+    overflow: hidden;
+    line-height: 20px;
+    text-wrap: normal;
+    word-wrap:break-word;
+    font-size: 16px;
+    color: #111111;
+}
+.fristTypeKnowledgeWra .typeKnowledgeList li .topContent {
+    height: 32px;
+    margin-top: 10px;
+    overflow: hidden;
+    line-height: 16px;
+    word-wrap:break-word;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+.fristKnowledgeWra .content {
+    padding-top: 16px;
+}
+.fristKnowledgeWra .content li {
+    height: 140px;
+    text-align: left;
+}
+
+.fristKnowledgeWra .content img {
+    display: inline-block;
+    float: left;
+    width: 200px;
+    height: 140px;
+    margin-right: 20px;
+}
+.fristKnowledgeWra .content .mainConten {
+    margin-left: 220px;
+}
+.fristKnowledgeWra .content .mainConten h3 {
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 20px;
+    color: #111111;
+}
+.fristKnowledgeWra .content .detail{
+    line-height: 20px;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+/*---- 二级分类---*/
+.nowPositionBox {
+    height: 48px;
+    margin-bottom: 20px;
+    padding-left: 18px;
+    background: #fff;
+}
+.nowPositionBox span {
+    display: inline-block;
+    float: left;
+    height: 18px;
+    margin-top: 14px;
+    padding-left: 12px;
+    line-height: 18px;
+    font-size: 14px;
+    color: #484848;
+}
+.nowPositionBox span.allType {
+    border-left: 3px solid #68aae9;
+}
+.nowPositionBox span.arrow {
+    color: #a7a7a7;
+}
+.nowPositionBox span.secondStep {
+    color: #3f84c6;
+}
+.nowPositionBox span.titleStep {
+    color: #3f84c6;
+}
+.recommendBanner {
+    width: 760px;
+}
+/*--- 详情页面--*/
+.knowledgeDetail {
+    margin-bottom: 26px;
+    padding: 34px;
+    background: #fff;
+}
+
+.knowledgeDetail .title {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #111111;
+}
+
+.knowledgeDetail .createInfo {
+    margin-bottom: 30px;
+    line-height: 24px;
+}
+.knowledgeDetail .createInfo img,
+.knowledgeDetail .createInfo span {
+    display: inline-block;
+    float: left;
+    margin-right: 14px;
+}
+.knowledgeDetail .createInfo img {
+    width: 30px;
+    height: 30px;
+}
+.knowledgeDetail .createInfo span {
+    color: #8a8a8a;
+}
+.knowledgeDetail .createInfo span.username,
+.knowledgeDetail .createInfo span.dot,
+.knowledgeDetail .createInfo span.time {
+    color: #569de1;
+}
+.knowledgeDetail .content {
+    margin-bottom: 70px;
+    font-size: 14px;
+    color: #343434;
+}
+.knowledgeDetail .content a{
+
+    color: #569de1;
+}
+.knowledgeDetail .shareBox {
+    float: right;
+    padding-top: 30px;
+}
+
+.knowledgeDetail .shareBox a.share,
+.knowledgeDetail .shareBox span.share {
+    display: inline-block;
+    float: left;
+    margin-top: 10px;
+    margin-right: 12px;
+    font-size: 14px;
+    color: #4a4a4a;
+}
+.knowledgeDetail .shareBox .heart {
+    width: 22px;
+    height: 21px;
+    background: url(../images/gray_start.png) no-repeat;
+}
+.knowledgeDetail .shareBox .redheart {
+    width: 22px;
+    height: 21px;
+    background: url(../images/red_start.png) no-repeat;
+}
+.knowledgeDetail .btnWrapper {
+    float: left;
+    position: relative;
+}
+.knowledgeDetail .btnWrapper a {
+     display: inline-block;
+     font-size: 16px;
+}
+.knowledgeDetail .btnWrapper .praise {
+    width: 80px;
+    height: 50px;
+    margin-right: 12px;
+    padding-left: 48px;
+    line-height: 50px;   
+    color: #fff;
+    background: #ff7c88 url("../images/praise.png") 22px 14px no-repeat;
+}
+.knowledgeDetail .btnWrapper .edit {
+    width: 86px;
+    height: 48px;
+    padding-left: 40px;
+    border: 1px solid #cacaca;
+    line-height: 48px;
+    color: #8a8a8a;
+    background: #fff url("../images/edit.png") 20px 16px no-repeat;
+}
+.knowledgeDetail .btnWrapper .addpraise {
+    position: absolute;
+    left: 150px;
+    top: -20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+}
+
+/*---- 个人中心CSS----*/
+.personalInfo,
+.mallInfo {
+    margin-bottom: 34px;
+    padding: 20px;
+    background: #fff;
+}
+.personalInfo .baseInfo,
+.mallInfo .baseInfo {
+    float: left;
+    width: 280px;
+}
+.personalInfo .baseInfo h3,
+.mallInfo .baseInfo h3 {
+    margin-bottom: 30px;
+    padding-left: 10px;
+    border-left: 3px solid #68aae9;
+    font-size: 18px;
+    color: #3a3a3a;
+}
+.personalInfo .baseInfo p,
+.mallInfo .baseInfo p {
+    margin-bottom: 10px;
+}
+.personalInfo .baseInfo img,
+.mallInfo .baseInfo img {
+    width: 130px;
+    height: 130px;
+}
+.personalInfo .baseInfo .username,
+.mallInfo .baseInfo .text {
+    font-size: 18px;
+    color: #3a3a3a;
+}
+.personalInfo .baseInfo .levelBox {
+    width: 150px;
+    height: 10px;
+    margin-left: 66px;
+    border-radius: 4px;
+    background: #ededed;
+}
+.personalInfo .baseInfo .levelBox .currentLevel {
+    display: inline-block;
+    height: 10px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 12px;
+    background: #76b7f6;
+}
+.personalInfo .baseInfo .username a {
+    display: inline-block;
+    width: 38px;
+    height: 18px;
+    margin-left: 10px;
+    border: 1px solid #cacaca;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #575757;
+}
+.personalInfo .detailInfo,
+.mallInfo .detailInfo {
+    float: left;
+    margin-left: 50px;
+    padding-top: 40px;
+}
+.personalInfo .detailInfo .moneyInfo {
+    font-size: 16px;
+    color: #333333;
+}
+.personalInfo .detailInfo .moneyInfo label {
+    display: inline-block;
+    padding-left: 12px;
+    border-left: 3px solid #68aae9;
+}
+
+.personalInfo .detailInfo ul {
+    padding-top: 16px;
+}
+.personalInfo .detailInfo li {
+    float: left;
+    width: 122px;
+    height: 113px;
+    margin-right: 40px;
+    padding-top: 26px;
+}
+.personalInfo .detailInfo li.creat {
+    background: url("../images/blueBg.png") no-repeat;
+}
+.personalInfo .detailInfo li.edit {
+    background: url("../images/redBg.png") no-repeat;
+}
+.personalInfo .detailInfo li.questions {
+    background: url("../images/orangeBg.png") no-repeat;
+}
+.personalInfo .detailInfo li .text {
+    color: #8c8c8c;
+}
+.personalInfo .detailInfo li .count {
+    font-size: 36px;
+}
+.personalInfo .detailInfo li.creat .count {
+    color: #68aef0;
+}
+.personalInfo .detailInfo li.edit .count {
+    color: #f78b84;
+}
+.personalInfo .detailInfo li.questions .count {
+    color: #feba8f;
+}
+.personalInfo .detailInfo .exchange {
+    display: inline-block;
+    width: 76px;
+    height: 28px;
+    margin-left: 16px;
+    border: 1px solid #cacaca;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    color: #575757;
+}
+.personalContent {
+    background: #f7f7f7;
+}
+.personalContent .tabList {
+    float: left;
+    width: 300px;
+}
+.personalContent .tabList li {
+    height: 70px;
+    border-bottom: 1px solid #eaeaea;
+}
+.personalContent .tabList li.current {
+    border-left: 4px solid #5ba7ef;
+    background: #fff;
+}
+.personalContent .tabList li.current a {
+    color: #5ba7ef;
+}
+.personalContent .tabList li a {
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    font-size: 19px;
+    color: #b0b0b0;
+}
+.personalContent .tabContent {
+    float: left;
+    width: 800px;
+    min-height: 440px;
+    padding: 36px 50px 20px 50px;
+    background: #fff;
+}
+.personalContent .tabContent .fristContent {
+    display: none;
+}
+.personalContent .tabContent .current {
+    display: block;
+}
+.myKnowledgeTabList,
+.myRecordTabList,
+.myNewsTabList {
+    width: 463px;
+    margin-left: 180px;
+    margin-bottom: 30px;
+    border: 1px solid #cacaca;
+}
+.myTaskList,
+.myAttentionTabList {
+    width: 231px;
+    margin-left: 300px;
+    margin-bottom: 30px;
+    border: 1px solid #cacaca;
+}
+.myKnowledgeTabList li,
+.myTaskList li,
+.myRecordTabList li,
+.myAttentionTabList li,
+.myNewsTabList li {
+    float: left;
+    width: 115px;
+    border-right: 1px solid #cacaca;
+}
+.myKnowledgeTabList li.last,
+.myTaskList li.last,
+.myRecordTabList li.last,
+.myAttentionTabList li.last,
+.myNewsTabList li.last {
+    border: none;
+}
+.myKnowledgeTabList li a,
+.myTaskList li a,
+.myRecordTabList li a,
+.myAttentionTabList li a,
+.myNewsTabList li a {
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 14px;
+    color: #575757;
+}
+.myKnowledgeTabList li.current,
+.myTaskList li.current,
+.myRecordTabList li.current,
+.myAttentionTabList li.current,
+.myNewsTabList li.current {
+    background: #5ba7ef;
+}
+.myKnowledgeTabList li.current a,
+.myTaskList li.current a,
+.myRecordTabList li.current a,
+.myAttentionTabList li.current a,
+.myNewsTabList li.current a {
+    color: #fff;
+}
+.myKnowledgeTabContent .myKnowledgeDiv,
+.myTaskTabContent .myTaskDiv,
+.myRecordTabContent .myRecordDiv,
+.myAttentionTabContent .myAttentionDiv,
+.myNewsTabContent .myNewsDiv {
+    display: none;
+}
+.myKnowledgeTabContent .current,
+.myTaskTabContent .current,
+.myRecordTabContent .current,
+.myAttentionTabContent .current,
+.myNewsTabContent .current {
+    display: block;
+}
+.fristContent h2.title {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    color: #5ba7ef;
+}
+.attentionList,
+.fansList {
+    margin-left: -25px;
+}
+.attentionList li,
+.fansList li {
+    float: left;
+    height: 90px;
+    padding: 10px;
+    margin-left: 25px;
+    margin-bottom: 28px;
+    border: 1px solid #ededed;
+    background: #f3f9ff;
+}
+
+.attentionList li img,
+.fansList li img {
+    float: left;
+    width: 90px;
+    height: 90px;
+    margin-right: 20px;
+}
+.attentionList li .attentionName,
+.fansList li .fansName {
+    float: left;
+    width: 150px;
+}
+.attentionList li .attentionName .name,
+.fansList li .fansName .name {
+    padding-bottom: 10px;
+    font-size: 18px;
+    color: #3a3a3a;
+    word-break: break-all;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+.attentionList li .attentionName input {
+    width: 76px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+}
+.myTask .growTaskWrapper {
+    margin-bottom: 46px;
+    padding: 10px 6px;
+    border-radius: 6px;
+    background: #a5d3fe;
+}
+.myTask .growTaskWrapper .growTaskContent {
+    position: relative;
+    background: #f7f7f7;
+    padding-top: 16px;
+    padding-bottom: 40px;
+}
+.myTask .growTaskWrapper .taskTitle {
+    margin-bottom: 10px;
+    padding-left: 16px;
+    font-size: 18px;
+    color: #fefefe;
+}
+.myTask .growTaskWrapper .angle {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 39px;
+    height: 39px;
+    background: url("../images/angle.png") no-repeat;
+}
+.myTask .growTaskWrapper .growTaskList {
+    float: left;
+    width: 330px;
+    border-right: 1px solid #d9d9d9;
+}
+.myTask .growTaskWrapper .growTaskList li {
+    height: 30px;
+    padding-left: 40px;
+    line-height: 30px;
+    background: url("../images/taskitemBg.jpg") 0 10px no-repeat;
+}
+.myTask .growTaskWrapper .growTaskList .tip {
+    display: inline-block;
+    font-size: 16px;
+    color: #333333;
+    margin-right: 40px;
+}
+.myTask .growTaskWrapper .growTaskList li.over .tip {
+    text-decoration: line-through;
+    color: #b0b0b0;
+}
+.myTask .growTaskWrapper .growTaskList li.secondLi .tip {
+    margin-right: 10px;
+}
+.myTask .growTaskWrapper .growTaskList li a {
+    display: inline-block;
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #5ba7ef;
+}
+.myTask .growTaskWrapper .growTaskList li.over a {
+    background: none;
+    color: #5ba7ef;
+    width: auto;
+    text-decoration: underline;
+}
+.myTask .growTaskWrapper .currentStatus {
+    float: left;
+    padding-left: 70px;
+}
+.myTask .growTaskWrapper .currentStatus p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #3387d8;
+}
+.myTask .growTaskWrapper .getReward {
+    
+}
+.myTask .growTaskWrapper .getReward ul {
+    float: left;
+}
+.myTask .growTaskWrapper .getReward ul span {
+    display: inline-block;
+    margin-left: 10px;
+    color: #3387d8;
+}
+.myTask .growTaskWrapper .getReward .add {
+    display: inline-block;
+    float: left;
+    margin: 0 20px;
+    font-size: 30px;
+    color: #b8b8b8;
+
+}
+.myTask .growTaskWrapper .getReward .medal {
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    color: #333333;
+}
+.myTask .growTaskWrapper .getReward .medal label {
+    float: left;
+    margin-top: 10px;
+}
+.myTask .growTaskWrapper .getReward .medal img {
+    width: 50px;
+    height: 60px;
+    margin-left: 10px;
+}
+.myGradeList li {
+    float: left;
+    margin-right: 40px;
+}
+.myGradeList li span,
+.myGradeList li label {
+    display: inline-block;
+    float: left;
+}
+.myGradeList li .dot {
+    margin-top: -18px;
+    margin-right: 10px;
+    font-size: 30px;
+    color: #5ba7ef;
+}
+.myGradeList li .boldSize {
+    font-size: 16px;
+    color: #333333;
+}
+.myGradeList li .count {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #5ba7ef;
+}
+.myGradeList li .grayFont {
+    font-size: 16px;
+    color: #b1b1b1;
+}
+
+.myBadgeList li {
+    float: left;
+    width: 260px;
+}
+.myBadgeList .myBadgePic {
+    width: 97px;
+    height: 126px;
+}
+.myBadgeList .myBadgeText {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 16px;
+    color: #333333;
+}
+.myCurrentGradeItem {
+    margin: 20px 0;
+    
+}
+.myCurrentGradeItem li {
+    float: left;
+    padding-right: 16px;
+    background: url("../images/stepLine.jpg") 0 10px repeat-x;
+}
+.myCurrentGradeItem li.lastItem {
+    padding-right: 0;
+    background: url("../images/stepLine.jpg") 0 10px no-repeat;
+}
+.myCurrentGradeItem li.line {
+    padding-right: 0;
+    background: none;
+}
+.myCurrentGradeItem li .itemBg {
+    display: inline-block;
+    width: 16px;
+    height: 24px;
+    background: url("../images/grade_togo.jpg") 0 4px no-repeat;
+}
+.myCurrentGradeItem li.overItem .itemBg {
+    background: url("../images/grade_over.jpg") 0 4px no-repeat;
+}
+.myCurrentGradeItem li.currentItem .itemBg {
+    width: 24px;
+    height: 24px;
+    background: url("../images/grade_current.jpg") no-repeat;
+}
+.myCurrentGradeItem li .gradeText {
+    text-align: center;
+    font-size: 12px;
+    color: #333333;
+}
+.myCurrentGradeItem li .moneyText {
+    text-align: center;
+    font-size: 12px;
+    color: #5ba7ef;
+}
+.wealthP {
+    margin-bottom: 30px;
+}
+.wealthP a {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    margin-left: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #68aef0;
+}
+.blueBtn {
+    width: 80px;
+    height: 30px;
+    margin-top: 36px;
+    border: none;
+    font-size: 14px;
+    color: #fff;
+    background: #68aef0;
+    cursor: pointer;    
+}
+.mallInfo .detailInfo .text {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+.mallInfo .mallStep li {
+    float: left;
+}
+.mallInfo .mallStep .stepInfo {
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #3a3a3a;
+}
+.mallInfo .mallStep .stepTip {
+    text-align: center;
+    font-size: 12px;
+    color: #a0a0a0;
+}
+.mallInfo .mallStep .line {
+    line-height: 100px;
+    color: #d9d9d9;
+}
+.mallInfo .mallStep .stepCount {
+    width: 101px;
+    height: 101px;
+    margin-bottom: 6px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 32px;
+}
+.mallInfo .mallStep .fristStep {
+    color: #84bff6;
+    background: url("../images/stepbg_1.png") no-repeat;
+}
+.mallInfo .mallStep .secondStep {
+    color: #69dbe6;
+    background: url("../images/stepbg_2.png") no-repeat;
+}
+.mallInfo .mallStep .threeStep {
+    color: #76ecb0;
+    background: url("../images/stepbg_3.png") no-repeat;
+}
+.mallInfo .mallStep .fourStep {
+    color: #8bf161;
+    background: url("../images/stepbg_4.png") no-repeat;
+}
+.mallContent {
+    padding: 20px;
+    background: #fff;
+}
+.mallContent .mallTypeWrapper {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e7e7e7;
+}
+.mallContent .mallTypeWrapper input,
+.mallContent .mallTypeWrapper label {
+    float: left;
+}
+.mallContent .mallTypeWrapper input {
+    display: inline-block;
+    width: 18px;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+.mallContent .mallTypeWrapper label {
+    display: inline-block;
+    margin-right: 20px;
+}
+.mallContent .productsList li {
+    float: left;
+    width: 240px;
+    margin-left: 40px;
+    margin-bottom: 36px;
+    padding-bottom: 14px;
+    border: 1px solid #ededed;
+}
+.mallContent .productsList .productImgWra {
+    height: 180px;
+    text-align: center;
+    background: #fafafa;
+}
+.mallContent .productsList .productImgWra img {
+    width: 190px;
+    height: 160px;
+    margin-top: 10px;
+}
+.mallContent .productsList .productname {
+    padding: 10px;
+    font-size: 16px;
+    color: #3a3a3a;
+}
+.mallContent .productsList .exchange {
+    float: right;
+    width: 70px;
+    height: 30px;
+    margin-right: 10px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background: #68aef0;
+}
+.mallContent .productsList .grayExchange {
+    background: gray;
+    cursor: default;
+}
+.mallContent .productsList .info {
+    padding-left: 10px;
+    color: #a0a0a0;
+}
+.mallContent .topMoreTop {
+    background: #f8f8f8;
+}
+table a.gridLink {
+    display: inline-block;
+    margin-left: 20px;
+    color: #68aef0;
+}
+
+/*---- 撰写页面CSS ----*/
+.writerWrapper {
+    padding: 10px;
+    background: #fff;
+}
+.writerWrapper h3 {
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border-left: 3px solid #68aae9;
+    font-size: 18px;
+    color: #3a3a3a;
+}
+.writeQueryBox {
+    margin-bottom: 20px;
+    padding: 30px;
+    background: #f7f7f7;
+}
+.writeQueryBox p {
+    margin-bottom: 20px;
+}
+.writeQueryBox p em {
+    margin: 0 10px;
+    vertical-align: middle;
+    font-weight: bold;
+    /*color: #fe5f5f;*/
+}
+.writeQueryBox p label {
+    float: left;
+    line-height: 26px;
+    font-size: 12px;
+    color: #808080;
+}
+.writeQueryBox p .titleText {
+    width: 650px;
+    height: 30px;
+    padding-left: 8px;
+    border: 1px solid #d1d1d1;
+    line-height: 30px;
+    background: #fff;
+}
+.writeQueryBox p .text {
+    width: 470px;
+    height: 24px;
+    margin-left: 12px;
+    padding-left: 8px;
+    border: 1px solid #d1d1d1;
+    line-height: 24px;
+    background: #fff;
+}
+.writeQueryBox p .radio {
+    float: left;
+    margin: 6px 4px 0 14px;
+}
+.writeQueryBox p .select {
+    width: 180px;
+    height: 24px;
+    margin-right: 20px;
+    border: 1px solid #d1d1d1;
+    line-height: 24px;
+    background: #fff;
+}
+.writerContent .contentType {
+    padding-left: 60px;
+    margin-bottom: 20px;
+}
+.writerContent .contentType label {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+}
+.writerContent .contentType input {
+    float: left;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+.writerContent .formul li {
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.writerContent .formul li label {
+    display: block;
+    float: left;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: -210px;  
+    padding-bottom: 210px;  
+    text-align: right;
+    font-size: 14px;
+    color: #333333;
+}
+.writerContent .formul li label em {
+    color: #fe5f5f;
+    margin-right: 2px;
+    vertical-align: middle;
+}
+.writerContent .formul li .details {
+    float: left;
+    padding: 0 4px;
+    line-height: 23px;
+    width: 1000px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.writerContent .formul li .text {
+    width: 650px;
+    height: 22px;
+    padding: 4px 10px;
+    border: 1px solid #d1d1d1;
+    font-size: 14px;
+    font-family: "Microsoft Yahei";
+    color: #333;
+    background: #fff;
+}
+.writerContent .formul li textarea.text {
+    height: 100px;
+}
+
+.writerContent .formul li .textContent {
+    height: 428px;
+}
+/*--- 版本比较 ---*/
+.editionHeader {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #fff;
+}
+.editionHeader .editCount {
+    color: #ff4438;
+}
+.editionHeader .editionCompareTitle {
+    padding-left: 10px;
+    border-left: 3px solid #68aae9;
+}
+.editionHeader .knowledgeTitle{
+    color: #3f84c6;
+}
+.editionCompareWra {
+    padding: 20px;
+    background: #fff;
+}
+.editionCompareWra .editionCompareTitle {
+    float: left;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: normal;
+}
+.editionCompareWra .compareBtn {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    margin-bottom: 20px;
+    line-height: 30px;
+    color: #fff;
+    background: #68aef0 ;
+}
+/*--- 任务列表CSS ---*/
+.taskListWra {
+    padding: 20px;
+}
+.taskListWra .taskTypeContent {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+}
+.taskListWra .taskTypeText {
+    padding-bottom: 10px;
+}
+.taskTypeText .currentTaskType {
+    color: #3f84c6;
+}
+.taskTypeText label {
+    padding-left: 10px;
+    border-left: 3px solid #68aae9;
+}
+.taskListWra .taskTypeList {
+    padding: 10px;
+    background: #f7f7f7;
+}
+.taskListWra .taskTypeList li {
+    float: left;
+    padding: 10px 20px;
+}
+.taskListWra .taskTypeList li a {
+    display: block;
+}
+.taskListResult {
+    background: #fff;
+}
+.taskListResult .querybox {
+    padding: 24px;
+    background: #f7f7f7;
+}
+.taskListResult .querybox label {
+    margin-top: 4px;
+    margin-right:6px;
+}
+.taskListResult .queryText {
+    float: left;
+}
+.taskListResult .queryBtn {
+    display: inline-block;
+    float: left;
+    width: 80px;
+    height: 30px;
+    margin-left: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background: #3f84c6;
+}
+.taskListResult .taskGridWrapper {
+    padding: 20px;
+}
+/*--账号设置CSS--*/
+.setAccountWra {
+    padding: 20px 0;
+    background: #fff;
+}
+.setAccountWra h3 {
+    margin-left: 20px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+    border-left: 3px solid #68aae9;
+    color: #3a3a3a;
+    font-size: 18px;
+}
+.setAccountWra .setAccountForm {
+    padding: 20px 60px;
+}
+.setAccountWra .setAccountForm li {
+    margin-bottom: 40px;
+}
+.setAccountWra .setAccountForm .labelText {
+    display: inline-block;
+    float: left;
+    width: 70px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333333;
+}
+.setAccountWra .setAccountForm .text {
+    width: 230px;
+    height: 32px;
+    padding-left: 8px;
+    border: 1px solid #d1d1d1;
+    line-height: 30px;
+}
+.setAccountWra .setAccountForm .text.password {
+    width: 170px;
+    border: none;
+}
+.setAccountWra .setAccountForm .detail {
+    float: left;
+}
+.setAccountWra .setAccountForm .detail .img {
+    width: 130px;
+    height: 130px;
+}
+.setAccountWra .setAccountForm .detail .link {
+    display: inline-block;
+    margin-left: 16px;
+    text-decoration: underline;
+    color: #68aae9;
+}
+.setAccountWra .setAccountForm .btnWrapper {
+    padding-left: 40px;
+    text-align: left;
+}
+
+/*--- 对外个人中心CSS ---*/
+.foreignContent {
+    padding: 20px;
+    background: #fff;
+}
+.foreignContent h2 {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    color: #5ba7ef;
+}
+/*---- footer---*/
+.footer {
+    height: 46px;
+    color: #fff;
+    background: #6c6c6c
+}
+.footerContent {
+    width: 1200px;
+    margin: 0 auto;
+}
+.friendWrap {
+    position: relative;
+    float: right;
+    line-height: 46px;
+    color: #fff;
+}
+.friendWrap a.helpBtn {
+    color: #fff;
+}
+.friendWrap a.underLinkBtn {
+    color: #fff;
+    text-decoration: underline;
+}
+.friendWrap .friendContent {
+    display: inline-block;
+    position: relative;
+}
+.friendWrap .friendContent .arrow {
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    margin-left: 4px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #fff;
+    font-size: 0px;
+    line-height: 0px;
+}
+.toggleFriend {
+    position: absolute;
+    z-index: 99999;
+    top: -252px;
+    height: 252px;
+}
+.friendWrap .friendList {   
+    border-radius: 4px; 
+    background: #6c6c6c;
+}
+.friendList li {
+    width: 156px;
+    height: 39px;
+    border-bottom: 1px solid #fff;    
+}
+.friendList li a {
+    display: block;
+    padding-left: 24px;
+    line-height: 38px;
+    font-size: 16px;
+    color: #fff;
+}
+.friendList li a:hover {
+    padding-left: 21px;
+    border-left: 3px solid #569de1;
+    color: #569de1;
+}
+.toggleFriend .guidarrow {
+    display: block;
+    width: 0px;
+    height: 0px;
+    margin-top: -1px;
+    margin-left: 22px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #6c6c6c;
+    font-size: 0px;
+    line-height: 0px;
+}
+.copyText {
+    float: left;
+    line-height: 46px;
+}
+.btnWrapper {
+    padding: 20px 0;
+    text-align: center;
+}
+.btnWrapper a {
+    display: inline-block;
+    width: 110px;
+    height: 38px;
+    margin-right: 20px;
+    border: 1px solid #cacaca;
+    line-height: 38px;
+    text-align: center;
+    font-size: 16px;
+    color: #8a8a8a;
+}
+.btnWrapper a.blue {
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #68aae9;
+}
+.btnWrapper a.blue.gray {
+    background: #ccc;
+}
+
+/*--- 重置个人中心弹出框的样式 ---*/
+.personCenter.modal {
+    width: 800px;
+    margin-left: -400px;
+}
+.personCenter.modal .modal-body {
+    max-height: 600px;
+}
+
+/*--自动搜索过滤CSS --*/
+.autocomplete-suggestions {
+    border: 1px solid #ccc;
+    border-top: none;
+    background: #fff;
+}
+.autocomplete-suggestions .autocomplete-suggestion {
+    padding: 2px 10px;
+    cursor: default;
+}
+
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity .15s linear;
+    -moz-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
+    transition: opacity .15s linear
+}
+
+.fade.in {
+    opacity: 1
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000
+}
+
+.modal-backdrop.fade {
+    opacity: 0
+}
+
+.modal-backdrop,.modal-backdrop.fade.in {
+    opacity: .8;
+    filter: alpha(opacity=80)
+}
+
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    z-index: 1050;
+    width: 1000px;
+    margin-left: -500px;
+    background-color: #fff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.3);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 7px rgba(0,0,0,.3);
+    -moz-box-shadow: 0 3px 7px rgba(0,0,0,.3);
+    box-shadow: 0 3px 7px rgba(0,0,0,.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box
+}
+
+.modal.fade {
+    top: -25%;
+    -webkit-transition: opacity .3s linear,top .3s ease-out;
+    -moz-transition: opacity .3s linear,top .3s ease-out;
+    -o-transition: opacity .3s linear,top .3s ease-out;
+    transition: opacity .3s linear,top .3s ease-out
+}
+
+.modal.fade.in {
+    top: 10%
+}
+
+.modal-header {
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee
+}
+
+.modal-header .close {
+    margin-top: 2px
+}
+
+.modal-header h3 {
+    margin: 0;
+    line-height: 30px
+}
+
+.modal-body {
+    position: relative;
+    max-height: 400px;
+    padding: 15px;
+    overflow-y: auto
+}
+
+.modal-form {
+    margin-bottom: 0
+}
+
+.modal-footer {
+    padding: 14px 15px 15px;
+    margin-bottom: 0;
+    text-align: center;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    -webkit-border-radius: 0 0 6px 6px;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff
+}
+
+.modal-footer:after,.modal-footer:before {
+    display: table;
+    line-height: 0;
+    content: ""
+}
+
+.modal-footer:after {
+    clear: both
+}
+
+.modal-footer .btn+.btn {
+    margin-bottom: 0;
+    margin-left: 5px
+}
+
+.modal-footer .btn-group .btn+.btn {
+    margin-left: -1px
+}
+
+.modal-footer .btn-block+.btn-block {
+    margin-left: 0
+}
+
+.hide {
+    display: none
+}
+
+.show {
+    display: block
+}
+
+.errorWrapper {
+    padding: 24px 0 50px 0;
+    background: #ededed ;
+}
+
+.errorWrapper .errorContent {
+    width: 1200px;
+    height: 700px;
+    margin: 0 auto;
+    background: #fff url(../images/error.jpg) no-repeat center;
+}
+
+.errorWrapper .errorContent h2 {
+    padding-top: 80px;
+    text-align: center;
+    color: #4c4c4b;
+    font-size: 36px;
+    font-weight: normal;
+    font-family: '宋体';
+}
+
+.errorBtnWrapper {
+    margin-top: 460px;
+    text-align: center;
+}
+
+.errorBtnWrapper a {
+    display: inline-block;
+    width: 80px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #68aef0;
+}
+
+.errorBtnWrapper a.refreshBtn {
+    margin-right: 80px;
+}
+
+/*----- 系统反馈，知识需求 -----*/
+.feedbackWra .tabList {
+    border-bottom: 1px solid #dededf;
+}
+.feedbackWra .tabList li {
+    float: left;
+    width: 120px;
+    height: 60px;
+}
+.feedbackWra .tabList a {
+    display: block;
+    line-height: 58px;
+    text-align: center;
+    font-size: 18px;
+    color: #d9d9d9;
+}
+.feedbackWra .tabList li.current {
+    height: 57px;
+    border-bottom: 3px solid #68aae9;
+}
+.feedbackWra .tabList li.current a {
+    color: #68aae9;
+}
+.feedbackWra .tabItemContent {
+    display: none;
+}
+.feedbackWra .tabItemContent.current {
+    display: block;
+}
+.feedbackWra .tabItemContent textarea {
+    margin: 40px 0;
+    padding: 10px;
+    border: 1px solid #dededf;
+    font-size: 16px;
+    background: #fff;
+}
+.feedbackWra .tabItemContent li {
+    margin-bottom: 28px;
+}
+.feedbackWra .tabItemContent label {
+    display: inline-block;
+    width: 120px;
+    font-size: 18px;
+    color: #3a3a3a;
+}
+.feedbackWra .tabItemContent .text {
+    width: 338px;
+    height: 40px;
+    padding-left: 10px;
+    border: 1px solid #dededf;
+    background: #fff;
+}
+.feedbackWra .tabItemContent .submitBtn {
+    width: 100px;
+    height: 40px;
+    margin-bottom: 46px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #fff;
+    background: #569de1;
+}
+.feedbackWra .tabItemContent select {
+    width: 350px;
+    height: 40px;
+    border: 1px solid #dededf;
+}
+.feedbackWra .uploadForm {
+    display: inline-block;
+}
+/******撰写文档*******/
+.writeDocWrapper{
+    margin:auto;
+    width:1200px;
+    position:relative;
+} 
+.writeDocWrapper .btnBox{
+    width:400px;
+    height:30px;
+    position: absolute;
+    bottom:80px;
+    right:120px;
+}
+.writeDocWrapper .btnBox a{
+    display: inline-block;
+    width:85px;
+    height:30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 2px;
+    cursor: pointer;
+    background: #68aef0;
+    color: #fff;
+    margin-left:15px;
+}
+.writeDocWrapper .btnBox a:hover{
+    background: #569de1;
+}
+#userBox{
+    width:340px;
+    height:170px;
+    background: #fff;
+    left:900px;
+    top:-640px;
+    position: relative;
+}
+#userBox .more{
+    font-size: 16px;
+    left: 280px;
+    position: absolute;
+    top:17px;
+}
+#userBox li{
+    height:20px;
+    line-height:20px;
+    color: #333;
+    margin-top:5px;
+    text-overflow:ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+}
+#userBox li span,#userBox li a{
+    float: left;
+    color: #333;
+    display: inline-block;
+}
+#userBox li a{
+    width:240px;
+    overflow: hidden; 
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+#userBox li span{
+    display: inline-block;
+    width:12px;
+    height:12px;
+    line-height: 12px;
+    background: #68aae9;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    margin-top:5px;
+    color: #fff;
+}
+#userBox li a:hover{
+    color: #68aae9;
+}
+/***********使用帮助文档************/
+.helpDocWrapper{
+    margin:auto;
+    width:1130px;
+    height:auto;
+    background: #fff;
+    padding:35px;
+}
+.helpDocWrapper .helpDocLeft{
+    width:100%;
+    height:700px;
+}
+.helpDocWrapper .helpDocLeft ul{
+    width:240px;
+    height:auto;
+    float: left;
+}
+.helpDocWrapper .helpDocLeft ul li{
+    height:35px;
+    line-height: 35px;
+    width:110px;
+    padding:0 20px 0 20px;
+    cursor: pointer;
+    border-left:10px solid #fff; 
+    font-size: 16px;
+}
+.helpDocWrapper .helpDocLeft ul .light{
+    border-left:10px solid #88b3f1;
+    color:#55aafa;
+}
+.helpDocWrapper .helpDocLeft .tabCon{
+    width:780px;
+    height:auto;
+    border-left:2px solid #ccc;
+    padding:0 40px;
+    float: left;
+    display: none;
+}
+.helpDocWrapper .helpDocLeft .tabCon p{
+    margin:20px 0;
+}
+.helpDocWrapper .helpDocLeft .tabCon img{
+    max-width: 750px;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.fn {
+    float: none;
+}
+
+.al {
+    text-align: left;
+}
+
+.ac {
+    text-align: center;
+}
+
+.ar {
+    text-align: right;
+}
+
+.at {
+    vertical-align: top;
+}
+
+.am {
+    vertical-align: middle;
+}
+
+.ab {
+    vertical-align: bottom;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.visibility {
+    visibility: hidden;
+}
+/* clear float */
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+.clearfix {
+    +zoom: 1;
+}
+
+.pb20 {
+    padding-bottom: 20px;
+}
+
+.pb80 {
+    padding-bottom: 80px;
+}
+.mb10 {
+    margin-bottom: 10px;
+}

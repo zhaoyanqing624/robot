@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+/* --- reset style start --- */
+html, pre, p, ul, ol, li,dl,dt,dd, form, input, hr,
+h1, h2, h3, h4, h5, h6,
+table, caption, tbody, tfoot, thead, tr, th, td { 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    display: table;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'Microsoft YaHei', Arial, sans-serif, \5b8b\4f53;
+    color: #333;
+    background: #fff;
+}
+
+pre {
+    border: none;
+    font-size: 100%;
+    font-family: inherit;
+    background-color: #fff;
+}
+
+ul li {
+    list-style: none;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 14px;
+}
+
+h4, h5, h6 {
+    font-size: 12px;
+}
+
+img {
+    cursor: pointer;
+    border: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    color: #606060;
+    text-decoration: none;
+    outline: 0 none;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+em {
+    font-style: normal;
+}
+
+textarea {
+    resize: none;
+}
+
+/* --- reset style end --- */
+
+
+/* --- common style start --- */
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.fn {
+    float: none;
+}
+
+.al {
+    text-align: left;
+}
+
+.ac {
+    text-align: center;
+}
+
+.ar {
+    text-align: right;
+}
+
+.at {
+    vertical-align: top;
+}
+
+.am {
+    vertical-align: middle;
+}
+
+.ab {
+    vertical-align: bottom;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.visibility {
+    visibility: hidden;
+}
+/* clear float */
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+.clearfix {
+    +zoom: 1;
+}
+
+.pb20 {
+    padding-bottom: 20px;
+}
+
+.pb80 {
+    padding-bottom: 80px;
+}
+.mb10 {
+    margin-bottom: 10px;
+}

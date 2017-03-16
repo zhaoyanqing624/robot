@@ -1,0 +1,433 @@
+/* CSS Document */
+	/*----------------------------------Author:lvzhaohua-----------------------------*/
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,img
+	{
+	padding: 0;
+	margin: 0 auto;
+	border: 0;
+}
+
+html,body {
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	color: #333;
+}
+
+ol,ul,li {
+	list-style-type: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	height: 100%;
+}
+
+fieldset,img {
+	border: 0;
+}
+
+input,textarea {
+	outline: none;
+}
+
+img {
+	list-style: none;
+	list-style-type: none;
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-weight: normal;
+	font-style: normal;
+}
+
+caption,th {
+	text-align: left;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight: normal;
+	font-size: 100%;
+}
+
+h2 {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+q:before,q:after {
+	content: ;
+}
+
+abbr,acronym {
+	border: 0;
+}
+
+.clearbh:after {
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
+	content: " ";
+}
+
+.clearbh {
+	clear: both;
+	font-size: 0;
+	height: 0;
+	overflow: hidden;
+	display: inline-block;
+}
+.clearfix {
+       zoom: 1;   
+}
+.clearfix:after {
+       display: block;
+       content: "";
+       clear: both;
+       visibility: hidden;
+       height: 0;
+       font-size: 0;
+       overflow: hidden;
+}
+
+
+/* fix IE hack \*/
+* html .clearbh {
+	height: 1%;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+a.t_link1,a.t_link1:hover,a.t_link1:active {
+	color: /*[text_color]*/ #7f1400 /*[/text_color]*/;
+}
+
+/*************************全局样式结束******************************/
+.p4-media {
+	width: 491px;
+	height: 611px;
+	position: absolute;
+}
+
+/***********media-body***********/
+.p4-media .media-body {
+	position: absolute;
+	height: 84%;
+	left: 0;
+	top: 0;
+	right: 0;
+	overflow: hidden;
+}
+
+.p4-media .media-body .line {
+	position: absolute;
+	height: 90%;
+	width: 1px;
+	background-color: #efeeec;
+	left: 50%;
+	top: 8%;
+}
+
+.p4-media .media-body ul li.li01 {
+	display: inline-block;
+	float: left;
+	height: 130px;
+	width: 50%;
+}
+
+.p4-media .media-body ul li.li01 .li-nav {
+	height: 100%;
+	width: 85%;
+	border-bottom: 1px solid #efeeec;
+	overflow: hidden;
+}
+
+.p4-media .media-body .li-nav .nav-title {
+	height: 48px;
+    margin-left: 45px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.p4-media .media-body .li-nav .nav-title p {
+	color: #40a2f3;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-top: 16px;
+    position: absolute;
+    width: 100px;
+}
+
+.p4-media .media-body .li-nav ul {
+	width: 280px;
+}
+
+.p4-media .media-body .li-nav ul li {
+	display: inline-block;
+	float: left;
+	width: 104px;
+	height: 26px;
+	margin-right: 9px;
+}
+
+.p4-media .media-body .li-nav ul li a {
+	text-decoration: none;
+	font-size: 13px;
+	color: #555555;
+}
+
+.p4-media .media-body .li-nav ul li a:HOVER {
+	text-decoration: none;
+	font-size: 13px;
+	color: #FFFFFF;
+	background-color: #40A2F3;
+}
+
+/************media-foot*************/
+.p4-media .media-foot {
+    bottom: 0;
+    height: 16%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+}
+
+.p4-media .media-foot .foot01 {
+    border-top: 1px solid #efeeec;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+.p4-media .media-foot .foot01 p {
+	font-size: 15px;
+	font-weight: bold;
+	color: #40A2F3;
+}
+
+.p4-media .media-foot .foot01 td {
+	text-align: center;
+}
+
+.p4-media .media-foot .foot01 a {
+	text-decoration: none;
+}
+
+.p4-media .media-foot ul {
+	height: 100%;
+    width: 600px;
+}
+
+.p4-media .media-foot ul li {
+    border-right: 1px solid #ccc;
+    display: inline-block;
+    float: left;
+    height: 100%;
+    padding:4px 29.5px 0 29.5px;
+    cursor:pointer;
+    width:68px;
+}
+.p4-media .media-foot ul li:HOVER{
+	background-color: #EFF0F2;
+}
+
+/************p4-shownav************/
+.p4-media .p4-shownav {
+	position: absolute;
+	display: none;
+	z-index: 100;
+	height: 129px;
+	width: 92.1%;
+	left: 3.7%;
+	top: 130px;
+}
+
+.p4-media .p4-shownav .show-top {
+	position: absolute;
+	z-index: 100;
+	top: 0;;
+	width: 100%;
+	height: 7px;
+}
+
+.p4-media .p4-shownav .show-body {
+	position: absolute;
+	width: 107%;
+	height: 115px;
+	left: -16px;
+	border: 1px solid #C4C4C4;
+	top: 6px;
+	background-color: #fafaf9;
+}
+
+.p4-media .p4-shownav .show-foot {
+	position: absolute;
+	z-index: 100;
+	top: 122px;;
+	width: 100%;
+	height: 7px;
+}
+
+/************p4-shownav01************/
+.p4-media .p4-shownav01 {
+	position: absolute;
+	display: none;
+	z-index: 100;
+	height: 129px;
+	width: 92.1%;
+	left: 3.7%;
+	top: 260px;
+}
+
+.p4-media .p4-shownav01 .show-top {
+	position: absolute;
+	z-index: 100;
+	top: 0;;
+	width: 100%;
+	height: 7px;
+}
+
+.p4-media .p4-shownav01 .show-body {
+	position: absolute;
+	width: 107%;
+	height: 115px;
+	left: -16px;
+	border: 1px solid #C4C4C4;
+	top: 6px;
+	background-color: #fafaf9;
+}
+
+.snv ul {
+	margin-top: 20px;
+	overflow: hidden;
+	padding-left: 20px;
+}
+
+.snv ul li {
+	text-decoration: none;
+	font-size: 13px;
+	color: #555555;
+	width: 45%;
+	line-height: 16px;
+	height: 16px;
+	float: left;
+	margin-top: 16px;
+	margin-right: 0px;
+	padding-left: 33px;
+	font-size: 13px;
+	text-align: vertical-align : middle;
+}
+
+.snv ul li a {
+	text-decoration: none;
+	color: #555555;
+	float: left;
+	margin-top:-1px;
+}
+
+.snv ul li img {
+	max-height: 16px;
+	vertical-align: middle;
+	float:left;
+}
+
+.snv ul li a:HOVER {
+	text-decoration: underline;
+	color: #40A2F3;
+}
+
+/**********************/
+.whitebg {
+	background-color: #ffffff;
+}
+
+.activebg,.active2bg {
+	background-color: #efeeec;
+}
+
+/*
+.activebg,.active2bg{
+  background-color: #efeeec;
+}
+*/
+.greybg {
+	background-color: #ffffff;
+}
+.bg_icon_hot1{
+    display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: 0px -168px;width:48px;height:48px;
+}
+.bg_icon_hot2{
+    display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -68px -168px;width:48px;height:48px;
+}
+.bg_icon_hot3{
+    display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -136px -168px;width:48px;height:48px;
+}
+.bg_icon_hot4{
+    display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -204px -168px;width:48px;height:48px;
+}
+.bg_icon_hot5{
+    display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -280px 0px;width:48px;height:48px;
+}
+.bg_icon_hot6{
+    display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -176px -46px;width:48px;height:48px;
+}
+.bg_icon_ic1{
+	display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: 0px 0px;width:68px;height:64px;
+}
+.bg_icon_ic2{
+	display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -88px 0px;width:68px;height:64px;
+}
+.bg_icon_ic3{
+	display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: 0px -84px;width:68px;height:64px;
+}
+.bg_icon_ic4{
+	display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -88px -84px;width:68px;height:64px;
+}
+.bg_icon_close_a{
+	display: inline-block;
+    height: 16px;
+  /*  padding: 2px 2px 0 0;*/
+    width: 16px;}
+.bg_icon_close{
+	display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -309px -243px;width:16px;height:16px;
+}
+.bg_icon_close:hover{
+	display: inline-block;
+    background-image: url('../../lenovo/images/icon_home.png');
+    background-position: -269px -243px;width:16px;height:16px;
+}

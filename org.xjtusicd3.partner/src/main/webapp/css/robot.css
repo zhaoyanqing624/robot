@@ -1,0 +1,74 @@
+.scroller {
+  margin: 0 !important;
+  padding: 0 12px 0 0 !important;
+}
+.media-list {
+    padding-left: 0;
+    list-style: none;
+}
+.media:first-child {
+    margin-top: 0;
+}
+.media, .media .media {
+    margin-top: 15px;
+}
+.media, .media-body {
+    overflow: hidden;
+    zoom: 1;
+}
+.media > .pull-left {
+    margin-right: 10px;
+}
+.pull-left {
+    float: left;
+}
+.pull-left {
+    float: left !important;
+    color:#999999;
+    font-size:14px;
+}
+.chat-pop {
+    background-color: #f4f4f4;
+    padding: 8px;
+    border-radius: 4px;
+    position: relative;
+    max-width: 500px;
+}
+.media > .pull-right {
+    margin-left: 10px;
+}
+.pull-right {
+    float: right;
+}
+.pull-right {
+    float: right !important;
+    color:#999999;
+    font-size:14px;
+}
+.chat-pop.mod {
+    background-color: #dbdbdb;
+    text-align: right;
+}
+.chat-pop > .media-heading {
+    color:#0083ff;
+}
+.media > .pull-right {
+    margin-left: 10px;
+}
+
+.timeago{
+	color:#999999;
+}
+.head_msg {
+    background: #b1ea99;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0;
+    padding: 1px 16px;
+    width: auto;
+}
+.content_line, .guess {
+    border-bottom: 1px dotted #a1a3a4;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
