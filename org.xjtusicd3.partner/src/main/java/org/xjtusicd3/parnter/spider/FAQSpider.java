@@ -32,6 +32,7 @@ public class FAQSpider implements PageProcessor {
                 		String num = new JsonPathSelector("$.total[*]").select(page.getRawText());
                     	int num1 = Integer.parseInt(num);
                     	System.out.println(num1);
+                    	System.err.println(1);
                 }
             }
         } else {
