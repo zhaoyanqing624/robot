@@ -46,11 +46,11 @@ public class FAQSpider implements PageProcessor {
         			faqSpiderPersistence.setFaqDescription(description.get(i));
         			faqSpiderPersistence.setFaqClassify(new JsonPathSelector("$.Category[*].subName").select(page.getRawText()));
         			faqSpiderPersistence.setFaqKeywords(keywords.get(i));
-        			faqSpiderPersistence.setFaqContent(content.get(i));
+        			faqSpiderPersistence.setFaqContent(zhuanyi(content.get(i)));
 					try {
 						FAQSpiderHelper.save(faqSpiderPersistence);
+						System.out.println("-------------------------已经插入--------"+i);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 //        			System.out.println("title:"+title.get(i));
@@ -67,7 +67,11 @@ public class FAQSpider implements PageProcessor {
     public Site getSite() {
         return site;
     }
-
+    
+    public static String zhuanyi(String string){
+    	string = string.replace("\'", "\\'");
+    	return string;
+    }
     public static void main(String[] args) {
         Spider.create(new FAQSpider())
         .addUrl("http://iknow.lenovo.com/doc/topicData?category_id=1&type=S")
