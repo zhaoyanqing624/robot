@@ -20,9 +20,7 @@ public class FAQSpider implements PageProcessor {
     
     private static final String ARITICALE_URL = "http://iknow.lenovo\\.com/doc/topicData/\\w+";
     private static final String LIST_URL = "http://iknow.lenovo\\.com/doc/topicData.*";
-
    // private static final String LIST_URL = "http://iknow.lenovo\\.com/doc/topicData.*";
-
     @Override
     public void process(Page page) {
         if (page.getUrl().regex(LIST_URL).match()) {
@@ -49,7 +47,7 @@ public class FAQSpider implements PageProcessor {
         			faqSpiderPersistence.setFaqContent(zhuanyi(content.get(i)));
 					try {
 						FAQSpiderHelper.save(faqSpiderPersistence);
-						System.out.println("-------------------------已经插入--------"+i);
+						System.out.println("--------已经插入--------"+i);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
