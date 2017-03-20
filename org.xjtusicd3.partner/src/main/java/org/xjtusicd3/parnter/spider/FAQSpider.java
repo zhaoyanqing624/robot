@@ -5,9 +5,6 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.xjtusicd3.database.helper.FAQSpiderHelper;
 import org.xjtusicd3.database.model.FAQSpiderPersistence;
-
-import com.google.gson.JsonObject;
-
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
