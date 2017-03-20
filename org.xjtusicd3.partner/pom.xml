@@ -103,12 +103,15 @@
 	</dependency>
 	
 	<!--json-lib-->    
-	<dependency>    
-	    <groupId>net.sf.json-lib</groupId>    
-	    <artifactId>json-lib</artifactId>    
-	    <version>2.4</version>    
-	    <classifier>jdk15</classifier>    
-	</dependency>  
+
+
+	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.1</version>
+</dependency>
+	     
 	
 
 	
