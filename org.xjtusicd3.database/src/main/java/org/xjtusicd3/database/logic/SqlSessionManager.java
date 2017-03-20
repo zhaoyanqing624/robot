@@ -9,7 +9,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.xjtusicd3.database.mapper.FAQSpiderPersistenceMapper;
+import org.xjtusicd3.database.mapper.SoftSpiderPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
+import org.xjtusicd3.database.model.SoftSpiderPersistence;
 
 
 
@@ -38,6 +40,7 @@ public class SqlSessionManager {
 			configuration.addMapper(IBaseDao.class);
 			configuration.addMapper(UserPersistenceMapper.class);
 			configuration.addMapper(FAQSpiderPersistenceMapper.class);
+			configuration.addMapper(SoftSpiderPersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;
