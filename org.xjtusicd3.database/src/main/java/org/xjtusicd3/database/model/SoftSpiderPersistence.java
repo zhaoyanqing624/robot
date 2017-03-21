@@ -7,6 +7,8 @@ import org.xjtusicd3.database.ann.TableKey.Strategy;
 @Table(tablename="soft")
 public class SoftSpiderPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
+	@TableField(columnName="soft_id")
+	private int soft_id;
 	@TableField(columnName="soft_name")
 	private String soft_name;
 	@TableField(columnName="point")
@@ -51,6 +53,13 @@ public class SoftSpiderPersistence {
 	private String download_num;
 	@TableField(columnName="os_type")
 	private String os_type;
+	
+	public int getSoft_id() {
+		return soft_id;
+	}
+	public void setSoft_id(int soft_id) {
+		this.soft_id = soft_id;
+	}
 	public String getSoft_name() {
 		return soft_name;
 	}

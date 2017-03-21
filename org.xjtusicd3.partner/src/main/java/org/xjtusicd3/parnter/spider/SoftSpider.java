@@ -19,7 +19,7 @@ public class SoftSpider implements PageProcessor {
 
     public static final String URL_POST = "http://rj\\.baidu\\.com/soft/detail/\\w+\\.html";
 
-    private Site site = Site.me().setRetryTimes(5).setSleepTime(1500);
+    private Site site = Site.me().setRetryTimes(5).setSleepTime(1000);
 
     @Override
     public void process(Page page) {
@@ -48,6 +48,7 @@ public class SoftSpider implements PageProcessor {
 	    	while(m.find()){
 	    		JSONObject object = JSONObject.fromObject(m.group(1));
 	    		JSONObject detail = object.getJSONObject("data").getJSONObject("softInfo");
+	    		int soft_id = detail.getInt("soft_id");
 	    		String soft_name=detail.getString("soft_name");
 	    		int point = detail.getInt("point");
 	    		String logo = detail.getString("logo");
@@ -101,6 +102,7 @@ public class SoftSpider implements PageProcessor {
 	    		String os_type = os_10+os_100+os_1000+os_10000+os_100000+os_1000000+os_10000000;
 	    		
 	    		SoftSpiderPersistence sp = new SoftSpiderPersistence();
+	    		sp.setSoft_id(soft_id);
 	    		sp.setSoft_name(soft_name);
 	    		sp.setPoint(point);
 	    		sp.setLogo(logo);
