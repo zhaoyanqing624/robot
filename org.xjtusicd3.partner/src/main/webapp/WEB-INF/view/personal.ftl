@@ -277,7 +277,7 @@
             $(".chklist").labelauty("chklist", "check");
         });
     </script>  
-	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script src="zhao/address/js/distpicker.data.js"></script>
 	<script src="zhao/address/js/distpicker.js"></script>
 	<script src="zhao/address/js/main.js"></script> 
