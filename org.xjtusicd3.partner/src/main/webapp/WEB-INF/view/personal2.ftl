@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>智能小朵-知识库 </title>
+    <title>智能小朵</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
     <script src="js/jquery-3.1.1.min.js"></script>
     <link href="css/font-awesome.min.css" rel="stylesheet">
