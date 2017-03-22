@@ -1,46 +1,39 @@
 package org.xjtusicd3.parnter.spider;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-/**
- * Created by Frank
- * 替换匹配的文本
- */
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.event.KeyEvent;
+
 public class TT {
-	
-    public static String zhuanyi(String string){
-    	string = string.replace("\"", "\\\"");
-    	return string;
-    }
-    public static void main(String[] args) {
-    	String test1 = "zyq";
-        // 创建一个正则表达式模式，用以匹配一个单词（\b=单词边界）
-        String patt = "er\\d*.*4";
+	public static void main(String[] args) throws Exception {
+	 Robot robot = new Robot();
+	 Runtime.getRuntime().exec("dxdiag");
+	 robot.delay(2500);
+	 keyPressWithCtrl(robot, KeyEvent.VK_S);
+	 robot.delay(13000);
+	 keyPressWithAlt(robot, KeyEvent.VK_S);
+	 keyPressWithCtrl(robot, KeyEvent.VK_X);
+	}
+	 public static void keyPressWithCtrl(Robot r, int key) {
+		 r.keyPress(KeyEvent.VK_CONTROL);
+		 r.keyPress(key);
+		 r.keyRelease(key);
+		 r.keyRelease(KeyEvent.VK_CONTROL);
+		 r.delay(100);
+	 }
+	 
+	 public static void keyPressWithAlt(Robot r, int key) {
+		 r.keyPress(KeyEvent.VK_ALT);
+		 r.keyPress(key);
+		 r.keyRelease(key);
+		 r.keyRelease(KeyEvent.VK_ALT);
+		 r.delay(100);
+	}
+	 
 
-        // 用于测试的输入字符串
-        String input = "er98980938\"zhao\"20495z809348095";
-        String iString = zhuanyi(input);
-        System.out.println("Input:" + input);
-        System.out.println("zhao:" + iString);
 
-        // 从正则表达式实例中运行方法并查看其如何运行
-        Pattern r = Pattern.compile(patt);
-        Matcher m = r.matcher(input);
-        while(m.find()){
-        	System.out.println("ReplaceAll:" + m.group());
-        }
-		
-        
-
-//        // appendReplacement方法
-//        m.reset();
-//        StringBuffer sb = new StringBuffer();
-//        while (m.find()) {
-//            // 将匹配之前的字符串复制到sb,再将匹配结果替换为："favour"，并追加到sb
-//            m.appendReplacement(sb, "favour");
-//        }
-//        System.out.println(sb.toString());
-//        m.appendTail(sb);
-//        System.out.println(sb.toString());
-    }
 }
