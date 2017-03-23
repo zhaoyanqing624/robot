@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>智能小朵 </title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
-    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/login_bg/jquery-1.9.1.js"></script>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset2.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util2.css" />
