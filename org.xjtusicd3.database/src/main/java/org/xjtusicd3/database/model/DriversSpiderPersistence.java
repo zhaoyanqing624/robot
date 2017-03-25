@@ -9,6 +9,7 @@ public class DriversSpiderPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
 	@TableField(columnName="driverId")
 	private int driverId;
+
 	@TableField(columnName="driverName")
 	private String driverName;
 	@TableField(columnName="driverOs")
@@ -27,6 +28,7 @@ public class DriversSpiderPersistence {
 	private String driverContent;
 	@TableField(columnName="driverUrl")
 	private String driverUrl;
+
 	public int getDriverId() {
 		return driverId;
 	}

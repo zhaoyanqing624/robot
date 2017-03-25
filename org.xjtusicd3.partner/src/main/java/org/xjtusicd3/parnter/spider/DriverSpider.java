@@ -3,6 +3,7 @@ package org.xjtusicd3.parnter.spider;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.xjtusicd3.database.helper.DriversSpiderHelper;
 import org.xjtusicd3.database.model.DriversSpiderPersistence;
 
 import us.codecraft.webmagic.Page;
@@ -20,6 +21,7 @@ public class DriverSpider implements PageProcessor {
 
     @Override
     public void process(Page page) {
+    	String type = "";
     	if (page.getHtml().xpath("//div[@class='cjpp']").match()) {
         	page.addTargetRequests(page.getHtml().links().regex(URL_LIST).all());
 		}
@@ -45,6 +47,7 @@ public class DriverSpider implements PageProcessor {
 			ds.setDriverFitness(page.getHtml().xpath("//div[@class='down_lb']/ul/li[6]/a/text()").toString());
 			ds.setDriverContent(page.getHtml().xpath("//div[@class='down_info']/text()").toString());
 			ds.setDriverUrl(url);
+			DriversSpiderHelper.sava(ds);
 		}
     }
 
@@ -55,7 +58,7 @@ public class DriverSpider implements PageProcessor {
 
     public static void main(String[] args) {
     	for(int i = 1;i <= 40;i++){
-        	Spider.create(new DriverSpider()).addUrl("http://drivers.mydrivers.com/search-"+i+"/").thread(5).run();
+        	Spider.create(new DriverSpider()).addUrl("http://drivers.mydrivers.com/search-"+i+"/").thread(10).run();
         	}
     }
 }
