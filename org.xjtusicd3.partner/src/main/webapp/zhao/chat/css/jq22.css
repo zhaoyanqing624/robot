@@ -9039,7 +9039,7 @@ hr.dots:before {
   border: 1px solid #ddd;
   background-color: #fff;
   position: relative;
-  max-width: 1078px;
+  max-width: 90%;
   height: 700px;
   padding: 0;
 }
