@@ -3871,9 +3871,9 @@ body {
 
 .user-head-info .user-info {
 	position: relative;
-	width: 712px;
-	padding-right: 247px;
-	padding-top: 60px;
+	width: 43%;
+	padding-right: 0;
+	padding-top: 4%;
 	margin: 0 auto
 }
 
@@ -4061,7 +4061,7 @@ body {
 
 .wrap {
 	position: relative;
-	width: 1200px;
+	width: 72%;
 	margin: 0 auto
 }
 
