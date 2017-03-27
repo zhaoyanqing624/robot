@@ -4067,9 +4067,9 @@ body {
 
 .slider {
 	position: fixed;
-	width: 200px;
-left: 200px;
-    top: 90px;
+	width: 12%;
+	left: 13%;
+    top: 10%;
 }
 
 .slider.fixed {
