@@ -4067,7 +4067,7 @@ body {
 
 .slider {
 	position: fixed;
-	width: 12%;
+	width: 200px;
 	left: 13%;
     top: 15%;
 }
@@ -4223,7 +4223,7 @@ body {
 }
 
 .u-container {
-	margin-left: 240px;
+	margin-left: 20%;
 	min-height: 589px
 }
 
