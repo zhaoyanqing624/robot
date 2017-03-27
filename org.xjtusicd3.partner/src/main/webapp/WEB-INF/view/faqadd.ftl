@@ -25,11 +25,11 @@
             <div class="content clearfix">
                 <div class="header_top_wrap_left">
 		            <ul>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">智能小朵</a></li>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">知识库</a></li>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
+		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
+		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
 		                <li>
-		                    <a class="new_a" href="">关于我们</a>
+		                    <a class="new_a" href="service.html">关于我们</a>
 		                </li>
 		            </ul> 
                 </div>

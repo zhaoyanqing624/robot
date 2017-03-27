@@ -17,11 +17,11 @@
             <div class="content clearfix">
                 <div class="header_top_wrap_left">
 		            <ul>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">智能小朵</a></li>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">知识库</a></li>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
+		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
+		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
 		                <li>
-		                    <a class="new_a" href="">关于我们</a>
+		                    <a class="new_a" href="service.html">关于我们</a>
 		                </li>
 		            </ul> 
                 </div>
@@ -34,9 +34,10 @@
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
 		                            <ul class="ul_list">
-		                                <li><a ">个人信息</a></li>
-		                                <li><a ">我的主页</a></li>
-		                                </li>
+		                                <li><a href="personal.html">个人信息</a></li>
+		                                <li><a href="personal3.html">我的设备</a></li>
+		                                <li><a href="personal2.html">我的主页</a></li>
+		                                <li><a href="notice.html">消息通知</a></li>
 		                            </ul>
 		                        </div>
 		                    </li>
@@ -213,8 +214,8 @@
                     	<h3 class="box-title">我想贡献</h3>
 					    <p class="textp">小朵知识库是众人参与可协作的知识分享平台。</p>
 					    <p class="linkWrapper">
-					    <a href="javascript:void(0)" class="writer" onclick="goCreateKnowledge()">创建知识</a>
-					    <a href="http://ask.lenovo.com.cn/html/index.html" class="question" target="_blank">我要提问</a>
+					    <a href="javascript:void(0);" onclick="window.open('faqadd.html');">创建知识</a>
+					    <a href=""javascript:void(0);" onclick="window.open('question.html');" >我要提问</a>
 					    </p>
 				</div>
 				<div class="barBox2 " id="" data="1" style="left:0px;top:645px;z-index:1;width:340px;">
@@ -236,7 +237,7 @@
     			</div>
 				<div class=" " id="" data="1" style="left:0px;top:215px;z-index:1">
                     <input type="hidden" class="data" value="18"><a href="" onclick="clickadd()"><img src=""></a></div><div class="barAdBox " id="" data="1" style="left:0px;top:215px;z-index:1">
-                    <input type="hidden" class="data" value="24"><a href="http://iknow.lenovo.com/detail/dc_KB022987.html" onclick="clickadd()"><img src="images/erweima.png"></a></div></div>
+                    <input type="hidden" class="data" value="24"><a href="http://iknow.lenovo.com/detail/dc_KB022987.html" onclick="clickadd()"><img src="images/erweima.PNG"></a></div></div>
         		</div>
         		
     		</div>
