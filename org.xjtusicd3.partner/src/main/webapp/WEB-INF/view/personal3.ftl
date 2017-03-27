@@ -54,7 +54,7 @@
 		                <div class="unlogin">
 		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
 		                    <li class="loginLinkLi" id="userNameText">您好：zhao</li>
-		                    	<li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
+		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
 		                            <ul class="ul_list">
@@ -93,7 +93,6 @@
                         <ul id="tab2" class="nav nav-pills">
                             <li class="active"><a href="#tab2-item1" data-toggle="tab">服务器</a></li>
                             <li><a href="#tab2-item2" data-toggle="tab">电脑设备</a></li>
-                            <li><a href="#tab2-item3" data-toggle="tab">移动设备</a></li>
                         </ul>
                         <div class="tab-content" style="margin-left: 165px;margin-top: 30px;width: 1000px;float: left;">
                             <div class="tab-pane fade active in" id="tab2-item1" style="width: 889px;float: left;">
@@ -177,39 +176,6 @@
 							            </div>
 							        </div>
 							    </section>
-                            </div>
-                            <div class="tab-pane fade" id="tab2-item3">
-							    <section id="portfolio-information" class="padding-top">
-							        <div class="container">
-							            <div class="row">
-							                <div class="col-sm-6" style="width:35%">
-							                    <img src="images/portfolio-details/iPhone 7 Plus.jpg" class="img-responsive" alt="">
-							                </div>
-							                <div class="col-sm-6">
-							                    <div class="project-name overflow">
-							                        <h2 class="bold">iPhone 7 Plus </h2>
-							                        <ul class="nav navbar-nav navbar-default">
-							                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：2016.12.27</span></li>
-							                            <li><a href="#"><i class="fa fa-tag"></i>编号：A1454641232654</a></li>
-							                        </ul>
-							                    </div>
-							                    <div class="project-info overflow">
-							                        <h3>硬件信息：</h3>
-							                        <ul class="elements">
-							                            <li><i class="fa fa-angle-right"></i> 处理器：苹果 A10+M10协处理器</li>
-							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：3GB</li>
-							                            <li><i class="fa fa-angle-right"></i> 存储：128GB</li>
-							                            <li><i class="fa fa-angle-right"></i> 机身颜色：玫瑰金</li>
-							                            <li><i class="fa fa-angle-right"></i> SIM卡：单卡，Nano SIM卡</li>
-							                            <li><i class="fa fa-angle-right"></i> 操作系统：iOS 10</li>
-							                            <li><i class="fa fa-angle-right"></i> 主屏尺寸：5.5英寸</li>
-							                        </ul>
-							                    </div>
-							                </div>
-							            </div>
-							        </div>
-							    </section>
-							     <!--/#portfolio-information-->
                             </div>
                         </div>
                     </div>

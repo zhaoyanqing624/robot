@@ -42,9 +42,10 @@
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
 		                            <ul class="ul_list">
-		                                <li><a ">个人信息</a></li>
-		                                <li><a ">我的主页</a></li>
-		                                </li>
+		                                <li><a href="personal.html">个人信息</a></li>
+		                                <li><a href="personal3.html">我的设备</a></li>
+		                                <li><a href="personal2.html">我的主页</a></li>
+		                                <li><a href="notice.html">消息通知</a></li>
 		                            </ul>
 		                        </div>
 		                    </li>

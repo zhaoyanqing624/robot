@@ -30,7 +30,7 @@
 		                <div class="unlogin">
 		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
 		                    <li class="loginLinkLi" id="userNameText">您好：zhao</li>
-		                    		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
+		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
 		                            <ul class="ul_list">
