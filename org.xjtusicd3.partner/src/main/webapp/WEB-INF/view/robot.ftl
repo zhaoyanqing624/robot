@@ -7,17 +7,17 @@
     <title>智能小朵</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
-    <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
+    <link rel="stylesheet" type="text/css" href="new/front/style/util-rb.css" />
     <link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/body.css">
 	<link rel="stylesheet" type="text/css" href="css/detail.css">
-	<link rel="stylesheet" href="zhao/chat/css/jq22.css">
+	<link rel="stylesheet" href="zhao/chat/css/jq22-rb.css">
 	<link rel="stylesheet" href="css/robot.css">
-	<link rel="stylesheet" type="text/css" href="zhao/chat/css/chat.css" />
+	<link rel="stylesheet" type="text/css" href="zhao/chat/css/chat-rb.css" />
 	<link rel="stylesheet" type="text/css" href="zhao/chat/css/waves.min.css">
 	<link rel="stylesheet" href="zhao/classify/css/ui.css">
-	<link rel="stylesheet" href="zhao/classify/css/style.css">
+	<link rel="stylesheet" href="zhao/classify/css/style-rb.css">
 	<link rel="stylesheet" type="text/css" href="zhao/xuanzhuan/css/normalize.css" />
 	<link rel='stylesheet prefetch' href='http://www.jq22.com/jquery/font-awesome.4.6.0.css'>
 	<link rel='stylesheet prefetch' href='zhao/xuanzhuan/css/animate.min.css'>
