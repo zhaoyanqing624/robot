@@ -10,6 +10,6 @@ public interface FaqPersistenceMapper extends IBaseDao<FaqPersistence, String>{
 	/*
 	 * robot-分类
 	 */
-	@Select("SELECT faqId,faqTitle,faqClassify,classifyName FROM faq,classify WHERE faq.faqClassify = classify.classifyId AND faq.faqClassify=#{0} ORDER BY faqCollection DESC LIMIT 4")
+	@Select("SELECT faq.faqId,faq.faqTitle FROM faq,classify WHERE faq.faqClassify = classify.classifyId AND faq.faqClassify=#{0} ORDER BY faq.faqCollection DESC LIMIT 4")
 	public List<FaqPersistence> SecondClassify_robot(int paramString);
 }

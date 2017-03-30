@@ -26,4 +26,12 @@ public class ClassifyHelper {
 		session.close();
 		return list;
 	}
+	
+	public static List<ClassifyPersistence> classifyName1(){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.FirstClassify_robot();
+		session.close();
+		return list;
+	}
 }
