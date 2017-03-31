@@ -6,18 +6,18 @@ public class FaqTitleView {
 	/*
 	 * robot-第三类
 	 */
-	private String content;
+	private String faqTitle;
 	
-	public String getContent() {
-		return content;
+	public String getFaqTitle() {
+		return faqTitle;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setFaqTitle(String faqTitle) {
+		this.faqTitle = faqTitle;
 	}
-	
-	
+
 	public FaqTitleView(FaqPersistence faqPersistence){
-		this.content = faqPersistence.getFaqTitle();
+		this.faqTitle = faqPersistence.getFaqTitle();
 	}
 	
 	public FaqTitleView(){

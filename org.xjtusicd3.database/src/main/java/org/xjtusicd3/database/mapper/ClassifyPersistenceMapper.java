@@ -12,6 +12,6 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	 */
 	@Select("SELECT classifyId,classifyName FROM classify WHERE parentId='0'")
 	public List<ClassifyPersistence> FirstClassify_robot();
-	@Select("SELECT classifyId,classifyName FROM classify WHERE parentId=#{0}")
-	public List<ClassifyPersistence> FirstClassify_robot2(int paramString);
+	@Select("SELECT classifyId,classifyName,sum(faqCollection) as a FROM faq,classify  WHERE classifyId=faqClassify AND parentId=#{0} GROUP BY faqClassify ORDER BY a DESC LIMIT 4")
+	public List<ClassifyPersistence> SecondClassify_robot(int paramString);
 }

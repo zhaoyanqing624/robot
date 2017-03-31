@@ -28,47 +28,9 @@
 	<script src="zhao/classify/js/knockout.js"></script>
 	<script>
 	$(function(){
-var navData=[
-			{
-				title:['操作系统'],
-				id:'speedMenu'+parseInt(Math.random()*1000),
-				content:[
-					{
-						title:'磁盘分区',
-						content:['磁盘分区', '蓝屏死机', '系统安装与升级', '程序安装与卸载', '浏览器', '应用商店问题', '系统还原']
-					},
-					{
-						title:'蓝屏死机',
-						content:["硬盘保护系统", "联想云盘", "R&R应急恢复系统", "人像识别", "office软件", "其他随机软件", "手机应用", "一键恢复"]
-					},
-					{
-						title:'系统安装与升级',
-						content:["USB","蓝牙","指纹","摄像头","麦克风","外接显示","耳机"]
-					},
-					{
-						title:'程序安装与卸载',
-						content:["市场经理","市场专员","品牌推广","市场企划"]
-					}
-				]
-			}
-		];
+var navData=[${string}];
 		ko.applyBindings({navData:navData})
 	})
-</script>
-<script>
-$(document).ready(
-   function(){
-         $.ajax({
-             type: "GET",
-             url: "http://localhost:8080/org.xjtusicd3.partner/getFirstLevel.html",            
-             dataType: "json",
-             success: function(data){            
-     			 for(var i in data){ 
-			      }                                                                      
-             }
-         });
-    })
-
 </script>
 	   <style>
         #colored-button .btn {
@@ -94,7 +56,7 @@ $(document).ready(
 		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
 		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
 		                <li>
-		                    <a class="new_a" href="service.html">关于我们</a>
+		                    <a class="new_a" href="service.html">关于我们${string}</a>
 		                </li>
 		            </ul> 
                 </div>

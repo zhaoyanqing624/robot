@@ -19,18 +19,19 @@ public class ClassifyHelper {
 		return list;
 	}
 	
-	public static List<ClassifyPersistence> FirstClassify_robot2(int parentId){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
-		List<ClassifyPersistence> list = mapper.FirstClassify_robot2(parentId);
-		session.close();
-		return list;
-	}
+
 	
 	public static List<ClassifyPersistence> classifyName1(){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
 		List<ClassifyPersistence> list = mapper.FirstClassify_robot();
+		session.close();
+		return list;
+	}
+	public static List<ClassifyPersistence> classifyName2(int parentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.SecondClassify_robot(parentId);
 		session.close();
 		return list;
 	}
