@@ -103,7 +103,7 @@
 	</dependency>
 	
 	<!--json-lib-->    
-
+	
 
 	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 <dependency>
@@ -111,11 +111,6 @@
     <artifactId>commons-lang3</artifactId>
     <version>3.1</version>
 </dependency>
-
-
-	     
-	
-
 	
 	
   </dependencies>

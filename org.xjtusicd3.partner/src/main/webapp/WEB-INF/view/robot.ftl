@@ -28,10 +28,10 @@
 	<script src="zhao/classify/js/knockout.js"></script>
 	<script>
 	$(function(){
-var navData=[${string}];
-		ko.applyBindings({navData:navData})
+	var navData=[${string}];
+		ko.applyBindings({navData:navData});
 	})
-</script>
+	</script>
 	   <style>
         #colored-button .btn {
             color: #fff;
@@ -56,7 +56,7 @@ var navData=[${string}];
 		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
 		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
 		                <li>
-		                    <a class="new_a" href="service.html">关于我们${string}</a>
+		                    <a class="new_a" href="service.html">关于我们</a>
 		                </li>
 		            </ul> 
                 </div>

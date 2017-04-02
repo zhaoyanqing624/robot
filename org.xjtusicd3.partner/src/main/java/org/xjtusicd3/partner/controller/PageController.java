@@ -22,11 +22,11 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
 	}
-	@RequestMapping(value="robot",method=RequestMethod.GET)
-	public ModelAndView robot(){
-		ModelAndView mv = new ModelAndView("robot");
-		return mv;
-	}
+//	@RequestMapping(value="robot",method=RequestMethod.GET)
+//	public ModelAndView robot(){
+//		ModelAndView mv = new ModelAndView("robot");
+//		return mv;
+//	}
 	@RequestMapping(value="404",method=RequestMethod.GET)
 	public ModelAndView notfound(){
 		ModelAndView mv = new ModelAndView("404");

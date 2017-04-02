@@ -13,19 +13,22 @@
 	
 	<!-- 访问根路径的时候， /WEB-INF/index.jsp -->
 	 <!-- <mvc:view-controller path="/" view-name="index" />  -->
-	 
-	 <!-- 处理请求时返回json字符串的中文乱码问题 -->
-    <mvc:annotation-driven>
-	    <mvc:message-converters>
-	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-	            <property name="supportedMediaTypes">
-	                <list>
-	                    <value>application/json;charset=UTF-8</value>
-	                </list>
-	            </property>
-	        </bean>
-	    </mvc:message-converters>
-	</mvc:annotation-driven>
+	 <mvc:annotation-driven />
+<mvc:annotation-driven> 
+  <mvc:message-converters register-defaults="true"> 
+    <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+    <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"> 
+      <property name="supportedMediaTypes"> 
+        <list> 
+          <value>application/json;charset=UTF-8</value> 
+        </list> 
+      </property> 
+    </bean> 
+  </mvc:message-converters> 
+</mvc:annotation-driven> 
+	
+	
+	
 	
 	<!-- resolve配置 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -65,4 +68,7 @@
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    
+    <!-- json -->
+    
 </beans>
