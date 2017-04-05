@@ -1,0 +1,23 @@
+/*** SLIDER ***/
+*{
+	padding:0;
+	margin:0;
+	list-style: none;
+}
+img{
+	border: 0;
+}
+#outerslider{
+	width:100%;margin: 0 auto;border-radius: 20px;
+}
+#slidercontainer{position:relative; height:358px;}
+.box_skitter_large {width:100%; height:358px;}
+.box_skitter_large .label_skitter{
+	bottom:0px;
+	left:0px ; 
+	padding:0; background:url(../images/opacity-slider-text.png) repeat;
+	font-size:22px;
+	padding:10px 30px;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+}

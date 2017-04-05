@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
     <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
+    <script type="text/javascript" src="js/my.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -64,51 +65,72 @@
     <div class="mainContent">
         <div class="contentWra clearfix">
             <div class="leftMainWrapper fristKnowledgeWra">
-				<div class="nowPositionBox clearfix">
-                    <a href="/"><span class="allType">所有分类</span></a>
-                    <span class="arrow">&gt;</span>
-                    <a href="/topic/c_1.html" id="firstNavStep"><span id="fristProductionName">操作系统</span></a>
-                    <span class="arrow">&gt;</span>
-                    <a href="/list/c_14.html" id="secondNavStep"><span class="secondStep" id="subProductionName">磁盘分区</span></a>                    
+                <div class="allFristTypeWrapper">
+                    <p class="allFristType"><a href="/"><span class="type">所有分类</span></a><span> &gt; </span><a href="/topic/c_1.html" id="oneNavStep"><span id="productionName">操作系统</span></a></p>
+                    <input type="hidden" id="secondeType" value="c">
+                    <ul class="typeContent clearfix" id="typeTplWrapper">
+                    	<#list classifyName2 as a>
+                        	<li><a href="faq2.html?c=${a.classifyId}">${a.classifyName}</a></li>
+                        </#list>
+                    </ul>
                 </div>
-                
-                <div class="secondListtWrapper" id="secondListtWrapper">
-                	<ul class="knowledgeList"><li><p class="title"><a href="faq3.html" target="_blank">Windows 10系统下如何进行压缩卷</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/11/25</span><span class="line">|</span><span class="showCount">178150</span><span class="message">2</span><span class="collection">4</span></li><li class="content">本文介绍了Windows 10系统下进行压缩卷的操作步骤。</li></ul>
- 		            <ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_091203.html" target="_blank">Lenovo 电脑如何将磁盘从GPT格式转换成MBR格式</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/05/09</span><span class="line">|</span><span class="showCount">37178</span><span class="message">0</span><span class="collection">10</span></li><li class="content">当需要将出厂的win8/8.1/10系统改成Win7/vista/xp系统时，我们需要将出厂硬盘的GPT分区变成MBR格式，那么应该如何操作呢？本文为您揭晓。</li></ul> 
-                	<ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_141923.html" target="_blank">Win8、Win10磁盘分区教程</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2017/02/27</span><span class="line">|</span><span class="showCount">20764</span><span class="message">0</span><span class="collection">5</span></li><li class="content">预装系统的笔记本正常只有一个C盘系统分区，那么要分出更多的分区该怎么操作呢？</li></ul>
-                	<ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_086978.html" target="_blank">在GPT格式的磁盘分区上如何引导安装Windows 7系统</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/03/22</span><span class="line">|</span><span class="showCount">17504</span><span class="message">0</span><span class="collection">1</span></li><li class="content">在GPT格式的磁盘分区上应该如何引导安装Windows 7系统呢？商用台式机Intel 6系列及以上机器采用EFI主板，配合64位Vista及以上版本操作系统可以实现GPT分区引导，下面做详细介绍。</li></ul>
-                	<ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_131649.html" target="_blank">Windows安装过程中提示“安装程序无法定位现有系统分区，也无法创建新的系统分区”</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/04/08</span><span class="line">|</span><span class="showCount">16474</span><span class="message">0</span><span class="collection">2</span></li><li class="content">在正常引导安装Windows 7/8/8.1/10操作系统时，可能会遇到报错提示“安装程序无法定位现有系统分区，也无法创建新的系统分区”，原因是：所选择的分区不是活动分区，而因磁盘主分区数量等原因导致安装程序无法自动创建系统引导分区，使用工具将要安装系统的分区激活即可。</li></ul>
+                <div class="recommendWrapper">
+                    <p class="knowledgeType"><span class="type">推荐知识</span></p>
+                   	 <div id="onebyone_slider">
+						<div class="oneByOne_item">
+							<span class="ob1_title">近期Win8.1、Win10系统出现不定时蓝屏</span>
+							<span class="ob1_description">近期Win8.1、Win10出现的蓝屏现象，可以通过本文提供的工具清除插件来解决。</span>
+							<img src="zhao/lunbo/images/header/1.jpg" class="ob1_img_device1"  />
+						</div>
+						<div class="oneByOne_item">
+							<span class="ob1_title">永久关闭Windows10自动更新</span>
+							<span class="ob1_description">本文介绍了永久关闭Win10自动更新的操作方法。</span>
+							<img src="zhao/lunbo/images/header/2.jpg" class="ob1_img_device1" alt="" />
+						</div>
+						<div class="oneByOne_item">
+							<span class="ob1_title">正式版Windows 10回退至Windows 7或Windows 8.1的功能介绍</span>
+							<span class="ob1_description">正式版Windows 10回退至Windows 7和Windows 8.1的功能介绍、操作步骤、风险提示。</span>
+							<img src="zhao/lunbo/images/header/3.jpg" class="ob1_img_device1" alt="" />
+						</div>
+						<div class="oneByOne_item">
+							<span class="ob1_title">如何安装或重新安装Windows 7</span>
+							<span class="ob1_description">本文介绍了使用光盘重新安装Windows 7操作系统的方法，因安装系统需要对硬盘进行格式化操作，为了避免重要数据的丢失，请事先把硬盘上的重要数据进行备份。</span>
+							<img src="zhao/lunbo/images/header/4.jpg" class="ob1_img_device1" alt="BubbleTips气泡提示Jquery插件" />
+						</div>
+					</div>
                 </div>
-                
-                <div class="topMoreTop" id="querymorelink">
-                    <a href="javascript:void(0);" onclick="queryMoreTop()">加载更多</a>
-                </div>
+                <#list Classify_faq1View as a2>
+                <div class="fristTypeKnowledgeWra clearfix" id="knowledgeTopTplWrapper">
+                    <div class="knowledgeBox">
+                        <p class="knowledgeType"><span class="type">${a2.classifyName}</span></p>
+                        <ul class="typeKnowledgeList">
+                            <li class="clearfix fristList">
+                                <img src="zhao/lunbo/images/11.jpg" alt="重置Edge浏览器" class="topImage">
+                                <div class="topList clearfix">
+                                    <div class="topTitle">
+                                        <a href="/detail/dc_151506.html" target="_blank" >${b1.faqTitle}</a>
+                                    </div>
+                                    <p class="topContent" >${b1.faqDescription}</p>
+                                </div>
+                            </li>
+                            <li><a href="/detail/dc_133964.html" target="_blank" >${b2.faqTitle}</a></li>
+                        </ul>
+                    </div>
+                 </div>
+                 </#list>
             </div>
             <div class="rightBarWrapper">
             	<div class="barBox " id="knowledgeBox" data="1" style="left:0px;top:0px;z-index:1">
             		<h3 class="box-title">知识专区</h3>
-				    <ul class="knowledge clearfix">
-				            <li class="default"><a href="/topic/c_1.html">操作系统</a></li>
-				            <li class="orange"><a href="/topic/c_2.html">随机软件</a></li>
-				            <li class="pink"><a href="/topic/c_3.html">设备应用</a></li>
-				            <li class="red"><a href="/topic/c_4.html">显卡切换与调试</a></li>
-				            <li class="blue"><a href="/topic/c_5.html">病毒与安全</a></li>
-				            <li class="green"><a href="/topic/c_6.html">驱动程序帮助</a></li>
-				            <li class="gray"><a href="/topic/c_7.html">上网问题</a></li>
-				            <li class="black"><a href="/topic/c_8.html">一键恢复</a></li>
-				            
-				            <li class="default"><a href="/topic/c_9.html">显示故障</a></li>
-				            <li class="orange"><a href="/topic/c_10.html">娱乐影音</a></li>
-				            <li class="pink"><a href="/topic/c_12.html">第三方软件</a></li>
-				            <li class="red"><a href="/topic/c_13.html">BIOS</a></li>
+				    <ul class="knowledge clearfix" id="konwledge-first">
 				    </ul>
     			</div>
     			<div class="barBox contribution " id="contribution" data="1" style="left:0px;top:460.078125px;z-index:1;height:130px;">
                     	<h3 class="box-title">我想贡献</h3>
 					    <p class="textp">小朵知识库是众人参与可协作的知识分享平台。</p>
 					    <p class="linkWrapper">
-					    <a href="javascript:void(0)" class="writer" onclick="goCreateKnowledge()">创建知识</a>
-					    <a href="http://ask.lenovo.com.cn/html/index.html" class="question" target="_blank">我要提问</a>
+					    <a href="javascript:void(0);" onclick="window.open('faqadd.html');">创建知识</a>
+					    <a href=""javascript:void(0);" onclick="window.open('question.html');" >我要提问</a>
 					    </p>
 				</div>
 				<div class="barBox2 " id="" data="1" style="left:0px;top:645px;z-index:1;width:340px;">
@@ -118,13 +140,13 @@
 			                <div id="ranking" class="first">1</div>
 			                <div id="user-pic"><a target="_blank" href="/u/4985559/bbs"><img style="display: block;height: 100%;" src="http://img.mukewang.com/58bec74a0001ff7a16001280-100-100.jpg" title="八神花露水"></a></div><!--.user-pic end-->
 			                <div id="user-name"><a target="_blank" href="/u/4985559/bbs">八神花露水</a></div><!--.user-name end-->
-			                <div id="user-info" class="clearfix"><span id="role"></span><span id="answer-num">19条知识</span></div><!--.user-info end-->
+			                <div id="user-info" class="clearfix"><span id="role"></span><span id="answer-num">19知识库</span></div><!--.user-info end-->
 			            </li>
 			            <li>
 			                <div id="ranking" class="second">2</div>
 			                <div id="user-pic"><a target="_blank" href="/u/4499997/bbs"><img style="display: block;height: 100%;" src="http://img.mukewang.com/583d2ab20001050406400640-100-100.jpg" title="习惯受伤"></a></div><!--.user-pic end-->
 			                <div id="user-name"><a target="_blank" href="/u/4499997/bbs">习惯受伤</a></div><!--.user-name end-->
-			                <div id="user-info" class="clearfix"><span id="role">西安明乐运维</span><span id="answer-num">10条知识</span></div><!--.user-info end-->
+			                <div id="user-info" class="clearfix"><span id="role">西安明乐运维</span><span id="answer-num">10知识库</span></div><!--.user-info end-->
             			</li>
                     </ul>
     			</div>
@@ -152,6 +174,5 @@
 		});
 		</script> 
     <!--/script--!>
-    <script type="text/javascript" src="js/my.js"></script>
 </body>
 </html>

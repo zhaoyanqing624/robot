@@ -9,7 +9,10 @@
     <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="zhao/lunbo_1/styles/slider.css" />
+    <link rel="stylesheet" type="text/css" href="zhao/lunbo_1/styles/skitter.styles.css" media="all" />
     <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
+    <script type="text/javascript" src="js/my.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -62,188 +65,221 @@
 		</div>
     </div>
     <div class="mainContent">
-        <div class="contentWra clearfix">
-            <div class="leftMainWrapper fristKnowledgeWra">
-                <div class="allFristTypeWrapper">
-                    <p class="allFristType"><a href="/"><span class="type">所有分类</span></a><span> &gt; </span><a href="/topic/c_1.html" id="oneNavStep"><span id="productionName">操作系统</span></a></p>
-                    <input type="hidden" id="secondeType" value="c">
-                    <ul class="typeContent clearfix" id="typeTplWrapper">
-                        <li><a href="faq2.html">磁盘分区</a></li>
-                        <li><a href="/list/c_15.html">蓝屏死机</a></li>
-                        <li><a href="/list/c_16.html">系统安装与升级</a></li>
-                        <li><a href="/list/c_17.html">程序安装与卸载</a></li>
-                        <li><a href="/list/c_18.html">浏览器</a></li>
-                        <li><a href="/list/c_19.html">应用商店问题</a></li>
-                        <li><a href="/list/c_20.html">系统还原</a></li>
-                        <li><a href="/list/c_21.html">清理垃圾</a></li>
-                        <li><a href="/list/c_38.html">系统登录问题</a></li>
-                        <li><a href="/list/c_23.html">输入法问题</a></li>
-                        <li><a href="/list/c_24.html">系统应用操作</a></li>
-                        <li><a href="/list/c_25.html">注册表操作</a></li>
-                        <li><a href="/list/c_39.html">系统数据恢复</a></li>
-                        <li><a href="/list/c_26.html">用户账户</a></li>
-                        <li><a href="/list/c_28.html">屏幕保护程序</a></li>
-                        <li><a href="/list/c_29.html">非Windows系统支持</a></li>
-                        <li><a href="/list/c_30.html">开关机问题</a></li>
-                        <li><a href="/list/c_31.html">激活问题</a></li>
-                    </ul>
+    	<div class="contentWra clearfix">
+            <div class="leftMainWrapper">
+                <div class="banner">
+			        <!-- SLIDER -->
+			        <div id="outerslider" >
+			        	<div id="slidercontainer">
+			            	<section id="slider">
+			                <div class="box_skitter box_skitter_large">
+			                    <ul>
+			                        
+			                        <li>
+			                            <img src="zhao/lunbo_1/images/content/z1.png"  alt="" />
+			                            <div class="label_text">
+			                                <span>Windows 10系统升级、安装、更新热点问题汇总</span>
+			                            </div>
+			                        </li>
+			                        <li>
+			                            <img src="zhao/lunbo_1/images/content/z2.png"  alt="" />
+			                            <div class="label_text">
+			                                <span>联想一键恢复的使用方法</span>
+			                            </div>
+			                        </li>
+			                        <li>
+			                            <img src="zhao/lunbo_1/images/content/z3.jpg"  alt="" />
+			                            <div class="label_text">
+			                                <span>采用RAID SSD的机型安装Win10系统无法识别随机标配的硬盘</span>
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </div>
+			                </section>
+			            </div>
+			        </div>
+			        <!-- END SLIDER -->
                 </div>
-                <div class="recommendWrapper">
-                    <p class="knowledgeType"><span class="type">推荐知识</span></p>
-                   	 <div id="onebyone_slider">
-						<div class="oneByOne_item">
-							<span class="ob1_title">近期Win8.1、Win10系统出现不定时蓝屏</span>
-							<span class="ob1_description">近期Win8.1、Win10出现的蓝屏现象，可以通过本文提供的工具清除插件来解决。</span>
-							<img src="zhao/lunbo/images/header/1.jpg" class="ob1_img_device1"  />
-						</div>
-						<div class="oneByOne_item">
-							<span class="ob1_title">永久关闭Windows10自动更新</span>
-							<span class="ob1_description">本文介绍了永久关闭Win10自动更新的操作方法。</span>
-							<img src="zhao/lunbo/images/header/2.jpg" class="ob1_img_device1" alt="" />
-						</div>
-						<div class="oneByOne_item">
-							<span class="ob1_title">正式版Windows 10回退至Windows 7或Windows 8.1的功能介绍</span>
-							<span class="ob1_description">正式版Windows 10回退至Windows 7和Windows 8.1的功能介绍、操作步骤、风险提示。</span>
-							<img src="zhao/lunbo/images/header/3.jpg" class="ob1_img_device1" alt="" />
-						</div>
-						<div class="oneByOne_item">
-							<span class="ob1_title">如何安装或重新安装Windows 7</span>
-							<span class="ob1_description">本文介绍了使用光盘重新安装Windows 7操作系统的方法，因安装系统需要对硬盘进行格式化操作，为了避免重要数据的丢失，请事先把硬盘上的重要数据进行备份。</span>
-							<img src="zhao/lunbo/images/header/4.jpg" class="ob1_img_device1" alt="BubbleTips气泡提示Jquery插件" />
-						</div>
-					</div>
-                </div>
-                <div class="fristTypeKnowledgeWra clearfix" id="knowledgeTopTplWrapper">
-                        <div class="knowledgeBox">
-                            <p class="knowledgeType"><span class="type">浏览器</span></p>
-                            <ul class="typeKnowledgeList">
-                                <li class="clearfix fristList">
-                                    <img src="zhao/lunbo/images/11.jpg" alt="重置Edge浏览器" class="topImage">
-                                    <div class="topList clearfix">
-                                        <div class="topTitle">
-                                            <a href="/detail/dc_151506.html" target="_blank" title="Windows 10下如何重置Edge浏览器">Windows 10下如何重置Edge浏览器</a>
-                                        </div>
-                                        <p class="topContent" title="本文介绍如何在不影响系统地情况下，重置Edge浏览器的方法。">本文介绍如何在不影响系统地情况下，重置Edge浏览器的方法。</p>
-                                    </div>
-                                </li>
-                                <li><a href="/detail/dc_133964.html" target="_blank" title="Microsoft Edge浏览器如何设置兼容模式">Microsoft Edge浏览器如何设置兼容模式</a></li>
-                                <li><a href="/detail/dc_132523.html" target="_blank" title="Win10系统下使用edge浏览器如何切换到IE11浏览网页">Win10系统下使用edge浏览器如何切换到IE11浏览网页</a></li>
-                                <li><a href="/detail/dc_135012.html" target="_blank" title="Edge浏览器打开某些网页慢或无法打开">Edge浏览器打开某些网页慢或无法打开</a></li>
-                                <li><a href="/detail/dc_133135.html" target="_blank" title="Win10如何使用IE8浏览网站">Win10如何使用IE8浏览网站</a></li>
-                                <li><a href="/detail/dc_120523.html" target="_blank" title="用命令卸载IE9、IE10、IE11浏览器的方法">用命令卸载IE9、IE10、IE11浏览器的方法</a></li>
-                            </ul>
+                <div class="topWrapper" id="tplWrapper">
+                        <div class="topList clearfix">
+                        <div class="imagesPotion">
+                            <a href="/detail/dc_143417.html" target="_blank">
+                                <img src="images/test/21.png" alt="">
+                            </a>
                         </div>
-                        <div class="knowledgeBox">
-                            <p class="knowledgeType"><span class="type">开关机问题</span></p>
-                            <ul class="typeKnowledgeList">
-                                <li class="clearfix fristList">
-                                    <img src="zhao/lunbo/images/12.jpg" alt="禁止开机启动项" class="topImage">
-                                    <div class="topList clearfix">
-                                        <div class="topTitle">
-                                            <a href="/detail/dc_134352.html" target="_blank" title="利用Windows 10自带的系统配置禁止开机启动项和程序">利用Windows 10自带的系统配置禁止开机启动项和程序</a>
-                                        </div>
-                                        <p class="topContent" title="利用Windows 10自带的系统配置禁止开机启动项和程序操作指导。">利用Windows 10自带的系统配置禁止开机启动项和程序操作指导。</p>
-                                    </div>
-                                </li>
-                                <li><a href="/detail/dc_R0194.html" target="_blank" title="Windows 8笔记本电脑关机后电源灯要亮一段时间，是否正常">Windows 8笔记本电脑关机后电源灯要亮一段时间，是否正常</a></li>
-                                <li><a href="/detail/dc_127687.html" target="_blank" title="Win8提示“无法完成更新，正在撤销更改，请不要关闭计算机”">Win8提示“无法完成更新，正在撤销更改，请不要关闭计算机”</a></li>
-                                <li><a href="/detail/dc_115157.html" target="_blank" title="Windows 7 系统开机提示：0XC000000F 现象如何处理">Windows 7 系统开机提示：0XC000000F 现象如何处理</a></li>
-                                <li><a href="/detail/dc_115387.html" target="_blank" title="开机提示“invalid partition table”错误无法进入系统的解决方案">开机提示“invalid partition table”错误无法进入系统的解决方案</a></li>
-                                <li><a href="/detail/dc_079120.html" target="_blank" title="Windows 8系统如何实现定时关机功能">Windows 8系统如何实现定时关机功能</a></li>
-                            </ul>
-                        </div>
-                        <div class="knowledgeBox">
-                            <p class="knowledgeType"><span class="type">磁盘分区</span></p>
-                            <ul class="typeKnowledgeList">
-                                <li class="clearfix fristList">
-                                    <img src="zhao/lunbo/images/13.jpg" alt="Win10 磁盘分区" class="topImage">
-                                    <div class="topList clearfix">
-                                        <div class="topTitle">
-                                            <a href="/detail/dc_145631.html" target="_blank" title="Win10系统下如何进行磁盘分区">Win10系统下如何进行磁盘分区</a>
-                                        </div>
-                                        <p class="topContent" title="本文描述了在Win10系统下进行磁盘分区的操作步骤。">本文描述了在Win10系统下进行磁盘分区的操作步骤。</p>
-                                    </div>
-                                </li>
-                                <li><a href="/detail/dc_133316.html" target="_blank" title="Windows 10系统下如何进行压缩卷">Windows 10系统下如何进行压缩卷</a></li>
-                                <li><a href="/detail/dc_089225.html" target="_blank" title="如何使用GPT磁盘分区安装系统">如何使用GPT磁盘分区安装系统</a></li>
-                                <li><a href="/detail/dc_091203.html" target="_blank" title="Lenovo 电脑如何将磁盘从GPT格式转换成MBR格式">Lenovo 电脑如何将磁盘从GPT格式转换成MBR格式</a></li>
-                                <li><a href="/detail/dc_040945.html" target="_blank" title="Windows 7系统分区时提示“该磁盘已经包含最大分区数”如何解决？">Windows 7系统分区时提示“该磁盘已经包含最大分区数”如何解决？</a></li>
-                                <li><a href="/detail/dc_043440.html" target="_blank" title="Win7下用磁盘管理为硬盘分区">Win7下用磁盘管理为硬盘分区</a></li>
-                            </ul>
-                        </div>
-                        <div class="knowledgeBox">
-                            <p class="knowledgeType"><span class="type">系统安装与升级</span></p>
-                            <ul class="typeKnowledgeList">
-                                <li class="clearfix fristList">
-                                    <img src="zhao/lunbo/images/14.jpg" alt="SKYLAKE" class="topImage">
-                                    <div class="topList clearfix">
-                                        <div class="topTitle">
-                                            <a href="/detail/dc_146092.html" target="_blank" title="SKYLAKE平台机型改装Win7的方法（U盘安装）">SKYLAKE平台机型改装Win7的方法（U盘安装）</a>
-                                        </div>
-                                        <p class="topContent" title="本文介绍了制作U盘系统盘的方法和SKYLAKE平台机型改装Win7系统的操作方法。">本文介绍了制作U盘系统盘的方法和SKYLAKE平台机型改装Win7系统的操作方法。</p>
-                                    </div>
-                                </li>
-                                <li><a href="/detail/dc_134251.html" target="_blank" title="如何使用微软介质创建工具升级Windows 10">如何使用微软介质创建工具升级Windows 10</a></li>
-                                <li><a href="/detail/dc_026482.html" target="_blank" title="如何制作U盘系统盘以及使用U盘安装操作系统的方法">如何制作U盘系统盘以及使用U盘安装操作系统的方法</a></li>
-                                <li><a href="/detail/dc_106253.html" target="_blank" title="如何全新安装Windows 8.1？">如何全新安装Windows 8.1？</a></li>
-                                <li><a href="/detail/dc_093720.html" target="_blank" title="预装Win8/8.1系统的电脑改装为Win7系统的操作步骤及常见问题">预装Win8/8.1系统的电脑改装为Win7系统的操作步骤及常见问题</a></li>
-                                <li><a href="/detail/dc_093712.html" target="_blank" title="Lenovo消费台式与一体机预装Win8改装Win7的解决方案">Lenovo消费台式与一体机预装Win8改装Win7的解决方案</a></li>
-                            </ul>
-                        </div>
+                        <ul class="topcontent">
+                            <li>
+                                <p class="title">
+                                    <a href="/detail/dc_143417.html" target="_blank">如何在Windows 7安装U盘中加入USB3.0的支持</a>
+                                </p>
+                            </li>
+                            <li class="clearfix">
+                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
+                                <span class="username">Iknow</span>
+                                <span class="dot">-</span>
+                                <span class="time">2015/11/04</span>
+                                <span class="line">|</span>
+                                <span class="showCount">236955</span>
+                                <span class="message">34</span>
+                                <span class="collection">78</span>
+                            </li>
+                            <li class="content">原生Win7系统不包含USB3.0的驱动，所以无法使用USB3.0的U盘在USB3.0的设备上引导，且安装完系统后还需要重新安装USB3.0驱动。</li>
+                        </ul>
                     </div>
+                    
+                        <div class="topList clearfix">
+                        <div class="imagesPotion">
+                            <a href="/detail/dc_039949.html" target="_blank">
+                                <img src="images/test/22.jpg" alt="新扬天电脑所配USB键盘">
+                            </a>
+                        </div>
+                        <ul class="topcontent">
+                            <li>
+                                <p class="title">
+                                    <a href="/detail/dc_039949.html" target="_blank">新扬天电脑所配USB键盘功能键驱动问题注意事项</a>
+                                </p>
+                            </li>
+                            <li class="clearfix">
+                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
+                                <span class="username">Iknow</span>
+                                <span class="dot">-</span>
+                                <span class="time">2015/11/07</span>
+                                <span class="line">|</span>
+                                <span class="showCount">148932</span>
+                                <span class="message">11</span>
+                                <span class="collection">7</span>
+                            </li>
+                            <li class="content">2010年7月上市的新扬天电脑所配的USB键盘，F1-F12系统下会默认为快捷键（功能键），而非F1-F12实际功能，本文介绍了按键的切换调整方法，供参考。</li>
+                        </ul>
+                    </div>
+                    
+                        <div class="topList clearfix">
+                        <div class="imagesPotion">
+                            <a href="/detail/dc_153184.html" target="_blank">
+                                <img src="images/test/23.jpg" alt="永久关闭Windows 10的自动更新">
+                            </a>
+                        </div>
+                        <ul class="topcontent">
+                            <li>
+                                <p class="title">
+                                    <a href="/detail/dc_153184.html" target="_blank">永久关闭Windows 10的自动更新</a>
+                                </p>
+                            </li>
+                            <li class="clearfix">
+                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
+                                <span class="username">Iknow</span>
+                                <span class="dot">-</span>
+                                <span class="time">2016/10/26</span>
+                                <span class="line">|</span>
+                                <span class="showCount">44195</span>
+                                <span class="message">26</span>
+                                <span class="collection">86</span>
+                            </li>
+                            <li class="content">本文介绍了永久关闭Win10自动更新的操作方法。</li>
+                        </ul>
+                    </div>
+                    
+                        <div class="topList clearfix">
+                        <div class="imagesPotion">
+                            <a href="/detail/dc_141257.html" target="_blank">
+                                <img src="images/test/24.jpg" alt="Lenovo settings下载及使用介绍">
+                            </a>
+                        </div>
+                        <ul class="topcontent">
+                            <li>
+                                <p class="title">
+                                    <a href="/detail/dc_141257.html" target="_blank">Lenovo settings下载及使用介绍</a>
+                                </p>
+                            </li>
+                            <li class="clearfix">
+                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
+                                <span class="username">Iknow</span>
+                                <span class="dot">-</span>
+                                <span class="time">2015/12/11</span>
+                                <span class="line">|</span>
+                                <span class="showCount">183724</span>
+                                <span class="message">19</span>
+                                <span class="collection">36</span>
+                            </li>
+                            <li class="content">联想随机软件Lenovo settings界面展示，下载和使用方法介绍。</li>
+                        </ul>
+                    </div>
+                    
+                        <div class="topList clearfix">
+                        <div class="imagesPotion">
+                            <a href="/detail/dc_152752.html" target="_blank">
+                                <img src="images/test/25.jpg" alt="小新Air12 LTE版如何4G上网">
+                            </a>
+                        </div>
+                        <ul class="topcontent">
+                            <li>
+                                <p class="title">
+                                    <a href="/detail/dc_152752.html" target="_blank">小新Air12 LTE版如何4G上网？</a>
+                                </p>
+                            </li>
+                            <li class="clearfix">
+                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
+                                <span class="username">Iknow</span>
+                                <span class="dot">-</span>
+                                <span class="time">2016/10/08</span>
+                                <span class="line">|</span>
+                                <span class="showCount">9615</span>
+                                <span class="message">0</span>
+                                <span class="collection">5</span>
+                            </li>
+                            <li class="content">本文介绍了小新Air12 LTE版4G上网的设置方法和常见问题。</li>
+                        </ul>
+                    </div>
+                    </div>
+                <div class="topMoreTop" id="querymorelink">
+                <div style="width: 118px;height: 32px;margin: 0 auto;padding-top: 14px;">
+                    <a href="javascript:void(0);">加载中</a>
+                    </div>
+                </div>
             </div>
-            <div class="rightBarWrapper">
-            	<div class="barBox " id="knowledgeBox" data="1" style="left:0px;top:0px;z-index:1">
-            		<h3 class="box-title">知识专区</h3>
-				    <ul class="knowledge clearfix">
-				            <li class="default"><a href="/topic/c_1.html">操作系统</a></li>
-				            <li class="orange"><a href="/topic/c_2.html">随机软件</a></li>
-				            <li class="pink"><a href="/topic/c_3.html">设备应用</a></li>
-				            <li class="red"><a href="/topic/c_4.html">显卡切换与调试</a></li>
-				            <li class="blue"><a href="/topic/c_5.html">病毒与安全</a></li>
-				            <li class="green"><a href="/topic/c_6.html">驱动程序帮助</a></li>
-				            <li class="gray"><a href="/topic/c_7.html">上网问题</a></li>
-				            <li class="black"><a href="/topic/c_8.html">一键恢复</a></li>
-				            <li class="default"><a href="/topic/c_9.html">显示故障</a></li>
-				            <li class="orange"><a href="/topic/c_10.html">娱乐影音</a></li>
-				            <li class="pink"><a href="/topic/c_12.html">第三方软件</a></li>
-				            <li class="red"><a href="/topic/c_13.html">BIOS</a></li>
-				    </ul>
-    			</div>
-    			<div class="barBox contribution " id="contribution" data="1" style="left:0px;top:460.078125px;z-index:1;height:130px;">
-                    	<h3 class="box-title">我想贡献</h3>
-					    <p class="textp">小朵知识库是众人参与可协作的知识分享平台。</p>
-					    <p class="linkWrapper">
-					    <a href="javascript:void(0);" onclick="window.open('faqadd.html');">创建知识</a>
-					    <a href=""javascript:void(0);" onclick="window.open('question.html');" >我要提问</a>
-					    </p>
-				</div>
-				<div class="barBox2 " id="" data="1" style="left:0px;top:645px;z-index:1;width:340px;">
-            		<h3 class="box-title">活跃用户</h3>
-				    <ul class="leifeng-tab-box-min" >
-			            <li style="position: relative;padding-left: 90px;margin-top: 30px;">
-			                <div id="ranking" class="first">1</div>
-			                <div id="user-pic"><a target="_blank" href="/u/4985559/bbs"><img style="display: block;height: 100%;" src="http://img.mukewang.com/58bec74a0001ff7a16001280-100-100.jpg" title="八神花露水"></a></div><!--.user-pic end-->
-			                <div id="user-name"><a target="_blank" href="/u/4985559/bbs">八神花露水</a></div><!--.user-name end-->
-			                <div id="user-info" class="clearfix"><span id="role"></span><span id="answer-num">19知识库</span></div><!--.user-info end-->
-			            </li>
-			            <li>
-			                <div id="ranking" class="second">2</div>
-			                <div id="user-pic"><a target="_blank" href="/u/4499997/bbs"><img style="display: block;height: 100%;" src="http://img.mukewang.com/583d2ab20001050406400640-100-100.jpg" title="习惯受伤"></a></div><!--.user-pic end-->
-			                <div id="user-name"><a target="_blank" href="/u/4499997/bbs">习惯受伤</a></div><!--.user-name end-->
-			                <div id="user-info" class="clearfix"><span id="role">西安明乐运维</span><span id="answer-num">10知识库</span></div><!--.user-info end-->
-            			</li>
-                    </ul>
-    			</div>
-				<div class=" " id="" data="1" style="left:0px;top:215px;z-index:1">
-                    <input type="hidden" class="data" value="18"><a href="" onclick="clickadd()"><img src=""></a></div><div class="barAdBox " id="" data="1" style="left:0px;top:215px;z-index:1">
-                    <input type="hidden" class="data" value="24"><a href="http://iknow.lenovo.com/detail/dc_KB022987.html" onclick="clickadd()"><img src="images/erweima.PNG"></a></div></div>
-        		</div>
-        		
+            <div class="rightBarWrapper"><div class="barBox " id="knowledgeBox" data="1" style="left:0px;top:0px;z-index:1"><h3 class="box-title">知识专区</h3>
+    			<ul class="knowledge clearfix" id="konwledge-first">
+				</ul>
     		</div>
+			<div class="barBox contribution " id="contribution" data="1" style="left:0px;top:660px;z-index:1;height:130px;">
+                	<h3 class="box-title">我想贡献</h3>
+				    <p class="textp">小朵知识库是众人参与可协作的知识分享平台。</p>
+				    <p class="linkWrapper">
+				    <a href="javascript:void(0)" class="writer" onclick="goCreateKnowledge()">创建知识</a>
+				    <a href="http://ask.lenovo.com.cn/html/index.html" class="question" target="_blank">我要提问</a>
+				    </p>
+			</div>
+			<div class="barBox " id="dynamicBox" data="1" style="left:0px;top:836px;z-index:1"><h3 class="box-title">用户动态</h3><ul class="dynamicList"><li class="dynamicItem"><p class="dynamicTime">2017-04-05 15:19:32</p><p class="dynamicDesc">ai2019191: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10访问小米路由器硬盘的操作方法</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 15:01:16</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10系统lol安全组件加载失败怎么办</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 14:47:35</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10搜狗输入法用户遭遇winlogon.exe应用程序错误怎么解决</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 14:45:11</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10新建虚拟桌面的方法</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 14:25:15</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10网页突然变大的应对措施</a>”</p></li></ul></div><div class="barBox " id="userBox" data="1" style="left:0px;top:445px;z-index:1"><h3 class="box-title">用户原创</h3><a class="more" href="/list/o.html">更多 &gt;</a><ul><li><span>1</span><a href="/detail/dc_KB020486.html" style="margin-left:10px;margin-right: 8px;">判断笔记本能不能装ssd</a><label>忐忑</label></li><li><span>2</span><a href="/detail/dc_KB023202.html" style="margin-left:10px;margin-right: 8px;">机械键盘的分类与选择</a><label>新手9552</label></li><li><span>3</span><a href="/detail/dc_KB023200.html" style="margin-left:10px;margin-right: 8px;">VR、AR、MR的区别</a><label>新手9552</label></li><li><span>4</span><a href="/detail/dc_KB023899.html" style="margin-left:10px;margin-right: 8px;">如何查看是否有人蹭网</a><label>初心_2056789</label></li><li><span>5</span><a href="/detail/dc_KB022885.html" style="margin-left:10px;margin-right: 8px;">Win10如何去掉通知区域网络图标上的感叹号</a><label>新手7977</label></li></ul></div><div class=" " id="" data="1" style="left:0px;top:238px;z-index:1">
+                    <input type="hidden" class="data" value="16"><a href="" onclick="clickadd()"><img src=""></a></div><div class="barAdBox " id="" data="1" style="left:0px;top:209px;z-index:1">
+                    <input type="hidden" class="data" value="23"><a href="http://iknow.lenovo.com/detail/dc_KB022987.html" onclick="clickadd()"><img src="images/erweima.PNG"></a></div></div>
+        	</div>
+	</div>            
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
+    <!-- Slider -->
+    <script type="text/javascript" src="zhao/lunbo_1/js/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript" src="zhao/lunbo_1/js/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="zhao/lunbo_1/js/jquery.skitter.js"></script>
+	<script type="text/javascript" src="zhao/lunbo_1/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery(".box_skitter_large").skitter({
+			animation: "random",
+			interval: 3000,
+			numbers: false, 
+			numbers_align: "right", 
+			hideTools: false,
+			controls: false,
+			focus: false,
+			focus_position: true,
+			width_label:'1000px', 
+			enable_navigation_keys: true,   
+			progressbar: false
+		});
+	
+	});
+	</script>
     <!--script--!>
     	<script type="text/javascript" src="new/front/js/util.js"></script>
     	<script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>

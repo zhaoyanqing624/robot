@@ -1,23 +1,77 @@
-			function showAddGuanzhu(){
-				document.getElementById("weiguanzhu").style.display="block";
-			};
-			function hideAddGuanzhu(){
-				document.getElementById("weiguanzhu").style.display="none";
-			}
-			function showGuanzhu(){
-				document.getElementById("yiguanzhu").style.display="block";
-			}
-			function hideGuanzhu(){
-				document.getElementById("yiguanzhu").style.display="none";
-			}
-			function guanzhu(){
-				document.getElementById("yiguanzhu0").style.display="block";
-				document.getElementById("weiguanzhu0").style.display="none";
-			}
-			function quguanzhu(){
-				document.getElementById("yiguanzhu0").style.display="none";
-				document.getElementById("weiguanzhu0").style.display="block";
-			}
+$(document).ready(
+function(){
+	 $.ajax({
+	 type: "GET",
+	 url: "/org.xjtusicd3.partner/getFirstLevel.html",            
+	 dataType: "json",
+	 success: function(data){
+	 		for(var i in data){
+	 		    var a = data[i].classifyId;
+	 		    var b = data[i].classifyName;
+	 		    var list = document.getElementById("konwledge-first");
+	 		    var html = list.innerHTML;
+	 		    if(a<=8){
+	     			if(a%8==1){
+	     				list.innerHTML=html+'<li class="default"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==2){
+	     				list.innerHTML=html+'<li class="orange"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==3){
+	     				list.innerHTML=html+'<li class="pink"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==4){
+	     				list.innerHTML=html+'<li class="red"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==5){
+	     				list.innerHTML=html+'<li class="blue"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==6){
+	     				list.innerHTML=html+'<li class="green"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==7){
+	     				list.innerHTML=html+'<li class="gray"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==0){
+	     				list.innerHTML=html+'<li class="black"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}
+	 		    }else{
+	     			if(a%8==1){
+	     				list.innerHTML=html+'<li class="default"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==2){
+	     				list.innerHTML=html+'<li class="orange"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==3){
+	     				list.innerHTML=html+'<li class="pink"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==4){
+	     				list.innerHTML=html+'<li class="red"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==5){
+	     				list.innerHTML=html+'<li class="blue"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==6){
+	     				list.innerHTML=html+'<li class="green"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==7){
+	     				list.innerHTML=html+'<li class="gray"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	     			}else if(a%8==0){
+	     				list.innerHTML=html+'<li class="black"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
+	         			}
+	     		    }
+	          }
+	      }
+	 });
+})
+
+function showAddGuanzhu(){
+	document.getElementById("weiguanzhu").style.display="block";
+};
+function hideAddGuanzhu(){
+	document.getElementById("weiguanzhu").style.display="none";
+}
+function showGuanzhu(){
+	document.getElementById("yiguanzhu").style.display="block";
+}
+function hideGuanzhu(){
+	document.getElementById("yiguanzhu").style.display="none";
+}
+function guanzhu(){
+	document.getElementById("yiguanzhu0").style.display="block";
+	document.getElementById("weiguanzhu0").style.display="none";
+}
+function quguanzhu(){
+	document.getElementById("yiguanzhu0").style.display="none";
+	document.getElementById("weiguanzhu0").style.display="block";
+}
 
 function zhankai() {
 	zhankaiall.outerHTML = '<a onclick="shouqi()" style="color:blue;" id="shouqiall">收起</a>';
@@ -59,3 +113,5 @@ function c_question(){
 	zhao1.style.display="none";
 	zhao2.style.display="none";
 }
+
+
