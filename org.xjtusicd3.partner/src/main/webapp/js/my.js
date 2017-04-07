@@ -51,7 +51,27 @@ function(){
 	      }
 	 });
 })
-
+var pagenow = 1;
+function queryMoreTop(){
+	$.ajax({
+		type:"post",
+		url:"/org.xjtusicd3.partner/getMoreFaqList.html",
+		data:{
+			"pagenow":pagenow+1
+		},
+		dataType:"html",
+		async:false,
+		success:function(data){
+			alert(data);
+		}
+	})
+}
+function getData(a){
+	var str =a;
+	str = str.replace(/-/g,"/");
+	var date = new Date(str);
+	return date;
+}
 function showAddGuanzhu(){
 	document.getElementById("weiguanzhu").style.display="block";
 };

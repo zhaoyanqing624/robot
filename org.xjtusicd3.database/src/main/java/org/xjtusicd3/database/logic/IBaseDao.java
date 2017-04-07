@@ -1,5 +1,6 @@
 package org.xjtusicd3.database.logic;
 
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -20,12 +21,12 @@ public interface IBaseDao<T, PK> {
 
 	@Update(SqlHelper.BASE_UPDATE)
 	public void update(T object);
+	
+	@Select(SqlHelper.BASE_LIST)
+	public List<T> list(Class<T> cls, Page<T> page);
 
 	@Select(SqlHelper.BASE_FIND_BY_PK)
 	public T findByPk(T object);
-
-	@Select(SqlHelper.BASE_LIST)
-	public List<T> list(Class<T> cls, Page<T> page);
 
 	@Select(SqlHelper.BASE_SEQ)
 	public Long getSeq(T object);

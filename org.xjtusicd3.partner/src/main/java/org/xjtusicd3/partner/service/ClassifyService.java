@@ -7,7 +7,6 @@ import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.FaqHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.FaqPersistence;
-import org.xjtusicd3.partner.view.ClassifyView;
 import org.xjtusicd3.partner.view.Classify_faq1View;
 import org.xjtusicd3.partner.view.Faq_faq1View;
 public class ClassifyService {
@@ -96,10 +95,24 @@ public class ClassifyService {
 				faq1Views2.add(faq1View);
 			}
 			Classify_faq1View view = new Classify_faq1View(classifyPersistence);
+			view.setContent(faq1Views);
+			view.setContent2(faq1Views2);
 			classify_faq1Views.add(view);
 		}
 		return classify_faq1Views;
-		
 	}
+	/*
+	 * faq2_获取第二类分类的名称、第一类分类的名称
+	 */
+	public static List<ClassifyPersistence> classify2(int classifyId){
+		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classify(classifyId);
+		return classifyPersistences;
+	}
+	public static List<ClassifyPersistence> classify(int classifyId){
+		int classifyParentId = ClassifyHelper.classifyParentId(classifyId);
+		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classify(classifyParentId);
+		return classifyPersistences;
+	}
+
 		
 }

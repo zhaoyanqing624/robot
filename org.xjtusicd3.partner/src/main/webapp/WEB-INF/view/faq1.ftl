@@ -66,7 +66,7 @@
         <div class="contentWra clearfix">
             <div class="leftMainWrapper fristKnowledgeWra">
                 <div class="allFristTypeWrapper">
-                    <p class="allFristType"><a href="/"><span class="type">所有分类</span></a><span> &gt; </span><a href="/topic/c_1.html" id="oneNavStep"><span id="productionName">操作系统</span></a></p>
+                    <p class="allFristType"><a href="/org.xjtusicd3.partner/faq.html"><span class="type">所有分类</span></a><span> &gt; </span><a href="/topic/c_1.html" id="oneNavStep"><span id="productionName">操作系统</span></a></p>
                     <input type="hidden" id="secondeType" value="c">
                     <ul class="typeContent clearfix" id="typeTplWrapper">
                     	<#list classifyName2 as a>
@@ -99,25 +99,29 @@
 						</div>
 					</div>
                 </div>
-                <#list Classify_faq1View as a2>
                 <div class="fristTypeKnowledgeWra clearfix" id="knowledgeTopTplWrapper">
+                <#list Classify_faq1View as a2>
                     <div class="knowledgeBox">
                         <p class="knowledgeType"><span class="type">${a2.classifyName}</span></p>
                         <ul class="typeKnowledgeList">
+                        	<#list a2.content as b1>
                             <li class="clearfix fristList">
-                                <img src="zhao/lunbo/images/11.jpg" alt="重置Edge浏览器" class="topImage">
+                                <img src="zhao/lunbo/images/${a2_index}.jpg"  class="topImage">
                                 <div class="topList clearfix">
                                     <div class="topTitle">
-                                        <a href="/detail/dc_151506.html" target="_blank" >${b1.faqTitle}</a>
+                                        <a href="/org.xjtusicd3.partner/faq3.html?f=${b1.faqId}" target="_blank" >${b1.faqTitle}</a>
                                     </div>
                                     <p class="topContent" >${b1.faqDescription}</p>
                                 </div>
                             </li>
-                            <li><a href="/detail/dc_133964.html" target="_blank" >${b2.faqTitle}</a></li>
+                            </#list>
+                            <#list a2.content2 as b2>
+                            <li><a href="/org.xjtusicd3.partner/faq3.html?f=${b2.faqId}" target="_blank" >${b2.faqTitle}</a></li>
+                            </#list>
                         </ul>
                     </div>
+                 </#list>   
                  </div>
-                 </#list>
             </div>
             <div class="rightBarWrapper">
             	<div class="barBox " id="knowledgeBox" data="1" style="left:0px;top:0px;z-index:1">

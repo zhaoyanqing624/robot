@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
     <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
+    <script type="text/javascript" src="js/my.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -65,19 +66,35 @@
         <div class="contentWra clearfix">
             <div class="leftMainWrapper fristKnowledgeWra">
 				<div class="nowPositionBox clearfix">
-                    <a href="/"><span class="allType">所有分类</span></a>
+                    <a href="/org.xjtusicd3.partner/faq.html"><span class="allType">所有分类</span></a>
                     <span class="arrow">&gt;</span>
-                    <a href="/topic/c_1.html" id="firstNavStep"><span id="fristProductionName">操作系统</span></a>
+                    <#list classify as classify>
+                    <a href="/org.xjtusicd3.partner/faq1.html?p=${classify.classifyId}" id="firstNavStep"><span id="fristProductionName">${classify.classifyName}</span></a>
+                    </#list>
                     <span class="arrow">&gt;</span>
-                    <a href="/list/c_14.html" id="secondNavStep"><span class="secondStep" id="subProductionName">磁盘分区</span></a>                    
+                    <#list classify2 as classify2>
+                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.classifyId}" id="secondNavStep"><span class="secondStep" id="subProductionName">${classify2.classifyName}</span></a>
+                    </#list>                    
                 </div>
                 
                 <div class="secondListtWrapper" id="secondListtWrapper">
-                	<ul class="knowledgeList"><li><p class="title"><a href="faq3.html" target="_blank">Windows 10系统下如何进行压缩卷</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/11/25</span><span class="line">|</span><span class="showCount">178150</span><span class="message">2</span><span class="collection">4</span></li><li class="content">本文介绍了Windows 10系统下进行压缩卷的操作步骤。</li></ul>
- 		            <ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_091203.html" target="_blank">Lenovo 电脑如何将磁盘从GPT格式转换成MBR格式</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/05/09</span><span class="line">|</span><span class="showCount">37178</span><span class="message">0</span><span class="collection">10</span></li><li class="content">当需要将出厂的win8/8.1/10系统改成Win7/vista/xp系统时，我们需要将出厂硬盘的GPT分区变成MBR格式，那么应该如何操作呢？本文为您揭晓。</li></ul> 
-                	<ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_141923.html" target="_blank">Win8、Win10磁盘分区教程</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2017/02/27</span><span class="line">|</span><span class="showCount">20764</span><span class="message">0</span><span class="collection">5</span></li><li class="content">预装系统的笔记本正常只有一个C盘系统分区，那么要分出更多的分区该怎么操作呢？</li></ul>
-                	<ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_086978.html" target="_blank">在GPT格式的磁盘分区上如何引导安装Windows 7系统</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/03/22</span><span class="line">|</span><span class="showCount">17504</span><span class="message">0</span><span class="collection">1</span></li><li class="content">在GPT格式的磁盘分区上应该如何引导安装Windows 7系统呢？商用台式机Intel 6系列及以上机器采用EFI主板，配合64位Vista及以上版本操作系统可以实现GPT分区引导，下面做详细介绍。</li></ul>
-                	<ul class="knowledgeList"><li><p class="title"><a href="/detail/dc_131649.html" target="_blank">Windows安装过程中提示“安装程序无法定位现有系统分区，也无法创建新的系统分区”</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="new/front/images/avatar.jpg"></span><span class="username">Iknow</span><span class="dot">-</span><span class="time">2016/04/08</span><span class="line">|</span><span class="showCount">16474</span><span class="message">0</span><span class="collection">2</span></li><li class="content">在正常引导安装Windows 7/8/8.1/10操作系统时，可能会遇到报错提示“安装程序无法定位现有系统分区，也无法创建新的系统分区”，原因是：所选择的分区不是活动分区，而因磁盘主分区数量等原因导致安装程序无法自动创建系统引导分区，使用工具将要安装系统的分区激活即可。</li></ul>
+                <#list faq2Views as faqlist>
+                	<ul class="knowledgeList">
+                		<li><p class="title"><a href="faq3.html?f=${faqlist.faqId}" target="_blank">${faqlist.faqTitle}</a><span class="tags undefined"></span></p></li>
+                		<li class="clearfix">
+                		<#list faqlist.uList as ulist>
+                			<span class="userPic">
+                				<img src="${ulist.userImage}">
+                			</span>
+                			<span class="username">${ulist.userName}</span>
+                		</#list>
+                			<span class="dot">-</span>
+                			<span class="time">${faqlist.faqModifytime?substring(0,10)?replace('-','/')}</span>
+                			<span class="line">|</span>
+                			<span class="showCount">${faqlist.faqScan}</span><span class="message">2</span><span class="collection">${faqlist.faqCollection}</span></li><li class="content">${faqlist.faqDescription}</li>
+                	</ul>
+                </#list>
+                
                 </div>
                 
                 <div class="topMoreTop" id="querymorelink">
@@ -87,20 +104,7 @@
             <div class="rightBarWrapper">
             	<div class="barBox " id="knowledgeBox" data="1" style="left:0px;top:0px;z-index:1">
             		<h3 class="box-title">知识专区</h3>
-				    <ul class="knowledge clearfix">
-				            <li class="default"><a href="/topic/c_1.html">操作系统</a></li>
-				            <li class="orange"><a href="/topic/c_2.html">随机软件</a></li>
-				            <li class="pink"><a href="/topic/c_3.html">设备应用</a></li>
-				            <li class="red"><a href="/topic/c_4.html">显卡切换与调试</a></li>
-				            <li class="blue"><a href="/topic/c_5.html">病毒与安全</a></li>
-				            <li class="green"><a href="/topic/c_6.html">驱动程序帮助</a></li>
-				            <li class="gray"><a href="/topic/c_7.html">上网问题</a></li>
-				            <li class="black"><a href="/topic/c_8.html">一键恢复</a></li>
-				            
-				            <li class="default"><a href="/topic/c_9.html">显示故障</a></li>
-				            <li class="orange"><a href="/topic/c_10.html">娱乐影音</a></li>
-				            <li class="pink"><a href="/topic/c_12.html">第三方软件</a></li>
-				            <li class="red"><a href="/topic/c_13.html">BIOS</a></li>
+				    <ul class="knowledge clearfix" id="konwledge-first">
 				    </ul>
     			</div>
     			<div class="barBox contribution " id="contribution" data="1" style="left:0px;top:460.078125px;z-index:1;height:130px;">
@@ -152,6 +156,5 @@
 		});
 		</script> 
     <!--/script--!>
-    <script type="text/javascript" src="js/my.js"></script>
 </body>
 </html>

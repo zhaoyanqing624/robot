@@ -9,7 +9,7 @@ import org.xjtusicd3.database.model.FaqPersistence;
 
 public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence, String>{
 	/*
-	 * robot-分类
+	 * robot_分类
 	 */
 	@Select("SELECT classifyId,classifyName FROM classify WHERE parentId='0'")
 	public List<ClassifyPersistence> FirstClassify_robot();
@@ -29,4 +29,12 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	public List<FaqPersistence> faqPersistences_faq1(int paramString);
 	@Select("SELECT * FROM faq WHERE faqClassify=#{0} ORDER BY faqScan DESC LIMIT 1,5")
 	public List<FaqPersistence> faqPersistences2_faq1(int paramString);
+	/*
+	 * faq2_获取第二类分类的名称、第一类分类的名称
+	 */
+	@Select("SELECT * FROM classify WHERE classifyId=#{0}")
+	public List<ClassifyPersistence> classify(int classifyId);
+	@Select("SELECT parentId FROM classify WHERE classifyId=#{0}")
+	public int classifyParentId(int classifyId);
+
 }

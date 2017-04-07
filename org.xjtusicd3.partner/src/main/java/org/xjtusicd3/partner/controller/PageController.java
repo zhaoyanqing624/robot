@@ -83,16 +83,6 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("faq");
 		return mv;
 	}
-	@RequestMapping(value="faq2",method=RequestMethod.GET)
-	public ModelAndView faq2(){
-		ModelAndView mv = new ModelAndView("faq2");
-		return mv;
-	}
-	@RequestMapping(value="faq3",method=RequestMethod.GET)
-	public ModelAndView faq3(){
-		ModelAndView mv = new ModelAndView("faq3");
-		return mv;
-	}
 	@RequestMapping(value="faqadd",method=RequestMethod.GET)
 	public ModelAndView faqadd(){
 		ModelAndView mv = new ModelAndView("faqadd");

@@ -27,6 +27,10 @@ public class FaqPersistence {
 	private String faqModifytime;
 	@TableField(columnName="faqScore")
 	private float faqScore;
+	@TableField(columnName="faqBelong")
+	private int faqBelong;
+	@TableField(columnName="faqWritetime")
+	private int faqWritetime;
 	
 	public int getFaqId() {
 		return faqId;
@@ -88,6 +92,19 @@ public class FaqPersistence {
 	public void setFaqScore(float faqScore) {
 		this.faqScore = faqScore;
 	}
+	public int getFaqBelong() {
+		return faqBelong;
+	}
+	public void setFaqBelong(int faqBelong) {
+		this.faqBelong = faqBelong;
+	}
+	public int getFaqWritetime() {
+		return faqWritetime;
+	}
+	public void setFaqWritetime(int faqWritetime) {
+		this.faqWritetime = faqWritetime;
+	}
+	
 	
 	
 }

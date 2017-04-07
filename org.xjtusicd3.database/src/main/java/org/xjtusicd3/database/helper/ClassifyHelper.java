@@ -3,10 +3,8 @@ package org.xjtusicd3.database.helper;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.w3c.dom.ls.LSInput;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.ClassifyPersistenceMapper;
-import org.xjtusicd3.database.mapper.FaqPersistenceMapper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.FaqPersistence;
 
@@ -61,5 +59,22 @@ public class ClassifyHelper {
 		List<FaqPersistence> list = mapper.faqPersistences2_faq1(faqClassify);
 		session.close();
 		return list;
+	}
+	/*
+	 * faq2_获取第二类分类的名称、第一类分类的名称
+	 */
+	public static List<ClassifyPersistence> classify(int classifyId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.classify(classifyId);
+		session.close();
+		return list;
+	}
+	public static int classifyParentId(int classifyId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		int classifyParentId = mapper.classifyParentId(classifyId);
+		session.close();
+		return classifyParentId;
 	}
 }

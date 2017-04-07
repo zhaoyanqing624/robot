@@ -62,41 +62,38 @@
     		</div>
 		</div>
     </div>
+    <#list faq3Views as faq3Views>
     <div class="mainContent">
         <div class="contentWra clearfix">
             <div class="leftMainWrapper ">
                 <div class="nowPositionBox clearfix">
-                    <a href="/"><span class="allType">所有分类</span></a>
+                    <a href="/org.xjtusicd3.partner/faq.html"><span class="allType">所有分类</span></a>
                     <span class="arrow">&gt;</span>
-                    <a href="/topic/c_1.html" id="firstNavStep" class="oneFlag"><span id="fristProductionName">操作系统</span></a>
-                    <span class="arrow oneFlag">&gt;</span>
-                    <a href="/list/c_14.html" id="secondNavStep" class="twoFlag"><span id="subProductionName">磁盘分区</span></a>
+                    <#list classify as classify>
+                    <a href="/org.xjtusicd3.partner/faq1.html?p=${classify.classifyId}" id="firstNavStep"><span id="fristProductionName">${classify.classifyName}</span></a>
+                    </#list>
+                    <span class="arrow">&gt;</span>
+                    <#list classify2 as classify2>
+                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.classifyId}" id="secondNavStep"><span class="secondStep" id="subProductionName">${classify2.classifyName}</span></a>
+                    </#list>
                     <span class="arrow twoFlag">&gt;</span>
-                    <span class="titleStep">Windows 10系统下如何进行压缩卷</span>
+                    <span class="titleStep">${faq3Views.faqTitle}</span>
                 </div>
                 
                 <div class="knowledgeDetail">
                     <div id="detailTplWrapper">
-                        <span class="title">Windows 10系统下如何进行压缩卷</span>
+                        <span class="title">${faq3Views.faqTitle}</span>
                         <span class=""></span>
-
                         <p class="createInfo clearfix">
-                            <img src="new/front/images/avatar.jpg">
-                            <span class="username">Iknow</span>
-                            <span class="dot">.</span>
-                            <span class="time">2015-11-18 19:08</span>
+                        <#list faq3Views.uList as ulist>
+                            <img src="${ulist.userImage}">
+                            <span class="username">${ulist.userName}</span>
+                        </#list>
                             <span>|</span>
                             <span id="doc_id" doc_id="11717">知识编号：</span>
-                            <span>133316</span>
+                            <span>${faq3Views.faqId}</span>
                         </p>
-                        <div class="content">
-                            <p class="mb10">风险提示：删除或格式化磁盘的操作将会导致数据丢失，建议您提前备份重要数据以避免任何损失。</p>
-                            <p><strong>相关视频：Windows 10系统下如何进行压缩卷</strong></p><p><br></p><style type="text/css">.iframe{position:relative;left:50%;top:50%;width:610px;height:420px;margin-left:-308px;}
-@media screen and (max-width:600px) {
-.iframe{width:100%;height:360px;left:0px;margin-left:0;position:relative;left:0;top:0;}
-}</style><p><iframe class="iframe" scrolling="no" src="http://yuntv.letv.com/bcloud.html?uu=40237019cb&amp;vu=65b14e1ece&amp;pu=fc61e22329&amp;auto_play=0&amp;width=100%" frameborder="0"></iframe></p><p><br></p><p><strong>操作步骤：</strong></p><p><br></p><p>1、右击“此电脑”，选择管理；</p><p><br></p><p><img width="334" height="331" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124539001.jpg"></p><p><br></p><p>2、选择左边列表的“<a href="/detail/kd_17452.html" target="_blank">磁盘</a>管理”，此时能看到磁盘数量和分区情况。</p><p><br></p><p><img width="554" height="396" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124540002.jpg"></p><p><br></p><p>3、选择要压缩的分区，例如：D盘，右击磁盘，然后选择“<a href="/detail/kd_17492.html" target="_blank">压缩卷</a>”；</p><p><br></p><p><img width="554" height="396" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124540003.jpg"></p><p><br></p><p>4、此时磁盘会计算可用来压缩的磁盘空间。</p><p><br></p><p><img width="454" height="124" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124541004.jpg"></p><p><br></p><p>5、默认值为最大，可以修改为自己压缩的空间，单位为MB。</p><p><br></p><p><img width="541" height="400" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124543005.jpg"></p><p><br></p><p>6、以10240MB（10GB）为例，点击压缩；</p><p><br></p><p><img width="541" height="400" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124546006.jpg"></p><p><br></p><p>7、压缩后会产生一个10GB的未分配空间；</p><p><br></p><p><img width="554" height="396" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124547007.jpg"></p><p><br></p><p>8、右击未分配的空间，点击“新建简单卷”；</p><p><br></p><p><img width="554" height="396" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124547008.jpg"></p><p><br></p><p>9、点击“下一步”，默认大小即可。</p><p><br></p><p><img width="554" height="475" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124548009.jpg"></p><p><br></p><p><img width="554" height="475" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124548010.jpg"></p><p><br></p><p>10、选择要分配的盘符，一般默认即可。连续点击“下一步”，最后点击“完成”。</p><p><br></p><p><img width="554" height="475" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124548011.jpg"></p><p><br></p><p><img width="554" height="475" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124549012.jpg"></p><p><br></p><p><img width="554" height="475" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124549013.jpg"></p><p><br></p><p>11、此时未分配的空间，变成了新加卷G：</p><p><br></p><p><img width="554" height="396" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124550014.jpg"></p><p><br></p><p>12、打开“此电脑”，也能看到刚刚创建的分区了。</p><p><br></p><p><img width="553" height="451" src="http://webdoc.lenovo.com.cn/lenovowsi/new_cskb/uploadfile/20150722124550015.jpg"></p>
-                        </div>
-
+                        <div class="content">${faq3Views.faqContent}</div>
                         <div id="affixBtn" class="hidden">
                             <a href="" style="color:blue;">点击下载附件</a>
                         </div>
@@ -135,7 +132,7 @@
                             <span class="fl score-text"></span>
                             <span class="fl" id="praiseEditTplWrapper"><a href="javascript:void(0);" id="editBtn" class="edit hidden" onclick="goEditKnowledge(11717)">我要编辑</a></span></div>
                     </div>
-                    <div>联想网站提供的技术方案或与您产品的实际情况有所差异，您需在完整阅读方案并知晓其提示风险的情况下谨慎操作，避免造成任何损失。</div>
+                    <div>知识库提供的技术方案或与您产品的实际情况有所差异，您需在完整阅读方案并知晓其提示风险的情况下谨慎操作，避免造成任何损失。</div>
                 </div>
                 <div class="comment">
                     <h3>发表评论</h3>
@@ -171,11 +168,12 @@
             <div class="rightBarWrapper knowledgeCount">
             	<div class="barBox" id="countTplWrapper"><h3 class="box-title">知识统计</h3>
                     <ul class="countList">
-                        <li><label>浏览次数：</label><span>178163次</span></li>
-                        <li><label>最近更新：</label><span>2016-11-25 11:34</span></li>
-                        <li><label>创建者：</label><a href="/foreignCenter/10068673852.html" class="creatUser">Iknow</a><a href="javascript:void(0);" class="attention" id="attentionLink" onclick="attention('10068673852')">+关注</a><a href="javascript:void(0);" class="attention overAttention hidden" id="overAttentionLink">+已关注</a></li>
-                        <li><label>贡献者：</label><span>2人</span></li>
-                        <li><label>编辑次数：</label><span>2次</span></li>
+                        <li><label>浏览次数：</label><span>${faq3Views.faqScan}次</span></li>
+                        <li><label>最近更新：</label><span>${faq3Views.faqModifytime}</span></li>
+                        <#list faq3Views.uList as ulist>
+                        <li><label>创建者：</label><a href="/foreignCenter/10068673852.html" class="creatUser">${ulist.userName}</a><a href="javascript:void(0);" class="attention" id="attentionLink" onclick="attention('10068673852')">+关注</a><a href="javascript:void(0);" class="attention overAttention hidden" id="overAttentionLink">+已关注</a></li>
+                        </#list>
+                        <li><label>编辑次数：</label><span>${faq3Views.faqWritetime}次</span></li>
                         <li>
                             <label>评分：</label>
                             <span class="scoreResult" id="showScore">
@@ -204,6 +202,7 @@
                 </div>
         	</div>
     </div>
+    </#list>
     <div class="dialoge">
         <a href="http://365.lenovo.com.cn/?from=lenser03" target="_blank">如果本知识没解决您的问题，可以选择<label style="color:#4e9eeb;border-bottom:1px solid #4e9eeb;cursor:pointer">远程专家服务</label></a>
         <span class="closeDia">关闭</span>
