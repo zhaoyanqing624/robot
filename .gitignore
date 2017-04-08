@@ -40,3 +40,4 @@ jrat.xml
 ._*
 target/
 /target/
+/build/
