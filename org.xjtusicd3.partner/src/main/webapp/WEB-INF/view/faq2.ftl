@@ -73,7 +73,7 @@
                     </#list>
                     <span class="arrow">&gt;</span>
                     <#list classify2 as classify2>
-                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.classifyId}" id="secondNavStep"><span class="secondStep" id="subProductionName">${classify2.classifyName}</span></a>
+                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.classifyId}" id="secondNavStep" value="${classify2.classifyId}"><span class="secondStep" id="subProductionName">${classify2.classifyName}</span></a>
                     </#list>                    
                 </div>
                 
@@ -97,8 +97,8 @@
                 
                 </div>
                 
-                <div class="topMoreTop" id="querymorelink">
-                    <a href="javascript:void(0);" onclick="queryMoreTop()">加载更多</a>
+                <div class="topMoreTop" id="querymorelink" value="1">
+                    <a href="javascript:void(0);" onclick="queryMoreTop()" >加载更多</a>
                 </div>
             </div>
             <div class="rightBarWrapper">
@@ -141,20 +141,25 @@
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
-    <!--script--!>
-    	<script type="text/javascript" src="new/front/js/util.js"></script>
-    	<script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function(){
-			$('#onebyone_slider').oneByOne({
-				className:'oneByOne1',
-				easeType:'random',
-				slideShow:true,
-				delay:200,
-				slideShowDelay:4000
-			})
-		});
-		</script> 
-    <!--/script--!>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script>
+		function queryMoreTop(){ 
+			var pagenow = $("#querymorelink").attr("value");
+			var classifyId = $("#secondNavStep").attr("value");
+				$.ajax({
+					type:"post",
+					url:"/org.xjtusicd3.partner/getMoreFaqList.html",
+					data:{
+						"pagenow":pagenow,
+						"classifyId":classifyId
+					},
+					dataType:"json",
+					success:function(data){
+						alert(1);
+						alert(data);
+					}
+				})
+		}
+	</script>
 </body>
 </html>

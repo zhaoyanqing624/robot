@@ -23,10 +23,11 @@ public class FaqHelper {
 	/*
 	 * faq2_知识列表
 	 */
-	public static List<FaqPersistence> faqlist_faq2(int faqClassify){
+	public static List<FaqPersistence> faqlist_faq2(int faqClassify,int pageNow){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		FaqPersistenceMapper mapper = session.getMapper(FaqPersistenceMapper.class);
-		List<FaqPersistence> list = mapper.faqlist_faq2(faqClassify);
+		int a  = (pageNow-1)*5;
+		List<FaqPersistence> list = mapper.faqlist_faq2(faqClassify,a);
 		session.close();
 		return list;
 	}

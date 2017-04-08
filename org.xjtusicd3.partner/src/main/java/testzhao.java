@@ -1,15 +1,17 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class testzhao {
+	public static void a(){
+		int a=1;
+		a = a+1;
+		System.out.println(a);
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Date nowdate = new java.util.Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		String t = sdf.format(nowdate);
-		System.out.println(t);
+		
+//		Date nowdate = new java.util.Date();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+//		String t = sdf.format(nowdate);
+		a();
+		a();
 	}
 
 }

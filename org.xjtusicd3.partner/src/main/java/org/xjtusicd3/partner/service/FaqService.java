@@ -7,15 +7,16 @@ import org.xjtusicd3.database.helper.FaqHelper;
 import org.xjtusicd3.database.model.FaqPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.view.Faq_faq2View;
+import org.xjtusicd3.partner.view.Faq_faq3View;
 import org.xjtusicd3.partner.view.User_faq2View;
 
 public class FaqService {
 	/*
 	 * faq2_知识列表
 	 */
-	public static List<Faq_faq2View> faqlist_faq2(int faqClassify){
+	public static List<Faq_faq2View> faqlist_faq2(int faqClassify,int pageNow){
 		List<Faq_faq2View> faq2Views = new ArrayList<Faq_faq2View>();
-		List<FaqPersistence> faqPersistences = FaqHelper.faqlist_faq2(faqClassify);
+		List<FaqPersistence> faqPersistences = FaqHelper.faqlist_faq2(faqClassify,pageNow);
 		for(FaqPersistence faqPersistence:faqPersistences){
 			List<User_faq2View> user_faq2Views = new ArrayList<User_faq2View>();
 			List<UserPersistence> userPersistences = FaqHelper.userlist_faq2(faqPersistence.getFaqBelong());
@@ -32,8 +33,8 @@ public class FaqService {
 	/*
 	 * faq3_知识内容
 	 */
-	public static List<Faq_faq2View> faqcontent_faq3(int faqId){
-		List<Faq_faq2View> faq3Views = new ArrayList<Faq_faq2View>();
+	public static List<Faq_faq3View> faqcontent_faq3(int faqId){
+		List<Faq_faq3View> faq3Views = new ArrayList<Faq_faq3View>();
 		List<FaqPersistence> faqPersistences = FaqHelper.faqcontent_faq3(faqId);
 		for(FaqPersistence faqPersistence:faqPersistences){
 			List<User_faq2View> user_faq2Views = new ArrayList<User_faq2View>();
@@ -42,7 +43,7 @@ public class FaqService {
 				User_faq2View user_faq2View = new User_faq2View(userPersistence);
 				user_faq2Views.add(user_faq2View);
 			}
-			Faq_faq2View faq3View = new Faq_faq2View(faqPersistence);
+			Faq_faq3View faq3View = new Faq_faq3View(faqPersistence);
 			faq3View.setuList(user_faq2Views);
 			faq3Views.add(faq3View);
 		}

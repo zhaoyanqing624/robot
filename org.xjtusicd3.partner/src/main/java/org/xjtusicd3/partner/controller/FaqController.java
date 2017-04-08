@@ -1,5 +1,6 @@
 package org.xjtusicd3.partner.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
-import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.FaqHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.FaqService;
 import org.xjtusicd3.partner.view.Classify_faq1View;
 import org.xjtusicd3.partner.view.Faq_faq2View;
+import org.xjtusicd3.partner.view.Faq_faq3View;
 @Controller
 public class FaqController {
 	/*
@@ -43,7 +44,7 @@ public class FaqController {
 		ModelAndView modelAndView = new ModelAndView("faq2");
 		List<ClassifyPersistence> classify2 = ClassifyService.classify2(c);
 		List<ClassifyPersistence> classify = ClassifyService.classify(c);
-		List<Faq_faq2View> faq2Views = FaqService.faqlist_faq2(c);
+		List<Faq_faq2View> faq2Views = FaqService.faqlist_faq2(c,1);
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
 		modelAndView.addObject("faq2Views", faq2Views);
@@ -54,10 +55,13 @@ public class FaqController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreFaqList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
-	public String search(HttpServletRequest request,HttpServletResponse response){
-		String mobile = request.getParameter("mobile");
-		
-		return null;
+	public String faq2list(HttpServletRequest request,HttpServletResponse response){
+		int pagenow = Integer.parseInt(request.getParameter("pagenow"));
+		int classifyId = Integer.parseInt(request.getParameter("classifyId"));
+		List<Faq_faq2View> faq2Views = FaqService. faqlist_faq2(classifyId, pagenow);
+		String result = JsonUtil.toJsonString(faq2Views);
+		System.out.println(result);
+		return result;
 	 }
 	/*
 	 * faq3_知识内容
@@ -68,7 +72,7 @@ public class FaqController {
 		int classifyId = FaqHelper.faqclassify(f);
 		List<ClassifyPersistence> classify2 = ClassifyService.classify2(classifyId);
 		List<ClassifyPersistence> classify = ClassifyService.classify(classifyId);
-		List<Faq_faq2View> faq3Views = FaqService.faqcontent_faq3(f);
+		List<Faq_faq3View> faq3Views = FaqService.faqcontent_faq3(f);
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
 		modelAndView.addObject("faq3Views", faq3Views);
