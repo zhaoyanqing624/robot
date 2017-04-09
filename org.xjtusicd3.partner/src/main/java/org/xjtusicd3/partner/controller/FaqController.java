@@ -59,14 +59,17 @@ public class FaqController {
 	@RequestMapping(value={"/getMoreFaqList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String faq2list(HttpServletRequest request,HttpServletResponse response){
 		int pagenow = Integer.parseInt(request.getParameter("pagenow"));
-		int classifyId = Integer.parseInt(request.getParameter("classifyId"));
-		List<Faq_faq2View> faq2Views = FaqService. faqlist_faq2(classifyId, pagenow);
 		int pageNow = pagenow+1;
-		String result = JsonUtil.toJsonString(faq2Views);
+		int classifyId = Integer.parseInt(request.getParameter("classifyId"));
+		List<Faq_faq2View> faq2Views = FaqService. faqlist_faq2(classifyId, pageNow);
+		int faqTotal = FaqHelper.pageTotal(classifyId);
+		int pageTotal = (int) Math.ceil((double)faqTotal/(double)5);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("pagenow", pageNow);
 		jsonObject.put("faqlist", faq2Views);
+		jsonObject.put("pageTotal",pageTotal);
 		String faq2_list = JsonUtil.toJsonString(jsonObject);
+		System.out.println(faq2_list);
 		return faq2_list;
 	 }
 	/*

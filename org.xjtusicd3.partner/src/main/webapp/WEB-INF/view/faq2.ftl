@@ -97,7 +97,7 @@
                 
                 </div>
                 
-                <div class="topMoreTop" id="querymorelink" value="1">
+                <div class="topMoreTop" id="querymorelink" value="1" display="block">
                     <a href="javascript:void(0);" onclick="queryMoreTop()" >加载更多</a>
                 </div>
             </div>
@@ -143,8 +143,8 @@
     </div>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script>
+		var pagenow = 1;
 		function queryMoreTop(){ 
-			var pagenow = $("#querymorelink").attr("value");
 			var classifyId = $("#secondNavStep").attr("value");
 				$.ajax({
 					type:"post",
@@ -155,13 +155,18 @@
 					},
 					dataType:"json",
 					success:function(data){
-						alert(1);
-						alert(data.pagenow);
 						for(var i in data.faqlist){
-							alert(data.faqlist[i].faqId);
+							var html = document.getElementById("secondListtWrapper").innerHTML;
+							var time = data.faqlist[i].faqModifytime.substring(0,10).replace(/-/,'/');
+							document.getElementById("secondListtWrapper").innerHTML = html+ '<ul class="knowledgeList"><li><p class="title"><a href="faq3.html?f='+data.faqlist[i].faqId+'" target="_blank">'+data.faqlist[i].faqTitle+'</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="'+data.faqlist[i].uList[0].userImage+'"></span><span class="username">'+data.faqlist[i].uList[0].userName+'</span><span class="dot">-</span><span class="time">'+time+'</span><span class="line">|</span><span class="showCount">'+data.faqlist[i].faqScan+'</span><span class="message">2</span><span class="collection">'+data.faqlist[i].faqCollection+'</span></li><li class="content">'+data.faqlist[i].faqDescription+'</li></ul>';
+						}
+						if(data.pagenow<data.pageTotal){
+							pagenow = data.pagenow;
+						}else{
+							document.getElementById("querymorelink").remove();
 						}
 					}
-				})
+				});
 		}
 	</script>
 </body>

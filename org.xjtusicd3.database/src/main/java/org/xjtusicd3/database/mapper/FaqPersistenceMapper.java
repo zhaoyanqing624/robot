@@ -16,10 +16,12 @@ public interface FaqPersistenceMapper extends IBaseDao<FaqPersistence, String>{
 	/*
 	 * faq2_知识列表
 	 */
-	@Select("SELECT * FROM faq WHERE faqClassify=#{0} LIMIT ${pageNow},5")
-	public List<FaqPersistence> faqlist_faq2(int faqClassify,int pageNow);
+	@Select("SELECT * FROM faq WHERE faqClassify=#{0} LIMIT #{1},5")
+	public List<FaqPersistence> faqlist_faq2(int param1,int param2);
 	@Select("SELECT * FROM user WHERE userId=#{0}")
 	public List<UserPersistence> userlist_faq2(int userId);
+	@Select("SELECT COUNT(*) FROM faq WHERE faqClassify=#{0}")
+	public int pageTotal(int faqClassify);
 	/*
 	 * faq3_知识内容
 	 */

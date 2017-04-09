@@ -38,6 +38,13 @@ public class FaqHelper {
 		session.close();
 		return list;
 	}
+	public static int pageTotal(int faqClassify){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		FaqPersistenceMapper mapper = session.getMapper(FaqPersistenceMapper.class);
+		int pageTotal = mapper.pageTotal(faqClassify);
+		session.close();
+		return pageTotal;
+	}
 	/*
 	 * faq3_知识内容
 	 */
