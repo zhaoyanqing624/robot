@@ -156,7 +156,10 @@
 					dataType:"json",
 					success:function(data){
 						alert(1);
-						alert(data);
+						alert(data.pagenow);
+						for(var i in data.faqlist){
+							alert(data.faqlist[i].faqId);
+						}
 					}
 				})
 		}

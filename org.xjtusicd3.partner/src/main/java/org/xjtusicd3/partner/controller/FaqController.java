@@ -19,6 +19,8 @@ import org.xjtusicd3.partner.service.FaqService;
 import org.xjtusicd3.partner.view.Classify_faq1View;
 import org.xjtusicd3.partner.view.Faq_faq2View;
 import org.xjtusicd3.partner.view.Faq_faq3View;
+
+import com.alibaba.fastjson.JSONObject;
 @Controller
 public class FaqController {
 	/*
@@ -54,14 +56,18 @@ public class FaqController {
 	 * faq2_ajax请求更多知识列表
 	 */
 	@ResponseBody
-	@RequestMapping(value={"/getMoreFaqList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	@RequestMapping(value={"/getMoreFaqList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String faq2list(HttpServletRequest request,HttpServletResponse response){
 		int pagenow = Integer.parseInt(request.getParameter("pagenow"));
 		int classifyId = Integer.parseInt(request.getParameter("classifyId"));
 		List<Faq_faq2View> faq2Views = FaqService. faqlist_faq2(classifyId, pagenow);
+		int pageNow = pagenow+1;
 		String result = JsonUtil.toJsonString(faq2Views);
-		System.out.println(result);
-		return result;
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("pagenow", pageNow);
+		jsonObject.put("faqlist", faq2Views);
+		String faq2_list = JsonUtil.toJsonString(jsonObject);
+		return faq2_list;
 	 }
 	/*
 	 * faq3_知识内容
