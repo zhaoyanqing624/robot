@@ -7,6 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PageController {
+	/*
+	 * aaaa
+	 */
 	@RequestMapping(value="test",method=RequestMethod.GET)
 	public ModelAndView test(){
 		ModelAndView mv = new ModelAndView("test");
