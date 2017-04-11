@@ -21,7 +21,9 @@ public class ClassifyService {
 			String firstTitle = "";
 			String content = "";
 			String secondTitle = "";
+			int secondTitleId;
 			String faqTitle = "";
+			int faqId;
 			String content_string = "{\"title\":\"";
 			String firstTitle_string = "{\"title\":\"";
 			List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.classifyName2(classifyPersistence.getClassifyId());
@@ -33,7 +35,8 @@ public class ClassifyService {
 				for(FaqPersistence faqPersistence:faqPersistences){
 					length3--;
 					faqTitle = faqPersistence.getFaqTitle();
-					content2 += "\""+faqTitle+"\"";
+					faqId = faqPersistence.getFaqId();
+					content2 += "{\"faqTitle\":\""+faqTitle+"\","+"\"faqId\":\""+faqId+"\"}";
 					if (length3>1) {
 						content2 += ",";
 					}else {
@@ -42,7 +45,8 @@ public class ClassifyService {
 				}
 				length2--;
 				secondTitle = classifyPersistence2.getClassifyName();
-				content +=content_string+secondTitle+"\","+"\"content\":["+content2+ "]}";
+				secondTitleId = classifyPersistence2.getClassifyId();
+				content +=content_string+secondTitle+"\","+"\"id\":\""+secondTitleId+"\",\"content\":["+content2+ "]}";
 				if (length2>1) {
 					content += ",";
 				}else {

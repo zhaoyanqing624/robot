@@ -15,7 +15,6 @@ import org.xjtusicd3.database.mapper.FaqPersistenceMapper;
 import org.xjtusicd3.database.mapper.PatchSpiderPersistenceMapper;
 import org.xjtusicd3.database.mapper.SoftSpiderPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
-import org.xjtusicd3.database.model.SoftSpiderPersistence;
 
 
 

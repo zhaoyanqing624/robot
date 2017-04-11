@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.FaqPersistenceMapper;
-import org.xjtusicd3.database.mapper.UserPersistenceMapper;
 import org.xjtusicd3.database.model.FaqPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 
