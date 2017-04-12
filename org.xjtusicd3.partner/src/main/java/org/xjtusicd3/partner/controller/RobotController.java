@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xjtusicd3.common.util.JsonUtil;
-import org.xjtusicd3.database.helper.ClassifyHelper;
-import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.RobotPersistence;
+import org.xjtusicd3.partner.service.RobotService;
 
 @Controller
 public class RobotController {
@@ -21,11 +21,8 @@ public class RobotController {
 	public  String RobotInfo(HttpServletResponse response){
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
-		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
-		if (classifyPersistences == null || classifyPersistences.size()==0) {
-			return null;
-		}			
-		String result = JsonUtil.toJsonString(classifyPersistences);
+		List<RobotPersistence> list = RobotService.robotinfo();
+		String result = JsonUtil.toJsonString(list);
 		return result;
 	 }
 }

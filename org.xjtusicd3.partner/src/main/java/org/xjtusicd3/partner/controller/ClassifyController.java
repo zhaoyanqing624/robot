@@ -20,7 +20,7 @@ import org.xjtusicd3.partner.service.ClassifyService;
 @Controller
 public class ClassifyController {
 	/*
-	 * root_分类
+	 * robot_分类
 	 */
 	@RequestMapping(value="robot",method=RequestMethod.GET)
 	public ModelAndView classifyName(){
