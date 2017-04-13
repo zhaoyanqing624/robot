@@ -14,6 +14,21 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("test");
  	   return mv;
     }
+	@RequestMapping(value="index",method=RequestMethod.GET)
+    public ModelAndView  index(){
+ 	   ModelAndView mv=new ModelAndView("index");
+ 	   return mv;
+    }
+	@RequestMapping(value="elementindex",method=RequestMethod.GET)
+    public ModelAndView  element(){
+ 	   ModelAndView mv=new ModelAndView("elementindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="knowledgeindex",method=RequestMethod.GET)
+    public ModelAndView  knowledge(){
+ 	   ModelAndView mv=new ModelAndView("knowledgeindex");
+ 	   return mv;
+    }
 	 @RequestMapping(value="login",method=RequestMethod.GET)
      public ModelAndView  login(){
   	   ModelAndView mv=new ModelAndView("login");
@@ -34,11 +49,7 @@ public class PageController {
   	   ModelAndView mv=new ModelAndView("forget");
   	   return mv;
      }
-	 @RequestMapping(value="index",method=RequestMethod.GET)
-     public ModelAndView  index(){
-  	   ModelAndView mv=new ModelAndView("index");
-  	   return mv;
-     }
+	 
 	 @RequestMapping(value="event1",method=RequestMethod.GET)
      public ModelAndView  event1(){
   	   ModelAndView mv=new ModelAndView("event1");
