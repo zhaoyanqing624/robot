@@ -44,5 +44,20 @@ public class ClassifyController {
 		String result = JsonUtil.toJsonString(classifyPersistences);
 		return result;
 	 }
+	/*
+	 * ajax获取第二级分类
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getSecondLevel"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="text/plain;charset=UTF-8")
+	public  String search2(int classifyId,HttpServletResponse response){
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName2_2(classifyId);
+		if (classifyPersistences == null || classifyPersistences.size()==0) {
+			return null;
+		}			
+		String result = JsonUtil.toJsonString(classifyPersistences);
+		return result;
+	 }
 	
 }

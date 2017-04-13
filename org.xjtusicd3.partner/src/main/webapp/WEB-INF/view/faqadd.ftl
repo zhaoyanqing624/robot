@@ -13,11 +13,15 @@
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/body.css">
 	<link rel="stylesheet" type="text/css" href="css/detail.css">
+	<link rel="stylesheet" type="text/css" href="css/validate.css">
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
-    <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="zhao/tankuang/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="zhao/tankuang/css/dialog.css" />
+	<link rel="stylesheet" type="text/css" href="zhao/tankuang/css/dialog-wilma.css" />
     <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="zhao/tankuang/js/modernizr.custom.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -75,8 +79,9 @@
                 <ul class="formul">
                 	<li class="clearfix">
                         <label><em>*</em>标题：</label>
-                        <div class="details">
-                            <input type="text" class="text" id="title" placeholder="标题不超过44个中文字符">
+                        <div class="details" >
+                            <input type="text" class="text" id="title" placeholder="请输入知识标题">
+                            <div class="validate_faqadd spa1"></div>
                         </div>
                     </li>
                      <li class="clearfix">
@@ -84,48 +89,37 @@
                         <div class="details">
                          	<input type="radio" class="radio" value="0" name="resource">原创</input>&nbsp;&nbsp;&nbsp;
                          	<input type="radio" class="radio" value="1" name="resource">转载</input>
+                         	<div class="validate_faqadd spa2"></div>
                         </div>
                     </li>
                     <li class="clearfix">
                         <label>关键字：</label>
                         <div class="details">
                             <input type="text" class="text" id="keywords" placeholder="在输入关键词时请使用半角逗号间隔">
+                            <div class="validate_faqadd spa3"></div>
                         </div>
                     </li>
                     <li class="clearfix">
                         <label>分类：</label>
                         <div class="details">
-                        	 <select class="select" id="specialCategoryId"><option value="">请选择第一分类</option><option value="1">操作系统</option><option value="2">随机软件</option><option value="3">设备应用</option><option value="4">显卡切换与调试</option><option value="5">病毒与安全</option><option value="6">驱动程序帮助</option><option value="7">上网问题</option><option value="8">一键恢复</option><option value="9">显示故障</option><option value="10">娱乐影音</option><option value="11">服务网点</option><option value="12">第三方软件</option><option value="13">BIOS</option><option value="140">术语</option><option value="147">评测赏析</option></select>
-                   			 <select class="select" id="subspecialCategoryId"><option value="">请选择第二分类</option></select>
+                        	 <select class="select" id="specialCategoryId" onchange="selectSecondChild()"></select>
+                   			 <select class="select" id="subspecialCategoryId" name="classifyName"></select>
+                   			 <div class="validate_faqadd spa4"></div>
                         </div>
                     </li>
                     <li class="clearfix">
                         <label><em>*</em>摘要说明：</label>
                         <div class="details">
-                            <textarea class="text" id="description"></textarea> 
+                            <textarea class="text" id="description"></textarea>
+                            <div class="validate_faqadd spa5"></div> 
                         </div>
-                    </li>
-                  </ul>
-                  <ul class="formul" id="formList">
-
-                  </ul>
-                  <ul class="formul">
-                    <li class="clearfix faultLi hidden">
-                        <label><em>*</em>故障描述：</label>
-                        <div class="details">
-                            <input type="text" class="text" id="fault_description">
-                        </div>
-                    </li>                    
-                    <li class="clearfix faultLi hidden">
-                        <label>原因分析：</label>
-                        <div class="details">
-                            <textarea class="text" id="reason_analysis"></textarea>
-                        </div>
+                        
                     </li>
                     <li class="clearfix">
                         <label>风险提示：</label>
                         <div class="details">
                             <textarea class="text" id="risk_prompt"></textarea>
+                            <div class="validate_faqadd spa6"></div> 
                         </div>
                     </li>
                     <li class="clearfix">
@@ -134,10 +128,10 @@
                         	<script id="editor" type="text/plain" style="width:672px;height:300px;"></script>
                         </div>
                     </li>
-                
+                  </ul>
+                  
             <div class="btnWrapper">
-                <a href="javascript:void(0);" class="blue" onclick="submitKnowledge()">提交</a>
-                <a href="javascript:void(0);" onclick="preview()">预览</a>
+                <a href="javascript:void(0);" class="blue"  id="sub" data-dialog="somedialog">提交</a>
             </div>
         </div>
         </div>
@@ -146,21 +140,26 @@
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
+	<div id="somedialog" class="dialog">
+		<div class="dialog__overlay"></div>
+		<div class="dialog__content">
+			<div class="morph-shape">
+				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 560 280" preserveAspectRatio="none">
+					<rect x="3" y="3" fill="none" width="556" height="276"/>
+				</svg>
+			</div>
+			<div class="dialog-inner">
+				<h2><strong>保存成功</strong></h2>
+				<div><button class="action" data-dialog-close>关闭</button></div>
+			</div>
+		</div>
+	</div>
     <!--script--!>
-    	<script type="text/javascript" src="new/front/js/util.js"></script>
-    	<script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
+    	
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>    
+		<script type="text/javascript" src="js/my_faqadd.js"></script>
+		<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			$('#onebyone_slider').oneByOne({
-				className:'oneByOne1',
-				easeType:'random',
-				slideShow:true,
-				delay:200,
-				slideShowDelay:4000
-			})
-		});
-		</script>
-		    <script type="text/javascript">
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
@@ -269,7 +268,8 @@
         UE.getEditor('editor').execCommand( "clearlocaldata" );
         alert("已清空草稿箱")
     }
-</script>    
-    <!--/script--!>
+</script>
+		<script src="zhao/tankuang/js/classie.js"></script>
+		<script src="zhao/tankuang/js/dialogFx.js"></script>
 </body>
 </html>
