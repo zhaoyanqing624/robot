@@ -11,19 +11,19 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	/*
 	 * robot_分类
 	 */
-	@Select("SELECT classifyId,classifyName FROM classify WHERE parentId='0'")
+	@Select("SELECT ClassifyId,classifyName FROM classify WHERE parentId='0'")
 	public List<ClassifyPersistence> FirstClassify_robot();
-	@Select("SELECT classifyId,classifyName,sum(faqCollection) as a FROM faq,classify  WHERE classifyId=faqClassify AND parentId=#{0} GROUP BY faqClassify ORDER BY a DESC LIMIT 4")
+	@Select("SELECT ClassifyId,classifyName,sum(faqCollection) as a FROM faq,classify  WHERE classifyId=faqClassify AND parentId=#{0} GROUP BY faqClassify ORDER BY a DESC LIMIT 4")
 	public List<ClassifyPersistence> SecondClassify_robot(int paramString);
 	/*
 	 * faq、faq1_上侧的第二级分类
 	 */
-	@Select("SELECT classifyId,classifyName FROM classify  WHERE parentId=#{0}")
+	@Select("SELECT ClassifyId,classifyName FROM classify  WHERE parentId=#{0}")
 	public List<ClassifyPersistence> SecondClassify_robot2(int paramString);
 	/*
 	 * faq1_下面4栏推荐_按照浏览量
 	 */
-	@Select("SELECT classifyId,classifyName,sum(faqScan) as a  FROM faq,classify WHERE faq.faqClassify = classify.classifyId AND classify.parentId=#{0} GROUP BY faqClassify ORDER BY a DESC LIMIT 4")
+	@Select("SELECT ClassifyId,classifyName,sum(faqScan) as a  FROM faq,classify WHERE faq.faqClassify = classify.classifyId AND classify.parentId=#{0} GROUP BY faqClassify ORDER BY a DESC LIMIT 4")
 	public List<ClassifyPersistence> SecondClassify_faq1(int paramString);
 	@Select("SELECT * FROM faq WHERE faqClassify=#{0} ORDER BY faqScan DESC LIMIT 1")
 	public List<FaqPersistence> faqPersistences_faq1(int paramString);
@@ -36,5 +36,6 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	public List<ClassifyPersistence> classify(int classifyId);
 	@Select("SELECT parentId FROM classify WHERE classifyId=#{0}")
 	public int classifyParentId(int classifyId);
+	
 
 }

@@ -5,14 +5,14 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="classify")
+@Table(tablename="Classify")
 public class ClassifyPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="classifyId")
+	@TableField(columnName="ClassifyId")
 	private int classifyId;
-	@TableField(columnName="classifyName")
+	@TableField(columnName="ClassifyName")
 	private String classifyName;
-	@TableField(columnName="parentId")
+	@TableField(columnName="ParentId")
 	private int parentId;
 	public int getClassifyId() {
 		return classifyId;
