@@ -1,5 +1,7 @@
 package org.xjtusicd3.database.model;
 
+
+
 import org.xjtusicd3.database.ann.Table;
 import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
@@ -9,28 +11,31 @@ import org.xjtusicd3.database.ann.TableKey.Strategy;
 public class ClassifyPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
 	@TableField(columnName="ClassifyId")
-	private int classifyId;
+	private String ClassifyId;
 	@TableField(columnName="ClassifyName")
-	private String classifyName;
+	private String ClassifyName;
 	@TableField(columnName="ParentId")
-	private int parentId;
-	public int getClassifyId() {
-		return classifyId;
+	private String ParentId;
+	
+	
+	
+	public String getClassifyId() {
+		return ClassifyId;
 	}
-	public void setClassifyId(int classifyId) {
-		this.classifyId = classifyId;
+	public void setClassifyId(String classifyId) {
+		ClassifyId = classifyId;
 	}
 	public String getClassifyName() {
-		return classifyName;
+		return ClassifyName;
 	}
 	public void setClassifyName(String classifyName) {
-		this.classifyName = classifyName;
+		ClassifyName = classifyName;
 	}
-	public int getParentId() {
-		return parentId;
+	public String getParentId() {
+		return ParentId;
 	}
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
+	public void setParentId(String parentId) {
+		ParentId = parentId;
 	}
 	
 	

@@ -1,10 +1,16 @@
 package org.xjtusicd3.parnter.spider;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.xjtusicd3.database.helper.FAQSpiderHelper;
-import org.xjtusicd3.database.model.FAQSpiderPersistence;
+import org.xjtusicd3.database.helper.AnswerHelper;
+import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.model.AnswerPersistence;
+import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -17,7 +23,6 @@ public class FAQSpider implements PageProcessor {
     
     private static final String ARITICALE_URL = "http://iknow.lenovo\\.com/doc/topicData/\\w+";
     private static final String LIST_URL = "http://iknow.lenovo\\.com/doc/topicData.*";
-   // private static final String LIST_URL = "http://iknow.lenovo\\.com/doc/topicData.*";
     @Override
     public void process(Page page) {
         if (page.getUrl().regex(LIST_URL).match()) {
@@ -36,15 +41,26 @@ public class FAQSpider implements PageProcessor {
         	List<String> content = new JsonPathSelector("$.docList[*].content").selectList(page.getRawText());
         	if (CollectionUtils.isNotEmpty(title)) {
         		for(int i = 0;i<title.size();i++){
-        			FAQSpiderPersistence faqSpiderPersistence = new FAQSpiderPersistence();
-        			faqSpiderPersistence.setFaqTitle(title.get(i));
-        			faqSpiderPersistence.setFaqDescription(description.get(i));
-        			faqSpiderPersistence.setFaqClassify(new JsonPathSelector("$.Category[*].subName").select(page.getRawText()));
-        			faqSpiderPersistence.setFaqKeywords(keywords.get(i));
-        			faqSpiderPersistence.setFaqContent(zhuanyi(content.get(i)));
+        			QuestionPersistence questionPersistence = new QuestionPersistence();
+        			UUID uuid = UUID.randomUUID();
+        			questionPersistence.setQuestionId(uuid.toString());
+        			questionPersistence.setFaqTitle(title.get(i));
+        			questionPersistence.setFaqDescription(description.get(i));
+        			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.spider_ClassifyListByName(new JsonPathSelector("$.Category[*].subName").select(page.getRawText()));
+        			for(int j = 0;j<classifyPersistences.size();j++){
+        				questionPersistence.setClassify(classifyPersistences.get(j).getClassifyId());
+        			}
+        			questionPersistence.setFaqKeywords(keywords.get(i));
+        			AnswerPersistence answerPersistence = new AnswerPersistence();
+        			UUID uuid2 = UUID.randomUUID();
+        			answerPersistence.setAnswerId(uuid2.toString());
+        			answerPersistence.setQuestionId(uuid.toString());
+        			answerPersistence.setFaqContent(zhuanyi(content.get(i)));
+        			answerPersistence.setAnswerUserId("4fb6be09-8a2b-4a33-8b29-e9e51b071856");
 					try {
-						FAQSpiderHelper.save(faqSpiderPersistence);
-						System.out.println("--------已经插入--------"+i);
+						QuestionHelper.save(questionPersistence);
+						AnswerHelper.save(answerPersistence);
+						System.out.println("-----------------------------------");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -62,6 +78,7 @@ public class FAQSpider implements PageProcessor {
     public Site getSite() {
         return site;
     }
+    
     
     public static String zhuanyi(String string){
     	string = string.replace("\'", "\\'");
