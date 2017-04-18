@@ -1,10 +1,14 @@
 package org.xjtusicd3.parnter.spider;
 
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.xjtusicd3.database.helper.DriversSpiderHelper;
-import org.xjtusicd3.database.model.DriversSpiderPersistence;
+import org.apache.ibatis.reflection.wrapper.BaseWrapper;
+import org.xjtusicd3.database.helper.ConfigureHelper;
+import org.xjtusicd3.database.helper.DriversHelper;
+import org.xjtusicd3.database.model.ConfigurePersistence;
+import org.xjtusicd3.database.model.DriversPersistence;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -37,17 +41,30 @@ public class DriverSpider implements PageProcessor {
 	    	while(m.find()){
 	    		url = m.group(1);
 	    	}
-			DriversSpiderPersistence ds = new DriversSpiderPersistence();
-			ds.setDriverName(page.getHtml().xpath("//div[@class='t']/text()").toString());
-			ds.setDriverOs(page.getHtml().xpath("//div[@class='down_lb']/ul/li[1]/text()").toString());
-			ds.setDriverProducer(page.getHtml().xpath("//div[@class='down_lb']/ul/li[2]/a/text()").toString());
-			ds.setDriverDate(page.getHtml().xpath("//div[@class='down_lb']/ul/li[3]/text()").toString());
-			ds.setDriverSize(page.getHtml().xpath("//div[@class='down_lb']/ul/li[4]/text()").toString());
-			ds.setDriverClassify(page.getHtml().xpath("//div[@class='down_lb']/ul/li[5]/a/text()").toString());
-			ds.setDriverFitness(page.getHtml().xpath("//div[@class='down_lb']/ul/li[6]/a/text()").toString());
-			ds.setDriverContent(page.getHtml().xpath("//div[@class='down_info']/text()").toString());
-			ds.setDriverUrl(url);
-			DriversSpiderHelper.sava(ds);
+	    	ConfigurePersistence configurePersistence = new ConfigurePersistence();
+	    	DriversPersistence driversPersistence = new DriversPersistence();
+	    	UUID uuid = UUID.randomUUID();
+	    	configurePersistence.setConfigureId(uuid.toString());
+	    	configurePersistence.setConfigureName(page.getHtml().xpath("//div[@class='t']/text()").toString());
+	    	configurePersistence.setConfigureType("驱动");
+	    	configurePersistence.setConfigureProducer(page.getHtml().xpath("//div[@class='down_lb']/ul/li[2]/a/text()").toString());
+	    	configurePersistence.setConfigureDate(page.getHtml().xpath("//div[@class='down_lb']/ul/li[3]/text()").toString());
+	    	configurePersistence.setConfigureURL(url);
+	    	configurePersistence.setConfigureSize(page.getHtml().xpath("//div[@class='down_lb']/ul/li[4]/text()").toString());
+	    	
+	    	driversPersistence.setConfigureId(uuid.toString());
+	    	driversPersistence.setDriversOS(page.getHtml().xpath("//div[@class='down_lb']/ul/li[1]/text()").toString());
+	    	driversPersistence.setDriversClassify(page.getHtml().xpath("//div[@class='down_lb']/ul/li[5]/a/text()").toString());
+	    	driversPersistence.setDriversFitness(page.getHtml().xpath("//div[@class='down_lb']/ul/li[6]/a/text()").toString());
+	    	driversPersistence.setDriversContent(page.getHtml().xpath("//div[@class='down_info']/text()").toString());
+			
+	    	try {
+				ConfigureHelper.save_Driver(configurePersistence);
+				DriversHelper.sava(driversPersistence);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    	System.out.println("-------------------------------");
 		}
     }
 

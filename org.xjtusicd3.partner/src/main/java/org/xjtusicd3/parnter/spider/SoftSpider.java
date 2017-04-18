@@ -1,10 +1,13 @@
 package org.xjtusicd3.parnter.spider;
 
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.xjtusicd3.database.helper.SoftSpiderHelper;
-import org.xjtusicd3.database.model.SoftSpiderPersistence;
+import org.xjtusicd3.database.helper.ConfigureHelper;
+import org.xjtusicd3.database.helper.SoftHelper;
+import org.xjtusicd3.database.model.ConfigurePersistence;
+import org.xjtusicd3.database.model.SoftPersistence;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -48,28 +51,27 @@ public class SoftSpider implements PageProcessor {
 	    	while(m.find()){
 	    		JSONObject object = JSONObject.fromObject(m.group(1));
 	    		JSONObject detail = object.getJSONObject("data").getJSONObject("softInfo");
-	    		int soft_id = detail.getInt("soft_id");
-	    		String soft_name=detail.getString("soft_name");
-	    		int point = detail.getInt("point");
-	    		String logo = detail.getString("logo");
-	    		String logo48 = detail.getString("logo48");
-	    		String logo96 = detail.getString("logo96");
-	    		String official_web = detail.getString("official_web");
-	    		String soft_desc = detail.getString("soft_desc");
-	    		String soft_desc_short = detail.getString("soft_desc_short");
-	    		String nick_version = detail.getString("nick_version");
-	    		String whats_new_desc = detail.getString("whats_new_desc");
-	    		String whats_new_short = detail.getString("whats_new_short");
-	    		String version = detail.getString("version");
-	    		String file_size = detail.getString("file_size");
-	    		String file_name = detail.getString("file_name");
-	    		String update_time = detail.getString("update_time");
-	    		String url = detail.getString("url");
-	    		String pic_path = detail.getString("pic_path");
-	    		String class_name = detail.getString("class_name");
-	    		String reurl = detail.getString("reurl");
-	    		String developer_name = detail.getString("developer_name");
-	    		String download_num = detail.getString("download_num");
+	    		String ConfigureName = detail.getString("soft_name");
+	    		String ConfigureProducer = detail.getString("developer_name");
+	    		String ConfigureDate = detail.getString("update_time");
+	    		String ConfigureURL = detail.getString("url");
+	    		String ConfigureSize = detail.getString("file_size");
+	    		
+	    		
+	    		String SoftId = detail.getString("soft_id");
+	    		String SoftScore = detail.getString("point");
+	    		String Logo = detail.getString("logo");
+	    		String Logo48 = detail.getString("logo48");
+	    		String Logo96 = detail.getString("logo96");
+	    		String Offical_website = detail.getString("official_web");
+	    		String Soft_desc = detail.getString("soft_desc");
+	    		String Soft_desc_short = detail.getString("soft_desc_short");
+	    		String Nick_version = detail.getString("nick_version");
+	    		String Whats_new_desc = detail.getString("whats_new_desc");
+	    		String Whats_new_desc_short = detail.getString("whats_new_short");
+	    		String Version = detail.getString("version");
+	    		String ClassifyName = detail.getString("class_name");
+	    		String ReURL = detail.getString("reurl");
 	    		JSONObject os_type1 = detail.getJSONObject("os_type");
 	    		String os_10 = "";
 	    		String os_100 = "";
@@ -99,33 +101,42 @@ public class SoftSpider implements PageProcessor {
 	    		if(os_type1.containsKey("10000000")){
 	    			 os_10000000 = os_type1.getString("10000000"); 
 	    		}
-	    		String os_type = os_10+os_100+os_1000+os_10000+os_100000+os_1000000+os_10000000;
+	    		String OS_type = os_10+os_100+os_1000+os_10000+os_100000+os_1000000+os_10000000;
+	    		UUID uuid = UUID.randomUUID();
+	    		ConfigurePersistence configurePersistence = new ConfigurePersistence();
+	    		configurePersistence.setConfigureId(uuid.toString());
+	    		configurePersistence.setConfigureName(ConfigureName);
+	    		configurePersistence.setConfigureType("软件");
+	    		configurePersistence.setConfigureProducer(ConfigureProducer);
+	    		configurePersistence.setConfigureDate(ConfigureDate);
+	    		configurePersistence.setConfigureURL(ConfigureURL);
+	    		configurePersistence.setConfigureSize(ConfigureSize);
 	    		
-	    		SoftSpiderPersistence sp = new SoftSpiderPersistence();
-	    		sp.setSoft_id(soft_id);
-	    		sp.setSoft_name(soft_name);
-	    		sp.setPoint(point);
-	    		sp.setLogo(logo);
-	    		sp.setLogo48(logo48);
-	    		sp.setLogo96(logo96);
-	    		sp.setOfficial_web(official_web);
-	    		sp.setSoft_desc(soft_desc);
-	    		sp.setSoft_desc_short(soft_desc_short);
-	    		sp.setNick_version(nick_version);
-	    		sp.setWhats_new_desc(whats_new_desc);
-	    		sp.setWhats_new_short(whats_new_short);
-	    		sp.setVersion(version);
-	    		sp.setFile_size(file_size);
-	    		sp.setFile_name(file_name);
-	    		sp.setUpdate_time(update_time);
-	    		sp.setUrl(url);
-	    		sp.setPic_path(pic_path);
-	    		sp.setClass_name(class_name);
-	    		sp.setReurl(reurl);
-	    		sp.setDeveloper_name(developer_name);
-	    		sp.setDownload_num(download_num);
-	    		sp.setOs_type(os_type);
-	    		SoftSpiderHelper.sava(sp);
+	    		SoftPersistence softPersistence = new SoftPersistence();
+	    		softPersistence.setConfigureId(uuid.toString());
+	    		softPersistence.setSoftId(SoftId);
+	    		softPersistence.setSoftScore(SoftScore);
+	    		softPersistence.setLogo(Logo);
+	    		softPersistence.setLogo48(Logo48);
+	    		softPersistence.setLogo96(Logo96);
+	    		softPersistence.setSoft_desc(Soft_desc);
+	    		softPersistence.setSoft_desc_short(Soft_desc_short);
+	    		softPersistence.setNick_version(Nick_version);
+	    		softPersistence.setVersion(Version);
+	    		softPersistence.setWhats_new_desc(Whats_new_desc);
+	    		softPersistence.setWhats_new_desc_short(Whats_new_desc_short);
+	    		softPersistence.setClassifyName(ClassifyName);
+	    		softPersistence.setReURL(ReURL);
+	    		softPersistence.setOS_type(OS_type);
+	    		softPersistence.setOffical_website(Offical_website);
+	    		
+	    		try {
+					ConfigureHelper.save_Soft(configurePersistence);
+					SoftHelper.sava(softPersistence);
+	    			System.out.println("-------------------------------------");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 	    	}
 		}
     }
@@ -138,6 +149,6 @@ public class SoftSpider implements PageProcessor {
     public static void main(String[] args) {
 	        Spider.create(new SoftSpider())
 	        .addUrl("http://rj.baidu.com/soft/lists/1/1")
-	        .run();
+	        .thread(15).run();
     }
 }

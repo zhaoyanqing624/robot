@@ -3,9 +3,12 @@ package org.xjtusicd3.parnter.spider;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.UUID;
 
-import org.xjtusicd3.database.helper.PatchSpiderHelper;
-import org.xjtusicd3.database.model.PatchSpiderPersistence;
+import org.xjtusicd3.database.helper.ConfigureHelper;
+import org.xjtusicd3.database.helper.PatchHelper;
+import org.xjtusicd3.database.model.ConfigurePersistence;
+import org.xjtusicd3.database.model.PatchPersistence;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -74,18 +77,25 @@ public class PatchSpider implements PageProcessor {
 	    	while(m8.find()){
 	    		patchURL = "http://down.tech.sina.com.cn/download/d_load.php?d_id="+m8.group(1)+"&down_id=2";
 	    	}
-	    	PatchSpiderPersistence ps = new PatchSpiderPersistence();
-	    	ps.setPatchName(patchName);
-	    	ps.setPatchOs(patchOs);
-	    	ps.setPatchProducer(patchProducer);
-	    	ps.setPatchDate(patchDate);
-	    	ps.setPatchSize(patchSize);
-	    	ps.setPatchKeyword(patchKeyword);
-	    	ps.setPatchLanguage(patchLanguage);
-	    	ps.setPatchContent(patchContent);
-	    	ps.setPatchURL(patchURL);
+	    	ConfigurePersistence configurePersistence = new ConfigurePersistence();
+	    	PatchPersistence patchPersistence = new PatchPersistence();
+	    	UUID uuid = UUID.randomUUID();
+	    	configurePersistence.setConfigureId(uuid.toString());
+	    	configurePersistence.setConfigureName(patchName);
+	    	configurePersistence.setConfigureType("补丁");
+	    	configurePersistence.setConfigureProducer(patchProducer);
+	    	configurePersistence.setConfigureDate(patchDate);
+	    	configurePersistence.setConfigureURL(patchURL);
+	    	configurePersistence.setConfigureSize(patchSize);
+	    	
+	    	patchPersistence.setConfigureId(uuid.toString());
+	    	patchPersistence.setPatchKeyword(patchKeyword);
+	    	patchPersistence.setPatchLanguage(patchLanguage);
+	    	patchPersistence.setPatchOS(patchOs);
+	    	patchPersistence.setPatchContent(patchContent);
 	    	try {
-				PatchSpiderHelper.save(ps);
+	    		ConfigureHelper.save_Patch(configurePersistence);
+				PatchHelper.save(patchPersistence);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
