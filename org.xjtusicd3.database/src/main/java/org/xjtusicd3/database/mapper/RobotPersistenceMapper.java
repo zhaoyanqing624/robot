@@ -10,6 +10,6 @@ public interface RobotPersistenceMapper extends IBaseDao<RobotPersistence, Strin
 	/*
 	 * robot_ajax获取机器人信息
 	 */
-	@Select("SELECT * FROM robot")
+	@Select("SELECT * FROM Robot")
 	public List<RobotPersistence> robotinfo();
 }

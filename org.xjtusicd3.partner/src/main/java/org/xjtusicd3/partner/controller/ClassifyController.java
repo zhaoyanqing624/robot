@@ -19,31 +19,32 @@ import org.xjtusicd3.partner.service.ClassifyService;
 
 @Controller
 public class ClassifyController {
-//	/*
-//	 * robot_分类
-//	 */
-//	@RequestMapping(value="robot",method=RequestMethod.GET)
-//	public ModelAndView classifyName(){
-//		ModelAndView modelAndView = new ModelAndView("robot");
-//		String string = ClassifyService.classify();
-//		modelAndView.addObject("string",string);
-//		return modelAndView;
-//	}
-//	/*
-//	 * faq、faq1_右侧的第一级分类
-//	 */
-//	@ResponseBody
-//	@RequestMapping(value={"/getFirstLevel"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="text/plain;charset=UTF-8")
-//	public  String search(HttpServletResponse response){
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("utf-8");
-//		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
-//		if (classifyPersistences == null || classifyPersistences.size()==0) {
-//			return null;
-//		}			
-//		String result = JsonUtil.toJsonString(classifyPersistences);
-//		return result;
-//	 }
+	/*
+	 * robot_分类
+	 */
+	@RequestMapping(value="robot",method=RequestMethod.GET)
+	public ModelAndView classifyName(){
+		ModelAndView modelAndView = new ModelAndView("robot");
+		String string = ClassifyService.classify();
+		modelAndView.addObject("string",string);
+		System.out.println(string);
+		return modelAndView;
+	}
+	/*
+	 * faq、faq1_右侧的第一级分类
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getFirstLevel"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="text/plain;charset=UTF-8")
+	public  String search(HttpServletResponse response){
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		List<ClassifyPersistence> classifyPersistences = ClassifyService.faq_ClassifyName();
+		if (classifyPersistences == null || classifyPersistences.size()==0) {
+			return null;
+		}			
+		String result = JsonUtil.toJsonString(classifyPersistences);
+		return result;
+	 }
 //	/*
 //	 * ajax获取第二级分类
 //	 */

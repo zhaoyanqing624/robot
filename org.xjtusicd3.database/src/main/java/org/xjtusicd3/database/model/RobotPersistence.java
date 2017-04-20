@@ -5,57 +5,58 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="robot")
+@Table(tablename="Robot")
 public class RobotPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="robotId")
-	private int robotId;
-	@TableField(columnName="robotName")
-	private String robotName;
-	@TableField(columnName="robotWelcome")
-	private String robotWelcome;
-	@TableField(columnName="robotDescription")
-	private String robotDescription;
-	@TableField(columnName="robotImage")
-	private String robotImage;
-	@TableField(columnName="robotNoknow")
-	private String robotNoknow;
-	public int getRobotId() {
-		return robotId;
+	@TableField(columnName="RobotId")
+	private String RobotId;
+	@TableField(columnName="RobotName")
+	private String RobotName;
+	@TableField(columnName="RobotWelcome")
+	private String RobotWelcome;
+	@TableField(columnName="RobotDescription")
+	private String RobotDescription;
+	@TableField(columnName="RobotImage")
+	private String RobotImage;
+	@TableField(columnName="RobotNoknow")
+	private String RobotNoknow;
+	public String getRobotId() {
+		return RobotId;
 	}
-	public void setRobotId(int robotId) {
-		this.robotId = robotId;
+	public void setRobotId(String robotId) {
+		RobotId = robotId;
 	}
 	public String getRobotName() {
-		return robotName;
+		return RobotName;
 	}
 	public void setRobotName(String robotName) {
-		this.robotName = robotName;
+		RobotName = robotName;
 	}
 	public String getRobotWelcome() {
-		return robotWelcome;
+		return RobotWelcome;
 	}
 	public void setRobotWelcome(String robotWelcome) {
-		this.robotWelcome = robotWelcome;
+		RobotWelcome = robotWelcome;
 	}
 	public String getRobotDescription() {
-		return robotDescription;
+		return RobotDescription;
 	}
 	public void setRobotDescription(String robotDescription) {
-		this.robotDescription = robotDescription;
+		RobotDescription = robotDescription;
 	}
 	public String getRobotImage() {
-		return robotImage;
+		return RobotImage;
 	}
 	public void setRobotImage(String robotImage) {
-		this.robotImage = robotImage;
+		RobotImage = robotImage;
 	}
 	public String getRobotNoknow() {
-		return robotNoknow;
+		return RobotNoknow;
 	}
 	public void setRobotNoknow(String robotNoknow) {
-		this.robotNoknow = robotNoknow;
+		RobotNoknow = robotNoknow;
 	}
+
 	
 	
 }

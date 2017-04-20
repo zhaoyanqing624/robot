@@ -21,7 +21,7 @@
   position: absolute;
   top: -2px;
   left: -11.7%;
-  width: 22%;
+  width: 17%;
   height: -1%;
   background: url('../img/title_bg.jpg') repeat-x 0 0;
 }
@@ -709,7 +709,7 @@
   position: absolute;
   background: #FFF;
   left: 240px;
-  width: 125%;
+  width: 140%;
   box-shadow: 0px 0px 10px #DDDDDD;
   border: 1px solid #DDD;
   top: 3px;
@@ -789,7 +789,7 @@
 }
 .macth_content_ul li .macth_xvnav_li_alist {
   float: left;
-  width: 230px;
+  width: 65%;
   font-size: 14px;
   color: #cc3333;
   line-height: 32px;
@@ -800,7 +800,7 @@
   margin: 0;
   padding-left: 0;
   float: left;
-  width: 240px;
+  width: 66%;
   overflow: hidden;
   margin-left: 10px;
 }

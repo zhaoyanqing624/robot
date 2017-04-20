@@ -10,43 +10,8 @@ function(){
 	 		    var b = data[i].classifyName;
 	 		    var list = document.getElementById("konwledge-first");
 	 		    var html = list.innerHTML;
-	 		    if(a<=8){
-	     			if(a%8==1){
-	     				list.innerHTML=html+'<li class="default"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==2){
-	     				list.innerHTML=html+'<li class="orange"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==3){
-	     				list.innerHTML=html+'<li class="pink"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==4){
-	     				list.innerHTML=html+'<li class="red"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==5){
-	     				list.innerHTML=html+'<li class="blue"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==6){
-	     				list.innerHTML=html+'<li class="green"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==7){
-	     				list.innerHTML=html+'<li class="gray"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==0){
-	     				list.innerHTML=html+'<li class="black"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}
-	 		    }else{
-	     			if(a%8==1){
-	     				list.innerHTML=html+'<li class="default"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==2){
-	     				list.innerHTML=html+'<li class="orange"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==3){
-	     				list.innerHTML=html+'<li class="pink"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==4){
-	     				list.innerHTML=html+'<li class="red"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==5){
-	     				list.innerHTML=html+'<li class="blue"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==6){
-	     				list.innerHTML=html+'<li class="green"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==7){
-	     				list.innerHTML=html+'<li class="gray"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	     			}else if(a%8==0){
-	     				list.innerHTML=html+'<li class="black"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
-	         			}
-	     		    }
+	 		    var color = new Array("default","orange","pink","red","blue","green","gray","black","default","orange","pink","red","blue","green","gray","black","default","orange","pink","red","blue","green","gray","black");
+	 		    list.innerHTML=html+'<li class="'+color[i]+'"><a href="/org.xjtusicd3.partner/faq1.html?p='+a+'">'+b+'</a></li>';
 	          }
 	      }
 	 });

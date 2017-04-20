@@ -1,15 +1,18 @@
 package org.xjtusicd3.database.mapper;
 
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Select;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.QuestionPersistence;
 
 public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence, String>{
-//	/*
-//	 * robot-分类
-//	 */
-//	@Select("SELECT faq.faqId,faq.faqTitle FROM faq,classify WHERE faq.faqClassify = classify.classifyId AND faq.faqClassify=#{0} ORDER BY faq.faqCollection DESC LIMIT 4")
-//	public List<FaqPersistence> SecondClassify_robot(int paramString);
+	/*
+	 * robot-分类
+	 */
+	@Select("SELECT Question.QuestionId,Question.FaqTitle FROM Question WHERE Question.ClassifyId=#{0} ORDER BY Question.FaqCollection DESC LIMIT 4 ")
+	public List<QuestionPersistence> SecondClassify_robot(String ClassifyId);
 //	/*
 //	 * faq2_知识列表
 //	 */

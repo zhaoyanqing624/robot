@@ -1,6 +1,8 @@
 package org.xjtusicd3.database.helper;
 
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
@@ -16,16 +18,16 @@ public class QuestionHelper {
 		mapper.save(questionPersistence);
 		session.close();
 	}
-//	/*
-//	 * robot-分类
-//	 */
-//	public static List<FaqPersistence> SecondClassify_robot(int faqClassify){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-//		List<FaqPersistence> list = mapper.SecondClassify_robot(faqClassify);
-//		session.close();
-//		return list;
-//	}
+	/*
+	 * robot-分类
+	 */
+	public static List<QuestionPersistence> SecondClassify_robot(String ClassifyId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.SecondClassify_robot(ClassifyId);
+		session.close();
+		return list;
+	}
 //	/*
 //	 * faq2_知识列表
 //	 */

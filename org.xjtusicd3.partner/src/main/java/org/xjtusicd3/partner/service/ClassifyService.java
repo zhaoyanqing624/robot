@@ -7,64 +7,77 @@ import org.apache.ibatis.reflection.wrapper.BaseWrapper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.partner.view.Classify_faq1View;
 import org.xjtusicd3.partner.view.Faq_faq1View;
 public class ClassifyService {
-//	/*
-//	 * robot-分类
-//	 */
-//	public static String classify(){
-//		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
-//		int length = classifyPersistences.size()+1;
-//		String string = "";
-//		for(ClassifyPersistence classifyPersistence:classifyPersistences){
-//			String firstTitle = "";
-//			String content = "";
-//			String secondTitle = "";
-//			int secondTitleId;
-//			String faqTitle = "";
-//			int faqId;
-//			String content_string = "{\"title\":\"";
-//			String firstTitle_string = "{\"title\":\"";
-//			List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.classifyName2(classifyPersistence.getClassifyId());
-//			int length2 = classifyPersistences2.size()+1;
-//			for(ClassifyPersistence classifyPersistence2:classifyPersistences2){
-//				String content2 = "";
-//				List<FaqPersistence> faqPersistences = FaqHelper.SecondClassify_robot(classifyPersistence2.getClassifyId());
-//				int length3 = faqPersistences.size()+1;
-//				for(FaqPersistence faqPersistence:faqPersistences){
-//					length3--;
-//					faqTitle = faqPersistence.getFaqTitle();
-//					faqId = faqPersistence.getFaqId();
-//					content2 += "{\"faqTitle\":\""+faqTitle+"\","+"\"faqId\":\""+faqId+"\"}";
-//					if (length3>1) {
-//						content2 += ",";
-//					}else {
-//						content2 += "";
-//					}
-//				}
-//				length2--;
-//				secondTitle = classifyPersistence2.getClassifyName();
-//				secondTitleId = classifyPersistence2.getClassifyId();
-//				content +=content_string+secondTitle+"\","+"\"id\":\""+secondTitleId+"\",\"content\":["+content2+ "]}";
-//				if (length2>1) {
-//					content += ",";
-//				}else {
-//					content += "";
-//				}
-//			}
-//				int num  = classifyPersistence.getClassifyId();
-//				length--;
-//				firstTitle = classifyPersistence.getClassifyName();
-//				string += firstTitle_string+firstTitle+"\","+"\"id\":\"speedMenu"+num+"\","+"\"content\":["+content+"]"+"}";
-//				if (length>1) {
-//					string += ",";
-//				}else {
-//					string += "";
-//				}
-//			}
-//		return string;
-//		}
+	/*
+	 * robot-分类
+	 */
+	public static String classify(){
+		int num  = 1;
+		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
+		int length = classifyPersistences.size()+1;
+		String string = "";
+		for(ClassifyPersistence classifyPersistence:classifyPersistences){
+			String firstTitle = "";
+			String content = "";
+			String secondTitle = "";
+			String faqTitle = "";
+			String content_string = "{\"title\":\"";
+			String firstTitle_string = "{\"title\":\"";
+			List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.classifyName2(classifyPersistence.getClassifyId());
+			int length2 = classifyPersistences2.size()+1;
+			for(ClassifyPersistence classifyPersistence2:classifyPersistences2){
+				String content2 = "";
+				List<QuestionPersistence> faqPersistences = QuestionHelper.SecondClassify_robot(classifyPersistence2.getClassifyId());
+				int length3 = faqPersistences.size()+1;
+				for(QuestionPersistence faqPersistence:faqPersistences){
+					length3--;
+					faqTitle = zhuanyi(faqPersistence.getFaqTitle());
+					content2 += "{\"faqTitle\":\""+faqTitle+"\"}";
+					if (length3>1) {
+						content2 += ",";
+					}else {
+						content2 += "";
+					}
+				}
+				length2--;
+				secondTitle = classifyPersistence2.getClassifyName();
+				content +=content_string+secondTitle+"\",\"content\":["+content2+ "]}";
+				if (length2>1) {
+					content += ",";
+				}else {
+					content += "";
+				}
+			}
+				firstTitle = classifyPersistence.getClassifyName();
+				string += firstTitle_string+firstTitle+"\","+"\"id\":\"speedMenu"+num+"\","+"\"content\":["+content+"]"+"}";
+				num++;
+				length--;
+				if (length>1) {
+					string += ",";
+				}else {
+					string += "";
+				}
+			}
+		return string;
+		}
+    public static String zhuanyi(String string){
+    	string = string.replace("\"", "'");
+    	return string;
+    }
+	/*
+	 * faq_右侧分类
+	 */
+    public static List<ClassifyPersistence> faq_ClassifyName(){
+    	List<ClassifyPersistence> cList = null;
+    	List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
+    	for(ClassifyPersistence classifyPersistence:classifyPersistences){
+    		cList = ClassifyHelper.faq_ClassifyName(classifyPersistence.getParentId());
+    	}
+		return cList;
+    }
 //	/*
 //	 * faq、faq1_右侧的第一类分类
 //	 */

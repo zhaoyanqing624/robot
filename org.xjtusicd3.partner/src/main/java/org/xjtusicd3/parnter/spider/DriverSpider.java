@@ -4,7 +4,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.ibatis.reflection.wrapper.BaseWrapper;
 import org.xjtusicd3.database.helper.ConfigureHelper;
 import org.xjtusicd3.database.helper.DriversHelper;
 import org.xjtusicd3.database.model.ConfigurePersistence;

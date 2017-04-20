@@ -27,23 +27,33 @@ public class ClassifyHelper {
 		session.close();
 		return list;
 	}
-//	/*
-//	 * robot-分类
-//	 */
-//	public static List<ClassifyPersistence> classifyName1(){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
-//		List<ClassifyPersistence> list = mapper.FirstClassify_robot();
-//		session.close();
-//		return list;
-//	}
-//	public static List<ClassifyPersistence> classifyName2(int parentId){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
-//		List<ClassifyPersistence> list = mapper.SecondClassify_robot(parentId);
-//		session.close();
-//		return list;
-//	}
+	/*
+	 * robot-分类
+	 */
+	public static List<ClassifyPersistence> classifyName1(){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.FirstClassify_robot();
+		session.close();
+		return list;
+	}
+	public static List<ClassifyPersistence> classifyName2(String ParentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.SecondClassify_robot(ParentId);
+		session.close();
+		return list;
+	}
+	/*
+	 * faq_右侧分类
+	 */
+	public static List<ClassifyPersistence> faq_ClassifyName(String ParentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.faq_ClassifyName(ParentId);
+		session.close();
+		return list;
+	}
 //	/*
 //	 * faq、faq1_上侧的第二级分类
 //	 */

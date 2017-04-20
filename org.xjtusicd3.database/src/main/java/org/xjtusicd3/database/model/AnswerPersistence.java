@@ -16,17 +16,6 @@ public class AnswerPersistence {
 	private String FaqContent;
 	@TableField(columnName="UserId")
 	private String AnswerUserId;
-	@TableField(columnName="FaqCollection")
-	private int FaqCollection;
-	@TableField(columnName="FaqScan")
-	private int FaqScan;
-	@TableField(columnName="FaqModifytime")
-	private String FaqModifytime;
-	@TableField(columnName="FaqWritetime")
-	private int FaqWritetime;
-	@TableField(columnName="FaqScore")
-	private float FaqScore;
-	
 	public String getAnswerId() {
 		return AnswerId;
 	}
@@ -50,36 +39,6 @@ public class AnswerPersistence {
 	}
 	public void setAnswerUserId(String answerUserId) {
 		AnswerUserId = answerUserId;
-	}
-	public int getFaqCollection() {
-		return FaqCollection;
-	}
-	public void setFaqCollection(int faqCollection) {
-		FaqCollection = faqCollection;
-	}
-	public int getFaqScan() {
-		return FaqScan;
-	}
-	public void setFaqScan(int faqScan) {
-		FaqScan = faqScan;
-	}
-	public String getFaqModifytime() {
-		return FaqModifytime;
-	}
-	public void setFaqModifytime(String faqModifytime) {
-		FaqModifytime = faqModifytime;
-	}
-	public int getFaqWritetime() {
-		return FaqWritetime;
-	}
-	public void setFaqWritetime(int faqWritetime) {
-		FaqWritetime = faqWritetime;
-	}
-	public float getFaqScore() {
-		return FaqScore;
-	}
-	public void setFaqScore(float faqScore) {
-		FaqScore = faqScore;
 	}
 	
 }
