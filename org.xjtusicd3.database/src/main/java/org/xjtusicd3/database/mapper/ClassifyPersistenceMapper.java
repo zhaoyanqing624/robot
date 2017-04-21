@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
 
 public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence, String>{
 	/*
@@ -19,31 +20,27 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	public List<ClassifyPersistence> FirstClassify_robot();
 	@Select("SELECT Classify.ClassifyId,Classify.ClassifyName,sum(Question.FaqCollection) as a FROM Classify,Question WHERE Classify.ClassifyId=Question.ClassifyId AND Classify.ParentId=#{0} GROUP BY Question.ClassifyId ORDER BY a DESC LIMIT 4")
 	public List<ClassifyPersistence> SecondClassify_robot(String ParentId);
-	/*
-	 * faq_右侧分类
-	 */
-	@Select("SELECT Classify.ClassifyId,Classify.ClassifyName,sum(Question.FaqScan) as a FROM Classify,Question WHERE Classify.ClassifyId=Question.ClassifyId AND Classify.ParentId=#{0} GROUP BY Question.ClassifyId ORDER BY a DESC")
-	public List<ClassifyPersistence> faq_ClassifyName(String ParentId);
+
 	/*
 	 * faq、faq1_上侧的第二级分类
 	 */
-	@Select("SELECT ClassifyId,classifyName FROM classify  WHERE parentId=#{0}")
-	public List<ClassifyPersistence> SecondClassify_robot2(int paramString);
-//	/*
-//	 * faq1_下面4栏推荐_按照浏览量
-//	 */
-//	@Select("SELECT ClassifyId,classifyName,sum(faqScan) as a  FROM faq,classify WHERE faq.faqClassify = classify.classifyId AND classify.parentId=#{0} GROUP BY faqClassify ORDER BY a DESC LIMIT 4")
-//	public List<ClassifyPersistence> SecondClassify_faq1(int paramString);
-//	@Select("SELECT * FROM faq WHERE faqClassify=#{0} ORDER BY faqScan DESC LIMIT 1")
-//	public List<FaqPersistence> faqPersistences_faq1(int paramString);
-//	@Select("SELECT * FROM faq WHERE faqClassify=#{0} ORDER BY faqScan DESC LIMIT 1,5")
-//	public List<FaqPersistence> faqPersistences2_faq1(int paramString);
+	@Select("SELECT Classify.ClassifyId,Classify.ClassifyName,sum(Question.FaqScan+Question.FaqCollection*10) as a FROM Classify,Question WHERE Classify.ClassifyId=Question.ClassifyId AND Classify.ParentId=#{0} GROUP BY Question.ClassifyId ORDER BY a DESC")
+	public List<ClassifyPersistence> SecondClassify_robot2(String ParentId);
+	/*
+	 * faq1_下面4栏推荐_按照浏览量
+	 */
+	@Select("SELECT Classify.ClassifyId,Classify.ClassifyName,sum(FaqScan) as a FROM Question,Classify WHERE Question.ClassifyId = Classify.ClassifyId AND Classify.ParentId=#{0} GROUP BY Question.ClassifyId ORDER BY a DESC LIMIT 4")
+	public List<ClassifyPersistence> faq1_SecondClassify(String ParentId);
+	@Select("SELECT * FROM Question WHERE ClassifyId=#{0} ORDER BY FaqScan DESC LIMIT 1")
+	public List<QuestionPersistence> faq1_faqPersistences(String ClassifyId);
+	@Select("SELECT * FROM Question WHERE ClassifyId=#{0} ORDER BY FaqScan DESC LIMIT 1,5")
+	public List<QuestionPersistence> faq1_faqPersistences2(String paramString);
 	/*
 	 * faq2_获取第二类分类的名称、第一类分类的名称
 	 */
-	@Select("SELECT * FROM classify WHERE classifyId=#{0}")
-	public List<ClassifyPersistence> classify(int classifyId);
-	@Select("SELECT parentId FROM classify WHERE classifyId=#{0}")
-	public int classifyParentId(int classifyId);
+	@Select("SELECT * FROM Classify WHERE ClassifyId=#{0}")
+	public List<ClassifyPersistence> faq2_classify(String ClassifyId);
+	@Select("SELECT ParentId FROM Classify WHERE ClassifyId=#{0}")
+	public String faq2_classifyParentId(String ClassifyId);
 	
 }

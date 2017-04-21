@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.model.QuestionPersistence;
+import org.xjtusicd3.database.model.UserPersistence;
 
 public class QuestionHelper {
 	/*
@@ -28,49 +29,56 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
-//	/*
-//	 * faq2_知识列表
-//	 */
-//	public static List<FaqPersistence> faqlist_faq2(int faqClassify,int pageNow){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-//		int a  = (pageNow-1)*5;
-//		List<FaqPersistence> list = mapper.faqlist_faq2(faqClassify,a);
-//		session.close();
-//		return list;
-//	}
-//	public static List<UserPersistence> userlist_faq2(int userId){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-//		List<UserPersistence> list = mapper.userlist_faq2(userId);
-//		session.close();
-//		return list;
-//	}
-//	public static int pageTotal(int faqClassify){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-//		int pageTotal = mapper.pageTotal(faqClassify);
-//		session.close();
-//		return pageTotal;
-//	}
-//	/*
-//	 * faq3_知识内容
-//	 */
-//	public static List<FaqPersistence> faqcontent_faq3(int faqId){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-//		List<FaqPersistence> list = mapper.faqcontent_faq3(faqId);
-//		session.close();
-//		return list;
-//	}
-//	/*
-//	 * faq3_根据知识ID找类型classify
-//	 */
-//	public static int faqclassify(int faqId){
-//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-//		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-//		int f = mapper.faqclassify(faqId);
-//		session.close();
-//		return f;
-//	}
+	/*
+	 * faq2_知识列表
+	 */
+	public static List<QuestionPersistence> faq2_faqlist(String ClassifyId,int pageNow){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		int a  = (pageNow-1)*5;
+		List<QuestionPersistence> list = mapper.faq2_faqlist(ClassifyId,a);
+		session.close();
+		return list;
+	}
+	public static List<UserPersistence> faq2_userlist(String UserId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<UserPersistence> list = mapper.faq2_userlist(UserId);
+		session.close();
+		return list;
+	}
+	public static int pageTotal(String ClassifyId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		int pageTotal = mapper.pageTotal(ClassifyId);
+		session.close();
+		return pageTotal;
+	}
+	public static String faq2_userId(String QuestionId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		String UserId = mapper.faq2_UserId(QuestionId);
+		session.close();
+		return UserId;
+	}
+	/*
+	 * faq3_知识内容
+	 */
+	public static List<QuestionPersistence> faq3_faqcontent(String faqId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faq3_faqcontent(faqId);
+		session.close();
+		return list;
+	}
+	/*
+	 * faq3_根据知识ID找类型classify
+	 */
+	public static String faqclassify(String QuestionId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		String ClassifyId = mapper.faq3_faqclassifyId(QuestionId);
+		session.close();
+		return ClassifyId;
+	}
 }

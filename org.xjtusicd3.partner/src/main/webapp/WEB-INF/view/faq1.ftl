@@ -69,7 +69,7 @@
                     <p class="allFristType"><a href="/org.xjtusicd3.partner/faq.html"><span class="type">所有分类</span></a><span> &gt; </span><a href="/topic/c_1.html" id="oneNavStep"><span id="productionName">操作系统</span></a></p>
                     <input type="hidden" id="secondeType" value="c">
                     <ul class="typeContent clearfix" id="typeTplWrapper">
-                    	<#list classifyName2 as a>
+                    	<#list faq1_list as a>
                         	<li><a href="faq2.html?c=${a.classifyId}">${a.classifyName}</a></li>
                         </#list>
                     </ul>
@@ -100,7 +100,7 @@
 					</div>
                 </div>
                 <div class="fristTypeKnowledgeWra clearfix" id="knowledgeTopTplWrapper">
-                <#list Classify_faq1View as a2>
+                <#list faq1_list2 as a2>
                     <div class="knowledgeBox">
                         <p class="knowledgeType"><span class="type">${a2.classifyName}</span></p>
                         <ul class="typeKnowledgeList">

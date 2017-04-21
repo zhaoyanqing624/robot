@@ -2,14 +2,16 @@ package org.xjtusicd3.partner.view;
 
 import org.xjtusicd3.database.model.UserPersistence;
 
-public class User_faq2View {
-	private int userId;
+public class Faq2_faqUserView {
+	private String userId;
 	private String userName;
 	private String userImage;
-	public int getUserId() {
+	
+	
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUserName() {
@@ -24,12 +26,12 @@ public class User_faq2View {
 	public void setUserImage(String userImage) {
 		this.userImage = userImage;
 	}
-	public User_faq2View(UserPersistence userPersistence ){
+	public Faq2_faqUserView(UserPersistence userPersistence){
 		this.userId = userPersistence.getUserId();
 		this.userName = userPersistence.getUserName();
 		this.userImage = userPersistence.getUserImage();
 	}
-	public User_faq2View(){
+	public Faq2_faqUserView(){
 		
 	}
 }

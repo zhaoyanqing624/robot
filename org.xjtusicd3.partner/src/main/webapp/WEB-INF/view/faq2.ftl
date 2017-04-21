@@ -68,19 +68,19 @@
 				<div class="nowPositionBox clearfix">
                     <a href="/org.xjtusicd3.partner/faq.html"><span class="allType">所有分类</span></a>
                     <span class="arrow">&gt;</span>
-                    <#list classify as classify>
+                    <#list faq2_list as classify>
                     <a href="/org.xjtusicd3.partner/faq1.html?p=${classify.classifyId}" id="firstNavStep"><span id="fristProductionName">${classify.classifyName}</span></a>
                     </#list>
                     <span class="arrow">&gt;</span>
-                    <#list classify2 as classify2>
+                    <#list faq2_list2 as classify2>
                     <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.classifyId}" id="secondNavStep" value="${classify2.classifyId}"><span class="secondStep" id="subProductionName">${classify2.classifyName}</span></a>
                     </#list>                    
                 </div>
                 
                 <div class="secondListtWrapper" id="secondListtWrapper">
-                <#list faq2Views as faqlist>
+                <#list faq2_list3 as faqlist>
                 	<ul class="knowledgeList">
-                		<li><p class="title"><a href="faq3.html?f=${faqlist.faqId}" target="_blank">${faqlist.faqTitle}</a><span class="tags undefined"></span></p></li>
+                		<li><p class="title"><a href="faq3.html?q=${faqlist.questionId}" target="_blank">${faqlist.faqTitle}</a><span class="tags undefined"></span></p></li>
                 		<li class="clearfix">
                 		<#list faqlist.uList as ulist>
                 			<span class="userPic">
@@ -101,6 +101,7 @@
                     <a href="javascript:void(0);" onclick="queryMoreTop()" >加载更多</a>
                 </div>
             </div>
+           	<div style="">
             <div class="rightBarWrapper">
             	<div class="barBox " id="knowledgeBox" data="1" style="left:0px;top:0px;z-index:1">
             		<h3 class="box-title">知识专区</h3>
@@ -136,7 +137,7 @@
                     <input type="hidden" class="data" value="18"><a href="" onclick="clickadd()"><img src=""></a></div><div class="barAdBox " id="" data="1" style="left:0px;top:215px;z-index:1">
                     <input type="hidden" class="data" value="24"><a href="http://iknow.lenovo.com/detail/dc_KB022987.html" onclick="clickadd()"><img src="images/erweima.PNG"></a></div></div>
         		</div>
-        		
+    		</div>
     		</div>
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>

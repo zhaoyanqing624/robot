@@ -9,7 +9,7 @@ import org.xjtusicd3.database.ann.TableKey.Strategy;
 public class UserPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
 	@TableField(columnName="userId")
-	private int userId;
+	private String userId;
 	@TableField(columnName="userEmail")
 	private String userEmail;
 	@TableField(columnName="userPassword")
@@ -27,10 +27,11 @@ public class UserPersistence {
 	@TableField(columnName="userImage")
 	private String userImage;
 	
-	public int getUserId() {
+	
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUserEmail() {

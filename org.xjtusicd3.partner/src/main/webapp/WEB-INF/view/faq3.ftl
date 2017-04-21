@@ -93,7 +93,9 @@
                             <span id="doc_id" doc_id="11717">知识编号：</span>
                             <span>${faq3Views.faqId}</span>
                         </p>
-                        <div class="content">${faq3Views.faqContent}</div>
+                        <#list faq3Views.faqAnswers as flist>
+                        <div class="content">${flist.faqContent}</div>
+                        </#list>
                         <div id="affixBtn" class="hidden">
                             <a href="" style="color:blue;">点击下载附件</a>
                         </div>
