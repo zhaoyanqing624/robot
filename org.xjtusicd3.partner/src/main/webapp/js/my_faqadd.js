@@ -125,11 +125,9 @@ $("textarea").focus(function(){
 $("#sub").click(function(){
 	$(".spa2").text("");
 	$(".spa4").text("");
-	
 	var na = /^\S{2,44}$/   
 	var kw = /^\S{2,30}$/  
 	var dp = /^\S{2,100}$/
-	
 	if(na.test($("#title").val())&&$('input:radio[name="resource"]:checked').val()&&kw.test($("#keywords").val())&&$("#subspecialCategoryId").val&&dp.test($("#description").val())){
 		(function() {
 			var dlgtrigger = document.querySelector( '[data-dialog]' ),

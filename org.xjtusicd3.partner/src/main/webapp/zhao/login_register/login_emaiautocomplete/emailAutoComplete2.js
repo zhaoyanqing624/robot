@@ -1,3 +1,6 @@
+/*
+ * 邮箱自动补全
+ */
 var nowid;
 var totalid;
 var can1press = false;
@@ -53,7 +56,7 @@ $(document).ready(function(){
    $("#myemail2").css("display","none"); 
   }
  })
- $(docume2nt).click(function(){ //文本框失焦时删除层
+ $(document).click(function(){ //文本框失焦时删除层
  if(can1press){
    $("#myemail2").remove();
    can1press = false;
@@ -73,7 +76,7 @@ $(document).ready(function(){
  $("#me2").val(newhtml);
  $("#myemail2").remove();
  })
- $(docume2nt).bind("keydown",function(e)
+ $(document).bind("keydown",function(e)
  {
   if(can1press){
    switch(e.which) 

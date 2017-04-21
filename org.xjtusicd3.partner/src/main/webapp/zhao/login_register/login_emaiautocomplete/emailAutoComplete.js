@@ -1,4 +1,7 @@
-	var nowid;
+/*
+ * 邮箱自动补全
+ */
+var nowid;
 var totalid;
 var can1press = false;
 var emailafter;
@@ -122,3 +125,38 @@ function isEmail(str){
  return false;
  }
 }
+
+/*
+ * 
+ */
+window.onload=function(){
+	$("#me").focus();
+}
+$("input").blur(function(){
+	if($(this).is("#me")){
+		var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+		if($("#me").val()!=""){
+			if(!(na.test($("#me").val()))){
+				$(".spa1").text("请仔细检查您的邮箱");
+				return false;
+			}else if(na){
+				$(".spa1").text("");
+				return true;
+			}
+		}else{
+			$(".spa1").text("");
+		}
+	}
+	if($(this).is("#user")){
+		var us = /^\w{2,10}$/;
+		if(!(us.test($("#user").val()))){
+			$(".spa2").text("用户名不含特殊字符且2-10位");
+			return false;
+		}else if (us){
+			$(".spa2").text("");
+			return true;
+		}
+	}else{
+		$(".spa2").text("");
+	}
+})

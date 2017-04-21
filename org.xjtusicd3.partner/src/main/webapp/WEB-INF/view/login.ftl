@@ -7,8 +7,9 @@
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link href="zhao/login_register/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/validate.css">
 <style type="text/css">
-#myemail, .newemail, .newemailtitle{ 
+#myemail, .newemail, .newemailtitle,#myemail2, .newemail2, .newemailtitle2{ 
  cursor:default;
  line-height:18px;
 }
@@ -53,13 +54,13 @@
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
           <h2>SIGN UP</h2>
           <input type="text" class="inputElem" id="me" placeholder="邮箱" />
-          <div><a style="color:red">hao</a></div>
-          <input type="text" placeholder="用户名" />
-          <div><a style="color:red">hao</a></div>
-          <input type="password" placeholder="密码" />
-          <div><a style="color:red">hao</a></div>
-          <input type="password" placeholder="再次输入密码" />
-          <div><a style="color:red">hao</a></div>
+          <div><a class="validate_faqadd spa1"></a></div>
+          <input type="text" id="user" placeholder="用户名" />
+          <div><a class="validate_faqadd spa2"></a></div>
+          <input type="password" id="password" placeholder="密码" />
+          <div><a class="validate_faqadd spa3"></a></div>
+          <input type="password" id="repassword" placeholder="再次输入密码" />
+          <div><a class="validate_faqadd spa4"></a></div>
           <button class="btn_sign_up" onclick="cambiar_sign_up()">注册</button>
         </div>
       </div>
