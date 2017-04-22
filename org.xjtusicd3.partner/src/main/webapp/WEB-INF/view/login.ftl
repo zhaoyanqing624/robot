@@ -58,10 +58,10 @@
           <input type="text" id="user" placeholder="用户名" />
           <div><a class="validate_faqadd spa2"></a></div>
           <input type="password" id="password" placeholder="密码" />
-          <div><a class="validate_faqadd spa3"></a></div>
+          <div><a class="validate_faqadd spa3" id="_password"></a></div>
           <input type="password" id="repassword" placeholder="再次输入密码" />
-          <div><a class="validate_faqadd spa4"></a></div>
-          <button class="btn_sign_up" onclick="cambiar_sign_up()">注册</button>
+          <div><a class="validate_faqadd spa4" id="_repassword"></a></div>
+          <button class="btn_sign_up" id="register">注册</button>
         </div>
       </div>
     </div>

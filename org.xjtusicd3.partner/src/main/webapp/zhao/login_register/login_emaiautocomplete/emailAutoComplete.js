@@ -159,4 +159,106 @@ $("input").blur(function(){
 	}else{
 		$(".spa2").text("");
 	}
+	if($(this).is("#password")){
+		var pw = /^\w{6,16}$/;
+		if(!(pw.test($("#password").val()))){
+			$(".spa3").text("密码由字母、数字、下划线组成且6-16位");
+			return false;
+		}else if (pw){
+			$(".spa3").text("");
+			return true;
+		}
+	}else{
+		$(".spa3").text("");
+	}
+	if($(this).is("#repassword")){
+		var rpw = $("#repassword").val();
+		if(!(rpw==($("#password").val()))){
+			$(".spa4").text("两次输入的密码不一致");
+			return false;
+		}else if(rpw){
+			$(".spa4").text("");
+			return true;
+		}
+	}else{
+		$(".spa4").text("");
+	}
+})
+
+$("input").focus(function(){
+	$('#password').keyup(function (){
+		document.getElementById("_password").innerHTML="<tr><th></th><td id='level' class='pw-strength'><div class='pw-bar'></div><div class='pw-bar-on'></div><div class='pw-txt'><span>弱</span><span>中</span><span>强</span></div></td></tr>";
+		var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g"); 
+		var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g"); 
+		var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+		if (false == enoughRegex.test($("#password").val())) {
+			$('#level').removeClass('pw-weak'); 
+			$('#level').removeClass('pw-medium'); 
+			$('#level').removeClass('pw-strong'); 
+			$('#level').addClass(' pw-defule'); 
+			 //密码小于六位的时候，密码强度图片都为灰色 
+		} 
+		else if (strongRegex.test($("#password").val())) { 
+			$('#level').removeClass('pw-weak'); 
+			$('#level').removeClass('pw-medium'); 
+			$('#level').removeClass('pw-strong'); 
+			$('#level').addClass(' pw-strong'); 
+			 //密码为八位及以上并且字母数字特殊字符三项都包括,强度最强 
+		} 
+		else if (mediumRegex.test($("#password").val())) { 
+			$('#level').removeClass('pw-weak'); 
+			$('#level').removeClass('pw-medium'); 
+			$('#level').removeClass('pw-strong'); 
+			$('#level').addClass(' pw-medium'); 
+			 //密码为七位及以上并且字母、数字、特殊字符三项中有两项，强度是中等 
+		} 
+		else { 
+			$('#level').removeClass('pw-weak'); 
+			$('#level').removeClass('pw-medium'); 
+			$('#level').removeClass('pw-strong'); 
+			$('#level').addClass('pw-weak'); 
+			 //如果密码为6为及以下，就算字母、数字、特殊字符三项都包括，强度也是弱的 
+		} 
+		return true; 
+	})
+	if($(this).is("#repassword")){
+		document.getElementById("_repassword").innerHTML="<td id='level' class='pw-strength'><div class='pw-bar'></div><div class='pw-bar-on'></div><div class='pw-txt'><span>弱</span><span>中</span><span>强</span></div></td>";
+	}
+})
+$("#register").click(function(){
+	var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+	var us = /^\w{2,10}$/;
+	var pw = /^\w{6,16}$/;
+	var rpw = $("#repassword").val();
+	if(na.test($("#me").val())&&us.test($("#user").val())&&pw.test($("#password").val())&&(rpw==($("#password").val()))){
+		$.ajax({
+			type:"post",
+			url:"/org.xjtusicd3.partner/register.html",
+			data:{
+				"email":$("#me").val(),
+				"username":$("#user").val(),
+				"password":$("#password").val()
+			},
+			dataType:"json",
+			success:function(data){
+				
+			}
+		})
+		return true;
+	}else{
+		if($("#me").val()==""){
+			$(".spa1").text('请填写注册的邮箱');
+		}
+		if($("#user").val()==""){
+			$(".spa2").text('请填写用户名');
+		}
+		if($("#password").val()==""){
+			$(".spa3").text('请填写密码');
+		}
+		if($("#repassword").val()==""){
+			$(".spa4").text('请再次填写密码');
+		}
+		return false;
+	}
+	
 })
