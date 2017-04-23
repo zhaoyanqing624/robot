@@ -9,9 +9,69 @@ import org.springframework.web.servlet.ModelAndView;
 public class PageController {
 	
 	
-	@RequestMapping(value="test",method=RequestMethod.GET)
+	@RequestMapping(value="incidentindex",method=RequestMethod.GET)
+    public ModelAndView  incident(){
+ 	   ModelAndView mv=new ModelAndView("incidentindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="problemindex",method=RequestMethod.GET)
+    public ModelAndView  problem(){
+ 	   ModelAndView mv=new ModelAndView("problemindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="cfgindex",method=RequestMethod.GET)
+    public ModelAndView  cfg(){
+ 	   ModelAndView mv=new ModelAndView("cfgindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="changeindex",method=RequestMethod.GET)
+    public ModelAndView  change(){
+ 	   ModelAndView mv=new ModelAndView("changeindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="fileindex",method=RequestMethod.GET)
+    public ModelAndView  file(){
+ 	   ModelAndView mv=new ModelAndView("fileindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="logindex",method=RequestMethod.GET)
     public ModelAndView  test(){
- 	   ModelAndView mv=new ModelAndView("test");
+ 	   ModelAndView mv=new ModelAndView("logindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="userindex",method=RequestMethod.GET)
+    public ModelAndView  user(){
+ 	   ModelAndView mv=new ModelAndView("userindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="spiderindex",method=RequestMethod.GET)
+    public ModelAndView  spider(){
+ 	   ModelAndView mv=new ModelAndView("spiderindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="messageindex",method=RequestMethod.GET)
+    public ModelAndView  message(){
+ 	   ModelAndView mv=new ModelAndView("messageindex");
+ 	   return mv;
+    }
+	@RequestMapping(value="incidentdetail",method=RequestMethod.GET)
+    public ModelAndView  incidentdetail(){
+ 	   ModelAndView mv=new ModelAndView("incidentdetail");
+ 	   return mv;
+    }
+	@RequestMapping(value="incidentdetail2",method=RequestMethod.GET)
+    public ModelAndView  incidentdetail2(){
+ 	   ModelAndView mv=new ModelAndView("incidentdetail2");
+ 	   return mv;
+    }
+	@RequestMapping(value="incidentdetail3",method=RequestMethod.GET)
+    public ModelAndView  incidentdetail3(){
+ 	   ModelAndView mv=new ModelAndView("incidentdetail3");
+ 	   return mv;
+    }
+	@RequestMapping(value="rbacindex",method=RequestMethod.GET)
+    public ModelAndView  rbac(){
+ 	   ModelAndView mv=new ModelAndView("rbacindex");
  	   return mv;
     }
 	@RequestMapping(value="index",method=RequestMethod.GET)

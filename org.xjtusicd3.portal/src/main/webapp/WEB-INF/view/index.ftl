@@ -47,7 +47,7 @@
                     <span class="ng-scope">管理员界面</span>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="ManageIndexElement.html">
+                    <a class="J_menuItem" href="elementindex.html">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">首页</span>
                     </a>
@@ -64,26 +64,26 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="ManageIncidentIndex.html">
+                            <a class="J_menuItem" href="incidentindex.html">
                                 <i class="fa fa-paste"></i>
                                 <span class="nav-label">事件</span>
                             </a>
                         </li>
 
                         <li>
-                            <a class="J_menuItem" href="ManageProblemIndex.html">
+                            <a class="J_menuItem" href="problemindex.html">
                                 <i class="fa fa-warning"></i>
                                 <span class="nav-label">问题</span>
                             </a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="ManageChangeIndex.html">
+                            <a class="J_menuItem" href="changeindex.html">
                                 <i class="fa fa-edit"></i>
                                 <span class="nav-label">变更</span>
                             </a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="ManageCfgIndex.html">
+                            <a class="J_menuItem" href="cfgindex.html">
                                 <i class="fa fa-cutlery"></i>
                                 <span class="nav-label">配置</span>
                             </a>
@@ -102,7 +102,7 @@
                 </li>
 
                 <li>
-                    <a class="J_menuItem" href="ManageWormIndex.html">
+                    <a class="J_menuItem" href="spiderindex.html">
                         <i class="fa fa-bug"></i>
                         <span class="nav-label">爬虫管理</span>
                         <span class="nav-label"></span>
@@ -114,7 +114,7 @@
                     <span class="ng-scope"></span>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="ManageLog.html">
+                    <a class="J_menuItem" href="logindex.html">
                         <i class="fa fa-user-md"></i>
                         <span class="nav-label">日志管理</span>
                     </a>
@@ -124,7 +124,7 @@
                     <span class="ng-scope"></span>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="ManageFile.html">
+                    <a class="J_menuItem" href="fileindex.html">
                         <i class="fa fa-file"></i>
                         <span class="nav-label">文件管理</span>
                         <span class="nav-label"></span>
@@ -135,7 +135,7 @@
                 </li>
 
                 <li>
-                    <a class="J_menuItem" href="SuperUserManage.html">
+                    <a class="J_menuItem" href="userindex.html">
                         <i class="fa fa-user-plus"></i>
                         <span class="nav-label">用户管理</span>
                     </a>
@@ -144,7 +144,7 @@
                     <span class="ng-scope"></span>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="ManageMessage.html">
+                    <a class="J_menuItem" href="messageindex.html">
                         <i class="fa fa-link"></i>
                         <span class="nav-label">留言管理</span>
                     </a>
@@ -155,7 +155,7 @@
                 </li>
 
                 <li>
-                    <a class="J_menuItem" href="SuperRBAC.html">
+                    <a class="J_menuItem" href="rbacindex.html">
                         <i class="fa fa-rebel"></i>
                         <span class="nav-label">权限管理</span>
                     </a>
