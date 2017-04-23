@@ -5,83 +5,105 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="user")
+@Table(tablename="User")
 public class UserPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="userId")
-	private String userId;
-	@TableField(columnName="userEmail")
-	private String userEmail;
-	@TableField(columnName="userPassword")
-	private String userPassword;
-	@TableField(columnName="userName")
-	private String userName;
-	@TableField(columnName="userSex")
-	private String userSex;
-	@TableField(columnName="userBirthday")
-	private String userBirthday;
-	@TableField(columnName="userAddress")
-	private String userAddress;
-	@TableField(columnName="userBrief")
-	private String userBrief;
-	@TableField(columnName="userImage")
-	private String userImage;
-	
-	
+	@TableField(columnName="UserId")
+	private String UserId;
+	@TableField(columnName="UserName")
+	private String UserName;
+	@TableField(columnName="UserPassword")
+	private String UserPassword;
+	@TableField(columnName="UserEmail")
+	private String UserEmail;
+	@TableField(columnName="UserSex")
+	private String UserSex;
+	@TableField(columnName="UserBirthday")
+	private String UserBirthday;
+	@TableField(columnName="UserAddress")
+	private String UserAddress;
+	@TableField(columnName="UserBrief")
+	private String UserBrief;
+	@TableField(columnName="UserImage")
+	private String UserImage;
+	@TableField(columnName="RoleId")
+	private String RoleId;
+	@TableField(columnName="UserState")
+	private int UserState;
+	@TableField(columnName="UserRegister")
+	private String UserRegister;
 	public String getUserId() {
-		return userId;
+		return UserId;
 	}
 	public void setUserId(String userId) {
-		this.userId = userId;
+		UserId = userId;
 	}
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-	public String getUserPassword() {
-		return userPassword;
-	}
-	
 	public String getUserName() {
-		return userName;
+		return UserName;
 	}
 	public void setUserName(String userName) {
-		this.userName = userName;
+		UserName = userName;
 	}
-	public String getUserSex() {
-		return userSex;
-	}
-	public void setUserSex(String userSex) {
-		this.userSex = userSex;
-	}
-	public String getUserBirthday() {
-		return userBirthday;
-	}
-	public void setUserBirthday(String userBirthday) {
-		this.userBirthday = userBirthday;
-	}
-	public String getUserAddress() {
-		return userAddress;
-	}
-	public void setUserAddress(String userAddress) {
-		this.userAddress = userAddress;
-	}
-	public String getUserBrief() {
-		return userBrief;
-	}
-	public void setUserBrief(String userBrief) {
-		this.userBrief = userBrief;
-	}
-	public String getUserImage() {
-		return userImage;
-	}
-	public void setUserImage(String userImage) {
-		this.userImage = userImage;
+	public String getUserPassword() {
+		return UserPassword;
 	}
 	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+		UserPassword = userPassword;
 	}
+	public String getUserEmail() {
+		return UserEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		UserEmail = userEmail;
+	}
+	public String getUserSex() {
+		return UserSex;
+	}
+	public void setUserSex(String userSex) {
+		UserSex = userSex;
+	}
+	public String getUserBirthday() {
+		return UserBirthday;
+	}
+	public void setUserBirthday(String userBirthday) {
+		UserBirthday = userBirthday;
+	}
+	public String getUserAddress() {
+		return UserAddress;
+	}
+	public void setUserAddress(String userAddress) {
+		UserAddress = userAddress;
+	}
+	public String getUserBrief() {
+		return UserBrief;
+	}
+	public void setUserBrief(String userBrief) {
+		UserBrief = userBrief;
+	}
+	public String getUserImage() {
+		return UserImage;
+	}
+	public void setUserImage(String userImage) {
+		UserImage = userImage;
+	}
+	public String getRoleId() {
+		return RoleId;
+	}
+	public void setRoleId(String roleId) {
+		RoleId = roleId;
+	}
+	public int getUserState() {
+		return UserState;
+	}
+	public void setUserState(int userState) {
+		UserState = userState;
+	}
+	public String getUserRegister() {
+		return UserRegister;
+	}
+	public void setUserRegister(String userRegister) {
+		UserRegister = userRegister;
+	}
+	
 	
 }	

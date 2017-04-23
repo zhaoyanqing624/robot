@@ -17,15 +17,13 @@ public class UserController {
 	 * login_ajax_注册
 	 */
 	@ResponseBody
-	@RequestMapping(value={"/register"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@RequestMapping(value={"/saveRegister"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String registerlist(HttpServletRequest request,HttpServletResponse response){
 		String email = request.getParameter("email");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println(email);
-		System.out.println(username);
-		System.out.println(password);
-		return null;
+		UserService.login_register(email, password, username);
+		return password;
 	}
 	/*
 	 * 检验邮箱是否被注册

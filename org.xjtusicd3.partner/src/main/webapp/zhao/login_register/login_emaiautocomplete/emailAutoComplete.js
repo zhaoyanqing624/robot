@@ -187,7 +187,7 @@ $("input").blur(function(){
 
 $("input").focus(function(){
 	$('#password').keyup(function (){
-		document.getElementById("_password").innerHTML="<tr><th></th><td id='level' class='pw-strength'><div class='pw-bar'></div><div class='pw-bar-on'></div><div class='pw-txt'><span>弱</span><span>中</span><span>强</span></div></td></tr>";
+		document.getElementById("_password").innerHTML="<tr><th></th><div id='level' class='pw-strength'><div class='pw-bar'></div><div class='pw-bar-on'></div><div class='pw-txt'><span>弱</span><span>中</span><span>强</span></div></div></tr>";
 		var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g"); 
 		var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g"); 
 		var enoughRegex = new RegExp("(?=.{6,}).*", "g");
@@ -221,9 +221,6 @@ $("input").focus(function(){
 		} 
 		return true; 
 	})
-	if($(this).is("#repassword")){
-		document.getElementById("_repassword").innerHTML="<td id='level' class='pw-strength'><div class='pw-bar'></div><div class='pw-bar-on'></div><div class='pw-txt'><span>弱</span><span>中</span><span>强</span></div></td>";
-	}
 })
 $("#register").click(function(){
 	var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
@@ -233,7 +230,7 @@ $("#register").click(function(){
 	if(na.test($("#me").val())&&us.test($("#user").val())&&pw.test($("#password").val())&&(rpw==($("#password").val()))){
 		$.ajax({
 			type:"post",
-			url:"/org.xjtusicd3.partner/register.html",
+			url:"/org.xjtusicd3.partner/saveRegister.html",
 			data:{
 				"email":$("#me").val(),
 				"username":$("#user").val(),

@@ -54,13 +54,13 @@
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
           <h2>SIGN UP</h2>
           <input type="text" class="inputElem" id="me" placeholder="邮箱" />
-          <div><a class="validate_faqadd spa1"></a></div>
+          <div><div class="validate_faqadd spa1"></div></div>
           <input type="text" id="user" placeholder="用户名" />
-          <div><a class="validate_faqadd spa2"></a></div>
+          <div><div class="validate_faqadd spa2"></div></div>
           <input type="password" id="password" placeholder="密码" />
-          <div><a class="validate_faqadd spa3" id="_password"></a></div>
+          <div><div class="validate_faqadd spa3" id="_password"></div></div>
           <input type="password" id="repassword" placeholder="再次输入密码" />
-          <div><a class="validate_faqadd spa4" id="_repassword"></a></div>
+          <div><div class="validate_faqadd spa4" id="_repassword"></div></div>
           <button class="btn_sign_up" id="register">注册</button>
         </div>
       </div>
