@@ -2,6 +2,7 @@ package org.xjtusicd3.partner.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.UserService;
 
 @Controller
@@ -17,31 +20,20 @@ public class UserController {
 	 * login_ajax_注册
 	 */
 	@ResponseBody
-	@RequestMapping(value={"/saveRegister"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@RequestMapping(value={"/saveRegister"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
 	public String registerlist(HttpServletRequest request,HttpServletResponse response){
 		String email = request.getParameter("email");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		UserService.login_register(email, password, username);
-		return password;
-	}
-	/*
-	 * 检验邮箱是否被注册
-	 */
-	@RequestMapping(value={"getEmail"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="text/html;charset=UTF-8")
-	public void getEmail(HttpServletResponse response,String e) throws IOException{
-		String email = UserService.getEmail(e);
-		boolean flag=false;
-		if(email!=null&&email.length()!=0){
-			 flag = true;
-		}else{
-			 flag = false;
+		//判断邮箱是否被注册
+		List<UserPersistence> list = UserHelper.getEmail(email);
+		if (list==null) {
+			UserService.login_register(email, password, username);
+			return "0";
+		}else {
+			return "1";
 		}
-		response.setContentType("text/html;charset=utf-8");
-        PrintWriter out = response.getWriter();
-        out.print(flag);//返回登录信息
-        out.flush();
-        out.close();
+		
 	}
-	
+
 }

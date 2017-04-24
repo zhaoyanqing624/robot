@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.ValidateEmail;
 
 public class UserService {
@@ -15,6 +16,7 @@ public class UserService {
 	public static void login_register(String email,String password,String username){
 		UUID uuid = UUID.randomUUID();
 		String userregister =genCodes(8, 1).get(0);
+		
 		//发送邮件验证信息
 		ValidateEmail validateEmail = new ValidateEmail();
 		try {
@@ -52,9 +54,5 @@ public class UserService {
         }
         return results;
         }
-	//校验邮箱是否被注册
-	public static String getEmail(String email){
-		String a = UserHelper.getEmail(email);
-		return a;
-	}
+
 }

@@ -9,7 +9,7 @@ var emailbefor;
 $(document).ready(function(){ 
  $("#me").focus(function(){ //文本框获得焦点，插入Email提示层
  $("#myemail").remove();
- $(this).after("<div id='myemail' style='width:84%; height:auto; background:#fff; color:#6B6B6B; position:absolute; left:9.5%; top:31%; border:1px solid #ccc;z-index:5px; '></div>");
+ $(this).after("<div id='myemail' style='width:84%; height:auto; background:#fff; color:#6B6B6B; position:absolute; left:9.5%; top:38%; border:1px solid #ccc;z-index:5px; '></div>");
  if($("#myemail").html()){
   $("#myemail").css("display","block");
  $(".newemail").css("width",$("#myemail").width());
@@ -229,7 +229,7 @@ $("#register").click(function(){
 	var rpw = $("#repassword").val();
 	if(na.test($("#me").val())&&us.test($("#user").val())&&pw.test($("#password").val())&&(rpw==($("#password").val()))){
 		$.ajax({
-			type:"post",
+			type:"POST",
 			url:"/org.xjtusicd3.partner/saveRegister.html",
 			data:{
 				"email":$("#me").val(),
@@ -238,9 +238,15 @@ $("#register").click(function(){
 			},
 			dataType:"json",
 			success:function(data){
-				
+				if(data=="1"){
+					$(".spa1").text('该邮箱已被注册');
+				}else{
+					document.getElementById("modal_bg").style.display="block";
+					document.getElementById("myModal").style.visibility = "visible";
+				}
 			}
 		})
+
 		return true;
 	}else{
 		if($("#me").val()==""){
@@ -257,5 +263,10 @@ $("#register").click(function(){
 		}
 		return false;
 	}
-	
+})
+//取消弹出框
+$("#cancelModal").click(function(){
+	document.getElementById("modal_bg").style.display="none";
+	document.getElementById("myModal").style.visibility = "hidden";
+	window.location.reload(); 
 })

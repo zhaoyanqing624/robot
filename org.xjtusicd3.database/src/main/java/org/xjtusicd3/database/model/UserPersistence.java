@@ -32,6 +32,8 @@ public class UserPersistence {
 	private int UserState;
 	@TableField(columnName="UserRegister")
 	private String UserRegister;
+	@TableField(columnName="RegisterTime")
+	private String RegisterTime;
 	public String getUserId() {
 		return UserId;
 	}
@@ -103,6 +105,12 @@ public class UserPersistence {
 	}
 	public void setUserRegister(String userRegister) {
 		UserRegister = userRegister;
+	}
+	public String getRegisterTime() {
+		return RegisterTime;
+	}
+	public void setRegisterTime(String registerTime) {
+		RegisterTime = registerTime;
 	}
 	
 	

@@ -8,6 +8,7 @@
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link href="zhao/login_register/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/validate.css">
+
 <style type="text/css">
 #myemail, .newemail, .newemailtitle,#myemail2, .newemail2, .newemailtitle2{ 
  cursor:default;
@@ -49,7 +50,10 @@
           <div>hao</div>
           <input type="password" placeholder="密码" />
           <div>hao</div>
-          <button class="btn_login" onclick="cambiar_login()">登录</button>
+          <button class="btn_login"  data-dialog="somedialog" id="sub">登录</button>
+                      <div class="btnWrapper">
+                <a href="javascript:void(0);" class="blue"  id="sub" data-dialog="somedialog">提交</a>
+            </div>
         </div>
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
           <h2>SIGN UP</h2>
@@ -61,7 +65,7 @@
           <div><div class="validate_faqadd spa3" id="_password"></div></div>
           <input type="password" id="repassword" placeholder="再次输入密码" />
           <div><div class="validate_faqadd spa4" id="_repassword"></div></div>
-          <button class="btn_sign_up" id="register">注册</button>
+          <button class="btn_sign_up" id="register" >注册</button>
         </div>
       </div>
     </div>
@@ -70,12 +74,14 @@
 </div>
 </div>
 
-<script src="js/jquery-1.6.2.js"></script>
-<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete.js"></script>
-<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete2.js"></script>
-<script src="js/login_bg/cav.js"></script>
-<script src="js/login_bg/getStart.js"></script>
-<script src="zhao/login_register/index.js"></script>
+
+
+	<script src="js/jquery-1.6.2.js"></script>
+	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete.js"></script>
+	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete2.js"></script>
+	<script src="js/login_bg/cav.js"></script>
+	<script src="js/login_bg/getStart.js"></script>
+	<script src="zhao/login_register/index.js"></script>
 
 </body>
 </html>

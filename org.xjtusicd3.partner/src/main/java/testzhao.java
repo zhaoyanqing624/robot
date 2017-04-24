@@ -14,46 +14,42 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+import org.joda.time.Seconds;
+
 public class testzhao {
-
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        List<String> results=genCodes(6,1);
-        System.out.println(results.get(0));
-    }
- 
-    public static List<String> genCodes(int length,long num){
-         
-        List<String> results=new ArrayList<String>();
-         
-        for(int j=0;j<num;j++){
-            String val = "";     
-                      
-            Random random = new Random();     
-            for(int i = 0; i < length; i++)     
-            {     
-                String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num"; // 输出字母还是数字     
-                          
-                if("char".equalsIgnoreCase(charOrNum)) // 字符串     
-                {     
-                    int choice = random.nextInt(2) % 2 == 0 ? 65 : 97; //取得大写字母还是小写字母     
-                    val += (char) (choice + random.nextInt(26));     
-                }     
-                else if("num".equalsIgnoreCase(charOrNum)) // 数字     
-                {     
-                    val += String.valueOf(random.nextInt(10));     
-                }     
-            }
-            val=val.toLowerCase();
-            if(results.contains(val)){
-                continue;
-            }else{
-                results.add(val);
-            }
-        }
-        return results;
-                      
-               
-        }   
+    	Date date=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time=format.format(date);
+        String dateStart = "2013-02-19 09:29:58";
+        
 
+        Date d1 = null;
+        Date d2 = null;
+
+        try {
+            d1 = format.parse(dateStart);
+            d2 = format.parse(time);
+
+            DateTime dt1 = new DateTime(d1);
+            DateTime dt2 = new DateTime(d2);
+
+            System.out.print("两个时间相差：");
+            System.out.print(Days.daysBetween(dt1, dt2).getDays() + " 天, ");
+            System.out.print(Hours.hoursBetween(dt1, dt2).getHours() % 24
+                    + " 小时, ");
+            System.out.print(Minutes.minutesBetween(dt1, dt2).getMinutes() % 60
+                    + " 分钟, ");
+            System.out.print(Seconds.secondsBetween(dt1, dt2).getSeconds() % 60
+                    + " 秒.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

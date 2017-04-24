@@ -6,6 +6,7 @@ package org.xjtusicd3.partner.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,10 @@ public class ClassifyController {
 	 * robot_分类
 	 */
 	@RequestMapping(value="robot",method=RequestMethod.GET)
-	public ModelAndView classifyName(){
+	public ModelAndView classifyName(HttpSession session,String e,String r){
 		ModelAndView modelAndView = new ModelAndView("robot");
 		String string = ClassifyService.classify();
 		modelAndView.addObject("string",string);
-		System.out.println(string);
 		return modelAndView;
 	}
 	/*
