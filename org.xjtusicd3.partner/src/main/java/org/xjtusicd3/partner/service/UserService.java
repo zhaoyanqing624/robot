@@ -1,6 +1,8 @@
 package org.xjtusicd3.partner.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -13,18 +15,21 @@ public class UserService {
 	/*
 	 * login_ajax_注册
 	 */
-	public static void login_register(String email,String password,String username){
+	public static void login_register(String email,String password){
 		UUID uuid = UUID.randomUUID();
-		String userregister =genCodes(8, 1).get(0);
-		
+		String identification_number =genCodes(8, 1).get(0);
+    	Date date=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time_stamp = format.format(date);
+		String username = "会员"+ time_stamp + genCodes(6, 1).get(0); 
 		//发送邮件验证信息
 		ValidateEmail validateEmail = new ValidateEmail();
 		try {
-			validateEmail.validateEmail(email,username,userregister);
+			validateEmail.validateEmail(email,username,identification_number);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		UserHelper.login_register(uuid.toString(),email,password,username,0,userregister);
+		UserHelper.login_register(uuid.toString(),email,password,username,0,identification_number,time_stamp);
 	}
 	//随机产生一个length位的字母+数字
     public static List<String> genCodes(int length,long num){

@@ -233,7 +233,6 @@ $("#register").click(function(){
 			url:"/org.xjtusicd3.partner/saveRegister.html",
 			data:{
 				"email":$("#me").val(),
-				"username":$("#user").val(),
 				"password":$("#password").val()
 			},
 			dataType:"json",

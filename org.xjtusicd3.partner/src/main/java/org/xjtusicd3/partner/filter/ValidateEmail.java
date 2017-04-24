@@ -12,7 +12,7 @@ public class ValidateEmail {
 	/*
 	 * 邮件的发送
 	 */
-    public static void validateEmail(String email,String username,String userregister) throws Exception{
+    public static void validateEmail(String email,String username,String identification_number) throws Exception{
           String myEmailAccount = "sicd_xiaoduo@163.com";
           String myEmailPassword = "hyhzjz06030922";
           String myEmailSMTPHost = "smtp.163.com";
@@ -23,13 +23,13 @@ public class ValidateEmail {
           props.setProperty("mail.smtp.auth", "true");            
           Session session = Session.getDefaultInstance(props);
           session.setDebug(true);                                 
-          MimeMessage message = createMimeMessage(session, myEmailAccount, receiveMailAccount,username,userregister);
+          MimeMessage message = createMimeMessage(session, myEmailAccount, receiveMailAccount,username,identification_number);
           Transport transport = session.getTransport();
           transport.connect(myEmailAccount, myEmailPassword);
           transport.sendMessage(message, message.getAllRecipients());
           transport.close();
     }
-    public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,String username,String userregister) throws Exception {
+    public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,String username,String identification_number) throws Exception {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(sendMail, "小朵", "UTF-8"));
         message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "zhao用户", "UTF-8"));
