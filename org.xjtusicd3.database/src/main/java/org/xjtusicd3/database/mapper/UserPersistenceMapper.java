@@ -2,8 +2,10 @@ package org.xjtusicd3.database.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.UserPersistence;
 
@@ -11,9 +13,19 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	/*
 	 * login_ajax_注册
 	 */
-	@Insert("INSERT INTO `User`(`User`.UserId,`User`.UserEmail,`User`.UserPassword,`User`.UserName,`User`.UserState,`User`.Identification_number,`User`.Time_stamp) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6})")
-	public void login_register(String param1,String param2,String param3,String param4,int param5,String param6,String param7);
+	@Insert("INSERT INTO `User`(`User`.UserId,`User`.UserEmail,`User`.UserPassword,`User`.UserName,`User`.UserState,`User`.IdentificationNumber,`User`.UserTimeStamp) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6})")
+	public void login_register(String userid,String email,String password,String username,int userstate,String identification_number,String time_stamp);
 	//校验邮箱是否被注册
 	@Select("SELECT * FROM User WHERE UserEmail=#{0}")
 	List<UserPersistence> getEmail(String useremail);
+	@Select("SELECT * FROM User WHERE UserEmail=#{0} AND UserPassword=#{1}")
+	List<UserPersistence> getEmail2(String param1,String param2);
+	@Select("SELECT * FROM User WHERE UserEmail=#{0} AND IdentificationNumber=#{1}")
+	List<UserPersistence> getEmail3(String param1,String param2);
+	//验证码通过
+	@Update("UPDATE `User` SET `User`.UserState='1' WHERE UserEmail=#{0}")
+	public void updateUserState(String useremail);
+	//验证码没有通过 删除
+	@Delete("DELETE FROM `User` WHERE `User`.UserEmail=#{0}")
+	public void deleteUser(String useremail);
 }

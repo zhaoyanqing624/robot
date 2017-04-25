@@ -30,10 +30,11 @@ public class UserPersistence {
 	private String RoleId;
 	@TableField(columnName="UserState")
 	private int UserState;
-	@TableField(columnName="UserRegister")
-	private String UserRegister;
-	@TableField(columnName="RegisterTime")
-	private String RegisterTime;
+	@TableField(columnName="IdentificationNumber")
+	private String IdentificationNumber;
+	@TableField(columnName="UserTimeStamp")
+	private String UserTimeStamp;
+	
 	public String getUserId() {
 		return UserId;
 	}
@@ -100,18 +101,17 @@ public class UserPersistence {
 	public void setUserState(int userState) {
 		UserState = userState;
 	}
-	public String getUserRegister() {
-		return UserRegister;
+	public String getIdentificationNumber() {
+		return IdentificationNumber;
 	}
-	public void setUserRegister(String userRegister) {
-		UserRegister = userRegister;
+	public void setIdentificationNumber(String identificationNumber) {
+		IdentificationNumber = identificationNumber;
 	}
-	public String getRegisterTime() {
-		return RegisterTime;
+	public String getUserTimeStamp() {
+		return UserTimeStamp;
 	}
-	public void setRegisterTime(String registerTime) {
-		RegisterTime = registerTime;
+	public void setUserTimeStamp(String userTimeStamp) {
+		UserTimeStamp = userTimeStamp;
 	}
-	
 	
 }	

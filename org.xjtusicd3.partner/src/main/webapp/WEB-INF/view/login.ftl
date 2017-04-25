@@ -8,7 +8,7 @@
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link href="zhao/login_register/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/validate.css">
-
+<link rel="stylesheet" type="text/css" href="zhao/tankuang/css/reveal.css" />
 <style type="text/css">
 #myemail, .newemail, .newemailtitle,#myemail2, .newemail2, .newemailtitle2{ 
  cursor:default;
@@ -44,28 +44,25 @@
       </div>
       <div class="cont_forms" >
         <div class="cont_img_back_"> <img src="zhao/login_register/po.jpg" alt="" /> </div>
+        <form  action="saveLogin.html" method="post">
         <div class="cont_form_login"> <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
           <h2>LOGIN</h2>
-          <input type="text" placeholder="邮箱" id="me2"/>
-          <div>hao</div>
-          <input type="password" placeholder="密码" />
-          <div>hao</div>
-          <button class="btn_login"  data-dialog="somedialog" id="sub">登录</button>
-                      <div class="btnWrapper">
-                <a href="javascript:void(0);" class="blue"  id="sub" data-dialog="somedialog">提交</a>
-            </div>
+          <input type="text" placeholder="邮箱" id="me2" name="UserEmail" oninput="_email1()"/>
+          <div><div class="validate_faqadd spa5"></div></div>
+          <input type="password" id="password2" placeholder="密码" name="UserPassword" oninput="_password1()"/>
+          <div><div class="validate_faqadd spa6" id="me_password"></div></div>
+          <button class="btn_login"  data-dialog="somedialog" id="login">登录</button>
         </div>
+        </form>
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
           <h2>SIGN UP</h2>
-          <input type="text" class="inputElem" id="me" placeholder="邮箱" />
+          <input type="text" class="inputElem" id="me" placeholder="邮箱" oninput="_email2()"/>
           <div><div class="validate_faqadd spa1"></div></div>
-          <input type="text" id="user" placeholder="用户名" />
-          <div><div class="validate_faqadd spa2"></div></div>
-          <input type="password" id="password" placeholder="密码" />
+          <input type="password" id="password" placeholder="密码" "/>
           <div><div class="validate_faqadd spa3" id="_password"></div></div>
-          <input type="password" id="repassword" placeholder="再次输入密码" />
-          <div><div class="validate_faqadd spa4" id="_repassword"></div></div>
-          <button class="btn_sign_up" id="register" >注册</button>
+          <input type="password" id="repassword" placeholder="再次输入密码" oninput="_repassword2()"/>
+          <div><div class="validate_faqadd spa4" id="_repassword" ></div></div>
+          <button class="btn_sign_up" id="register" data-dialog="somedialog">注册</button>
         </div>
       </div>
     </div>
@@ -75,7 +72,14 @@
 </div>
 
 
-
+	<div id="myModal" class="reveal-modal">			
+		<h1>邮箱需要验证</h1>
+		<br/>			
+		<p>请在5分钟之内，登录您的邮箱进行验证。</p>			
+		<a class="close-reveal-modal" id="cancelModal">&#215;</a>
+	</div>
+	<div class="reveal-modal-bg" id="modal_bg" style="display: display; cursor: pointer;"></div>
+	
 	<script src="js/jquery-1.6.2.js"></script>
 	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete.js"></script>
 	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete2.js"></script>

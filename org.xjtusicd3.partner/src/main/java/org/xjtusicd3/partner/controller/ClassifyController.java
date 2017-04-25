@@ -25,6 +25,8 @@ public class ClassifyController {
 	 */
 	@RequestMapping(value="robot",method=RequestMethod.GET)
 	public ModelAndView classifyName(HttpSession session,String e,String r){
+		Object object = session.getAttribute("UserEmail");
+		String userEmail = (String) object;
 		ModelAndView modelAndView = new ModelAndView("robot");
 		String string = ClassifyService.classify();
 		modelAndView.addObject("string",string);

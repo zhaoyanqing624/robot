@@ -26,11 +26,8 @@ public class testzhao {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time=format.format(date);
         String dateStart = "2013-02-19 09:29:58";
-        
-
         Date d1 = null;
         Date d2 = null;
-
         try {
             d1 = format.parse(dateStart);
             d2 = format.parse(time);

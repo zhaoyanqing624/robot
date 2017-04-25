@@ -74,6 +74,7 @@ $(document).ready(function(){
  var newhtml = $(this).html();
  newhtml = newhtml.replace(/<.*?>/g,"");
  $("#me").val(newhtml);
+ _email2();
  $("#myemail").remove();
  })
  $(document).bind("keydown",function(e)
@@ -126,39 +127,68 @@ function isEmail(str){
  }
 }
 
-/*
- * 
- */
-window.onload=function(){
-	$("#me").focus();
-}
-$("input").blur(function(){
-	if($(this).is("#me")){
-		var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
-		if($("#me").val()!=""){
-			if(!(na.test($("#me").val()))){
-				$(".spa1").text("请仔细检查您的邮箱");
-				return false;
-			}else if(na){
-				$(".spa1").text("");
-				return true;
-			}
-		}else{
-			$(".spa1").text("");
-		}
-	}
-	if($(this).is("#user")){
-		var us = /^\w{2,10}$/;
-		if(!(us.test($("#user").val()))){
-			$(".spa2").text("用户名不含特殊字符且2-10位");
+function _email2() {
+    var x = document.getElementById("me").value;
+    var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+	if($("#me").val()!=""){
+		if(!(na.test($("#me").val()))){
+			$(".spa1").text("请仔细检查您的邮箱");
 			return false;
-		}else if (us){
-			$(".spa2").text("");
+		}else if(na){
+			$(".spa1").text("");
 			return true;
 		}
 	}else{
-		$(".spa2").text("");
+		$(".spa1").text("");
 	}
+}
+//function _password2(){
+//	if($("#password").val()!=""){
+//		var pw = /^\w{6,16}$/;
+//		if(!(pw.test($("#password").val()))){
+//			$(".spa3").text("密码由字母、数字、下划线组成且6-16位");
+//			return false;
+//		}else if (pw){
+//			$(".spa3").text("");
+//			return true;
+//		}
+//	}else{
+//		$(".spa3").text("");
+//	}
+//}
+function _repassword2(){
+	if($("#repassword").val()!=""){
+		var pw = $("#password").val();
+		if(!(pw==$("#repassword").val())){
+			$(".spa4").text("两次输入的密码不一致");
+			return false;
+		}else if (pw){
+			$(".spa4").text("");
+			return true;
+		}
+	}else{
+		$(".spa4").text("");
+	}
+}
+//window.onload=function(){
+//	$("#me").focus();
+//}
+$("input").blur(function(){
+//	if($(this).is("#me")){
+//		var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+//		if($("#me").val()!=""){
+//			if(!(na.test($("#me").val()))){
+//				$(".spa1").text("请仔细检查您的邮箱");
+//				return false;
+//			}else if(na){
+//				$(".spa1").text("");
+//				return true;
+//			}
+//		}else{
+//			$(".spa1").text("");
+//		}
+//	}
+//
 	if($(this).is("#password")){
 		var pw = /^\w{6,16}$/;
 		if(!(pw.test($("#password").val()))){
@@ -171,18 +201,18 @@ $("input").blur(function(){
 	}else{
 		$(".spa3").text("");
 	}
-	if($(this).is("#repassword")){
-		var rpw = $("#repassword").val();
-		if(!(rpw==($("#password").val()))){
-			$(".spa4").text("两次输入的密码不一致");
-			return false;
-		}else if(rpw){
-			$(".spa4").text("");
-			return true;
-		}
-	}else{
-		$(".spa4").text("");
-	}
+//	if($(this).is("#repassword")){
+//		var rpw = $("#repassword").val();
+//		if(!(rpw==($("#password").val()))){
+//			$(".spa4").text("两次输入的密码不一致");
+//			return false;
+//		}else if(rpw){
+//			$(".spa4").text("");
+//			return true;
+//		}
+//	}else{
+//		$(".spa4").text("");
+//	}
 })
 
 $("input").focus(function(){
@@ -239,6 +269,8 @@ $("#register").click(function(){
 			success:function(data){
 				if(data=="1"){
 					$(".spa1").text('该邮箱已被注册');
+				}else if(data=="2"){
+					$(".spa1").text('该邮箱还未验证');
 				}else{
 					document.getElementById("modal_bg").style.display="block";
 					document.getElementById("myModal").style.visibility = "visible";
