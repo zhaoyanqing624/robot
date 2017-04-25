@@ -81,4 +81,14 @@ public class QuestionHelper {
 		session.close();
 		return ClassifyId;
 	}
+	/*
+	 * zpz_
+	 */
+	public static List<QuestionPersistence> getFaq(){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.getFaq();
+		session.close();
+		return list;
+	}
 }

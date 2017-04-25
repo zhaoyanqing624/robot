@@ -1,5 +1,7 @@
 package org.xjtusicd3.database.helper;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.ConfigurePersistenceMapper;
@@ -33,4 +35,15 @@ public class ConfigureHelper {
 		mapper.save(configurePersistence);
 		session.close();
 	}
+	/*
+	 * 获取所有的设备信息
+	 */
+	public static List<ConfigurePersistence> getAllConfig() throws Exception{
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ConfigurePersistenceMapper mapper = session.getMapper(ConfigurePersistenceMapper.class);
+		List<ConfigurePersistence> cPersistences = mapper.getAllConfig();
+		session.close();
+		return cPersistences;
+	}
+	
 }

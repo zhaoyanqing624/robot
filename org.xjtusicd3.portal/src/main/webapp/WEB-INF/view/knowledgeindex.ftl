@@ -1695,117 +1695,8 @@
 
         $.jgrid.defaults.styleUI = 'Bootstrap';
         // Examle data for jqGrid
-        var mydata = [
-            {
-                id: "1",
-                type:"操作系统",
-                tag: "系统卡，系统慢，一顿一顿",
-                date: "2016-09-24",
 
-                provider: "管理员",
-                detail: "点击"
-            },
-            {
-                id: "2",
-                type:"外接设备",
-                tag: "鼠标点击无效，鼠标没反应",
-                date: "2017-01-12",
-
-                provider: "张三",
-                detail: "点击"
-            },
-
-            {
-                id: "3",
-                type:"操作系统",
-                tag: "系统卡，系统慢，一顿一顿",
-                date: "2016-09-24",
-
-                provider: "管理员",
-                detail: "点击"
-            },
-            {
-                id: "4",
-                type:"外接设备",
-                tag: "鼠标点击无效，鼠标没反应",
-                date: "2017-01-12",
-
-                provider: "张三",
-                detail: "点击"
-            },
-            {
-                id: "5",
-                type:"操作系统",
-                tag: "系统卡，系统慢，一顿一顿",
-                date: "2016-09-24",
-
-                provider: "管理员",
-                detail: "点击"
-            },
-            {
-                id: "6",
-                type:"外接设备",
-                tag: "鼠标点击无效，鼠标没反应",
-                date: "2017-01-12",
-
-                provider: "张三",
-                detail: "点击"
-            },
-            {
-                id: "7",
-                type:"操作系统",
-                tag: "系统卡，系统慢，一顿一顿",
-                date: "2016-09-24",
-
-                provider: "管理员",
-                detail: "点击"
-            },
-            {
-                id: "8",
-                type:"外接设备",
-                tag: "鼠标点击无效，鼠标没反应",
-                date: "2017-01-12",
-
-                provider: "张三",
-                detail: "点击"
-            },
-            {
-                id: "9",
-                type:"操作系统",
-                tag: "系统卡，系统慢，一顿一顿",
-                date: "2016-09-24",
-
-                provider: "管理员",
-                detail: "点击"
-            },
-            {
-                id: "10",
-                type:"外接设备",
-                tag: "鼠标点击无效，鼠标没反应",
-                date: "2017-01-12",
-
-                provider: "张三",
-                detail: "点击"
-            },
-            {
-                id: "11",
-                type:"操作系统",
-                tag: "系统卡，系统慢，一顿一顿",
-                date: "2016-09-24",
-
-                provider: "管理员",
-                detail: "点击"
-            },
-            {
-                id: "12",
-                type:"外接设备",
-                tag: "鼠标点击无效，鼠标没反应",
-                date: "2017-01-12",
-
-                provider: "张三",
-                detail: "点击"
-            },
-        ];
+        var mydata = [${result}];
 
         // Configuration for jqGrid Example 2
         $("#table_list_2").jqGrid({
@@ -1816,7 +1707,7 @@
             shrinkToFit: true,
             rowNum: 20,
             rowList: [10, 20, 30],
-            colNames: ['FAQ编号', '问题类型', '问题标签','录入时间', '提供者','查看详情'],
+            colNames: ['FAQ编号', '问题类型', '问题标签'],
             colModel: [
                 {
                     name: 'id',
@@ -1830,40 +1721,16 @@
                 },
 
                 {
-                    name: 'type',
-                    index: 'type',
+                    name: 'faqTitle',
+                    index: 'faqTitle',
                     editable: true,
                     width:85
                 },
                 {
-                    name: 'tag',
-                    index: 'tag',
+                    name: 'classifyName',
+                    index: 'classifyName',
                     editable: true,
                     width: 120
-                },
-
-                {
-                    name: 'date',
-                    index: 'date',
-                    editable: true,
-                    width: 90,
-                    sorttype: "date",
-                    formatter: "date"
-                },
-
-
-                {
-                    name: 'provider',
-                    index: 'provider',
-                    editable: true,
-                    width: 50
-                },
-                {
-                    name: 'detail',
-                    index: 'detail',
-                    editable: true,
-                    width: 100,
-                    sortable: false
                 }
             ],
             pager: "#pager_list_2",

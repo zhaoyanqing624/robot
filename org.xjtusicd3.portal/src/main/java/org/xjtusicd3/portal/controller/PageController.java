@@ -14,6 +14,11 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("incidentindex");
  	   return mv;
     }
+	@RequestMapping(value="problemdetail",method=RequestMethod.GET)
+    public ModelAndView  problemdetail(){
+ 	   ModelAndView mv=new ModelAndView("problemdetail");
+ 	   return mv;
+    }
 	@RequestMapping(value="problemindex",method=RequestMethod.GET)
     public ModelAndView  problem(){
  	   ModelAndView mv=new ModelAndView("problemindex");
@@ -84,11 +89,7 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("elementindex");
  	   return mv;
     }
-	@RequestMapping(value="knowledgeindex",method=RequestMethod.GET)
-    public ModelAndView  knowledge(){
- 	   ModelAndView mv=new ModelAndView("knowledgeindex");
- 	   return mv;
-    }
+
 	 @RequestMapping(value="login",method=RequestMethod.GET)
      public ModelAndView  login(){
   	   ModelAndView mv=new ModelAndView("login");

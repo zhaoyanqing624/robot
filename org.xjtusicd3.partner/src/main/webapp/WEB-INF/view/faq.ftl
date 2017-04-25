@@ -14,7 +14,7 @@
     <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
     <script type="text/javascript" src="js/my.js"></script>
 </head>
-<body>
+<body>0
 	<div class="header" id="head">      
         <div class="loginRegistHead" role="banner">
             <div class="content clearfix">

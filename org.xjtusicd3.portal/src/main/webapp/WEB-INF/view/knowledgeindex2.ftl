@@ -27,13 +27,11 @@
         <div class="col-sm-6"style="width:100%;height: 100%">
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">问题首页</a>
+                    <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">知识库首页</a>
                     </li>
-                    <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">问题中心</a>
+                    <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">知识库管理</a>
                     </li>
-                    <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">问题查询</a>
-                    </li>
-                    <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">问题设置</a>
+                    <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">知识库设置</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -278,11 +276,12 @@
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-                            <title>问题中心</title>
+                            <title>知识库管理</title>
                             <meta name="keywords" content="">
                             <meta name="description" content="">
 
-                            <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+                            <link rel="shortcut icon" href="favicon.ico">
+                            <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
                             <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
                             <link href="css/animate.css" rel="stylesheet">
                             <link href="css/style.css?v=4.1.0" rel="stylesheet">
@@ -296,9 +295,9 @@
                                 <div class="col-sm-6"  style="width: 100%">
                                     <div class="tabs-container">
                                         <ul class="nav nav-tabs">
-                                            <li class="active"><a data-toggle="tab" href="#tab-31" aria-expanded="true">待处理问题</a>
+                                            <li class="active"><a data-toggle="tab" href="#tab-31" aria-expanded="true">FAQ</a>
                                             </li>
-                                            <li class=""><a data-toggle="tab" href="#tab-32" aria-expanded="false">已处理问题</a>
+                                            <li class=""><a data-toggle="tab" href="#tab-32" aria-expanded="false">待审核FAQ</a>
                                             </li>
 
                                         </ul>
@@ -364,6 +363,9 @@
 
                     </div>
 
+
+
+
                     <div id="tab-3" class="tab-pane">
                         <!DOCTYPE html>
                         <html>
@@ -374,73 +376,7 @@
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-                            <title>事件查询</title>
-                            <meta name="keywords" content="">
-                            <meta name="description" content="">
-
-                            <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-                            <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
-                            <!-- jqgrid-->
-                            <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
-
-                            <link href="css/animate.css" rel="stylesheet">
-                            <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
-                            <style>
-                                /* Additional style to fix warning dialog position */
-
-                                #alertmod_table_list_2 {
-                                    top: 900px !important;
-                                }
-                            </style>
-
-                        </head>
-
-                        <body class="gray-bg">
-                        <div class="wrapper wrapper-content  animated fadeInRight">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="ibox ">
-                                        <div class="ibox-title">
-                                            <h5>问题查询</h5>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div class="input-group">
-                                                <input type="text" placeholder="请输入搜索内容" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-
-                                            </div>
-                                            <div class="jqGrid_wrapper">
-                                                <table id="table_list_4"></table>
-                                                <div id="pager_list_4"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        </body>
-
-                        </html>
-
-
-                    </div>
-
-                    <div id="tab-4" class="tab-pane">
-                        <!DOCTYPE html>
-                        <html>
-
-                        <head>
-
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-                            <title>问题设置</title>
+                            <title>知识库设置</title>
                             <meta name="keywords" content="">
                             <meta name="description" content="">
 
@@ -460,7 +396,7 @@
                                         <ul class="nav nav-tabs">
                                             <li class="active"><a data-toggle="tab" href="#tab-41" aria-expanded="true">问题分类</a>
                                             </li>
-                                            <li class=""><a data-toggle="tab" href="#tab-42" aria-expanded="false">字段说明</a>
+                                            <li class=""><a data-toggle="tab" href="#tab-43" aria-expanded="false">字段说明</a>
                                             </li>
 
                                         </ul>
@@ -501,27 +437,27 @@
                                                                         </thead>
                                                                         <tbody>
                                                                         <tr>
-                                                                            <td>网络相关</td>
+                                                                            <td>操作系统</td>
                                                                             <td>
-                                                                                <button>交换机</button>
-                                                                                <button>其他网络设备</button>
-                                                                                <button>1光纤</button>
+                                                                                <button>磁盘分区</button>
+                                                                                <button>蓝屏死机</button>
+                                                                                <button>系统安装与升级</button>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>安全相关</td>
+                                                                            <td>随机软件</td>
                                                                             <td>
-                                                                                <button>监视器</button>
-                                                                                <button>摄像机</button>
-                                                                                <button>其他仪器</button>
+                                                                                <button>联想云盘</button>
+                                                                                <button>人像识别</button>
+                                                                                <button>office软件</button>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>办公设备</td>
+                                                                            <td>设备应用</td>
                                                                             <td>
-                                                                                <button>笔记本</button>
-                                                                                <button>台式机</button>
-                                                                                <button>打印机</button>
+                                                                                <button>键盘</button>
+                                                                                <button>硬盘</button>
+                                                                                <button>读卡器</button>
                                                                             </td>
                                                                         </tr>
                                                                         </tbody>
@@ -534,7 +470,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="tab-42" class="tab-pane">
+
+                                            <div id="tab-43" class="tab-pane">
                                                 <div class="panel-body">
                                                     <div class="row">
 
@@ -565,7 +502,7 @@
                                                                     <table class="table table-striped" width="100%">
                                                                         <thead>
                                                                         <tr>
-                                                                            <td><h5>发起时间</h5><small>事件或者请求提交的事件</small></td>
+                                                                            <td><h5>报告时间</h5><small>事件或者请求提交的事件</small></td>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -1761,107 +1698,113 @@
         var mydata = [
             {
                 id: "1",
-                description:"电脑无缘无故黑屏，蓝屏也有",
-                Qname: "张三",
-                invdate: "2016-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
+                type:"操作系统",
+                tag: "系统卡，系统慢，一顿一顿",
+                date: "2016-09-24",
 
-                status: "未解决"
+                provider: "管理员",
+                detail: "点击"
             },
             {
                 id: "2",
-                description:"键盘输入不对，键有问题",
-                Qname: "李四",
-                invdate: "2017-02-29",
-                priority:"中",
-                sort: "硬件方面，外设性能",
+                type:"外接设备",
+                tag: "鼠标点击无效，鼠标没反应",
+                date: "2017-01-12",
 
-                status: "未解决"
+                provider: "张三",
+                detail: "点击"
             },
 
             {
                 id: "3",
-                description:"电脑无缘无故黑屏，蓝屏也有",
-                Qname: "张三",
-                invdate: "2016-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
+                type:"操作系统",
+                tag: "系统卡，系统慢，一顿一顿",
+                date: "2016-09-24",
 
-                status: "未解决"
+                provider: "管理员",
+                detail: "点击"
             },
             {
                 id: "4",
-                description:"键盘输入不对，键有问题",
-                Qname: "李四",
-                invdate: "2017-02-29",
-                priority:"中",
-                sort: "硬件方面，外设性能",
+                type:"外接设备",
+                tag: "鼠标点击无效，鼠标没反应",
+                date: "2017-01-12",
 
-                status: "未解决"
+                provider: "张三",
+                detail: "点击"
             },
             {
                 id: "5",
-                description:"电脑无缘无故黑屏，蓝屏也有",
-                Qname: "张三",
-                invdate: "2016-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
+                type:"操作系统",
+                tag: "系统卡，系统慢，一顿一顿",
+                date: "2016-09-24",
 
-                status: "未解决"
+                provider: "管理员",
+                detail: "点击"
             },
             {
                 id: "6",
-                description:"键盘输入不对，键有问题",
-                Qname: "李四",
-                invdate: "2017-02-29",
-                priority:"中",
-                sort: "硬件方面，外设性能",
+                type:"外接设备",
+                tag: "鼠标点击无效，鼠标没反应",
+                date: "2017-01-12",
 
-                status: "未解决"
+                provider: "张三",
+                detail: "点击"
             },
             {
                 id: "7",
-                description:"电脑无缘无故黑屏，蓝屏也有",
-                Qname: "张三",
-                invdate: "2016-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
+                type:"操作系统",
+                tag: "系统卡，系统慢，一顿一顿",
+                date: "2016-09-24",
 
-                status: "未解决"
+                provider: "管理员",
+                detail: "点击"
             },
             {
                 id: "8",
-                description:"键盘输入不对，键有问题",
-                Qname: "李四",
-                invdate: "2017-02-29",
-                priority:"中",
-                sort: "硬件方面，外设性能",
+                type:"外接设备",
+                tag: "鼠标点击无效，鼠标没反应",
+                date: "2017-01-12",
 
-                status: "未解决"
+                provider: "张三",
+                detail: "点击"
             },
             {
                 id: "9",
-                description:"电脑无缘无故黑屏，蓝屏也有",
-                Qname: "张三",
-                invdate: "2016-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
+                type:"操作系统",
+                tag: "系统卡，系统慢，一顿一顿",
+                date: "2016-09-24",
 
-                status: "未解决"
+                provider: "管理员",
+                detail: "点击"
             },
             {
                 id: "10",
-                description:"键盘输入不对，键有问题",
-                Qname: "李四",
-                invdate: "2017-02-29",
-                priority:"中",
-                sort: "硬件方面，外设性能",
+                type:"外接设备",
+                tag: "鼠标点击无效，鼠标没反应",
+                date: "2017-01-12",
 
-                status: "未解决"
+                provider: "张三",
+                detail: "点击"
             },
+            {
+                id: "11",
+                type:"操作系统",
+                tag: "系统卡，系统慢，一顿一顿",
+                date: "2016-09-24",
 
+                provider: "管理员",
+                detail: "点击"
+            },
+            {
+                id: "12",
+                type:"外接设备",
+                tag: "鼠标点击无效，鼠标没反应",
+                date: "2017-01-12",
 
+                provider: "张三",
+                detail: "点击"
+            },
         ];
 
         // Configuration for jqGrid Example 2
@@ -1873,7 +1816,7 @@
             shrinkToFit: true,
             rowNum: 20,
             rowList: [10, 20, 30],
-            colNames: ['问题编号', '问题描述', '发起人','发起时间', '优先级', '问题分类' ,'当前状态'],
+            colNames: ['FAQ编号', '问题类型', '问题标签','录入时间', '提供者','查看详情'],
             colModel: [
                 {
                     name: 'id',
@@ -1883,48 +1826,41 @@
                     sorttype: "int",
                     search: true,
                     formatter:'showlink',
-                    formatoptions:{baseLinkUrl:"problemdetail.html"}
+                    formatoptions:{baseLinkUrl:"KnowledgeDetail.html"}
                 },
 
                 {
-                    name: 'description',
-                    index: 'description',
+                    name: 'type',
+                    index: 'type',
                     editable: true,
-                    width: 120,
+                    width:85
                 },
                 {
-                    name: 'Qname',
-                    index: 'Qname',
+                    name: 'tag',
+                    index: 'tag',
                     editable: true,
-                    width: 50
+                    width: 120
                 },
 
                 {
-                    name: 'invdate',
-                    index: 'invdate',
+                    name: 'date',
+                    index: 'date',
                     editable: true,
                     width: 90,
                     sorttype: "date",
                     formatter: "date"
                 },
 
-                {
-                    name: 'priority',
-                    index: 'priority',
-                    editable: true,
-                    width: 30,
-                    align: "center",
-                },
-                {
-                    name: 'sort',
-                    index: 'sort',
-                    editable: true,
-                    width: 110,
-                },
 
                 {
-                    name: 'status',
-                    index: 'status',
+                    name: 'provider',
+                    index: 'provider',
+                    editable: true,
+                    width: 50
+                },
+                {
+                    name: 'detail',
+                    index: 'detail',
                     editable: true,
                     width: 100,
                     sortable: false
@@ -1932,7 +1868,7 @@
             ],
             pager: "#pager_list_2",
             viewrecords: true,
-            caption: "待处理问题",
+            caption: "FAQ",
             add: true,
             edit: true,
             addtext: 'Add',
@@ -1971,126 +1907,116 @@
         var mydata = [
             {
                 id: "1",
-                description:"打开word文档总是闪关",
-                Qname: "张三",
-                invdate: "2017-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
+                type:"电脑设置",
+                description: "电脑如何设置定时关机",
+                date: "2017-03-24",
+                provider: "张三",
+                detail: "点击查看"
             },
             {
                 id: "2",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "张三",
-                status: "已解决"
+                type:"网络问题",
+                description: "无线上网设置总是不成功",
+                date: "2016-01-24",
+                provider: "李四",
+                detail: "点击查看"
             },
             {
                 id: "3",
-                description:"打开word文档总是闪关",
-                Qname: "张三",
-                invdate: "2017-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
+                type:"电脑设置",
+                description: "电脑如何设置定时关机",
+                date: "2017-03-24",
+                provider: "张三",
+                detail: "点击查看"
             },
             {
                 id: "4",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "张三",
-                status: "已解决"
+                type:"网络问题",
+                description: "无线上网设置总是不成功",
+                date: "2016-01-24",
+                provider: "李四",
+                detail: "点击查看"
             },
             {
                 id: "5",
-                description:"打开word文档总是闪关",
-                Qname: "张三",
-                invdate: "2017-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
+                type:"电脑设置",
+                description: "电脑如何设置定时关机",
+                date: "2017-03-24",
+                provider: "张三",
+                detail: "点击查看"
             },
             {
                 id: "6",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "张三",
-                status: "已解决"
+                type:"网络问题",
+                description: "无线上网设置总是不成功",
+                date: "2016-01-24",
+                provider: "李四",
+                detail: "点击查看"
             },
             {
                 id: "7",
-                description:"打开word文档总是闪关",
-                Qname: "张三",
-                invdate: "2017-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
+                type:"电脑设置",
+                description: "电脑如何设置定时关机",
+                date: "2017-03-24",
+                provider: "张三",
+                detail: "点击查看"
             },
             {
                 id: "8",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "张三",
-                status: "已解决"
+                type:"网络问题",
+                description: "无线上网设置总是不成功",
+                date: "2016-01-24",
+                provider: "李四",
+                detail: "点击查看"
             },
             {
                 id: "9",
-                description:"打开word文档总是闪关",
-                Qname: "张三",
-                invdate: "2017-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
+                type:"电脑设置",
+                description: "电脑如何设置定时关机",
+                date: "2017-03-24",
+                provider: "张三",
+                detail: "点击查看"
             },
             {
                 id: "10",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "张三",
-                status: "已解决"
+                type:"网络问题",
+                description: "无线上网设置总是不成功",
+                date: "2016-01-24",
+                provider: "李四",
+                detail: "点击查看"
             },
             {
                 id: "11",
-                description:"打开word文档总是闪关",
-                Qname: "张三",
-                invdate: "2017-03-04",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
+                type:"电脑设置",
+                description: "电脑如何设置定时关机",
+                date: "2017-03-24",
+                provider: "张三",
+                detail: "点击查看"
             },
             {
                 id: "12",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "张三",
-                status: "已解决"
+                type:"网络问题",
+                description: "无线上网设置总是不成功",
+                date: "2016-01-24",
+                provider: "李四",
+                detail: "点击查看"
             },
-
-
+            {
+                id: "13",
+                type:"电脑设置",
+                description: "电脑如何设置定时关机",
+                date: "2017-03-24",
+                provider: "张三",
+                detail: "点击查看"
+            },
+            {
+                id: "14",
+                type:"网络问题",
+                description: "无线上网设置总是不成功",
+                date: "2016-01-24",
+                provider: "李四",
+                detail: "点击查看"
+            },
 
         ];
 
@@ -2103,7 +2029,7 @@
             shrinkToFit: true,
             rowNum: 20,
             rowList: [10, 20, 30],
-            colNames: ['问题编号', '问题描述', '发起人','发起时间', '优先级', '问题分类', '解决人','当前状态'],
+            colNames: ['编号', '问题类型', '问题描述','推送时间', '提供者','查看详情'],
             colModel: [
                 {
                     name: 'id',
@@ -2111,25 +2037,27 @@
                     editable: true,
                     width: 40,
                     sorttype: "int",
-                    search: true
+                    search: true,
+                    formatter:'showlink',
+                    formatoptions:{baseLinkUrl:"KnowledgeDetail.html"}
                 },
 
                 {
-                    name: 'description',
-                    index: 'description',
+                    name: 'type',
+                    index: 'type',
                     editable: true,
                     width: 120,
                 },
                 {
-                    name: 'Qname',
-                    index: 'Qname',
+                    name: 'description',
+                    index: 'description',
                     editable: true,
-                    width: 50
+                    width: 85
                 },
 
                 {
-                    name: 'invdate',
-                    index: 'invdate',
+                    name: 'date',
+                    index: 'date',
                     editable: true,
                     width: 90,
                     sorttype: "date",
@@ -2137,28 +2065,14 @@
                 },
 
                 {
-                    name: 'priority',
-                    index: 'priority',
-                    editable: true,
-                    width: 30,
-                    align: "center",
-                },
-                {
-                    name: 'sort',
-                    index: 'sort',
-                    editable: true,
-                    width: 110,
-                },
-
-                {
-                    name: 'Aname',
-                    index: 'Aname',
+                    name: 'provider',
+                    index: 'provider',
                     editable: true,
                     width: 50
                 },
                 {
-                    name: 'status',
-                    index: 'status',
+                    name: 'detail',
+                    index: 'detail',
                     editable: true,
                     width: 100,
                     sortable: false
@@ -2166,7 +2080,7 @@
             ],
             pager: "#pager_list_3",
             viewrecords: true,
-            caption: "已处理问题",
+            caption: "待审核FAQ",
             add: true,
             edit: true,
             addtext: 'Add',
@@ -2197,219 +2111,7 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function () {
 
-        $.jgrid.defaults.styleUI = 'Bootstrap';
-        // Examle data for jqGrid
-        var mydata = [
-            {
-                id: "1",
-                description:"电脑很多软件打不开",
-                Qname: "张三",
-                invdate: "2010-01-24",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
-            },
-            {
-                id: "2",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "",
-                status: "未解决"
-            },
-            {
-                id: "3",
-                description:"电脑很多软件打不开",
-                Qname: "张三",
-                invdate: "2010-01-24",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
-            },
-            {
-                id: "4",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "",
-                status: "未解决"
-            },
-            {
-                id: "5",
-                description:"电脑很多软件打不开",
-                Qname: "张三",
-                invdate: "2010-01-24",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
-            },
-            {
-                id: "6",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "",
-                status: "未解决"
-            },
-            {
-                id: "7",
-                description:"电脑很多软件打不开",
-                Qname: "张三",
-                invdate: "2010-01-24",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
-            },
-            {
-                id: "8",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "",
-                status: "未解决"
-            },
-            {
-                id: "9",
-                description:"电脑很多软件打不开",
-                Qname: "张三",
-                invdate: "2010-01-24",
-                priority:"中",
-                sort: "操作系统，电脑性能",
-                Aname: "李四",
-                status: "已解决"
-            },
-            {
-                id: "10",
-                description:"电脑无故发烫",
-                Qname: "李四",
-                invdate: "2017-02-24",
-                priority:"中",
-                sort: "硬件方面，主板散热",
-                Aname: "",
-                status: "未解决"
-            },
-
-
-        ];
-
-        // Configuration for jqGrid Example 2
-        $("#table_list_4").jqGrid({
-            data: mydata,
-            datatype: "local",
-            height: 450,
-            autowidth: true,
-            shrinkToFit: true,
-            rowNum: 20,
-            rowList: [10, 20, 30],
-            colNames: ['问题编号', '问题描述', '发起人','发起时间', '优先级', '问题分类', '解决人','当前状态'],
-            colModel: [
-                {
-                    name: 'id',
-                    index: 'id',
-                    editable: true,
-                    width: 40,
-                    sorttype: "int",
-                    search: true
-                },
-
-                {
-                    name: 'description',
-                    index: 'description',
-                    editable: true,
-                    width: 120,
-                },
-                {
-                    name: 'Qname',
-                    index: 'Qname',
-                    editable: true,
-                    width: 50
-                },
-
-                {
-                    name: 'invdate',
-                    index: 'invdate',
-                    editable: true,
-                    width: 90,
-                    sorttype: "date",
-                    formatter: "date"
-                },
-
-                {
-                    name: 'priority',
-                    index: 'priority',
-                    editable: true,
-                    width: 30,
-                    align: "center",
-                },
-                {
-                    name: 'sort',
-                    index: 'sort',
-                    editable: true,
-                    width: 110,
-                },
-
-                {
-                    name: 'Aname',
-                    index: 'Aname',
-                    editable: true,
-                    width: 50
-                },
-                {
-                    name: 'status',
-                    index: 'status',
-                    editable: true,
-                    width: 100,
-                    sortable: false
-                }
-            ],
-            pager: "#pager_list_4",
-            viewrecords: true,
-            caption: "所有问题",
-            add: true,
-            edit: true,
-            addtext: 'Add',
-            edittext: 'Edit',
-            hidegrid: false
-        });
-
-        // Add selection
-        $("#table_list_4").setSelection(4, true);
-
-
-        // Setup buttons
-        $("#table_list_4").jqGrid('navGrid', '#pager_list_4', {
-            edit: true,
-            add: true,
-            del: true,
-            search: true
-        }, {
-            height: 200,
-            reloadAfterSubmit: true
-        });
-
-        // Add responsive to jqGrid
-        $(window).bind('resize', function () {
-            var width = $('.jqGrid_wrapper').width();
-            $('#table_list_1').setGridWidth(width);
-            $('#table_list_4').setGridWidth(width);
-        });
-    });
-</script>
 
 
 </body>

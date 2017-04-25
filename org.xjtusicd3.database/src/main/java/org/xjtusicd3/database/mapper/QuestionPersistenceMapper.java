@@ -35,4 +35,9 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT ClassifyId FROM Question WHERE QuestionId=#{0}")
 	public String faq3_faqclassifyId(String QuestionId);
+	/*
+	 * zpz_
+	 */
+	@Select("SELECT * FROM Question LIMIT 5")
+	public List<QuestionPersistence> getFaq();
 }
