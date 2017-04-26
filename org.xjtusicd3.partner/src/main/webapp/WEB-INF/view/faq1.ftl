@@ -27,10 +27,11 @@
 		            </ul> 
                 </div>
                 <div class="header_top_wrap_right">
-		              <ul>
+		             <ul>
+		              <#if UserEmail??>
 		                <div class="unlogin">
 		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：zhao</li>
+		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
 		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
@@ -42,9 +43,17 @@
 		                            </ul>
 		                        </div>
 		                    </li>
-		                    <li class="left_margin loginLinkLi"><a id="headExit">退出</a>
+		                    <li class="left_margin loginLinkLi"><a href="loginout.html" id="headExit">退出</a>
 		                    </li>
 		                </div>
+		             <#else>
+				       	<div class="unlogin">
+		                    <li class="unloginLinkLi">
+		                        <a href="login.html" id="headLogin" class="listen_btn" data-pos="categorys_1_2">登录/注册</a>
+		                        </li>
+		                    </li>
+		                </div>
+		             </#if>
 		            </ul> 
                 </div>
             </div>

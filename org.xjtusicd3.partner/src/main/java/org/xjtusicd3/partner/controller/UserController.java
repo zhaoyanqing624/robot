@@ -89,24 +89,47 @@ public class UserController {
 	 * login_登录
 	 */
 	@RequestMapping(value="/saveLogin",method=RequestMethod.POST)
-	public String loginlist(UserView userView,HttpSession session){
-		String email = userView.getUserEmail();
-		String password = userView.getUserPassword();
-		List<UserPersistence> list = UserHelper.getEmail2(email, password);
-		if (list.size()==0) {
+	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request){
+		String urlPath = (String) session.getAttribute("urlPath");
+		if(urlPath==null){
 			return "redirect:login.html";
 		}else {
-			session.setAttribute("UserEmail", email);
-			return "redirect:robot.html";
+			String email = userView.getUserEmail();
+			String password = userView.getUserPassword();
+			List<UserPersistence> list = UserHelper.getEmail2(email, password);
+			if (list.size()==0) {
+				return "redirect:login.html";
+			}else {
+				session.setAttribute("UserEmail", email);
+				return "redirect:"+urlPath+"";
+			}
 		}
+		
 	}
 	/*
 	 * 用户退出
 	 */
 	@RequestMapping(value="/loginout",method=RequestMethod.GET)
-	public String loginout(UserView userView,HttpSession session){
+	public String loginout(HttpSession session,HttpServletRequest request){
 		ModelAndView modelAndView = null;
+		String urlPath = (String) session.getAttribute("urlPath");
 		session.invalidate();
-		return "redirect:/robot.html";
+		return "redirect:"+urlPath+"";
+	}
+	/*
+	 * personal_个人信息
+	 */
+	@RequestMapping(value="personal",method=RequestMethod.GET)
+	public ModelAndView personal(HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return new ModelAndView("login");
+		}else {
+			ModelAndView mv = new ModelAndView("personal");
+			List<UserPersistence> list = UserHelper.getEmail(useremail);
+			mv.addObject("personal_list", list);
+			return mv;
+		}
+		
 	}
 }
