@@ -6,14 +6,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.eclipse.jetty.server.Authentication.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.UserService;
+import org.xjtusicd3.partner.view.UserView;
 
 @Controller
 public class UserController {
@@ -27,20 +31,105 @@ public class UserController {
 		String password = request.getParameter("password");
 		//判断邮箱是否被注册
 		List<UserPersistence> list = UserHelper.getEmail(email);
-		if (list==null) {
+		if (list.size()==0) {
 			UserService.login_register(email, password);
 			return "0";
 		}else {
-			return "1";
+			if (UserHelper.getEmail2(email, password).size()==0) {
+				if (UserService.validateUserState(email)==false) {
+					if (UserService.validateEmail(email)==true) {
+						return "1";
+					}else {
+						UserHelper.deleteUser(email);
+						UserService.login_register(email, password);
+						return "0";
+					}
+				}else {
+					return "1";
+				}
+			}else {
+				if (UserService.validateUserState(email)==false) {
+					if (UserService.validateEmail(email)==true) {
+						return "2";
+					}else {
+						UserHelper.deleteUser(email);
+						UserService.login_register(email, password);
+						return "0";
+					}
+				}else {
+					return "1";
+				}
+			}
 		}
 	}
 	/*
 	 * 邮箱跳转验证码是否超时
 	 */
-	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String validateEmail(String e,String p){
-		
-		return p;
+	@RequestMapping(value="/valiadateEmail",method=RequestMethod.GET)
+	public String validateEmail(HttpSession session,String e,String p){
+		List<UserPersistence> list = UserHelper.getEmail3(e, p);
+		if (list.size()==0) {
+			return "redirect:404.html";
+		}else {
+			if (UserService.validateUserState(e)==true) {
+				session.setAttribute("UserEmail", e);
+				return "redirect:robot.html";
+			}else {
+				if (UserService.validateEmail(e)==true) {
+					UserHelper.updateUserState(e);
+					session.setAttribute("UserEmail", e);
+					return "redirect:robot.html";
+				}else {
+					return "redirect:404.html";
+				}
+			}
+		}
 	}
-
+	/*
+	 * login_登录
+	 */
+	@RequestMapping(value="/saveLogin",method=RequestMethod.POST)
+	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request){
+		String urlPath = (String) session.getAttribute("urlPath");
+		if(urlPath==null){
+			return "redirect:login.html";
+		}else {
+			String email = userView.getUserEmail();
+			String password = userView.getUserPassword();
+			List<UserPersistence> list = UserHelper.getEmail2(email, password);
+			if (list.size()==0) {
+				return "redirect:login.html";
+			}else {
+				session.setAttribute("UserEmail", email);
+				return "redirect:"+urlPath+"";
+			}
+		}
+		
+	}
+	/*
+	 * 用户退出
+	 */
+	@RequestMapping(value="/loginout",method=RequestMethod.GET)
+	public String loginout(HttpSession session,HttpServletRequest request){
+		ModelAndView modelAndView = null;
+		String urlPath = (String) session.getAttribute("urlPath");
+		session.invalidate();
+		return "redirect:"+urlPath+"";
+	}
+	/*
+	 * personal_个人信息
+	 */
+	@RequestMapping(value="personal",method=RequestMethod.GET)
+	public ModelAndView personal(HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return new ModelAndView("login");
+		}else {
+			ModelAndView mv = new ModelAndView("personal");
+			List<UserPersistence> list = UserHelper.getEmail(useremail);
+			mv.addObject("personal_list", list);
+			return mv;
+		}
+		
+	}
 }

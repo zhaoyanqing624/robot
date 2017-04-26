@@ -5,6 +5,7 @@ package org.xjtusicd3.partner.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -24,10 +25,14 @@ public class ClassifyController {
 	 * robot_分类
 	 */
 	@RequestMapping(value="robot",method=RequestMethod.GET)
-	public ModelAndView classifyName(HttpSession session,String e,String r){
+	public ModelAndView classifyName(HttpSession session,HttpServletRequest request,String e,String r){
+		Object object = session.getAttribute("UserEmail");
+		String userEmail = (String) object;
 		ModelAndView modelAndView = new ModelAndView("robot");
 		String string = ClassifyService.classify();
 		modelAndView.addObject("string",string);
+		String urlPath = request.getServletPath();
+		session.setAttribute("urlPath", urlPath);
 		return modelAndView;
 	}
 	/*

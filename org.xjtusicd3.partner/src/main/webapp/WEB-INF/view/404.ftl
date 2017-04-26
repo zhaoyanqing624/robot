@@ -36,7 +36,7 @@
                             </div>
                             <h2>页面找不到了</h2>
                             <p>小朵对此深表遗憾。</p>
-                            <a href="index.html" class="btn btn-error">返回首页</a>
+                            <a href="robot.html" class="btn btn-error">返回首页</a>
                         </div>
                     </div>
                 </div>

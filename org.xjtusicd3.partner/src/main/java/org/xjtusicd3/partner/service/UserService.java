@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.filter.IdentificationNumber;
 import org.xjtusicd3.partner.filter.ValidateEmail;
 
 public class UserService {
@@ -20,8 +21,10 @@ public class UserService {
 		String identification_number =genCodes(8, 1).get(0);
     	Date date=new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMddHHmmss");
         String time_stamp = format.format(date);
-		String username = "会员"+ time_stamp + genCodes(6, 1).get(0); 
+        String time = format2.format(date);
+		String username = "会员"+ time + genCodes(6, 1).get(0); 
 		//发送邮件验证信息
 		ValidateEmail validateEmail = new ValidateEmail();
 		try {
@@ -59,5 +62,30 @@ public class UserService {
         }
         return results;
         }
-
+    //校验邮箱验证码时间是否超时
+    public static boolean validateEmail(String email){
+    	boolean a = false;
+    	List<UserPersistence> uList = UserHelper.getEmail(email);
+    	String startTime = uList.get(0).getUserTimeStamp();
+    	Date date=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String endTime = format.format(date);
+        IdentificationNumber identificationNumber = new IdentificationNumber();
+        boolean b = identificationNumber.identificationNumber(startTime, endTime);
+        if (b==true) {
+			return b;
+		}else {
+			return false;
+		}
+    }
+    //校验用户是否已验证邮箱
+    public static boolean validateUserState(String email){
+    	boolean b = false;
+    	List<UserPersistence> uList = UserHelper.getEmail(email);
+    	if (uList.get(0).getUserState()==0) {
+			return b;
+		}else {
+			return true;
+		}
+    }
 }

@@ -21,7 +21,6 @@
 	<script src="zhao/upload/sitelogo/sitelogo.js"></script>
 	<script src="zhao/upload/bootstrap/js/bootstrap.min.js"></script>
 	<script src="zhao/password/js/register.js"></script>
-	<link type="text/css" rel="stylesheet" href="zhao/data/jedate/skin/jedate.css">
 	<style>
 		.datainp { width: 128px; height: 35px; border: 1px #A5D2EC solid; }
 		.datep { margin-bottom: 40px; line-height: 24px; margin-right: 15px; }
@@ -50,10 +49,11 @@
 		            </ul> 
                 </div>
                 <div class="header_top_wrap_right">
-		              <ul>
+		             <ul>
+		              <#if UserEmail??>
 		                <div class="unlogin">
 		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：zhao</li>
+		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
 		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
@@ -65,9 +65,17 @@
 		                            </ul>
 		                        </div>
 		                    </li>
-		                    <li class="left_margin loginLinkLi"><a id="headExit">退出</a>
+		                    <li class="left_margin loginLinkLi"><a href="loginout.html" id="headExit">退出</a>
 		                    </li>
 		                </div>
+		             <#else>
+				       	<div class="unlogin">
+		                    <li class="unloginLinkLi">
+		                        <a href="login.html" id="headLogin" class="listen_btn" data-pos="categorys_1_2">登录/注册</a>
+		                        </li>
+		                    </li>
+		                </div>
+		             </#if>
 		            </ul> 
                 </div>
             </div>
@@ -96,11 +104,12 @@
                         </ul>
                         <div class="tab-content" style="margin-left: 165px;margin-top: 30px;width: 1000px;float: left;min-height:500px;">
                             <div class="tab-pane fade active in" id="tab2-item1" style="width: 889px;float: left;">
+                            <#list personal_list as userinfo>
                             	<div class="ibox-content" style="width:400px;float:left;">
 									<div class="row">
 										<div id="crop-avatar" class="col-md-6">
 											<div class="avatar-view" title="Change Logo Picture">
-			    								<img src="zhao/upload/logo.jpg" alt="Logo">
+			    								<img src="${userinfo.userImage}" alt="Logo">
 			    							</div>
 									    </div>
 									</div>
@@ -150,17 +159,14 @@
   										</div>
   									</div>
 								</div>
+								
 								<div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
 									<div class="col-sm-6" style="float:right;">
 					                    <div class="project-name overflow">
 										    <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>用户名：</span></div>
-					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="name" class="form-control"  required="required" placeholder="用户名"></div>
-					                            </div>
-					                            <div class="form-group" style="width: 370px;height: 36px;">
-					                            	<div style="float:left;margin-top:10px;width:56px;"><span>邮箱：</span></div>
-					                                <div style="float:right;width:314px;height:50px;"><input type="email" name="email" class="form-control" required="required" placeholder="邮箱地址"></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="name" class="form-control"  required="required" value="${userinfo.userName}"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>性别：</span></div>
@@ -208,6 +214,7 @@
 					                    </div>
 					                </div>
                         	</div>
+                        	</#list>
                             <div class="tab-pane fade" id="tab2-item2" style="width: 800px;float: left;">
                             	<div class="col-sm-6" style="margin-left: 180px;width:80%;">
 					                    <div class="project-name overflow">
@@ -279,11 +286,6 @@
         });
     </script>  
 	<script src="js/bootstrap.min.js"></script>
-	<script src="zhao/address/js/distpicker.data.js"></script>
-	<script src="zhao/address/js/distpicker.js"></script>
-	<script src="zhao/address/js/main.js"></script> 
-	<script type="text/javascript" src="zhao/data/jedate/jquery.jedate.js"></script>
-	<script type="text/javascript" src="zhao/data/jedate/data.js"></script>
 	<script type="text/javascript" src="js/my.js"></script> 
 </body>
 </html>

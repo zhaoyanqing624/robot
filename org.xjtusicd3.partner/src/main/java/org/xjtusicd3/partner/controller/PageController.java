@@ -45,12 +45,6 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("service");
 		return mv;
 	}
-	@RequestMapping(value="personal",method=RequestMethod.GET)
-	public ModelAndView personal(){
-		ModelAndView mv = new ModelAndView("personal");
-		return mv;
-	}
-
 	@RequestMapping(value="personal2",method=RequestMethod.GET)
 	public ModelAndView personal2(){
 		ModelAndView mv = new ModelAndView("personal2");
@@ -79,11 +73,6 @@ public class PageController {
 	@RequestMapping(value="question2",method=RequestMethod.GET)
 	public ModelAndView question2(){
 		ModelAndView mv = new ModelAndView("question2");
-		return mv;
-	}
-	@RequestMapping(value="faq",method=RequestMethod.GET)
-	public ModelAndView faq(){
-		ModelAndView mv = new ModelAndView("faq");
 		return mv;
 	}
 	@RequestMapping(value="faqadd",method=RequestMethod.GET)

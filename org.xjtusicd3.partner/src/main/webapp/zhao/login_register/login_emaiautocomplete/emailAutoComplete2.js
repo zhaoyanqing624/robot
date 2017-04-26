@@ -74,6 +74,7 @@ $(document).ready(function(){
  var newhtml = $(this).html();
  newhtml = newhtml.replace(/<.*?>/g,"");
  $("#me2").val(newhtml);
+ _email1();
  $("#myemail2").remove();
  })
  $(document).bind("keydown",function(e)
@@ -125,3 +126,91 @@ function isEmail(str){
  return false;
  }
 }
+function _email1() {
+    var x = document.getElementById("me2").value;
+    var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+	if($("#me2").val()!=""){
+		if(!(na.test($("#me2").val()))){
+			$(".spa5").text("请仔细检查您的邮箱");
+			return false;
+		}else if(na){
+			$(".spa5").text("");
+			return true;
+		}
+	}else{
+		$(".spa5").text("");
+	}
+}
+function _password1(){
+	if($("#password2").val()!=""){
+		var pw = /^\w{6,16}$/;
+		if(!(pw.test($("#password2").val()))){
+			$(".spa6").text("密码由字母、数字、下划线组成且6-16位");
+			return false;
+		}else if (pw){
+			$(".spa6").text("");
+			return true;
+		}
+	}else{
+		$(".spa6").text("");
+	}
+}
+//$("input").blur(function(){
+//	if($(this).is("#me2")){
+//		var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+//		if($("#me2").val()!=""){
+//			if(!(na.test($("#me2").val()))){
+//				$(".spa5").text("请仔细检查您的邮箱");
+//				return false;
+//			}else if(na){
+//				$(".spa5").text("");
+//				return true;
+//			}
+//		}else{
+//			$(".spa5").text("");
+//		}
+//	}
+//	if($(this).is("#password2")){
+//		var pw = /^\w{6,16}$/;
+//		if(!(pw.test($("#password2").val()))){
+//			$(".spa6").text("密码由字母、数字、下划线组成且6-16位");
+//			return false;
+//		}else if (pw){
+//			$(".spa6").text("");
+//			return true;
+//		}
+//	}else{
+//		$(".spa6").text("");
+//	}
+//})
+$("#login").click(function(){
+	var na = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+	var pw = /^\w{6,16}$/;
+	if(na.test($("#me2").val())&&pw.test($("#password2").val())){
+		$.ajax({
+			type:"POST",
+			url:"/org.xjtusicd3.partner/saveLogin.html",
+			data:{
+				"email":$("#me2").val(),
+				"password":$("#password2").val()
+			},
+			dataType:"json",
+			success:function(data){
+				if(data=="1"){
+					$(".spa5").text('帐号或密码错误');
+				}
+			}
+		})
+
+		return true;
+	}else{
+		if($("#me2").val()==""){
+			$(".spa5").text('请填写注册的邮箱');
+		}
+
+		if($("#password2").val()==""){
+			$(".spa6").text('请填写密码');
+		}
+		return false;
+	}
+})
