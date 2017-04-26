@@ -12,6 +12,9 @@ public class UserView {
 	private String UserAddress;
 	private String UserBrief;
 	private String UserImage;
+	private String Province;
+	private String City;
+	private String District;
 	public String getUserId() {
 		return UserId;
 	}
@@ -67,6 +70,24 @@ public class UserView {
 		UserImage = userImage;
 	}
 	
+	public String getProvince() {
+		return Province;
+	}
+	public void setProvince(String province) {
+		Province = province;
+	}
+	public String getCity() {
+		return City;
+	}
+	public void setCity(String city) {
+		City = city;
+	}
+	public String getDistrict() {
+		return District;
+	}
+	public void setDistrict(String district) {
+		District = district;
+	}
 	public UserView(UserPersistence userPersistence){
 		this.UserId = userPersistence.getUserId();
 		this.UserName = userPersistence.getUserName();
@@ -76,6 +97,10 @@ public class UserView {
 		this.UserAddress = userPersistence.getUserAddress();
 		this.UserBrief = userPersistence.getUserBrief();
 		this.UserImage = userPersistence.getUserImage();
+		this.UserSex = userPersistence.getUserSex();
+		this.Province = getProvince();
+		this.City = getCity();
+		this.District = getDistrict();
 	}
 	
 	public UserView(){

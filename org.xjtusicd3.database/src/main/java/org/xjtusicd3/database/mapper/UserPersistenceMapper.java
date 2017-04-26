@@ -32,4 +32,11 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	//zpz_获取用户信息
 	@Select("SELECT UserName,UserPassword,UserEmail FROM User")
 	List<UserPersistence> getUser();
+
+	//上传图片
+	@Update("UPDATE `User` SET `User`.UserImage=#{1} WHERE UserEmail=#{0}")
+	public void updateUserImage(String param2, String param1);
+	//用户个人信息完善
+	@Update("UPDATE `User` SET UserName=#{1},UserSex=#{2},UserBirthday=#{3},UserAddress=#{4},UserBrief=#{5} WHERE UserEmail=#{0}")
+	public void updateUserInfo(String email, String username, String usersex, String userbirthday, String address,String userbrief);
 }

@@ -1,94 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>小朵 | 登录/注册</title>
-<link href="zhao/login_register/style.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-<link href="zhao/login_register/style.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/validate.css">
-<link rel="stylesheet" type="text/css" href="zhao/tankuang/css/reveal.css" />
-<style type="text/css">
-#myemail, .newemail, .newemailtitle,#myemail2, .newemail2, .newemailtitle2{ 
- cursor:default;
- line-height:18px;
-}
-</style>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>智能小朵-知识库</title>
+    <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="new/front/style/reset2.css" />
+    <link rel="stylesheet" type="text/css" href="new/front/style/util2.css" />
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<link href="zhao/upload/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="zhao/upload/cropper/cropper.min.css" rel="stylesheet">
+	<link href="zhao/upload/sitelogo/sitelogo.css" rel="stylesheet">
+	<script src="zhao/upload/cropper/cropper.min.js"></script>
+	<script src="zhao/upload/sitelogo/sitelogo.js"></script>
+	<script src="zhao/upload/bootstrap/js/bootstrap.min.js"></script>
+		<script src="zhao/password/js/register.js"></script>
+    <script type="text/javascript" src="jedate/jquery.jedate.js"></script>
 </head>
 <body>
+	<div class="ibox-content">
+		<div class="row">
+			<div id="crop-avatar" class="col-md-6">
+				<div class="avatar-view" title="Change Logo Picture">
+			    	<img src="logo.jpg" alt="Logo">
+			    </div>
+			</div>
+		</div>
+	</div>
 
-<div id="container">
-<div id="anitOut" class="anitOut" style="height:1054px;"> 
-	<div class="cotn_principal">
-  <div class="cont_centrar">
-    <div class="cont_login">
-      <div class="cont_info_log_sign_up">
-        <div class="col_md_login">
-          <div class="cont_ba_opcitiy">
-            <h2>LOGIN</h2>
-            <p>已有帐号，登录立即体验.</p>
-            <button class="btn_login" onclick="cambiar_login()" >登录</button>
-          </div>
-        </div>
-        <div class="col_md_sign_up">
-          <div class="cont_ba_opcitiy">
-            <h2>SIGN UP</h2>
-            <p>还没有帐号？点击注册.</p>
-            <button class="btn_sign_up" onclick="cambiar_sign_up()">注册</button>
-          </div>
-        </div>
-      </div>
-      <div class="cont_back_info">
-        <div class="cont_img_back_grey"> <img src="zhao/login_register/po.jpg" alt="" /> </div>
-      </div>
-      <div class="cont_forms" >
-        <div class="cont_img_back_"> <img src="zhao/login_register/po.jpg" alt="" /> </div>
-        <div class="cont_form_login"> <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
-          <h2>LOGIN</h2>
-          <input type="text" placeholder="邮箱" id="me2"/>
-          <div>hao</div>
-          <input type="password" placeholder="密码" />
-          <div>hao</div>
-          <button class="btn_login"  data-dialog="somedialog" id="sub">登录</button>
-                      <div class="btnWrapper">
-                <a href="javascript:void(0);" class="blue"  id="sub" data-dialog="somedialog">提交</a>
-            </div>
-        </div>
-        <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-          <h2>SIGN UP</h2>
-          <input type="text" class="inputElem" id="me" placeholder="邮箱" />
-          <div><div class="validate_faqadd spa1"></div></div>
-          <input type="password" id="password" placeholder="密码" />
-          <div><div class="validate_faqadd spa3" id="_password"></div></div>
-          <input type="password" id="repassword" placeholder="再次输入密码" />
-          <div><div class="validate_faqadd spa4" id="_repassword"></div></div>
-          <button class="btn_sign_up" id="register" data-dialog="somedialog">注册</button>
-        </div>
-      </div>
-    </div>
+<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form class="avatar-form" action="{{url('admin/upload-logo')}}" enctype="multipart/form-data" method="post">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" type="button">&times;</button>
+					<h4 class="modal-title" id="avatar-modal-label">Change Logo Picture</h4>
+				</div>
+				<div class="modal-body">
+					<div class="avatar-body">
+						<div class="avatar-upload">
+							<input class="avatar-src" name="avatar_src" type="hidden">
+							<input class="avatar-data" name="avatar_data" type="hidden">
+							<label for="avatarInput">图片上传</label>
+							<input class="avatar-input" id="avatarInput" name="avatar_file" type="file"></div>
+						<div class="row">
+							<div class="col-md-9">
+								<div class="avatar-wrapper"></div>
+							</div>
+							<div class="col-md-3">
+								<div class="avatar-preview preview-lg"></div>
+								<div class="avatar-preview preview-md"></div>
+								<div class="avatar-preview preview-sm"></div>
+							</div>
+						</div>
+						<div class="row avatar-btns">
+							<div class="col-md-9">
+								<div class="btn-group">
+									<button class="btn" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"><i class="fa fa-undo"></i> 向左旋转</button>
+								</div>
+								<div class="btn-group">
+									<button class="btn" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"><i class="fa fa-repeat"></i> 向右旋转</button>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<button class="btn btn-success btn-block avatar-save" type="submit"><i class="fa fa-save"></i> 保存修改</button>
+							</div>
+						</div>
+					</div>
+				</div>
+  		</form>
+  	</div>
   </div>
 </div>
-</div>
-</div>
 
-
-	<div id="myModal" class="reveal-modal">			
-		<h1>邮箱需要验证</h1>
-		<br/>			
-		<p>请在5分钟之内，登录您的邮箱进行验证。</p>			
-		<a class="close-reveal-modal" id="cancelModal">&#215;</a>
-	</div>
-	<div class="reveal-modal-bg" id="modal_bg" style="display: display; cursor: pointer;"></div>
-	
-	<script src="js/jquery-1.6.2.js"></script>
-	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete.js"></script>
-	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete2.js"></script>
-	<script src="js/login_bg/cav.js"></script>
-	<script src="js/login_bg/getStart.js"></script>
-	<script src="zhao/login_register/index.js"></script>
-
-
-
+<div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
 </body>
 </html>
