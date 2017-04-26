@@ -28,16 +28,7 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	//验证码没有通过 删除
 	@Delete("DELETE FROM `User` WHERE `User`.UserEmail=#{0}")
 	public void deleteUser(String useremail);
-	@Select("SELECT * FROM User WHERE UserEmail=#{0} AND UserPassword=#{1}")
-	List<UserPersistence> getEmail2(String param1,String param2);
-	@Select("SELECT * FROM User WHERE UserEmail=#{0} AND IdentificationNumber=#{1}")
-	List<UserPersistence> getEmail3(String param1,String param2);
-	//验证码通过
-	@Update("UPDATE `User` SET `User`.UserState='1' WHERE UserEmail=#{0}")
-	public void updateUserState(String useremail);
-	//验证码没有通过 删除
-	@Delete("DELETE FROM `User` WHERE `User`.UserEmail=#{0}")
-	public void deleteUser(String useremail);
+	 
 	//zpz_获取用户信息
 	@Select("SELECT UserName,UserPassword,UserEmail FROM User")
 	List<UserPersistence> getUser();

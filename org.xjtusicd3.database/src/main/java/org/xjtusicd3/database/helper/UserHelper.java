@@ -52,65 +52,10 @@ public class UserHelper {
 		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
 		mapper.deleteUser(email);
 		session.close();
-	}
-	public static List<UserPersistence> getEmail2(String useremail,String password){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		List<UserPersistence> list = mapper.getEmail2(useremail,password);
-		session.close();
-		return list;
-	}
-	public static List<UserPersistence> getEmail3(String useremail,String identificationnumber){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		List<UserPersistence> list = mapper.getEmail3(useremail,identificationnumber);
-		session.close();
-		return list;
-	}
-	//验证码通过--update
-	public static void  updateUserState(String email){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		mapper.updateUserState(email);
-		session.close();
-	}
-	//验证码失败--delete
-	public static void deleteUser(String email){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		mapper.deleteUser(email);
-		session.close();
-	}
-	public static List<UserPersistence> getEmail2(String useremail,String password){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		List<UserPersistence> list = mapper.getEmail2(useremail,password);
-		session.close();
-		return list;
-	}
-	public static List<UserPersistence> getEmail3(String useremail,String identificationnumber){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		List<UserPersistence> list = mapper.getEmail3(useremail,identificationnumber);
-		session.close();
-		return list;
-	}
-	//验证码通过--update
-	public static void  updateUserState(String email){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		mapper.updateUserState(email);
-		session.close();
-	}
-	//验证码失败--delete
-	public static void deleteUser(String email){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		mapper.deleteUser(email);
-		session.close();
-	}
+	} 
+	  
 	//获取用户信息
-	private static List<UserPersistence> getUser()
+	public static List<UserPersistence> getUser()
 	{
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
