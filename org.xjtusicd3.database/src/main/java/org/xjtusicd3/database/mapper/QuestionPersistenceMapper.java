@@ -38,6 +38,6 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	/*
 	 * zpz_
 	 */
-	@Select("SELECT * FROM Question LIMIT 5")
+	@Select("SELECT * FROM Question LIMIT 200")
 	public List<QuestionPersistence> getFaq();
 }

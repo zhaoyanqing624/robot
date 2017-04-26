@@ -38,12 +38,12 @@ public class ConfigureHelper {
 	/*
 	 * 获取所有的设备信息
 	 */
-	public static List<ConfigurePersistence> getAllConfig() throws Exception{
+	public static List<ConfigurePersistence> getPartConfig(){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		ConfigurePersistenceMapper mapper = session.getMapper(ConfigurePersistenceMapper.class);
-		List<ConfigurePersistence> cPersistences = mapper.getAllConfig();
+		List<ConfigurePersistence> list = mapper.getPartConfig();
 		session.close();
-		return cPersistences;
+		return list;
 	}
 	
 }

@@ -96,99 +96,7 @@
 
         $.jgrid.defaults.styleUI = 'Bootstrap';
         // Examle data for jqGrid
-        var mydata = [
-            {
-                id: "1",
-                number: "2016031548",
-                name: "张三",
-                password: "16649232189",
-                telephone:"15785631594",
-                mail: "51989561@qq.com",
-                position: "科员"
-            },
-            {
-                id: "2",
-                number: "2016021625",
-                name: "李四",
-                password: "qsddf621615",
-                mail: "195357821@qq.com",
-                telephone:"15954631258",
-                position: "科长"
-            },
-            {
-                id: "3",
-                number: "2016031548",
-                name: "张三",
-                password: "16649232189",
-                telephone:"15785631594",
-                mail: "51989561@qq.com",
-                position: "科员"
-            },
-            {
-                id: "4",
-                number: "2016021625",
-                name: "李四",
-                password: "qsddf621615",
-                mail: "195357821@qq.com",
-                telephone:"15954631258",
-                position: "科长"
-            },
-            {
-                id: "5",
-                number: "2016031548",
-                name: "张三",
-                password: "16649232189",
-                telephone:"15785631594",
-                mail: "51989561@qq.com",
-                position: "科员"
-            },
-            {
-                id: "6",
-                number: "2016021625",
-                name: "李四",
-                password: "qsddf621615",
-                mail: "195357821@qq.com",
-                telephone:"15954631258",
-                position: "科长"
-            },
-            {
-                id: "7",
-                number: "2016031548",
-                name: "张三",
-                password: "16649232189",
-                telephone:"15785631594",
-                mail: "51989561@qq.com",
-                position: "科员"
-            },
-            {
-                id: "8",
-                number: "2016021625",
-                name: "李四",
-                password: "qsddf621615",
-                mail: "195357821@qq.com",
-                telephone:"15954631258",
-                position: "科长"
-            },
-            {
-                id: "9",
-                number: "2016031548",
-                name: "张三",
-                password: "16649232189",
-                telephone:"15785631594",
-                mail: "51989561@qq.com",
-                position: "科员"
-            },
-            {
-                id: "10",
-                number: "2016021625",
-                name: "李四",
-                password: "qsddf621615",
-                mail: "195357821@qq.com",
-                telephone:"15954631258",
-                position: "科长"
-            },
-
-        ];
+        var mydata = [${user}];
 
 
 
@@ -201,7 +109,7 @@
             shrinkToFit: true,
             rowNum: 20,
             rowList: [10, 20, 30],
-            colNames: ['ID', '工号', '用户名', '用户密码', '用户邮箱', '用户联系方式', '职称'],
+            colNames: ['ID',  '用户名', '用户密码', '用户邮箱'],
             colModel: [
                 {
                     name: 'id',
@@ -211,52 +119,29 @@
                     sorttype: "int",
                     search: true,
                     formatter:'showlink',
-                    formatoptions:{baseLinkUrl:"UserDetail.html"}
+                    formatoptions:{baseLinkUrl:"userdetail.html"}
                 },
                 {
-                    name: 'number',
-                    index: 'number',
+                    name: 'userName',
+                    index: 'userName',
                     editable: true,
                     width: 90,
                     sorttype: "int",
                 },
                 {
-                    name: 'name',
-                    index: 'name',
+                    name: 'userPassword',
+                    index: 'userPassword',
                     editable: true,
                     width: 100
                 },
                 {
-                    name: 'password',
-                    index: 'password',
+                    name: 'userEmail',
+                    index: 'userEmail',
                     editable: true,
                     width: 80,
                     align: "right",
                     sorttype: "float",
-                },
-                {
-                    name: 'mail',
-                    index: 'mail',
-                    editable: true,
-                    width: 80,
-                    align: "right",
-                    sorttype: "float"
-                },
-                {
-                    name: 'telephone',
-                    index: 'telephone',
-                    editable: true,
-                    width: 80,
-                    align: "right",
-                    sorttype: "float"
-                },
-                {
-                    name: 'position',
-                    index: 'position',
-                    editable: true,
-                    width: 100,
-                    sortable: false
-                }
+                }, 
             ],
             pager: "#pager_list_2",
             viewrecords: true,

@@ -40,11 +40,6 @@ public class FaqService {
 			jsonObject.put("faqTitle", list.get(i).getFaqTitle());
 			jsonObject.put("classifyName", cList.get(0).getClassifyName());
 			result += JsonUtil.toJsonString(jsonObject);
-			if (i<list.size()-1) {
-				result += ",";
-			}else {
-				result += "";
-			}
 		}
 		System.out.println(result);
 		return result;

@@ -5,10 +5,29 @@ import java.util.List;
 import org.xjtusicd3.database.helper.ConfigureHelper;
 import org.xjtusicd3.database.model.ConfigurePersistence;
 
-public class ConfigureService {
+public class ConfigureService 
+{
 
-	public static List<ConfigurePersistence> getAllConfig() throws Exception{
-		List<ConfigurePersistence> cp = ConfigureHelper.getAllConfig();
-		return cp;		
+	public static String getPartConfig() 
+	{
+		String result = "";
+		List<ConfigurePersistence> list = ConfigureHelper.getPartConfig();
+		for (int i = 0; i < list.size(); i++) 
+		{
+			result += "{\"id\":\""+(i+1)+"\",\"configureProducer\":\""+list.get(i).getConfigureProducer()+"\",\"configureName\":\""+list.get(i).getConfigureName()+"\",\"configureType\":\""+list.get(i).getConfigureType()+"\"}";
+			if(i < list.size()-1)
+			{
+				result += ",";
+			}else
+			{
+				result += "";
+			}
+		}
+		System.out.println(result);
+		return result;
+	}
+	public static void main(String[] args) 
+	{
+		getPartConfig();
 	}
 }

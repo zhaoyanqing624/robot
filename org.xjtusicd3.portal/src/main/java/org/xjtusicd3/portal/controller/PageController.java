@@ -8,6 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PageController {
 	
+	@RequestMapping(value="userdetail",method=RequestMethod.GET)
+    public ModelAndView  userdetail(){
+ 	   ModelAndView mv=new ModelAndView("userdetail");
+ 	   return mv;
+    }
 	
 	@RequestMapping(value="incidentindex",method=RequestMethod.GET)
     public ModelAndView  incident(){
@@ -24,11 +29,7 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("problemindex");
  	   return mv;
     }
-	@RequestMapping(value="cfgindex",method=RequestMethod.GET)
-    public ModelAndView  cfg(){
- 	   ModelAndView mv=new ModelAndView("cfgindex");
- 	   return mv;
-    }
+	
 	@RequestMapping(value="changeindex",method=RequestMethod.GET)
     public ModelAndView  change(){
  	   ModelAndView mv=new ModelAndView("changeindex");
@@ -44,11 +45,7 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("logindex");
  	   return mv;
     }
-	@RequestMapping(value="userindex",method=RequestMethod.GET)
-    public ModelAndView  user(){
- 	   ModelAndView mv=new ModelAndView("userindex");
- 	   return mv;
-    }
+	
 	@RequestMapping(value="spiderindex",method=RequestMethod.GET)
     public ModelAndView  spider(){
  	   ModelAndView mv=new ModelAndView("spiderindex");

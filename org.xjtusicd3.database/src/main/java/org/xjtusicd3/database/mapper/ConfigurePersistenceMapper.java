@@ -12,6 +12,6 @@ public interface ConfigurePersistenceMapper extends IBaseDao<ConfigurePersistenc
 	/*
 	 * 获取所有的设备信息
 	 */
-	@Select("SELECT * FROM Configure")
-	public List<ConfigurePersistence> getAllConfig();
+	@Select("SELECT ConfigureName,ConfigureType,ConfigureProducer FROM Configure LIMIT 200")
+	public List<ConfigurePersistence> getPartConfig();
 }

@@ -378,7 +378,7 @@
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-                            <title>系统配置</title>
+                            <title>${result}</title>
                             <meta name="keywords" content="">
                             <meta name="description" content="">
 
@@ -1899,106 +1899,6 @@
                 CPU: "1.4GHz",
                 serverType: "机架式"
             },
-            {
-                id: "8871",
-                brand:"惠普",
-                memory: "8GB",
-                date: "2016-01-14",
-                portSort:"SATA",
-                hardDisk: "400GB",
-                CPU: "1.6GHz",
-                serverType: "其他"
-            },
-            {
-                id: "8871",
-                brand:"联想",
-                memory: "16GB",
-                date: "2016-01-24",
-                portSort:"SAS",
-                hardDisk: "300GB",
-                CPU: "1.4GHz",
-                serverType: "机架式"
-            },
-            {
-                id: "8871",
-                brand:"惠普",
-                memory: "8GB",
-                date: "2016-01-14",
-                portSort:"SATA",
-                hardDisk: "400GB",
-                CPU: "1.6GHz",
-                serverType: "其他"
-            },
-            {
-                id: "8871",
-                brand:"联想",
-                memory: "16GB",
-                date: "2016-01-24",
-                portSort:"SAS",
-                hardDisk: "300GB",
-                CPU: "1.4GHz",
-                serverType: "机架式"
-            },
-            {
-                id: "8871",
-                brand:"惠普",
-                memory: "8GB",
-                date: "2016-01-14",
-                portSort:"SATA",
-                hardDisk: "400GB",
-                CPU: "1.6GHz",
-                serverType: "其他"
-            },
-            {
-                id: "8871",
-                brand:"联想",
-                memory: "16GB",
-                date: "2016-01-24",
-                portSort:"SAS",
-                hardDisk: "300GB",
-                CPU: "1.4GHz",
-                serverType: "机架式"
-            },
-            {
-                id: "8871",
-                brand:"惠普",
-                memory: "8GB",
-                date: "2016-01-14",
-                portSort:"SATA",
-                hardDisk: "400GB",
-                CPU: "1.6GHz",
-                serverType: "其他"
-            },
-            {
-                id: "8871",
-                brand:"联想",
-                memory: "16GB",
-                date: "2016-01-24",
-                portSort:"SAS",
-                hardDisk: "300GB",
-                CPU: "1.4GHz",
-                serverType: "机架式"
-            },
-            {
-                id: "8871",
-                brand:"惠普",
-                memory: "8GB",
-                date: "2016-01-14",
-                portSort:"SATA",
-                hardDisk: "400GB",
-                CPU: "1.6GHz",
-                serverType: "其他"
-            },
-            {
-                id: "8871",
-                brand:"联想",
-                memory: "16GB",
-                date: "2016-01-24",
-                portSort:"SAS",
-                hardDisk: "300GB",
-                CPU: "1.4GHz",
-                serverType: "机架式"
-            },
 
         ];
 
@@ -2110,118 +2010,7 @@
 
         $.jgrid.defaults.styleUI = 'Bootstrap';
         // Examle data for jqGrid
-        var mydata = [
-            {
-                id: "1",
-                name:"win8",
-                type: "操作系统",
-                version: "3.24",
-                date:"2016.3.24",
-                environment: "电脑内存2G，显卡2G，i5处理器，优于亦可",
-                detail: "点击"
-            },
-            {
-                id: "2",
-                name:"Tecent QQ",
-                type: "聊天软件",
-                version: "1.26",
-                date:"高",
-                environment: "无强硬要求",
-                detail: "点击"
-            },
-            {
-                id: "3",
-                name:"win8",
-                type: "操作系统",
-                version: "3.24",
-                date:"2016.3.24",
-                environment: "电脑内存2G，显卡2G，i5处理器，优于亦可",
-                detail: "点击"
-            },
-            {
-                id: "4",
-                name:"Tecent QQ",
-                type: "聊天软件",
-                version: "1.26",
-                date:"高",
-                environment: "无强硬要求",
-                detail: "点击"
-            },
-            {
-                id: "5",
-                name:"win8",
-                type: "操作系统",
-                version: "3.24",
-                date:"2016.3.24",
-                environment: "电脑内存2G，显卡2G，i5处理器，优于亦可",
-                detail: "点击"
-            },
-            {
-                id: "6",
-                name:"Tecent QQ",
-                type: "聊天软件",
-                version: "1.26",
-                date:"高",
-                environment: "无强硬要求",
-                detail: "点击"
-            },
-            {
-                id: "7",
-                name:"win8",
-                type: "操作系统",
-                version: "3.24",
-                date:"2016.3.24",
-                environment: "电脑内存2G，显卡2G，i5处理器，优于亦可",
-                detail: "点击"
-            },
-            {
-                id: "8",
-                name:"Tecent QQ",
-                type: "聊天软件",
-                version: "1.26",
-                date:"高",
-                environment: "无强硬要求",
-                detail: "点击"
-            },
-            {
-                id: "9",
-                name:"win8",
-                type: "操作系统",
-                version: "3.24",
-                date:"2016.3.24",
-                environment: "电脑内存2G，显卡2G，i5处理器，优于亦可",
-                detail: "点击"
-            },
-            {
-                id: "10",
-                name:"Tecent QQ",
-                type: "聊天软件",
-                version: "1.26",
-                date:"高",
-                environment: "无强硬要求",
-                detail: "点击"
-            },
-            {
-                id: "11",
-                name:"win8",
-                type: "操作系统",
-                version: "3.24",
-                date:"2016.3.24",
-                environment: "电脑内存2G，显卡2G，i5处理器，优于亦可",
-                detail: "点击"
-            },
-            {
-                id: "12",
-                name:"Tecent QQ",
-                type: "聊天软件",
-                version: "1.26",
-                date:"高",
-                environment: "无强硬要求",
-                detail: "点击"
-            },
-
-
-        ];
+        var mydata = [${result}];
 
         // Configuration for jqGrid Example 2
         $("#table_list_4").jqGrid({
@@ -2232,13 +2021,13 @@
             shrinkToFit: true,
             rowNum: 20,
             rowList: [10, 20, 30],
-            colNames: ['配置ID', '配置项','配置类型', '配置版本','更新时间','适用环境','详情'],
+            colNames: ['配置ID', '配置厂家','配置名称', '配置类型'],
             colModel: [
                 {
                     name: 'id',
                     index: 'id',
                     editable: true,
-                    width: 40,
+                    width: 20,
                     sorttype: "int",
                     search: true,
                     formatter:'showlink',
@@ -2246,47 +2035,27 @@
                 },
 
                 {
-                    name: 'name',
-                    index: 'name',
+                    name: 'configureProducer',
+                    index: 'configureProducer',
                     editable: true,
-                    width: 95,
+                    width: 30,
                 },
                 {
-                    name: 'type',
-                    index: 'type',
-                    editable: true,
-                    width: 50
-                },
-
-
-                {
-                    name: 'version',
-                    index: 'version',
-                    editable: true,
-                    width: 60,
-                },
-
-                {
-                    name: 'date',
-                    index: 'date',
-                    editable: true,
-                    width: 75,
-                    sorttype: "date",
-                    formatter: "date"
-                },
-                {
-                    name: 'environment',
-                    index: 'environment',
-                    editable: true,
-                    width: 140
-                },
-                {
-                    name: 'detail',
-                    index: 'detail',
+                    name: 'configureName',
+                    index: 'configureName',
                     editable: true,
                     width: 100,
-                    sortable: false
-                }
+                },
+
+
+                {
+                    name: 'configureType',
+                    index: 'configureType',
+                    editable: true,
+                    width: 30,
+                },
+
+                 
             ],
             pager: "#pager_list_4",
             viewrecords: true,
