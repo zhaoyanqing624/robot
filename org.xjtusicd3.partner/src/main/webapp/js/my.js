@@ -85,4 +85,3 @@ function c_question(){
 	zhao2.style.display="none";
 }
 
-

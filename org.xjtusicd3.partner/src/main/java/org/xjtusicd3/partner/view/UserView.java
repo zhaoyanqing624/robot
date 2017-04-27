@@ -6,6 +6,7 @@ public class UserView {
 	private String UserId;
 	private String UserName;
 	private String UserPassword;
+	private String UserPassword2;
 	private String UserEmail;
 	private String UserSex;
 	private String UserBirthday;
@@ -15,6 +16,7 @@ public class UserView {
 	private String Province;
 	private String City;
 	private String District;
+	
 	public String getUserId() {
 		return UserId;
 	}
@@ -88,6 +90,13 @@ public class UserView {
 	public void setDistrict(String district) {
 		District = district;
 	}
+	
+	public String getUserPassword2() {
+		return UserPassword2;
+	}
+	public void setUserPassword2(String userPassword2) {
+		UserPassword2 = userPassword2;
+	}
 	public UserView(UserPersistence userPersistence){
 		this.UserId = userPersistence.getUserId();
 		this.UserName = userPersistence.getUserName();
@@ -101,6 +110,7 @@ public class UserView {
 		this.Province = getProvince();
 		this.City = getCity();
 		this.District = getDistrict();
+		this.UserPassword2 = getUserPassword2();
 	}
 	
 	public UserView(){

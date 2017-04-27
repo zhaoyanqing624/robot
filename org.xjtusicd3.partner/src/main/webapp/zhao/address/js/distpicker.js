@@ -192,14 +192,22 @@
       this.$element.removeData(NAMESPACE);
     }
   };
-
+  
   Distpicker.DEFAULTS = {
     autoSelect: true,
     placeholder: true,
     province: '—— 省 ——',
     city: '—— 市 ——',
-    district: '—— 区 ——'
+    district: '—— 区 ——',
   };
+  
+	Distpicker.DEFAULTS2 = {
+	    autoSelect: true,
+	    placeholder: true,
+	    province: '省 ——',
+	    city: '市 ——',
+	    district: '区 ——',
+	  };
 
   Distpicker.setDefaults = function (options) {
     $.extend(Distpicker.DEFAULTS, options);

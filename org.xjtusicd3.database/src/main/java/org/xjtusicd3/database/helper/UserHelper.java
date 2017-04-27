@@ -79,4 +79,11 @@ public class UserHelper {
 		mapper.updateUserInfo(email,username,usersex,userbirthday,address,userbrief);
 		session.close();
 	}
+	//个人密码修改
+	public static void updateUserPassword(String email,String password){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		mapper.updateUserPassword(email,password);
+		session.close();
+	}
 }

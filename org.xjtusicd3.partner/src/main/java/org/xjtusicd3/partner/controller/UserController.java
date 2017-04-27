@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.CopyFile;
+import org.xjtusicd3.partner.filter.RegexAddress;
 import org.xjtusicd3.partner.service.UserService;
 import org.xjtusicd3.partner.view.UserView;
 
@@ -146,13 +147,16 @@ public class UserController {
 	 * personal_个人信息
 	 */
 	@RequestMapping(value="personal",method=RequestMethod.GET)
-	public ModelAndView personal(HttpSession session){
+	public ModelAndView personal(UserView userView ,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
 		if (useremail==null) {
 			return new ModelAndView("login");
 		}else {
 			ModelAndView mv = new ModelAndView("personal");
 			List<UserPersistence> list = UserHelper.getEmail(useremail);
+			String address = list.get(0).getUserAddress();
+			RegexAddress regexAddress = new RegexAddress();
+			mv.addObject("address", regexAddress.replaceAddress(address));
 			mv.addObject("personal_list", list);
 			return mv;
 		}
@@ -173,13 +177,38 @@ public class UserController {
 			String province = userView.getProvince();
 			String city = userView.getCity();
 			String district = userView.getDistrict();
-			String address = province+city+district;
+			String address = "0"+province+"1"+city+"2"+district+"3";
 			String userbrief = userView.getUserBrief();
 			UserHelper.updateUserInfo(useremail, username, usersex, userbirthday, address, userbrief);
 			return "redirect:personal.html";
 		}
 	}
-	
+	/*
+	 * personal_个人密码修改
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/updateUserPassword"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	public String updateUserPassword(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		String password = request.getParameter("password");
+		String password2 = request.getParameter("password2");
+		String repassword2 = request.getParameter("repassword2");
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return "redirect:login.html";
+		}else {
+			if (password==password2) {
+				return "0";
+			}else {
+				List<UserPersistence> list = UserHelper.getEmail2(useremail, password);
+				if (list.size()==0) {
+					return "1";
+				}else {
+					UserHelper.updateUserPassword(useremail, password2);
+					return "2";
+				}
+			}
+		}
+	}
 	
 	
 	//头像上传
@@ -226,4 +255,5 @@ public class UserController {
 		return aString;
        
     }
+	
 }

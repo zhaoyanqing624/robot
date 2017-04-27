@@ -39,4 +39,7 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	//用户个人信息完善
 	@Update("UPDATE `User` SET UserName=#{1},UserSex=#{2},UserBirthday=#{3},UserAddress=#{4},UserBrief=#{5} WHERE UserEmail=#{0}")
 	public void updateUserInfo(String email, String username, String usersex, String userbirthday, String address,String userbrief);
+	//用户个人密码修改
+	@Update("UPDATE `User` SET UserPassword=#{1} WHERE UserEmail=#{0}")
+	public void updateUserPassword(String email, String password);
 }
