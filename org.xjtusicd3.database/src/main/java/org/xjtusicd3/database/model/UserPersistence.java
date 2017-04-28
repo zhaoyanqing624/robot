@@ -5,34 +5,34 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="User")
+@Table(tablename="TBL_User")
 public class UserPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="UserId")
+	@TableField(columnName="USERID")
 	private String UserId;
-	@TableField(columnName="UserName")
+	@TableField(columnName="USERNAME")
 	private String UserName;
-	@TableField(columnName="UserPassword")
+	@TableField(columnName="USERPASSWORD")
 	private String UserPassword;
-	@TableField(columnName="UserEmail")
+	@TableField(columnName="USEREMAIL")
 	private String UserEmail;
-	@TableField(columnName="UserSex")
+	@TableField(columnName="GENDER")
 	private String UserSex;
-	@TableField(columnName="UserBirthday")
+	@TableField(columnName="USERBIRTHDAY")
 	private String UserBirthday;
-	@TableField(columnName="UserAddress")
+	@TableField(columnName="USERADDRESS")
 	private String UserAddress;
-	@TableField(columnName="UserBrief")
+	@TableField(columnName="USERSIGNATURE")
 	private String UserBrief;
-	@TableField(columnName="UserImage")
+	@TableField(columnName="AVATAR")
 	private String UserImage;
-	@TableField(columnName="RoleId")
+	@TableField(columnName="ROLEID")
 	private String RoleId;
-	@TableField(columnName="UserState")
+	@TableField(columnName="USERSTATE")
 	private int UserState;
-	@TableField(columnName="IdentificationNumber")
+	@TableField(columnName="VERIFICATIONCODE")
 	private String IdentificationNumber;
-	@TableField(columnName="UserTimeStamp")
+	@TableField(columnName="TIMESTAMPS")
 	private String UserTimeStamp;
 	
 	public String getUserId() {
