@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.xjtusicd3</groupId>
+  <artifactId>org.xjtusicd3</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Archetype - org.xjtusicd3</name>
+  <url>http://maven.apache.org</url>
+    <packaging>pom</packaging>
+  <modules>
+    <module>org.xjtusicd3.partner</module>
+    <module>org.xjtusicd3.portal</module>
+    
+    <module>org.xjtusicd3.database</module>
+    <module>org.xjtusicd3.common</module>
+    
+  </modules>
+  
+  <repositories>  	   	    
+        <repository>  
+            <id>io.spring.repo.maven.release</id>  
+            <url>http://repo.spring.io/release/</url>  
+            <snapshots>  
+                <enabled>false</enabled>  
+            </snapshots>  
+        </repository>  
+        <repository>  
+            <id>io.spring.repo.maven.milestone</id>  
+            <url>http://repo.spring.io/milestone/</url>  
+            <snapshots>  
+                <enabled>false</enabled>  
+            </snapshots>  
+        </repository>  
+        <repository>  
+            <id>jboss-public-repository-group</id>  
+            <name>JBoss Public Repository Group</name>  
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>  
+            <layout>default</layout>  
+            <releases>  
+                <enabled>true</enabled>  
+                <updatePolicy>never</updatePolicy>  
+            </releases>  
+            <snapshots>  
+                <enabled>true</enabled>  
+                <updatePolicy>never</updatePolicy>  
+            </snapshots>  
+        </repository>  
+        <repository>  
+            <id>jboss-deprecated</id>  
+            <name>JBoss Deprecated</name>  
+            <url>https://repository.jboss.org/nexus/content/repositories/deprecated/</url>  
+            <layout>default</layout>  
+            <releases>  
+                <enabled>true</enabled>  
+                <updatePolicy>never</updatePolicy>  
+            </releases>  
+            <snapshots>  
+                <enabled>false</enabled>  
+            </snapshots>  
+        </repository>  
+        <repository>  
+            <id>jboss-maven2-brew</id>  
+            <name>JBoss Maven 2 Brew Repository</name>  
+            <url>http://repository.jboss.org/maven2-brew/</url>  
+            <layout>default</layout>  
+            <releases> 
+                <enabled>true</enabled>  
+                <updatePolicy>never</updatePolicy>  
+            </releases>  
+            <snapshots>  
+                <enabled>false</enabled>  
+            </snapshots>  
+        </repository>  
+  
+        
+        <repository>  
+            <id>central</id>  
+            <name>Central Repository</name>  
+            <url>http://repo1.maven.org/maven2/</url>  
+            <snapshots>  
+                <enabled>false</enabled>  
+            </snapshots>  
+        </repository>  
+    </repositories> 
+    <dependencies>
+
+    </dependencies>
+    
+</project>

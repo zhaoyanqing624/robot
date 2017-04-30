@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+
+.investment_f{ width:960px; margin:20px auto}
+.investment_f .investment_title{height:44px;  width:960px; overflow:hidden}
+.investment_title div{ width:131px; height:44px; background:url(../tab/invest_detail_22.png); float:left; margin-right:6px; display:inline; font-size:14px; font-weight:bold; text-align:center; line-height:46px; color:#555; cursor:pointer; margin-left:1px;}
+.investment_title a,.investment_title a:link,.investment_title a:visited,.investment_title a:hover{ color:#555;width:131px; height:44px;display:inline-block}
+.investment_title div.on a,.investment_title div.on a:link,.investment_title div.on a:visited,.investment_title div.on a:hover{ color:#f70}
+.investment_title div.on{background:url(../tab/invest_detail_18.png); color:#f70}
+.investment_con{ clear:both; background:#fff; padding:20px;}
+.investment_con_list{display:none;}

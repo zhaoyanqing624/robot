@@ -1,0 +1,101 @@
+﻿use knowledge;
+drop table if exists admin_table;
+create table admin_table(
+	admin_name varchar(64) not null primary key,
+	admin_password varchar(128) not null,
+	authority_id tinyint comment '权限id'
+)comment='管理员表';
+drop table  if exists authority_table;
+create table authority_table(
+	authority_id  tinyint primary key comment '权限id',
+	authority_name varchar(32) comment '权限名称',
+	authority_path varchar(128) comment  '权限路径'
+)comment='权限表';
+drop table  if exists user_table;
+create table user_table(
+	email varchar(64) primary key comment  '联系方式',
+	username varchar(64) comment '用户名',
+	password varchar(128) comment '密码',
+	contact  varchar(64) comment '联系方式',
+	
+	user_status varchar (32) comment '用户状态，状态有普通用户，高级用户，审核中，黑名单',
+	truename varchar(32) comment '真实姓名',
+	phone_number varchar(32) comment '手机号',
+	bank_number varchar(32) comment '银行卡号',
+	id_number varchar(32) comment '身份证号'
+)comment='用户表';
+
+drop table  if exists attachment;
+create table attachment(
+	attach_id int not null auto_increment primary key comment '附件ID',
+	pathname varchar(128) comment '文件路径',
+	attach_file longblob comment '附件'
+)comment='附件表';
+
+drop table  if exists black_list;
+create table black_list(
+	id int not null auto_increment primary key,
+	username varchar(64) comment '用户名'
+)comment='用户黑名单表';
+
+drop table if exists eupatent_table;
+create table eupatent_table(
+	id int not null auto_increment primary key,
+	title varchar(1024) comment '标题',
+	inventor varchar(512) comment '发明人',
+	applicant varchar(512) comment '授权机构',
+	cpc varchar(512) comment '欧洲分类',
+	ipc varchar(512) comment '国际专利分类',
+	publicationNumber varchar(256) comment '发行号',
+	publicationDate varchar(256) comment '发布日期',
+	priorityDate varchar(256) comment '授权日期',
+	detailLink varchar(1024) comment '详情链接',
+	queryId varchar(64) comment '用户查询记录的ID'
+)comment='欧洲专利局数据';
+
+drop table if exists query_record_table;
+create table query_record_table(
+	query_id varchar(64) primary key comment '查询记录ID',
+	user_email varchar(64) comment '用户的邮箱',
+	query_word varchar(64) comment '用户关键字',
+	time_stamp varchar(64) comment '时间戳'
+);
+
+-- ----------------------------
+-- Table structure for demand_table
+-- ----------------------------
+DROP TABLE IF EXISTS `demand_table`;
+CREATE TABLE `demand_table` (
+  `demand_id` varchar(64) NOT NULL COMMENT '需求号',
+  `user_email` varchar(64) DEFAULT NULL COMMENT '下单人',
+  `demand_type` varchar(64) DEFAULT NULL COMMENT '需求类型',
+  `demand_summary` varchar(128) DEFAULT NULL COMMENT '需求简介',
+  `demand_detail` varchar(128) DEFAULT NULL COMMENT '需求详情',
+  `demand_att` longblob COMMENT '需求附件',
+  `demand_reward` double(255,0) DEFAULT NULL COMMENT '赏金',
+  `demand_state` varchar(255) DEFAULT NULL,
+  `sendee` varchar(255) DEFAULT NULL,
+  `demand_date` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`demand_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='需求表';
+
+-- ----------------------------
+-- Table structure for order_table
+-- ----------------------------
+DROP TABLE IF EXISTS `order_table`;
+CREATE TABLE `order_table` (
+  `order_id` varchar(64) NOT NULL COMMENT '订单号',
+  `order_detail` varchar(128) DEFAULT NULL COMMENT '订单详情',
+  `order_att` longblob COMMENT '订单附件',
+  `order_user` varchar(64) DEFAULT NULL COMMENT '接单人',
+  `order_status` varchar(64) DEFAULT NULL COMMENT '订单状态',
+  `order_summary` varchar(255) DEFAULT NULL,
+  `order_date` date DEFAULT NULL,
+  `order_reward` double(255,0) DEFAULT NULL,
+  `user_email` varchar(255) DEFAULT NULL,
+  `order_type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
+
+
+
