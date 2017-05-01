@@ -22,6 +22,8 @@ public class ConfigurePersistence {
 	private String URL;
 	@TableField(columnName="FILESIZE")
 	private String FILESIZE;
+	@TableField(columnName="CONFIGURETIME")
+	private String CONFIGURETIME;
 	public String getCONFIGUREID() {
 		return CONFIGUREID;
 	}
@@ -64,5 +66,10 @@ public class ConfigurePersistence {
 	public void setFILESIZE(String fILESIZE) {
 		FILESIZE = fILESIZE;
 	}
-	
+	public String getCONFIGURETIME() {
+		return CONFIGURETIME;
+	}
+	public void setCONFIGURETIME(String cONFIGURETIME) {
+		CONFIGURETIME = cONFIGURETIME;
+	}
 }

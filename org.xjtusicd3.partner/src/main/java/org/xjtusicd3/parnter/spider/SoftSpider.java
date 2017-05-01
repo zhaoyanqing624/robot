@@ -1,5 +1,6 @@
 package org.xjtusicd3.parnter.spider;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -106,15 +107,17 @@ public class SoftSpider implements PageProcessor {
 	    		UUID uuid2 = UUID.randomUUID();
 	    		ConfigurePersistence configurePersistence = new ConfigurePersistence();
 	    		ConfigureHistoryPersistence configureHistoryPersistence = new ConfigureHistoryPersistence();
+	    		ConfigureHistoryPersistence configureHistoryPersistence2 = new ConfigureHistoryPersistence();
 	    		SoftPersistence softPersistence = new SoftPersistence();
-	    		
+	    		List<ConfigurePersistence> list = ConfigureHelper.getConfigure(zhuanyi(ConfigureName));
 	    		configurePersistence.setCONFIGUREID(uuid.toString());
-	    		configurePersistence.setCONFIGURENAME(ConfigureName);
+	    		configurePersistence.setCONFIGURENAME(zhuanyi(ConfigureName));
 	    		configurePersistence.setCONFIGURETYPE("软件");
-	    		configurePersistence.setPRODUCER(ConfigureProducer);
+	    		configurePersistence.setPRODUCER(zhuanyi(ConfigureProducer));
 	    		configurePersistence.setURL(ConfigureURL);
 	    		configurePersistence.setFILESIZE(ConfigureSize);
 	    		configurePersistence.setDOWNLOADTIMES("0");
+	    		configurePersistence.setCONFIGURETIME(ConfigureDate);
 	    		
 	    		configureHistoryPersistence.setCONFIGUREHISTORYID(uuid2.toString());
 	    		configureHistoryPersistence.setCONFIGUREID(uuid.toString());
@@ -138,15 +141,37 @@ public class SoftSpider implements PageProcessor {
 	    		softPersistence.setSPAREURL(ReURL);
 	    		softPersistence.setOS(OS_type);
 	    		softPersistence.setWEBSITE(Offical_website);
-	    		
-	    		try {
-					ConfigureHelper.save_Soft(configurePersistence);
-					ConfigureHistoryHelper.save_ConfigureHistory(configureHistoryPersistence);
-					SoftHelper.sava(softPersistence);
-	    			System.out.println("-------------------------------------");
-				} catch (Exception e) {
-					e.printStackTrace();
+	    		if (list.size()==0) {
+		    		try {
+						ConfigureHelper.save_Soft(configurePersistence);
+						ConfigureHistoryHelper.save_ConfigureHistory(configureHistoryPersistence);
+						SoftHelper.sava(softPersistence);
+		    			System.out.println("++++++++++++++++++++++++++++++++++++++++");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else {
+					if (list.get(0).getCONFIGURETIME()==ConfigureDate) {
+						System.out.println(".....................................");
+					}else {
+			    		ConfigureHelper.update_Configure(zhuanyi(ConfigureName), ConfigureSize, ConfigureURL, "0", ConfigureProducer, ConfigureDate);
+			    		SoftHelper.update_Soft(list.get(0).getCONFIGUREID(), Logo, zhuanyi(Soft_desc), zhuanyi(Soft_desc_short), Nick_version, Version, zhuanyi(Whats_new_desc), zhuanyi(Whats_new_desc_short), ClassifyName, ReURL, OS_type, Offical_website, SoftScore);
+			    		UUID uuid3 = UUID.randomUUID();
+			    		configureHistoryPersistence2.setCONFIGUREHISTORYID(uuid3.toString());
+			    		configureHistoryPersistence2.setCONFIGUREID(list.get(0).getCONFIGUREID());
+			    		configureHistoryPersistence2.setUPDATETIME(ConfigureDate);
+			    		configureHistoryPersistence2.setVERSION(Version);
+			    		configureHistoryPersistence2.setREMARKS(zhuanyi(Whats_new_desc));
+			    		configureHistoryPersistence2.setURL(ConfigureURL);
+			    		try {
+							ConfigureHistoryHelper.save_ConfigureHistory(configureHistoryPersistence2);
+							System.out.println(".+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
 				}
+
 	    	}
 		}
     }
@@ -159,9 +184,7 @@ public class SoftSpider implements PageProcessor {
     	string = string.replace("\'", "\\'");
     	return string;
     }
-    public static void main(String[] args) {
-	        Spider.create(new SoftSpider())
-	        .addUrl("http://rj.baidu.com/soft/lists/1/1")
-	        .thread(15).run();
+    public static void spider_soft(){
+    	Spider.create(new SoftSpider()).addUrl("http://rj.baidu.com/soft/lists/1/1").thread(15).run();
     }
 }
