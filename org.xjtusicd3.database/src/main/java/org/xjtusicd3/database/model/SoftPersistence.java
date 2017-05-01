@@ -4,137 +4,120 @@ import org.xjtusicd3.database.ann.Table;
 import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
-@Table(tablename="Soft")
+@Table(tablename="TBL_Soft")
 public class SoftPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="ConfigureId")
-	private String ConfigureId;
-	@TableField(columnName="SoftId")
-	private String SoftId;
-	@TableField(columnName="SoftScore")
-	private String SoftScore;
-	@TableField(columnName="Logo")
-	private String Logo;
-	@TableField(columnName="Logo48")
-	private String Logo48;
-	@TableField(columnName="Logo96")
-	private String Logo96;
-	@TableField(columnName="Offical_website")
-	private String Offical_website;
-	@TableField(columnName="Soft_desc")
-	private String Soft_desc;
-	@TableField(columnName="Soft_desc_short")
-	private String Soft_desc_short;
-	@TableField(columnName="Nick_version")
-	private String Nick_version;
-	@TableField(columnName="Whats_new_desc")
-	private String whats_new_desc;
-	@TableField(columnName="Whats_new_desc_short")
-	private String Whats_new_desc_short;
-	@TableField(columnName="Version")
-	private String Version;
-	@TableField(columnName="ClassifyName")
-	private String ClassifyName;
-	@TableField(columnName="ReURL")
-	private String ReURL;
-	@TableField(columnName="OS_type")
-	private String OS_type;
-	public String getConfigureId() {
-		return ConfigureId;
+	@TableField(columnName="CONFIGUREID")
+	private String CONFIGUREID;
+	@TableField(columnName="SOFTID")
+	private String SOFTID;
+	@TableField(columnName="SCORE")
+	private String SCORE;
+	@TableField(columnName="LOGO")
+	private String LOGO;
+	@TableField(columnName="WEBSITE")
+	private String WEBSITE;
+	@TableField(columnName="INTRODUCTION")
+	private String INTRODUCTION;
+	@TableField(columnName="DESCRIPTION")
+	private String DESCRIPTION;
+	@TableField(columnName="VERSIONTYPE")
+	private String VERSIONTYPE;
+	@TableField(columnName="NEWVERSIONINTRODUCTION")
+	private String NEWVERSIONINTRODUCTION;
+	@TableField(columnName="NEWVERSIONDESCRIPTION")
+	private String NEWVERSIONDESCRIPTION;
+	@TableField(columnName="VERSION")
+	private String VERSION;
+	@TableField(columnName="SOFTTYPE")
+	private String SOFTTYPE;
+	@TableField(columnName="SPAREURL")
+	private String SPAREURL;
+	@TableField(columnName="OS")
+	private String OS;
+	public String getCONFIGUREID() {
+		return CONFIGUREID;
 	}
-	public void setConfigureId(String configureId) {
-		ConfigureId = configureId;
+	public void setCONFIGUREID(String cONFIGUREID) {
+		CONFIGUREID = cONFIGUREID;
 	}
-	public String getSoftId() {
-		return SoftId;
+	public String getSOFTID() {
+		return SOFTID;
 	}
-	public void setSoftId(String softId) {
-		SoftId = softId;
+	public void setSOFTID(String sOFTID) {
+		SOFTID = sOFTID;
 	}
-	public String getSoftScore() {
-		return SoftScore;
+	public String getSCORE() {
+		return SCORE;
 	}
-	public void setSoftScore(String softScore) {
-		SoftScore = softScore;
+	public void setSCORE(String sCORE) {
+		SCORE = sCORE;
 	}
-	public String getLogo() {
-		return Logo;
+	public String getLOGO() {
+		return LOGO;
 	}
-	public void setLogo(String logo) {
-		Logo = logo;
+	public void setLOGO(String lOGO) {
+		LOGO = lOGO;
 	}
-	public String getLogo48() {
-		return Logo48;
+	public String getWEBSITE() {
+		return WEBSITE;
 	}
-	public void setLogo48(String logo48) {
-		Logo48 = logo48;
+	public void setWEBSITE(String wEBSITE) {
+		WEBSITE = wEBSITE;
 	}
-	public String getLogo96() {
-		return Logo96;
+	public String getINTRODUCTION() {
+		return INTRODUCTION;
 	}
-	public void setLogo96(String logo96) {
-		Logo96 = logo96;
+	public void setINTRODUCTION(String iNTRODUCTION) {
+		INTRODUCTION = iNTRODUCTION;
 	}
-	public String getOffical_website() {
-		return Offical_website;
+	public String getDESCRIPTION() {
+		return DESCRIPTION;
 	}
-	public void setOffical_website(String offical_website) {
-		Offical_website = offical_website;
+	public void setDESCRIPTION(String dESCRIPTION) {
+		DESCRIPTION = dESCRIPTION;
 	}
-	public String getSoft_desc() {
-		return Soft_desc;
+	public String getVERSIONTYPE() {
+		return VERSIONTYPE;
 	}
-	public void setSoft_desc(String soft_desc) {
-		Soft_desc = soft_desc;
+	public void setVERSIONTYPE(String vERSIONTYPE) {
+		VERSIONTYPE = vERSIONTYPE;
 	}
-	public String getSoft_desc_short() {
-		return Soft_desc_short;
+	public String getNEWVERSIONINTRODUCTION() {
+		return NEWVERSIONINTRODUCTION;
 	}
-	public void setSoft_desc_short(String soft_desc_short) {
-		Soft_desc_short = soft_desc_short;
+	public void setNEWVERSIONINTRODUCTION(String nEWVERSIONINTRODUCTION) {
+		NEWVERSIONINTRODUCTION = nEWVERSIONINTRODUCTION;
 	}
-	public String getNick_version() {
-		return Nick_version;
+	public String getNEWVERSIONDESCRIPTION() {
+		return NEWVERSIONDESCRIPTION;
 	}
-	public void setNick_version(String nick_version) {
-		Nick_version = nick_version;
+	public void setNEWVERSIONDESCRIPTION(String nEWVERSIONDESCRIPTION) {
+		NEWVERSIONDESCRIPTION = nEWVERSIONDESCRIPTION;
 	}
-	public String getWhats_new_desc() {
-		return whats_new_desc;
+	public String getVERSION() {
+		return VERSION;
 	}
-	public void setWhats_new_desc(String whats_new_desc) {
-		this.whats_new_desc = whats_new_desc;
+	public void setVERSION(String vERSION) {
+		VERSION = vERSION;
 	}
-	
-	public String getWhats_new_desc_short() {
-		return Whats_new_desc_short;
+	public String getSOFTTYPE() {
+		return SOFTTYPE;
 	}
-	public void setWhats_new_desc_short(String whats_new_desc_short) {
-		Whats_new_desc_short = whats_new_desc_short;
+	public void setSOFTTYPE(String sOFTTYPE) {
+		SOFTTYPE = sOFTTYPE;
 	}
-	public String getVersion() {
-		return Version;
+	public String getSPAREURL() {
+		return SPAREURL;
 	}
-	public void setVersion(String version) {
-		Version = version;
+	public void setSPAREURL(String sPAREURL) {
+		SPAREURL = sPAREURL;
 	}
-	public String getClassifyName() {
-		return ClassifyName;
+	public String getOS() {
+		return OS;
 	}
-	public void setClassifyName(String classifyName) {
-		ClassifyName = classifyName;
-	}
-	public String getReURL() {
-		return ReURL;
-	}
-	public void setReURL(String reURL) {
-		ReURL = reURL;
-	}
-	public String getOS_type() {
-		return OS_type;
-	}
-	public void setOS_type(String oS_type) {
-		OS_type = oS_type;
+	public void setOS(String oS) {
+		OS = oS;
 	}
 	
 }	

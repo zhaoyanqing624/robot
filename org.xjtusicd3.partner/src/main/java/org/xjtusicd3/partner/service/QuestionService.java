@@ -22,7 +22,7 @@ public class QuestionService {
 		List<QuestionPersistence> questionPersistences = QuestionHelper.faq2_faqlist(ClassifyId,pageNow);
 		for(QuestionPersistence questionPersistence:questionPersistences){
 			List<Faq2_faqUserView> user_faq2Views = new ArrayList<Faq2_faqUserView>();
-			String userId = QuestionHelper.faq2_userId(questionPersistence.getQuestionId());
+			String userId = QuestionHelper.faq2_userId(questionPersistence.getFAQQUESTIONID());
 			List<UserPersistence> userPersistences = QuestionHelper.faq2_userlist(userId);
 			for(UserPersistence userPersistence:userPersistences){
 				Faq2_faqUserView user_faq2View = new Faq2_faqUserView(userPersistence);
@@ -43,7 +43,7 @@ public class QuestionService {
 		for(QuestionPersistence faqPersistence:faqPersistences){
 			List<Faq2_faqUserView> user_faq2Views = new ArrayList<Faq2_faqUserView>();
 			List<Faq3_faqAnswer> faq3_faqAnswers = new ArrayList<Faq3_faqAnswer>();
-			String userId = QuestionHelper.faq2_userId(faqPersistence.getQuestionId());
+			String userId = QuestionHelper.faq2_userId(faqPersistence.getFAQQUESTIONID());
 			List<UserPersistence> userPersistences = QuestionHelper.faq2_userlist(userId);
 			List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(QuestionId);
 			for(UserPersistence userPersistence:userPersistences){
@@ -56,7 +56,7 @@ public class QuestionService {
 			}
 			Faq3_faqContentView faq3View = new Faq3_faqContentView(faqPersistence);
 			faq3View.setuList(user_faq2Views);
-			faq3View.setfaqAnswers(faq3_faqAnswers);
+			faq3View.setFaqAnswers(faq3_faqAnswers);
 			faq3Views.add(faq3View);
 		}
 		return faq3Views;

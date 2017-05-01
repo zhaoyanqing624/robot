@@ -5,9 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.xjtusicd3.database.helper.ConfigureHelper;
+import org.xjtusicd3.database.helper.ConfigureHistoryHelper;
 import org.xjtusicd3.database.helper.DriversHelper;
+import org.xjtusicd3.database.model.ConfigureHistoryPersistence;
 import org.xjtusicd3.database.model.ConfigurePersistence;
-import org.xjtusicd3.database.model.DriversPersistence;
+import org.xjtusicd3.database.model.DriverPersistence;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -41,24 +43,32 @@ public class DriverSpider implements PageProcessor {
 	    		url = m.group(1);
 	    	}
 	    	ConfigurePersistence configurePersistence = new ConfigurePersistence();
-	    	DriversPersistence driversPersistence = new DriversPersistence();
-	    	UUID uuid = UUID.randomUUID();
-	    	configurePersistence.setConfigureId(uuid.toString());
-	    	configurePersistence.setConfigureName(page.getHtml().xpath("//div[@class='t']/text()").toString());
-	    	configurePersistence.setConfigureType("驱动");
-	    	configurePersistence.setConfigureProducer(page.getHtml().xpath("//div[@class='down_lb']/ul/li[2]/a/text()").toString());
-	    	configurePersistence.setConfigureDate(page.getHtml().xpath("//div[@class='down_lb']/ul/li[3]/text()").toString());
-	    	configurePersistence.setConfigureURL(url);
-	    	configurePersistence.setConfigureSize(page.getHtml().xpath("//div[@class='down_lb']/ul/li[4]/text()").toString());
+	    	ConfigureHistoryPersistence configureHistoryPersistence = new ConfigureHistoryPersistence();
+	    	DriverPersistence driversPersistence = new DriverPersistence();
 	    	
-	    	driversPersistence.setConfigureId(uuid.toString());
-	    	driversPersistence.setDriversOS(page.getHtml().xpath("//div[@class='down_lb']/ul/li[1]/text()").toString());
-	    	driversPersistence.setDriversClassify(page.getHtml().xpath("//div[@class='down_lb']/ul/li[5]/a/text()").toString());
-	    	driversPersistence.setDriversFitness(page.getHtml().xpath("//div[@class='down_lb']/ul/li[6]/a/text()").toString());
-	    	driversPersistence.setDriversContent(page.getHtml().xpath("//div[@class='down_info']/text()").toString());
+	    	UUID uuid = UUID.randomUUID();
+	    	UUID uuid2 = uuid.randomUUID();
+	    	configurePersistence.setCONFIGUREID(uuid.toString());
+	    	configurePersistence.setCONFIGURENAME(page.getHtml().xpath("//div[@class='t']/text()").toString());
+	    	configurePersistence.setCONFIGURETYPE("驱动");
+	    	configurePersistence.setPRODUCER(page.getHtml().xpath("//div[@class='down_lb']/ul/li[2]/a/text()").toString());
+	    	configurePersistence.setURL(url);
+	    	configurePersistence.setFILESIZE(page.getHtml().xpath("//div[@class='down_lb']/ul/li[4]/text()").toString());
+	    	configurePersistence.setDOWNLOADTIMES("0");
+	    	
+	    	configureHistoryPersistence.setCONFIGUREHISTORYID(uuid2.toString());
+	    	configureHistoryPersistence.setCONFIGUREID(uuid.toString());
+	    	configureHistoryPersistence.setUPDATETIME(page.getHtml().xpath("//div[@class='down_lb']/ul/li[3]/text()").toString());
+	    	
+	    	driversPersistence.setCONFIGUREID(uuid.toString());
+	    	driversPersistence.setOS(page.getHtml().xpath("//div[@class='down_lb']/ul/li[1]/text()").toString());
+	    	driversPersistence.setDRIVERTYPE(page.getHtml().xpath("//div[@class='down_lb']/ul/li[5]/a/text()").toString());
+	    	driversPersistence.setFITNESS(page.getHtml().xpath("//div[@class='down_lb']/ul/li[6]/a/text()").toString());
+	    	driversPersistence.setDRIVERINTRODUCTION(zhuanyi(page.getHtml().xpath("//div[@class='down_info']/text()").toString()));
 			
 	    	try {
 				ConfigureHelper.save_Driver(configurePersistence);
+				ConfigureHistoryHelper.save_ConfigureHistory(configureHistoryPersistence);
 				DriversHelper.sava(driversPersistence);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -66,7 +76,10 @@ public class DriverSpider implements PageProcessor {
 	    	System.out.println("-------------------------------");
 		}
     }
-
+    public static String zhuanyi(String string){
+    	string = string.replace("\'", "\\'");
+    	return string;
+    }
     @Override
     public Site getSite() {
         return site;

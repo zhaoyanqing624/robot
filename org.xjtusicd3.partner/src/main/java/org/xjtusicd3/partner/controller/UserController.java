@@ -154,7 +154,7 @@ public class UserController {
 		}else {
 			ModelAndView mv = new ModelAndView("personal");
 			List<UserPersistence> list = UserHelper.getEmail(useremail);
-			String address = list.get(0).getUserAddress();
+			String address = list.get(0).getUSERADDRESS();
 			RegexAddress regexAddress = new RegexAddress();
 			mv.addObject("address", regexAddress.replaceAddress(address));
 			mv.addObject("personal_list", list);

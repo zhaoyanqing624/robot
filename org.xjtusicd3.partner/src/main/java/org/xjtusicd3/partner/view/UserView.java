@@ -98,15 +98,15 @@ public class UserView {
 		UserPassword2 = userPassword2;
 	}
 	public UserView(UserPersistence userPersistence){
-		this.UserId = userPersistence.getUserId();
-		this.UserName = userPersistence.getUserName();
-		this.UserPassword = userPersistence.getUserPassword();
-		this.UserEmail = userPersistence.getUserEmail();
-		this.UserBirthday = userPersistence.getUserBirthday();
-		this.UserAddress = userPersistence.getUserAddress();
-		this.UserBrief = userPersistence.getUserBrief();
-		this.UserImage = userPersistence.getUserImage();
-		this.UserSex = userPersistence.getUserSex();
+		this.UserId = userPersistence.getUSERID();
+		this.UserName = userPersistence.getUSERNAME();
+		this.UserPassword = userPersistence.getUSERPASSWORD();
+		this.UserEmail = userPersistence.getUSEREMAIL();
+		this.UserBirthday = userPersistence.getUSERBIRTHDAY();
+		this.UserAddress = userPersistence.getUSERADDRESS();
+		this.UserBrief = userPersistence.getUSERSIGNATURE();
+		this.UserImage = userPersistence.getAVATAR();
+		this.UserSex = userPersistence.getGENDER();
 		this.Province = getProvince();
 		this.City = getCity();
 		this.District = getDistrict();

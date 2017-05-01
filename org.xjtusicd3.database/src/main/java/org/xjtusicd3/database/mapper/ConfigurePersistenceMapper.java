@@ -6,12 +6,13 @@ import org.apache.ibatis.annotations.Select;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.ConfigurePersistence;
 
-public interface ConfigurePersistenceMapper extends IBaseDao<ConfigurePersistence, String>
-{
+public interface ConfigurePersistenceMapper extends IBaseDao<ConfigurePersistence, String>{
 
 	/*
-	 * 获取所有的设备信息
+	 * 锟斤拷取锟斤拷锟叫碉拷锟借备锟斤拷息
 	 */
 	@Select("SELECT ConfigureName,ConfigureType,ConfigureProducer FROM Configure LIMIT 200")
 	public List<ConfigurePersistence> getPartConfig();
+
+	
 }

@@ -5,48 +5,50 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="Patch")
+@Table(tablename="TBL_Patch")
 public class PatchPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="ConfigureId")
-	private String ConfigureId;
-	@TableField(columnName="PatchOS")
-	private String PatchOS;
-	@TableField(columnName="PatchKeyword")
-	private String PatchKeyword;
-	@TableField(columnName="PatchLanguage")
-	private String 	PatchLanguage;
-	@TableField(columnName="PatchContent")
-	private String PatchContent;
-	public String getConfigureId() {
-		return ConfigureId;
+	@TableField(columnName="CONFIGUREID")
+	private String CONFIGUREID;
+	@TableField(columnName="OS")
+	private String OS;
+	@TableField(columnName="PATCHNUMBER")
+	private String PATCHNUMBER;
+	@TableField(columnName="LANGUAGE")
+	private String 	LANGUAGE;
+	@TableField(columnName="PATCHINTRODUCTION")
+	private String PATCHINTRODUCTION;
+	public String getCONFIGUREID() {
+		return CONFIGUREID;
 	}
-	public void setConfigureId(String configureId) {
-		ConfigureId = configureId;
+	public void setCONFIGUREID(String cONFIGUREID) {
+		CONFIGUREID = cONFIGUREID;
 	}
-	public String getPatchOS() {
-		return PatchOS;
+	public String getOS() {
+		return OS;
 	}
-	public void setPatchOS(String patchOS) {
-		PatchOS = patchOS;
+	public void setOS(String oS) {
+		OS = oS;
 	}
-	public String getPatchKeyword() {
-		return PatchKeyword;
+	public String getPATCHNUMBER() {
+		return PATCHNUMBER;
 	}
-	public void setPatchKeyword(String patchKeyword) {
-		PatchKeyword = patchKeyword;
+	public void setPATCHNUMBER(String pATCHNUMBER) {
+		PATCHNUMBER = pATCHNUMBER;
 	}
-	public String getPatchLanguage() {
-		return PatchLanguage;
+	public String getLANGUAGE() {
+		return LANGUAGE;
 	}
-	public void setPatchLanguage(String patchLanguage) {
-		PatchLanguage = patchLanguage;
+	public void setLANGUAGE(String lANGUAGE) {
+		LANGUAGE = lANGUAGE;
 	}
-	public String getPatchContent() {
-		return PatchContent;
+	public String getPATCHINTRODUCTION() {
+		return PATCHINTRODUCTION;
 	}
-	public void setPatchContent(String patchContent) {
-		PatchContent = patchContent;
+	public void setPATCHINTRODUCTION(String pATCHINTRODUCTION) {
+		PATCHINTRODUCTION = pATCHINTRODUCTION;
 	}
+	
+	
 
 }

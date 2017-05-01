@@ -10,6 +10,7 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.xjtusicd3.database.mapper.AnswerPersistenceMapper;
 import org.xjtusicd3.database.mapper.ClassifyPersistenceMapper;
+import org.xjtusicd3.database.mapper.ConfigureHistoryPersistenceMapper;
 import org.xjtusicd3.database.mapper.ConfigurePersistenceMapper;
 import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
@@ -45,6 +46,7 @@ public class SqlSessionManager {
 			configuration.addMapper(IBaseDao.class);
 			configuration.addMapper(UserPersistenceMapper.class);
 			configuration.addMapper(ConfigurePersistenceMapper.class);
+			configuration.addMapper(ConfigureHistoryPersistenceMapper.class);
 			configuration.addMapper(SoftPersistenceMapper.class);
 			configuration.addMapper(DriversPersistenceMapper.class);
 			configuration.addMapper(PatchPersistenceMapper.class);

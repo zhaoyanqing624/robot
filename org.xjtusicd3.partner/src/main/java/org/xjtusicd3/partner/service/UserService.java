@@ -66,7 +66,7 @@ public class UserService {
     public static boolean validateEmail(String email){
     	boolean a = false;
     	List<UserPersistence> uList = UserHelper.getEmail(email);
-    	String startTime = uList.get(0).getUserTimeStamp();
+    	String startTime = uList.get(0).getTIMESTAMPS();
     	Date date=new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String endTime = format.format(date);
@@ -82,7 +82,7 @@ public class UserService {
     public static boolean validateUserState(String email){
     	boolean b = false;
     	List<UserPersistence> uList = UserHelper.getEmail(email);
-    	if (uList.get(0).getUserState()==0) {
+    	if (uList.get(0).getUSERSTATE()==0) {
 			return b;
 		}else {
 			return true;

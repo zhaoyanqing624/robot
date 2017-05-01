@@ -25,9 +25,9 @@ public class Faq1_faqContentView {
 		FaqDescription = faqDescription;
 	}
 	public Faq1_faqContentView(QuestionPersistence questionPersistence ){
-		this.QuestionId = questionPersistence.getQuestionId();
-		this.FaqTitle = questionPersistence.getFaqTitle();
-		this.FaqDescription = questionPersistence.getFaqDescription();
+		this.QuestionId = questionPersistence.getFAQQUESTIONID();
+		this.FaqTitle = questionPersistence.getFAQTITLE();
+		this.FaqDescription = questionPersistence.getFAQDESCRIPTION();
 	}
 	public Faq1_faqContentView(){
 		

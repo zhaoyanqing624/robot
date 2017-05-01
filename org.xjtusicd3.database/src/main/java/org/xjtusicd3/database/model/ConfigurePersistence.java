@@ -5,65 +5,64 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="Configure")
+@Table(tablename="TBL_Configure")
 public class ConfigurePersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="ConfigureId")
-	private String ConfigureId;
-	@TableField(columnName="ConfigureName")
-	private String ConfigureName;
-	@TableField(columnName="ConfigureType")
-	private String ConfigureType;
-	@TableField(columnName="ConfigureProducer")
-	private String ConfigureProducer;
-	@TableField(columnName="ConfigureDate")
-	private String ConfigureDate;
-	@TableField(columnName="ConfigureURL")
-	private String ConfigureURL;
-	@TableField(columnName="ConfigureSize")
-	private String ConfigureSize;
-	public String getConfigureId() {
-		return ConfigureId;
+	@TableField(columnName="CONFIGUREID")
+	private String CONFIGUREID;
+	@TableField(columnName="CONFIGURENAME")
+	private String CONFIGURENAME;
+	@TableField(columnName="CONFIGURETYPE")
+	private String CONFIGURETYPE;
+	@TableField(columnName="PRODUCER")
+	private String PRODUCER;
+	@TableField(columnName="DOWNLOADTIMES")
+	private String DOWNLOADTIMES;
+	@TableField(columnName="URL")
+	private String URL;
+	@TableField(columnName="FILESIZE")
+	private String FILESIZE;
+	public String getCONFIGUREID() {
+		return CONFIGUREID;
 	}
-	public void setConfigureId(String configureId) {
-		ConfigureId = configureId;
+	public void setCONFIGUREID(String cONFIGUREID) {
+		CONFIGUREID = cONFIGUREID;
 	}
-	public String getConfigureName() {
-		return ConfigureName;
+	public String getCONFIGURENAME() {
+		return CONFIGURENAME;
 	}
-	public void setConfigureName(String configureName) {
-		ConfigureName = configureName;
+	public void setCONFIGURENAME(String cONFIGURENAME) {
+		CONFIGURENAME = cONFIGURENAME;
 	}
-	public String getConfigureType() {
-		return ConfigureType;
+	public String getCONFIGURETYPE() {
+		return CONFIGURETYPE;
 	}
-	public void setConfigureType(String configureType) {
-		ConfigureType = configureType;
+	public void setCONFIGURETYPE(String cONFIGURETYPE) {
+		CONFIGURETYPE = cONFIGURETYPE;
 	}
-	public String getConfigureProducer() {
-		return ConfigureProducer;
+	public String getPRODUCER() {
+		return PRODUCER;
 	}
-	public void setConfigureProducer(String configureProducer) {
-		ConfigureProducer = configureProducer;
+	public void setPRODUCER(String pRODUCER) {
+		PRODUCER = pRODUCER;
 	}
-	public String getConfigureDate() {
-		return ConfigureDate;
+	public String getDOWNLOADTIMES() {
+		return DOWNLOADTIMES;
 	}
-	public void setConfigureDate(String configureDate) {
-		ConfigureDate = configureDate;
+	public void setDOWNLOADTIMES(String dOWNLOADTIMES) {
+		DOWNLOADTIMES = dOWNLOADTIMES;
 	}
-	public String getConfigureURL() {
-		return ConfigureURL;
+	public String getURL() {
+		return URL;
 	}
-	public void setConfigureURL(String configureURL) {
-		ConfigureURL = configureURL;
+	public void setURL(String uRL) {
+		URL = uRL;
 	}
-	public String getConfigureSize() {
-		return ConfigureSize;
+	public String getFILESIZE() {
+		return FILESIZE;
 	}
-	public void setConfigureSize(String configureSize) {
-		ConfigureSize = configureSize;
+	public void setFILESIZE(String fILESIZE) {
+		FILESIZE = fILESIZE;
 	}
-	
 	
 }

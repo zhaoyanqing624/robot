@@ -34,8 +34,8 @@ public class Faq1_ClassifyView {
 		this.content2 = content2;
 	}
 	public Faq1_ClassifyView(ClassifyPersistence classifyPersistence){
-		this.ClassifyId = classifyPersistence.getClassifyId();
-		this.ClassifyName = classifyPersistence.getClassifyName();
+		this.ClassifyId = classifyPersistence.getFAQCLASSIFYID();
+		this.ClassifyName = classifyPersistence.getFAQCLASSIFYNAME();
 	}
 	public Faq1_ClassifyView(){
 		
