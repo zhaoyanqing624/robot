@@ -13,7 +13,7 @@ public class Faq3_faqAnswer {
 		FaqContent = faqContent;
 	}
 	public Faq3_faqAnswer(AnswerPersistence answerPersistence){
-		this.FaqContent = answerPersistence.getFaqContent();
+		this.FaqContent = answerPersistence.getFAQCONTENT();
 	}
 	public Faq3_faqAnswer(){
 		

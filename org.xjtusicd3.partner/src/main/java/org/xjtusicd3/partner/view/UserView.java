@@ -6,12 +6,17 @@ public class UserView {
 	private String UserId;
 	private String UserName;
 	private String UserPassword;
+	private String UserPassword2;
 	private String UserEmail;
 	private String UserSex;
 	private String UserBirthday;
 	private String UserAddress;
 	private String UserBrief;
 	private String UserImage;
+	private String Province;
+	private String City;
+	private String District;
+	
 	public String getUserId() {
 		return UserId;
 	}
@@ -67,15 +72,45 @@ public class UserView {
 		UserImage = userImage;
 	}
 	
+	public String getProvince() {
+		return Province;
+	}
+	public void setProvince(String province) {
+		Province = province;
+	}
+	public String getCity() {
+		return City;
+	}
+	public void setCity(String city) {
+		City = city;
+	}
+	public String getDistrict() {
+		return District;
+	}
+	public void setDistrict(String district) {
+		District = district;
+	}
+	
+	public String getUserPassword2() {
+		return UserPassword2;
+	}
+	public void setUserPassword2(String userPassword2) {
+		UserPassword2 = userPassword2;
+	}
 	public UserView(UserPersistence userPersistence){
-		this.UserId = userPersistence.getUserId();
-		this.UserName = userPersistence.getUserName();
-		this.UserPassword = userPersistence.getUserPassword();
-		this.UserEmail = userPersistence.getUserEmail();
-		this.UserBirthday = userPersistence.getUserBirthday();
-		this.UserAddress = userPersistence.getUserAddress();
-		this.UserBrief = userPersistence.getUserBrief();
-		this.UserImage = userPersistence.getUserImage();
+		this.UserId = userPersistence.getUSERID();
+		this.UserName = userPersistence.getUSERNAME();
+		this.UserPassword = userPersistence.getUSERPASSWORD();
+		this.UserEmail = userPersistence.getUSEREMAIL();
+		this.UserBirthday = userPersistence.getUSERBIRTHDAY();
+		this.UserAddress = userPersistence.getUSERADDRESS();
+		this.UserBrief = userPersistence.getUSERSIGNATURE();
+		this.UserImage = userPersistence.getAVATAR();
+		this.UserSex = userPersistence.getGENDER();
+		this.Province = getProvince();
+		this.City = getCity();
+		this.District = getDistrict();
+		this.UserPassword2 = getUserPassword2();
 	}
 	
 	public UserView(){

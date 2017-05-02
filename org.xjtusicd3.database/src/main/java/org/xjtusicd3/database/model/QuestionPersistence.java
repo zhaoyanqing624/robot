@@ -5,96 +5,91 @@ import org.xjtusicd3.database.ann.Table;
 import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
-@Table(tablename="Question")
+@Table(tablename="TBL_FAQquestion")
 public class QuestionPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="QuestionId")
-	private String QuestionId;
-	@TableField(columnName="FaqTitle")
-	private String FaqTitle;
-	@TableField(columnName="FaqDescription")
-	private String FaqDescription;
-	@TableField(columnName="ClassifyId")
-	private String ClassifyId;
-	@TableField(columnName="FaqKeyword")
-	private String FaqKeywords;
-	@TableField(columnName="FaqCollection")
-	private int FaqCollection;
-	@TableField(columnName="FaqScan")
-	private int FaqScan;
-	@TableField(columnName="FaqModifytime")
-	private String FaqModifytime;
-	@TableField(columnName="FaqWritetime")
-	private int FaqWritetime;
-	@TableField(columnName="FaqScore")
-	private float FaqScore;
-
+	@TableField(columnName="FAQQUESTIONID")
+	private String FAQQUESTIONID;
+	@TableField(columnName="FAQTITLE")
+	private String FAQTITLE;
+	@TableField(columnName="FAQDESCRIPTION")
+	private String FAQDESCRIPTION;
+	@TableField(columnName="FAQCLASSIFYID")
+	private String FAQCLASSIFYID;
+	@TableField(columnName="FAQKEYWORDS")
+	private String FAQKEYWORDS;
+	@TableField(columnName="COLLECTION")
+	private String COLLECTION;
+	@TableField(columnName="SCAN")
+	private String SCAN;
+	@TableField(columnName="MODIFYTIME")
+	private String MODIFYTIME;
+	@TableField(columnName="MODIFYNUMBER")
+	private String MODIFYNUMBER;
+	@TableField(columnName="SCORE")
+	private float SCORE;
+	public String getFAQQUESTIONID() {
+		return FAQQUESTIONID;
+	}
+	public void setFAQQUESTIONID(String fAQQUESTIONID) {
+		FAQQUESTIONID = fAQQUESTIONID;
+	}
+	public String getFAQTITLE() {
+		return FAQTITLE;
+	}
+	public void setFAQTITLE(String fAQTITLE) {
+		FAQTITLE = fAQTITLE;
+	}
+	public String getFAQDESCRIPTION() {
+		return FAQDESCRIPTION;
+	}
+	public void setFAQDESCRIPTION(String fAQDESCRIPTION) {
+		FAQDESCRIPTION = fAQDESCRIPTION;
+	}
+	public String getFAQCLASSIFYID() {
+		return FAQCLASSIFYID;
+	}
+	public void setFAQCLASSIFYID(String fAQCLASSIFYID) {
+		FAQCLASSIFYID = fAQCLASSIFYID;
+	}
+	public String getFAQKEYWORDS() {
+		return FAQKEYWORDS;
+	}
+	public void setFAQKEYWORDS(String fAQKEYWORDS) {
+		FAQKEYWORDS = fAQKEYWORDS;
+	}
+	public String getCOLLECTION() {
+		return COLLECTION;
+	}
+	public void setCOLLECTION(String cOLLECTION) {
+		COLLECTION = cOLLECTION;
+	}
+	public String getSCAN() {
+		return SCAN;
+	}
+	public void setSCAN(String sCAN) {
+		SCAN = sCAN;
+	}
+	public String getMODIFYTIME() {
+		return MODIFYTIME;
+	}
+	public void setMODIFYTIME(String mODIFYTIME) {
+		MODIFYTIME = mODIFYTIME;
+	}
+	public String getMODIFYNUMBER() {
+		return MODIFYNUMBER;
+	}
+	public void setMODIFYNUMBER(String mODIFYNUMBER) {
+		MODIFYNUMBER = mODIFYNUMBER;
+	}
+	public float getSCORE() {
+		return SCORE;
+	}
+	public void setSCORE(float sCORE) {
+		SCORE = sCORE;
+	}
 	
-	public String getQuestionId() {
-		return QuestionId;
-	}
-	public void setQuestionId(String questionId) {
-		QuestionId = questionId;
-	}
-	public String getClassify() {
-		return ClassifyId;
-	}
-	public void setClassify(String classify) {
-		ClassifyId = classify;
-	}
-	public String getFaqTitle() {
-		return FaqTitle;
-	}
-	public void setFaqTitle(String faqTitle) {
-		FaqTitle = faqTitle;
-	}
-	public String getFaqDescription() {
-		return FaqDescription;
-	}
-	public void setFaqDescription(String faqDescription) {
-		FaqDescription = faqDescription;
-	}
-	public String getFaqKeywords() {
-		return FaqKeywords;
-	}
-	public void setFaqKeywords(String faqKeywords) {
-		FaqKeywords = faqKeywords;
-	}
-	public String getClassifyId() {
-		return ClassifyId;
-	}
-	public void setClassifyId(String classifyId) {
-		ClassifyId = classifyId;
-	}
-	public int getFaqCollection() {
-		return FaqCollection;
-	}
-	public void setFaqCollection(int faqCollection) {
-		FaqCollection = faqCollection;
-	}
-	public int getFaqScan() {
-		return FaqScan;
-	}
-	public void setFaqScan(int faqScan) {
-		FaqScan = faqScan;
-	}
-	public String getFaqModifytime() {
-		return FaqModifytime;
-	}
-	public void setFaqModifytime(String faqModifytime) {
-		FaqModifytime = faqModifytime;
-	}
-	public int getFaqWritetime() {
-		return FaqWritetime;
-	}
-	public void setFaqWritetime(int faqWritetime) {
-		FaqWritetime = faqWritetime;
-	}
-	public float getFaqScore() {
-		return FaqScore;
-	}
-	public void setFaqScore(float faqScore) {
-		FaqScore = faqScore;
-	}
+	
+	
 	
 }

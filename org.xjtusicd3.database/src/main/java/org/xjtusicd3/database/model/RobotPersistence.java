@@ -5,58 +5,57 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="Robot")
+@Table(tablename="TBL_Robot")
 public class RobotPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="RobotId")
-	private String RobotId;
-	@TableField(columnName="RobotName")
-	private String RobotName;
-	@TableField(columnName="RobotWelcome")
-	private String RobotWelcome;
-	@TableField(columnName="RobotDescription")
-	private String RobotDescription;
-	@TableField(columnName="RobotImage")
-	private String RobotImage;
-	@TableField(columnName="RobotNoknow")
-	private String RobotNoknow;
-	public String getRobotId() {
-		return RobotId;
+	@TableField(columnName="ROBOTID")
+	private String ROBOTID;
+	@TableField(columnName="ROBOTNAME")
+	private String ROBOTNAME;
+	@TableField(columnName="ROBOTWELCOME")
+	private String ROBOTWELCOME;
+	@TableField(columnName="ROBOTINTRODUCTION")
+	private String ROBOTINTRODUCTION;
+	@TableField(columnName="ROBOTIMAGE")
+	private String ROBOTIMAGE;
+	@TableField(columnName="ROBOTNOKNOW")
+	private String ROBOTNOKNOW;
+	public String getROBOTID() {
+		return ROBOTID;
 	}
-	public void setRobotId(String robotId) {
-		RobotId = robotId;
+	public void setROBOTID(String rOBOTID) {
+		ROBOTID = rOBOTID;
 	}
-	public String getRobotName() {
-		return RobotName;
+	public String getROBOTNAME() {
+		return ROBOTNAME;
 	}
-	public void setRobotName(String robotName) {
-		RobotName = robotName;
+	public void setROBOTNAME(String rOBOTNAME) {
+		ROBOTNAME = rOBOTNAME;
 	}
-	public String getRobotWelcome() {
-		return RobotWelcome;
+	public String getROBOTWELCOME() {
+		return ROBOTWELCOME;
 	}
-	public void setRobotWelcome(String robotWelcome) {
-		RobotWelcome = robotWelcome;
+	public void setROBOTWELCOME(String rOBOTWELCOME) {
+		ROBOTWELCOME = rOBOTWELCOME;
 	}
-	public String getRobotDescription() {
-		return RobotDescription;
+	public String getROBOTINTRODUCTION() {
+		return ROBOTINTRODUCTION;
 	}
-	public void setRobotDescription(String robotDescription) {
-		RobotDescription = robotDescription;
+	public void setROBOTINTRODUCTION(String rOBOTINTRODUCTION) {
+		ROBOTINTRODUCTION = rOBOTINTRODUCTION;
 	}
-	public String getRobotImage() {
-		return RobotImage;
+	public String getROBOTIMAGE() {
+		return ROBOTIMAGE;
 	}
-	public void setRobotImage(String robotImage) {
-		RobotImage = robotImage;
+	public void setROBOTIMAGE(String rOBOTIMAGE) {
+		ROBOTIMAGE = rOBOTIMAGE;
 	}
-	public String getRobotNoknow() {
-		return RobotNoknow;
+	public String getROBOTNOKNOW() {
+		return ROBOTNOKNOW;
 	}
-	public void setRobotNoknow(String robotNoknow) {
-		RobotNoknow = robotNoknow;
+	public void setROBOTNOKNOW(String rOBOTNOKNOW) {
+		ROBOTNOKNOW = rOBOTNOKNOW;
 	}
-
 	
 	
 }

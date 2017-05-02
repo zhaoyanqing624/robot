@@ -27,9 +27,9 @@ public class Faq2_faqUserView {
 		this.userImage = userImage;
 	}
 	public Faq2_faqUserView(UserPersistence userPersistence){
-		this.userId = userPersistence.getUserId();
-		this.userName = userPersistence.getUserName();
-		this.userImage = userPersistence.getUserImage();
+		this.userId = userPersistence.getUSERID();
+		this.userName = userPersistence.getUSERNAME();
+		this.userImage = userPersistence.getAVATAR();
 	}
 	public Faq2_faqUserView(){
 		

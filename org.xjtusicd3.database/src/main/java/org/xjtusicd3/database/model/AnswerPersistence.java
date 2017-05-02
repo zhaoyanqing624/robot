@@ -5,40 +5,39 @@ import org.xjtusicd3.database.ann.Table;
 import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
-@Table(tablename="Answer")
+@Table(tablename="TBL_FAQanswer")
 public class AnswerPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="AnswerId")
-	private String AnswerId;
-	@TableField(columnName="QuestionId")
-	private String QuestionId;
-	@TableField(columnName="FaqContent")
-	private String FaqContent;
-	@TableField(columnName="UserId")
-	private String AnswerUserId;
-	public String getAnswerId() {
-		return AnswerId;
+	@TableField(columnName="FAQANSWERID")
+	private String FAQANSWERID;
+	@TableField(columnName="FAQQUESTIONID")
+	private String FAQQUESTIONID;
+	@TableField(columnName="FAQCONTENT")
+	private String FAQCONTENT;
+	@TableField(columnName="USERID")
+	private String USERID;
+	public String getFAQANSWERID() {
+		return FAQANSWERID;
 	}
-	public void setAnswerId(String answerId) {
-		AnswerId = answerId;
+	public void setFAQANSWERID(String fAQANSWERID) {
+		FAQANSWERID = fAQANSWERID;
 	}
-	public String getQuestionId() {
-		return QuestionId;
+	public String getFAQQUESTIONID() {
+		return FAQQUESTIONID;
 	}
-	public void setQuestionId(String questionId) {
-		QuestionId = questionId;
+	public void setFAQQUESTIONID(String fAQQUESTIONID) {
+		FAQQUESTIONID = fAQQUESTIONID;
 	}
-	public String getFaqContent() {
-		return FaqContent;
+	public String getFAQCONTENT() {
+		return FAQCONTENT;
 	}
-	public void setFaqContent(String faqContent) {
-		FaqContent = faqContent;
+	public void setFAQCONTENT(String fAQCONTENT) {
+		FAQCONTENT = fAQCONTENT;
 	}
-	public String getAnswerUserId() {
-		return AnswerUserId;
+	public String getUSERID() {
+		return USERID;
 	}
-	public void setAnswerUserId(String answerUserId) {
-		AnswerUserId = answerUserId;
+	public void setUSERID(String uSERID) {
+		USERID = uSERID;
 	}
-	
 }

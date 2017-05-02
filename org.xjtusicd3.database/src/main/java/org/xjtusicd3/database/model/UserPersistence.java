@@ -5,113 +5,113 @@ import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
 
-@Table(tablename="User")
+@Table(tablename="TBL_User")
 public class UserPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
-	@TableField(columnName="UserId")
-	private String UserId;
-	@TableField(columnName="UserName")
-	private String UserName;
-	@TableField(columnName="UserPassword")
-	private String UserPassword;
-	@TableField(columnName="UserEmail")
-	private String UserEmail;
-	@TableField(columnName="UserSex")
-	private String UserSex;
-	@TableField(columnName="UserBirthday")
-	private String UserBirthday;
-	@TableField(columnName="UserAddress")
-	private String UserAddress;
-	@TableField(columnName="UserBrief")
-	private String UserBrief;
-	@TableField(columnName="UserImage")
-	private String UserImage;
-	@TableField(columnName="RoleId")
-	private String RoleId;
-	@TableField(columnName="UserState")
-	private int UserState;
-	@TableField(columnName="IdentificationNumber")
-	private String IdentificationNumber;
-	@TableField(columnName="UserTimeStamp")
-	private String UserTimeStamp;
+	@TableField(columnName="USERID")
+	private String USERID;
+	@TableField(columnName="USERNAME")
+	private String USERNAME;
+	@TableField(columnName="USERPASSWORD")
+	private String USERPASSWORD;
+	@TableField(columnName="USEREMAIL")
+	private String USEREMAIL;
+	@TableField(columnName="GENDER")
+	private String GENDER;
+	@TableField(columnName="USERBIRTHDAY")
+	private String USERBIRTHDAY;
+	@TableField(columnName="USERADDRESS")
+	private String USERADDRESS;
+	@TableField(columnName="USERSIGNATURE")
+	private String USERSIGNATURE;
+	@TableField(columnName="AVATAR")
+	private String AVATAR;
+	@TableField(columnName="ROLEID")
+	private String ROLEID;
+	@TableField(columnName="USERSTATE")
+	private int USERSTATE;
+	@TableField(columnName="VERIFICATIONCODE")
+	private String VERIFICATIONCODE;
+	@TableField(columnName="TIMESTAMPS")
+	private String TIMESTAMPS;
+	public String getUSERID() {
+		return USERID;
+	}
+	public void setUSERID(String uSERID) {
+		USERID = uSERID;
+	}
+	public String getUSERNAME() {
+		return USERNAME;
+	}
+	public void setUSERNAME(String uSERNAME) {
+		USERNAME = uSERNAME;
+	}
+	public String getUSERPASSWORD() {
+		return USERPASSWORD;
+	}
+	public void setUSERPASSWORD(String uSERPASSWORD) {
+		USERPASSWORD = uSERPASSWORD;
+	}
+	public String getUSEREMAIL() {
+		return USEREMAIL;
+	}
+	public void setUSEREMAIL(String uSEREMAIL) {
+		USEREMAIL = uSEREMAIL;
+	}
+	public String getGENDER() {
+		return GENDER;
+	}
+	public void setGENDER(String gENDER) {
+		GENDER = gENDER;
+	}
+	public String getUSERBIRTHDAY() {
+		return USERBIRTHDAY;
+	}
+	public void setUSERBIRTHDAY(String uSERBIRTHDAY) {
+		USERBIRTHDAY = uSERBIRTHDAY;
+	}
+	public String getUSERADDRESS() {
+		return USERADDRESS;
+	}
+	public void setUSERADDRESS(String uSERADDRESS) {
+		USERADDRESS = uSERADDRESS;
+	}
+	public String getUSERSIGNATURE() {
+		return USERSIGNATURE;
+	}
+	public void setUSERSIGNATURE(String uSERSIGNATURE) {
+		USERSIGNATURE = uSERSIGNATURE;
+	}
+	public String getAVATAR() {
+		return AVATAR;
+	}
+	public void setAVATAR(String aVATAR) {
+		AVATAR = aVATAR;
+	}
+	public String getROLEID() {
+		return ROLEID;
+	}
+	public void setROLEID(String rOLEID) {
+		ROLEID = rOLEID;
+	}
+	public int getUSERSTATE() {
+		return USERSTATE;
+	}
+	public void setUSERSTATE(int uSERSTATE) {
+		USERSTATE = uSERSTATE;
+	}
+	public String getVERIFICATIONCODE() {
+		return VERIFICATIONCODE;
+	}
+	public void setVERIFICATIONCODE(String vERIFICATIONCODE) {
+		VERIFICATIONCODE = vERIFICATIONCODE;
+	}
+	public String getTIMESTAMPS() {
+		return TIMESTAMPS;
+	}
+	public void setTIMESTAMPS(String tIMESTAMPS) {
+		TIMESTAMPS = tIMESTAMPS;
+	}
 	
-	public String getUserId() {
-		return UserId;
-	}
-	public void setUserId(String userId) {
-		UserId = userId;
-	}
-	public String getUserName() {
-		return UserName;
-	}
-	public void setUserName(String userName) {
-		UserName = userName;
-	}
-	public String getUserPassword() {
-		return UserPassword;
-	}
-	public void setUserPassword(String userPassword) {
-		UserPassword = userPassword;
-	}
-	public String getUserEmail() {
-		return UserEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		UserEmail = userEmail;
-	}
-	public String getUserSex() {
-		return UserSex;
-	}
-	public void setUserSex(String userSex) {
-		UserSex = userSex;
-	}
-	public String getUserBirthday() {
-		return UserBirthday;
-	}
-	public void setUserBirthday(String userBirthday) {
-		UserBirthday = userBirthday;
-	}
-	public String getUserAddress() {
-		return UserAddress;
-	}
-	public void setUserAddress(String userAddress) {
-		UserAddress = userAddress;
-	}
-	public String getUserBrief() {
-		return UserBrief;
-	}
-	public void setUserBrief(String userBrief) {
-		UserBrief = userBrief;
-	}
-	public String getUserImage() {
-		return UserImage;
-	}
-	public void setUserImage(String userImage) {
-		UserImage = userImage;
-	}
-	public String getRoleId() {
-		return RoleId;
-	}
-	public void setRoleId(String roleId) {
-		RoleId = roleId;
-	}
-	public int getUserState() {
-		return UserState;
-	}
-	public void setUserState(int userState) {
-		UserState = userState;
-	}
-	public String getIdentificationNumber() {
-		return IdentificationNumber;
-	}
-	public void setIdentificationNumber(String identificationNumber) {
-		IdentificationNumber = identificationNumber;
-	}
-	public String getUserTimeStamp() {
-		return UserTimeStamp;
-	}
-	public void setUserTimeStamp(String userTimeStamp) {
-		UserTimeStamp = userTimeStamp;
-	}
 	
 }	

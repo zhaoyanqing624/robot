@@ -1,21 +1,34 @@
 package org.xjtusicd3.partner.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.eclipse.jetty.server.Authentication.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.filter.CopyFile;
+import org.xjtusicd3.partner.filter.RegexAddress;
 import org.xjtusicd3.partner.service.UserService;
 import org.xjtusicd3.partner.view.UserView;
 
@@ -90,10 +103,9 @@ public class UserController {
 	 */
 	@RequestMapping(value="/saveLogin",method=RequestMethod.POST)
 	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request){
+		String useremail = (String) session.getAttribute("UserEmail");
 		String urlPath = (String) session.getAttribute("urlPath");
-		if(urlPath==null){
-			return "redirect:login.html";
-		}else {
+		if (useremail==null) {
 			String email = userView.getUserEmail();
 			String password = userView.getUserPassword();
 			List<UserPersistence> list = UserHelper.getEmail2(email, password);
@@ -101,9 +113,24 @@ public class UserController {
 				return "redirect:login.html";
 			}else {
 				session.setAttribute("UserEmail", email);
-				return "redirect:"+urlPath+"";
+				return "redirect:robot.html";
+			}
+		}else {
+			if(urlPath==null){
+				return "redirect:login.html";
+			}else {
+				String email = userView.getUserEmail();
+				String password = userView.getUserPassword();
+				List<UserPersistence> list = UserHelper.getEmail2(email, password);
+				if (list.size()==0) {
+					return "redirect:login.html";
+				}else {
+					session.setAttribute("UserEmail", email);
+					return "redirect:"+urlPath+"";
+				}
 			}
 		}
+		
 		
 	}
 	/*
@@ -120,16 +147,113 @@ public class UserController {
 	 * personal_个人信息
 	 */
 	@RequestMapping(value="personal",method=RequestMethod.GET)
-	public ModelAndView personal(HttpSession session){
+	public ModelAndView personal(UserView userView ,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
 		if (useremail==null) {
 			return new ModelAndView("login");
 		}else {
 			ModelAndView mv = new ModelAndView("personal");
 			List<UserPersistence> list = UserHelper.getEmail(useremail);
+			String address = list.get(0).getUSERADDRESS();
+			RegexAddress regexAddress = new RegexAddress();
+			mv.addObject("address", regexAddress.replaceAddress(address));
 			mv.addObject("personal_list", list);
 			return mv;
 		}
 		
 	}
+	/*
+	 * personal_个人信息添加
+	 */
+	@RequestMapping(value="/addUserInfo",method=RequestMethod.POST)
+	public String addUserInfo(UserView userView,HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return "redirect:login.html";
+		}else {
+			String username = userView.getUserName();
+			String usersex = userView.getUserSex();
+			String userbirthday = userView.getUserBirthday();
+			String province = userView.getProvince();
+			String city = userView.getCity();
+			String district = userView.getDistrict();
+			String address = "0"+province+"1"+city+"2"+district+"3";
+			String userbrief = userView.getUserBrief();
+			UserHelper.updateUserInfo(useremail, username, usersex, userbirthday, address, userbrief);
+			return "redirect:personal.html";
+		}
+	}
+	/*
+	 * personal_个人密码修改
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/updateUserPassword"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	public String updateUserPassword(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		String password = request.getParameter("password");
+		String password2 = request.getParameter("password2");
+		String repassword2 = request.getParameter("repassword2");
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return "redirect:login.html";
+		}else {
+			if (password==password2) {
+				return "0";
+			}else {
+				List<UserPersistence> list = UserHelper.getEmail2(useremail, password);
+				if (list.size()==0) {
+					return "1";
+				}else {
+					UserHelper.updateUserPassword(useremail, password2);
+					return "2";
+				}
+			}
+		}
+	}
+	
+	
+	//头像上传
+	@ResponseBody
+	@RequestMapping(value = "/uploadUserImage",method=RequestMethod.POST)
+    public String uploadUserImage(HttpServletRequest request,HttpSession session) throws IOException {
+		String useremail = (String) session.getAttribute("UserEmail");
+		MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;//request强制转换注意
+		Iterator<String> iterator = mRequest.getFileNames();
+        String path  ="";
+        String fileName = "";
+        String suffix = "";
+		String filename = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String dir = "static/image/"+useremail +"/"+ sdf.format(new Date()) + "/";
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+        while(iterator.hasNext()){
+            MultipartFile multipartFile = mRequest.getFile(iterator.next());
+            if(multipartFile != null){
+                String fn = multipartFile.getOriginalFilename();
+                 suffix = fn.substring(fn.lastIndexOf("."));
+                 filename = RandomStringUtils.randomAlphanumeric(6);
+                fileName = dir + filename + suffix;
+                path = realPath + fileName;
+                path = path.replace("\\", "/");
+                File f = new File(path);
+                if(!f.mkdirs()){
+                    f.mkdir();
+                }
+                multipartFile.transferTo(f);
+            }
+        }
+        CopyFile copyFile = new CopyFile();
+        String newPath = copyFile.copyFile(path, useremail, sdf.format(new Date()));
+        newPath = newPath.replace("\\", "/");
+        newPath = newPath.replace("E:/eclipse/workspace/xiaoduo-master/org.xjtusicd3.partner/src/main/webapp", "/org.xjtusicd3.partner");
+        UserHelper.updateUserImage(useremail, newPath);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        String aString = "{\"result\":\""+newPath+"\"}";
+		return aString;
+       
+    }
+	
 }

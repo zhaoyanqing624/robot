@@ -9,13 +9,16 @@ public class Faq3_faqContentView {
 	private String QuestionId;
 	private String FaqTitle;
 	private String FaqDescription;
-	private int FaqScan;
+	private String FaqScan;
 	private String FaqModifytime;
-	private int FaqCollection;
-	private int FaqWritetime;
+	private String FaqCollection;
+	private String FaqWritetime;
 	private float FaqScore;
 	private List<Faq3_faqAnswer> faqAnswers;
 	private List<Faq2_faqUserView> uList;
+	
+	
+
 	public String getQuestionId() {
 		return QuestionId;
 	}
@@ -34,10 +37,10 @@ public class Faq3_faqContentView {
 	public void setFaqDescription(String faqDescription) {
 		FaqDescription = faqDescription;
 	}
-	public int getFaqScan() {
+	public String getFaqScan() {
 		return FaqScan;
 	}
-	public void setFaqScan(int faqScan) {
+	public void setFaqScan(String faqScan) {
 		FaqScan = faqScan;
 	}
 	public String getFaqModifytime() {
@@ -46,16 +49,16 @@ public class Faq3_faqContentView {
 	public void setFaqModifytime(String faqModifytime) {
 		FaqModifytime = faqModifytime;
 	}
-	public int getFaqCollection() {
+	public String getFaqCollection() {
 		return FaqCollection;
 	}
-	public void setFaqCollection(int faqCollection) {
+	public void setFaqCollection(String faqCollection) {
 		FaqCollection = faqCollection;
 	}
-	public int getFaqWritetime() {
+	public String getFaqWritetime() {
 		return FaqWritetime;
 	}
-	public void setFaqWritetime(int faqWritetime) {
+	public void setFaqWritetime(String faqWritetime) {
 		FaqWritetime = faqWritetime;
 	}
 	public float getFaqScore() {
@@ -64,10 +67,10 @@ public class Faq3_faqContentView {
 	public void setFaqScore(float faqScore) {
 		FaqScore = faqScore;
 	}
-	public List<Faq3_faqAnswer> getfaqAnswers() {
+	public List<Faq3_faqAnswer> getFaqAnswers() {
 		return faqAnswers;
 	}
-	public void setfaqAnswers(List<Faq3_faqAnswer> faqAnswers) {
+	public void setFaqAnswers(List<Faq3_faqAnswer> faqAnswers) {
 		this.faqAnswers = faqAnswers;
 	}
 	public List<Faq2_faqUserView> getuList() {
@@ -76,16 +79,15 @@ public class Faq3_faqContentView {
 	public void setuList(List<Faq2_faqUserView> uList) {
 		this.uList = uList;
 	}
-
 	public Faq3_faqContentView(QuestionPersistence questionPersistence){
-		this.QuestionId = questionPersistence.getQuestionId();
-		this.FaqTitle = questionPersistence.getFaqTitle();
-		this.FaqDescription = questionPersistence.getFaqDescription();
-		this.FaqModifytime = questionPersistence.getFaqModifytime();
-		this.FaqScan = questionPersistence.getFaqScan();
-		this.FaqCollection = questionPersistence.getFaqCollection();
-		this.FaqWritetime = questionPersistence.getFaqWritetime();
-		this.FaqScore = questionPersistence.getFaqScore();
+		this.QuestionId = questionPersistence.getFAQQUESTIONID();
+		this.FaqTitle = questionPersistence.getFAQTITLE();
+		this.FaqDescription = questionPersistence.getFAQDESCRIPTION();
+		this.FaqModifytime = questionPersistence.getMODIFYTIME();
+		this.FaqScan = questionPersistence.getSCAN();
+		this.FaqCollection = questionPersistence.getCOLLECTION();
+		this.FaqWritetime = questionPersistence.getMODIFYNUMBER();
+		this.FaqScore = questionPersistence.getSCORE();
 	}
 	public Faq3_faqContentView(){
 		

@@ -1,12 +1,10 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>智能小朵-知识库</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
-    <script src="js/jquery-3.1.1.min.js"></script>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset2.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util2.css" />
@@ -17,10 +15,14 @@
     <link href="zhao/radio&check/css/labelauty.css" rel="stylesheet" />
     <link href="zhao/password/css/gloab.css" rel="stylesheet">
 	<link href="zhao/password/css/index.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="zhao/tankuang/css/reveal.css" />
+	<link type="text/css" rel="stylesheet" href="jedate/skin/jedate.css">
+	<script src="zhao/upload/jquery-2.1.js"></script>
 	<script src="zhao/upload/cropper/cropper.min.js"></script>
 	<script src="zhao/upload/sitelogo/sitelogo.js"></script>
 	<script src="zhao/upload/bootstrap/js/bootstrap.min.js"></script>
 	<script src="zhao/password/js/register.js"></script>
+    <script type="text/javascript" src="jedate/jquery.jedate.js"></script>
 	<style>
 		.datainp { width: 128px; height: 35px; border: 1px #A5D2EC solid; }
 		.datep { margin-bottom: 40px; line-height: 24px; margin-right: 15px; }
@@ -117,7 +119,7 @@
 								<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
 									<div class="modal-dialog modal-lg">
 										<div class="modal-content">
-											<form class="avatar-form" action="{{url('admin/upload-logo')}}" enctype="multipart/form-data" method="post">
+											<form class="avatar-form" action="uploadUserImage.html" enctype="multipart/form-data" method="post">
 												<div class="modal-header">
 													<button class="close" data-dismiss="modal" type="button">&times;</button>
 													<h4 class="modal-title" id="avatar-modal-label">头像变更</h4>
@@ -161,22 +163,23 @@
 								</div>
 								
 								<div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
-									<div class="col-sm-6" style="float:right;">
+								
+									<div class="col-sm-6" style="float:right;display:none" id="updateinfo" >
 					                    <div class="project-name overflow">
-										    <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+										    <form id="main-contact-form" name="contact-form" method="post" action="addUserInfo.html">
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>用户名：</span></div>
-					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="name" class="form-control"  required="required" value="${userinfo.userName}"></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.userName}"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>性别：</span></div>
 													<div class="rdo">
-												        <input type="radio" name="rdo" class="rdolist" checked="checked" />
+												        <input type="radio" name="UserSex" class="rdolist" value="${userinfo.userSex}"/ >
 												        <label class="rdobox">
 												            <span class="check-image"></span>
 												            <span class="radiobox-content">男</span>
 												        </label>
-												        <input type="radio" name="rdo" class="rdolist" />
+												        <input type="radio" name="UserSex" class="rdolist" value="${userinfo.userSex}" />
 												        <label class="rdobox">
 												            <span class="check-image"></span>
 												            <span class="radiobox-content">女</span>
@@ -186,80 +189,106 @@
 					                            <div class="form-group" style="width: 370px;height: 37px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>生日：</span></div>
 					                                <div style="float:right;width:314px;height:50px;">
-														<li class="datep">
-													      <input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD"  readonly>
-													    </li>
+														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.userBirthday}" readonly ></li>
 					                                </div>
 					                            </div>
-					                            <div class="form-group" style="width: 370px;height: 77px;">
-					                            	<div style="float:left;margin-top:10px;width:56px;"><span>所在地：</span></div>
+					                            <div class="form-group" style="width: 370px;height:125px;">
+					                            	<div style="float:left;margin-top:10px;width:56px;"><span>所在地：${Province}</span></div>
 					                                <div style="float:right;width:314px;height:50px;">
 					                                	<div id="distpicker5">
-													  		<select style="height: 36px;width:155px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;color: #555;background-color: #fff;background-image: none;border: 1px solid #eaeaea;;border-radius: 4px;" data-province="---- 选择省 ----"></select>
-													  		<select style="height: 36px;width:155px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;color: #555;background-color: #fff;background-image: none;border: 1px solid #eaeaea;;border-radius: 4px;" data-city="---- 选择市 ----"></select>
-													  		<select style="height: 36px;width:155px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;color: #555;background-color: #fff;background-image: none;border: 1px solid #eaeaea;;border-radius: 4px;" data-district="---- 选择区 ----"></select>
-														</div>
+													        <div class="form-group">
+													          <label class="sr-only" for="province10">Province</label>
+													          <select class="form-control1" id="province10" name="Province" ></select>
+													        </div>
+													        <div class="form-group">
+													          <label class="sr-only" for="city10">City</label>
+													          <select class="form-control1" id="city10" name="City"></select>
+													        </div>
+													        <div class="form-group">
+													          <label class="sr-only" for="district10">District</label>
+													          <select class="form-control1" id="district10" name="District"></select>
+													        </div>
+													    </div>
 					                                </div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 77px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>简介：</span></div>
 					                            	<div style="float:right;width:314px;height:130px;">
-					                                	<textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名"></textarea>
+					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" >${userinfo.userBrief}</textarea>
 					                            	</div>
 					                            </div>                        
 					                            <div class="form-group">
-					                                <input type="submit" name="submit" class="btn btn-submit" value="完成">
+					                                <input type="submit" name="submit" class="btn btn-submit" value="完成" id="submit_">
 					                            </div>
 					                        </form>
 					                    </div>
 					                </div>
+					                
+					                <div class="col-sm-6" style="float:right;display:block" id="subinfo">
+					                    <div class="project-name overflow">
+					                            <div class="form-group" style="width: 370px;height: 36px;">
+					                            	<div style="float:left;margin-top:10px;width:56px;"><span>用户名：</span></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.userName}"></div>
+					                            </div>
+					                            <div class="form-group" style="width: 370px;height: 36px;">
+					                            	<div style="float:left;margin-top:10px;width:56px;"><span>性别：</span></div>
+													<div style="float:right;width:314px;height:50px;"><input type="text" name="UserSex" class="form-control"  required="required" value="${userinfo.userSex}"></div>
+					                            </div>
+					                            <div class="form-group" style="width: 370px;height: 37px;">
+					                            	<div style="float:left;margin-top:10px;width:56px;"><span>生日：</span></div>
+					                                <div style="float:right;width:314px;height:50px;">
+														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.userBirthday}" readonly ></li>
+					                                </div>
+					                            </div>
+					                            <div class="form-group" style="width: 370px;height:40px;">
+					                            	<div style="float:left;margin-top:10px;width:56px;"><span>所在地：</span></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserAddress" class="form-control"  required="required" value="${address}"></div>
+					                            </div>
+					                            <div class="form-group" style="width: 370px;height: 77px;">
+					                            	<div style="float:left;margin-top:10px;width:56px;"><span>简介：</span></div>
+					                            	<div style="float:right;width:314px;height:130px;">
+					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" >${userinfo.userBrief}</textarea>
+					                            	</div>
+					                            </div>                        
+					                            <div class="form-group">
+					                                <input   class="btn btn-submit" value="修改信息" id="update_">
+					                            </div>
+					                    </div>
+					                </div>
+					                
                         	</div>
                         	</#list>
                             <div class="tab-pane fade" id="tab2-item2" style="width: 800px;float: left;">
                             	<div class="col-sm-6" style="margin-left: 180px;width:80%;">
 					                    <div class="project-name overflow">
-											<form class="form-horizontal showcase-form " role="form" id="dependency_form" name="dependency_form" novalidate>
 											    <div class="form-group">
 											            <div class="reg-box" id="verifyCheck" style="margin-top:20px;">
 											            		<div class="item col-xs-12" style="margin-top: 30px;">
 											                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>原始密码：</span>    
 											                        <div class="f-fl item-ifo">
-											                            <input type="text"  maxlength="20" class="txt03 f-r3 required" tabindex="3" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-20||level:2" data-error="密码不能为空||密码长度6-20位||该密码太简单，有被盗风险，建议字母+数字的组合" /> 
+											                            <input type="text"  class="txt03 f-r3 required"  id="password" oninput="_password()"/>
+											                            <label class="focus valid spa1"></label>
 											                        </div>
 											                    </div>
 											                    <div class="item col-xs-12" style="margin-top: 30px;">
 											                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>密码：</span>    
 											                        <div class="f-fl item-ifo">
-											                            <input type="password" id="password" maxlength="20" class="txt03 f-r3 required" tabindex="3" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-20||level:2" data-error="密码不能为空||密码长度6-20位||该密码太简单，有被盗风险，建议字母+数字的组合" /> 
-											                            <span class="ie8 icon-close close hide" style="right:55px"></span>
-											                            <span class="showpwd" data-eye="password"></span>                        
-											                            <label class="icon-sucessfill blank hide"></label>
-											                            <label class="focus">6-20位英文（区分大小写）、数字、字符的组合</label>
-											                            <label class="focus valid"></label>
-											                            <span class="clearfix"></span>
-											                            <label class="strength">
-											                            	<span class="f-fl f-size12">安全程度：</span>
-											                            	<b><i>弱</i><i>中</i><i>强</i></b>
-											                            </label>    
+											                            <input type="password" id="password2"  class="txt03 f-r3 required""return  false" oninput="_password2()" />
+											                            <label class="focus valid error spa2"></label>
 											                        </div>
 											                    </div>
 											                    <div class="item col-xs-12" style="margin-top: 30px;">
 											                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>确认密码：</span>    
 											                        <div class="f-fl item-ifo">
-											                            <input type="password" maxlength="20" class="txt03 f-r3 required" tabindex="4" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-16||isRepeat:password" data-error="密码不能为空||密码长度6-16位||两次密码输入不一致" id="rePassword" />
-											                            <span class="ie8 icon-close close hide" style="right:55px"></span>
-											                            <span class="showpwd" data-eye="rePassword"></span>
-											                            <label class="icon-sucessfill blank hide"></label>
-											                            <label class="focus">请再输入一遍上面的密码</label> 
-											                            <label class="focus valid"></label>                          
+											                            <input type="password" id="repassword2" maxlength="20" class="txt03 f-r3 required"  oninput="_repassword2()" />
+											                        	<label class="focus valid error spa3"></label>
 											                        </div>
 											                    </div>
 											            </div>
 											    </div>
 											    <div class="form-group">
-					                                <input type="submit" name="submit" class="btn btn-submit" style="width:42%;margin-left: 17px;margin-top: 40px;" value="完成">
+					                                <button  class="btn btn-submit" style="width:42%;margin-left: 17px;margin-top: 40px;"  id="submitupdatePassword">确认提交</button>
 					                            </div>
-											</form>
 					                    </div>
 					                </div>
                             </div>
@@ -276,16 +305,133 @@
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
-    	<script type="text/javascript" src="js/jquery.js"></script>
+    
+    <div id="myModal" class="reveal-modal" style="visibility:hidden">			
+		<h1>密码修改成功</h1>
+		<br/>			
+		<a class="close-reveal-modal" id="cancelModal">&#215;</a>
+	</div>
+	<div class="reveal-modal-bg" id="modal_bg" style="display:none;cursor: pointer;"></div>
+    <script>
+
+	  </script>
+	   	<script type="text/javascript">
+		$("#date03").jeDate({
+		    isinitVal:true,
+		    festival:true,
+		    ishmsVal:false,
+		    minDate: '1900-01-01 00:00:00',
+		    maxDate: $.nowDate(0),
+		    format:"YYYY-MM-DD",
+		    zIndex:3000,
+		});
+		$("#update_").click(function(){
+			$("#subinfo").css('display','none');
+			$("#updateinfo").css('display','block');	
+		});
+		$("#submit_").click(function(){
+			$("#subinfo").css('display','block');
+			$("#updateinfo").css('display','none');
+		});
+		
+		$("#submitupdatePassword").click(function(){
+		var pw = /^\w{6,16}$/;
+		var rpw = $("#repassword2").val();
+	if(pw.test($("#password").val())&&pw.test($("#password2").val())&&(rpw==($("#password2").val()))){
+		$.ajax({
+			type:"POST",
+			url:"/org.xjtusicd3.partner/updateUserPassword.html",
+			data:{
+				"password":$("#password").val(),
+				"password2":$("#password2").val(),
+				"repassword2":$("#repassword2").val()
+			},
+			dataType:"json",
+			success:function(data){
+				if(data=="0"){
+					$(".spa2").text('新密码不能与原密码相同');
+				}if(data="1"){
+					$(".spa1").text('原密码错误');
+				}if(data="2"){
+					document.getElementById("modal_bg").style.display="block";
+					document.getElementById("myModal").style.visibility = "visible";
+				}
+			}
+		})
+		return true;
+	}else{
+		if($("#password").val()==""){
+			$(".spa1").text('请填写密码');
+		}
+		if($("#password2").val()==""){
+			$(".spa2").text('请填写密码');
+		}
+		if($("#repassword2").val()==""){
+			$(".spa3").text('请再次填写密码');
+		}
+		return false;
+	}
+});
+function _password(){
+	if($("#password").val()!=""){
+		var pw = /^\w{6,16}$/;
+		if(!(pw.test($("#password").val()))){
+			$(".spa1").text("密码由字母、数字、下划线组成且6-16位");
+			return false;
+		}else if (pw){
+			$(".spa1").text("");
+			return true;
+		}
+	}else{
+		$(".spa1").text("");
+	}
+}
+function _password2(){
+	if($("#password2").val()!=""){
+		var pw = /^\w{6,16}$/;
+		if(!(pw.test($("#password2").val()))){
+			$(".spa2").text("密码由字母、数字、下划线组成且6-16位");
+			return false;
+		}else if (pw){
+			$(".spa2").text("");
+			return true;
+		}
+	}else{
+		$(".spa2").text("");
+	}
+}
+function _repassword2(){
+	if($("#repassword2").val()!=""){
+		var pw = $("#password2").val();
+		if(!(pw==$("#repassword2").val())){
+			$(".spa3").text("两次输入的密码不一致");
+			return false;
+		}else if (pw){
+			$(".spa3").text("");
+			return true;
+		}
+	}else{
+		$(".spa3").text("");
+	}
+}
+//取消弹出框
+$("#cancelModal").click(function(){
+	document.getElementById("modal_bg").style.display="none";
+	document.getElementById("myModal").style.visibility = "hidden";
+	window.location.reload(); 
+})
+		</script>
     	<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script src="zhao/radio&check/js/labelauty.js"></script>
     <script>
         $(document).ready(function () {
             $(".rdolist").labelauty("rdolist", "rdo");
-            $(".chklist").labelauty("chklist", "check");
         });
-    </script>  
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/my.js"></script> 
+	</script>
+	
+	  <script src="zhao/address/js/distpicker.data.js"></script>
+	  <script src="zhao/address/js/distpicker.js"></script>
+	  <script src="zhao/address/js/main.js"></script>
+
 </body>
 </html>

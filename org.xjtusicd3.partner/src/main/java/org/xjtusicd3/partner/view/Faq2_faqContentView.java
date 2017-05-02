@@ -9,10 +9,12 @@ public class Faq2_faqContentView {
 	private String QuestionId;
 	private String FaqTitle;
 	private String FaqDescription;
-	private int FaqScan;
+	private String FaqScan;
 	private String FaqModifytime;
-	private int FaqCollection;
+	private String FaqCollection;
 	private List<Faq2_faqUserView> uList;
+	
+	
 	public String getQuestionId() {
 		return QuestionId;
 	}
@@ -31,10 +33,10 @@ public class Faq2_faqContentView {
 	public void setFaqDescription(String faqDescription) {
 		FaqDescription = faqDescription;
 	}
-	public int getFaqScan() {
+	public String getFaqScan() {
 		return FaqScan;
 	}
-	public void setFaqScan(int faqScan) {
+	public void setFaqScan(String faqScan) {
 		FaqScan = faqScan;
 	}
 	public String getFaqModifytime() {
@@ -43,10 +45,10 @@ public class Faq2_faqContentView {
 	public void setFaqModifytime(String faqModifytime) {
 		FaqModifytime = faqModifytime;
 	}
-	public int getFaqCollection() {
+	public String getFaqCollection() {
 		return FaqCollection;
 	}
-	public void setFaqCollection(int faqCollection) {
+	public void setFaqCollection(String faqCollection) {
 		FaqCollection = faqCollection;
 	}
 	public List<Faq2_faqUserView> getuList() {
@@ -56,12 +58,12 @@ public class Faq2_faqContentView {
 		this.uList = uList;
 	}
 	public Faq2_faqContentView(QuestionPersistence questionPersistence){
-		this.QuestionId = questionPersistence.getQuestionId();
-		this.FaqTitle = questionPersistence.getFaqTitle();
-		this.FaqDescription = questionPersistence.getFaqDescription();
-		this.FaqModifytime = questionPersistence.getFaqModifytime();
-		this.FaqScan = questionPersistence.getFaqScan();
-		this.FaqCollection = questionPersistence.getFaqCollection();
+		this.QuestionId = questionPersistence.getFAQQUESTIONID();
+		this.FaqTitle = questionPersistence.getFAQTITLE();
+		this.FaqDescription = questionPersistence.getFAQDESCRIPTION();
+		this.FaqModifytime = questionPersistence.getMODIFYTIME();
+		this.FaqScan = questionPersistence.getSCAN();
+		this.FaqCollection = questionPersistence.getCOLLECTION();
 	}
 	public Faq2_faqContentView(){
 		

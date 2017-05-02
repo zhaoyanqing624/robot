@@ -26,15 +26,15 @@ public class ClassifyService {
 			String faqTitle = "";
 			String content_string = "{\"title\":\"";
 			String firstTitle_string = "{\"title\":\"";
-			List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.classifyName2(classifyPersistence.getClassifyId());
+			List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.classifyName2(classifyPersistence.getFAQCLASSIFYID());
 			int length2 = classifyPersistences2.size()+1;
 			for(ClassifyPersistence classifyPersistence2:classifyPersistences2){
 				String content2 = "";
-				List<QuestionPersistence> faqPersistences = QuestionHelper.SecondClassify_robot(classifyPersistence2.getClassifyId());
+				List<QuestionPersistence> faqPersistences = QuestionHelper.SecondClassify_robot(classifyPersistence2.getFAQCLASSIFYID());
 				int length3 = faqPersistences.size()+1;
 				for(QuestionPersistence faqPersistence:faqPersistences){
 					length3--;
-					faqTitle = zhuanyi(faqPersistence.getFaqTitle());
+					faqTitle = zhuanyi(faqPersistence.getFAQTITLE());
 					content2 += "{\"faqTitle\":\""+faqTitle+"\"}";
 					if (length3>1) {
 						content2 += ",";
@@ -43,7 +43,7 @@ public class ClassifyService {
 					}
 				}
 				length2--;
-				secondTitle = classifyPersistence2.getClassifyName();
+				secondTitle = classifyPersistence2.getFAQCLASSIFYNAME();
 				content +=content_string+secondTitle+"\",\"content\":["+content2+ "]}";
 				if (length2>1) {
 					content += ",";
@@ -51,7 +51,7 @@ public class ClassifyService {
 					content += "";
 				}
 			}
-				firstTitle = classifyPersistence.getClassifyName();
+				firstTitle = classifyPersistence.getFAQCLASSIFYNAME();
 				string += firstTitle_string+firstTitle+"\","+"\"id\":\"speedMenu"+num+"\","+"\"content\":["+content+"]"+"}";
 				num++;
 				length--;
@@ -76,9 +76,9 @@ public class ClassifyService {
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq1_SecondClassify(parentId);
 		for(ClassifyPersistence classifyPersistence:classifyPersistences){
 			List<Faq1_faqContentView> faq1Views = new ArrayList<Faq1_faqContentView>();
-			List<QuestionPersistence> questionPersistences = ClassifyHelper.faq1_faqPersistences(classifyPersistence.getClassifyId());
+			List<QuestionPersistence> questionPersistences = ClassifyHelper.faq1_faqPersistences(classifyPersistence.getFAQCLASSIFYID());
 			List<Faq1_faqContentView> faq1Views2 = new ArrayList<Faq1_faqContentView>();
-			List<QuestionPersistence> questionPersistences2 = ClassifyHelper.faq1_faqPersistences2(classifyPersistence.getClassifyId());
+			List<QuestionPersistence> questionPersistences2 = ClassifyHelper.faq1_faqPersistences2(classifyPersistence.getFAQCLASSIFYID());
 			for(QuestionPersistence questionPersistence:questionPersistences){
 				Faq1_faqContentView faq1View = new Faq1_faqContentView(questionPersistence);
 				faq1Views.add(faq1View);

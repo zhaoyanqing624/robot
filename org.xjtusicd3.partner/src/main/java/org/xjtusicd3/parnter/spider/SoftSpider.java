@@ -1,11 +1,14 @@
 package org.xjtusicd3.parnter.spider;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.xjtusicd3.database.helper.ConfigureHelper;
+import org.xjtusicd3.database.helper.ConfigureHistoryHelper;
 import org.xjtusicd3.database.helper.SoftHelper;
+import org.xjtusicd3.database.model.ConfigureHistoryPersistence;
 import org.xjtusicd3.database.model.ConfigurePersistence;
 import org.xjtusicd3.database.model.SoftPersistence;
 
@@ -61,8 +64,6 @@ public class SoftSpider implements PageProcessor {
 	    		String SoftId = detail.getString("soft_id");
 	    		String SoftScore = detail.getString("point");
 	    		String Logo = detail.getString("logo");
-	    		String Logo48 = detail.getString("logo48");
-	    		String Logo96 = detail.getString("logo96");
 	    		String Offical_website = detail.getString("official_web");
 	    		String Soft_desc = detail.getString("soft_desc");
 	    		String Soft_desc_short = detail.getString("soft_desc_short");
@@ -103,52 +104,87 @@ public class SoftSpider implements PageProcessor {
 	    		}
 	    		String OS_type = os_10+os_100+os_1000+os_10000+os_100000+os_1000000+os_10000000;
 	    		UUID uuid = UUID.randomUUID();
+	    		UUID uuid2 = UUID.randomUUID();
 	    		ConfigurePersistence configurePersistence = new ConfigurePersistence();
-	    		configurePersistence.setConfigureId(uuid.toString());
-	    		configurePersistence.setConfigureName(ConfigureName);
-	    		configurePersistence.setConfigureType("软件");
-	    		configurePersistence.setConfigureProducer(ConfigureProducer);
-	    		configurePersistence.setConfigureDate(ConfigureDate);
-	    		configurePersistence.setConfigureURL(ConfigureURL);
-	    		configurePersistence.setConfigureSize(ConfigureSize);
-	    		
+	    		ConfigureHistoryPersistence configureHistoryPersistence = new ConfigureHistoryPersistence();
+	    		ConfigureHistoryPersistence configureHistoryPersistence2 = new ConfigureHistoryPersistence();
 	    		SoftPersistence softPersistence = new SoftPersistence();
-	    		softPersistence.setConfigureId(uuid.toString());
-	    		softPersistence.setSoftId(SoftId);
-	    		softPersistence.setSoftScore(SoftScore);
-	    		softPersistence.setLogo(Logo);
-	    		softPersistence.setLogo48(Logo48);
-	    		softPersistence.setLogo96(Logo96);
-	    		softPersistence.setSoft_desc(Soft_desc);
-	    		softPersistence.setSoft_desc_short(Soft_desc_short);
-	    		softPersistence.setNick_version(Nick_version);
-	    		softPersistence.setVersion(Version);
-	    		softPersistence.setWhats_new_desc(Whats_new_desc);
-	    		softPersistence.setWhats_new_desc_short(Whats_new_desc_short);
-	    		softPersistence.setClassifyName(ClassifyName);
-	    		softPersistence.setReURL(ReURL);
-	    		softPersistence.setOS_type(OS_type);
-	    		softPersistence.setOffical_website(Offical_website);
+	    		List<ConfigurePersistence> list = ConfigureHelper.getConfigure(zhuanyi(ConfigureName));
+	    		configurePersistence.setCONFIGUREID(uuid.toString());
+	    		configurePersistence.setCONFIGURENAME(zhuanyi(ConfigureName));
+	    		configurePersistence.setCONFIGURETYPE("软件");
+	    		configurePersistence.setPRODUCER(zhuanyi(ConfigureProducer));
+	    		configurePersistence.setURL(ConfigureURL);
+	    		configurePersistence.setFILESIZE(ConfigureSize);
+	    		configurePersistence.setDOWNLOADTIMES("0");
+	    		configurePersistence.setCONFIGURETIME(ConfigureDate);
 	    		
-	    		try {
-					ConfigureHelper.save_Soft(configurePersistence);
-					SoftHelper.sava(softPersistence);
-	    			System.out.println("-------------------------------------");
-				} catch (Exception e) {
-					e.printStackTrace();
+	    		configureHistoryPersistence.setCONFIGUREHISTORYID(uuid2.toString());
+	    		configureHistoryPersistence.setCONFIGUREID(uuid.toString());
+	    		configureHistoryPersistence.setUPDATETIME(ConfigureDate);
+	    		configureHistoryPersistence.setVERSION(Version);
+	    		configureHistoryPersistence.setREMARKS(zhuanyi(Whats_new_desc));
+	    		configureHistoryPersistence.setURL(ConfigureURL);
+	    		
+	    		
+	    		softPersistence.setCONFIGUREID(uuid.toString());
+	    		softPersistence.setSOFTID(SoftId);
+	    		softPersistence.setSCORE(SoftScore);
+	    		softPersistence.setLOGO(Logo);
+	    		softPersistence.setINTRODUCTION(zhuanyi(Soft_desc));
+	    		softPersistence.setDESCRIPTION(zhuanyi(Soft_desc_short));
+	    		softPersistence.setVERSIONTYPE(Nick_version);
+	    		softPersistence.setVERSION(Version);
+	    		softPersistence.setNEWVERSIONINTRODUCTION(zhuanyi(Whats_new_desc));
+	    		softPersistence.setNEWVERSIONDESCRIPTION(zhuanyi(Whats_new_desc_short));
+	    		softPersistence.setSOFTTYPE(ClassifyName);
+	    		softPersistence.setSPAREURL(ReURL);
+	    		softPersistence.setOS(OS_type);
+	    		softPersistence.setWEBSITE(Offical_website);
+	    		if (list.size()==0) {
+		    		try {
+						ConfigureHelper.save_Soft(configurePersistence);
+						ConfigureHistoryHelper.save_ConfigureHistory(configureHistoryPersistence);
+						SoftHelper.sava(softPersistence);
+		    			System.out.println("++++++++++++++++++++++++++++++++++++++++");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else {
+					if (list.get(0).getCONFIGURETIME()==ConfigureDate) {
+						System.out.println(".....................................");
+					}else {
+			    		ConfigureHelper.update_Configure(zhuanyi(ConfigureName), ConfigureSize, ConfigureURL, "0", ConfigureProducer, ConfigureDate);
+			    		SoftHelper.update_Soft(list.get(0).getCONFIGUREID(), Logo, zhuanyi(Soft_desc), zhuanyi(Soft_desc_short), Nick_version, Version, zhuanyi(Whats_new_desc), zhuanyi(Whats_new_desc_short), ClassifyName, ReURL, OS_type, Offical_website, SoftScore);
+			    		UUID uuid3 = UUID.randomUUID();
+			    		configureHistoryPersistence2.setCONFIGUREHISTORYID(uuid3.toString());
+			    		configureHistoryPersistence2.setCONFIGUREID(list.get(0).getCONFIGUREID());
+			    		configureHistoryPersistence2.setUPDATETIME(ConfigureDate);
+			    		configureHistoryPersistence2.setVERSION(Version);
+			    		configureHistoryPersistence2.setREMARKS(zhuanyi(Whats_new_desc));
+			    		configureHistoryPersistence2.setURL(ConfigureURL);
+			    		try {
+							ConfigureHistoryHelper.save_ConfigureHistory(configureHistoryPersistence2);
+							System.out.println(".+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
 				}
+
 	    	}
 		}
     }
-
+    
     @Override
     public Site getSite() {
         return site;
     }
-    
-    public static void main(String[] args) {
-	        Spider.create(new SoftSpider())
-	        .addUrl("http://rj.baidu.com/soft/lists/1/1")
-	        .thread(15).run();
+    public static String zhuanyi(String string){
+    	string = string.replace("\'", "\\'");
+    	return string;
+    }
+    public static void spider_soft(){
+    	Spider.create(new SoftSpider()).addUrl("http://rj.baidu.com/soft/lists/1/1").thread(15).run();
     }
 }

@@ -1,5 +1,7 @@
 package org.xjtusicd3.parnter.spider;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,20 +45,26 @@ public class FAQSpider implements PageProcessor {
         		for(int i = 0;i<title.size();i++){
         			QuestionPersistence questionPersistence = new QuestionPersistence();
         			UUID uuid = UUID.randomUUID();
-        			questionPersistence.setQuestionId(uuid.toString());
-        			questionPersistence.setFaqTitle(title.get(i));
-        			questionPersistence.setFaqDescription(description.get(i));
+        	    	Date date=new Date();
+        	        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        	        String time = format.format(date);
+        			questionPersistence.setFAQQUESTIONID(uuid.toString());
+        			questionPersistence.setFAQTITLE(zhuanyi(title.get(i)));
+        			questionPersistence.setFAQDESCRIPTION(zhuanyi(description.get(i)));
+        			questionPersistence.setMODIFYTIME(time);
+        			questionPersistence.setSCORE(10);
+        			questionPersistence.setMODIFYNUMBER("1");
         			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.spider_ClassifyListByName(new JsonPathSelector("$.Category[*].subName").select(page.getRawText()));
         			for(int j = 0;j<classifyPersistences.size();j++){
-        				questionPersistence.setClassify(classifyPersistences.get(j).getClassifyId());
+        				questionPersistence.setFAQCLASSIFYID(classifyPersistences.get(j).getFAQCLASSIFYID());
         			}
-        			questionPersistence.setFaqKeywords(keywords.get(i));
+        			questionPersistence.setFAQKEYWORDS(keywords.get(i));
         			AnswerPersistence answerPersistence = new AnswerPersistence();
         			UUID uuid2 = UUID.randomUUID();
-        			answerPersistence.setAnswerId(uuid2.toString());
-        			answerPersistence.setQuestionId(uuid.toString());
-        			answerPersistence.setFaqContent(zhuanyi(content.get(i)));
-        			answerPersistence.setAnswerUserId("4fb6be09-8a2b-4a33-8b29-e9e51b071856");
+        			answerPersistence.setFAQANSWERID(uuid2.toString());
+        			answerPersistence.setFAQQUESTIONID(uuid.toString());
+        			answerPersistence.setFAQCONTENT(zhuanyi(content.get(i)));
+        			answerPersistence.setUSERID("fa2f2884-985d-44e0-89b8-0454d0feaeac");
 					try {
 						QuestionHelper.save(questionPersistence);
 						AnswerHelper.save(answerPersistence);
@@ -78,7 +86,6 @@ public class FAQSpider implements PageProcessor {
     public Site getSite() {
         return site;
     }
-    
     
     public static String zhuanyi(String string){
     	string = string.replace("\'", "\\'");

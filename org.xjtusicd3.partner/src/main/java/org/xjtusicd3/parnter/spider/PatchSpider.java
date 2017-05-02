@@ -3,6 +3,7 @@ package org.xjtusicd3.parnter.spider;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.List;
 import java.util.UUID;
 
 import org.xjtusicd3.database.helper.ConfigureHelper;
@@ -79,25 +80,31 @@ public class PatchSpider implements PageProcessor {
 	    	}
 	    	ConfigurePersistence configurePersistence = new ConfigurePersistence();
 	    	PatchPersistence patchPersistence = new PatchPersistence();
-	    	UUID uuid = UUID.randomUUID();
-	    	configurePersistence.setConfigureId(uuid.toString());
-	    	configurePersistence.setConfigureName(patchName);
-	    	configurePersistence.setConfigureType("补丁");
-	    	configurePersistence.setConfigureProducer(patchProducer);
-	    	configurePersistence.setConfigureDate(patchDate);
-	    	configurePersistence.setConfigureURL(patchURL);
-	    	configurePersistence.setConfigureSize(patchSize);
-	    	
-	    	patchPersistence.setConfigureId(uuid.toString());
-	    	patchPersistence.setPatchKeyword(patchKeyword);
-	    	patchPersistence.setPatchLanguage(patchLanguage);
-	    	patchPersistence.setPatchOS(patchOs);
-	    	patchPersistence.setPatchContent(patchContent);
-	    	try {
-	    		ConfigureHelper.save_Patch(configurePersistence);
-				PatchHelper.save(patchPersistence);
-			} catch (Exception e) {
-				e.printStackTrace();
+	    	List<ConfigurePersistence> list = ConfigureHelper.getConfigure(zhuanyi(patchName));
+	    	if (list.size()==0) {
+		    	UUID uuid = UUID.randomUUID();
+		    	configurePersistence.setCONFIGUREID(uuid.toString());
+		    	configurePersistence.setCONFIGURENAME(zhuanyi(patchName));
+		    	configurePersistence.setCONFIGURETYPE("补丁");
+		    	configurePersistence.setPRODUCER(zhuanyi(patchProducer));
+		    	configurePersistence.setCONFIGURETIME(patchDate);
+		    	configurePersistence.setURL(patchURL);
+		    	configurePersistence.setFILESIZE(patchSize);
+		    	
+		    	patchPersistence.setCONFIGUREID(uuid.toString());
+		    	patchPersistence.setPATCHNUMBER(patchKeyword);
+		    	patchPersistence.setLANGUAGE(patchLanguage);
+		    	patchPersistence.setOS(patchOs);
+		    	patchPersistence.setPATCHINTRODUCTION(zhuanyi(patchContent));
+		    	try {
+		    		ConfigureHelper.save_Patch(configurePersistence);
+					PatchHelper.save(patchPersistence);
+					System.out.println("+++++++++++++++++++++++++++++");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else {
+				System.out.println(".........................");
 			}
 		}
     }
@@ -106,9 +113,14 @@ public class PatchSpider implements PageProcessor {
     public Site getSite() {
         return site;
     }
+    public static String zhuanyi(String string){
+    	string = string.replace("\'", "\\'");
+    	return string;
+    }
 
-    public static void main(String[] args) {
-    	for(int i=1;i<=919;i++)
-        Spider.create(new PatchSpider()).addUrl("http://down.tech.sina.com.cn/list/716_3_"+i+".html").thread(15).run();
+    public static void spider_patch(){
+    	for(int i=1;i<=919;i++){
+            Spider.create(new PatchSpider()).addUrl("http://down.tech.sina.com.cn/list/716_3_"+i+".html").thread(15).run();
+            }
     }
 }

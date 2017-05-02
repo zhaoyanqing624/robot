@@ -100,44 +100,11 @@
                     </div>
                     <div class="col-md-6" style="width:100%;">
                         <ul id="tab2" class="nav nav-pills">
-                            <li class="active"><a href="#tab2-item1" data-toggle="tab">服务器</a></li>
-                            <li><a href="#tab2-item2" data-toggle="tab">电脑设备</a></li>
+                            <li class="active"><a href="#tab2-item1" data-toggle="tab">电脑PC</a></li>
                         </ul>
                         <div class="tab-content" style="margin-left: 165px;margin-top: 30px;width: 1000px;float: left;">
                             <div class="tab-pane fade active in" id="tab2-item1" style="width: 889px;float: left;">
 								<section id="portfolio-information" class="padding-top">
-							        <div class="container">
-							            <div class="row">
-							                <div class="col-sm-6" style="width:35%">
-							                    <img src="images/portfolio-details/RH2288.jpg" class="img-responsive" alt="">
-							                </div>
-							                <div class="col-sm-6">
-							                    <div class="project-name overflow">
-							                        <h2 class="bold">华为FusionServer RH2288 V2 </h2>
-							                        <ul class="nav navbar-nav navbar-default">
-							                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：2016.12.26</span></li>
-							                            <li><a href="#"><i class="fa fa-tag"></i>编号：A1454641232654</a></li>
-							                        </ul>
-							                    </div>
-							                    <div class="project-info overflow">
-							                        <h3>硬件信息：</h3>
-							                        <ul class="elements">
-							                            <li><i class="fa fa-angle-right"></i> 处理器：Xeon E5-2620 v2</li>
-							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：8,223MB</li>
-							                            <li><i class="fa fa-angle-right"></i> 存储：300GB</li>
-							                            <li><i class="fa fa-angle-right"></i> 主板：6×PCI-E 3.0</li>
-							                            <li><i class="fa fa-angle-right"></i> 网络控制器：集成4个千兆GE网口</li>
-							                            <li><i class="fa fa-angle-right"></i> 安全认证：CCC/CE/UL/FCC认证</li>
-							                        </ul>
-							                    </div>
-							                </div>
-							            </div>
-							        </div>
-							    </section>
-                        	</div>
-                        	
-                            <div class="tab-pane fade" id="tab2-item2" style="width: 800px;float: left;">
- 									<section id="portfolio-information" class="padding-top">
 							        <div class="container">
 							            <div class="row">
 							                <div class="col-sm-6" style="width:35%">
@@ -185,7 +152,8 @@
 							            </div>
 							        </div>
 							    </section>
-                            </div>
+                        	</div>
+                        	
                         </div>
                     </div>
                 </div>

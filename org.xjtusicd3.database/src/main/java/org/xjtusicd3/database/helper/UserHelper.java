@@ -63,5 +63,27 @@ public class UserHelper {
 		session.close();
 		return userlist;
 		
+
+	}
+	//图片上传
+	public static void updateUserImage(String email,String path){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		mapper.updateUserImage(email,path);
+		session.close();
+	}
+	//用户个人信息完善
+	public static void updateUserInfo(String email,String username,String usersex,String userbirthday,String address,String userbrief){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		mapper.updateUserInfo(email,username,usersex,userbirthday,address,userbrief);
+		session.close();
+	}
+	//个人密码修改
+	public static void updateUserPassword(String email,String password){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		mapper.updateUserPassword(email,password);
+		session.close();
 	}
 }

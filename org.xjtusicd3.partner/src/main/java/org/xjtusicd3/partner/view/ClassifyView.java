@@ -27,7 +27,7 @@ public class ClassifyView {
 	}
 
 	public ClassifyView(ClassifyPersistence classifyPersistence){
-		this.title = classifyPersistence.getClassifyName();
+		this.title = classifyPersistence.getFAQCLASSIFYNAME();
 	}
 	public ClassifyView(){
 	}

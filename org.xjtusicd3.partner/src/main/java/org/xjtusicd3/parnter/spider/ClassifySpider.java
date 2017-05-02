@@ -20,39 +20,39 @@ public class ClassifySpider implements PageProcessor {
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
     @Override
     public void process(Page page) {
-//    	//第一层分类
-//    	List<String> classifyName = new JsonPathSelector("$.datas[*].firstKnowledgeName").selectList(page.getRawText());  
-//    	if (CollectionUtils.isNotEmpty(classifyName)) {
-//    		for (String classifyNameFirst : classifyName) {
-//    			UUID uuid = UUID.randomUUID();
-//    			ClassifyPersistence classifyPersistence = new ClassifyPersistence();
-//    			classifyPersistence.setClassifyId(uuid.toString());
-//    			classifyPersistence.setClassifyName(classifyNameFirst);
-//    			classifyPersistence.setParentId("0");
-//    			try {
-//					ClassifyHelper.save(classifyPersistence);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//    		}
-//    	}
-    	//第二层分类
-    	List<String> classifyName = new JsonPathSelector("$.datas[*].category[*].category_name").selectList(page.getRawText());
-        if (CollectionUtils.isNotEmpty(classifyName)) {
-            for (String classifyNameSecond : classifyName) {
-            	UUID uuid = UUID.randomUUID();	
-            	ClassifyPersistence classifyPersistence = new ClassifyPersistence();
-    			classifyPersistence.setClassifyId(uuid.toString());
-    			classifyPersistence.setClassifyName(classifyNameSecond);
-    			classifyPersistence.setParentId("edb75f70-68eb-4014-ac5c-2fba05b0f75f");
-    			System.out.println(classifyNameSecond);
+    	//第一层分类
+    	List<String> classifyName = new JsonPathSelector("$.datas[*].firstKnowledgeName").selectList(page.getRawText());  
+    	if (CollectionUtils.isNotEmpty(classifyName)) {
+    		for (String classifyNameFirst : classifyName) {
+    			UUID uuid = UUID.randomUUID();
+    			ClassifyPersistence classifyPersistence = new ClassifyPersistence();
+    			classifyPersistence.setFAQCLASSIFYID(uuid.toString());
+    			classifyPersistence.setFAQCLASSIFYNAME(classifyNameFirst);
+    			classifyPersistence.setFAQPARENTID("0");
     			try {
-					//ClassifyHelper.save(classifyPersistence);
+					ClassifyHelper.save(classifyPersistence);
+			    	//第二层分类
+			    	List<String> classifyName2 = new JsonPathSelector("$.datas[*].category[*].category_name").selectList(page.getRawText());
+			    	List<ClassifyPersistence> cList = ClassifyHelper.spider_ClassifyListByName(classifyNameFirst);
+			        if (CollectionUtils.isNotEmpty(classifyName2)) {
+			            for (String classifyNameSecond : classifyName2) {
+			            	UUID uuid2 = UUID.randomUUID();	
+			            	ClassifyPersistence classifyPersistence2 = new ClassifyPersistence();
+			    			classifyPersistence2.setFAQCLASSIFYID(uuid2.toString());
+			    			classifyPersistence2.setFAQCLASSIFYNAME(classifyNameSecond);
+			    			classifyPersistence2.setFAQPARENTID(cList.get(0).getFAQCLASSIFYID());
+			    			try {
+								ClassifyHelper.save(classifyPersistence2);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+			            }
+			        }
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-            }
-        }
+    		}
+    	}
     }
     @Override
     public Site getSite() {
