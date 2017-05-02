@@ -50,7 +50,7 @@ public class UserHelper {
 	public static void deleteUser(String email){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		mapper.deleteUser(email);
+		mapper.deleteUser(email);  
 		session.close();
 	} 
 	  

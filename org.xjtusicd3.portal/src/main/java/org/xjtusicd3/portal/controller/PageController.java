@@ -51,11 +51,6 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("spiderindex");
  	   return mv;
     }
-	@RequestMapping(value="messageindex",method=RequestMethod.GET)
-    public ModelAndView  message(){
- 	   ModelAndView mv=new ModelAndView("messageindex");
- 	   return mv;
-    }
 	@RequestMapping(value="incidentdetail",method=RequestMethod.GET)
     public ModelAndView  incidentdetail(){
  	   ModelAndView mv=new ModelAndView("incidentdetail");

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -27,14 +28,16 @@
                 <div class="ibox-content">
                     <h3>留言列表</h3>
                     <p class="small"><i class="fa fa-hand-o-up"></i>&nbsp;Tip:列表可拖动</p>
-
-                    <div class="input-group">
+					<div class="input-group">
                         <input type="text" placeholder="搜索相关留言" class="input input-sm form-control">
                         <span class="input-group-btn">
                                         <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-search"></i> 搜索</button>
                                 </span>
                     </div>
-
+					<#list advise_list as advice>
+						${advice.name}
+						${advice.content}						
+					</#list>
                     <ul class="sortable-list connectList agile-list">
                         <li class="warning-element">
                             <a href="UserMessageDetail.html">加强过程管理，及时统计教育经费使用情况，做到底码清楚</a>
