@@ -10,7 +10,7 @@ import org.xjtusicd3.database.model.AdvisePersistence;
 public class AdviseHelper
 {
 	/*
-	 * zpz_获取Advise
+	 * zpz_get information of advise
 	 */
 	public static List<AdvisePersistence> getAdvise()
 	{

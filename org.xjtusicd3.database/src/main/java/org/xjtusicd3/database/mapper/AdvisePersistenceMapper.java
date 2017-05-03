@@ -9,8 +9,8 @@ import org.xjtusicd3.database.model.AdvisePersistence;
 public interface  AdvisePersistenceMapper extends IBaseDao<AdvisePersistence,String>
 {
 	/*
-	 * zpz_getAdvise
+	 * zpz_get information of TBL_Advise
 	 */
-	@Select("SELECT Name,Content FROM Advise")
+	@Select("SELECT * TBL_Advise")
 	public List<AdvisePersistence> getAdvise();
 }

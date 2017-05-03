@@ -26,7 +26,9 @@
         <div class="col-sm-4" style="width: 100%;">
             <div class="ibox">
                 <div class="ibox-content">
-                    <h3>留言列表</h3>
+                    <h3><#list advise_list as advice>
+								${advice.text} 
+								</#list></h3>
                     <p class="small"><i class="fa fa-hand-o-up"></i>&nbsp;Tip:列表可拖动</p>
 					<div class="input-group">
                         <input type="text" placeholder="搜索相关留言" class="input input-sm form-control">
@@ -34,67 +36,28 @@
                                         <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-search"></i> 搜索</button>
                                 </span>
                     </div>
-					<#list advise_list as advice>
-						${advice.name}
-						${advice.content}						
-					</#list>
+				 
                     <ul class="sortable-list connectList agile-list">
-                        <li class="warning-element">
-                            <a href="UserMessageDetail.html">加强过程管理，及时统计教育经费使用情况，做到底码清楚</a>
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-white">已读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.09.01
-                            </div>
-                        </li>
-                        <li class="success-element">
-                            支持财会人员的继续培训工作。
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-white">已读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.05.12
-                            </div>
-                        </li>
-                        <li class="info-element">
-                            协同教导处搞好助学金、减免教科书费的工作。
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-white">已读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.09.10
-                            </div>
-                        </li>
-                        <li class="danger-element">
-                            要求会计、出纳人员严格执行财务制度，遵守岗位职责，按时上报各种资料。
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-primary">未读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.06.10
-                            </div>
-                        </li>
-                        <li class="warning-element">
-                            做好职工公费医疗工作，按时发放门诊费。
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-white">已读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.09.09
-                            </div>
-                        </li>
-                        <li class="warning-element">
-                            有计划地把课本复习三至五遍。
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-primary">未读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.08.04
-                            </div>
-                        </li>
-                        <li class="success-element">
-                            看一本高质量的高中语法书
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-white">已读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.05.12
-                            </div>
-                        </li>
-                        <li class="info-element">
-                            选择一份较好的英语报纸，通过阅读提高英语学习效果。
-                            <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-white">已读</a>
-                                <i class="fa fa-user"></i>张三&nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.09.10
-                            </div>
-                        </li>
+                        
+                                <#list advise_list as advice>
+									 
+									<li class="success-element">
+                          					
+										<div class="agile-detail">
+                                			<a href="#" class="pull-right btn btn-xs btn-white"></a>
+                               				
+                            			</div>
+
+                            			<div class="agile-detail">
+                                			
+                                			<i class="fa fa-user"></i>${advice.name} &nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.05.12
+                            			</div>
+                        			</li>
+														
+								</#list>
+					
+                          
+                         
                     </ul>
                 </div>
             </div>

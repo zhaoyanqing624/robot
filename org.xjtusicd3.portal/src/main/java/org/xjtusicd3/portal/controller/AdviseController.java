@@ -16,12 +16,14 @@ public class AdviseController
 	 * zpz_advise_查看advise
 	 */
 	@RequestMapping(value="messageindex",method=RequestMethod.GET)
-	public ModelAndView advise()
+	public  ModelAndView advise()
 	{
 		ModelAndView mv = new ModelAndView("messageindex");
 		List<AdvisePersistence> advise = AdviseService.getAdvise();
 		mv.addObject("advise_list",advise);
 		return mv;
+	 
 		
 	}
+	 
 }
