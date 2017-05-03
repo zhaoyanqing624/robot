@@ -14,7 +14,7 @@ public class ConfigureService
 		List<ConfigurePersistence> list = ConfigureHelper.getPartConfig();
 		for (int i = 0; i < list.size(); i++) 
 		{
-			result += "{\"id\":\""+(i+1)+"\",\"configureProducer\":\""+list.get(i).getConfigureProducer()+"\",\"configureName\":\""+list.get(i).getConfigureName()+"\",\"configureType\":\""+list.get(i).getConfigureType()+"\"}";
+			result += "{\"id\":\""+(i+1)+"\",\"configureProducer\":\""+list.get(i).getPRODUCER()+"\",\"configureName\":\""+list.get(i).getCONFIGURENAME()+"\",\"configureType\":\""+list.get(i).getCONFIGURETYPE()+"\"}";
 			if(i < list.size()-1)
 			{
 				result += ",";

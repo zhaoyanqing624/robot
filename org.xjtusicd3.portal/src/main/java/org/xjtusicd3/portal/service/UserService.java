@@ -18,9 +18,9 @@ public class UserService {
 		{
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("id",i+1);
-			jsonObject.put("userName", userlist.get(i).getUserName());
-			jsonObject.put("userPassword", userlist.get(i).getUserPassword());
-			jsonObject.put("userEmail", userlist.get(i).getUserEmail());
+			jsonObject.put("userName", userlist.get(i).getUSERNAME());
+			jsonObject.put("userPassword", userlist.get(i).getUSERPASSWORD());
+			jsonObject.put("userEmail", userlist.get(i).getUSEREMAIL());
 			user += JsonUtil.toJsonString(jsonObject);
 			if(i < userlist.size()-1)
 			{

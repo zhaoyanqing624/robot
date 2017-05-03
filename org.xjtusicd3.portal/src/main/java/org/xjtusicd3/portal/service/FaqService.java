@@ -19,8 +19,8 @@ public class FaqService {
 		String result = "";
 		List<QuestionPersistence> list = QuestionHelper.getFaq();
 		for(int i = 0;i<list.size();i++){
-			List<ClassifyPersistence> cList = ClassifyHelper.faq2_classify(list.get(i).getClassifyId());
-			 result += "{\"id\":\""+(i+1)+"\",\"faqTitle\":\""+list.get(i).getFaqTitle()+"\",\"classifyName\":\""+cList.get(0).getClassifyName()+"\"}";
+			List<ClassifyPersistence> cList = ClassifyHelper.faq2_classify(list.get(i).getFAQCLASSIFYID());
+			 result += "{\"id\":\""+(i+1)+"\",\"faqTitle\":\""+list.get(i).getFAQTITLE()+"\",\"classifyName\":\""+cList.get(0).getFAQCLASSIFYNAME()+"\"}";
 			if (i<list.size()-1) {
 				result += ",";
 			}else {
@@ -34,11 +34,11 @@ public class FaqService {
 		String result="";
 		List<QuestionPersistence> list = QuestionHelper.getFaq();
 		for(int i = 0;i<list.size();i++){
-			List<ClassifyPersistence> cList = ClassifyHelper.faq2_classify(list.get(i).getClassifyId());
+			List<ClassifyPersistence> cList = ClassifyHelper.faq2_classify(list.get(i).getFAQCLASSIFYID());
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("id", i+1);
-			jsonObject.put("faqTitle", list.get(i).getFaqTitle());
-			jsonObject.put("classifyName", cList.get(0).getClassifyName());
+			jsonObject.put("faqTitle", list.get(i).getFAQTITLE());
+			jsonObject.put("classifyName", cList.get(0).getFAQCLASSIFYNAME());
 			result += JsonUtil.toJsonString(jsonObject);
 		}
 		System.out.println(result);
