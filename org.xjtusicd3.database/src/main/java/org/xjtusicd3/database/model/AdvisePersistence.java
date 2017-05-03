@@ -8,23 +8,23 @@ import org.xjtusicd3.database.ann.Table;
 import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
 import org.xjtusicd3.database.ann.TableKey.Strategy;
-@Table(tablename="Advise")
+@Table(tablename="TBL_Advise")
 public class AdvisePersistence
 {
 	@TableKey(strategy = Strategy.NORMAL)
-	@TableField(columnName="AdviseId")
+	@TableField(columnName="ADVISEID")
 	private String AdviseId;
-	@TableField(columnName="Email")
+	@TableField(columnName="EMAIL")
 	private String Email;
-	@TableField(columnName="Name")
+	@TableField(columnName="NAME")
 	private String Name;
-	@TableField(columnName="Phone")
+	@TableField(columnName="PHONE")
 	private String Phone;
-	@TableField(columnName="Conetent")
+	@TableField(columnName="TEXT")
 	private String Content;
-	@TableField(columnName="Attachment")
+	@TableField(columnName="ANNEX")
 	private String Attachment;
-	@TableField(columnName="UserId")
+	@TableField(columnName="USERID")
 	private String UserId;
 		
 	public String getAdviseId()

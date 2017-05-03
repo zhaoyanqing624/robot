@@ -10,9 +10,9 @@ import org.xjtusicd3.database.model.ConfigurePersistence;
 public interface ConfigurePersistenceMapper extends IBaseDao<ConfigurePersistence, String>{
 
 	/*
-	 * zpz_get part of the information of configure
+	 * zpz_get part of information of configure
 	 */
-	@Select("SELECT CONFIGURENAME,CONFIGURETYPE,CONFIGUREPRODUCER FROM TBL_Configure LIMIT 200")
+	@Select("SELECT CONFIGURENAME,CONFIGURETYPE,PRODUCER FROM TBL_Configure LIMIT 200")
 	public List<ConfigurePersistence> getPartConfig();
 	/*
 	 * zyq_spider_按名字查看设备
