@@ -1,3 +1,5 @@
+package org.xjtusicd3.partner.filter;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -16,7 +18,7 @@ import org.hyperic.sigar.SigarException;
 import org.hyperic.sigar.Swap;
 import org.hyperic.sigar.Who;
 
-public class testzhao {
+public class SigarTest {
     public static void main(String[] args) {
         try {
             // System信息，从jvm获取
@@ -221,8 +223,6 @@ public class testzhao {
         }
         return;
     }
-
-  
-
    
 }
+

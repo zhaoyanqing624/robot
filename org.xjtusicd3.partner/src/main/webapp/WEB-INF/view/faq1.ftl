@@ -79,7 +79,7 @@
                     <input type="hidden" id="secondeType" value="c">
                     <ul class="typeContent clearfix" id="typeTplWrapper">
                     	<#list faq1_list as a>
-                        	<li><a href="faq2.html?c=${a.classifyId}">${a.classifyName}</a></li>
+                        	<li><a href="faq2.html?c=${a.FAQCLASSIFYID}">${a.FAQCLASSIFYNAME}</a></li>
                         </#list>
                     </ul>
                 </div>

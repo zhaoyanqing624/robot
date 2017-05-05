@@ -123,6 +123,7 @@
 							                        <ul class="elements">
 							                            <li><i class="fa fa-angle-right"></i> 处理器：Inter64 Family 6 Model 30 Stepping 5 GenuineTntel ~2933Mhz</li>
 							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：12,223MB</li>
+							                            <li><i class="fa fa-angle-right"></i> 硬盘（RAM）：12,223MB</li>
 							                            <li><i class="fa fa-angle-right"></i> 网卡：Inter<R> 82578DM Gigabit Network Connection</li>
 							                            <li><i class="fa fa-angle-right"></i> BIOS：Hewlett-Packard 786H1 v01.05,2010/6/9</li>
 							                            <li><i class="fa fa-angle-right"></i> 系统名称：Microsoft Windows 7 旗舰版</li>

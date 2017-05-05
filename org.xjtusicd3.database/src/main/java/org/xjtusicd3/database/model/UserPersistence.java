@@ -32,8 +32,8 @@ public class UserPersistence {
 	private int USERSTATE;
 	@TableField(columnName="VERIFICATIONCODE")
 	private String VERIFICATIONCODE;
-	@TableField(columnName="TIMESTAMPS")
-	private String TIMESTAMPS;
+	@TableField(columnName="TIMEREMARKS")
+	private String TIMEREMARKS;
 	public String getUSERID() {
 		return USERID;
 	}
@@ -106,12 +106,13 @@ public class UserPersistence {
 	public void setVERIFICATIONCODE(String vERIFICATIONCODE) {
 		VERIFICATIONCODE = vERIFICATIONCODE;
 	}
-	public String getTIMESTAMPS() {
-		return TIMESTAMPS;
+	public String getTIMEREMARKS() {
+		return TIMEREMARKS;
 	}
-	public void setTIMESTAMPS(String tIMESTAMPS) {
-		TIMESTAMPS = tIMESTAMPS;
+	public void setTIMEREMARKS(String tIMEREMARKS) {
+		TIMEREMARKS = tIMEREMARKS;
 	}
+	
 	
 	
 }	

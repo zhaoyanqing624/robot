@@ -6,8 +6,8 @@ function(){
 	 dataType: "json",
 	 success: function(data){
 	 		for(var i in data){
-	 		    var a = data[i].classifyId;
-	 		    var b = data[i].classifyName;
+	 		    var a = data[i].fAQCLASSIFYID;
+	 		    var b = data[i].fAQCLASSIFYNAME;
 	 		    var list = document.getElementById("konwledge-first");
 	 		    var html = list.innerHTML;
 	 		    var color = new Array("default","orange","pink","red","blue","green","gray","black","default","orange","pink","red","blue","green","gray","black","default","orange","pink","red","blue","green","gray","black");

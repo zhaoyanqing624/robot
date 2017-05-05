@@ -79,11 +79,11 @@
                     <a href="/org.xjtusicd3.partner/faq.html"><span class="allType">所有分类</span></a>
                     <span class="arrow">&gt;</span>
                     <#list classify as classify>
-                    <a href="/org.xjtusicd3.partner/faq1.html?p=${classify.classifyId}" id="firstNavStep"><span id="fristProductionName">${classify.classifyName}</span></a>
+                    <a href="/org.xjtusicd3.partner/faq1.html?p=${classify.FAQCLASSIFYID}" id="firstNavStep"><span id="fristProductionName">${classify.FAQCLASSIFYNAME}</span></a>
                     </#list>
                     <span class="arrow">&gt;</span>
                     <#list classify2 as classify2>
-                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.classifyId}" id="secondNavStep"><span class="secondStep" id="subProductionName">${classify2.classifyName}</span></a>
+                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.FAQCLASSIFYID}" id="secondNavStep"><span class="secondStep" id="subProductionName">${classify2.FAQCLASSIFYNAME}</span></a>
                     </#list>
                     <span class="arrow twoFlag">&gt;</span>
                     <span class="titleStep">${faq3Views.faqTitle}</span>
@@ -98,9 +98,6 @@
                             <img src="${ulist.userImage}">
                             <span class="username">${ulist.userName}</span>
                         </#list>
-                            <span>|</span>
-                            <span id="doc_id" doc_id="11717">知识编号：</span>
-                            <span>${faq3Views.faqId}</span>
                         </p>
                         <#list faq3Views.faqAnswers as flist>
                         <div class="content">${flist.faqContent}</div>

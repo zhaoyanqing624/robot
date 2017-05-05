@@ -78,11 +78,11 @@
                     <a href="/org.xjtusicd3.partner/faq.html"><span class="allType">所有分类</span></a>
                     <span class="arrow">&gt;</span>
                     <#list faq2_list as classify>
-                    <a href="/org.xjtusicd3.partner/faq1.html?p=${classify.classifyId}" id="firstNavStep"><span id="fristProductionName">${classify.classifyName}</span></a>
+                    <a href="/org.xjtusicd3.partner/faq1.html?p=${classify.FAQCLASSIFYID}" id="firstNavStep"><span id="fristProductionName">${classify.FAQCLASSIFYNAME}</span></a>
                     </#list>
                     <span class="arrow">&gt;</span>
                     <#list faq2_list2 as classify2>
-                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.classifyId}" id="secondNavStep" value="${classify2.classifyId}"><span class="secondStep" id="subProductionName">${classify2.classifyName}</span></a>
+                    <a href="/org.xjtusicd3.partner/faq2.html?c=${classify2.FAQCLASSIFYID}" id="secondNavStep" value="${classify2.FAQCLASSIFYID}"><span class="secondStep" id="subProductionName">${classify2.FAQCLASSIFYNAME}</span></a>
                     </#list>                    
                 </div>
                 

@@ -89,6 +89,7 @@ public class PatchSpider implements PageProcessor {
 		    	configurePersistence.setPRODUCER(zhuanyi(patchProducer));
 		    	configurePersistence.setCONFIGURETIME(patchDate);
 		    	configurePersistence.setURL(patchURL);
+		    	configurePersistence.setDOWNLOADTIMES("0");
 		    	configurePersistence.setFILESIZE(patchSize);
 		    	
 		    	patchPersistence.setCONFIGUREID(uuid.toString());

@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.CopyFile;
+import org.xjtusicd3.partner.filter.DeleteFile;
 import org.xjtusicd3.partner.filter.RegexAddress;
 import org.xjtusicd3.partner.service.UserService;
 import org.xjtusicd3.partner.view.UserView;
@@ -155,8 +156,12 @@ public class UserController {
 			ModelAndView mv = new ModelAndView("personal");
 			List<UserPersistence> list = UserHelper.getEmail(useremail);
 			String address = list.get(0).getUSERADDRESS();
-			RegexAddress regexAddress = new RegexAddress();
-			mv.addObject("address", regexAddress.replaceAddress(address));
+			if(address==null){
+				
+			}else {
+				RegexAddress regexAddress = new RegexAddress();
+				mv.addObject("address", regexAddress.replaceAddress(address));
+			}
 			mv.addObject("personal_list", list);
 			return mv;
 		}
@@ -168,16 +173,28 @@ public class UserController {
 	@RequestMapping(value="/addUserInfo",method=RequestMethod.POST)
 	public String addUserInfo(UserView userView,HttpServletRequest request,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
+		String usersex = "";
+		String address = "";
 		if (useremail==null) {
 			return "redirect:login.html";
 		}else {
+			List<UserPersistence> list = UserHelper.getEmail(useremail);
+			if (list.get(0).getGENDER()!=null) {
+				 usersex = list.get(0).getGENDER();
+			}else {
+				 usersex = userView.getUserSex();
+			}
 			String username = userView.getUserName();
-			String usersex = userView.getUserSex();
 			String userbirthday = userView.getUserBirthday();
 			String province = userView.getProvince();
 			String city = userView.getCity();
 			String district = userView.getDistrict();
-			String address = "0"+province+"1"+city+"2"+district+"3";
+			RegexAddress regexAddress = new RegexAddress();
+			if (province==null&&city==null&&district==null) {
+				address = list.get(0).getUSERADDRESS();
+			}else {
+				address = "0"+province+"1"+city+"2"+district+"3";
+			}
 			String userbrief = userView.getUserBrief();
 			UserHelper.updateUserInfo(useremail, username, usersex, userbirthday, address, userbrief);
 			return "redirect:personal.html";
@@ -216,43 +233,49 @@ public class UserController {
 	@RequestMapping(value = "/uploadUserImage",method=RequestMethod.POST)
     public String uploadUserImage(HttpServletRequest request,HttpSession session) throws IOException {
 		String useremail = (String) session.getAttribute("UserEmail");
-		MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;//request强制转换注意
-		Iterator<String> iterator = mRequest.getFileNames();
-        String path  ="";
-        String fileName = "";
-        String suffix = "";
-		String filename = "";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String dir = "static/image/"+useremail +"/"+ sdf.format(new Date()) + "/";
-        String realPath = request.getSession().getServletContext().getRealPath("/");
-        while(iterator.hasNext()){
-            MultipartFile multipartFile = mRequest.getFile(iterator.next());
-            if(multipartFile != null){
-                String fn = multipartFile.getOriginalFilename();
-                 suffix = fn.substring(fn.lastIndexOf("."));
-                 filename = RandomStringUtils.randomAlphanumeric(6);
-                fileName = dir + filename + suffix;
-                path = realPath + fileName;
-                path = path.replace("\\", "/");
-                File f = new File(path);
-                if(!f.mkdirs()){
-                    f.mkdir();
-                }
-                multipartFile.transferTo(f);
-            }
-        }
-        CopyFile copyFile = new CopyFile();
-        String newPath = copyFile.copyFile(path, useremail, sdf.format(new Date()));
-        newPath = newPath.replace("\\", "/");
-        newPath = newPath.replace("E:/eclipse/workspace/xiaoduo-master/org.xjtusicd3.partner/src/main/webapp", "/org.xjtusicd3.partner");
-        UserHelper.updateUserImage(useremail, newPath);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (useremail==null) {
+			return "redirect:login.html";
+		}else {
+			MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;//request强制转换注意
+			Iterator<String> iterator = mRequest.getFileNames();
+	        String path  ="";
+	        String fileName = "";
+	        String suffix = "";
+			String filename = "";
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	        String dir = "static/image/"+useremail +"/"+ sdf.format(new Date()) + "/";
+	        String realPath = request.getSession().getServletContext().getRealPath("/");
+	        while(iterator.hasNext()){
+	            MultipartFile multipartFile = mRequest.getFile(iterator.next());
+	            if(multipartFile != null){
+	                String fn = multipartFile.getOriginalFilename();
+	                 suffix = fn.substring(fn.lastIndexOf("."));
+	                 filename = RandomStringUtils.randomAlphanumeric(6);
+	                fileName = dir + filename + suffix;
+	                path = realPath + fileName;
+	                path = path.replace("\\", "/");
+	                File f = new File(path);
+	                if(!f.mkdirs()){
+	                    f.mkdir();
+	                }
+	                multipartFile.transferTo(f);
+	            }
+	        }
+	        CopyFile copyFile = new CopyFile();
+	        String newPath = copyFile.copyFile(path, useremail, sdf.format(new Date()));
+	        newPath = newPath.replace("\\", "/");
+	        newPath = newPath.replace("E:/eclipse/workspace/robot-master/org.xjtusicd3.partner/src/main/webapp", "/org.xjtusicd3.partner");
+	        UserHelper.updateUserImage(useremail, newPath);
+			try {
+				Thread.sleep(3500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	        String aString = "{\"result\":\""+newPath+"\"}";
+			return aString;
 		}
-        String aString = "{\"result\":\""+newPath+"\"}";
-		return aString;
+		
+
        
     }
 	

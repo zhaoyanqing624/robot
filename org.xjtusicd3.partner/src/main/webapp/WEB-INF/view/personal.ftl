@@ -111,7 +111,7 @@
 									<div class="row">
 										<div id="crop-avatar" class="col-md-6">
 											<div class="avatar-view" title="Change Logo Picture">
-			    								<img src="${userinfo.userImage}" alt="Logo">
+			    								<img src="${userinfo.AVATAR}" alt="Logo">
 			    							</div>
 									    </div>
 									</div>
@@ -169,17 +169,17 @@
 										    <form id="main-contact-form" name="contact-form" method="post" action="addUserInfo.html">
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>用户名：</span></div>
-					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.userName}"></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.USERNAME}"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>性别：</span></div>
 													<div class="rdo">
-												        <input type="radio" name="UserSex" class="rdolist" value="${userinfo.userSex}"/ >
+												        <input type="radio" name="UserSex" class="rdolist" value="男"/ >
 												        <label class="rdobox">
 												            <span class="check-image"></span>
 												            <span class="radiobox-content">男</span>
 												        </label>
-												        <input type="radio" name="UserSex" class="rdolist" value="${userinfo.userSex}" />
+												        <input type="radio" name="UserSex" class="rdolist"  />
 												        <label class="rdobox">
 												            <span class="check-image"></span>
 												            <span class="radiobox-content">女</span>
@@ -189,7 +189,7 @@
 					                            <div class="form-group" style="width: 370px;height: 37px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>生日：</span></div>
 					                                <div style="float:right;width:314px;height:50px;">
-														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.userBirthday}" readonly ></li>
+														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.USERBIRTHDAY}" readonly ></li>
 					                                </div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height:125px;">
@@ -214,7 +214,7 @@
 					                            <div class="form-group" style="width: 370px;height: 77px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>简介：</span></div>
 					                            	<div style="float:right;width:314px;height:130px;">
-					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" >${userinfo.userBrief}</textarea>
+					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" >${userinfo.USERSIGNATURE}</textarea>
 					                            	</div>
 					                            </div>                        
 					                            <div class="form-group">
@@ -228,16 +228,16 @@
 					                    <div class="project-name overflow">
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>用户名：</span></div>
-					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.userName}"></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.USERNAME}"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>性别：</span></div>
-													<div style="float:right;width:314px;height:50px;"><input type="text" name="UserSex" class="form-control"  required="required" value="${userinfo.userSex}"></div>
+													<div style="float:right;width:314px;height:50px;"><input type="text" name="UserSex" class="form-control"  required="required" value="${userinfo.GENDER}"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 37px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>生日：</span></div>
 					                                <div style="float:right;width:314px;height:50px;">
-														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.userBirthday}" readonly ></li>
+														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.USERBIRTHDAY}" readonly ></li>
 					                                </div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height:40px;">
@@ -247,7 +247,7 @@
 					                            <div class="form-group" style="width: 370px;height: 77px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>简介：</span></div>
 					                            	<div style="float:right;width:314px;height:130px;">
-					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" >${userinfo.userBrief}</textarea>
+					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" >${userinfo.USERSIGNATURE}</textarea>
 					                            	</div>
 					                            </div>                        
 					                            <div class="form-group">

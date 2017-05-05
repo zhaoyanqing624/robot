@@ -8,10 +8,10 @@ public class Spider {
 //		SoftSpider softSpider = new SoftSpider();
 //		softSpider.spider_soft();
 		
-		DriverSpider driverSpider = new DriverSpider();
-		driverSpider.spider_driver();
+//		DriverSpider driverSpider = new DriverSpider();
+//		driverSpider.spider_driver();
 		
-//		PatchSpider patchSpider = new PatchSpider();
-//		patchSpider.spider_patch();
+		PatchSpider patchSpider = new PatchSpider();
+		patchSpider.spider_patch();
 	}
 }

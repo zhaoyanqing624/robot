@@ -66,7 +66,7 @@ public class UserService {
     public static boolean validateEmail(String email){
     	boolean a = false;
     	List<UserPersistence> uList = UserHelper.getEmail(email);
-    	String startTime = uList.get(0).getTIMESTAMPS();
+    	String startTime = uList.get(0).getTIMEREMARKS();
     	Date date=new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String endTime = format.format(date);
