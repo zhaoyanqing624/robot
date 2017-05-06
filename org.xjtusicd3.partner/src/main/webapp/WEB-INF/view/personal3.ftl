@@ -127,7 +127,6 @@
 							                            <li><i class="fa fa-angle-right"></i> 网卡：Inter<R> 82578DM Gigabit Network Connection</li>
 							                            <li><i class="fa fa-angle-right"></i> BIOS：Hewlett-Packard 786H1 v01.05,2010/6/9</li>
 							                            <li><i class="fa fa-angle-right"></i> 系统名称：Microsoft Windows 7 旗舰版</li>
-							                            <li><i class="fa fa-angle-right"></i> 系统ID：00426-OEM-8992662-00400</li>
 							                            
 							                        </ul>
 							                    </div>
