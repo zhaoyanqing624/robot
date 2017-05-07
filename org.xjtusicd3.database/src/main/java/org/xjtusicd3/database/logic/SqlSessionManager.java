@@ -14,6 +14,7 @@ import org.xjtusicd3.database.mapper.ClassifyPersistenceMapper;
 import org.xjtusicd3.database.mapper.ConfigureHistoryPersistenceMapper;
 import org.xjtusicd3.database.mapper.ConfigurePersistenceMapper;
 import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
+import org.xjtusicd3.database.mapper.EquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
@@ -56,6 +57,7 @@ public class SqlSessionManager {
 			configuration.addMapper(ClassifyPersistenceMapper.class);
 			configuration.addMapper(RobotPersistenceMapper.class);
 			configuration.addMapper(AdvisePersistenceMapper.class);
+			configuration.addMapper(EquipmentPersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

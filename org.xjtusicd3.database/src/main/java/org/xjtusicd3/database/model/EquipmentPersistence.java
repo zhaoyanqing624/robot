@@ -10,6 +10,8 @@ public class EquipmentPersistence {
 	@TableKey(strategy=Strategy.NORMAL)
 	@TableField(columnName="EQUIPMENTID")
 	private String EQUIPMENTID;
+	@TableField(columnName="MACADDRESS")
+	private String MACADDRESS;
 	@TableField(columnName="EQUIPMENTMODEL")
 	private String EQUIPMENTMODEL;
 	@TableField(columnName="BUYTIME")
@@ -79,6 +81,12 @@ public class EquipmentPersistence {
 	}
 	public void setSTATE(int sTATE) {
 		STATE = sTATE;
+	}
+	public String getMACADDRESS() {
+		return MACADDRESS;
+	}
+	public void setMACADDRESS(String mACADDRESS) {
+		MACADDRESS = mACADDRESS;
 	}
 	
 	
