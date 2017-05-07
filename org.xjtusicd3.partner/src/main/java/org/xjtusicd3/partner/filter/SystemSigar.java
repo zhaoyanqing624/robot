@@ -1,5 +1,10 @@
 package org.xjtusicd3.partner.filter;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Map;
+import java.util.Properties;
+
 import org.hyperic.sigar.FileSystem;
 import org.hyperic.sigar.FileSystemUsage;
 import org.hyperic.sigar.Mem;
@@ -11,11 +16,11 @@ public class SystemSigar {
 		file();
 	}
 	//获取内存
-    private static String memory() throws SigarException {
+	public static String memory() throws SigarException {
         Sigar sigar = new Sigar();
         Mem mem = sigar.getMem();
         // 内存总量
-        String ram =  mem.getTotal() / 1024L/1000 + "MB";
+        String ram =  Math.ceil((mem.getTotal() / 1024L/1024/1024)) + "GB";
 		return ram;
     }
     
@@ -34,9 +39,22 @@ public class SystemSigar {
 				
 			}
         }
-        String total = totalsize / 1024L/1024 + "GB";
+        String total = Math.ceil((totalsize / 1024L/1024)) + "GB";
 		return total;
     	
+    }
+    
+    //
+    public static String property() throws UnknownHostException {
+        Runtime r = Runtime.getRuntime();
+        Properties props = System.getProperties();
+        InetAddress addr;
+        addr = InetAddress.getLocalHost();
+        String ip = addr.getHostAddress();
+        Map<String, String> map = System.getenv();
+        System.out.println("本地ip地址:    " + ip);
+        System.out.println("操作系统的名称：    " + props.getProperty("os.name"));
+        return ip+","+props.getProperty("os.name");
     }
     
 }

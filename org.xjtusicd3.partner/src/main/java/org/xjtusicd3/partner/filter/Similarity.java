@@ -73,5 +73,8 @@ public class Similarity {
         Similarity similarity = new Similarity(s1, s2);  
         System.out.println(similarity.sim());  
     }  
-  
+    public static double similarity(String string,String string2){
+    	Similarity similarity = new Similarity(string, string2);
+		return similarity.sim();
+    }
 } 

@@ -132,30 +132,45 @@ System.out.println(getMotherBoard());
             return Storagename+","+Storageversion+","+Storagetime;
         }
 
+//        public static String getMotherBoard(){
+//            //主板
+//        	String Mainboard="";
+//        	String Mainboardversion="";
+//        	String Mainboardtime="";
+//        	RegistryKey LOCALMACHINE = RegistryKey.getRootKeyForIndex(RegistryKey.HKEY_LOCAL_MACHINE_INDEX);
+//            RegistryKey rt6 = new RegistryKey(LOCALMACHINE, "\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E97D-E325-11CE-BFC1-08002BE10318}");
+//            List<RegistryKey> rts6 = rt6.getSubKeys();
+//            for(RegistryKey rrt:rts6){
+//            	String properties = rrt.getName();
+//            	RegistryKey rt6_1 = new RegistryKey(LOCALMACHINE, "\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E97D-E325-11CE-BFC1-08002BE10318}\\"+rrt.getName());
+//            	RegistryValue rV = rt6_1.getValue("WdTimerTic");
+//            	if (rV!=null) {
+//            		RegistryValue rValue6_1 = rt6_1.getValue("DriverDesc");
+//        	        RegistryValue rValue6_2 = rt6_1.getValue("DriverVersion");
+//        	        RegistryValue rValue6_3 = rt6_1.getValue("DriverDate");
+//		        	 Mainboard = rValue6_1.toString().substring(rValue6_1.toString().lastIndexOf("Value")+6).trim();
+//		        	 Mainboardversion = rValue6_2.toString().substring(rValue6_2.toString().lastIndexOf("Value")+6).trim();
+//		        	 Mainboardtime = rValue6_3.toString().substring(rValue6_3.toString().lastIndexOf("Value")+6).trim();
+//				}
+//            }
+//			return Mainboard+","+Mainboardversion+","+Mainboardtime;
+//        }
         public static String getMotherBoard(){
             //主板
         	String Mainboard="";
         	String Mainboardversion="";
         	String Mainboardtime="";
         	RegistryKey LOCALMACHINE = RegistryKey.getRootKeyForIndex(RegistryKey.HKEY_LOCAL_MACHINE_INDEX);
-            RegistryKey rt6 = new RegistryKey(LOCALMACHINE, "\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E97D-E325-11CE-BFC1-08002BE10318}");
-            List<RegistryKey> rts6 = rt6.getSubKeys();
-            for(RegistryKey rrt:rts6){
-            	String properties = rrt.getName();
-            	RegistryKey rt6_1 = new RegistryKey(LOCALMACHINE, "\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E97D-E325-11CE-BFC1-08002BE10318}\\"+rrt.getName());
-            	RegistryValue rV = rt6_1.getValue("WdTimerTic");
-            	if (rV!=null) {
-            		RegistryValue rValue6_1 = rt6_1.getValue("DriverDesc");
-        	        RegistryValue rValue6_2 = rt6_1.getValue("DriverVersion");
-        	        RegistryValue rValue6_3 = rt6_1.getValue("DriverDate");
-		        	 Mainboard = rValue6_1.toString().substring(rValue6_1.toString().lastIndexOf("Value")+6).trim();
-		        	 Mainboardversion = rValue6_2.toString().substring(rValue6_2.toString().lastIndexOf("Value")+6).trim();
-		        	 Mainboardtime = rValue6_3.toString().substring(rValue6_3.toString().lastIndexOf("Value")+6).trim();
-				}
-            }
-			return Mainboard+","+Mainboardversion+","+Mainboardtime;
+            RegistryKey rt6 = new RegistryKey(LOCALMACHINE, "\\HARDWARE\\DESCRIPTION\\System\\BIOS");
+            RegistryValue value = rt6.getValue("BIOSVendor");
+            RegistryValue value2 = rt6.getValue("BaseBoardProduct");
+            RegistryValue value3 = rt6.getValue("BIOSReleaseDate");
+            String producter = value.toString().substring(value.toString().lastIndexOf("Value")+6).trim();
+            String BIOS = value2.toString().substring(value2.toString().lastIndexOf("Value")+6).trim();
+            String time = value3.toString().substring(value3.toString().lastIndexOf("Value")+6).trim();
+            
+			return producter+","+BIOS+","+time;
         }
-
         
         public static String getNetworkCard1(){
             //有限网卡

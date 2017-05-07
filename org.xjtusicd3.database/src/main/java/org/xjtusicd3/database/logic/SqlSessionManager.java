@@ -20,6 +20,8 @@ import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
 import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
+import org.xjtusicd3.database.model.CurrentConfigurePersistence;
+import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
 
 
 
@@ -58,6 +60,8 @@ public class SqlSessionManager {
 			configuration.addMapper(RobotPersistenceMapper.class);
 			configuration.addMapper(AdvisePersistenceMapper.class);
 			configuration.addMapper(EquipmentPersistenceMapper.class);
+			configuration.addMapper(CurrentConfigurePersistence.class);
+			configuration.addMapper(CurrentEquipmentPersistence.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

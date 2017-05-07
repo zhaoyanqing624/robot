@@ -10,8 +10,11 @@ import java.util.UUID;
   
 public class Main {  
 	public static void main(String[] args) {
-		UUID uuid = UUID.randomUUID();
-		System.out.println(uuid.toString());
+		for (int i=1;i<3;i++){
+			UUID uuid = UUID.randomUUID();
+			System.out.println(uuid.toString());
+		}
+		
 //    	Date date=new Date();
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        String time = format.format(date);
