@@ -151,15 +151,42 @@ System.out.println(getMotherBoard());
 		        	 Mainboard = rValue6_1.toString().substring(rValue6_1.toString().lastIndexOf("Value")+6).trim();
 		        	 Mainboardversion = rValue6_2.toString().substring(rValue6_2.toString().lastIndexOf("Value")+6).trim();
 		        	 Mainboardtime = rValue6_3.toString().substring(rValue6_3.toString().lastIndexOf("Value")+6).trim();
-		        	 System.out.println(Mainboard);
 				}
             }
 			return Mainboard+","+Mainboardversion+","+Mainboardtime;
         }
 
         
-        public static String getNetworkCard(){
-            //网卡
+        public static String getNetworkCard1(){
+            //有限网卡
+        	String network="";
+        	RegistryKey LOCALMACHINE = RegistryKey.getRootKeyForIndex(RegistryKey.HKEY_LOCAL_MACHINE_INDEX);
+            RegistryKey rt7 = new RegistryKey(LOCALMACHINE, "\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E972-E325-11CE-BFC1-08002BE10318}");
+            List<RegistryKey> rts7 = rt7.getSubKeys();
+            for(RegistryKey rrt:rts7){
+            	RegistryKey rt7_1 = new RegistryKey(LOCALMACHINE, "\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E972-E325-11CE-BFC1-08002BE10318}\\"+rrt.getName());
+            	RegistryValue rValue7_IPv4 = rt7_1.getValue("*LsoV1IPv4");
+            	RegistryValue rValue7_IPv6 = rt7_1.getValue("*LsoV2IPv6");
+            	RegistryValue SSID = rt7_1.getValue("SSID");
+            	if (SSID==null) {
+            		if (rValue7_IPv4!=null&&rValue7_IPv6!=null) {
+    	                RegistryValue rValue7_1 = rt7_1.getValue("DriverDesc");
+    	                RegistryValue rValue7_2 = rt7_1.getValue("DriverVersion");
+    	                RegistryValue rValue7_3 = rt7_1.getValue("DriverDate");
+    	                String Network = rValue7_1.toString().substring(rValue7_1.toString().lastIndexOf("Value")+6).trim();
+    	                String Networkversion = rValue7_2.toString().substring(rValue7_2.toString().lastIndexOf("Value")+6).trim();
+    	                String Networktime = rValue7_3.toString().substring(rValue7_3.toString().lastIndexOf("Value")+6).trim();
+    	                network = Network+","+Networkversion+","+Networktime;
+    	  			}
+    			}
+
+            }
+			return network;
+        }
+        
+        public static String getNetworkCard2(){
+            //无线网卡
+        	String network="";
         	RegistryKey LOCALMACHINE = RegistryKey.getRootKeyForIndex(RegistryKey.HKEY_LOCAL_MACHINE_INDEX);
             RegistryKey rt7 = new RegistryKey(LOCALMACHINE, "\\SYSTEM\\ControlSet001\\Control\\Class\\{4D36E972-E325-11CE-BFC1-08002BE10318}");
             List<RegistryKey> rts7 = rt7.getSubKeys();
@@ -175,21 +202,10 @@ System.out.println(getMotherBoard());
                     String Network = rValue7_1.toString().substring(rValue7_1.toString().lastIndexOf("Value")+6).trim();
                     String Networkversion = rValue7_2.toString().substring(rValue7_2.toString().lastIndexOf("Value")+6).trim();
                     String Networktime = rValue7_3.toString().substring(rValue7_3.toString().lastIndexOf("Value")+6).trim();
-                    System.out.println("无线网卡："+Network+Networkversion+Networktime);
-    			}else {
-    	        	if (rValue7_IPv4!=null&&rValue7_IPv6!=null) {
-    	                RegistryValue rValue7_1 = rt7_1.getValue("DriverDesc");
-    	                RegistryValue rValue7_2 = rt7_1.getValue("DriverVersion");
-    	                RegistryValue rValue7_3 = rt7_1.getValue("DriverDate");
-    	                String Network = rValue7_1.toString().substring(rValue7_1.toString().lastIndexOf("Value")+6).trim();
-    	                String Networkversion = rValue7_2.toString().substring(rValue7_2.toString().lastIndexOf("Value")+6).trim();
-    	                String Networktime = rValue7_3.toString().substring(rValue7_3.toString().lastIndexOf("Value")+6).trim();
-    	                System.out.println("有线网卡："+Network+Networkversion+Networktime);
-    	  			}
+                    network = Network+","+Networkversion+","+Networktime;
     			}
-
             }
-			return null;
+			return network;
         }
         
         //获得操作系统的ID
