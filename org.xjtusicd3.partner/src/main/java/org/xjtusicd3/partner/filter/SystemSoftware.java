@@ -11,11 +11,11 @@ import com.registry.RegistryValue;
 
 public class SystemSoftware {
 
-    public static void SoftList(String equipmentId) {
+    public static List<String> SoftList() {
 //        System.loadLibrary("reg_x64.dll");
     	String result="";
         RegistryKey LOCALMACHINE = RegistryKey.getRootKeyForIndex(RegistryKey.HKEY_LOCAL_MACHINE_INDEX);
-        
+        ArrayList list = new ArrayList<>();
         RegistryKey rt = new RegistryKey(LOCALMACHINE, "\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
         
         List<RegistryKey> rts = rt.getSubKeys();
@@ -30,7 +30,8 @@ public class SystemSoftware {
 					if (rv2!=null) {
 		                String path = rv.toString().substring(rv.toString().lastIndexOf("Value")+6).trim();
 		                String path2 = rv2.toString().substring(rv2.toString().lastIndexOf("Value")+6).trim();
-//		                System.out.println("名称："+path);
+		                String soft = path+","+path2;
+		                list.add(soft);
 //		                System.out.println(path2);
 //		                System.out.println("------------------------");
 					}
@@ -38,5 +39,6 @@ public class SystemSoftware {
             }
             
         }
+		return list;
     }
 }

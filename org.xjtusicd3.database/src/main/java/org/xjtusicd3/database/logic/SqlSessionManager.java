@@ -13,6 +13,8 @@ import org.xjtusicd3.database.mapper.AnswerPersistenceMapper;
 import org.xjtusicd3.database.mapper.ClassifyPersistenceMapper;
 import org.xjtusicd3.database.mapper.ConfigureHistoryPersistenceMapper;
 import org.xjtusicd3.database.mapper.ConfigurePersistenceMapper;
+import org.xjtusicd3.database.mapper.CurrentConfigurePersistenceMapper;
+import org.xjtusicd3.database.mapper.CurrentEquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
 import org.xjtusicd3.database.mapper.EquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
@@ -20,6 +22,7 @@ import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
 import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
+import org.xjtusicd3.database.mapper.User_Equipment_HistoryPersistenceMapper;
 import org.xjtusicd3.database.model.CurrentConfigurePersistence;
 import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
 
@@ -60,8 +63,9 @@ public class SqlSessionManager {
 			configuration.addMapper(RobotPersistenceMapper.class);
 			configuration.addMapper(AdvisePersistenceMapper.class);
 			configuration.addMapper(EquipmentPersistenceMapper.class);
-			configuration.addMapper(CurrentConfigurePersistence.class);
-			configuration.addMapper(CurrentEquipmentPersistence.class);
+			configuration.addMapper(CurrentConfigurePersistenceMapper.class);
+			configuration.addMapper(CurrentEquipmentPersistenceMapper.class);
+			configuration.addMapper(User_Equipment_HistoryPersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

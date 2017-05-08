@@ -18,4 +18,22 @@ public class CurrentEquipmentHelp {
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_personal3_存入当前设备表
+	 */
+	public static void save(CurrentEquipmentPersistence currentEquipmentPersistence){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
+		mapper.save(currentEquipmentPersistence);
+		session.close();
+	}
+	/*
+	 * zyq_peisonal3_更新当前设备表
+	 */
+	public static void update(CurrentEquipmentPersistence currentEquipmentPersistence){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
+		mapper.update(currentEquipmentPersistence);
+		session.close();
+	}
 }

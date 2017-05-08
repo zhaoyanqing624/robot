@@ -7,7 +7,7 @@ import com.registry.RegistryKey;
 import com.registry.RegistryValue;
 
 public class SystemPatch {
-	public static List PatchList(){
+	public static List<String> PatchList(){
 //      System.loadLibrary("reg_x64.dll");
       RegistryKey LOCALMACHINE = RegistryKey.getRootKeyForIndex(RegistryKey.HKEY_LOCAL_MACHINE_INDEX);
       ArrayList list = new ArrayList<>();

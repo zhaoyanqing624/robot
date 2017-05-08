@@ -20,6 +20,8 @@ public class CurrentEquipmentPersistence {
 	private String CPU;
 	@TableField(columnName="RAM")
 	private String RAM;
+	@TableField(columnName="HARDDRIVER")
+	private String HARDDRIVER;
 	@TableField(columnName="STORAGE")
 	private String STORAGE;
 	@TableField(columnName="NETWORKCARD")
@@ -30,6 +32,8 @@ public class CurrentEquipmentPersistence {
 	private String MOTHERBOARD;
 	@TableField(columnName="OSNAME")
 	private String OSNAME;
+	@TableField(columnName="OSTYPE")
+	private String OSTYPE;
 	@TableField(columnName="OSVERSION")
 	private String OSVERSION;
 	@TableField(columnName="OSID")
@@ -42,6 +46,8 @@ public class CurrentEquipmentPersistence {
 	private String GRAPHICCARD;
 	@TableField(columnName="AUDIOCARD")
 	private String AUDIOCARD;
+	@TableField(columnName="TIMEREMARKS")
+	private String TIMEREMARKS;
 	public String getEQUIPMENTID() {
 		return EQUIPMENTID;
 	}
@@ -144,6 +150,23 @@ public class CurrentEquipmentPersistence {
 	public void setAUDIOCARD(String aUDIOCARD) {
 		AUDIOCARD = aUDIOCARD;
 	}
-	
+	public String getOSTYPE() {
+		return OSTYPE;
+	}
+	public void setOSTYPE(String oSTYPE) {
+		OSTYPE = oSTYPE;
+	}
+	public String getHARDDRIVER() {
+		return HARDDRIVER;
+	}
+	public void setHARDDRIVER(String hARDDRIVER) {
+		HARDDRIVER = hARDDRIVER;
+	}
+	public String getTIMEREMARKS() {
+		return TIMEREMARKS;
+	}
+	public void setTIMEREMARKS(String tIMEREMARKS) {
+		TIMEREMARKS = tIMEREMARKS;
+	}
 	
 }
