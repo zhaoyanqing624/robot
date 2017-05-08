@@ -14,6 +14,8 @@ public class CurrentEquipmentPersistence {
 	private String MACADDRESS;
 	@TableField(columnName="EQUIPMENTMODEL")
 	private String EQUIPMENTMODEL;
+	@TableField(columnName="EQUIPMENTTIME")
+	private String EQUIPMENTTIME;
 	@TableField(columnName="IP")
 	private String IP;
 	@TableField(columnName="CPU")
@@ -167,6 +169,12 @@ public class CurrentEquipmentPersistence {
 	}
 	public void setTIMEREMARKS(String tIMEREMARKS) {
 		TIMEREMARKS = tIMEREMARKS;
+	}
+	public String getEQUIPMENTTIME() {
+		return EQUIPMENTTIME;
+	}
+	public void setEQUIPMENTTIME(String eQUIPMENTTIME) {
+		EQUIPMENTTIME = eQUIPMENTTIME;
 	}
 	
 }

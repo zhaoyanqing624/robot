@@ -18,6 +18,13 @@ public class CurrentEquipmentHelp {
 		session.close();
 		return list;
 	}
+	public static List<CurrentEquipmentPersistence> currentEquipmentByID(String userid){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
+		List<CurrentEquipmentPersistence> list = mapper.currentEquipmentByID(userid);
+		session.close();
+		return list;
+	}
 	/*
 	 * zyq_personal3_存入当前设备表
 	 */

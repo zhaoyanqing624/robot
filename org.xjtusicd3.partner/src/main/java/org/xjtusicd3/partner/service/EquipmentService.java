@@ -23,6 +23,7 @@ import org.xjtusicd3.partner.filter.SystemDriver;
 import org.xjtusicd3.partner.filter.SystemPatch;
 import org.xjtusicd3.partner.filter.SystemSigar;
 import org.xjtusicd3.partner.filter.SystemSoftware;
+import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
 public class EquipmentService {
 	/*
@@ -36,6 +37,7 @@ public class EquipmentService {
 		SystemDriver systemDriver = new SystemDriver();
 		String[] EquipmentModel = systemDriver.getEquipmentModel().split(",");
 		String equipmentmodel = EquipmentModel[0];
+		String equipmenttime = EquipmentModel[1];
 		String cpu = systemDriver.getCPU();
 		String[] GraphicCard = systemDriver.getGraphicCard().split(",");
 		String graphiccard = GraphicCard[0];
@@ -77,6 +79,7 @@ public class EquipmentService {
 				cep.setEQUIPMENTID(uuid.toString());
 				cep.setMACADDRESS(macaddress);
 				cep.setEQUIPMENTMODEL(equipmentmodel);
+				cep.setEQUIPMENTTIME(equipmenttime);
 				cep.setRAM(ram);
 				cep.setHARDDRIVER(harddriver);
 				cep.setIP(ip);
@@ -111,7 +114,6 @@ public class EquipmentService {
 				}
 				//添加软件信息
 				for(int i=0;i<SoftList.size();i++){
-					System.out.println(SoftList.get(i).toString());
 					String[] soft = SoftList.get(i).toString().split(",");
 					String softname = soft[0];
 					String softversion = soft[1];
@@ -139,6 +141,7 @@ public class EquipmentService {
 				cep.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
 				cep.setMACADDRESS(macaddress);
 				cep.setEQUIPMENTMODEL(equipmentmodel);
+				cep.setEQUIPMENTTIME(equipmenttime);
 				cep.setRAM(ram);
 				cep.setHARDDRIVER(harddriver);
 				cep.setIP(ip);
@@ -173,7 +176,6 @@ public class EquipmentService {
 				}
 				//添加软件信息
 				for(int i=0;i<SoftList.size();i++){
-					System.out.println(SoftList.get(i).toString());
 					String[] soft = SoftList.get(i).toString().split(",");
 					String softname = soft[0];
 					String softversion = soft[1];
@@ -208,6 +210,7 @@ public class EquipmentService {
 				cep.setEQUIPMENTID(uuid.toString());
 				cep.setMACADDRESS(macaddress);
 				cep.setEQUIPMENTMODEL(equipmentmodel);
+				cep.setEQUIPMENTTIME(equipmenttime);
 				cep.setRAM(ram);
 				cep.setHARDDRIVER(harddriver);
 				cep.setIP(ip);
@@ -242,7 +245,6 @@ public class EquipmentService {
 				}
 				//添加软件信息
 				for(int i=0;i<SoftList.size();i++){
-					System.out.println(SoftList.get(i).toString());
 					String[] soft = SoftList.get(i).toString().split(",");
 					String softname = soft[0];
 					String softversion = soft[1];
@@ -270,6 +272,7 @@ public class EquipmentService {
 				cep.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
 				cep.setMACADDRESS(macaddress);
 				cep.setEQUIPMENTMODEL(equipmentmodel);
+				cep.setEQUIPMENTTIME(equipmenttime);
 				cep.setRAM(ram);
 				cep.setHARDDRIVER(harddriver);
 				cep.setIP(ip);
@@ -304,7 +307,6 @@ public class EquipmentService {
 				}
 				//添加软件信息
 				for(int i=0;i<SoftList.size();i++){
-					System.out.println(SoftList.get(i).toString());
 					String[] soft = SoftList.get(i).toString().split(",");
 					String softname = soft[0];
 					String softversion = soft[1];
@@ -331,7 +333,14 @@ public class EquipmentService {
 		}
 
 	}
-//	public static void main(String[] args) throws UnknownHostException, SocketException, SigarException {
-//		saveCurrentEquipment("77528570@qq.com");
-//	}
+	/*
+	 * zyq_personal3_设备信息展示
+	 */
+	public static List<Personal3_EquipmentView> personal3_EquipmentView(String email){
+		List<UserPersistence> uList = UserHelper.getEmail(email);
+		List<CurrentEquipmentPersistence> list = CurrentEquipmentHelp.currentEquipmentByID(uList.get(0).getUSERID());
+		
+		return null;
+		
+	}
 }

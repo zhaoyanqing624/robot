@@ -12,5 +12,10 @@ public interface CurrentEquipmentPersistenceMapper extends IBaseDao<CurrentEquip
 	 */
 	@Select("SELECT * FROM TBL_CurrentEquipment WHERE MACADDRESS=#{0}")
 	List<CurrentEquipmentPersistence> currentEquipment(String macaddress);
+	/*
+	 * zyq_personal3_根据ID查询列表
+	 */
+	@Select("SELECT * FROM TBL_CurrentEquipment WHERE USERID=#{0}")
+	List<CurrentEquipmentPersistence> currentEquipmentByID(String userid);
 
 }

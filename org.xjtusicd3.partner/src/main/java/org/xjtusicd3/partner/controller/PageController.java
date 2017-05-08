@@ -60,11 +60,6 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("personal23");
 		return mv;
 	}
-	@RequestMapping(value="personal3",method=RequestMethod.GET)
-	public ModelAndView personal3(){
-		ModelAndView mv = new ModelAndView("personal3");
-		return mv;
-	}
 	@RequestMapping(value="question",method=RequestMethod.GET)
 	public ModelAndView question(){
 		ModelAndView mv = new ModelAndView("question");

@@ -11,10 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.hyperic.sigar.SigarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.xjtusicd3.database.model.EquipmentPersistence;
-import org.xjtusicd3.partner.filter.SystemDriver;
-import org.xjtusicd3.partner.filter.SystemSigar;
+import org.springframework.web.servlet.ModelAndView;
+import org.xjtusicd3.database.helper.CurrentEquipmentHelp;
+import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
+import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.EquipmentService;
 
 @Controller
@@ -34,6 +37,20 @@ public class EquipmentController {
 		return null;
 	}
 	/*
-	 * 
+	 * zyq_personal3_当前设备展示
 	 */
+	@RequestMapping(value="personal3",method=RequestMethod.GET)
+	public ModelAndView personal3(HttpSession session,HttpServletRequest request){
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return new ModelAndView("login");
+		}else {
+			ModelAndView mv = new ModelAndView("personal3");
+			List<UserPersistence> uList = UserHelper.getEmail(useremail);
+			List<CurrentEquipmentPersistence> list = CurrentEquipmentHelp.currentEquipmentByID(uList.get(0).getUSERID());
+			
+			mv.addObject("personal3_list", list);
+			return mv;
+		}
+	}
 }

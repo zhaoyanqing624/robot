@@ -111,25 +111,29 @@
 							                    <img src="images/portfolio-details/hp8180.jpg" class="img-responsive" alt="">
 							                </div>
 							                <div class="col-sm-6">
+							                <#list personal3_list as list>
 							                    <div class="project-name overflow">
-							                        <h2 class="bold">HP Compaq 8180 Elite CMT PC </h2>
+							                        <h2 class="bold">${list.EQUIPMENTMODEL}</h2>
 							                        <ul class="nav navbar-nav navbar-default">
-							                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：2016.12.25</span></li>
-							                            <li><a href="#"><i class="fa fa-tag"></i>编号：4CV0515KJ0</a></li>
+							                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：${list.EQUIPMENTTIME}</span></li>
 							                        </ul>
 							                    </div>
 							                    <div class="project-info overflow">
 							                        <h3>硬件信息：</h3>
 							                        <ul class="elements">
-							                            <li><i class="fa fa-angle-right"></i> 处理器：Inter64 Family 6 Model 30 Stepping 5 GenuineTntel ~2933Mhz</li>
-							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：12,223MB</li>
-							                            <li><i class="fa fa-angle-right"></i> 硬盘（RAM）：12,223MB</li>
-							                            <li><i class="fa fa-angle-right"></i> 网卡：Inter<R> 82578DM Gigabit Network Connection</li>
-							                            <li><i class="fa fa-angle-right"></i> BIOS：Hewlett-Packard 786H1 v01.05,2010/6/9</li>
-							                            <li><i class="fa fa-angle-right"></i> 系统名称：Microsoft Windows 7 旗舰版</li>
+							                            <li><i class="fa fa-angle-right"></i> 处理器：${list.CPU}</li>
+							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：${list.RAM}</li>
+							                            <li><i class="fa fa-angle-right"></i> 硬盘：${list.HARDDRIVER}</li>
+							                            <li><i class="fa fa-angle-right"></i> 网卡：${list.NETWORKCARD}</li>
+							                            <#if list.NETWORKCARD2 ??>
+							                            <li><i class="fa fa-angle-right"></i> 无线网卡：${list.NETWORKCARD2}</li>
+							                            </#if>
+							                            <li><i class="fa fa-angle-right"></i> 主板：${list.MOTHERBOARD}</li>
+							                            <li><i class="fa fa-angle-right"></i> 系统名称：${list.OSNAME}   ${list.OSTYPE}</li>
 							                            
 							                        </ul>
 							                    </div>
+							                 </#list>    
 							                    <div class="skills overflow" style="height:78px;" id="buding">
 							                        <h3>补丁信息：</h3>
 							                        <ul class="nav navbar-nav navbar-default">
