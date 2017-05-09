@@ -1,5 +1,7 @@
 package org.xjtusicd3.database.helper;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.CurrentConfigurePersistenceMapper;
@@ -41,5 +43,15 @@ public class CurrentConfigureHelper {
 		CurrentConfigurePersistenceMapper mapper = session.getMapper(CurrentConfigurePersistenceMapper.class);
 		mapper.updateCurrentConfigure_driver(configureid,equipmentid,version,name,type);
 		session.close();
+	}
+	/*
+	 * zyq_personal3_查看当前配置表
+	 */
+	public static List<CurrentConfigurePersistence> getCurrentConfigure(String equipmentId,String type){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CurrentConfigurePersistenceMapper mapper = session.getMapper(CurrentConfigurePersistenceMapper.class);
+		List<CurrentConfigurePersistence> list = mapper.getCurrentConfigure(equipmentId,type);
+		session.close();
+		return list;
 	}
 }

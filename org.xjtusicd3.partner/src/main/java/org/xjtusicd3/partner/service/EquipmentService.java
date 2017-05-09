@@ -3,6 +3,7 @@ package org.xjtusicd3.partner.service;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +24,7 @@ import org.xjtusicd3.partner.filter.SystemDriver;
 import org.xjtusicd3.partner.filter.SystemPatch;
 import org.xjtusicd3.partner.filter.SystemSigar;
 import org.xjtusicd3.partner.filter.SystemSoftware;
+import org.xjtusicd3.partner.view.Personal3_EquipmentConfigureView;
 import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
 public class EquipmentService {
@@ -337,10 +339,29 @@ public class EquipmentService {
 	 * zyq_personal3_设备信息展示
 	 */
 	public static List<Personal3_EquipmentView> personal3_EquipmentView(String email){
+		List<Personal3_EquipmentView> personal3_EquipmentViews = new ArrayList<Personal3_EquipmentView>();
 		List<UserPersistence> uList = UserHelper.getEmail(email);
-		List<CurrentEquipmentPersistence> list = CurrentEquipmentHelp.currentEquipmentByID(uList.get(0).getUSERID());
-		
-		return null;
+		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipmentByID(uList.get(0).getUSERID());
+		for(CurrentEquipmentPersistence currentEquipmentPersistence:currentEquipmentPersistences){
+			List<Personal3_EquipmentConfigureView> personal3_EquipmentConfigureViews = new ArrayList<Personal3_EquipmentConfigureView>();
+			List<CurrentConfigurePersistence> configurePersistences = CurrentConfigureHelper.getCurrentConfigure(currentEquipmentPersistence.getEQUIPMENTID(),"补丁");
+			List<Personal3_EquipmentConfigureView> personal3_EquipmentConfigureViews2 = new ArrayList<Personal3_EquipmentConfigureView>();
+			List<CurrentConfigurePersistence> configurePersistences2 = CurrentConfigureHelper.getCurrentConfigure(currentEquipmentPersistence.getEQUIPMENTID(),"软件");
+			for(CurrentConfigurePersistence configurePersistence:configurePersistences){
+				Personal3_EquipmentConfigureView personal3_EquipmentConfigureView = new Personal3_EquipmentConfigureView(configurePersistence);
+				personal3_EquipmentConfigureViews.add(personal3_EquipmentConfigureView);
+			}
+			for(CurrentConfigurePersistence configurePersistence:configurePersistences2){
+				Personal3_EquipmentConfigureView personal3_EquipmentConfigureView = new Personal3_EquipmentConfigureView(configurePersistence);
+				personal3_EquipmentConfigureViews2.add(personal3_EquipmentConfigureView);
+			}
+			Personal3_EquipmentView view = new Personal3_EquipmentView(currentEquipmentPersistence);
+			view.setPatchViews(personal3_EquipmentConfigureViews);
+			view.setSoftViews(personal3_EquipmentConfigureViews2);;
+			personal3_EquipmentViews.add(view);
+			
+		}
+		return personal3_EquipmentViews;
 		
 	}
 }

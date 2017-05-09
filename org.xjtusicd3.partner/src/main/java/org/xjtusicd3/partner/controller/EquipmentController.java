@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.xjtusicd3.database.helper.CurrentEquipmentHelp;
 import org.xjtusicd3.database.helper.UserHelper;
-import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.EquipmentService;
+import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
 @Controller
 public class EquipmentController {
@@ -47,8 +46,7 @@ public class EquipmentController {
 		}else {
 			ModelAndView mv = new ModelAndView("personal3");
 			List<UserPersistence> uList = UserHelper.getEmail(useremail);
-			List<CurrentEquipmentPersistence> list = CurrentEquipmentHelp.currentEquipmentByID(uList.get(0).getUSERID());
-			
+			List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(useremail);
 			mv.addObject("personal3_list", list);
 			return mv;
 		}
