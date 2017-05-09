@@ -26,7 +26,10 @@
             <div class="ibox">
                 <div class="ibox-content">
                     <span class="text-muted small pull-right">最后更新：<i class="fa fa-clock-o"></i> 2015-09-01 12:00</span>
-                    <h2>日志管理</h2>
+                    <h2>日志管理AAA</h2>
+                    <#list log_list as log>
+								${log.logid} 
+							</#list>
                     <p>
                         所有用户必须通过验证
                     </p>
@@ -55,6 +58,9 @@
                                                 <td><a data-toggle="tab" href="#contact-1" class="client-link">1</a>
                                                 </td>
                                                 <td>撤销事件请求</td>
+                                                <#list log_list as log>
+													${log.LOGMETHOD} 
+												</#list>
                                                 <td class="client-status"><span class="label label-primary">2015-09-01 12:00</span>
                                             </td>
                                                 <td class="contact-type"><i class="fa fa-check-circle-o"> </i>

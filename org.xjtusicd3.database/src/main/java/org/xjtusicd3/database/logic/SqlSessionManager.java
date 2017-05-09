@@ -11,6 +11,9 @@ import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.xjtusicd3.database.mapper.AdvisePersistenceMapper;
 import org.xjtusicd3.database.mapper.AnswerPersistenceMapper;
 import org.xjtusicd3.database.mapper.ClassifyPersistenceMapper;
+import org.xjtusicd3.database.mapper.CommunityAnswerPersistenceMapper;
+import org.xjtusicd3.database.mapper.CommunityQuestionPersistenceMapper;
+import org.xjtusicd3.database.mapper.ComputerPersistenceMapper;
 import org.xjtusicd3.database.mapper.ConfigureHistoryPersistenceMapper;
 import org.xjtusicd3.database.mapper.ConfigurePersistenceMapper;
 import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
@@ -19,6 +22,9 @@ import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
 import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
+import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
+import org.xjtusicd3.database.model.ComputerPersistence;
+import org.xjtusicd3.database.mapper.LogPersistenceMapper;
 
 
 
@@ -56,6 +62,11 @@ public class SqlSessionManager {
 			configuration.addMapper(ClassifyPersistenceMapper.class);
 			configuration.addMapper(RobotPersistenceMapper.class);
 			configuration.addMapper(AdvisePersistenceMapper.class);
+			configuration.addMapper(LogPersistenceMapper.class);
+			configuration.addMapper(CommunityQuestionPersistenceMapper.class);
+			configuration.addMapper(CommunityAnswerPersistenceMapper.class);
+			configuration.addMapper(ComputerPersistenceMapper.class);
+			configuration.addMapper(UserQuestionPersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

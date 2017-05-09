@@ -11,6 +11,6 @@ public interface  AdvisePersistenceMapper extends IBaseDao<AdvisePersistence,Str
 	/*
 	 * zpz_get information of TBL_Advise
 	 */
-	@Select("SELECT * TBL_Advise")
+	@Select("SELECT * FROM TBL_Advise")
 	public List<AdvisePersistence> getAdvise();
 }
