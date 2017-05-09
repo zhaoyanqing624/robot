@@ -40,11 +40,7 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("fileindex");
  	   return mv;
     }
-	@RequestMapping(value="logindex",method=RequestMethod.GET)
-    public ModelAndView  test(){
- 	   ModelAndView mv=new ModelAndView("logindex");
- 	   return mv;
-    }
+	 
 	
 	@RequestMapping(value="spiderindex",method=RequestMethod.GET)
     public ModelAndView  spider(){
