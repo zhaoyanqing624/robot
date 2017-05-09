@@ -7,6 +7,7 @@
     <title>智能小朵-知识库</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
     <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/websocket.js"></script>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset2.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util2.css" />
@@ -102,12 +103,19 @@
                 <!-- 加载loading -->
                 <div id="list_waper" class="clearfix ps-container">
                     <ul id="lastChat" class="user_list">
-                        <div class="msg-loading" style="display: none;">
-                            <div class="msg-loading-icon"></div>
-                            <p>正在加载...</p>
-                        </div>
-                    <li id="lastChat10000" uid="10000"> 							<div class="list-box">							<img src="http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg" alt="女神" width="40" height="40"> 					     	<div class="info"><h5>女神</h5><p class="theLastMsg">各位小伙伴们~大家学习的怎么样了呢？如果有什么意见和建议欢迎大家随时提出来哦~~另外，马上就要过年了。，到底是什么呢？我们一起来看一下吧~
-在移动互联网如此火爆的今天，你是不是也有过想入行却没有人领路的痛苦呢？之《零基础入门Android语法与界面》来学习吧!传送门：http://class.imooc.com/sc/6 在这里你将获得1V1的专业教学团队的答疑支持，</p></div>					     	</div>				 		</li></ul>
+	                    <li id="lastChat10000" uid="10000"> 							
+	                    	<div class="list-box">							
+	                    		<img src="http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg" alt="女神" width="40" height="40"> 					     	
+	                    		<div class="info"><h5>女神</h5><p class="theLastMsg">各位小伙伴们~大家学习的怎么样了呢？如果有什么意见和建议欢迎大家随时提出来哦~~另外，马上就要过年了。，到底是什么呢？我们一起来看一下吧~在移动互联网如此火爆的今天，你是不是也有过想入行却没有人领路的痛苦呢？之《零基础入门Android语法与界面》来学习吧!传送门：http://class.imooc.com/sc/6 在这里你将获得1V1的专业教学团队的答疑支持，</p>
+								</div>					     	
+							</div>
+							<div class="list-box">							
+	                    		<img src="http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg" alt="女神" width="40" height="40"> 					     	
+	                    		<div class="info"><h5>女神</h5><p class="theLastMsg">各位小伙伴们~大家学习的怎么样了呢？如果有什么意见和建议欢迎大家随时提出来哦~~另外，马上就要过年了。，到底是什么呢？我们一起来看一下吧~在移动互联网如此火爆的今天，你是不是也有过想入行却没有人领路的痛苦呢？之《零基础入门Android语法与界面》来学习吧!传送门：http://class.imooc.com/sc/6 在这里你将获得1V1的专业教学团队的答疑支持，</p>
+								</div>					     	
+							</div>
+						</li>
+					</ul>
                 <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px; width: 320px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 560px;"><div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div></div></div>
                 <!-- 加载loading end -->
                 <!-- 搜索历史 -->

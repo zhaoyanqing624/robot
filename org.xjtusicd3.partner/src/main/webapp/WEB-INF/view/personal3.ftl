@@ -111,43 +111,49 @@
 							                    <img src="images/portfolio-details/hp8180.jpg" class="img-responsive" alt="">
 							                </div>
 							                <div class="col-sm-6">
+							                <#list personal3_list as list>
 							                    <div class="project-name overflow">
-							                        <h2 class="bold">HP Compaq 8180 Elite CMT PC </h2>
+							                        <h2 class="bold">${list.EQUIPMENTMODEL}</h2>
 							                        <ul class="nav navbar-nav navbar-default">
-							                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：2016.12.25</span></li>
-							                            <li><a href="#"><i class="fa fa-tag"></i>编号：4CV0515KJ0</a></li>
+							                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：${list.EQUIPMENTTIME}</span></li>
 							                        </ul>
 							                    </div>
 							                    <div class="project-info overflow">
 							                        <h3>硬件信息：</h3>
 							                        <ul class="elements">
-							                            <li><i class="fa fa-angle-right"></i> 处理器：Inter64 Family 6 Model 30 Stepping 5 GenuineTntel ~2933Mhz</li>
-							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：12,223MB</li>
-							                            <li><i class="fa fa-angle-right"></i> 硬盘（RAM）：12,223MB</li>
-							                            <li><i class="fa fa-angle-right"></i> 网卡：Inter<R> 82578DM Gigabit Network Connection</li>
-							                            <li><i class="fa fa-angle-right"></i> BIOS：Hewlett-Packard 786H1 v01.05,2010/6/9</li>
-							                            <li><i class="fa fa-angle-right"></i> 系统名称：Microsoft Windows 7 旗舰版</li>
+							                            <li><i class="fa fa-angle-right"></i> 处理器：${list.CPU}</li>
+							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：${list.RAM}</li>
+							                            <li><i class="fa fa-angle-right"></i> 硬盘：${list.HARDDRIVER}</li>
+							                            <li><i class="fa fa-angle-right"></i> 网卡：${list.NETWORKCARD}</li>
+							                            <#if list.NETWORKCARD2 ??>
+							                            <li><i class="fa fa-angle-right"></i> 无线网卡：${list.NETWORKCARD2}</li>
+							                            </#if>
+							                            <li><i class="fa fa-angle-right"></i> 主板：${list.MOTHERBOARD}</li>
+							                            <li><i class="fa fa-angle-right"></i> 系统名称：${list.OSNAME}   ${list.OSTYPE}</li>
 							                            
 							                        </ul>
 							                    </div>
+							                   	
 							                    <div class="skills overflow" style="height:78px;" id="buding">
 							                        <h3>补丁信息：</h3>
 							                        <ul class="nav navbar-nav navbar-default">
 							                        	<a onclick="zhankai()" style="color:blue;margin-left:10px;" id="zhankaiall">展开</a>
-							                            <li style="float:left"><image src="ico/system.ico"></image><span>KB2849697</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;">3.5.150.0</span></li><br/>
-							                            <li style="float:left"><image src="ico/system.ico"></image><span>KB2849697</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">8.5.18600.0</span></li><br/>
-							                            <li style="float:left"><image src="ico/system.ico"></image><span>KB2849697</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;">7.2.1</span></li><br/>
+							                        	<#list list.patchViews as patchView>
+							                            <li style="float:left"><image src="ico/system.ico"></image><span>${patchView.CONFIGURENAME}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;"></span></li><br/>
+							                        	</#list>
 							                        </ul>
 							                    </div>
+							                    
 							                    <div class="client overflow" style="height:78px;" id="ruanjian">
 							                        <h3>软件信息：</h3>
 							                        <ul class="nav navbar-nav navbar-default">
 							                        	<a onclick="zhankai2()" style="color:blue;margin-left:10px;" id="zhankaiall2">展开</a>
-							                            <li style="float:left"><image src="ico/Python.ico"></image><span>Python 3.5.0 Utility Scripts<64-bit></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;">3.5.150.0</span></li><br/>
-							                            <li style="float:left"><image src="ico/qq.ico"></image><span>腾讯QQ</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">8.5.18600.0</span></li><br/>
-							                            <li style="float:left"><image src="ico/CAJViewer.ico"></image><span>CAJViewer</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;">7.2.1</span></li><br/>
+							                        	<#list list.softViews as softView>
+							                            <li style="float:left"><image src="ico/Python.ico"></image><span>${softView.CONFIGURENAME}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;">${softView.CONFIGUREVERSION}</span></li><br/>
+							                       		</#list>
 							                        </ul>
 							                    </div>
+							                </#list>  
 							                </div>
 							            </div>
 							        </div>
