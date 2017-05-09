@@ -67,6 +67,7 @@ function c_index(){
 	zhao1.style.display="block";
 	zhao2.style.display="none";
 	zhao3.style.display="none";
+	zhao4.style.display="none";
 }
 function c_know(){
 	c_index.outerHTML='<a onclick="c_index()"  id="c_index"><i class="fa fa-home"></i><span>主&nbsp;&nbsp;&nbsp;&nbsp;页</span><b class="fa fa-angle-right"></b></a>';
@@ -75,6 +76,7 @@ function c_know(){
 	zhao2.style.display="block";
 	zhao1.style.display="none";
 	zhao3.style.display="none";
+	zhao4.style.display="none";
 }
 function c_question(){
 	c_index.outerHTML='<a onclick="c_index()"  id="c_index"><i class="fa fa-home"></i><span>主&nbsp;&nbsp;&nbsp;&nbsp;页</span><b class="fa fa-angle-right"></b></a>';
@@ -83,5 +85,18 @@ function c_question(){
 	zhao3.style.display="block";
 	zhao1.style.display="none";
 	zhao2.style.display="none";
+	zhao4.style.display="none";
+}
+function guanzhubutton(){
+	zhao1.style.display="none";
+	zhao2.style.display="none";
+	zhao3.style.display="none";
+	zhao4.style.display="block";
+}
+function beiguanzhubutton(){
+	zhao1.style.display="none";
+	zhao2.style.display="none";
+	zhao3.style.display="none";
+	zhao4.style.display="block";
 }
 

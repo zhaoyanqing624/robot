@@ -6,6 +6,7 @@ import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
 
 public class Personal3_EquipmentView {
 	private String EQUIPMENTMODEL;
+	private String EQUIPMENTTIME;
 	private String CPU;
 	private String RAM;
 	private String HARDDRIVER;
@@ -65,6 +66,12 @@ public class Personal3_EquipmentView {
 	}
 	
 	
+	public String getEQUIPMENTTIME() {
+		return EQUIPMENTTIME;
+	}
+	public void setEQUIPMENTTIME(String eQUIPMENTTIME) {
+		EQUIPMENTTIME = eQUIPMENTTIME;
+	}
 	public List<Personal3_EquipmentConfigureView> getPatchViews() {
 		return patchViews;
 	}
@@ -86,6 +93,7 @@ public class Personal3_EquipmentView {
 		this.NETWORKCARD2 = currentEquipmentPersistence.getNETWORKCARD2();
 		this.MOTHERBOARD = currentEquipmentPersistence.getMOTHERBOARD();
 		this.OS = currentEquipmentPersistence.getOSNAME()+" "+currentEquipmentPersistence.getOSTYPE();
+		this.EQUIPMENTTIME = currentEquipmentPersistence.getEQUIPMENTTIME();
 	}
 	public Personal3_EquipmentView(){
 		

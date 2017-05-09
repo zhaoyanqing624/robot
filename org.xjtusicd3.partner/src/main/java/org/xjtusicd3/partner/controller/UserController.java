@@ -25,7 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.xjtusicd3.database.helper.ITHelper;
+import org.xjtusicd3.database.helper.PayHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.ITPersistence;
+import org.xjtusicd3.database.model.PayPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.CopyFile;
 import org.xjtusicd3.partner.filter.DeleteFile;
@@ -274,9 +278,35 @@ public class UserController {
 	        String aString = "{\"result\":\""+newPath+"\"}";
 			return aString;
 		}
-		
-
-       
     }
+	/*
+	 * zyq_personal2_个人信息
+	 */
+	@RequestMapping(value="personal2",method=RequestMethod.GET)
+	public ModelAndView personal2(HttpServletRequest request,HttpSession session){
+		
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return new ModelAndView("login");
+		}else {
+			//主页页面
+			ModelAndView mv = new ModelAndView("personal2");
+			List<UserPersistence> list = UserHelper.getEmail(useremail);
+			List<ITPersistence> list2 = ITHelper.IT(list.get(0).getUSERID());
+			if (list2.size()!=0) {
+				mv.addObject("GOODWORK", list2.get(0).getGOODWORK());
+				mv.addObject("WORKAGE", list2.get(0).getWORKAGE());
+			}
+			List<PayPersistence> payPersistences = PayHelper.payList(list.get(0).getUSERID());
+			List<PayPersistence> payPersistences2 = PayHelper.bepayList(list.get(0).getUSERID());
+			
+			mv.addObject("personal2_list", list);
+			mv.addObject("paynumber", payPersistences.size());//关注人数
+			mv.addObject("bepaynumber", payPersistences2.size());//粉丝数
+			return mv;
+		}
+		
+		
+	}
 	
 }

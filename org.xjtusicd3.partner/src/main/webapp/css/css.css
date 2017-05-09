@@ -3961,7 +3961,7 @@ body {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background: url(/static/img/u/secret.png) no-repeat;
+	background: url(../static/image/secret.png) no-repeat;
 	vertical-align: -3px
 }
 
@@ -5334,4 +5334,137 @@ body {
 
 .bdsharebuttonbox .bds.link {
 	color: #b5b9bc !important
+}
+.concern-list {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+.concern-list .box {
+    float: left;
+    width: 40.4%;
+    padding: 20px;
+    background-color: #f8fafc;
+    margin-left: 18px;
+    margin-bottom: 15px;
+    min-height: 114px;
+}
+.concern-list ul {
+    margin-left: -18px;
+}
+.concern-list .left-img {
+    float: left;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    top: 0;
+}
+.concern-list .left-img .top_head {
+    position: absolute;
+    top: 0;
+    border-radius: 25px;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+}
+.concern-list .right-c {
+    margin-left: 50px;
+}
+.concern-list .right-c .title {
+    font-weight: 700;
+    color: #07111b;
+    padding-bottom: 8px;
+    width: 100%;
+}
+.concern-list .right-c .title .nickname {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 60%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.concern-list .icon-list {
+    height: 16px;
+    display: inline-block;
+    margin-left: 1px;
+    vertical-align: middle;
+    width: auto;
+}
+.concern-list .icon-list .u-icon {
+    float: left;
+    background-image: url(../static/image/user-icon.png);
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    background-position: 0 0;
+    position: relative;
+
+}
+.concern-list .icon-list .imooc-teacher {
+       background-position: 0px -17px
+}
+.concern-list .icon-list .icon_tip {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    background: #fff;
+    display: none;
+    position: absolute;
+    top: 22px;
+    left: -32px;
+    color: #14191e;
+    font-weight: 400;
+}
+.concern-list .right-c .desc {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    min-height: 18px;
+}
+.concern-list .right-c .desc, .concern-list .right-c .fs-line {
+    color: #93999f;
+    padding-bottom: 8px;
+    font-size: 12px;
+}
+.concern-list .right-c .desc, .concern-list .right-c .fs-line {
+    color: #93999f;
+    padding-bottom: 8px;
+    font-size: 12px;
+}
+.concern-list .right-c .fs-line .u-target {
+    color: #93999f!important;
+}
+.concern-list .right-c .fs-line .group {
+    min-width: 80px;
+    display: inline-block;
+}
+.concern-list .btn-gray-o {
+    border: 1px solid #d0d6d9;
+    color: #787d82;
+    background-color: #fff;
+    margin-right: 14px;
+}
+.concern-list .btn-o {
+    display: inline-block;
+    padding: 6px 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 55px;
+}
+.concern-list .btn-o, .nav a, .nodata {
+    text-align: center;
+}
+.nodata {
+    height: 420px;
+    line-height: 420px;
+    font-size: 18px;
+    color: #b5b9bc;
 }

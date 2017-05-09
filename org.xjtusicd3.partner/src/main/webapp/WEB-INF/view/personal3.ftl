@@ -129,7 +129,7 @@
 							                            <li><i class="fa fa-angle-right"></i> 无线网卡：${list.NETWORKCARD2}</li>
 							                            </#if>
 							                            <li><i class="fa fa-angle-right"></i> 主板：${list.MOTHERBOARD}</li>
-							                            <li><i class="fa fa-angle-right"></i> 系统名称：${list.OSNAME}   ${list.OSTYPE}</li>
+							                            <li><i class="fa fa-angle-right"></i> 系统名称：${list.OS}</li>
 							                            
 							                        </ul>
 							                    </div>

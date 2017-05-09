@@ -7,8 +7,7 @@ import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.AdvisePersistenceMapper;
 import org.xjtusicd3.database.model.AdvisePersistence;
 
-public class AdviseHelper
-{
+public class AdviseHelper{
 	/*
 	 * zpz_get information of advise
 	 */
@@ -20,5 +19,14 @@ public class AdviseHelper
 		session.close();
 		return advise;
 		
+	}
+	/*
+	 * zyq_advise_添加意见建议
+	 */
+	public static void saveAdvise(AdvisePersistence advisePersistence ){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		AdvisePersistenceMapper mapper = session.getMapper(AdvisePersistenceMapper.class);
+		mapper.save(advisePersistence);
+		session.close();
 	}
 }

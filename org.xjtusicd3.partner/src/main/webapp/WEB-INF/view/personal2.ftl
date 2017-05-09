@@ -69,30 +69,42 @@
 	<section id="shortcodes">
 		<div id="main">
 			<div class="bg-other user-head-info">
+				<#list personal2_list as list>
     			<div class="user-info">
         			<h3 class="user-name clearfix">
-            		<span>赵云</span>
+            		<span>${list.USERNAME}</span>
         			</h3>
-        			<p class="about-info"><span class=" gender " title=" 男 "></span>四川 &nbsp; 成都市 &nbsp;&nbsp;&nbsp;&nbsp;运维工程师（网络安全）</p>
-                 	<p class="user-desc" title="人有三急，1、2、3">人有三急，1、2、3</p>
+        			<p class="about-info">
+        			<#if list.GENDER=="男">
+        			<span class="gender" title="男"></span>
+        			<#elseif list.GENDER=="女">
+        			<span class="gender girl" title="女"></span>
+        			<#else>
+        			<span class="sexSecret " title="保密"></span>
+        			</#if>
+        				${list.USERADDRESS?replace('0',' ')?replace('1',' ')?replace('2',' ')?replace('3',' ')}     </p>
+                 	<p class="about-info">${GOODWORK}   ${WORKAGE}</p>
+                 	<p class="user-desc" >${list.USERSIGNATURE}</p>
         			<div class="study-info clearfix">
                     	<div class="item follows">
-                        	<a href="/u/3940996/follows"><em>1</em></a>
+                        	<a onclick="guanzhubutton()"><em>${paynumber}</em></a>
                         	<span>关注</span>
                     	</div>
                     	<div class="item followers">
-                            <a href="/u/3940996/fans"><em>0</em></a>
+                            <a onclick="beiguanzhubutton()"><em>${bepaynumber}</em></a>
                             <span>粉丝</span>
                     	</div>
         			</div><!--.study-info end-->
     			</div><!-- .user-info end -->
+    			</#list>
 			</div><!-- .big-pic end -->
 			
 			<div class="wrap">
+			<#list personal2_list as picture>
 				<div class="slider">
         			<div class="user-pic" data-is-fans="" data-is-follows="">
             			<div class="user-pic-bg"></div><!--user-pic-big end-->
-            			<img class="img" src="http://img.mukewang.com/545864000001644402200220-200-200.jpg" alt="">
+            			<img class="img" src="${picture.AVATAR}" alt="">
                     <div class="friend mail js-already-follow  " id="yiguanzhu0" onmouseover="showGuanzhu();" onmouseout="hideGuanzhu();" style="display:none;" >
                          <a href="message.html" target="_blank"><i class="fa fa-envelope"></i></a>
 							<div class="u-info-tips u-info-alreadyfollow-tip" data-type="2" id="yiguanzhu" style="display:none" >    
@@ -126,8 +138,9 @@
 		        </li>     
 		        </ul>
 		</div><!-- .slider end -->
+		</#list>
 	</div>	
-<div class="u-container" id="zhao1" style="display:block;">
+<div class="u-container" id="zhao1" style="display:none;">
 		<div class=" page-home js-usercard-box" id="notices">
 			<div class="dyanmic-title-wrap">
 	    		<p class="dynamic-title">Ta的动态 </p>
@@ -388,7 +401,51 @@
 					</div>
 </div><!-- .container end -->
 
-
+<div class="u-container" id="zhao4" style="display:none;">
+					<div class="investment_f">
+			  			<div class="investment_title" id="investment_title">
+			    			<div class="on">我的关注</div>
+			    			<div>我的粉丝</div>
+					    </div>
+			  			<div class="investment_con">
+						    <div class="article-main">
+						    	<div class="concern-list">
+									<ul>
+										<li class="box">
+				 							<div class="left-img">
+				 								<a href="/u/3806692" target="_blank"><img src="http://img.mukewang.com/57a991b80001a15406500634-100-100.jpg" class="top_head"></a>
+				 							</div>
+				 							<div class="right-c">
+				 								<div class="title">
+				 									<a href="/u/3806692" target="_blank"><span class="nickname">TerryG</span></a>
+				 										<ul class="icon-list">
+				 										 	<li class="u-icon imooc-teacher">
+				 											</li>
+				 										</ul>
+				 								</div>
+				 							<p class="desc" title="全栈工程师">全栈工程师</p>
+				 								<div class="fs-line">
+				 									<a  class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">0</em></span></a>
+						 							<a href="/u/3806692/fans" class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">103</em></span></a>					 				
+				 								</div>
+				 								<div class="btn-line" data-is_self="1" data-is-fans="0">
+													<a href="Javascript:" data-uid="3806692" class="btn-o btn-gray-o hide js-concern-mutual">互相关注</a>
+													<a href="Javascript:" data-uid="3806692" class="btn-o btn-gray-o  js-concern-already">已关注</a>
+													<a href="/u/3674640/messages?uid=3806692" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a>
+												</div>
+				 							</div>
+				 						</li>
+									</ul>
+								</div>
+			    			</div>
+						    <div class="investment_con_list">
+						    	<div class="ques-list">
+            						<div class="nodata">您还没有任何粉丝</div>
+								</div>
+						    </div>
+			  			</div>
+					</div>
+</div><!-- .container end -->
 
 </div><!-- .wrap end-->
 

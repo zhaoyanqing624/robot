@@ -36,18 +36,18 @@
                             <div class="col-md-4 col-sm-12" style="margin-left:31%">
 				               <div class="contact-form bottom">
 				                        <h2>意见和建议</h2>
-				                        <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+				                        <form id="main-contact-form" name="contact-form" method="post" action="saveAdvise.html">
 				                            <div class="form-group">
-				                                <input type="text" name="name" class="form-control" required="required" placeholder="请输入您的真实姓名">
+				                                <input type="text" name="NAME" class="form-control" required="required" placeholder="请输入您的真实姓名">
 				                            </div>
 				                            <div class="form-group">
-				                                <input type="text" name="phone" class="form-control" required="required" placeholder="请输入您的手机号码，方便我们与您取得联系">
+				                                <input type="text" name="PHONE" class="form-control" required="required" placeholder="请输入您的手机号码，方便我们与您取得联系">
 				                            </div>
 				                            <div class="form-group">
-				                                <input type="email" name="email" class="form-control" required="required" placeholder="请输入您的邮箱地址，方便我们与您取得联系">
+				                                <input type="email" name="EMAIL" class="form-control" required="required" placeholder="请输入您的邮箱地址，方便我们与您取得联系">
 				                            </div>
 				                            <div class="form-group">
-				                                <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="请输入您的意见或建议"></textarea>
+				                                <textarea name="TEXT" id="message" required="required" class="form-control" rows="8" placeholder="请输入您的意见或建议"></textarea>
 				                            </div>                        
 				                            <div class="form-group">
 				                                <input type="submit" name="submit" class="btn btn-submit" value="提交">

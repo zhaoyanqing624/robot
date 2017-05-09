@@ -55,6 +55,7 @@
 		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
 		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
 		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="advise.html" data-pos="categorys_1_1">意见建议</a></li>
 		                <li>
 		                    <a class="new_a" href="service.html">关于我们</a>
 		                </li>

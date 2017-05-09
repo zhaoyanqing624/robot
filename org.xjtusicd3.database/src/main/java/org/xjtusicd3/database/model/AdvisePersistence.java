@@ -1,9 +1,5 @@
 package org.xjtusicd3.database.model;
 
-import java.util.jar.Attributes.Name;
-
-import javax.swing.text.AbstractDocument.Content;
-
 import org.xjtusicd3.database.ann.Table;
 import org.xjtusicd3.database.ann.TableField;
 import org.xjtusicd3.database.ann.TableKey;
@@ -13,75 +9,77 @@ public class AdvisePersistence
 {
 	@TableKey(strategy = Strategy.NORMAL)
 	@TableField(columnName="ADVISEID")
-	private String AdviseId;
+	private String ADVISEID;
 	@TableField(columnName="EMAIL")
-	private String Email;
+	private String EMAIL;
 	@TableField(columnName="NAME")
-	private String Name;
+	private String NAME;
 	@TableField(columnName="PHONE")
-	private String Phone;
+	private String PHONE;
 	@TableField(columnName="TEXT")
-	private String Content;
+	private String TEXT;
 	@TableField(columnName="ANNEX")
-	private String Attachment;
+	private String ANNEX;
 	@TableField(columnName="USERID")
-	private String UserId;
-		
-	public String getAdviseId()
-	{
-		return AdviseId;
+	private String USERID;
+	@TableField(columnName="STATES")
+	private int STATES;
+	@TableField(columnName="ADVISETIME")
+	private String ADVISETIME;
+	public String getADVISEID() {
+		return ADVISEID;
 	}
-	public void setAdviseId(String adviseId)
-	{
-		AdviseId = adviseId;
+	public void setADVISEID(String aDVISEID) {
+		ADVISEID = aDVISEID;
 	}
-	public String getEmail()
-	{
-		return Email;
+	public String getEMAIL() {
+		return EMAIL;
 	}
-	public void setEmail(String email)
-	{
-		Email = email;
+	public void setEMAIL(String eMAIL) {
+		EMAIL = eMAIL;
 	}
-	public String getName()
-	{
-		return Name;
+	public String getNAME() {
+		return NAME;
 	}
-	public void setName(String name)
-	{
-		Name = name;
+	public void setNAME(String nAME) {
+		NAME = nAME;
 	}
-	public String getPhone()
-	{
-		return Phone;
+	public String getPHONE() {
+		return PHONE;
 	}
-	public void setPhone(String phone)
-	{
-		Phone = phone;
+	public void setPHONE(String pHONE) {
+		PHONE = pHONE;
 	}
-	public String getContent()
-	{
-		return Content;
+	public String getTEXT() {
+		return TEXT;
 	}
-	public void setContent(String content)
-	{
-		Content = content;
+	public void setTEXT(String tEXT) {
+		TEXT = tEXT;
 	}
-	public String getAttachment()
-	{
-		return Attachment;
+	public String getANNEX() {
+		return ANNEX;
 	}
-	public void setAttachment(String attachment)
-	{
-		Attachment = attachment;
+	public void setANNEX(String aNNEX) {
+		ANNEX = aNNEX;
 	}
-	public String getUserId()
-	{
-		return UserId;
+	public String getUSERID() {
+		return USERID;
 	}
-	public void setUserId(String userId)
-	{
-		UserId = userId;
+	public void setUSERID(String uSERID) {
+		USERID = uSERID;
 	}
+	public int getSTATES() {
+		return STATES;
+	}
+	public void setSTATES(int sTATES) {
+		STATES = sTATES;
+	}
+	public String getADVISETIME() {
+		return ADVISETIME;
+	}
+	public void setADVISETIME(String aDVISETIME) {
+		ADVISETIME = aDVISETIME;
+	}
+	
 	 
 }
