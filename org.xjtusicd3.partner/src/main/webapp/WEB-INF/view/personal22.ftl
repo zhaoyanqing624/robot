@@ -6,16 +6,167 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>智能小朵-知识库</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script>
+    /**
+ * 
+ */
+var websocket = null;
+var username = null;
+function connect() {
+	$("#chat_container").show();
+	// 判断当前浏览器是否支持WebSocket
+	if ('WebSocket' in window) {
+		websocket = new WebSocket(
+				"ws://localhost:8080/org.xjtusicd3.partner/websocketserver");
+	} else {
+		alert('Not support websocket')
+	}
+
+	// 连接发生错误的回调方法
+	websocket.onerror = function(e) {
+		setMessageInnerHTML("error" + e);
+	};
+
+	// 连接成功建立的回调方法
+	websocket.onopen = function(event) {
+		$.ajax({
+			type:"GET",
+			url:"/org.xjtusicd3.partner/getUserName.html",
+			dataType:"json",
+			success:function(data){
+				username = data[0].uSERNAME;
+				send("{username:'" + username + "',type:1}");
+			}
+		})
+	}
+
+	// 接收到消息的回调方法
+	websocket.onmessage = function(event) {
+		var onlinelisthtml = $("#lastChat10000").html();
+		var datajson = eval('(' + event.data + ')');
+		switch (datajson.type) {
+		case 1:
+			for (var u = 0; u < datajson.onlinelist.length; u++)
+				if (datajson.onlinelist[u] != datajson.username)
+					if (onlinelisthtml.indexOf("chat-" + datajson.onlinelist[u]) < 0)
+						$.ajax({
+							type:"POST",
+							url:"/org.xjtusicd3.partner/getUserInfo.html",
+							data:{
+								"username":datajson.onlinelist[u],
+							},
+							dataType:"json",
+							success:function(data){
+								$("#lastChat10000").append("<div class='list-box'><img src='"+data[0].aVATAR+"'  width='40' height='40'><div class='info'><h5>"+ data[0].uSERNAME+ "</h5></div></div>");
+								$("#chat_content").append("<ul class='userchatUl'><li><div class='timeLine'><strong style='width:130px;'>2016-07-16</strong></div> </li></ul>")							
+							}
+						})
+			break;
+		case 2:
+			if (datajson.isSelf == true) {
+				$(".chat-" + datajson.sendto)
+						.append(
+								"<div class='say-box'><span class='say-username-left'>我</span><span class='say-container-left'>"
+										+ datajson.content + "</span></div>");
+				$(".chat-" + datajson.sendto).scrollTop(
+						$(".chat-" + datajson.sendto)[0].scrollHeight);
+			} else if (datajson.isSelf == false) {
+				if (!$(".list-item-" + datajson.username).hasClass("bg-color"))
+					if($(".list-item-" + datajson.username).children("span").html().indexOf("point")<0)
+					$(".list-item-" + datajson.username).children("span")
+							.append("<i class='point'></i>");
+				$(".chat-" + datajson.username).append(
+						"<div class='say-box'><span class='say-username-right'>"
+								+ datajson.username
+								+ "</span><span class='say-container-right'>"
+								+ datajson.content + "</span></div>");
+				$(".chat-" + datajson.username).scrollTop(
+						$(".chat-" + datajson.username)[0].scrollHeight);
+			}
+			break;
+		case 4:
+			$(".chat-box").each(
+					function() {
+						$(this).append(
+								"<div class='msg'>" + datajson.username
+										+ "下线了！</div>");
+					});
+			$(".list-item-" + datajson.username).remove();
+			if ($("#online-list").html().indexOf("bg-color") < 0) {
+				$(".title").text("");
+				$("#content").blur();
+				$("#content").click(function() {
+					$(this).blur();
+				});
+			}
+			break;
+		}
+	}
+
+	// 连接关闭的回调方法
+	websocket.onclose = function() {
+		send("{username:'" + $("#username").val() + "',type:4}");
+	}
+
+	// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+	window.onbeforeunload = function() {
+		websocket.close();
+	}
+}
+
+// 关闭连接
+function closeWebSocket() {
+	websocket.close();
+}
+
+// 发送消息
+function send(message) {
+	websocket.send(message);
+}
+
+$(document).ready(
+		function() {
+				connect();
+			$("#send").click(
+					function() {
+						send("{username:'" + $("#username").val()
+								+ "',type:2,content:'" + $("#content").val()
+								+ "',sendto:'"
+								+ $(".bg-color").eq(0).find("span").html()
+								+ "'}");
+						$("#content").val("");
+					});
+		});
+$(document).ready(function() {
+	$("#lastChat10000").delegate(".list-box", "click", function() {
+		$(".list-box").each(function() {
+			$(this).removeClass("bg-color");
+			$(this).find(".chat-box").hide();
+		});
+		$(this).addClass("bg-color");
+		$(".title").text($(this).children("span").text());
+		$(this).find(".chat-box").show();
+		$("#content").unbind("click");
+		$(this).children("span").find("i").remove();
+	});
+	$("#content").keyup(function(event) {
+		if (event.keyCode == 13)
+			$("#send").click();
+	});
+	if ($("#online-list").html().indexOf("bg-color") < 0)
+		$("#content").click(function() {
+			$(this).blur();
+		});
+});
+    </script>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset2.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util2.css" />
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min2.css" rel="stylesheet">
     <link href="css/css.css" rel="stylesheet">
     <link rel="stylesheet" href="css/all.css">
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script language="javascript" src="zhao/tab/common.js"></script>
-    <link  type="text/css" rel="stylesheet" href="zhao/tab/style.css" />
 </head>
 <body>
 	<div class="header" id="head">      
@@ -23,32 +174,42 @@
             <div class="content clearfix">
                 <div class="header_top_wrap_left">
 		            <ul>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">智能小朵</a></li>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">知识库</a></li>
-		                <li><a class="new_a" href="" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
+		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
+		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
 		                <li>
-		                    <a class="new_a" href="">关于我们</a>
+		                    <a class="new_a" href="service.html">关于我们</a>
 		                </li>
 		            </ul> 
                 </div>
                 <div class="header_top_wrap_right">
 		              <ul>
+		              <#if UserEmail??>
 		                <div class="unlogin">
 		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：zhao</li>
-		                    	<li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
+		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
+		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
 		                            <ul class="ul_list">
-		                                <li><a ">个人信息</a></li>
-		                                <li><a ">我的主页</a></li>
-		                                </li>
+		                                <li><a href="personal.html">个人信息</a></li>
+		                                <li><a href="personal3.html">我的设备</a></li>
+		                                <li><a href="personal2.html">我的主页</a></li>
+		                                <li><a href="notice.html">消息通知</a></li>
 		                            </ul>
 		                        </div>
 		                    </li>
-		                    <li class="left_margin loginLinkLi"><a id="headExit">退出</a>
+		                    <li class="left_margin loginLinkLi"><a href="loginout.html" id="headExit">退出</a>
 		                    </li>
 		                </div>
+		             <#else>
+				       	<div class="unlogin">
+		                    <li class="unloginLinkLi">
+		                        <a href="login.html" id="headLogin" class="listen_btn" data-pos="categorys_1_2">登录/注册</a>
+		                        </li>
+		                    </li>
+		                </div>
+		             </#if>
 		            </ul> 
                 </div>
             </div>
@@ -56,440 +217,147 @@
     </div>
 	
 	<section id="shortcodes">
-		<div id="main">
-<div class="bg-other user-head-info">
-    <div class="user-info">
-        <h3 class="user-name clearfix">
-            <span>赵云</span>
-        </h3>
-        <p class="about-info">
-        <span class=" gender " title=" 男 "></span>     
-                    四川
-                                                        成都市
-                    运维工程师（网络安全）
+		<div id="main" style="min-height:825px">
 
-        </p>
-                 <p class="user-desc" title="人有三急，1、2、3">人有三急，1、2、3</p>
-                
-        <div class="study-info clearfix">
-                                <div class="item follows">
-                                                <a href="/u/3940996/follows"><em>1</em></a>
-                                        
-                        <span>关注</span>
-                    </div>
-                    <div class="item followers">
-                                                    <a href="/u/3940996/fans"><em>0</em></a>
-                                                <span>粉丝</span>
-                    </div>
-                        
-        </div><!--.study-info end-->
-    </div><!-- .user-info end -->
-</div><!-- .big-pic end -->
-<div class="wrap">
+<div class="container">
+    <!-- 导航条  -->
+    <div class="header-banner clearfix">
+        <div class="nav-box l">
+            <ul id="navTab" class="n-tab clearfix">
+    <li>
+        <a id="not_new" href="notice.html">通知<span class="not-num">(2)</span></a>
+    </li>
+    <li data-index="0" class="active">
+        <a id="msg_new" href="message.html" class="">私信<span class="msg-num" style="display: none;"></span></a>
+    </li>
+</ul>        </div>
         
-<div class="slider">
-        <div class="user-pic" data-is-fans="" data-is-follows="">
-            <div class="user-pic-bg"></div><!--user-pic-big end-->
-            <img class="img" src="http://img.mukewang.com/545864000001644402200220-200-200.jpg" alt="">
-                    
-                    <div class="friend mail js-fans-msg  hide" data-uid="3940996" data-type="3">
-                        <a href="/u/3674640/messages?uid=3940996" target="_blank">
-                         <i class="icon-mail"></i>
-                         
-<style type="text/css">
-    .u-info-tips{
-        background-color: #ccc;
-        display: block;        
-        color: #fff;
-        position: relative;
-        left: -68px;
-        top: 8px;
-        text-align: center;
-        z-index: 2;
-        border-radius: 3px;
-        padding: 20px;
-        min-width: 146px;
-        text-align: left;
-        display: none;
+    </div>
+    <!-- 导航条 end -->
+    
+    <!-- 聊天大容器 -->
+    <div class="clearfix msgbox">
+        <!-- 左侧面板 -->
+        <div id="left_panel">
+            <div class="left_panel_content">
+                <!-- 搜索框 -->
+                <div class="find-input-box">
+                    <i class="fa fa-search"></i>
+                    <input class="input js-input" placeholder="通过昵称快速搜索" type="text" autocomplete="off" value="">
+                    <span class="icon-close2 btn-text-clear js-text-clear" title="清空"></span>
+                </div>
+                <!-- 搜索框 end -->
+                <!-- 加载loading -->
+                <div id="list_waper" class="clearfix ps-container">
+                    <ul id="lastChat" class="user_list">
+	                    <li id="lastChat10000" uid="10000"> 							
+	                    	<div class="list-box">							
+	                    		<img src="http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg" alt="女神" width="40" height="40"> 					     	
+	                    		<div class="info"><h5>女神</h5><p class="theLastMsg">各位小伙伴们~大家学习的怎么样了呢？如果有什么意见和建议欢迎大家随时提出来哦~~另外，马上就要过年了。，到底是什么呢？我们一起来看一下吧~在移动互联网如此火爆的今天，你是不是也有过想入行却没有人领路的痛苦呢？之《零基础入门Android语法与界面》来学习吧!传送门：http://class.imooc.com/sc/6 在这里你将获得1V1的专业教学团队的答疑支持，</p>
+								</div>					     	
+							</div>
+							<div class="list-box">							
+	                    		<img src="http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg" alt="女神" width="40" height="40"> 					     	
+	                    		<div class="info"><h5>女神</h5><p class="theLastMsg">各位小伙伴们~大家学习的怎么样了呢？如果有什么意见和建议欢迎大家随时提出来哦~~另外，马上就要过年了。，到底是什么呢？我们一起来看一下吧~在移动互联网如此火爆的今天，你是不是也有过想入行却没有人领路的痛苦呢？之《零基础入门Android语法与界面》来学习吧!传送门：http://class.imooc.com/sc/6 在这里你将获得1V1的专业教学团队的答疑支持，</p>
+								</div>					     	
+							</div>
+						</li>
+					</ul>
+                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px; width: 320px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 560px;"><div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div></div></div>
+                <!-- 加载loading end -->
+                <!-- 搜索历史 -->
+                <div class="history-box">
+                    <ul id="history-list"></ul>
+                </div>
+                <!-- 搜索历史 end -->
+                <!-- 搜索结果 -->
+                <div class="result-box js-result-box">
+                    <ul id="result-list"></ul>
+                    <div class="no-result">无检索结果</div>
+                </div>
+                <!-- 搜索结果 end -->
+                <div class="mask"></div>
+            </div>
+        </div>
+        <!-- 聊天面板 -->
+        <div id="chat_container">
+            <div id="chat_content" class="ps-container"> 
+			</div>  <!-- 聊天内容显示区 -->
+            <div class="no_friend_right"></div>   <!-- 默认底图 -->
+            <!-- 聊天input -->
+            <div id="chat_editor" style="display: block;">
+                <form method="post" action="/u/3674640/uploadimg?1489304166966" enctype="multipart/form-data" id="upLoadForm" target="imageFrame">
+                    <table cellpadding="0" cellspacing="0">
+                        <tbody><tr>
+                            <th> <div class="attach"><a id="sendEmojiIcon" href="javascript:void(0)" onclick="return false" title="表情" style="margin-top:0;" class=""></a><div id="face_panel" style="display: none; z-index: 1;"><div id="choose_face"><a title="[微笑]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/1.png"><p>微笑</p></a><a title="[不]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/2.png"><p>不</p></a><a title="[亲亲]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/3.png"><p>亲亲</p></a><a title="[无聊]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/4.png"><p>无聊</p></a><a title="[鼓掌]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/5.png"><p>鼓掌</p></a><a title="[伤心]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/6.png"><p>伤心</p></a><a title="[害羞]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/7.png"><p>害羞</p></a><a title="[闭嘴]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/8.png"><p>闭嘴</p></a><a title="[耍酷]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/9.png"><p>耍酷</p></a><a title="[无语]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/10.png"><p>无语</p></a><a title="[发怒]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/11.png"><p>发怒</p></a><a title="[惊讶]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/12.png"><p>惊讶</p></a><a title="[委屈]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/13.png"><p>委屈</p></a><a title="[酷]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/14.png"><p>酷</p></a><a title="[汗]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/15.png"><p>汗</p></a><a title="[闪]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/16.png"><p>闪</p></a><a title="[放屁]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/17.png"><p>放屁</p></a><a title="[洗澡]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/18.png"><p>洗澡</p></a><a title="[偶耶]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/19.png"><p>偶耶</p></a><a title="[困]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/20.png"><p>困</p></a><a title="[咒骂]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/21.png"><p>咒骂</p></a><a title="[疑问]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/22.png"><p>疑问</p></a><a title="[晕]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/23.png"><p>晕</p></a><a title="[衰]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/24.png"><p>衰</p></a><a title="[装鬼]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/25.png"><p>装鬼</p></a><a title="[受伤]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/26.png"><p>受伤</p></a><a title="[再见]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/27.png"><p>再见</p></a><a title="[抠鼻]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/28.png"><p>抠鼻</p></a><a title="[心寒]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/29.png"><p>心寒</p></a><a title="[怒]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/30.png"><p>怒</p></a><a title="[凄凉]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/31.png"><p>凄凉</p></a><a title="[悄悄]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/32.png"><p>悄悄</p></a><a title="[奋斗]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/33.png"><p>奋斗</p></a><a title="[哭]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/34.png"><p>哭</p></a><a title="[赞]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/35.png"><p>赞</p></a><a title="[开心]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/36.png"><p>开心</p></a></div></div></div>
+                            </th>
+                            <th> <div class="chat_upImg" style="text-align:center">
+                                    <input type="file" name="imgFile" id="msgUploadImg" accept="image/jpeg,image/gif,image/x-png" title="图片" style="display:none">
+                                </div>
+                            </th>
+                            <th> <div style="position:relative;width:490px;margin-top:8px;">
+                                    <textarea class="chatInput" id="textInput" type="text" maxlength="300" placeholder="输入您要发送的私信..." style="height: 40px; overflow-y: hidden;"></textarea>
+                                    <div id="msg_upImg_box" style="height:62px;display:none"></div>
+                                    <span id="imgDel" style="display:none;width:10px;height:10px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAAA3NCSVQICAjb4U/gAAAAHlBMVEXKytn////z8/bX1+PU1OD19fjb2+Xz8/f19fnZ2ePstdLlAAAACXBIWXMAAAsSAAALEgHS3X78AAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMS8yNS8xM7kML+MAAAAvSURBVAiZY2AVFBRUYlBTFBQyYhByF1RRZBAsUUoSZBAUMiiEk2ARiGwYWCVYFwDX5gdZj1qR8wAAAABJRU5ErkJggg==) no-repeat 0 0;"></span> </div>
+                            </th>
+                            <th> <a class="chatSend btn btn-large btn-green" href="javascript:;">发送</a> </th>
+                        </tr>
+                    </tbody></table>
+                </form>
+                <iframe width="0" height="0" id="imageFrame" name="imageFrame" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <!-- 聊天input end -->
+        </div>
+        <div id="editor_msg"></div>     <!-- 聊天提示信息 -->
+    </div>
+    <!-- 聊天大容器 end -->
 
-    }
-    .u-info-tips .icon-drop_up{
-        position: absolute;
-        left: 80px;
-        top: -27px;
-        color: #ccc;
-        font-size: 26px!important;
-    }
-    .u-info-follow-tip{
-        background-color: #00c850;
-    }
-    .u-info-follow-tip .icon-drop_up{        
-        color: #00c850!important;
-    }
-    .u-info-follow-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-follow-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-    }
-
-    .u-info-alreadyfollow-tip{
-         background-color: #008cc8;
-    }
-    .u-info-alreadyfollow-tip .icon-drop_up{ 
-        color: #008cc8!important;
-    }
-    .u-info-alreadyfollow-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-alreadyfollow-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-    }      
-
-    .u-info-fans-tip{
-        background-color: #008cc8;
-    }
-    .u-info-fans-tip .icon-drop_up{
-        color: #008cc8!important;
-    }
-    .u-info-fans-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-fans-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-        color: #fff;
-    }
-    .u-info-tips .cancel-follow{
-        font-size: 12px;
-        display: block;
-        color: #fff;
-        opacity: 0.5;
-        margin-top: 10px;
-    }    
-</style>
-
-
-</a><div class="u-info-tips u-info-fans-tip" data-type="3"><a href="/u/3674640/messages?uid=3940996" target="_blank">    
-    <span class="title">你和Ta已互相关注</span>
-    <p class="content">相互关注后可及时了解Ta的动态信息，可进行即时聊天。</p>
-     
-        </a><a href="Javascript:" class="cancel-follow" data-uid="3940996">取消关注</a>    
-        <i class="icon-drop_up"></i>
-</div>                        
+    <div id="js-setup-popl" class="setup-popl">
+    <div class="setup-popl-top clearfix">
+        <span class="title">私信设置</span>
+        <i class="icon-close close"></i>
+    </div>
+    
+    <div class="setup-content">
+        <dl>
+            <dt class="clearfix">
+                <span class="dt-tit">接收设置</span>
+                <div class="dt-line"></div>
+            </dt>
+            <dd class="clearfix">
+                <div class="dd-item clearfix">
+                    <div class="switch on" data-setting="1">
+                        <div class="pinkline"></div>
+                        <span class="pinkround"></span>
                     </div>
-                   
                     
-                        <div class="friend mail js-already-follow  " data-uid="3940996" data-type="2">
-                            <a href="/u/3674640/messages?uid=3940996" target="_blank">
-                            <i class="icon-mail"></i>
-                            </a>
-                            
-<style type="text/css">
-    .u-info-tips{
-        background-color: #ccc;
-        display: block;        
-        color: #fff;
-        position: relative;
-        left: -68px;
-        top: 8px;
-        text-align: center;
-        z-index: 2;
-        border-radius: 3px;
-        padding: 20px;
-        min-width: 146px;
-        text-align: left;
-        display: none;
+                    <p class="switchname">只接受相互关注人的私信</p>
+                </div>
+                <div class="tip">关闭后可接受所有粉丝的私信</div>
+               
+            </dd>
+        </dl>
 
-    }
-    .u-info-tips .icon-drop_up{
-        position: absolute;
-        left: 80px;
-        top: -27px;
-        color: #ccc;
-        font-size: 26px!important;
-    }
-    .u-info-follow-tip{
-        background-color: #00c850;
-    }
-    .u-info-follow-tip .icon-drop_up{        
-        color: #00c850!important;
-    }
-    .u-info-follow-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-follow-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-    }
+        <dl>
+            <dt class="clearfix">
+                <span class="dt-tit">屏蔽列表</span>
+                <div class="dt-line"></div>
+            </dt>
+            <dd class="clearfix">
+                <div class="tip shield-tip">屏蔽<span>0</span></div> 
+            </dd>
+        </dl>
 
-    .u-info-alreadyfollow-tip{
-         background-color: #008cc8;
-    }
-    .u-info-alreadyfollow-tip .icon-drop_up{ 
-        color: #008cc8!important;
-    }
-    .u-info-alreadyfollow-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-alreadyfollow-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-    }      
+        <div class="shield-item-list clearfix">
 
-    .u-info-fans-tip{
-        background-color: #008cc8;
-    }
-    .u-info-fans-tip .icon-drop_up{
-        color: #008cc8!important;
-    }
-    .u-info-fans-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-fans-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-        color: #fff;
-    }
-    .u-info-tips .cancel-follow{
-        font-size: 12px;
-        display: block;
-        color: #fff;
-        opacity: 0.5;
-        margin-top: 10px;
-    }    
-</style>
+        </div>
+        <div class="no-shield-item">
+            <p>暂无屏蔽</p>
+        </div>
+    </div>
 
-
-<div class="u-info-tips u-info-alreadyfollow-tip" data-type="2">    
-    <span class="title">已成功关注Ta</span>
-    <p class="content">关注后可及时了解Ta的动态，并可向Ta发送即时消息。</p>
-     
-        <a href="Javascript:" class="cancel-follow" data-uid="3940996">取消关注</a>    
-        <i class="icon-drop_up"></i>
 </div>
-                        </div>
-                    
-                 
-                    <div class="friend group_add js-add-follow  " data-uid="3940996" data-type="1">
-                        <i class="fa fa-envelope"></i>
-                        
-<style type="text/css">
-    .u-info-tips{
-        background-color: #ccc;
-        display: block;        
-        color: #fff;
-        position: relative;
-        left: -68px;
-        top: 8px;
-        text-align: center;
-        z-index: 2;
-        border-radius: 3px;
-        padding: 20px;
-        min-width: 146px;
-        text-align: left;
-        display: none;
-
-    }
-    .u-info-tips .icon-drop_up{
-        position: absolute;
-        left: 80px;
-        top: -27px;
-        color: #ccc;
-        font-size: 26px!important;
-    }
-    .u-info-follow-tip{
-        background-color: #00c850;
-    }
-    .u-info-follow-tip .icon-drop_up{        
-        color: #00c850!important;
-    }
-    .u-info-follow-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-follow-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-    }
-
-    .u-info-alreadyfollow-tip{
-         background-color: #008cc8;
-    }
-    .u-info-alreadyfollow-tip .icon-drop_up{ 
-        color: #008cc8!important;
-    }
-    .u-info-alreadyfollow-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-alreadyfollow-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-    }      
-
-    .u-info-fans-tip{
-        background-color: #008cc8;
-    }
-    .u-info-fans-tip .icon-drop_up{
-        color: #008cc8!important;
-    }
-    .u-info-fans-tip .title{
-        font-weight: bold;
-        font-size: 16px;
-        color: #fff;        
-    }
-    .u-info-fans-tip .content{
-        margin-top: 10px;
-        display: block;
-        font-size: 12px;
-        color: #fff;
-    }
-    .u-info-tips .cancel-follow{
-        font-size: 12px;
-        display: block;
-        color: #fff;
-        opacity: 0.5;
-        margin-top: 10px;
-    }    
-</style>
-
-
-<div class="u-info-tips u-info-follow-tip" data-type="1">    
-    <span class="title">关注Ta</span>
-    <p class="content">关注后可及时了解Ta的动态信息，并可向Ta发送即时消息</p>
-        <i class="icon-drop_up"></i>
-</div>
-                    </div>
-                 
-                    </div>
-
-        <ul>
-        <li>
-            <a href="/u/3940996" class="active">
-            <i class="fa fa-home"></i><span>主&nbsp;&nbsp;&nbsp;&nbsp;页</span><b class="fa fa-angle-right"></b>
-            </a>
-        </li>
-        <li>
-            <a href="/u/3940996/courses">
-            <i class="fa fa-lightbulb-o"></i><span>智囊团</span><b class="fa fa-angle-right"></b>
-            </a>
-        </li>
-        <li>
-            <a href="/u/3940996/courses">
-            <i class="fa fa-question"></i><span>问&nbsp;&nbsp;&nbsp;&nbsp;吧</span><b class="fa fa-angle-right"></b>
-            </a>
-        </li>     
-        </ul>
-</div><!-- .slider end -->    
-		
-
-<div class="u-container">
-					<div class="investment_f">
-			  			<div class="investment_title">
-			    			<div class="on">我的知识</div>
-			    			<div>我的收藏</div>
-						    <div>我的评论</div>
-					    </div>
-			  			<div class="investment_con">
-						    <div class="article-main">
-						    <p class="notattend">你还没有任何原创知识，快去<a href="/article/publish" class="red" target="_blank">发表知识</a>吧</p>
-			    			</div>
-						    <div class="investment_con_list">
-						    	<div id="articleMain" class="article-main">
-									<div id="articlesList" class="articles-list">
-                 						<div class="list-item article-item ">
-            								<h3 class="item-title">
-	                							<a target="_blank" href="/article/16835" class="title-detail">自信可改变未来，问谁又能做到</a>
-	                                            <span class="original">原创</span>
-                            				</h3>
-								            <div class="">
-	               								 <p class="item-bd">自信可改变未来，问谁又能做到 前言：应广大人民群众的要求，我决定写这一篇如何从一个屌丝逆袭的手记。至于为何换个马甲，是因为里面有些东西不想让别人知道是我发的。内容非常多，但是我都做了标题，不想看的可以选择性的看。我还是建议看一下的，为什么写这些呢，其实是想让你们了解一下，我也有不堪的过去，我也是一步一步走来的，我可以，...</p>
-	            							</div>
-	            							<div class="item-btm clearfix">
-	                							<ul class="l left-info">
-	                                            	<li class="hd-pic">
-	                            						<a class="publisher-name" href="/u/1008447/articles" target="_blank">神秘路人甲</a>
-	                       							</li>
-	                                            </ul>
-               									<div class="r right-info">
-                    								<div class="favorite l">
-                       									 <i class="icon sns-thumb-up-outline"></i><em> 1606浏览</em>
-                    								</div>
-								                    <div class="favorite l">
-								                        <i class="icon sns-thumb-up-outline"></i><em> 116点赞</em>
-								                    </div>
-								                    <div class=" l">
-								                        <i class="icon sns-comment"></i><em> 40评论</em>
-								                    </div>
-               									 </div>
-                           					 </div>
-       									 </div>
-									</div>
-								</div>
-						    </div>
-						    
-				    		<div class="investment_con_list">
-						    	<div id="articleMain" class="article-main">
-									<div id="articlesList" class="articles-list">
-                 						<div class="list-item article-item ">
-            								<h3 class="item-title">
-	                							<a target="_blank" href="/article/16835" class="title-detail">自信可改变未来，问谁又能做到</a>
-	                                            <span class="original">原创</span>
-                            				</h3>
-								            <div class="">
-	               								 <p class="item-bd">自信可改变未来，问谁又能做到 前言：应广大人民群众的要求，我决定写这一篇如何从一个屌丝逆袭的手记。至于为何换个马甲，是因为里面有些东西不想让别人知道是我发的。内容非常多，但是我都做了标题，不想看的可以选择性的看。我还是建议看一下的，为什么写这些呢，其实是想让你们了解一下，我也有不堪的过去，我也是一步一步走来的，我可以，...</p>
-	            							</div>
-	            							<div class="item-btm clearfix">
-	                							<ul class="l left-info">
-	                                            	<li class="hd-pic">
-	                            						<a class="publisher-name" href="/u/1008447/articles" target="_blank">神秘路人甲</a>
-	                       							</li>
-	                                            </ul>
-               									<div class="r right-info">
-                    								<div class="favorite l">
-                       									 <i class="icon sns-thumb-up-outline"></i><em> 1606浏览</em>
-                    								</div>
-								                    <div class="favorite l">
-								                        <i class="icon sns-thumb-up-outline"></i><em> 116点赞</em>
-								                    </div>
-								                    <div class=" l">
-								                        <i class="icon sns-comment"></i><em> 40评论</em>
-								                    </div>
-               									 </div>
-                           					 </div>
-       									 </div>
-									</div>
-								</div>
-						    </div>
-			  			</div>
-					</div>
-</div><!-- .container end -->
-</div><!-- .wrap end-->
+<div class="setup-coverLayer"></div></div>
 
 </div>
     </section>    
@@ -497,5 +365,6 @@
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
+    <script type="text/javascript" src="new/front/js/util.js"></script>
 </body>
 </html>

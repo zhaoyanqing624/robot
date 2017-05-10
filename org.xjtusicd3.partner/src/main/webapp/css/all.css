@@ -568,7 +568,7 @@ ol, ul {
     margin-bottom: 0;
 }
 #lastChat li, #result-list li {
-    height: 40px;
+    height: 100%;
     position: relative;
 }
 #result-list li, .user_list li {
@@ -625,6 +625,7 @@ ol, ul {
     overflow: hidden;
     padding: 25px;
     background-color: #f5f5f5;
+    display: none;
 }
 #chat_content {
     height: 450px;

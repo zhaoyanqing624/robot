@@ -79,12 +79,7 @@
         <a id="msg_new" href="message.html" class="">私信<span class="msg-num" style="display: none;"></span></a>
     </li>
 </ul>        </div>
-        <div class="operation-box r">
-            <ul class="clearfix">
-                <li><a href="javascript:;" id="js-read-all">全部标记为已读</a></li>
-                <li><a href="javascript:;" id="js-setup">私信设置</a></li>
-            </ul>
-        </div>
+        
     </div>
     <!-- 导航条 end -->
     

@@ -3,7 +3,7 @@
  */
 var websocket = null;
 function connect() {
-	$("#chat_content").show();
+	$("#chat_container").show();
 	// 判断当前浏览器是否支持WebSocket
 	if ('WebSocket' in window) {
 		websocket = new WebSocket(
@@ -19,7 +19,16 @@ function connect() {
 
 	// 连接成功建立的回调方法
 	websocket.onopen = function(event) {
-		send("{username:'" + $("#username").val() + "',type:1}");
+		var username;
+		$.ajax({
+			type:"GET",
+			url:"/org.xjtusicd3.partner/getUserName.html",
+			dataType:"json",
+			success:function(data){
+				username = data[0].uSERNAME;
+			}
+		})
+		send("{username:'" + username + "',type:1}");
 	}
 
 	// 接收到消息的回调方法
@@ -29,19 +38,29 @@ function connect() {
 		switch (datajson.type) {
 		case 1:
 			for (var u = 0; u < datajson.onlinelist.length; u++)
-				if (datajson.onlinelist[u] != $("#username").val())
-					if (onlinelisthtml
-							.indexOf("chat-" + datajson.onlinelist[u]) < 0)
-						$("#lastChat10000").append(
-								"<li class='list-box list-item-"
-										+ datajson.onlinelist[u] + "'><span>"
-										+ datajson.onlinelist[u]
-										+ "</span><div class='chat_content chat-"
-										+ datajson.onlinelist[u]
-										+ "'></div></li>");
+				var username;
+				$.ajax({
+					type:"GET",
+					url:"/org.xjtusicd3.partner/getUserName.html",
+					dataType:"json",
+					success:function(data){
+						username = data[0].uSERNAME;
+						if (datajson.onlinelist[u] != username)
+							if (onlinelisthtml
+									.indexOf("chat-" + datajson.onlinelist[u]) < 0)
+								$("#lastChat10000").append(
+										"<div class='list-box-"
+												+ datajson.onlinelist[u] + "'><span>"
+												+ datajson.onlinelist[u]
+												+ "</span><div class='chat-box chat-"
+												+ datajson.onlinelist[u]
+												+ "'></div></div>");
+					}
+				})
+
 			/*
-			 * onlinelisthtml = onlinelisthtml + "<li class='list-box'><span>" +
-			 * datajson.onlinelist[u] + "</span><div class='chat_content
+			 * onlinelisthtml = onlinelisthtml + "<li class='online-list-item'><span>" +
+			 * datajson.onlinelist[u] + "</span><div class='chat-box
 			 * chat-"+datajson.onlinelist[u]+"'></div></li>";
 			 */
 			break;
@@ -68,14 +87,14 @@ function connect() {
 			}
 			break;
 		case 4:
-			$(".chat_content").each(
+			$(".chat-box").each(
 					function() {
 						$(this).append(
 								"<div class='msg'>" + datajson.username
 										+ "下线了！</div>");
 					});
 			$(".list-item-" + datajson.username).remove();
-			if ($("#lastChat10000").html().indexOf("bg-color") < 0) {
+			if ($("#online-list").html().indexOf("bg-color") < 0) {
 				$(".title").text("");
 				$("#content").blur();
 				$("#content").click(function() {
@@ -109,7 +128,7 @@ function send(message) {
 
 $(document).ready(
 		function() {
-			connect();
+				connect();
 			$("#send").click(
 					function() {
 						send("{username:'" + $("#username").val()
@@ -121,14 +140,14 @@ $(document).ready(
 					});
 		});
 $(document).ready(function() {
-	$(".lastChat10000").delegate(".list-box", "click", function() {
-		$(".list-box").each(function() {
+	$(".online-list").delegate(".online-list-item", "click", function() {
+		$(".online-list-item").each(function() {
 			$(this).removeClass("bg-color");
-			$(this).find(".chat_content").hide();
+			$(this).find(".chat-box").hide();
 		});
 		$(this).addClass("bg-color");
 		$(".title").text($(this).children("span").text());
-		$(this).find(".chat_content").show();
+		$(this).find(".chat-box").show();
 		$("#content").unbind("click");
 		$(this).children("span").find("i").remove();
 	});
@@ -136,11 +155,8 @@ $(document).ready(function() {
 		if (event.keyCode == 13)
 			$("#send").click();
 	});
-	if ($("#lastChat10000").html().indexOf("bg-color") < 0)
+	if ($("#online-list").html().indexOf("bg-color") < 0)
 		$("#content").click(function() {
 			$(this).blur();
 		});
-	$("#openwindow").click(function(){
-		window.open("client.jsp","百度一下","width=820px,height=620px,scrollbars=no,resizable=no");
-	});
 });

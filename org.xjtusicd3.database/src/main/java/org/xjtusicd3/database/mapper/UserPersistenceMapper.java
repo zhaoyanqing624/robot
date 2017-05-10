@@ -42,4 +42,9 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	//zyq_用户个人密码修改
 	@Update("UPDATE TBL_User SET USERPASSWORD=#{1} WHERE USEREMAIL=#{0}")
 	public void updateUserPassword(String email, String password);
+	/*
+	 * zyq_message_ajax_获得用户基本信息
+	 */
+	@Select("SELECT * FROM TBL_User WHERE USERNAME=#{0}")
+	public List<UserPersistence> getUserInfo(String username);
 }
