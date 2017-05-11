@@ -6,7 +6,7 @@ $(document).ready(
              dataType: "json",
              success: function(data){            
      			 for(var i in data){ 
-     			 	 document.getElementById("specialCategoryId").options.add(new Option(data[i].classifyName, data[i].classifyId));					        
+     			 	 document.getElementById("specialCategoryId").options.add(new Option(data[i].fAQCLASSIFYNAME, data[i].fAQCLASSIFYID));					        
 			      }                                                                      
              }
          });
@@ -22,7 +22,7 @@ $.ajax({
      success: function(data){
      			 document.getElementById("subspecialCategoryId").options.length=0;              	
      			 for(var i in data){ 
-     			 	 document.getElementById("subspecialCategoryId").options.add(new Option(data[i].classifyName, data[i].classifyId));					        
+     			 	 document.getElementById("subspecialCategoryId").options.add(new Option(data[i].fAQCLASSIFYNAME, data[i].fAQCLASSIFYID));					        
 				      }                                                                      
                   }
      });         

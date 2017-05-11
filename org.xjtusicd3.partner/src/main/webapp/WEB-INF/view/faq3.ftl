@@ -115,7 +115,6 @@
                             <span class="share">收藏：</span>
                             <a href="javascript:void(0);" id="favoriteHeart" class="share heart" onclick="favorite()"></a>
                             <span class="share">|</span>
-                            <span class="share">分享至：</span>
                             <!-- JiaThis Button BEGIN -->
                             <!--<div class="jiathis_style_32x32 fl">
                                 <a class="jiathis_button_qzone"></a>
@@ -147,26 +146,24 @@
                     <textarea class="textarea" id="content"></textarea>
                     <div class="clearfix commentScoreBtn">
                         <input type="button" value="发表评论" class="publishCommentBtn" onclick="comment()">
-                        <div class="scoreContent clearfix">
-                            <!--<span class="fl">评分:</span>
-                            <span class="score-icon fl" id="scoreList">
-                                <i class="score-star"></i>
-                                <i class="score-star"></i>
-                                <i class="score-star"></i>
-                                <i class="score-star"></i>
-                                <i class="score-star"></i>
-                            </span>-->
-                        </div>
-                        <!-- 隐藏域，用于存放回复用户id -->
-                        <input type="hidden" id="replayuserid">
-                        <!-- 隐藏域，用于存放评论id -->
-                        <input type="hidden" id="knowledgecommentid">
-                        <input type="hidden" id="commentid">
-                        <input type="hidden" id="replyid">
                     </div>
                     <h3>文章评论</h3>
-                    <ul class="commentList" id="commentContent"><li class="commentLiContent"><div class="userContent clearfix"><span class="username">新手9254</span><span class="line">|</span><span class="time">2016-12-06 14:05:20</span></div><div class="clearfix content"><a href="javascript:void(0);" class="commentReplay" onclick="openreply(this,'10085849254','10097837826','11717','793')">回复</a><p class="text">很好的一篇文章，新手也可以很容易理解。</p></div></li></ul>
-
+                    <#list comment as comment>
+                    <ul class="commentList" id="commentContent">
+                    	<li class="commentLiContent">
+                    		<#list comment.userViews as user>
+                    		<div class="userContent clearfix">
+                    			<span class="userPic"><img src="${user.userImage}"></span>
+                    			<span class="username">${user.userName}</span><span class="line">|</span><span class="time">${comment.commentTime}</span>
+                    		</div>
+                    		</#list>
+                    		<div class="clearfix content">
+                    		<a href="javascript:void(0);" class="commentReplay" onclick="openreply(this,'10085849254','10097837826','11717','793')">回复</a>
+                    		<p class="text">${comment.commentContent}</p>
+                    		</div>
+                    	</li>
+                    </ul>
+                    </#list>
                     <p class="ac hidden" id="querymorelink">
                         <a href="javascript:void(0);" onclick="querymorecomment()">查看更多...</a>
                     </p>
@@ -218,20 +215,27 @@
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
-    <!--script--!>
-    	<script type="text/javascript" src="new/front/js/util.js"></script>
-    	<script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function(){
-			$('#onebyone_slider').oneByOne({
-				className:'oneByOne1',
-				easeType:'random',
-				slideShow:true,
-				delay:200,
-				slideShowDelay:4000
+	<script type="text/javascript">
+		function comment(){
+		var faqtitle = document.getElementById("detailTplWrapper").getElementsByClassName("title")[0].innerHTML;
+		var comment = document.getElementById("content").value;
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveComment.html",
+				data:{
+					"faqtitle":faqtitle,
+					"comment":comment
+				},
+				dataType:"json",
+				success:function(data){
+					if(data=="0"){
+						self.location='login.html'; 
+					}else{
+						window.location.reload(); 
+					}
+				}
 			})
-		});
-		</script> 
-    <!--/script--!>
+		}
+	</script> 
 </body>
 </html>

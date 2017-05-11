@@ -18,6 +18,10 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	//zyq_校验邮箱是否被注册
 	@Select("SELECT * FROM TBL_User WHERE USEREMAIL=#{0}")
 	List<UserPersistence> getEmail(String useremail);
+	@Select("SELECT * FROM TBL_User WHERE USERNAME=#{0}")
+	List<UserPersistence> getEmail_name(String username);
+	@Select("SELECT * FROM TBL_User WHERE USERID=#{0}")
+	List<UserPersistence> getEmail_id(String userid);
 	@Select("SELECT * FROM TBL_User WHERE USEREMAIL=#{0} AND USERPASSWORD=#{1}")
 	List<UserPersistence> getEmail2(String param1,String param2);
 	@Select("SELECT * FROM TBL_User WHERE USEREMAIL=#{0} AND VERIFICATIONCODE=#{1}")

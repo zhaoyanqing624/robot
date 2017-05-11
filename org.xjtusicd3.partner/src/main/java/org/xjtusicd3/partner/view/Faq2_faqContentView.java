@@ -13,8 +13,16 @@ public class Faq2_faqContentView {
 	private String FaqModifytime;
 	private String FaqCollection;
 	private List<Faq2_faqUserView> uList;
+	private int  CommentNumber;
 	
 	
+	
+	public int getCommentNumber() {
+		return CommentNumber;
+	}
+	public void setCommentNumber(int commentNumber) {
+		CommentNumber = commentNumber;
+	}
 	public String getQuestionId() {
 		return QuestionId;
 	}

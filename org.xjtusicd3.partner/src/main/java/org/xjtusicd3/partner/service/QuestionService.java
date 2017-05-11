@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.xjtusicd3.database.helper.AnswerHelper;
+import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
+import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
@@ -28,8 +30,12 @@ public class QuestionService {
 				Faq2_faqUserView user_faq2View = new Faq2_faqUserView(userPersistence);
 				user_faq2Views.add(user_faq2View);
 			}
+			
 			Faq2_faqContentView faq2View  = new Faq2_faqContentView(questionPersistence);
 			faq2View.setuList(user_faq2Views);
+			List<CommentPersistence> commentPersistences = CommentHelper.getComment(questionPersistence.getFAQQUESTIONID());
+			int number = commentPersistences.size();
+			faq2View.setCommentNumber(number);
 			faq2Views.add(faq2View);
 		}
 		return faq2Views;

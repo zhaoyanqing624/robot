@@ -71,6 +71,13 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+	public static List<QuestionPersistence> faq3_faqcontent_title(String faqtitle){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faq3_faqcontent_title(faqtitle);
+		session.close();
+		return list;
+	}
 	/*
 	 * faq3_根据知识ID找类型classify
 	 */

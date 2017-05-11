@@ -39,14 +39,14 @@
 }
 
 .chat-box {
-	padding-top: 40px;
-	position: absolute;
-	display: none;
-	top: -5px;
-	left: 205px;
-	height: 400px;
-	width: 580px;
-	overflow: auto;
+    padding-top: 40px;
+    position: absolute;
+    display: none;
+    top: -106px;
+    left: 316px;
+    height: 428px;
+    width: 567px;
+    overflow: auto;
 }
 
 .msg {
