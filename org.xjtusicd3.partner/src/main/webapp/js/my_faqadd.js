@@ -128,13 +128,45 @@ $("#sub").click(function(){
 	var na = /^\S{2,44}$/   
 	var kw = /^\S{2,30}$/  
 	var dp = /^\S{2,100}$/
-	if(na.test($("#title").val())&&$('input:radio[name="resource"]:checked').val()&&kw.test($("#keywords").val())&&$("#subspecialCategoryId").val&&dp.test($("#description").val())){
-		(function() {
-			var dlgtrigger = document.querySelector( '[data-dialog]' ),
-				somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
-				dlg = new DialogFx( somedialog );
-			dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
-		})();
+	if(na.test($("#title").val())&&kw.test($("#keywords").val())&&$("#subspecialCategoryId").val&&dp.test($("#description").val())){
+			var title = document.getElementById("title").value;
+			var keywords = document.getElementById("keywords").value;
+			var subspecialCategoryId = document.getElementById("subspecialCategoryId").value;
+			var description = document.getElementById("description").value;
+			var risk_prompt = document.getElementById("risk_prompt").value;
+			var faqcontent = UE.getEditor('editor').getContent();
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveFAQ.html",
+				data:{
+					"title":title,
+					"keywords":keywords,
+					"subspecialCategoryId":subspecialCategoryId,
+					"description":description,
+					"risk_prompt":risk_prompt,
+					"faqcontent":faqcontent
+				},
+				dataType:"json",
+				success:function(data){
+					if(data=="0"){
+						self.location='login.html';
+					}else if(data=="1"){
+						(function() {
+							var dlgtrigger = document.querySelector( '[data-dialog]' ),
+								somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+								dlg = new DialogFx( somedialog );
+							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+						})();
+					}else{
+						(function() {
+							var dlgtrigger = document.querySelector( '[data-dialog]' ),
+								somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+								dlg = new DialogFx( somedialog2 );
+							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+						})();
+					}
+				}
+			})
 		return true;
 	}else{
 		if($("#title").val()==""){
@@ -155,4 +187,6 @@ $("#sub").click(function(){
 		return false;
 	}
 })
+
+
 

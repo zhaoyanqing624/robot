@@ -111,4 +111,42 @@ public class FaqController {
 		session.setAttribute("urlPath", urlPath);
 		return modelAndView;
 	}
+	/*
+	 * zyq_ajax_FAQ的增加
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
+	public String saveFAQ(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return "0";
+		}else {
+			String title = request.getParameter("title");
+			String keywords = request.getParameter("keywords");
+			String subspecialCategoryId = request.getParameter("subspecialCategoryId");
+			String description = request.getParameter("description");
+			String risk_prompt = request.getParameter("risk_prompt");
+			String faqcontent = request.getParameter("faqcontent");
+			List<QuestionPersistence> questionPersistences = QuestionHelper.faqadd_iscurrent(title,useremail);
+			if (questionPersistences.size()==0) {
+				QuestionService.saveFAQ(useremail,title,keywords,subspecialCategoryId,description,risk_prompt,faqcontent);
+				return "1";
+			}else {
+				return "2";
+			}
+			
+		}
+
+	}
+	/*
+	 * zyq_faqadd_FAQ的增加页面
+	 */
+	@RequestMapping(value="faqadd",method=RequestMethod.GET)
+	public ModelAndView faqadd(HttpSession session,HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("faqadd");
+		String urlPath = request.getHeader("REFERER");
+		System.out.println(urlPath);
+		session.setAttribute("urlPath", urlPath);
+		return mv;
+	}
 }

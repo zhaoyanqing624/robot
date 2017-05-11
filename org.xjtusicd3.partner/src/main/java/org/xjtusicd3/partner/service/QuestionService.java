@@ -1,11 +1,17 @@
 package org.xjtusicd3.partner.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import javax.xml.registry.infomodel.User;
 
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
@@ -66,5 +72,35 @@ public class QuestionService {
 			faq3Views.add(faq3View);
 		}
 		return faq3Views;
+	}
+	/*
+	 * zyq_ajax_FAQ的增加
+	 */
+	public static void saveFAQ(String useremail,String title,String keywords,String subspecialCategoryId,String description,String risk_prompt,String faqcontent){
+		QuestionPersistence questionPersistence = new QuestionPersistence();
+		String questionid = UUID.randomUUID().toString();
+		questionPersistence.setFAQQUESTIONID(questionid);
+		questionPersistence.setFAQTITLE(title);
+		questionPersistence.setFAQKEYWORDS(keywords);
+		questionPersistence.setFAQCLASSIFYID(subspecialCategoryId);
+		questionPersistence.setCOLLECTION("0");
+		questionPersistence.setSCAN("0");
+    	Date date=new Date();
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	String time = format.format(date);
+		questionPersistence.setMODIFYTIME(time);
+		questionPersistence.setSCORE(0);
+		questionPersistence.setFAQDESCRIPTION(description);
+		questionPersistence.setMODIFYNUMBER("1");
+		questionPersistence.setFAQSTATE(1);
+		QuestionHelper.save(questionPersistence);
+		
+		AnswerPersistence answerPersistence = new AnswerPersistence();
+		answerPersistence.setFAQANSWERID(UUID.randomUUID().toString());
+		answerPersistence.setFAQCONTENT(faqcontent);
+		answerPersistence.setFAQQUESTIONID(questionid);
+		List<UserPersistence> list = UserHelper.getEmail(useremail);
+		answerPersistence.setUSERID(list.get(0).getUSERID());
+		AnswerHelper.save(answerPersistence);
 	}
 }

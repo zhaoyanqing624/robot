@@ -79,6 +79,17 @@ public class QuestionHelper {
 		return list;
 	}
 	/*
+	 * faqadd_校验知识是否重复增添
+	 */
+	public static List<QuestionPersistence> faqadd_iscurrent(String faqtitle,String useremail){
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faqadd_iscurrent(faqtitle,userPersistences.get(0).getUSERID());
+		session.close();
+		return list;
+	}
+	/*
 	 * faq3_根据知识ID找类型classify
 	 */
 	public static String faqclassify(String QuestionId){

@@ -28,6 +28,8 @@ public class QuestionPersistence {
 	private String MODIFYNUMBER;
 	@TableField(columnName="SCORE")
 	private float SCORE;
+	@TableField(columnName="FAQSTATE")
+	private int FAQSTATE;
 	public String getFAQQUESTIONID() {
 		return FAQQUESTIONID;
 	}
@@ -88,8 +90,11 @@ public class QuestionPersistence {
 	public void setSCORE(float sCORE) {
 		SCORE = sCORE;
 	}
-	
-	
-	
+	public int getFAQSTATE() {
+		return FAQSTATE;
+	}
+	public void setFAQSTATE(int fAQSTATE) {
+		FAQSTATE = fAQSTATE;
+	}
 	
 }
