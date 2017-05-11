@@ -1,0 +1,149 @@
+.container_chat {
+	position: relative;
+	width: 88%;
+	box-shadow: 2px 5px 50px 1px #808080;
+	border-radius: 3px;
+}
+#content-box {
+    position: absolute;
+    display: ;
+    top: 483px;
+    right: 0;
+    height: 32px;
+    width: 710px;
+    border: none;
+    background: 0 0;
+}
+
+#content-box input {
+	width: 500px;
+	height: 35px;
+	font-family: 微软雅黑;
+	outline: none;
+	border: 1px solid #d8d8d8;
+	text-indent: 15px;
+	border-radius: 3px;
+	margin-left: 5px;
+}
+
+#content-box  button {
+	width: 60px;
+	height: 37px;
+	padding: 0;
+	border: 0;
+	border-radius: 3px;
+	background-color: #31de82;
+	color: #fff;
+	font-family: 微软雅黑;
+	font-size: 15px;
+}
+
+.chat-box {
+	padding-top: 40px;
+	position: absolute;
+	display: none;
+	top: -5px;
+	left: 205px;
+	height: 400px;
+	width: 580px;
+	overflow: auto;
+}
+
+.msg {
+	clear: both;
+	margin: 5px;
+	color: #f00;
+}
+
+.say-box {
+	clear: both;
+}
+
+.say-container-right {
+	margin: 5px 10px 5px 0;
+	display: inline-block;
+	border: 1px solid #000;
+	max-width: 260px;
+	word-wrap: break-word;
+	float: right;
+}
+
+.say-container-left {
+	margin: 5px 0 5px 10px;
+	display: inline-block;
+	border: 1px solid #000;
+	max-width: 260px;
+	word-wrap: break-word;
+	float: left;
+}
+
+.say-username-right {
+	margin: 5px 5px 5px 0;
+	float: right;
+}
+
+.say-username-left {
+	margin: 5px 0;
+	float: left;
+}
+
+.online-box {
+	margin-top: 20px;
+	position: relative;
+	width: 200px;
+	height: 500px;
+	padding: 5px 5px;
+	background-color: #d8d8d8;
+	border-radius: 3px 0 0 3px;
+	    float: left;
+    width: 320px;
+    position: relative;
+    border: 0;
+    background: #dfe3e6;
+}
+
+.online-list {
+	margin: 0;
+	list-style: none;
+	padding: 0;
+	position: relative;
+	list-style: none;
+}
+
+.online-list-item {
+	font-size: 20px;
+	font-family: 微软雅黑;
+	color: #494949; cursor : pointer;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+
+.online-list-item span {
+	padding: 5px 5px;
+	display: block;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.online-list-item span:hover {
+	background-color: #fff;
+}
+
+.bg-color {
+	background-color: #fff;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.bg-color2 {
+	color: #f00;
+}
+
+.point {
+	background-color: #f00;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	box-shadow: 0 0 5px #000;
+	float:right;
+	margin-top:7px;
+}

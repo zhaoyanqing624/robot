@@ -12,13 +12,12 @@
  * 
  */
 var websocket = null;
-var username = null;
 function connect() {
-	$("#chat_container").show();
+	$("#content-box").show();
 	// 判断当前浏览器是否支持WebSocket
 	if ('WebSocket' in window) {
 		websocket = new WebSocket(
-				"ws://localhost:8080/org.xjtusicd3.partner/websocketserver");
+				"ws://localhost:8080/websocket_demo2/websocketserver");
 	} else {
 		alert('Not support websocket')
 	}
@@ -43,25 +42,26 @@ function connect() {
 
 	// 接收到消息的回调方法
 	websocket.onmessage = function(event) {
-		var onlinelisthtml = $("#lastChat10000").html();
+		var onlinelisthtml = $("#online-list").html();
 		var datajson = eval('(' + event.data + ')');
 		switch (datajson.type) {
 		case 1:
 			for (var u = 0; u < datajson.onlinelist.length; u++)
 				if (datajson.onlinelist[u] != datajson.username)
-					if (onlinelisthtml.indexOf("chat-" + datajson.onlinelist[u]) < 0)
-						$.ajax({
-							type:"POST",
-							url:"/org.xjtusicd3.partner/getUserInfo.html",
-							data:{
-								"username":datajson.onlinelist[u],
-							},
-							dataType:"json",
-							success:function(data){
-								$("#lastChat10000").append("<div class='list-box'><img src='"+data[0].aVATAR+"'  width='40' height='40'><div class='info'><h5>"+ data[0].uSERNAME+ "</h5></div></div>");
-								$("#chat_content").append("<ul class='userchatUl'><li><div class='timeLine'><strong style='width:130px;'>2016-07-16</strong></div> </li></ul>")							
-							}
-						})
+					if (onlinelisthtml
+							.indexOf("chat-" + datajson.onlinelist[u]) < 0)
+						$("#online-list").append(
+								"<li class='online-list-item list-item-"
+										+ datajson.onlinelist[u] + "'><span>"
+										+ datajson.onlinelist[u]
+										+ "</span><div class='chat-box chat-"
+										+ datajson.onlinelist[u]
+										+ "'></div></li>");
+			/*
+			 * onlinelisthtml = onlinelisthtml + "<li class='online-list-item'><span>" +
+			 * datajson.onlinelist[u] + "</span><div class='chat-box
+			 * chat-"+datajson.onlinelist[u]+"'></div></li>";
+			 */
 			break;
 		case 2:
 			if (datajson.isSelf == true) {
@@ -139,8 +139,8 @@ $(document).ready(
 					});
 		});
 $(document).ready(function() {
-	$("#lastChat10000").delegate(".list-box", "click", function() {
-		$(".list-box").each(function() {
+	$(".online-list").delegate(".online-list-item", "click", function() {
+		$(".online-list-item").each(function() {
 			$(this).removeClass("bg-color");
 			$(this).find(".chat-box").hide();
 		});
@@ -158,8 +158,10 @@ $(document).ready(function() {
 		$("#content").click(function() {
 			$(this).blur();
 		});
-});
-    </script>
+	$("#openwindow").click(function(){
+		window.open("client.jsp","百度一下","width=820px,height=620px,scrollbars=no,resizable=no");
+	});
+});</script>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset2.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util2.css" />
@@ -167,6 +169,7 @@ $(document).ready(function() {
     <link href="css/bootstrap.min2.css" rel="stylesheet">
     <link href="css/css.css" rel="stylesheet">
     <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
 	<div class="header" id="head">      
@@ -235,82 +238,23 @@ $(document).ready(function() {
     </div>
     <!-- 导航条 end -->
     
-    <!-- 聊天大容器 -->
-    <div class="clearfix msgbox">
-        <!-- 左侧面板 -->
-        <div id="left_panel">
-            <div class="left_panel_content">
-                <!-- 搜索框 -->
-                <div class="find-input-box">
-                    <i class="fa fa-search"></i>
-                    <input class="input js-input" placeholder="通过昵称快速搜索" type="text" autocomplete="off" value="">
-                    <span class="icon-close2 btn-text-clear js-text-clear" title="清空"></span>
-                </div>
-                <!-- 搜索框 end -->
-                <!-- 加载loading -->
-                <div id="list_waper" class="clearfix ps-container">
-                    <ul id="lastChat" class="user_list">
-	                    <li id="lastChat10000" uid="10000"> 							
-	                    	<div class="list-box">							
-	                    		<img src="http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg" alt="女神" width="40" height="40"> 					     	
-	                    		<div class="info"><h5>女神</h5><p class="theLastMsg">各位小伙伴们~大家学习的怎么样了呢？如果有什么意见和建议欢迎大家随时提出来哦~~另外，马上就要过年了。，到底是什么呢？我们一起来看一下吧~在移动互联网如此火爆的今天，你是不是也有过想入行却没有人领路的痛苦呢？之《零基础入门Android语法与界面》来学习吧!传送门：http://class.imooc.com/sc/6 在这里你将获得1V1的专业教学团队的答疑支持，</p>
-								</div>					     	
-							</div>
-							<div class="list-box">							
-	                    		<img src="http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg" alt="女神" width="40" height="40"> 					     	
-	                    		<div class="info"><h5>女神</h5><p class="theLastMsg">各位小伙伴们~大家学习的怎么样了呢？如果有什么意见和建议欢迎大家随时提出来哦~~另外，马上就要过年了。，到底是什么呢？我们一起来看一下吧~在移动互联网如此火爆的今天，你是不是也有过想入行却没有人领路的痛苦呢？之《零基础入门Android语法与界面》来学习吧!传送门：http://class.imooc.com/sc/6 在这里你将获得1V1的专业教学团队的答疑支持，</p>
-								</div>					     	
-							</div>
-						</li>
-					</ul>
-                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px; width: 320px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 2px; height: 560px;"><div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div></div></div>
-                <!-- 加载loading end -->
-                <!-- 搜索历史 -->
-                <div class="history-box">
-                    <ul id="history-list"></ul>
-                </div>
-                <!-- 搜索历史 end -->
-                <!-- 搜索结果 -->
-                <div class="result-box js-result-box">
-                    <ul id="result-list"></ul>
-                    <div class="no-result">无检索结果</div>
-                </div>
-                <!-- 搜索结果 end -->
-                <div class="mask"></div>
+	<div id="container" class="container_chat">
+		<div class="online-box">
+			<div class="find-input-box">
+                <i class="fa fa-search"></i>
+                <input class="input js-input" placeholder="通过昵称快速搜索" type="text" autocomplete="off" value="">
             </div>
-        </div>
-        <!-- 聊天面板 -->
-        <div id="chat_container">
-            <div id="chat_content" class="ps-container"> 
-			</div>  <!-- 聊天内容显示区 -->
-            <div class="no_friend_right"></div>   <!-- 默认底图 -->
-            <!-- 聊天input -->
-            <div id="chat_editor" style="display: block;">
-                <form method="post" action="/u/3674640/uploadimg?1489304166966" enctype="multipart/form-data" id="upLoadForm" target="imageFrame">
-                    <table cellpadding="0" cellspacing="0">
-                        <tbody><tr>
-                            <th> <div class="attach"><a id="sendEmojiIcon" href="javascript:void(0)" onclick="return false" title="表情" style="margin-top:0;" class=""></a><div id="face_panel" style="display: none; z-index: 1;"><div id="choose_face"><a title="[微笑]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/1.png"><p>微笑</p></a><a title="[不]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/2.png"><p>不</p></a><a title="[亲亲]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/3.png"><p>亲亲</p></a><a title="[无聊]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/4.png"><p>无聊</p></a><a title="[鼓掌]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/5.png"><p>鼓掌</p></a><a title="[伤心]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/6.png"><p>伤心</p></a><a title="[害羞]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/7.png"><p>害羞</p></a><a title="[闭嘴]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/8.png"><p>闭嘴</p></a><a title="[耍酷]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/9.png"><p>耍酷</p></a><a title="[无语]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/10.png"><p>无语</p></a><a title="[发怒]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/11.png"><p>发怒</p></a><a title="[惊讶]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/12.png"><p>惊讶</p></a><a title="[委屈]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/13.png"><p>委屈</p></a><a title="[酷]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/14.png"><p>酷</p></a><a title="[汗]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/15.png"><p>汗</p></a><a title="[闪]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/16.png"><p>闪</p></a><a title="[放屁]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/17.png"><p>放屁</p></a><a title="[洗澡]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/18.png"><p>洗澡</p></a><a title="[偶耶]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/19.png"><p>偶耶</p></a><a title="[困]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/20.png"><p>困</p></a><a title="[咒骂]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/21.png"><p>咒骂</p></a><a title="[疑问]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/22.png"><p>疑问</p></a><a title="[晕]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/23.png"><p>晕</p></a><a title="[衰]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/24.png"><p>衰</p></a><a title="[装鬼]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/25.png"><p>装鬼</p></a><a title="[受伤]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/26.png"><p>受伤</p></a><a title="[再见]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/27.png"><p>再见</p></a><a title="[抠鼻]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/28.png"><p>抠鼻</p></a><a title="[心寒]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/29.png"><p>心寒</p></a><a title="[怒]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/30.png"><p>怒</p></a><a title="[凄凉]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/31.png"><p>凄凉</p></a><a title="[悄悄]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/32.png"><p>悄悄</p></a><a title="[奋斗]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/33.png"><p>奋斗</p></a><a title="[哭]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/34.png"><p>哭</p></a><a title="[赞]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/35.png"><p>赞</p></a><a title="[开心]" href="javascript:;"><img class="ph_face_s" src="/static/img/smiley/36.png"><p>开心</p></a></div></div></div>
-                            </th>
-                            <th> <div class="chat_upImg" style="text-align:center">
-                                    <input type="file" name="imgFile" id="msgUploadImg" accept="image/jpeg,image/gif,image/x-png" title="图片" style="display:none">
-                                </div>
-                            </th>
-                            <th> <div style="position:relative;width:490px;margin-top:8px;">
-                                    <textarea class="chatInput" id="textInput" type="text" maxlength="300" placeholder="输入您要发送的私信..." style="height: 40px; overflow-y: hidden;"></textarea>
-                                    <div id="msg_upImg_box" style="height:62px;display:none"></div>
-                                    <span id="imgDel" style="display:none;width:10px;height:10px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAAA3NCSVQICAjb4U/gAAAAHlBMVEXKytn////z8/bX1+PU1OD19fjb2+Xz8/f19fnZ2ePstdLlAAAACXBIWXMAAAsSAAALEgHS3X78AAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMS8yNS8xM7kML+MAAAAvSURBVAiZY2AVFBRUYlBTFBQyYhByF1RRZBAsUUoSZBAUMiiEk2ARiGwYWCVYFwDX5gdZj1qR8wAAAABJRU5ErkJggg==) no-repeat 0 0;"></span> </div>
-                            </th>
-                            <th> <a class="chatSend btn btn-large btn-green" href="javascript:;">发送</a> </th>
-                        </tr>
-                    </tbody></table>
-                </form>
-                <iframe width="0" height="0" id="imageFrame" name="imageFrame" frameborder="0" scrolling="no"></iframe>
-            </div>
-            <!-- 聊天input end -->
-        </div>
-        <div id="editor_msg"></div>     <!-- 聊天提示信息 -->
-    </div>
-    <!-- 聊天大容器 end -->
+			<ul id="online-list" class="online-list">
+			</ul>
+		</div>
+		<div id="content-box">
+			<input id="content" type="text" placeholder="请输入聊天内容">
+			<button id="send">send</button>
+		</div>
+	</div>
+
+
+
 
     <div id="js-setup-popl" class="setup-popl">
     <div class="setup-popl-top clearfix">

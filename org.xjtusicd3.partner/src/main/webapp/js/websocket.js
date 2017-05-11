@@ -3,11 +3,11 @@
  */
 var websocket = null;
 function connect() {
-	$("#chat_container").show();
+	$("#content-box").show();
 	// 判断当前浏览器是否支持WebSocket
 	if ('WebSocket' in window) {
 		websocket = new WebSocket(
-				"ws://localhost:8080/org.xjtusicd3.partner/websocketserver");
+				"ws://localhost:8080/websocket_demo2/websocketserver");
 	} else {
 		alert('Not support websocket')
 	}
@@ -19,45 +19,34 @@ function connect() {
 
 	// 连接成功建立的回调方法
 	websocket.onopen = function(event) {
-		var username;
 		$.ajax({
 			type:"GET",
 			url:"/org.xjtusicd3.partner/getUserName.html",
 			dataType:"json",
 			success:function(data){
 				username = data[0].uSERNAME;
+				send("{username:'" + username + "',type:1}");
 			}
 		})
-		send("{username:'" + username + "',type:1}");
 	}
 
 	// 接收到消息的回调方法
 	websocket.onmessage = function(event) {
-		var onlinelisthtml = $("#lastChat10000").html();
+		var onlinelisthtml = $("#online-list").html();
 		var datajson = eval('(' + event.data + ')');
 		switch (datajson.type) {
 		case 1:
 			for (var u = 0; u < datajson.onlinelist.length; u++)
-				var username;
-				$.ajax({
-					type:"GET",
-					url:"/org.xjtusicd3.partner/getUserName.html",
-					dataType:"json",
-					success:function(data){
-						username = data[0].uSERNAME;
-						if (datajson.onlinelist[u] != username)
-							if (onlinelisthtml
-									.indexOf("chat-" + datajson.onlinelist[u]) < 0)
-								$("#lastChat10000").append(
-										"<div class='list-box-"
-												+ datajson.onlinelist[u] + "'><span>"
-												+ datajson.onlinelist[u]
-												+ "</span><div class='chat-box chat-"
-												+ datajson.onlinelist[u]
-												+ "'></div></div>");
-					}
-				})
-
+				if (datajson.onlinelist[u] != datajson.username)
+					if (onlinelisthtml
+							.indexOf("chat-" + datajson.onlinelist[u]) < 0)
+						$("#online-list").append(
+								"<li class='online-list-item list-item-"
+										+ datajson.onlinelist[u] + "'><span>"
+										+ datajson.onlinelist[u]
+										+ "</span><div class='chat-box chat-"
+										+ datajson.onlinelist[u]
+										+ "'></div></li>");
 			/*
 			 * onlinelisthtml = onlinelisthtml + "<li class='online-list-item'><span>" +
 			 * datajson.onlinelist[u] + "</span><div class='chat-box
@@ -128,7 +117,9 @@ function send(message) {
 
 $(document).ready(
 		function() {
+			$("#btn-connection").click(function() {
 				connect();
+			});
 			$("#send").click(
 					function() {
 						send("{username:'" + $("#username").val()
@@ -159,4 +150,7 @@ $(document).ready(function() {
 		$("#content").click(function() {
 			$(this).blur();
 		});
+	$("#openwindow").click(function(){
+		window.open("client.jsp","百度一下","width=820px,height=620px,scrollbars=no,resizable=no");
+	});
 });

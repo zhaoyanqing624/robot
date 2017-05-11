@@ -98,7 +98,9 @@ a:active {
 }
 
 .clearfix {
-	*zoom: 1
+	*zoom: 1;
+	    margin-left: -2%;
+    width: 100%;
 }
 
 .l {
