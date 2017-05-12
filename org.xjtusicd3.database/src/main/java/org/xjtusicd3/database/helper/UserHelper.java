@@ -25,6 +25,20 @@ public class UserHelper {
 		session.close();
 		return list;
 	}
+	public static List<UserPersistence> getEmail_name(String username){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		List<UserPersistence> list = mapper.getEmail_name(username);
+		session.close();
+		return list;
+	}
+	public static List<UserPersistence> getEmail_id(String userid){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		List<UserPersistence> list = mapper.getEmail_id(userid);
+		session.close();
+		return list;
+	}
 	public static List<UserPersistence> getEmail2(String useremail,String password){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
@@ -96,4 +110,16 @@ public class UserHelper {
 		session.close();
 		return list;
 	}
+	
+	//zpz_获取用户所有信息
+		public static List<UserPersistence> getAllUserInfo()
+		{
+			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+			UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+			List<UserPersistence> userlist = mapper.getAllUserInfo();
+			session.close();
+			return userlist;
+			
+
+		}
 }
