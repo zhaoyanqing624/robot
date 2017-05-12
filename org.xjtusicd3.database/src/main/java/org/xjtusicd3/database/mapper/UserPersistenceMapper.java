@@ -18,6 +18,10 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	//zyq_校验邮箱是否被注册
 	@Select("SELECT * FROM TBL_User WHERE USEREMAIL=#{0}")
 	List<UserPersistence> getEmail(String useremail);
+	@Select("SELECT * FROM TBL_User WHERE USERNAME=#{0}")
+	List<UserPersistence> getEmail_name(String username);
+	@Select("SELECT * FROM TBL_User WHERE USERID=#{0}")
+	List<UserPersistence> getEmail_id(String userid);
 	@Select("SELECT * FROM TBL_User WHERE USEREMAIL=#{0} AND USERPASSWORD=#{1}")
 	List<UserPersistence> getEmail2(String param1,String param2);
 	@Select("SELECT * FROM TBL_User WHERE USEREMAIL=#{0} AND VERIFICATIONCODE=#{1}")
@@ -29,10 +33,14 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	@Delete("DELETE FROM TBL_User WHERE TBL_User.USEREMAIL=#{0}")
 	public void deleteUser(String useremail);
 	 
-	//zpz_获取用户信息
+	//zpz_获取用户部分信息
 	@Select("SELECT USERNAME,USERPASSWORD,USEREMAIL FROM TBL_User")
 	List<UserPersistence> getUser();
+	//zpz_获取用户所有信息
+	@Select("SELECT * FROM TBL_User")
+	List<UserPersistence> getAllUserInfo();
 
+	
 	//zyq_上传图片
 	@Update("UPDATE TBL_User SET TBL_User.AVATAR=#{1} WHERE USEREMAIL=#{0}")
 	public void updateUserImage(String param2, String param1);
