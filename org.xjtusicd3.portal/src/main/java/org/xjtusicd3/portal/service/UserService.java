@@ -15,35 +15,43 @@ import com.alibaba.fastjson.JSONObject;
 
 public class UserService {
     //获取用户信息
-	public static String getUser()
+//	public static String getUser()
+//	{
+//		String user = "";
+//		List<UserPersistence> userlist = UserHelper.getUser();
+//		for (int i = 0; i < userlist.size(); i++)
+//		{
+//			JSONObject jsonObject = new JSONObject();
+//			jsonObject.put("id",i+1);
+//			jsonObject.put("userName", userlist.get(i).getUSERNAME());
+//			jsonObject.put("userPassword", userlist.get(i).getUSERPASSWORD());
+//			jsonObject.put("userEmail", userlist.get(i).getUSEREMAIL());
+//			user += JsonUtil.toJsonString(jsonObject);
+//			if(i < userlist.size()-1)
+//			{
+//				user += ",";
+//			}else
+//			{
+//				user += "";
+//			}
+//		}
+//		System.out.println(user);
+//		return user;
+//		
+//	}
+//	
+//	public static void main(String[] args)
+//	{
+//		getUser();
+//	}
+	
+	public static List<UserPersistence> getAllUserList() 
 	{
-		String user = "";
-		List<UserPersistence> userlist = UserHelper.getUser();
-		for (int i = 0; i < userlist.size(); i++)
-		{
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("id",i+1);
-			jsonObject.put("userName", userlist.get(i).getUSERNAME());
-			jsonObject.put("userPassword", userlist.get(i).getUSERPASSWORD());
-			jsonObject.put("userEmail", userlist.get(i).getUSEREMAIL());
-			user += JsonUtil.toJsonString(jsonObject);
-			if(i < userlist.size()-1)
-			{
-				user += ",";
-			}else
-			{
-				user += "";
-			}
-		}
-		System.out.println(user);
-		return user;
+		List<UserPersistence> userlist = UserHelper.getAllUserInfo();
+		return userlist;
 		
 	}
 	
-	public static void main(String[] args)
-	{
-		getUser();
-	}
 	public static void login_register(String email, String password)
 	{
 		UUID uuid = UUID.randomUUID();

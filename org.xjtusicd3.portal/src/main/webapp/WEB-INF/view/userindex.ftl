@@ -28,6 +28,36 @@
             top: 900px !important;
         }
     </style>
+    
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+	 
+
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="media/image/favicon.ico" />
 
 </head>
 
@@ -35,150 +65,202 @@
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
-            <div class="ibox ">
-                <div class="ibox-title">
-                    <h5>用户列表</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="SuperUserManage.html">普通用户</a>
-                            </li>
-                            <li><a href="SuperUserManage.html">管理员</a>
-                            </li>
-                            </li>
-                            <li><a href="SuperUserManage.html">IT运维师</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <div class="input-group">
-                        <input type="text" placeholder="请输入搜索内容" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+             <!-- BEGIN PAGE CONTENT-->
 
-                    </div>
-                    <div class="jqGrid_wrapper">
-                        <table id="table_list_2"></table>
-                        <div id="pager_list_2"></div>
-                    </div>
-                </div>
-            </div>
+				<div class="row-fluid">
+
+					<div class="span12">
+
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+						<div class="portlet box blue">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-edit"></i>用户信息列表</div>
+
+								<div class="tools">
+
+									<a href="javascript:;" class="collapse"></a>
+
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+									<a href="javascript:;" class="reload"></a>
+
+									<a href="javascript:;" class="remove"></a>
+
+								</div>
+
+							</div>
+
+							<div class="portlet-body">
+
+								<div class="clearfix">
+
+									<div class="btn-group">
+
+										<button id="sample_editable_1_new" class="btn green">
+
+										增加用户<i class="icon-plus"></i>
+
+										</button>
+
+									</div>
+
+									<div class="btn-group pull-right">
+
+										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+
+										</button>
+
+										<ul class="dropdown-menu pull-right">
+
+											<li><a href="#">Print</a></li>
+
+											<li><a href="#">Save as PDF</a></li>
+
+											<li><a href="#">Export to Excel</a></li>
+
+										</ul>
+
+									</div>
+
+								</div>
+
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+
+									<thead>
+
+										<tr>
+
+										
+											<th>用户名</th>
+
+											<th>用户邮箱</th>
+
+											<th>用户地址</th>
+
+											<th>用户创建时间</th>
+
+											<th>Edit</th>
+
+											<th>Delete</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody>
+										<#list allUserList as userlist>
+										<tr class="">
+
+											<td>
+                								${userlist.USERNAME}
+                								
+                							</td>
+											<td>${userlist.USEREMAIL}</td>
+
+											<td class="center">${userlist.USERADDRESS}</td>
+
+											<td class="center">${userlist.CREATETIME}</td>
+
+											<td><a class="edit" href="javascript:;">Edit</a></td>
+
+											<td><a class="delete" href="javascript:;">Delete</a></td>
+
+										</tr>
+										</#list>
+										 
+
+									</tbody>
+
+								</table>
+
+							</div>
+
+						</div>
+
+						<!-- END EXAMPLE TABLE PORTLET-->
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE CONTENT -->
+
+			</div>
+
+			<!-- END PAGE CONTAINER-->
         </div>
     </div>
-</div>
+ 
 
 <!-- 全局js -->
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-<!-- Peity -->
-<script src="js/plugins/peity/jquery.peity.min.js"></script>
-
-<!-- jqGrid -->
-<script src="js/plugins/jqgrid/i18n/grid.locale-cn.js?0820"></script>
-<script src="js/plugins/jqgrid/jquery.jqGrid.min.js?0820"></script>
+ 
 
 <!-- 自定义js -->
 <script src="js/content.js?v=1.0.0"></script>
+ 
 
-<!-- Page-Level Scripts -->
-<script>
-    $(document).ready(function () {
+<!-- BEGIN CORE PLUGINS -->
 
-        $.jgrid.defaults.styleUI = 'Bootstrap';
-        // Examle data for jqGrid
-        var mydata = [${user}];
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-        // Configuration for jqGrid Example 2
-        $("#table_list_2").jqGrid({
-            data: mydata,
-            datatype: "local",
-            height: 450,
-            autowidth: true,
-            shrinkToFit: true,
-            rowNum: 20,
-            rowList: [10, 20, 30],
-            colNames: ['ID',  '用户名', '用户密码', '用户邮箱'],
-            colModel: [
-                {
-                    name: 'id',
-                    index: 'id',
-                    editable: true,
-                    width: 60,
-                    sorttype: "int",
-                    search: true,
-                    formatter:'showlink',
-                    formatoptions:{baseLinkUrl:"userdetail.html"}
-                },
-                {
-                    name: 'userName',
-                    index: 'userName',
-                    editable: true,
-                    width: 90,
-                    sorttype: "int",
-                },
-                {
-                    name: 'userPassword',
-                    index: 'userPassword',
-                    editable: true,
-                    width: 100
-                },
-                {
-                    name: 'userEmail',
-                    index: 'userEmail',
-                    editable: true,
-                    width: 80,
-                    align: "right",
-                    sorttype: "float",
-                }, 
-            ],
-            pager: "#pager_list_2",
-            viewrecords: true,
-            caption: "所有用户",
-            add: true,
-            edit: true,
-            addtext: 'Add',
-            edittext: 'Edit',
-            hidegrid: false
-        });
+	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 
-        // Add selection
-        $("#table_list_2").setSelection(4, true);
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
 
+	<!--[if lt IE 9]>
 
-        // Setup buttons
-        $("#table_list_2").jqGrid('navGrid', '#pager_list_2', {
-            edit: true,
-            add: true,
-            del: true,
-            search: true
-        }, {
-            height: 200,
-            reloadAfterSubmit: true
-        });
+	<script src="media/js/excanvas.min.js"></script>
 
-        // Add responsive to jqGrid
-        $(window).bind('resize', function () {
-            var width = $('.jqGrid_wrapper').width();
-            $('#table_list_1').setGridWidth(width);
-            $('#table_list_2').setGridWidth(width);
-        });
-    });
-</script>
+	<script src="media/js/respond.min.js"></script>  
 
+	<![endif]-->   
 
+	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+
+	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	<script src="media/js/app.js"></script>
+
+	<script src="media/js/table-editable.js"></script>    
+
+	<script>
+
+		jQuery(document).ready(function() {       
+
+		   App.init();
+
+		   TableEditable.init();
+
+		});
+
+	</script>
 
 
 </body>

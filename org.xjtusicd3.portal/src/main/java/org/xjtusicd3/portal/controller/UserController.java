@@ -17,24 +17,24 @@ import org.xjtusicd3.portal.service.UserService;
 public class UserController 
 {
 	/*
-	 * zpz_µÃµ½user
+	 * zpz_ï¿½Ãµï¿½user
 	 */
 	@RequestMapping(value="userindex",method=RequestMethod.GET)
 	public ModelAndView user()
 	{
 		ModelAndView mv = new ModelAndView("userindex");
-		String user = UserService.getUser();
-		mv.addObject("user",user);
+		List<UserPersistence> userlist = UserService.getAllUserList();
+		mv.addObject("allUserList",userlist);
 		return mv;
 		
 	}
-	//Ôö¼ÓÓÃ»§
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
 	@RequestMapping(value="adminAddUser",method=RequestMethod.GET)
 	public String adminAddUser(HttpServletRequest request,HttpServletResponse response){
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		//ÅÐ¶ÏÓÊÏäÊÇ·ñ±»×¢²á
+		//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½×¢ï¿½ï¿½
 		List<UserPersistence> list = UserHelper.getEmail(email);
 		if (list.size()==0) {
 			UserService.login_register(email, password);

@@ -50,11 +50,9 @@
                                 <dt>性别：</dt>
                                 <dd>男</dd>
                                 <dt>职位：</dt>
-                                <dd>科员</a>
-                                </dd>
+                                <dd>科员 </dd>
                                 <dt>用户密码：</dt>
-                                <dd>65165198162198</a>
-                                </dd>
+                                <dd>65165198162198 /dd>
                             </dl>
                         </div>
                         <div class="col-sm-7" id="cluster_info">

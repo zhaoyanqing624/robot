@@ -39,8 +39,7 @@
                 <div class="tab-content">
 
                     <div id="tab-1" class="tab-pane active">
-                        <!DOCTYPE html>
-                        <html>
+                       
 
                         <head>
 
@@ -263,8 +262,7 @@
 
                         </body>
 
-                        </html>
-
+                      
 
                     </div>
 

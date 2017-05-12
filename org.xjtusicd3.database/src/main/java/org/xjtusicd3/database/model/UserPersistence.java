@@ -30,10 +30,18 @@ public class UserPersistence {
 	private String ROLEID;
 	@TableField(columnName="USERSTATE")
 	private int USERSTATE;
+	@TableField(columnName="CREATETIME")
+	private String CREATETIME;
 	@TableField(columnName="VERIFICATIONCODE")
 	private String VERIFICATIONCODE;
 	@TableField(columnName="TIMEREMARKS")
 	private String TIMEREMARKS;
+	public String getCREATETIME() {
+		return CREATETIME;
+	}
+	public void setCREATETIME(String cREATETIME) {
+		CREATETIME = cREATETIME;
+	}
 	public String getUSERID() {
 		return USERID;
 	}

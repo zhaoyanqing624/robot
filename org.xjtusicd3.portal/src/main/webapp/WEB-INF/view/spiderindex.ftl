@@ -48,8 +48,7 @@
                             <li><a href="SuperUserManage.html">普通用户</a>
                             </li>
                             <li><a href="SuperUserManage.html">管理员</a>
-                            </li>
-                            </li>
+                            </li> 
                             <li><a href="SuperUserManage.html">IT运维师</a>
                             </li>
                         </ul>
