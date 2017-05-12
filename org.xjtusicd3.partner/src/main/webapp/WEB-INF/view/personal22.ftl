@@ -106,7 +106,15 @@ function connect() {
 
 	// 连接关闭的回调方法
 	websocket.onclose = function() {
-		send("{username:'" + $("#username").val() + "',type:4}");
+			$.ajax({
+			type:"GET",
+			url:"/org.xjtusicd3.partner/getUserName.html",
+			dataType:"json",
+			success:function(data){
+				username = data[0].uSERNAME;
+				send("{username:'" + username + "',type:4}");
+			}
+		})
 	}
 
 	// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
@@ -130,12 +138,20 @@ $(document).ready(
 				connect();
 			$("#send").click(
 					function() {
-						send("{username:'" + $("#username").val()
+						$.ajax({
+							type:"GET",
+							url:"/org.xjtusicd3.partner/getUserName.html",
+							dataType:"json",
+							success:function(data){
+								username = data[0].uSERNAME;
+								send("{username:'" + username
 								+ "',type:2,content:'" + $("#content").val()
 								+ "',sendto:'"
 								+ $(".bg-color").eq(0).find("span").html()
 								+ "'}");
 						$("#content").val("");
+							}
+						})
 					});
 		});
 $(document).ready(function() {

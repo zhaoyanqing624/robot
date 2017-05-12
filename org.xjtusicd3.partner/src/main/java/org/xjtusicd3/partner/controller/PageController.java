@@ -79,11 +79,6 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("question2");
 		return mv;
 	}
-	@RequestMapping(value="faqadd",method=RequestMethod.GET)
-	public ModelAndView faqadd(){
-		ModelAndView mv = new ModelAndView("faqadd");
-		return mv;
-	}
 	@RequestMapping(value="ueditor",method=RequestMethod.GET)
 	public ModelAndView ueditor(){
 		ModelAndView mv = new ModelAndView("ueditor");

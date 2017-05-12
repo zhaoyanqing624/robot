@@ -93,14 +93,6 @@
                             <div class="validate_faqadd spa1"></div>
                         </div>
                     </li>
-                     <li class="clearfix">
-                        <label>来源：</label>
-                        <div class="details">
-                         	<input type="radio" class="radio" value="0" name="resource">原创</input>&nbsp;&nbsp;&nbsp;
-                         	<input type="radio" class="radio" value="1" name="resource">转载</input>
-                         	<div class="validate_faqadd spa2"></div>
-                        </div>
-                    </li>
                     <li class="clearfix">
                         <label>关键字：</label>
                         <div class="details">
@@ -140,7 +132,7 @@
                   </ul>
                   
             <div class="btnWrapper">
-                <a href="javascript:void(0);" class="blue"  id="sub" data-dialog="somedialog">提交</a>
+                <a  class="blue"  id="sub" data-dialog="somedialog" >提交</a>
             </div>
         </div>
         </div>
@@ -158,13 +150,25 @@
 				</svg>
 			</div>
 			<div class="dialog-inner">
-				<h2><strong>保存成功</strong></h2>
-				<div><button class="action" data-dialog-close>关闭</button></div>
+				<h2><strong>上传成功，请您耐心等待管理员审核</strong></h2>
+				<div><button class="action" data-dialog-close onclick="windowclose()">关闭</button></div>
 			</div>
 		</div>
 	</div>
-    <!--script--!>
-    	
+	<div id="somedialog2" class="dialog">
+		<div class="dialog__overlay"></div>
+		<div class="dialog__content">
+			<div class="morph-shape">
+				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 560 280" preserveAspectRatio="none">
+					<rect x="3" y="3" fill="none" width="556" height="276"/>
+				</svg>
+			</div>
+			<div class="dialog-inner">
+				<h2><strong>请耐心等待审核，切勿重复提交</strong></h2>
+				<div><button class="action" data-dialog-close onclick="windowclose()">关闭</button></div>
+			</div>
+		</div>
+	</div>
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>    
 		<script type="text/javascript" src="js/my_faqadd.js"></script>
 		<script type="text/javascript" src="new/front/js/util.js"></script>
@@ -280,5 +284,10 @@
 </script>
 		<script src="zhao/tankuang/js/classie.js"></script>
 		<script src="zhao/tankuang/js/dialogFx.js"></script>
+		<script>
+			function windowclose(){
+				
+			}
+		</script>
 </body>
 </html>

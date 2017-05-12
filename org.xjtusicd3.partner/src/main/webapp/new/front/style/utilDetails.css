@@ -632,6 +632,11 @@
     padding-right: 10px;
     color: #8a8a8a;
 }
+.userPic img {
+    width: 30px;
+    height: 28px;
+    margin-right: 8px;
+}
 .commentLiContent .content {
     margin: 10px 0;
 }

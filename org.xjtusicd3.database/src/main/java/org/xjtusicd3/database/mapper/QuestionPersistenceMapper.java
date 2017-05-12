@@ -21,6 +21,7 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	public List<QuestionPersistence> faq2_faqlist(String param1,int param2);
 	@Select("SELECT * FROM TBL_User WHERE USERID=#{0}")
 	public List<UserPersistence> faq2_userlist(String UserId);
+	
 	@Select("SELECT COUNT(*) FROM TBL_FAQquestion WHERE FAQCLASSIFYID=#{0}")
 	public int pageTotal(String ClassifyId);
 	@Select("SELECT USERID FROM TBL_FAQanswer WHERE FAQQUESTIONID=#{0}")
@@ -30,6 +31,8 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion WHERE FAQQUESTIONID=#{0}")
 	public List<QuestionPersistence> faq3_faqcontent(String QuestionId);
+	@Select("SELECT * FROM TBL_FAQquestion WHERE FAQTITLE=#{0}")
+	public List<QuestionPersistence> faq3_faqcontent_title(String faqtitle);
 	/*
 	 * zyq_faq3_根据知识ID找类型classify
 	 */
@@ -40,4 +43,9 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion LIMIT 200")
 	public List<QuestionPersistence> getFaq();
+	/*
+	 * faqadd_校验知识是否重复增添
+	 */
+	@Select("SELECT * FROM TBL_FAQquestion,TBL_FAQanswer WHERE TBL_FAQquestion.FAQQUESTIONID=TBL_FAQanswer.FAQQUESTIONID AND TBL_FAQquestion.FAQTITLE=#{0} AND TBL_FAQanswer.USERID=#{1}")
+	public List<QuestionPersistence> faqadd_iscurrent(String faqtitle, String userid);
 }

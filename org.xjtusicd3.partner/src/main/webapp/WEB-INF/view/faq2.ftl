@@ -100,7 +100,7 @@
                 			<span class="dot">-</span>
                 			<span class="time">${faqlist.faqModifytime?substring(0,10)?replace('-','/')}</span>
                 			<span class="line">|</span>
-                			<span class="showCount">${faqlist.faqScan}</span><span class="message">2</span><span class="collection">${faqlist.faqCollection}</span></li><li class="content">${faqlist.faqDescription}</li>
+                			<span class="showCount">${faqlist.faqScan}</span><span class="message">${faqlist.commentNumber}</span><span class="collection">${faqlist.faqCollection}</span></li><li class="content">${faqlist.faqDescription}</li>
                 	</ul>
                 </#list>
                 
@@ -168,7 +168,7 @@
 						for(var i in data.faqlist){
 							var html = document.getElementById("secondListtWrapper").innerHTML;
 							var time = data.faqlist[i].faqModifytime.substring(0,10).replace(/-/,'/');
-							document.getElementById("secondListtWrapper").innerHTML = html+ '<ul class="knowledgeList"><li><p class="title"><a href="faq3.html?f='+data.faqlist[i].faqId+'" target="_blank">'+data.faqlist[i].faqTitle+'</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="'+data.faqlist[i].uList[0].userImage+'"></span><span class="username">'+data.faqlist[i].uList[0].userName+'</span><span class="dot">-</span><span class="time">'+time+'</span><span class="line">|</span><span class="showCount">'+data.faqlist[i].faqScan+'</span><span class="message">2</span><span class="collection">'+data.faqlist[i].faqCollection+'</span></li><li class="content">'+data.faqlist[i].faqDescription+'</li></ul>';
+							document.getElementById("secondListtWrapper").innerHTML = html+ '<ul class="knowledgeList"><li><p class="title"><a href="faq3.html?q='+data.faqlist[i].questionId+'" target="_blank">'+data.faqlist[i].faqTitle+'</a><span class="tags undefined"></span></p></li><li class="clearfix"><span class="userPic"><img src="'+data.faqlist[i].uList[0].userImage+'"></span><span class="username">'+data.faqlist[i].uList[0].userName+'</span><span class="dot">-</span><span class="time">'+time+'</span><span class="line">|</span><span class="showCount">'+data.faqlist[i].faqScan+'</span><span class="message">'+data.faqlist[i].commentNumber+'</span><span class="collection">'+data.faqlist[i].faqCollection+'</span></li><li class="content">'+data.faqlist[i].faqDescription+'</li></ul>';
 						}
 						if(data.pagenow<data.pageTotal){
 							pagenow = data.pagenow;

@@ -13,12 +13,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CommentPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
+import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.ClassifyService;
+import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.QuestionService;
+import org.xjtusicd3.partner.service.UserService;
 import org.xjtusicd3.partner.view.Faq1_ClassifyView;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
+import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -94,11 +102,51 @@ public class FaqController {
 		List<ClassifyPersistence> classify2 = ClassifyService.faq2_classify2(classifyId);
 		List<ClassifyPersistence> classify = ClassifyService.faq2_classify(classifyId);
 		List<Faq3_faqContentView> faq3Views = QuestionService.faq3_faqcontent(q);
+		List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(faq3Views.get(0).getQuestionId());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
 		modelAndView.addObject("faq3Views", faq3Views);
+		modelAndView.addObject("comment", faq3_CommentViews);
 		String urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
 		session.setAttribute("urlPath", urlPath);
 		return modelAndView;
+	}
+	/*
+	 * zyq_ajax_FAQ的增加
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
+	public String saveFAQ(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		if (useremail==null) {
+			return "0";
+		}else {
+			String title = request.getParameter("title");
+			String keywords = request.getParameter("keywords");
+			String subspecialCategoryId = request.getParameter("subspecialCategoryId");
+			String description = request.getParameter("description");
+			String risk_prompt = request.getParameter("risk_prompt");
+			String faqcontent = request.getParameter("faqcontent");
+			List<QuestionPersistence> questionPersistences = QuestionHelper.faqadd_iscurrent(title,useremail);
+			if (questionPersistences.size()==0) {
+				QuestionService.saveFAQ(useremail,title,keywords,subspecialCategoryId,description,risk_prompt,faqcontent);
+				return "1";
+			}else {
+				return "2";
+			}
+			
+		}
+
+	}
+	/*
+	 * zyq_faqadd_FAQ的增加页面
+	 */
+	@RequestMapping(value="faqadd",method=RequestMethod.GET)
+	public ModelAndView faqadd(HttpSession session,HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("faqadd");
+		String urlPath = request.getHeader("REFERER");
+		System.out.println(urlPath);
+		session.setAttribute("urlPath", urlPath);
+		return mv;
 	}
 }

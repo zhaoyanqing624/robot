@@ -71,6 +71,24 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+	public static List<QuestionPersistence> faq3_faqcontent_title(String faqtitle){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faq3_faqcontent_title(faqtitle);
+		session.close();
+		return list;
+	}
+	/*
+	 * faqadd_校验知识是否重复增添
+	 */
+	public static List<QuestionPersistence> faqadd_iscurrent(String faqtitle,String useremail){
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faqadd_iscurrent(faqtitle,userPersistences.get(0).getUSERID());
+		session.close();
+		return list;
+	}
 	/*
 	 * faq3_根据知识ID找类型classify
 	 */
