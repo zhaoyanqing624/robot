@@ -669,7 +669,11 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 				},
 				dataType:"json",
 				success:function(data){
-					
+					if(data=="0"){
+						self.location='login.html'; 
+					}else{
+						window.location.reload(); 
+					}
 				}
 			})
 	}
@@ -708,11 +712,8 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 			$(function() {
 				var dd = new DropDown( $('#dd') );
 				$(document).click(function() {
-
 					// all dropdowns
-
 					$('.wrapper-dropdown-3').removeClass('active');
-
 				});
 			});
 		</script> 

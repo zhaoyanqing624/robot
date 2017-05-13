@@ -157,72 +157,7 @@ $(function(){
 		}
 	});
 
-	//用户输入标题，即时提醒相似问题
-	$('#title').on('input',function(){
-		//终止上次的ajax请求
-		if(searchNowRequest){
-			searchNowRequest.abort();
-		}
 
-		//标题输入textarea高度自动适应
-  		var minHeight = 20;
-		var $this = $(this);
-        if ($this.scrollTop() == 0){
-        	$this.scrollTop(1);
-        }
-        while ($this.scrollTop() == 0){
-            if ($this.height() > minHeight)
-                $this.height($this.height()-minHeight);
-            else
-                break;
-            $this.scrollTop(1);
-            $this.css('overflow-y','hidden');
-            if ($this.scrollTop() > 0){
-                $this.height($this.height()+minHeight);
-                break;
-            }
-        }
-        while($this.scrollTop() > 0){
-            $this.height($this.height()+minHeight);
-            if ($this.scrollTop() == 0){
-            	$this.scrollTop(1);
-            }
-        }
-
-		//判断问题是否超出100字
-		if($(this).val().length>100){
-			$('.askTitleTip').text("长度超出"+($(this).val().length-100)+"字").show();
-			$('#similarAsk').empty().hide();
-		}
-		else{
-			$('.askTitleTip').hide();
-		}
-
-		//搜索相似问题
-		searchNowRequest = $.ajax({
-			url: '/search/ajax/search/',
-			data: {
-				'q':$(this).val(),
-				'action': 'related',
-				'limit':5
-			},
-			dataType: 'json',
-			success: function(msg){
-				if(searchNowRequest){
-					if(msg.data){
-						$('#similarAsk').empty().append('<h2>您的问题可能已经有答案</h2>').show();
-						for(var i=0;i<msg.data.length;i++){
-							var sim = $('<a target="_blank"></a>').attr('href','detail.html?qid='+msg.data[i].search_id).html(msg.data[i].name);
-							$('<li></li>').append(sim).appendTo('#similarAsk')
-						}
-					}
-					else{
-						$('#similarAsk').empty().hide();
-					}
-				}
-			}
-		});
-	});
 
 	//下一步
 	$('body').delegate('#toStep2','click',function(e){

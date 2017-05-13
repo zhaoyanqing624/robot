@@ -2,6 +2,7 @@ package org.xjtusicd3.database.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
@@ -13,5 +14,10 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	 */
 	@Select("SELECT * FROM TBL_CommunityQuestion WHERE USERID=#{0} AND TITLE=#{1}")
 	List<CommunityQuestionPersistence> question_iscurrent(String userid, String questiontitle);
+	/*
+	 * zyq_ajax_question的增加
+	 */
+	@Insert("INSERT INTO TBL_CommunityQuestion(COMMUNITYQUESTIONID,TIME,TITLE,CONTENT,CLASSIFYID,USERID,COLLECTION,SCAN,USERQUESTIONID) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8})")
+	void saveCommunityQuestion(String id, String time, String title, String content, String classifyid, String userid,String collection, String scan, String userquestionid);
 
 }

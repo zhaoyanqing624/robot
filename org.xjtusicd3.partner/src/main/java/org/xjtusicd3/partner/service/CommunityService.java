@@ -44,16 +44,6 @@ public class CommunityService {
     	Date date=new Date();
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	String time = format.format(date);
-    	CommunityQuestionPersistence communityQuestionPersistence = new CommunityQuestionPersistence();
-    	communityQuestionPersistence.setCOMMUNITYQUESTIONID(UUID.randomUUID().toString());
-    	communityQuestionPersistence.setTIME(time);
-    	communityQuestionPersistence.setCONTENT(content);
-    	communityQuestionPersistence.setCLASSIFYID(classifyPersistences.get(0).getFAQCLASSIFYID());
-    	communityQuestionPersistence.setUSERID(userPersistences.get(0).getUSERID());
-    	communityQuestionPersistence.setCOLLECTION("0");
-    	communityQuestionPersistence.setSCAN("0");
-    	communityQuestionPersistence.setUSERQUESTIONID(null);
-    	communityQuestionPersistence.setTITLE(title);
-    	CommunityQuestionHelper.saveCommunityQuestion(communityQuestionPersistence);
+    	CommunityQuestionHelper.saveCommunityQuestion(UUID.randomUUID().toString(),time,title,content,classifyPersistences.get(0).getFAQCLASSIFYID(),userPersistences.get(0).getUSERID(),"0","0",null);
 	}
 }

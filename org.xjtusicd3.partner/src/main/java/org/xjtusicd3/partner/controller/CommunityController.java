@@ -47,10 +47,11 @@ public class CommunityController {
 			String title = request.getParameter("title");
 			String content = request.getParameter("description");
 			String classifynumber = request.getParameter("check_val");
-			CommunityService.savaCommunityQuestion(useremail, title, content, classifynumber);
+			
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
 			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_iscurrent(userPersistences.get(0).getUSERID(), title);
 			if (communityQuestionPersistences.size()==0) {
+				CommunityService.savaCommunityQuestion(useremail, title, content, classifynumber);
 				return "1";
 			}else {
 				return "2";
