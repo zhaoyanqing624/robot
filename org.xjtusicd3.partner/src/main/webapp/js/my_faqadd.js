@@ -148,15 +148,16 @@ $("#sub").click(function(){
 				},
 				dataType:"json",
 				success:function(data){
-					if(data=="0"){
+					if(data.value=="0"){
 						self.location='login.html';
-					}else if(data=="1"){
+					}else if(data.value=="1"){
 						(function() {
 							var dlgtrigger = document.querySelector( '[data-dialog]' ),
 								somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
 								dlg = new DialogFx( somedialog );
 							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
 						})();
+						document.getElementById('lasturl').innerHTML=data.url;
 					}else{
 						(function() {
 							var dlgtrigger = document.querySelector( '[data-dialog]' ),
@@ -164,6 +165,7 @@ $("#sub").click(function(){
 								dlg = new DialogFx( somedialog2 );
 							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
 						})();
+						document.getElementById('lasturl').innerHTML=data.url;
 					}
 				}
 			})

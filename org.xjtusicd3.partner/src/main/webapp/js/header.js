@@ -1,30 +1,3 @@
-/*
-	所有页面的通用模块，包括判断用户是否登录，导航的操作：搜索、提问、登录注册、个人中心等
-	还有一些个页面的通用函数，包括cookie操作、弹窗函数、json对象长度计算等
-	创建于：2015.10.27.
-*/
-
-//用于判断UA，移动端和PC端之间的跳转
-var userAgentInfo = navigator.userAgent;
-var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
-var flag = true;
-for (var v = 0; v < Agents.length; v++) {
-	if (userAgentInfo.indexOf(Agents[v]) > 0) {
-		flag = false;
-		break;
-	}
-}
-if(!flag){
-	window.location.href=window.location.href.replace('/html/','/mhtml/');
-}
-
-var isEditingQuestion=false;//在提交问题时判断是在提新问题还是在编辑问题
-var isSubmitQuestion = false;//是否正在提交问题，防止多次提交
-var searchNowRequest;//即时搜索的xmlhttprequest对象，用于终止上一次的查询请求
-var notification_interval;	//消息面板上下移动计时器
-var post_hash;	// 提新问题、编辑问题token
-
-
 
 /**
  * 用于记录跳至其他标签页时的计时器的全局变量
@@ -35,61 +8,6 @@ var post_hash;	// 提新问题、编辑问题token
 var pageVisibility={};
 
 $(function(){
-
-	//cookie判断是否登录
-	if(getCookie('nick_name')&&getCookie('uid')&&getCookie('avatar_file')&&getCookie('group_id')){
-		//如果已经登录，将登录信息显示
-		$('#logedIn img#userImg').attr('src',getCookie('avatar_file'));
-		$('#logedIn span#userName').text(getCookie('nick_name'));
-		$('#logedIn').removeClass('hidden');
-		$('#notLoged').addClass('hidden');
-		$('#logedIn').width($('#userImg').width()+$('#userName').width()+15);
-		if($('header .memberico').width()>120){
-			if($('header .memberico').width()<180){
-				$('header form input').width($('header form input').width()+120-$('header .memberico').width());
-			}
-			else{
-				$('header form input').width(350);
-			}
-		}
-		//获取未读消息
-		getUnReadNotifyCount();
-	}
-	//如果没有cookie，请求is_user_login接口，判断用户是否已经登录
-	else{
-		$.getJSON("/api/ajax/is_user_login/",function(msg){
-			//如果已经登录，将登录信息写入cookie，并显示
-			if(msg.data!=null){
-				setCookie('uid',msg.data.uid,null,'/');
-				setCookie('avatar_file',decodeURIComponent(msg.data.avatar_file),null,'/');
-				setCookie('group_id',msg.data.group_id,null,'/');
-				$('#logedIn img#userImg').attr('src',decodeURIComponent(getCookie('avatar_file')));
-				$('#logedIn').removeClass('hidden');
-				$('#notLoged').addClass('hidden');
-				//如果nick_name为空，说明是新用户，还没有输入昵称，则弹窗让用户输入昵称
-				if(!msg.data.nick_name){
-					inputUserName();
-				}
-				else{
-					setCookie('nick_name',decodeURIComponent(msg.data.nick_name),null,'/');
-					$('#logedIn span#userName').text(getCookie('nick_name'));
-					$('#logedIn').width($('#userImg').width()+$('#userName').width()+15);
-					if($('header .memberico').width()>120){
-						if($('header .memberico').width()<180){
-							$('header form input').width($('header form input').width()+120-$('header .memberico').width());
-						}
-						else{
-							$('header form input').width(350);
-						}
-					}
-					//刚登录，需要声音提示
-					localStorage.unReadNumber = 0;
-					getUnReadNotifyCount();
-				}
-			}
-		});
-	}
-
 	/*
 	 * 即时搜索提示部分
 	 */
@@ -334,7 +252,7 @@ $(function(){
 
 	//判断最多选择五个标签
 	$('body').delegate('#questionForm input[name="category_id"]','change',function(){
-		if($('#questionForm input[name="category_id"]:checked').length>=5){
+		if($('#questionForm input[name="category_id"]:checked').length>=1){
 			$('#questionForm input[name="category_id"]').not(':checked').attr('disabled',true);
 		}
 		else{
@@ -397,129 +315,6 @@ $(function(){
 	})
 	*/
 
-	//提交问题
-	$('body').delegate('#questionForm #submit','click',function(){
-		if(isSubmitQuestion)
-			return;
-		isSubmitQuestion = true;
-		var content=$('#questionForm #title').val();
-		var detail=ue00.getContent();
-
-		var category="";
-		$('#questionForm input[name="category_id"]:checked').each(function(index){
-			if(0==index)
-				category=$(this).val();
-			else
-				category+=(","+$(this).val());
-		});
-
-		if(!isEditingQuestion){//提新问题
-			$.ajax({
-				url:'/publish/ajax/publish_question/',
-				type:'post',
-				data:{
-					'question_content': htmlUtil.htmlEncodeByRegExp(content),
-					'question_detail': detail,
-					'category_id':category,
-					'm_styple':100,
-					'post_hash':post_hash
-				},
-				dataType:'json',
-				success:function(msg){
-					isSubmitQuestion = false;
-					$('#questionForm').remove();
-					if (msg.data) {
-						if(msg.data.qid!=null){
-							window.location.href="detail.html?qid="+msg.data.qid;
-						}
-						else if(msg.data.approval_id){
-							window.location.href="approval.html?qid="+msg.data.approval_id;
-						}
-					}
-					else if (msg.errno == '-1') {
-						popUpTip(false, msg.err);
-					}
-				},
-				error:function(msg){
-					isSubmitQuestion = false;
-					popUpTip(false,"提交失败");
-				}
-			})
-		}
-		else{//编辑问题
-			var qid = $('#questionForm').attr('qid');
-			var approval_id=$('#questionForm').attr('approval_id');
-			//编辑审核过的问题
-			if(qid){
-				$.ajax({
-					url:'/publish/ajax/modify_question/',
-					type:'post',
-					data:{
-						'question_id': qid,
-						'question_content': htmlUtil.htmlEncodeByRegExp(content),
-						'question_detail': detail,
-						'category_id': category
-					},
-					dataType:'json',
-					success:function(msg){
-						isSubmitQuestion = false;
-						$('#questionForm').remove();
-						if(msg.data.question_id){
-							window.location.href="detail.html?qid="+msg.data.question_id;
-						}
-						else if(msg.data.approval_id){
-							window.location.href="approval.html?qid="+msg.data.approval_id;
-						}
-						else if(msg.return_code){
-							popUpTip(true,"修改成功，等待审核");
-						}
-						//清空所有的填充项
-						$('#questionForm #title').val(null);
-						ue00.setContent('');
-						$('#questionForm input[name="category_id"]:checked').attr('checked',false);
-						$('#questionForm input[name="category_id"]').attr('disabled',false);
-						$('#questionForm ul#customTag').empty();
-						$('#questionForm #question-s').removeClass('hidden');
-						$('#questionForm #tag-s').addClass('hidden');
-						$('#questionForm').addClass('hidden');
-					},
-					error:function(msg){
-						isSubmitQuestion = false;
-						popUpTip(false,"修改失败");
-					}
-				});
-			}
-			//编辑未审核问题
-			else{
-				$.ajax({
-					url:'/api/ajax/approval/',
-					type:'post',
-					data:{
-						'approval_id': approval_id,
-						action: 'update',
-						'question_content': htmlUtil.htmlEncodeByRegExp(content),
-						'question_detail': detail,
-						'category_id': category
-					},
-					dataType:'json',
-					success:function(msg){
-						isSubmitQuestion = false;
-						$('#questionForm').remove();
-						if(msg.data.question_id){
-							window.location.href="detail.html?qid="+msg.data.question_id;
-						}
-						else if(msg.data.approval_id){
-							window.location.href="approval.html?qid="+msg.data.approval_id;
-						}
-					},
-					error:function(msg){
-						isSubmitQuestion = false;
-						popUpTip(false,"修改失败");
-					}
-				});
-			}
-		}
-	});
 	/**
 	 * 提新问题结束
 	 */
@@ -554,171 +349,9 @@ $(function(){
 		}
 	});
 
-	//登陆按钮
-	$('#top #notLoged').on('click',function(){
-		if(!getCookie('uid')){//如果未登录
-			if(!$('body #loginForm').length){
-				$('body').css({'max-height':$(window).height()+'px','overflow':'hidden'});
-				$('<div id="loginForm" class="popup" style="display:none"><div class="fade"></div><div id="login-f"><div id="login-s"><a href="javascript:" id="close"></a><h1>问吧</h1><h2>有问题，来问吧~</h2><div id="options"><button id="log">登录</button><button id="register">注册</button></div></div></div></div>').appendTo('body').fadeIn(500);
-			}
-			else
-				$('body #loginForm').fadeIn(500);
-		}
-	});
-
-	//点击个人中心
-	$('#top #logedIn').on('click',function(){
-		var _href = "personal.html?userid="+encodeURIComponent(getCookie('uid'));
-		//如果存在未读消息，则在个人中心打开消息面板
-		if(!$('#hearer_user_notification_num').is(':hidden')&&$('#hearer_user_notification_num').text()){//有未读消息
-			_href+="&&notify";
-		}
-		//如果已经在个人中心，只刷新页面
-		if(window.location.href.indexOf('personal')!=-1){
-			window.location.href=_href;
-		}
-		//否则，新窗口打开
-		else{
-			window.open(_href);
-		}
-	});
-
-	//hover个人中心，消息框出现、消失
-	$('#top .memberico').hover(function(){
-		if(!getCookie('uid')){
-			return;
-		}
-		//显示弹框
-		$('header #personal').removeClass('hidden').css('right',$('.header').offset().left+'px');
-		//调整三角位置
-		var deco_left = $('#userImg').offset().left+10-$('#personal').offset().left;
-		$('#header_personal_deco').css('left',deco_left+'px');
-
-		if(getCookie('uid')){
-			var $this = $(this);
-			//没有加载过未读消息，则请求数据
-			if(!$(this).attr('data-load-notification')){
-				//移除最大高度消息面板限制
-				$('#notification_content').css('max-height','3000px');
-				//设置消息框内容显示部分的最大高度
-				var maxHeight = $(window).height()-136;
-				//隐藏向上向下按钮
-				$('#notification_scroll_down').addClass('hidden');
-				//显示等待动画
-				$('.spinner1').removeClass('hidden');
-				//清空原来的消息
-				$('#notification_content').empty();
-				$.ajax({
-					url:'/account/ajax/getnotifylist/',
-					data:{
-						uid: getCookie('uid')
-					},
-					dataType:'json',
-					success:function(msg){
-						$this.attr('data-load-notification',true);	//标记已经加载过
-						if(jsonLength(msg.data)>0){
-							var html = '';
-							//醉了，有五条消息的时候，key值居然是从1-5，而不是0-4，因此需要特殊处理
-							for(var i = 0, len = jsonLength(msg.data); i <= len; i++){
-								var data = msg.data[i];
-								if(!data){
-									continue;
-								}
-								html+='<div class="notification_content_detail fm_ele';
-								//如果消息未读，增加unRead类
-								if(data.read_flag==100){
-									html+=' unRead"'
-										+ ' fm-type="div" fm-name="read_notification_unRead" fm-operation="click" fm-zoon="notification_area"'//前端监控
-								}
-								else{
-									html+='"'
-										+ ' fm-type="div" fm-name="read_notification_readed" fm-operation="click" fm-zoon="notification_area"'//前端监控
-								}
-								html+=' data-notification-id='+data.notification_id
-									+ ' data-type='+data.type+'>'
-									+ '<p>'+data.message+'</p>'
-									+ '</div>';
-							}
-							$('#notification_content').html(html);
-
-							//显示消息内容
-							$('#no_notification').hide();
-							$('.spinner1').addClass('hidden');
-							$('#notification_content_outer').show();
-
-							//如果消息面板高度超出，那么设置面板高度，并显示向下按钮
-							if($('#notification_content').height() > maxHeight){
-								$('#notification_content').css('max-height',maxHeight + 'px');
-								$('#notification_scroll_down').removeClass('hidden');
-							}
-						}
-						else{
-							$('.spinner1').addClass('hidden');
-							$('#no_notification').show();
-							$('#notification_content_outer').hide();
-						}
-					},
-					error:function(msg){
-					}
-				})
-			}
-		}
-	},function(){
-		if(getCookie('uid')){
-			$('header #personal').addClass('hidden');
-		}
-	});
-
-	/**
-	 * 消息面板的向上滚动
-	 */
-	$('#notification_scroll_top').hover(
-		function(){
-			//呼吸灯效果取消
-			$('.notification_scroll').css('animation','none');
-			//mouseover时，计时器开始，滚动
-			notification_interval = setInterval(function(){
-				$('#notification_content').scrollTop($('#notification_content').scrollTop()-10);
-				//如果滚到顶部，按钮消失; 底部按钮开始呼吸灯效果
-				if($('#notification_content').scrollTop()==0){
-					$('#notification_scroll_top').addClass('hidden');
-					$('#notification_scroll_down').css('animation','breathLight 2s ease-in infinite alternate');
-				}
-			},100);
-			//只要向上滚动，那么就显示向下按钮
-			$('#notification_scroll_down').removeClass('hidden');
-		},function(){
-			//清除计时器
-			clearInterval(notification_interval);
-		}
-	);
 	/**
 	 * 消息面板的向下滚动                                                                [description]
 	 */
-	$('#notification_scroll_down').hover(
-		function(){
-			//呼吸灯效果取消
-			$('.notification_scroll').css('animation','none');
-			//mouseover时，计时器开始，滚动
-			notification_interval = setInterval(function(){
-				var pre = $('#notification_content').scrollTop();
-				$('#notification_content').scrollTop(pre + 10);
-				//如果滚到底部，按钮消失；顶部按钮显示呼吸灯效果
-				if(pre == $('#notification_content').scrollTop()){
-					$('#notification_scroll_down').addClass('hidden');
-					$('#notification_scroll_top').css('animation','breathLight 2s ease-in infinite alternate');
-				}
-				if($('#notification_content').scrollTop()>0){
-					//显示向上按钮
-					$('#notification_scroll_top').removeClass('hidden');
-				}
-			},100);
-
-		},function(){
-			//清除计时器
-			clearInterval(notification_interval);
-		}
-	);
 
 	//点击查看全部消息
 	$('#personal_allNotification').on('click',function(){
@@ -731,41 +364,6 @@ $(function(){
 		}
 	});
 
-	//消息已读
-	$('#notification_content').delegate('.notification_content_detail.unRead','click',function(){
-		readNotify($(this));
-	});
-
-	//进入个人中心
-	$('#personal_page').on('click',function(){
-		var _href = "personal.html?userid="+encodeURIComponent(getCookie('uid'));
-		if(window.location.href.indexOf('personal')!=-1){
-			window.location.href=_href;
-		}
-		else{
-			window.open(_href);
-		}
-	});
-
-	//注销
-	$('body').delegate('#logOut','click',function(e){
-		e.stopPropagation();
-		deleteCookie('uid','/');
-		deleteCookie('nick_name','/');
-		deleteCookie('avatar_file','/');
-		deleteCookie('group_id','/');
-		window.location.href="/api/ajax/logout/";
-	});
-
-	//登陆
-	$('body').delegate('#loginForm #log','click',function(){
-		window.location.href="/api/login/";
-	});
-
-	//注册
-	$('body').delegate('#loginForm #register','click',function(){
-		window.location.href="/api/register/";
-	});
 
 	//关闭所有弹窗
 	$('body').delegate('div.popup a#close','click',function(){
@@ -773,51 +371,6 @@ $(function(){
 		$('body').css({'max-height':'none','overflow':'scroll'});
 	});
 
-	//用户输入用户名
-	$('body').delegate('#confirmUserName','click',function(){
-		var inputName=$('input#userNameInput').val();
-
-		var count = inputName.replace(/[^\x00-\xff]/g,"**").length;
-		if(count<=0){
-			$('#userNameForm img').removeClass('hidden').attr('src','images/wrong.png');
-			$('#userNameForm .nickNameTip').text('用户昵称不能为空');
-			return;
-		}
-		if(count>16){
-			$('#userNameForm img').removeClass('hidden').attr('src','images/wrong.png');
-			$('#userNameForm .nickNameTip').text('用户昵称必须小于8个字');
-			return;
-		}
-
-		var a=$(this);
-		a.attr('disabled','disabled');
-		$.ajax({
-			url:"/api/ajax/profile/",
-			type:'post',
-			data:{'nick_name':htmlUtil.htmlEncodeByRegExp(inputName)},
-			dataType:'json',
-			success:function(msg){
-				if(msg.return_code==200){
-					$('#userNameForm img').removeClass('hidden').attr('src','img/right.png');
-					setTimeout(function(){
-						$('#userNameForm').remove();
-					},1000);
-					setCookie('nick_name',inputName,null,'/');
-					window.location.reload();
-				}
-				else if(msg.return_code==3003){
-					$('#userNameForm img').removeClass('hidden').attr('src','images/wrong.png');
-					$('#userNameForm .nickNameTip').text('用户昵称已经存在');
-				}
-				a.removeAttr('disabled');
-			},
-			error:function(){
-				$('#userNameForm img').removeClass('hidden').attr('src','images/wrong.png');
-				$('#userNameForm .nickNameTip').text('提交失败');
-				a.removeAttr('disabled');
-			}
-		});
-	});
 
 	//用户点击加载更多
 	$('#loadMore button').click(function(){

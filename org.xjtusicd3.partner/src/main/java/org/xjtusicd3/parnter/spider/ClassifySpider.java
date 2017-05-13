@@ -33,7 +33,7 @@ public class ClassifySpider implements PageProcessor {
 					ClassifyHelper.save(classifyPersistence);
 			    	//第二层分类
 			    	List<String> classifyName2 = new JsonPathSelector("$.datas[*].category[*].category_name").selectList(page.getRawText());
-			    	List<ClassifyPersistence> cList = ClassifyHelper.spider_ClassifyListByName(classifyNameFirst);
+			    	List<ClassifyPersistence> cList = ClassifyHelper.spider_ClassifyListByName(classifyNameFirst,"0");
 			        if (CollectionUtils.isNotEmpty(classifyName2)) {
 			            for (String classifyNameSecond : classifyName2) {
 			            	UUID uuid2 = UUID.randomUUID();	

@@ -107,18 +107,15 @@ body {
 	font: 14px 'Microsoft Yahei';
 	line-height: 32px;
 	display: inline-block;
-	width: 150px;
+	width: 235px;
 	height: 50px;
-	margin: 12px 0 8px 15px;
+	margin: 10px 0 0px 0px;
 	cursor: pointer;
 	text-align: center;
 	color: #478eb7;
 	border: none;
 	border-radius: 3px;
-	background: #a1d5f2;
-	background: -webkit-linear-gradient(#a1d5f2, #8fcef2);
 	background: linear-gradient(#a1d5f2, #8fcef2);
-	 margin-left: 40px;
 }
 
 #top .memberico {
@@ -633,7 +630,7 @@ opacity
 }
 
 #questionForm {
-	z-index: 10
+	z-index: 9
 }
 
 #questionForm h1 {

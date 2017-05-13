@@ -29,7 +29,10 @@ import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 @Controller
 public class FaqController {
 	@RequestMapping(value="faq",method=RequestMethod.GET)
@@ -118,6 +121,7 @@ public class FaqController {
 	@RequestMapping(value={"/saveFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
 	public String saveFAQ(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
+		String url = (String) session.getAttribute("urlPath");
 		if (useremail==null) {
 			return "0";
 		}else {
@@ -128,15 +132,20 @@ public class FaqController {
 			String risk_prompt = request.getParameter("risk_prompt");
 			String faqcontent = request.getParameter("faqcontent");
 			List<QuestionPersistence> questionPersistences = QuestionHelper.faqadd_iscurrent(title,useremail);
+			JSONObject jsonObject = new JSONObject();
 			if (questionPersistences.size()==0) {
 				QuestionService.saveFAQ(useremail,title,keywords,subspecialCategoryId,description,risk_prompt,faqcontent);
-				return "1";
+				jsonObject.put("value", "1");
+				jsonObject.put("url", url);
+				String result = JsonUtil.toJsonString(jsonObject);
+				return result;
 			}else {
-				return "2";
+				jsonObject.put("value", "2");
+				jsonObject.put("url", url);
+				String result = JsonUtil.toJsonString(jsonObject);
+				return result;
 			}
-			
 		}
-
 	}
 	/*
 	 * zyq_faqadd_FAQ的增加页面
@@ -145,7 +154,6 @@ public class FaqController {
 	public ModelAndView faqadd(HttpSession session,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("faqadd");
 		String urlPath = request.getHeader("REFERER");
-		System.out.println(urlPath);
 		session.setAttribute("urlPath", urlPath);
 		return mv;
 	}

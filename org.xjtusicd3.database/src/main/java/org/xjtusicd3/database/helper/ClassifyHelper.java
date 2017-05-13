@@ -21,10 +21,10 @@ public class ClassifyHelper {
 	/*
 	 * spider_按照分类名称查找
 	 */
-	public static List<ClassifyPersistence> spider_ClassifyListByName(String ClassifyName){
+	public static List<ClassifyPersistence> spider_ClassifyListByName(String ClassifyName,String type){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
-		List<ClassifyPersistence> list = mapper.spider_ClassifyListByName(ClassifyName);
+		List<ClassifyPersistence> list = mapper.spider_ClassifyListByName(ClassifyName,type);
 		session.close();
 		return list;
 	}
@@ -96,5 +96,25 @@ public class ClassifyHelper {
 		String classifyParentId = mapper.faq2_classifyParentId(ClassifyId);
 		session.close();
 		return classifyParentId;
+	}
+	/*
+	 * zyq_community_获取问题分类
+	 */
+	public static List<ClassifyPersistence> community_classify(){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.FirstClassify_community();
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_question_查看问答模块的分类
+	 */
+	public static List<ClassifyPersistence> question_ClassifyListByName(String ClassifyName,String type){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.question_ClassifyListByName(ClassifyName,type);
+		session.close();
+		return list;
 	}
 }

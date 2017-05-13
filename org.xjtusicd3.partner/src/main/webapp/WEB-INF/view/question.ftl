@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>智能小朵-问题中心</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/utilDetails.css" />
@@ -13,15 +14,14 @@
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/body.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
-    
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
     <script type="text/javascript" src="js/header.js"></script>
     <script type="text/javascript" src="js/lnv_frontMonitor.js"></script>
-        <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -88,7 +88,18 @@
 						<input type="text" placeholder="输入问题，如“如何升级至Windows 10？”">
 						<button>提交</button>
 					</form>
+					<div class="wrapper-demo">
+						<div id="dd" class="wrapper-dropdown-3" tabindex="1">
+							<span>全部</span>
+							<ul class="dropdown">
+								<li><a href="#"><i class="icon-envelope icon-large"></i>全部</a></li>
+								<li><a href="#"><i class="icon-truck icon-large"></i>已解决</a></li>
+								<li><a href="#"><i class="icon-plane icon-large"></i>待回答</a></li>
+							</ul>
+						</div>
+					​</div>
 				</div>
+
 				<!-- 问题查询列表 -->
 				<ul id="searchResult">
 				
@@ -150,7 +161,6 @@
 							<h2><a href="detail.html?qid=42200">window7&nbsp;thinkpad&nbsp;E430C怎么关闭FN的快捷键，</a></h2>
 						</div>
 						<div class="description">
-							
 							<div class="answerer" data-id="270359">
 								<img class="answerImg" src="new/front/images/avatar.jpg">
 								<div>
@@ -446,17 +456,10 @@
 					<div id="topicTitle"><img src="images/topic.png">话题</div>
 					<!-- 问题标签列表 -->
 					<ul id="tagFilter">
-				<li><a data-id="1" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">个人电脑</a></li>
-				<li><a data-id="2" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">智能手机</a></li>
-				<li><a data-id="3" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">平板电脑</a></li>
-				<li><a data-id="4" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">网络安全</a></li>
-				<li><a data-id="5" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">影音数码</a></li>
-				<li><a data-id="6" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">硬件外设</a></li>
-				<li><a data-id="7" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">操作系统</a></li>
-				<li><a data-id="8" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">智能设备</a></li>
-				<li><a data-id="9" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">评测选购</a></li>
-				<li><a data-id="10" class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">应用软件</a></li>
-		</ul>
+					<#list classifyList as classifyList>
+						<li><a class="fm_ele" fm-type="button" fm-name="tag_filter" fm-operation="click" fm-zoon="tag_area">${classifyList.FAQCLASSIFYNAME}</a></li>
+					</#list>
+					</ul>
 				</div>
 			</div>
         	</div>
@@ -525,21 +528,12 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 				<input type="checkbox" name="category_id" value="10" data-text="应用软件">
 				<label>应用软件</label>
 			</li>
-		</ul>					<ul id="customTag"></ul>					<div></div>					<!-- <img src="img/addTag.png"/>					<p id="tip">添加其他标签</p>					<div id="custom" class="hidden" tabindex="13">						<input id="customTip" type="text"/>						<button id="addCustom">添加</button>						<button id="cancelCustom">取消</button>					</div> -->					<button id="toStep1">返回</button>					<button id="submit">提交</button>				</div>			</div>		</div>
-    <!--script--!>
+		</ul>					
+		<ul id="customTag"></ul>					
+		<div></div>					
+		<button id="toStep1">返回</button>				
+		<button id="submit" onclick="saveCommunityQuestion()">提交</button>				</div>			</div>		</div>
     	<script type="text/javascript" src="new/front/js/util.js"></script>
-    	<script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function(){
-			$('#onebyone_slider').oneByOne({
-				className:'oneByOne1',
-				easeType:'random',
-				slideShow:true,
-				delay:200,
-				slideShowDelay:4000
-			})
-		});
-		</script> 
 		<script>
 			function questionForm(){
 				document.getElementById("questionForm").style.display="block";
@@ -654,7 +648,73 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
         UE.getEditor('editor').execCommand( "clearlocaldata" );
         alert("已清空草稿箱")
     }
-</script>  
-    <!--/script--!>
+</script> 
+<script>
+	function saveCommunityQuestion(){
+		var title = document.getElementById("title").value;
+		var description = UE.getEditor('editor').getContent();
+		var obj = document.getElementsByName("category_id");
+		check_val = [];
+	    for(k in obj){
+	        if(obj[k].checked)
+	            check_val.push(obj[k].value);
+	    }
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveCommunityQuestion.html",
+				data:{
+					"title":title,
+					"description":description,
+					"check_val":check_val[0]
+				},
+				dataType:"json",
+				success:function(data){
+					
+				}
+			})
+	}
+</script>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+			function DropDown(el) {
+				this.dd = el;
+				this.placeholder = this.dd.children('span');
+				this.opts = this.dd.find('ul.dropdown > li');
+				this.val = '';
+				this.index = -1;
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						return false;
+					});
+					obj.opts.on('click',function(){
+						var opt = $(this);
+						obj.val = opt.text();
+						obj.index = opt.index();
+						obj.placeholder.text(obj.val);
+					});
+				},
+				getValue : function() {
+					return this.val;
+				},
+				getIndex : function() {
+					return this.index;
+				}
+			}
+			$(function() {
+				var dd = new DropDown( $('#dd') );
+				$(document).click(function() {
+
+					// all dropdowns
+
+					$('.wrapper-dropdown-3').removeClass('active');
+
+				});
+			});
+		</script> 
 </body>
 </html>

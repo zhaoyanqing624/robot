@@ -169,6 +169,7 @@
 			</div>
 		</div>
 	</div>
+	<div id="lasturl" style="display:none"></div>
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>    
 		<script type="text/javascript" src="js/my_faqadd.js"></script>
 		<script type="text/javascript" src="new/front/js/util.js"></script>
@@ -286,7 +287,8 @@
 		<script src="zhao/tankuang/js/dialogFx.js"></script>
 		<script>
 			function windowclose(){
-				
+				var url = document.getElementById('lasturl').innerHTML;
+				self.location=url;
 			}
 		</script>
 </body>

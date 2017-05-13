@@ -28,7 +28,7 @@
 }
 
 .smileytable td {height: 37px;}
-#tabPanel{margin-left:5px;overflow: hidden;}
+#tabPanel{margin-left:5px;overflow: hidden;z-index: 15}
 #tabContent {float:left;background:#FFFFFF;}
 #tabContent div{display: none;width:480px;overflow:hidden;}
 #tabIconReview.show{left:17px;display:block;}

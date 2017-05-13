@@ -54,7 +54,7 @@ public class FAQSpider implements PageProcessor {
         			questionPersistence.setMODIFYTIME(time);
         			questionPersistence.setSCORE(10);
         			questionPersistence.setMODIFYNUMBER("1");
-        			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.spider_ClassifyListByName(new JsonPathSelector("$.Category[*].subName").select(page.getRawText()));
+        			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.spider_ClassifyListByName(new JsonPathSelector("$.Category[*].subName").select(page.getRawText()),"0");
         			for(int j = 0;j<classifyPersistences.size();j++){
         				questionPersistence.setFAQCLASSIFYID(classifyPersistences.get(j).getFAQCLASSIFYID());
         			}
