@@ -80,7 +80,7 @@ public class FaqController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreFaqList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
-	public String faq2list(HttpServletRequest request,HttpServletResponse response){
+	public String faq2list(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		int pagenow = Integer.parseInt(request.getParameter("pagenow"));
 		int pageNow = pagenow+1;
 		String ClassifyId = request.getParameter("classifyId");
@@ -92,7 +92,6 @@ public class FaqController {
 		jsonObject.put("faqlist", faq2Views);
 		jsonObject.put("pageTotal",pageTotal);
 		String faq2_list = JsonUtil.toJsonString(jsonObject);
-		System.out.println(faq2_list);
 		return faq2_list;
 	 }
 	/*

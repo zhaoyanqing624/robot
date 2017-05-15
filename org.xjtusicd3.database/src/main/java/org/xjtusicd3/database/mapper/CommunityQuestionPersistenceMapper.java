@@ -17,7 +17,21 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	/*
 	 * zyq_ajax_question的增加
 	 */
-	@Insert("INSERT INTO TBL_CommunityQuestion(COMMUNITYQUESTIONID,TIME,TITLE,CONTENT,CLASSIFYID,USERID,COLLECTION,SCAN,USERQUESTIONID) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8})")
-	void saveCommunityQuestion(String id, String time, String title, String content, String classifyid, String userid,String collection, String scan, String userquestionid);
+	@Insert("INSERT INTO TBL_CommunityQuestion(COMMUNITYQUESTIONID,TIME,TITLE,CONTENT,CLASSIFYID,USERID,COLLECTION,SCAN,USERQUESTIONID,ISANSWER) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8},#{9})")
+	void saveCommunityQuestion(String id, String time, String title, String content, String classifyid, String userid,String collection, String scan, String userquestionid,int isanswer);
+	/*
+	 * zyq_question_问题展示_根据类别ID
+	 */
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE CLASSIFYID=#{0} ORDER BY TIME DESC")
+	List<CommunityQuestionPersistence> question_getCommunity(String classifyid);
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE CLASSIFYID=#{0} AND ISANSWER=#{1} ORDER BY TIME DESC")
+	List<CommunityQuestionPersistence> question_getCommunity2(String classifyid,int isanswer);
+	/*
+	 * zyq_question_问题展示_根据是否有答案
+	 */
+	@Select("SELECT * FROM TBL_CommunityQuestion  ORDER BY TIME DESC")
+	List<CommunityQuestionPersistence> question_getCommunity_isanswer();
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE ISANSWER=#{1} ORDER BY TIME DESC")
+	List<CommunityQuestionPersistence> question_getCommunity2_isanswer(int isanswer);
 
 }

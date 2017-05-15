@@ -195,238 +195,6 @@
 
 					</article>
 				</li>
-				<li>
-					<article data-question-id="42199" data-asker-id="293430" data-answer-id="" data-answerer-id="">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">问题</li>
-							</ul>
-							<div class="time"><p>2017-03-01 00:32</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42199">触摸板关了还能用</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="detail">
-								<div class="detailP">触摸板关闭后还能用？</div>
-							</div>
-							<div class="fullDetail hidden">
-								<p>触摸板关闭后还能用</p><p>？</p><p><br></p>
-							</div>
-						</div>
-						<div class="options">
-							<ul>
-							
-									<li class="special"><a data-fun="toFocus" class="unFocused fm_ele" fm-type="button" fm-name="question_focus" fm-operation="click" fm-zoon="option_area"><span class="status">关注</span>  |  <span class="number">12</span></a></li>
-								<li><a data-fun="toAnswer" onclick="create_edit()" class="fm_ele" fm-type="button" fm-name="question_answer" fm-operation="click" fm-zoon="option_area"><span>回答</span></a></li>
-									<li><a data-fun="toStore" class="fm_ele" fm-type="button" fm-name="question_favorite" fm-operation="click" fm-zoon="option_area"><span>稍后回答</span></a></li>
-								<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-				<li>
-					<article data-question-id="42198" data-asker-id="293423" data-answer-id="" data-answerer-id="">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">问题</li>
-							</ul>
-							<div class="time"><p>2017-02-28 23:33</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42198">我的联想一体机B300装系统时无法装网卡，怎么办？</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="detail">
-								<div class="detailP">我的联想一体机B300系统崩溃，重新安装操作系统XP,可是网卡装不上，请问怎么办？</div>
-							</div>
-							<div class="fullDetail hidden">
-								<p>我的联想一体机B300系统崩溃，重新安装操作系统XP,可是网卡装不上，请问怎么办？</p>
-							</div>
-						</div>
-						<div class="options">
-							<ul>
-							
-									<li class="special"><a data-fun="toFocus" class="unFocused fm_ele" fm-type="button" fm-name="question_focus" fm-operation="click" fm-zoon="option_area"><span class="status">关注</span>  |  <span class="number">8</span></a></li>
-								<li><a data-fun="toAnswer" onclick="create_edit()" class="fm_ele" fm-type="button" fm-name="question_answer" fm-operation="click" fm-zoon="option_area"><span>回答</span></a></li>
-									<li><a data-fun="toStore" class="fm_ele" fm-type="button" fm-name="question_favorite" fm-operation="click" fm-zoon="option_area"><span>稍后回答</span></a></li>
-								<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-				<li>
-					<article data-question-id="42194" data-asker-id="293387" data-answer-id="" data-answerer-id="">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">问题</li>
-							</ul>
-							<div class="time"><p>2017-02-28 21:58</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42194">出风口那里一开机就一直呲呲的响，好怕要爆炸了，这到底是为啥啊</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="detail">
-								<div class="detailP"></div>
-							</div>
-							<div class="fullDetail hidden">
-								
-							</div>
-						</div>
-						<div class="options">
-							<ul>
-							
-									<li class="special"><a data-fun="toFocus" class="unFocused fm_ele" fm-type="button" fm-name="question_focus" fm-operation="click" fm-zoon="option_area"><span class="status">关注</span>  |  <span class="number">4</span></a></li>
-								<li><a data-fun="toAnswer" onclick="create_edit()" class="fm_ele" fm-type="button" fm-name="question_answer" fm-operation="click" fm-zoon="option_area"><span>回答</span></a></li>
-									<li><a data-fun="toStore" class="fm_ele" fm-type="button" fm-name="question_favorite" fm-operation="click" fm-zoon="option_area"><span>稍后回答</span></a></li>
-								<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-				<li>
-					<article data-question-id="42191" data-asker-id="293358" data-answer-id="" data-answerer-id="">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">问题</li>
-							</ul>
-							<div class="time"><p>2017-02-28 21:02</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42191">联想电脑台式H5050放入各种光盘&nbsp;&nbsp;&nbsp;&nbsp;主机变成了电动马达了</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="detail">
-								<div class="detailP">联想电脑台式H5050放入各种光盘 &nbsp; &nbsp;主机变成了电动马达了 &nbsp; &nbsp; &nbsp;产生震动的啸叫声 &nbsp; &nbsp; 新买的电脑 &nbsp;&nbsp;</div>
-							</div>
-							<div class="fullDetail hidden">
-								<p>联想电脑台式H5050放入各种光盘 &nbsp; &nbsp;主机变成了电动马达了 &nbsp; &nbsp; &nbsp;产生震动的啸叫声 &nbsp; &nbsp; 新买的电脑 &nbsp;&nbsp;</p>
-							</div>
-						</div>
-						<div class="options">
-							<ul>
-							
-									<li class="special"><a data-fun="toFocus" class="unFocused fm_ele" fm-type="button" fm-name="question_focus" fm-operation="click" fm-zoon="option_area"><span class="status">关注</span>  |  <span class="number">5</span></a></li>
-								<li><a data-fun="toAnswer" onclick="create_edit()" class="fm_ele" fm-type="button" fm-name="question_answer" fm-operation="click" fm-zoon="option_area"><span>回答</span></a></li>
-									<li><a data-fun="toStore" class="fm_ele" fm-type="button" fm-name="question_favorite" fm-operation="click" fm-zoon="option_area"><span>稍后回答</span></a></li>
-								<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-				<li>
-					<article data-question-id="42177" data-asker-id="293157" data-answer-id="" data-answerer-id="">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">问题</li>
-							</ul>
-							<div class="time"><p>2017-02-28 12:33</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42177">杨天s4130主板有固态接口吗
-</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="detail">
-								<div class="detailP"></div>
-							</div>
-							<div class="fullDetail hidden">
-								
-							</div>
-						</div>
-						<div class="options">
-							<ul>
-							
-									<li class="special"><a data-fun="toFocus" class="unFocused fm_ele" fm-type="button" fm-name="question_focus" fm-operation="click" fm-zoon="option_area"><span class="status">关注</span>  |  <span class="number">4</span></a></li>
-								<li><a data-fun="toAnswer" onclick="create_edit()" class="fm_ele" fm-type="button" fm-name="question_answer" fm-operation="click" fm-zoon="option_area"><span>回答</span></a></li>
-									<li><a data-fun="toStore" class="fm_ele" fm-type="button" fm-name="question_favorite" fm-operation="click" fm-zoon="option_area"><span>稍后回答</span></a></li>
-								<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-				<li>
-					<article data-question-id="42175" data-asker-id="293129" data-answer-id="" data-answerer-id="">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">问题</li>
-							</ul>
-							<div class="time"><p>2017-02-28 11:06</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42175">你好!请问如何安装或恢复我的wondows游戏</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="detail">
-								<div class="detailP">&nbsp;我的游戏资源管理器中没有游戏,怎么安装?</div>
-							</div>
-							<div class="fullDetail hidden">
-								<p>&nbsp;我的游戏资源管理器中没有游戏,怎么安装?</p>
-							</div>
-						</div>
-						<div class="options">
-							<ul>
-							
-									<li class="special"><a data-fun="toFocus" class="unFocused fm_ele" fm-type="button" fm-name="question_focus" fm-operation="click" fm-zoon="option_area"><span class="status">关注</span>  |  <span class="number">7</span></a></li>
-								<li><a data-fun="toAnswer" onclick="create_edit()" class="fm_ele" fm-type="button" fm-name="question_answer" fm-operation="click" fm-zoon="option_area"><span>回答</span></a></li>
-									<li><a data-fun="toStore" class="fm_ele" fm-type="button" fm-name="question_favorite" fm-operation="click" fm-zoon="option_area"><span>稍后回答</span></a></li>
-								<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-				<li>
-					<article data-question-id="42167" data-asker-id="293115" data-answer-id="" data-answerer-id="">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">问题</li>
-							</ul>
-							<div class="time"><p>2017-02-28 09:56</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42167">Y50-70现在如何升级至W10</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="detail">
-								<div class="detailP"></div>
-							</div>
-							<div class="fullDetail hidden">
-								
-							</div>
-						</div>
-						<div class="options">
-							<ul>
-							
-									<li class="special"><a data-fun="toFocus" class="unFocused fm_ele" fm-type="button" fm-name="question_focus" fm-operation="click" fm-zoon="option_area"><span class="status">关注</span>  |  <span class="number">6</span></a></li>
-								<li><a data-fun="toAnswer" onclick="create_edit()" class="fm_ele" fm-type="button" fm-name="question_answer" fm-operation="click" fm-zoon="option_area"><span>回答</span></a></li>
-									<li><a data-fun="toStore" class="fm_ele" fm-type="button" fm-name="question_favorite" fm-operation="click" fm-zoon="option_area"><span>稍后回答</span></a></li>
-								<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
 		</ul>
 				<div id="loadStatus">
 					<div id="loading" class="">
@@ -533,6 +301,36 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 		<div></div>					
 		<button id="toStep1">返回</button>				
 		<button id="submit" onclick="saveCommunityQuestion()">提交</button>				</div>			</div>		</div>
+    	
+    <div id="somedialog" class="dialog">
+		<div class="dialog__overlay"></div>
+		<div class="dialog__content">
+			<div class="morph-shape">
+				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 560 280" preserveAspectRatio="none">
+					<rect x="3" y="3" fill="none" width="556" height="276"/>
+				</svg>
+			</div>
+			<div class="dialog-inner">
+				<h2><strong>上传成功，请您耐心等待管理员审核</strong></h2>
+				<div><button class="action" data-dialog-close onclick="windowclose()">关闭</button></div>
+			</div>
+		</div>
+	</div>
+	<div id="somedialog2" class="dialog">
+		<div class="dialog__overlay"></div>
+		<div class="dialog__content">
+			<div class="morph-shape">
+				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 560 280" preserveAspectRatio="none">
+					<rect x="3" y="3" fill="none" width="556" height="276"/>
+				</svg>
+			</div>
+			<div class="dialog-inner">
+				<h2><strong>请耐心等待审核，切勿重复提交</strong></h2>
+				<div><button class="action" data-dialog-close onclick="windowclose()">关闭</button></div>
+			</div>
+		</div>
+	</div>
+	<div id="lasturl" style="display:none"></div>
     	<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script>
 			function questionForm(){
@@ -669,10 +467,24 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 				},
 				dataType:"json",
 				success:function(data){
-					if(data=="0"){
-						self.location='login.html'; 
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						(function() {
+							var dlgtrigger = document.querySelector( '[data-dialog]' ),
+								somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+								dlg = new DialogFx( somedialog );
+							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+						})();
+						document.getElementById('lasturl').innerHTML=data.url;
 					}else{
-						window.location.reload(); 
+						(function() {
+							var dlgtrigger = document.querySelector( '[data-dialog]' ),
+								somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+								dlg = new DialogFx( somedialog2 );
+							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+						})();
+						document.getElementById('lasturl').innerHTML=data.url;
 					}
 				}
 			})

@@ -26,6 +26,8 @@ public class CommunityQuestionPersistence{
 	private String SCAN;
 	@TableField(columnName="USERQUESTIONID")
 	private String USERQUESTIONID;
+	@TableField(columnName="ISANSWER")
+	private String ISANSWER;
 	public String getCOMMUNITYQUESTIONID() {
 		return COMMUNITYQUESTIONID;
 	}
@@ -80,5 +82,10 @@ public class CommunityQuestionPersistence{
 	public void setTITLE(String tITLE) {
 		TITLE = tITLE;
 	}
-	
+	public String getISANSWER() {
+		return ISANSWER;
+	}
+	public void setISANSWER(String iSANSWER) {
+		ISANSWER = iSANSWER;
+	}
 }

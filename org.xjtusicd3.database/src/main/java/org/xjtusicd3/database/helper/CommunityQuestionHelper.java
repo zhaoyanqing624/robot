@@ -11,10 +11,10 @@ public class CommunityQuestionHelper{
 	/*
 	 * zyq_ajax_question的增加
 	 */
-	public static void saveCommunityQuestion(String id,String time,String title,String content,String classifyid,String userid,String collection,String scan,String userquestionid){
+	public static void saveCommunityQuestion(String id,String time,String title,String content,String classifyid,String userid,String collection,String scan,String userquestionid,int isanswer){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
-		mapper.saveCommunityQuestion(id,time,title,content,classifyid,userid,collection,scan,userquestionid);
+		mapper.saveCommunityQuestion(id,time,title,content,classifyid,userid,collection,scan,userquestionid,0);
 		session.close();
 	}
 	/*
@@ -27,5 +27,38 @@ public class CommunityQuestionHelper{
 		session.close();
 		return list;
 	}
-	
+	/*
+	 * zyq_question_问题展示_根据类别ID
+	 */
+	public static List<CommunityQuestionPersistence> question_getCommunity(String classifyid){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> list = mapper.question_getCommunity(classifyid);
+		session.close();
+		return list;
+	}
+	public static List<CommunityQuestionPersistence> question_getCommunity2(String classifyid,int isanswer){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> list = mapper.question_getCommunity2(classifyid,isanswer);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_question_问题展示_根据是否有答案
+	 */
+	public static List<CommunityQuestionPersistence> question_getCommunity_isanswer(){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> list = mapper.question_getCommunity_isanswer();
+		session.close();
+		return list;
+	}
+	public static List<CommunityQuestionPersistence> question_getCommunity2_isanswer(int isanswer){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> list = mapper.question_getCommunity2_isanswer(isanswer);
+		session.close();
+		return list;
+	}
 }
