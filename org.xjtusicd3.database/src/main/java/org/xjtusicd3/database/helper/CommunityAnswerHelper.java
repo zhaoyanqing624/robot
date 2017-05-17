@@ -48,4 +48,14 @@ public class CommunityAnswerHelper{
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_question_判断评论是否重复提交
+	 */
+	public static List<CommunityAnswerPersistence> question_IsCommunityAnswer(String userid,String content,String questionId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		List<CommunityAnswerPersistence> list = mapper.question_IsCommunityAnswer(userid,content,questionId);
+		session.close();
+		return list;
+	}
 }

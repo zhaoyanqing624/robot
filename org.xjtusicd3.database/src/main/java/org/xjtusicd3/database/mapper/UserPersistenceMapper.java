@@ -13,8 +13,8 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	/*
 	 * zyq_login_ajax_注册
 	 */
-	@Insert("INSERT INTO TBL_User(TBL_User.USERID,TBL_User.USEREMAIL,TBL_User.USERPASSWORD,TBL_User.USERNAME,TBL_User.USERSTATE,TBL_User.VERIFICATIONCODE,TBL_User.TIMEREMARKS) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6})")
-	public void login_register(String userid,String email,String password,String username,int userstate,String identification_number,String time_stamp);
+	@Insert("INSERT INTO TBL_User(TBL_User.USERID,TBL_User.USEREMAIL,TBL_User.USERPASSWORD,TBL_User.USERNAME,TBL_User.USERSTATE,TBL_User.VERIFICATIONCODE,TBL_User.TIMEREMARKS,TBL_User.AVATAR) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})")
+	public void login_register(String userid,String email,String password,String username,int userstate,String identification_number,String time_stamp,String userimage);
 	//zyq_校验邮箱是否被注册
 	@Select("SELECT * FROM TBL_User WHERE USEREMAIL=#{0}")
 	List<UserPersistence> getEmail(String useremail);

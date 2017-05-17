@@ -61,7 +61,6 @@
 				       	<div class="unlogin">
 		                    <li class="unloginLinkLi">
 		                        <a href="login.html" id="headLogin" class="listen_btn" data-pos="categorys_1_2">登录/注册</a>
-		                        </li>
 		                    </li>
 		                </div>
 		             </#if>
@@ -102,100 +101,138 @@
 
 				<!-- 问题查询列表 -->
 				<ul id="searchResult">
-				
-				<li>
-					<article data-question-id="42314" data-asker-id="294663" data-answer-id="13786" data-answerer-id="270369">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">回答</li>
-							</ul>
-							<div class="time"><p>4 天前</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="question2.html">T540P的小键盘不管用，numlock键是好的，可以看到开启，而且开启后小键盘上的2，4，6，8这几个方向键是好用的</a></h2>
-						</div>
-						<div class="description">
-							
-							<div class="answerer" data-id="270369">
-								<img class="answerImg" src="new/front/images/avatar.jpg">
-								<div>
-									<a href="personal.html?userid=270369">
-										<span class="user_name">花开花独醉</span>
-											&nbsp;&nbsp;<span>盛年不重来，一日难再晨，及时当勉励，岁月不待人</span>
-									</a>
+					<#list communityViews as communityViews>
+					<li>
+						<article id="${communityViews.communityId}_">
+							<div class="tag">
+								<ul>
+									<li>${communityViews.classifyName}</li>
+									<#if communityViews.userId ??>
+									<li class="type">回答</li>
+									<#else>
+									<li class="type">问题</li>
+									</#if>
+								</ul>
+								<div class="time"><p>${communityViews.time}</p></div>
+							</div>
+							<div class="title">
+								<h2><a href="question2.html?q=${communityViews.communityId}">${communityViews.communityTitle}</a></h2>
+							</div>
+							<#if communityViews.userId ??>
+							<div class="description">
+								<div class="answerer" data-id="270369">
+									<img class="answerImg" src="${communityViews.userImage}">
+									<div>
+										<a href="">
+											<span class="user_name">${communityViews.userName}</span>
+												&nbsp;&nbsp;<span>${communityViews.signature}</span>
+										</a>
+									</div>
+									<div>
+										<img src="images/bluepoint.png" class="bluepoint">贡献${communityViews.totalCommunityNumber}个回答，获得${communityViews.totalLikesNumber}个赞
+									</div>
 								</div>
-								<div>
-									<img src="images/bluepoint.png" class="bluepoint">贡献48个回答，获得24个赞
+								<div class="detail">
+									<#if communityViews.answer?length gt 100>
+									<div class="detailP">
+										${communityViews.answer[0..100]}......
+										<span class="readMore">查看更多</span>
+									</div>
+									<#else>
+									<div class="detailP">${communityViews.answer}
+									</div>
+									</#if>
+								</div>
+								<div class="fullDetail hidden">
+									<p>${communityViews.answer}</p>
 								</div>
 							</div>
-							<div class="detail">
-								<div class="detailP">在键盘上按win+numlock（或者Fn+numlock）键进行切换回来就行了，应该是你关闭了小键盘导致的。</div>
-							</div>
-							<div class="fullDetail hidden">
-								<p>在键盘上按win+numlock（或者Fn+numlock）键进行切换回来就行了，应该是你关闭了小键盘导致的。</p>
-							</div>
-													</div>
-						<div class="options">
-							<ul>
-							
+							<div class="options">
+								<ul>
 									<li class="special"><a data-fun="toVote" class="unVoted fm_ele" fm-type="button" fm-name="answer_vote" fm-operation="click" fm-zoon="option_area"><span class="status">点赞</span>  |  <span class="number">4</span></a></li>
-								<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">1</span></a></li>
+									<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">1</span></a></li>
 									<li><a data-fun="toSave" class="fm_ele" fm-type="button" fm-name="answer_favorite" fm-operation="click" fm-zoon="option_area"><span>收藏</span></a></li>
-															<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-				<li>
-					<article data-question-id="42200" data-asker-id="293435" data-answer-id="13748" data-answerer-id="270359">
-						<div class="tag">
-							<ul>
-								<li>个人电脑</li>
-								<li class="type">回答</li>
-							</ul>
-							<div class="time"><p>2017-03-01 11:07</p></div>
-						</div>
-						<div class="title">
-							<h2><a href="detail.html?qid=42200">window7&nbsp;thinkpad&nbsp;E430C怎么关闭FN的快捷键，</a></h2>
-						</div>
-						<div class="description">
-							<div class="answerer" data-id="270359">
-								<img class="answerImg" src="new/front/images/avatar.jpg">
-								<div>
-									<a href="personal.html?userid=270359">
-										<span class="user_name">娜塔莉亚</span>
-											&nbsp;&nbsp;<span>上天派来的拯救者</span>
-									</a>
+									<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
+								</ul>
+							</div>
+							<#else>
+							<div class="description">
+								<div class="detail">
+									<#if communityViews.communityQuestion?length gt 100>
+									<div class="detailP">
+										${communityViews.communityQuestion[0..100]}......
+										<span class="readMore">查看更多</span>
+									</div>
+									<#else>
+									<div class="detailP">${communityViews.communityQuestion}
+									</div>
+									</#if>
 								</div>
-								<div>
-									<img src="images/bluepoint.png" class="bluepoint">贡献2个回答，获得10个赞
+								<div class="fullDetail hidden">
+									<p>${communityViews.communityQuestion}</p>
 								</div>
 							</div>
-							<div class="detail">
-								<div class="detailImg">
-									<img src="zhao/lunbo/images/13.jpg">
-								</div>
-								<div class="detailP">think笔记本作为一个高端商务品牌，这个功能肯定是可以切换的，从官网上找了几个方法，可以供题主参考一下。快捷键Fn+ESC启用或禁用Fn锁定功能禁用Fn 锁定功能后：Fn 锁定指示灯熄灭。要使用每个键上印有图标的特殊功能，请直接按...<span class="readMore">查看更多</span></div>
+							<div class="options">
+								<ul>
+									<li class="special"><a onclick="create_edit(this)" class="unFocused fm_ele" ><span class="status" id="${communityViews.communityId}">回答</span></a></li>
+									<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">0</span></a></li>
+									<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
+								</ul>
 							</div>
-							<div class="fullDetail hidden">
-								<p>think笔记本作为一个高端商务品牌，这个功能肯定是可以切换的，从官网上找了几个方法，可以供题主参考一下。</p><ol class=" list-paddingleft-2" ="list--type:="" decimal;"=""><li><p>快捷键Fn+ESC启用或禁用Fn锁定功能</p><p><img src="/ueditor/php/upload/image/20170301/1488336832449137.png" alt="think键盘.png"></p><p><br></p><p><br></p><p>禁用Fn 锁定功能后：Fn 锁定指示灯熄灭。要使用每个键上印有图标的特殊功能，请直接按功能键；要使用传统的F1-F12功能，请按Fn键和相应的功能键。</p><p>启用Fn 锁定功能后：Fn 锁定指示灯点亮。要使用传统的F1-F12功能，请直接按功能键；要使用每个键上印有图标的特殊功能，请按Fn键和相应的功能键。</p><p>注意事项：</p><p>1、ThinkPad E431/E531开始浮岛式键盘采用此功能；</p><p>2、个别早期机型浮岛式键盘除外，例如T430u，X1，ThinkPad X1 Carbon 一代、二代；</p></li><li><p>通过键盘属性设置Fn键的功能</p><p>这个方法首先要安装热键驱动，给题主附上驱动下载链接</p><p>驱动下载链接：<a href="http://think.lenovo.com.cn/support/driver/mainpage.aspx#ThinkPad" _src="http://think.lenovo.com.cn/support/driver/mainpage.aspx#ThinkPad">http://think.lenovo.com.cn/support/driver/mainpage.aspx#ThinkPad</a><br>确认好热键驱动安装完成之后，就可以按照下面的步骤来操作了。</p><p><br></p><p>1.打开控制面板，并将控制面板的视图从“类别”更改为“大图标”或“小图标”。<br><img src="/ueditor/php/upload/image/20170301/1488337442938474.png" alt="控制面板-查看方式.png"><br></p><p>2.找到“键盘”并打开，在“键盘属性”窗口中，单击“Fn和功能键”选项卡。</p><p><img src="/ueditor/php/upload/image/20170301/1488337367473742.jpg" alt="think键盘属性.jpg"><br></p><p>3.按照如下介绍设置为您需要的模式：</p><p>• 若选择“直接按F1-F12以启动F1-F12功能，……”</p><p>此时，要使用F1-F12传统按键功能，请直接按功能键；</p><p>要使用每个键上印有图标的特殊功能，请按Fn键和相应的功能键</p></li><li><p>通过BIOS设置Fn键的功能<br>题主提到了，进不去BIOS界面，这种情况确实有可能出现，推荐不要在开机的时候按F1，是进入操作系统之后，再重启电脑，重启的过程中就开始按F1，这样更容易进入BIOS。</p><p>电脑重启到ThinkPad Logo标识时连续敲击键盘F1键，进入BIOS，使用←→左右方向键选择Config菜单项，使用↑↓上下方向键选择Keyboard/Mouse选项并按下Enter回车键，其中：</p><p>通过“Fn and Ctrl Key swap”选项的开关，可以设置Fn与Ctrl键功能是否互换；</p><p>通过“Fn Key Lock”选项的开关，可以设置Fn键是否锁定</p><p><br></p></li></ol>
-							</div>
-													</div>
-						<div class="options">
-							<ul>
+							</#if>
 							
-									<li class="special"><a data-fun="toVote" class="unVoted fm_ele" fm-type="button" fm-name="answer_vote" fm-operation="click" fm-zoon="option_area"><span class="status">点赞</span>  |  <span class="number">10</span></a></li>
-								<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">1</span></a></li>
-									<li><a data-fun="toSave" class="fm_ele" fm-type="button" fm-name="answer_favorite" fm-operation="click" fm-zoon="option_area"><span>收藏</span></a></li>
-															<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
-							</ul>
-						</div>
-
-					</article>
-				</li>
-		</ul>
+						</article>
+					</li>
+					</#list>
+					<li>
+						<article data-question-id="42200" data-asker-id="293435" data-answer-id="13748" data-answerer-id="270359">
+							<div class="tag">
+								<ul>
+									<li>个人电脑</li>
+									<li class="type">回答</li>
+								</ul>
+								<div class="time"><p>2017-03-01 11:07</p></div>
+							</div>
+							<div class="title">
+								<h2><a href="detail.html?qid=42200">window7&nbsp;thinkpad&nbsp;E430C怎么关闭FN的快捷键，</a></h2>
+							</div>
+							<div class="description">
+								<div class="answerer" data-id="270359">
+									<img class="answerImg" src="new/front/images/avatar.jpg">
+									<div>
+										<a href="personal.html?userid=270359">
+											<span class="user_name">娜塔莉亚</span>
+												&nbsp;&nbsp;<span>上天派来的拯救者</span>
+										</a>
+									</div>
+									<div>
+										<img src="images/bluepoint.png" class="bluepoint">贡献2个回答，获得10个赞
+									</div>
+								</div>
+								<div class="detail">
+									<div class="detailImg">
+										<img src="zhao/lunbo/images/13.jpg">
+									</div>
+									<div class="detailP">think笔记本作为一个高端商务品牌，这个功能肯定是可以切换的，从官网上找了几个方法，可以供题主参考一下。快捷键Fn+ESC启用或禁用Fn锁定功能禁用Fn 锁定功能后：Fn 锁定指示灯熄灭。要使用每个键上印有图标的特殊功能，请直接按...<span class="readMore">查看更多</span></div>
+								</div>
+								<div class="fullDetail hidden">
+									<p>think笔记本作为一个高端商务品牌，这个功能肯定是可以切换的，从官网上找了几个方法，可以供题主参考一下。</p><ol class=" list-paddingleft-2" ="list--type:="" decimal;"=""><li><p>快捷键Fn+ESC启用或禁用Fn锁定功能</p><p><img src="/ueditor/php/upload/image/20170301/1488336832449137.png" alt="think键盘.png"></p><p><br></p><p><br></p><p>禁用Fn 锁定功能后：Fn 锁定指示灯熄灭。要使用每个键上印有图标的特殊功能，请直接按功能键；要使用传统的F1-F12功能，请按Fn键和相应的功能键。</p><p>启用Fn 锁定功能后：Fn 锁定指示灯点亮。要使用传统的F1-F12功能，请直接按功能键；要使用每个键上印有图标的特殊功能，请按Fn键和相应的功能键。</p><p>注意事项：</p><p>1、ThinkPad E431/E531开始浮岛式键盘采用此功能；</p><p>2、个别早期机型浮岛式键盘除外，例如T430u，X1，ThinkPad X1 Carbon 一代、二代；</p></li><li><p>通过键盘属性设置Fn键的功能</p><p>这个方法首先要安装热键驱动，给题主附上驱动下载链接</p><p>驱动下载链接：<a href="http://think.lenovo.com.cn/support/driver/mainpage.aspx#ThinkPad" _src="http://think.lenovo.com.cn/support/driver/mainpage.aspx#ThinkPad">http://think.lenovo.com.cn/support/driver/mainpage.aspx#ThinkPad</a><br>确认好热键驱动安装完成之后，就可以按照下面的步骤来操作了。</p><p><br></p><p>1.打开控制面板，并将控制面板的视图从“类别”更改为“大图标”或“小图标”。<br><img src="/ueditor/php/upload/image/20170301/1488337442938474.png" alt="控制面板-查看方式.png"><br></p><p>2.找到“键盘”并打开，在“键盘属性”窗口中，单击“Fn和功能键”选项卡。</p><p><img src="/ueditor/php/upload/image/20170301/1488337367473742.jpg" alt="think键盘属性.jpg"><br></p><p>3.按照如下介绍设置为您需要的模式：</p><p>• 若选择“直接按F1-F12以启动F1-F12功能，……”</p><p>此时，要使用F1-F12传统按键功能，请直接按功能键；</p><p>要使用每个键上印有图标的特殊功能，请按Fn键和相应的功能键</p></li><li><p>通过BIOS设置Fn键的功能<br>题主提到了，进不去BIOS界面，这种情况确实有可能出现，推荐不要在开机的时候按F1，是进入操作系统之后，再重启电脑，重启的过程中就开始按F1，这样更容易进入BIOS。</p><p>电脑重启到ThinkPad Logo标识时连续敲击键盘F1键，进入BIOS，使用←→左右方向键选择Config菜单项，使用↑↓上下方向键选择Keyboard/Mouse选项并按下Enter回车键，其中：</p><p>通过“Fn and Ctrl Key swap”选项的开关，可以设置Fn与Ctrl键功能是否互换；</p><p>通过“Fn Key Lock”选项的开关，可以设置Fn键是否锁定</p><p><br></p></li></ol>
+								</div>
+														</div>
+							<div class="options">
+								<ul>
+								
+										<li class="special"><a data-fun="toVote" class="unVoted fm_ele" fm-type="button" fm-name="answer_vote" fm-operation="click" fm-zoon="option_area"><span class="status">点赞</span>  |  <span class="number">10</span></a></li>
+									<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">1</span></a></li>
+										<li><a data-fun="toSave" class="fm_ele" fm-type="button" fm-name="answer_favorite" fm-operation="click" fm-zoon="option_area"><span>收藏</span></a></li>
+																<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
+								</ul>
+							</div>
+	
+						</article>
+					</li>
+				</ul>
+				
 				<div id="loadStatus">
 					<div id="loading" class="">
 						<span>加载中</span>
@@ -233,7 +270,7 @@
         	</div>
         </div>
     </div>
-   
+    
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
@@ -246,7 +283,8 @@
 				<textarea rows="1" name="question_content" id="title" placeholder="请输入您的问题，如：IPhone 6指纹识别如何破解？" maxlength="100"></textarea>
 				<script id="editor" type="text/plain" style="width:650px;height:300px;"></script>
 <p class="askTitleTip" style="display: none;"></p>	
-				<ul id="similarAsk" style="display: block;"></ul>					<h1 id="desH">添加问题的详细描述</h1>					
+				<ul id="similarAsk" style="display: block;"></ul>					
+				<h1 id="desH">添加问题的详细描述</h1>					
 				<div id="ueditor" class="edui-default" style="margin: 20px 0px 0px 35px; width: 650px; font-size: 14px;">
 				<div id="edui1" class="edui-editor  edui-default" style="width: 650px; z-index: 1;">
 				<div id="edui1_toolbarbox" class="edui-editor-toolbarbox edui-default">
@@ -300,36 +338,7 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 		<ul id="customTag"></ul>					
 		<div></div>					
 		<button id="toStep1">返回</button>				
-		<button id="submit" onclick="saveCommunityQuestion()">提交</button>				</div>			</div>		</div>
-    	
-    <div id="somedialog" class="dialog">
-		<div class="dialog__overlay"></div>
-		<div class="dialog__content">
-			<div class="morph-shape">
-				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 560 280" preserveAspectRatio="none">
-					<rect x="3" y="3" fill="none" width="556" height="276"/>
-				</svg>
-			</div>
-			<div class="dialog-inner">
-				<h2><strong>上传成功，请您耐心等待管理员审核</strong></h2>
-				<div><button class="action" data-dialog-close onclick="windowclose()">关闭</button></div>
-			</div>
-		</div>
-	</div>
-	<div id="somedialog2" class="dialog">
-		<div class="dialog__overlay"></div>
-		<div class="dialog__content">
-			<div class="morph-shape">
-				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 560 280" preserveAspectRatio="none">
-					<rect x="3" y="3" fill="none" width="556" height="276"/>
-				</svg>
-			</div>
-			<div class="dialog-inner">
-				<h2><strong>请耐心等待审核，切勿重复提交</strong></h2>
-				<div><button class="action" data-dialog-close onclick="windowclose()">关闭</button></div>
-			</div>
-		</div>
-	</div>
+		<button id="submit"  onclick="saveCommunityQuestion()">提交</button>				</div>			</div>		</div>
 	<div id="lasturl" style="display:none"></div>
     	<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script>
@@ -447,50 +456,101 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
         alert("已清空草稿箱")
     }
 </script> 
-<script>
-	function saveCommunityQuestion(){
-		var title = document.getElementById("title").value;
-		var description = UE.getEditor('editor').getContent();
-		var obj = document.getElementsByName("category_id");
-		check_val = [];
-	    for(k in obj){
-	        if(obj[k].checked)
-	            check_val.push(obj[k].value);
-	    }
-			$.ajax({
-				type:"POST",
-				url:"/org.xjtusicd3.partner/saveCommunityQuestion.html",
-				data:{
-					"title":title,
-					"description":description,
-					"check_val":check_val[0]
-				},
-				dataType:"json",
-				success:function(data){
-					if(data.value=="0"){
-						self.location='login.html';
-					}else if(data.value=="1"){
-						(function() {
-							var dlgtrigger = document.querySelector( '[data-dialog]' ),
-								somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
-								dlg = new DialogFx( somedialog );
-							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
-						})();
-						document.getElementById('lasturl').innerHTML=data.url;
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script>
+		function codefans(){
+			var box=document.getElementById("success");
+			box.style.display="none"; 
+		}
+		function codefans2(){
+			var box=document.getElementById("chongfu");
+			box.style.display="none"; 
+		}
+		function saveCommunityQuestion(){
+			var title = document.getElementById("title").value;
+			var description = UE.getEditor('editor').getContent();
+			var obj = document.getElementsByName("category_id");
+			check_val = [];
+		    for(k in obj){
+		        if(obj[k].checked)
+		            check_val.push(obj[k].value);
+		    }
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/saveCommunityQuestion.html",
+					data:{
+						"title":title,
+						"description":description,
+						"check_val":check_val[0]
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+						setTimeout("location.reload()",1000)
+							document.getElementById('lasturl').innerHTML=data.url;
+							document.getElementById('questionForm').style.display='none';
+							document.getElementById('success').style.display='block';
+							setTimeout("codefans()",3000);
+							
+						}else{
+						setTimeout("location.reload()",1000)
+							document.getElementById('lasturl').innerHTML=data.url;
+							document.getElementById('questionForm').style.display='none';
+							document.getElementById('chongfu').style.display='block';
+							setTimeout("codefans2()",3000);
+							
+						}
+					}
+				})
+			}
+			function create_edit(obj){
+				var a = document.getElementById(event.target.id+"_");
+				if(document.getElementById('userNameText')==null){
+					self.location='login.html';
+				}else{
+					if(a.lastChild.id=="addcomment"){
+						a.lastChild.remove();
 					}else{
-						(function() {
-							var dlgtrigger = document.querySelector( '[data-dialog]' ),
-								somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
-								dlg = new DialogFx( somedialog2 );
-							dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
-						})();
-						document.getElementById('lasturl').innerHTML=data.url;
+						var b = document.getElementById('userNameText').textContent;
+						$.ajax({
+							type:"POST",
+							url:"/org.xjtusicd3.partner/getUserInfo.html",
+							data:{
+								"useremail":b.replace(/您好：/,"")
+							},
+							dataType:"json",
+							success:function(data){
+								jsondata=$.parseJSON(data);
+								var oDiv = document.createElement('div');
+								oDiv.setAttribute("id","addcomment");
+		    					oDiv.innerHTML  = '<div class="comment"><img class="deco" src="images/dia-deco.png"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="'+jsondata[0].aVATAR+'"><input id="input_'+a.id.replace(/_/,"")+'" class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="addComment()" id="button_'+a.id.replace(/_/,"")+'">评论</button></div><ul class="commentList"></ul></div></div>';
+		    					a.appendChild(oDiv);
+							}
+						})
 					}
 				}
-			})
-	}
+			}
+			
+			function addComment(){
+				var a = document.getElementById(event.target.id);
+				var questionId = a.id.replace(/button_/,"");
+				var commentContent = document.getElementById('input_'+questionId).value;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/addComment.html",
+					data:{
+						"questionId":questionId,
+						"commentContent":commentContent
+					},
+					dataType:"json",
+					success:function(data){
+						
+					}
+				})
+			}
 </script>
-		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript">
 			function DropDown(el) {
 				this.dd = el;
@@ -528,6 +588,8 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 					$('.wrapper-dropdown-3').removeClass('active');
 				});
 			});
-		</script> 
+		</script>
+		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">提交成功</h2></div></div>
+		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
 </body>
 </html>
