@@ -58,4 +58,13 @@ public class CommunityAnswerHelper{
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_question_ajax_添加评论
+	 */
+	public static void addComment(CommunityAnswerPersistence communityAnswerPersistence){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		mapper.save(communityAnswerPersistence);
+		session.close();
+	}
 }

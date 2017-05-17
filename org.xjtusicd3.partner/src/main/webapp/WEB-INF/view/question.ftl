@@ -546,7 +546,22 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style>
 					},
 					dataType:"json",
 					success:function(data){
-						
+					alert(data);
+						jsondata=$.parseJSON(data);
+						if(jsondata.value=="0"){
+							self.location='login.html';
+						}else if(jsondata.value=="1"){
+						setTimeout("location.reload()",1000)
+							document.getElementById('lasturl').innerHTML=data.url;
+							document.getElementById('success').style.display='block';
+							setTimeout("codefans()",3000);
+							
+						}else{
+						setTimeout("location.reload()",1000)
+							document.getElementById('lasturl').innerHTML=data.url;
+							document.getElementById('chongfu').style.display='block';
+							setTimeout("codefans2()",3000);
+						}
 					}
 				})
 			}

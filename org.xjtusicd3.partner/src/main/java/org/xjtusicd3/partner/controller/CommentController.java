@@ -17,6 +17,9 @@ import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.CommentService;
+import org.xjtusicd3.partner.service.CommunityService;
+
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 public class CommentController {
@@ -45,18 +48,24 @@ public class CommentController {
 	@RequestMapping(value={"/addComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
 	public String addComment(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail"); 
+		String url = (String) session.getAttribute("urlPath");
 		String questionId = request.getParameter("questionId");
 		String commentContent = request.getParameter("commentContent");
 		//判断评论是否重复提交
 		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail); 
 		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_IsCommunityAnswer(userPersistences.get(0).getUSERID(), commentContent,questionId);
+		JSONObject jsonObject = new JSONObject();
 		if (communityAnswerPersistences.size()==0) {
-			//CommunityAnswerHelper.
+			CommunityService.addComment(userPersistences.get(0).getUSERID(), commentContent, questionId);
+			jsonObject.put("value", "1");
+			jsonObject.put("url",url);
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
 		}else{
-			
+			jsonObject.put("value", "2");
+			jsonObject.put("url",url);
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
 		}
-		System.out.println(questionId);
-		System.out.println(commentContent);
-		return questionId;
 	}
 }

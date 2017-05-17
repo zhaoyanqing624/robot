@@ -48,8 +48,11 @@ public class CommunityController {
 	public String saveCommunityQuestion(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
 		String url = (String) session.getAttribute("urlPath");
+		JSONObject jsonObject = new JSONObject();
 		if (useremail==null) {
-			return "0";
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
 		}else {
 			String title = request.getParameter("title");
 			String content = request.getParameter("description");
@@ -57,7 +60,7 @@ public class CommunityController {
 			
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
 			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_iscurrent(userPersistences.get(0).getUSERID(), title);
-			JSONObject jsonObject = new JSONObject();
+
 			if (communityQuestionPersistences.size()==0) {
 				CommunityService.savaCommunityQuestion(useremail, title, content, classifynumber);
 				jsonObject.put("value", "1");

@@ -323,4 +323,22 @@ public class CommunityService {
 
 		return question_CommunityViews;
 	}
+	/*
+	 * zyq_question_ajax_添加评论
+	 */
+	public static void addComment(String userid,String content,String questionId){
+		CommunityAnswerPersistence communityAnswerPersistence = new CommunityAnswerPersistence();
+		communityAnswerPersistence.setCOMMUNITYANSWERID(UUID.randomUUID().toString());
+	    Date date=new Date();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String time = format.format(date);
+		communityAnswerPersistence.setTIME(time);
+		communityAnswerPersistence.setCONTENT(content);
+		communityAnswerPersistence.setLIKES("0");
+		communityAnswerPersistence.setISBESTANSWER(0);
+		communityAnswerPersistence.setCOMMUNITYQUESTIONID(questionId);
+		communityAnswerPersistence.setUSERID(userid);
+		communityAnswerPersistence.setISNOTICE(0);
+		CommunityAnswerHelper.addComment(communityAnswerPersistence);
+	}
 }
