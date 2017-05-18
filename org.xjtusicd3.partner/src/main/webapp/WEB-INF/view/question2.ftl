@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>智能小朵-问题中心</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/utilDetails.css" />
@@ -13,9 +14,14 @@
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/body.css">
 	<link rel="stylesheet" type="text/css" href="css/detail.css">
-    
-    <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
-    <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
+	<link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="js/lnv_frontMonitor.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -83,23 +89,35 @@
 		<article id="question" data-question-id="42314" data-asker-id="294663">
 			<div class="tag">
 				<ul>
-					<li>个人电脑</li>
+					<li>${classifyName}</li>
 				</ul>
 			</div>
+			<#list questionList as questionList>
 			<div class="title">
-				<h2><a>T540P的小键盘不管用，numlock键是好的，可以看到开启，而且开启后小键盘上的2，4，6，8这几个方向键是好用的</a></h2>
+				<h2><a>${questionList.TITLE}</a></h2>
 			</div>
 			<div class="description">
-				<div class="fullDetail"></div>
+				<div class="detail">
+					<#if questionList.CONTENT?length gt 150>
+					<div class="detailP">
+						${questionList.CONTENT[0..150]}......
+						<span class="readMore">查看更多</span>
+					</div>
+					<#else>
+					<div class="detailP">${questionList.CONTENT}
+					</div>
+					</#if>
+				</div>
+				<div class="fullDetail hidden">
+					<p>${questionList.CONTENT}</p>
+				</div>
 			</div>
 			<div class="options">
 				<ul>
-						<li class="special"><a data-fun="toFocus" class="unFocused" d=""><span class="status">关注</span>  |  <span class="number">3</span></a></li>
-					<li></li>
-					<li></li>
+					<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
 				</ul>
 			</div>
-		</article>
+			</#list>
 		<div id="sort">
 			<h2>1个回答</h2>
 			<select>
@@ -109,11 +127,17 @@
 		</div>
 		<div class="clearfix"></div>
 		<div id="answer-edit">
+			<#list userList as userList>
 			<div id="answerer">
-				<img src="http://ask.lenovo.com.cn/static/common/avatar-real-img.png">
-				<p>zhaoshushu</p>
+				<img src="${userList.AVATAR}">
+				<p>${userList.USERNAME}</p>
 			</div>
-			<input type="text" placeholder="添加您的答案">
+			</#list>
+			<input type="text" placeholder="添加您的答案" id="input_answer" onclick="showeditor()" style="display:block">
+			<div id="answer-ueditor" class="edui-default" style="width:645px;font-size:14px;display:none">
+				<script id="editor" name="content" type="text/plain"></script>
+			</div>
+			<div class="submitDiv" style="display:none"><button id="answerSubmit">提交</button></div>
 		</div>
 		<ul id="searchResult">
 				<li>
@@ -222,20 +246,124 @@
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
-    <!--script--!>
-    	<script type="text/javascript" src="new/front/js/util.js"></script>
-    	<script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function(){
-			$('#onebyone_slider').oneByOne({
-				className:'oneByOne1',
-				easeType:'random',
-				slideShow:true,
-				delay:200,
-				slideShowDelay:4000
-			})
-		});
-		</script> 
-    <!--/script--!>
+	<script type="text/javascript">
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor',{
+    	initialFrameHeight:200
+    });
+    function isFocus(e){
+        alert(UE.getEditor('editor').isFocus());
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function setblur(e){
+        UE.getEditor('editor').blur();
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function insertHtml() {
+        var value = prompt('插入html代码', '');
+        UE.getEditor('editor').execCommand('insertHtml', value)
+    }
+    function createEditor() {
+        enableBtn();
+        UE.getEditor('editor');
+    }
+    function getAllHtml() {
+        alert(UE.getEditor('editor').getAllHtml())
+    }
+    function getContent() {
+        var arr = [];
+        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getContent());
+        alert(arr.join("\n"));
+    }
+    function getPlainTxt() {
+        var arr = [];
+        arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getPlainTxt());
+        alert(arr.join('\n'))
+    }
+    function setContent(isAppendTo) {
+        var arr = [];
+        arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+        UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
+        alert(arr.join("\n"));
+    }
+    function setDisabled() {
+        UE.getEditor('editor').setDisabled('fullscreen');
+        disableBtn("enable");
+    }
+
+    function setEnabled() {
+        UE.getEditor('editor').setEnabled();
+        enableBtn();
+    }
+
+    function getText() {
+        //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+        var range = UE.getEditor('editor').selection.getRange();
+        range.select();
+        var txt = UE.getEditor('editor').selection.getText();
+        alert(txt)
+    }
+
+    function getContentTxt() {
+        var arr = [];
+        arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+        arr.push("编辑器的纯文本内容为：");
+        arr.push(UE.getEditor('editor').getContentTxt());
+        alert(arr.join("\n"));
+    }
+    function hasContent() {
+        var arr = [];
+        arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+        arr.push("判断结果为：");
+        arr.push(UE.getEditor('editor').hasContents());
+        alert(arr.join("\n"));
+    }
+    function setFocus() {
+        UE.getEditor('editor').focus();
+    }
+    function deleteEditor() {
+        disableBtn();
+        UE.getEditor('editor').destroy();
+    }
+    function disableBtn(str) {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            if (btn.id == str) {
+                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+            } else {
+                btn.setAttribute("disabled", "true");
+            }
+        }
+    }
+    function enableBtn() {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+        }
+    }
+
+    function getLocalData () {
+        alert(UE.getEditor('editor').execCommand( "getlocaldata" ));
+    }
+
+    function clearLocalData () {
+        UE.getEditor('editor').execCommand( "clearlocaldata" );
+        alert("已清空草稿箱")
+    }
+</script>
+<script>
+	function showeditor(){
+		document.getElementById('input_answer').style.display="none";
+		document.getElementById('answer-ueditor').style.display="block";
+		document.getElementsByClassName('submitDiv')[0].style.display="block";
+	}
+</script> 
 </body>
 </html>

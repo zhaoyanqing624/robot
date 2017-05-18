@@ -14,6 +14,7 @@ import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.view.Question2_CommunityView;
 import org.xjtusicd3.partner.view.Question_CommunityView;
 
 public class CommunityService {
@@ -55,8 +56,8 @@ public class CommunityService {
 	 */
 	public static List<Question_CommunityView> Question_CommunityView(String type,String classifyname){
 		List<Question_CommunityView> question_CommunityViews = new ArrayList<Question_CommunityView>();
-		if (classifyname=="all") {
-			if (type=="all") {//展示全部问题
+		if (classifyname.equals("all")) {
+			if (type.equals("all")) {//展示全部问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity_isanswer();
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -99,7 +100,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="0") {//展示未有答案的问题
+			}else if (type.equals("0")) {//展示未有答案的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2_isanswer(0);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -142,7 +143,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="1") {//展示已回答的问题
+			}else if (type.equals("1")) {//展示已回答的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2_isanswer(1);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -188,7 +189,7 @@ public class CommunityService {
 			}
 		}else {
 			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.spider_ClassifyListByName(classifyname, "1");
-			if (type=="all") {//展示全部问题
+			if (type.equals("all")) {//展示全部问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity(classifyPersistences.get(0).getFAQCLASSIFYID());
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -231,7 +232,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="0") {//展示未有答案的问题
+			}else if (type.equals("0")) {//展示未有答案的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2(classifyPersistences.get(0).getFAQCLASSIFYID(),0);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -275,7 +276,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="1") {//展示已回答的问题
+			}else if (type.equals("1")) {//展示已回答的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2(classifyPersistences.get(0).getFAQCLASSIFYID(),1);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -340,5 +341,31 @@ public class CommunityService {
 		communityAnswerPersistence.setUSERID(userid);
 		communityAnswerPersistence.setISNOTICE(0);
 		CommunityAnswerHelper.addComment(communityAnswerPersistence);
+	}
+	/*
+	 * zyq_question2_问题展示
+	 */
+	public static List<Question2_CommunityView> question2_CommunityViews(String questionId){
+		List<Question2_CommunityView> question2_CommunityViews = new ArrayList<Question2_CommunityView>();
+		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(questionId);
+		for(CommunityAnswerPersistence communityAnswerPersistence:communityAnswerPersistences){
+			Question2_CommunityView question2_CommunityView = new Question2_CommunityView();
+			question2_CommunityView.setAnswer(communityAnswerPersistence.getCONTENT());
+			//获取用户信息
+			List<UserPersistence> userPersistences = UserHelper.getEmail_id(communityAnswerPersistence.getUSERID());
+			question2_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
+			question2_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
+			question2_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
+			//获取用户评论总数和点赞总数
+			String likesNumber =Integer.toString(CommunityAnswerHelper.likesNumber());
+			List<CommunityAnswerPersistence> communityAnswerPersistences2 = CommunityAnswerHelper.question_CommunityAnswer_userId(userPersistences.get(0).getUSERID());
+			question2_CommunityView.setTotalLikes(likesNumber);
+			question2_CommunityView.setTotalAnswer(Integer.toString(communityAnswerPersistences2.size()));
+			
+//			String communityAnswernumber = Integer.toString(communityAnswerPersistences.size());
+//			question2_CommunityView.setCommunityNumber(communityAnswernumber);
+			question2_CommunityView.setLikesNumber(communityAnswerPersistence.getLIKES());
+		}
+		return null;
 	}
 }

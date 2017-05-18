@@ -14,13 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.CommunityQuestionHelper;
-import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
-import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
-import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.CommunityService;
 import org.xjtusicd3.partner.view.Question_CommunityView;
 
@@ -32,12 +30,40 @@ public class CommunityController {
 	 * zyq_question_右侧类别
 	 */
 	@RequestMapping(value="question",method=RequestMethod.GET)
-	public ModelAndView question(HttpServletRequest request){
+	public ModelAndView question(String c,String type,HttpServletRequest request){
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.community_classify();
-		List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView("all", "all");
+		List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(type,c);
 		ModelAndView mv = new ModelAndView("question");
 		mv.addObject("classifyList", classifyPersistences);
 		mv.addObject("communityViews", question_CommunityViews);
+		String typename = "";
+		if (type.equals("all")) {
+			typename="全部";
+		}else if (type.equals("1")) {
+			typename="已解决";
+		}else if (type.equals("2")) {
+			typename="待回答";
+		}
+		mv.addObject("typename", typename);
+		return mv;
+	}
+	/*
+	 * zyq_question2_问题内容展示
+	 */
+	@RequestMapping(value="question2",method=RequestMethod.GET)
+	public ModelAndView question2(String q,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		ModelAndView mv = new ModelAndView("question2");
+		if (useremail==null) {
+			new ModelAndView("login.html");
+		}else {
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(q);
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
+			mv.addObject("userList", userPersistences);
+			mv.addObject("questionList", communityQuestionPersistences);
+			mv.addObject("classifyName", classifyPersistences.get(0).getFAQCLASSIFYNAME());
+		}
 		return mv;
 	}
 	/*
