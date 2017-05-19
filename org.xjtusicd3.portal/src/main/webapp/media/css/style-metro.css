@@ -118,7 +118,7 @@ select:focus {
 .btn.green {
   color: white;
   text-shadow: none;	 
-  background-color: #35aa47;
+  background-color: #0000a0;
 }
 .btn.green:hover, 
 .btn.green:focus, 
@@ -126,7 +126,7 @@ select:focus {
 .btn.green.active,
 .btn.green.disabled, 
 .btn.green[disabled]{ 
-  background-color: #1d943b !important;
+  background-color: #400080!important;
   color: #fff !important;
 }
 

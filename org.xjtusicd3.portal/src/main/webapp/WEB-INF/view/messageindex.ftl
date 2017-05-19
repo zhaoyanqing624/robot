@@ -18,155 +18,170 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+	 
+
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="media/image/favicon.ico" />
+
 </head>
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
         <div class="col-sm-4" style="width: 100%;">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <h3><#list advise_list as advice>
-								${advice.text} 
-								</#list></h3>
-                    <p class="small"><i class="fa fa-hand-o-up"></i>&nbsp;Tip:列表可拖动</p>
-					<div class="input-group">
-                        <input type="text" placeholder="搜索相关留言" class="input input-sm form-control">
-                        <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-search"></i> 搜索</button>
-                                </span>
-                    </div>
-				 
-                    <ul class="sortable-list connectList agile-list">
-                        
-                                <#list advise_list as advice>
-									 
-									<li class="success-element">
-                          					
-										<div class="agile-detail">
-                                			<a href="#" class="pull-right btn btn-xs btn-white"></a>
-                               				
-                            			</div>
+            <!-- BEGIN PAGE CONTENT-->
 
-                            			<div class="agile-detail">
-                                			
-                                			<i class="fa fa-user"></i>${advice.name} &nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o"></i> 2015.05.12
-                            			</div>
-                        			</li>
-														
-								</#list>
-					
-                          
-                         
-                    </ul>
-                </div>
-            </div>
+				<div class="row-fluid">
+
+					<div class="span12">
+
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+						<div class="portlet box blue">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-edit"></i>留言列表</div>
+
+								<div class="tools">
+
+									<a href="javascript:;" class="collapse"></a>
+
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+									<a href="javascript:;" class="reload"></a>
+
+									<a href="javascript:;" class="remove"></a>
+
+								</div>
+
+							</div>
+
+							<div class="portlet-body">
+
+								<div class="clearfix">
+
+									<div class="btn-group">
+
+										<button id="sample_editable_1_new" class="btn green">
+
+										<i class="icon-plus">增加用户</i>
+
+										</button>
+
+									</div>
+
+									<div class="btn-group pull-right">
+
+										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+
+										</button>
+
+										<ul class="dropdown-menu pull-right">
+
+											<li><a href="#">Print</a></li>
+
+											<li><a href="#">Save as PDF</a></li>
+
+											<li><a href="#">Export to Excel</a></li>
+
+										</ul>
+
+									</div>
+
+								</div>
+
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+
+									<thead>
+
+										<tr>
+
+										
+											<th>留言用户</th>
+
+											<th>用户邮箱</th>
+
+											<th>用户电话</th>
+
+											<th>用户留言内容</th>
+
+											<th>Edit</th>
+
+											<th>Delete</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody>
+										<#list advise_list as advise>
+										<tr class="">
+
+											<td>
+                								${advise.NAME}
+                								
+                							</td>
+											<td>${advise.EMAIL}</td>
+
+											<td class="center">${advise.PHONE}</td>
+
+											<td class="center">${advise.TEXT}</td>
+
+											<td><a class="edit" href="javascript:;">Edit</a></td>
+
+											<td><a class="delete" href="javascript:;">Delete</a></td>
+
+										</tr>
+										</#list>
+										 
+
+									</tbody>
+
+								</table>
+
+							</div>
+
+						</div>
+
+						<!-- END EXAMPLE TABLE PORTLET-->
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE CONTENT -->
+
+			</div>
+
+			<!-- END PAGE CONTAINER-->
         </div>
-        <!--<div class="col-sm-4">-->
-            <!--<div class="ibox">-->
-                <!--<div class="ibox-content">-->
-                    <!--<h3>进行中</h3>-->
-                    <!--<p class="small"><i class="fa fa-hand-o-up"></i> 在列表之间拖动任务面板</p>-->
-                    <!--<ul class="sortable-list connectList agile-list">-->
-                        <!--<li class="success-element">-->
-                            <!--全面、较深入地掌握我们“产品”的功能、特色和优势并做到应用自如。-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标签</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.09.01-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="success-element">-->
-                            <!--根据自己以前所了解的和从其他途径搜索到的信息，录入客户资料150家。-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标记</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.05.12-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="warning-element">-->
-                            <!--锁定有意向客户20家。-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标记</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.09.10-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="warning-element">-->
-                            <!--力争完成销售指标。-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标签</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.09.09-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="info-element">-->
-                            <!--在总结和摸索中前进。-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-primary">确定</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.08.04-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="success-element">-->
-                            <!--不断学习行业知识、产品知识，为客户带来实用介绍内容-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标记</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.05.12-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="danger-element">-->
-                            <!--先友后单：与客户发展良好友谊，转换销售员角色，处处为客户着想-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标记</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.11.04-->
-                            <!--</div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-sm-4">-->
-            <!--<div class="ibox">-->
-                <!--<div class="ibox-content">-->
-                    <!--<h3>已完成</h3>-->
-                    <!--<p class="small"><i class="fa fa-hand-o-up"></i> 在列表之间拖动任务面板</p>-->
-                    <!--<ul class="sortable-list connectList agile-list">-->
-                        <!--<li class="info-element">-->
-                            <!--制定工作日程表-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标记</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.09.10-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="warning-element">-->
-                            <!--每天坚持打40个有效电话，挖掘潜在客户-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标签</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.09.09-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="warning-element">-->
-                            <!--拜访客户之前要对该客户做全面的了解(客户的潜在需求、职位、权限以及个人性格和爱好)-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标签</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.09.09-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="warning-element">-->
-                            <!--提高自己电话营销技巧，灵活专业地与客户进行电话交流-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-primary">确定</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.08.04-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--<li class="success-element">-->
-                            <!--通过电话销售过程中了解各盛市的设备仪器使用、采购情况及相关重要追踪人-->
-                            <!--<div class="agile-detail">-->
-                                <!--<a href="#" class="pull-right btn btn-xs btn-white">标记</a>-->
-                                <!--<i class="fa fa-clock-o"></i> 2015.05.12-->
-                            <!--</div>-->
-                        <!--</li>-->
-
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+         
 
     </div>
 
@@ -189,6 +204,66 @@
 
     });
 </script>
+
+
+
+<!-- BEGIN CORE PLUGINS -->
+
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--[if lt IE 9]>
+
+	<script src="media/js/excanvas.min.js"></script>
+
+	<script src="media/js/respond.min.js"></script>  
+
+	<![endif]-->   
+
+	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+
+	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	<script src="media/js/app.js"></script>
+
+	<script src="media/js/table-editable.js"></script>    
+
+	<script>
+
+		jQuery(document).ready(function() {       
+
+		   App.init();
+
+		   TableEditable.init();
+
+		});
+
+	</script>
 
 
 

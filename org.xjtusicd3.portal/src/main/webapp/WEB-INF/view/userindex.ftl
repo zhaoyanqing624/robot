@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - jqGird</title>
+    <title>用户信息</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -86,6 +86,8 @@
 									<a href="#portlet-config" data-toggle="modal" class="config"></a>
 
 									<a href="javascript:;" class="reload"></a>
+									
+									
 
 									<a href="javascript:;" class="remove"></a>
 
@@ -101,7 +103,7 @@
 
 										<button id="sample_editable_1_new" class="btn green">
 
-										增加用户<i class="icon-plus"></i>
+										<i class="icon-plus">增加用户</i>
 
 										</button>
 

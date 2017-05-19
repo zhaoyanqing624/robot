@@ -55,4 +55,7 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	 */
 	@Select("SELECT * FROM TBL_User WHERE USERNAME=#{0}")
 	public List<UserPersistence> getUserInfo(String username);
+	//zpz edit user information
+//	@Update("UPDATE TBL_User SET USERPASSWORD=#{1} WHERE USEREMAIL=#{0}")
+//	public List<UserPersistence> updateUserInfo(String username,String email,String address,String Createtime);
 }
