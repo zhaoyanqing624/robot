@@ -27,5 +27,10 @@ public interface CommunityAnswerPersistenceMapper extends IBaseDao<CommunityAnsw
 	 */
 	@Select("SELECT * FROM TBL_CommunityAnswer WHERE USERID=#{0}")
 	List<CommunityAnswerPersistence> question_CommunityAnswer_userId(String userid);
+	/*
+	 * zyq_question_判断评论是否重复提交
+	 */
+	@Select("SELECT * FROM TBL_CommunityAnswer WHERE USERID=#{0} AND CONTENT=#{1} AND COMMUNITYQUESTIONID=#{2}")
+	List<CommunityAnswerPersistence> question_IsCommunityAnswer(String userid, String content,String questionId);
 	
 }

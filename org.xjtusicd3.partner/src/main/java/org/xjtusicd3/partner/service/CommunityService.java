@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
 import org.xjtusicd3.database.helper.CommunityQuestionHelper;
@@ -15,6 +14,7 @@ import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.view.Question2_CommunityView;
 import org.xjtusicd3.partner.view.Question_CommunityView;
 
 public class CommunityService {
@@ -56,8 +56,8 @@ public class CommunityService {
 	 */
 	public static List<Question_CommunityView> Question_CommunityView(String type,String classifyname){
 		List<Question_CommunityView> question_CommunityViews = new ArrayList<Question_CommunityView>();
-		if (classifyname=="all") {
-			if (type=="all") {//展示全部问题
+		if (classifyname.equals("all")) {
+			if (type.equals("all")) {//展示全部问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity_isanswer();
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -67,22 +67,28 @@ public class CommunityService {
 					List<CommunityAnswerPersistence> list = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 					if (list.size()==0) {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
-					
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setAnswer(list.get(0).getCONTENT());
 						question_CommunityView.setLikesNumber(list.get(0).getLIKES());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
+						question_CommunityView.setUserId(userPersistences.get(0).getUSERID());
 						question_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
 						question_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
 						question_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
@@ -94,7 +100,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="0") {//展示未有答案的问题
+			}else if (type.equals("0")) {//展示未有答案的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2_isanswer(0);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -104,22 +110,28 @@ public class CommunityService {
 					List<CommunityAnswerPersistence> list = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 					if (list.size()==0) {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
-					
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setAnswer(list.get(0).getCONTENT());
 						question_CommunityView.setLikesNumber(list.get(0).getLIKES());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
+						question_CommunityView.setUserId(userPersistences.get(0).getUSERID());
 						question_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
 						question_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
 						question_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
@@ -131,7 +143,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="1") {//展示已回答的问题
+			}else if (type.equals("1")) {//展示已回答的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2_isanswer(1);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -141,21 +153,28 @@ public class CommunityService {
 					List<CommunityAnswerPersistence> list = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 					if (list.size()==0) {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setAnswer(list.get(0).getCONTENT());
 						question_CommunityView.setLikesNumber(list.get(0).getLIKES());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
+						question_CommunityView.setUserId(userPersistences.get(0).getUSERID());
 						question_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
 						question_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
 						question_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
@@ -170,7 +189,7 @@ public class CommunityService {
 			}
 		}else {
 			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.spider_ClassifyListByName(classifyname, "1");
-			if (type=="all") {//展示全部问题
+			if (type.equals("all")) {//展示全部问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity(classifyPersistences.get(0).getFAQCLASSIFYID());
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -180,22 +199,28 @@ public class CommunityService {
 					List<CommunityAnswerPersistence> list = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 					if (list.size()==0) {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
-					
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setAnswer(list.get(0).getCONTENT());
 						question_CommunityView.setLikesNumber(list.get(0).getLIKES());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
+						question_CommunityView.setUserId(userPersistences.get(0).getUSERID());
 						question_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
 						question_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
 						question_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
@@ -207,7 +232,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="0") {//展示未有答案的问题
+			}else if (type.equals("0")) {//展示未有答案的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2(classifyPersistences.get(0).getFAQCLASSIFYID(),0);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -217,22 +242,29 @@ public class CommunityService {
 					List<CommunityAnswerPersistence> list = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 					if (list.size()==0) {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
 					
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setAnswer(list.get(0).getCONTENT());
 						question_CommunityView.setLikesNumber(list.get(0).getLIKES());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
+						question_CommunityView.setUserId(userPersistences.get(0).getUSERID());
 						question_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
 						question_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
 						question_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
@@ -244,7 +276,7 @@ public class CommunityService {
 						question_CommunityViews.add(question_CommunityView);
 					}
 				}
-			}else if (type=="1") {//展示已回答的问题
+			}else if (type.equals("1")) {//展示已回答的问题
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2(classifyPersistences.get(0).getFAQCLASSIFYID(),1);
 				for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 					//获取评论数
@@ -254,21 +286,28 @@ public class CommunityService {
 					List<CommunityAnswerPersistence> list = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 					if (list.size()==0) {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
 						Question_CommunityView question_CommunityView = new Question_CommunityView();
+						question_CommunityView.setCommunityId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 						question_CommunityView.setCommunityTitle(communityQuestionPersistence.getTITLE());
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setAnswer(list.get(0).getCONTENT());
 						question_CommunityView.setLikesNumber(list.get(0).getLIKES());
 						question_CommunityView.setCommunityNumber(communityNumber);
+						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
+						question_CommunityView.setUserId(userPersistences.get(0).getUSERID());
 						question_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
 						question_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
 						question_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
@@ -284,5 +323,49 @@ public class CommunityService {
 		}
 
 		return question_CommunityViews;
+	}
+	/*
+	 * zyq_question_ajax_添加评论
+	 */
+	public static void addComment(String userid,String content,String questionId){
+		CommunityAnswerPersistence communityAnswerPersistence = new CommunityAnswerPersistence();
+		communityAnswerPersistence.setCOMMUNITYANSWERID(UUID.randomUUID().toString());
+	    Date date=new Date();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String time = format.format(date);
+		communityAnswerPersistence.setTIME(time);
+		communityAnswerPersistence.setCONTENT(content);
+		communityAnswerPersistence.setLIKES("0");
+		communityAnswerPersistence.setISBESTANSWER(0);
+		communityAnswerPersistence.setCOMMUNITYQUESTIONID(questionId);
+		communityAnswerPersistence.setUSERID(userid);
+		communityAnswerPersistence.setISNOTICE(0);
+		CommunityAnswerHelper.addComment(communityAnswerPersistence);
+	}
+	/*
+	 * zyq_question2_问题展示
+	 */
+	public static List<Question2_CommunityView> question2_CommunityViews(String questionId){
+		List<Question2_CommunityView> question2_CommunityViews = new ArrayList<Question2_CommunityView>();
+		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(questionId);
+		for(CommunityAnswerPersistence communityAnswerPersistence:communityAnswerPersistences){
+			Question2_CommunityView question2_CommunityView = new Question2_CommunityView();
+			question2_CommunityView.setAnswer(communityAnswerPersistence.getCONTENT());
+			//获取用户信息
+			List<UserPersistence> userPersistences = UserHelper.getEmail_id(communityAnswerPersistence.getUSERID());
+			question2_CommunityView.setSignature(userPersistences.get(0).getUSERSIGNATURE());
+			question2_CommunityView.setUserImage(userPersistences.get(0).getAVATAR());
+			question2_CommunityView.setUserName(userPersistences.get(0).getUSERNAME());
+			//获取用户评论总数和点赞总数
+			String likesNumber =Integer.toString(CommunityAnswerHelper.likesNumber());
+			List<CommunityAnswerPersistence> communityAnswerPersistences2 = CommunityAnswerHelper.question_CommunityAnswer_userId(userPersistences.get(0).getUSERID());
+			question2_CommunityView.setTotalLikes(likesNumber);
+			question2_CommunityView.setTotalAnswer(Integer.toString(communityAnswerPersistences2.size()));
+			
+//			String communityAnswernumber = Integer.toString(communityAnswerPersistences.size());
+//			question2_CommunityView.setCommunityNumber(communityAnswernumber);
+			question2_CommunityView.setLikesNumber(communityAnswerPersistence.getLIKES());
+		}
+		return null;
 	}
 }

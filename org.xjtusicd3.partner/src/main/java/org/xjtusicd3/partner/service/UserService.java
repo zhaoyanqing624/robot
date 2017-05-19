@@ -32,7 +32,8 @@ public class UserService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		UserHelper.login_register(uuid.toString(),email,password,username,0,identification_number,time_stamp);
+		String userimage = "images/user.png";
+		UserHelper.login_register(uuid.toString(),email,password,username,0,identification_number,time_stamp,userimage);
 	}
 	//随机产生一个length位的字母+数字
     public static List<String> genCodes(int length,long num){

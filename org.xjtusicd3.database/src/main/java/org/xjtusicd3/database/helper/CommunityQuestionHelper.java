@@ -61,4 +61,15 @@ public class CommunityQuestionHelper{
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_question2_问题内容详情
+	 */
+	public static List<CommunityQuestionPersistence> question2_getCommunity(String questionId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> list = mapper.question2_getCommunity(questionId);
+		session.close();
+		return list;
+	}
+	
 }

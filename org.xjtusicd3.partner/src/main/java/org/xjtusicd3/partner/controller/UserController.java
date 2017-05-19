@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ITHelper;
 import org.xjtusicd3.database.helper.PayHelper;
 import org.xjtusicd3.database.helper.UserHelper;
@@ -43,7 +44,7 @@ public class UserController {
 	 * login_ajax_注册
 	 */
 	@ResponseBody
-	@RequestMapping(value={"/saveRegister"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	@RequestMapping(value={"/saveRegister"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
 	public String registerlist(HttpServletRequest request,HttpServletResponse response){
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -307,6 +308,18 @@ public class UserController {
 		}
 		
 		
+	}
+	/*
+	 * zyq_question_ajax获取用户的信息
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getUserInfo"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	public String getUserInfo(HttpServletRequest request,HttpServletResponse response){
+		String email = request.getParameter("useremail");
+		List<UserPersistence> userPersistences = UserHelper.getEmail(email);
+		String result = JsonUtil.toJsonString(userPersistences);
+		System.out.println(result);
+		return result;
 	}
 	
 }

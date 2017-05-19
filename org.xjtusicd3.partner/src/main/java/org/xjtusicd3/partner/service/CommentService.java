@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.ibatis.reflection.wrapper.BaseWrapper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.CommentPersistence;
