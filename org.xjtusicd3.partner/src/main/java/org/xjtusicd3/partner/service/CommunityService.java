@@ -6,16 +6,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
 import org.xjtusicd3.database.helper.CommunityQuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.view.Question2_CommunityReplayView;
 import org.xjtusicd3.partner.view.Question2_CommunityView;
 import org.xjtusicd3.partner.view.Question_CommunityView;
+
 
 public class CommunityService {
 	/*
@@ -350,6 +355,8 @@ public class CommunityService {
 		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(questionId);
 		for(CommunityAnswerPersistence communityAnswerPersistence:communityAnswerPersistences){
 			Question2_CommunityView question2_CommunityView = new Question2_CommunityView();
+			List<Question2_CommunityReplayView> question2_CommunityReplayViews = new ArrayList<Question2_CommunityReplayView>();
+			question2_CommunityView.setAnswerId(communityAnswerPersistence.getCOMMUNITYANSWERID());
 			question2_CommunityView.setAnswer(communityAnswerPersistence.getCONTENT());
 			//获取用户信息
 			List<UserPersistence> userPersistences = UserHelper.getEmail_id(communityAnswerPersistence.getUSERID());
@@ -361,11 +368,45 @@ public class CommunityService {
 			List<CommunityAnswerPersistence> communityAnswerPersistences2 = CommunityAnswerHelper.question_CommunityAnswer_userId(userPersistences.get(0).getUSERID());
 			question2_CommunityView.setTotalLikes(likesNumber);
 			question2_CommunityView.setTotalAnswer(Integer.toString(communityAnswerPersistences2.size()));
+			question2_CommunityView.setTime(communityAnswerPersistence.getTIME());
 			
-//			String communityAnswernumber = Integer.toString(communityAnswerPersistences.size());
-//			question2_CommunityView.setCommunityNumber(communityAnswernumber);
+			//查看评论数
+			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment(communityAnswerPersistence.getCOMMUNITYQUESTIONID(), communityAnswerPersistence.getCOMMUNITYANSWERID());
+			for(CommentPersistence commentPersistence:commentPersistences){
+				Question2_CommunityReplayView question2_CommunityReplayView = new Question2_CommunityReplayView();
+				List<UserPersistence> userPersistences2 = UserHelper.getEmail_id(commentPersistence.getUSERID());
+				question2_CommunityReplayView.setUserName(userPersistences2.get(0).getUSERNAME());
+				question2_CommunityReplayView.setUserImage(userPersistences2.get(0).getAVATAR());
+				question2_CommunityReplayView.setTime(commentPersistence.getCOMMENTTIME());
+				question2_CommunityReplayView.setCommunity(commentPersistence.getCOMMENTCONTENT());
+				question2_CommunityReplayViews.add(question2_CommunityReplayView);
+			}
+			String communityNumber = Integer.toString(commentPersistences.size());
+			question2_CommunityView.setCommunityNumber(communityNumber);
 			question2_CommunityView.setLikesNumber(communityAnswerPersistence.getLIKES());
+			question2_CommunityView.setReplay(question2_CommunityReplayViews);
+			question2_CommunityViews.add(question2_CommunityView);
+			
 		}
-		return null;
+		return question2_CommunityViews;
+	}
+	/*
+	 * zyq_ajax_question2回复的增加
+	 */
+	public static void saveReplyQuestion(String useremail,String content,String questionId){
+		CommunityAnswerPersistence communityAnswerPersistence = new CommunityAnswerPersistence();
+		communityAnswerPersistence.setCOMMUNITYANSWERID(UUID.randomUUID().toString());
+		communityAnswerPersistence.setCOMMUNITYQUESTIONID(questionId);
+		communityAnswerPersistence.setCONTENT(content);
+		communityAnswerPersistence.setISBESTANSWER(0);
+		communityAnswerPersistence.setISNOTICE(0);
+		communityAnswerPersistence.setLIKES("0");
+	    Date date=new Date();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String time = format.format(date);
+		communityAnswerPersistence.setTIME(time);
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		communityAnswerPersistence.setUSERID(userPersistences.get(0).getUSERID());
+		CommunityAnswerHelper.addComment(communityAnswerPersistence);
 	}
 }

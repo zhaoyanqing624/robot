@@ -120,7 +120,7 @@
         
             <div class="notice-show-box">
                 <p class="notice-con ">
-                    你的提问<a target="_blank" href="/wenda/detail/338293">想学习框架，SSH好还是SSM好，新手</a>有新的回复
+                    你的提问<a target="_blank" href="/wenda/detail/338293">window补丁怎么下载</a>有新的回复
                 </p>
                 <h5 class="notice-date">2017-03-01 22:00:07</h5>
             </div>
@@ -140,7 +140,7 @@
         
             <div class="notice-show-box">
                 <p class="notice-con ">
-                    你的知识库：“<a target="_blank" href="/wenda/detail/338486">指针初始化的问题</a>” 有新的回复
+                    你的知识库：“<a target="_blank" href="/wenda/detail/338486">如何更新软件的问题</a>” 有新的回复
                 </p>
                 <h5 class="notice-date">2016-12-12 23:00:02</h5>
             </div>

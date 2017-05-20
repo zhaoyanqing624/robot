@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
@@ -61,6 +63,7 @@ public class CommentController {
 			jsonObject.put("url",url);
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
+			
 		}else{
 			jsonObject.put("value", "2");
 			jsonObject.put("url",url);
@@ -68,4 +71,31 @@ public class CommentController {
 			return result;
 		}
 	}
+	/*
+	 * zyq_question2_ajax_添加评论的回复
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveCommunityComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	public String saveCommunityComment(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail"); 
+		String questionId = request.getParameter("questionId");
+		String answerId = request.getParameter("answerId");
+		String content = request.getParameter("content");
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		//判断回复是否重复提交
+		List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment2(answerId, userPersistences.get(0).getUSERID(), content);
+		JSONObject jsonObject = new JSONObject();
+		if (commentPersistences.size()==0) {
+			CommentService.saveCommunityComment(userPersistences.get(0).getUSERID(), questionId, content, answerId);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+			
+		}else{
+			jsonObject.put("value", "2");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	
 }

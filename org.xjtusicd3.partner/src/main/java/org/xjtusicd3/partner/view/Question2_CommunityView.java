@@ -1,8 +1,12 @@
 package org.xjtusicd3.partner.view;
 
+
+import java.util.List;
+
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 
 public class Question2_CommunityView {
+	private String answerId;
 	private String answer;
 	private String userImage;
 	private String userName;
@@ -11,7 +15,33 @@ public class Question2_CommunityView {
 	private String totalLikes;
 	private String likesNumber;
 	private String communityNumber;
+	private String time;
+	private List<Question2_CommunityReplayView> replay;
 	
+	public List<Question2_CommunityReplayView> getReplay() {
+		return replay;
+	}
+
+	public void setReplay(List<Question2_CommunityReplayView> replay) {
+		this.replay = replay;
+	}
+
+	public String getAnswerId() {
+		return answerId;
+	}
+
+	public void setAnswerId(String answerId) {
+		this.answerId = answerId;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public String getAnswer() {
 		return answer;
 	}

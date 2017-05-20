@@ -18,5 +18,15 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	 */
 	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0}")
 	List<CommentPersistence> getComment(String faqquestionid);
+	/*
+	 * zyq_question2_查看评论
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE COMMUNITYQUESTIONID=#{0} AND COMMENTPARENTID=#{1} ORDER BY COMMENTTIME ASC")
+	List<CommentPersistence> question2_getComment(String questionid, String parentId);
+	/*
+	 * zyq_question2_查看回复
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} AND USERID=#{1} AND COMMENTCONTENT=#{2} ORDER BY COMMENTTIME ASC")
+	List<CommentPersistence> question2_getComment2(String answerId, String userId, String content);
 
 }

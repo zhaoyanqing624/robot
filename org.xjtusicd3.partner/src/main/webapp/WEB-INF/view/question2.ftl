@@ -73,7 +73,7 @@
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
 	            	<img src="images/logo.jpg" class="logo">
-	            	<span>小朵问题中心</span>
+	            	<span>IT运维智能化服务一体化平台——问题中心</span>
 	        	</a>
     		</div>
 		</div>
@@ -137,36 +137,61 @@
 			<div id="answer-ueditor" class="edui-default" style="width:645px;font-size:14px;display:none">
 				<script id="editor" name="content" type="text/plain"></script>
 			</div>
-			<div class="submitDiv" style="display:none"><button id="answerSubmit">提交</button></div>
+			<div class="submitDiv" style="display:none"><button id="answerSubmit" onclick="replyQuestion()">提交</button></div>
 		</div>
 		<ul id="searchResult">
-				<li>
-					<article class="answerArticle" data-answer-id="13786" data-answer-approval-id="" data-answerer-id="270369">
+				<#list answerList as answerList>
+				<li id="${answerList.answerId}">
+					<article class="answerArticle">
 						<div class="description">
 							<div class="answerer">
-								<img class="answerImg" src="new/front/images/avatar.jpg">
+								<img class="answerImg" src="${answerList.userImage}">
 								<div class="answer_name">
-									<a href="personal.html?userid=270369">
-										<span class="user_name">花开花独醉</span>
-											&nbsp;&nbsp;<span>盛年不重来，一日难再晨，及时当勉励，岁月不待人</span>
+									<a href="personal2.html?userid=270369">
+										<span class="user_name">${answerList.userName}</span>
+											&nbsp;&nbsp;<span>${answerList.signature}</span>
 									</a>
 								</div>
-								<span class="answer_time">4 天前</span>
-								<div><img src="images/bluepoint.png" class="bluepoint">贡献48个回答，获得24个赞</div>
+								<span class="answer_time">${answerList.time}</span>
+								<div><img src="images/bluepoint.png" class="bluepoint">贡献${answerList.totalAnswer}个回答，获得${answerList.totalLikes}个赞</div>
 							</div>
-							<div class="fullDetail"><p>在键盘上按win+numlock（或者Fn+numlock）键进行切换回来就行了，应该是你关闭了小键盘导致的。</p></div>
+							<div class="fullDetail"><p>${answerList.answer}</p></div>
 						</div>
 						<div class="options">
 							<ul>
-									<li class="special"><a data-fun="toVote" class="unVoted"><span class="status">点赞</span>  |  <span class="number">4</span></a></li>
-								<li><a data-fun="toComment"><span>评论 </span><span class="number">1</span></a></li>
-									<li><a data-fun="toSave"><span>收藏</span></a></li>
-								
-								
+								<li class="special"><a data-fun="toVote" class="unVoted"><span class="status">点赞</span>  |  <span class="number">${answerList.likesNumber}</span></a></li>
+								<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList.communityNumber}</span></a></li>
+								<li><a data-fun="toSave"><span>收藏</span></a></li>
 							</ul>
+						</div>
+					   <div class="comment" style="display:none">
+							<img class="deco" src="images/dia-deco.png" style="left:106px">
+							<div class="comment-outer">
+								<#list userList as userList>
+								<div class="comment-Editor">
+									<img class="userImg" src="${userList.AVATAR}">
+									<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
+									<button class="submitComment" onclick="saveComment()">评论</button>
+								</div>
+								</#list>
+								<ul class="commentList">
+								<#list answerList.replay as replay>
+									<li>
+										<img class="userImg" src="${replay.userImage}">
+										<div class="commentDetail">
+											<p class="userName">${replay.userName}</p>
+											<p class="content">${replay.community}</p>
+											<p class="commentTime">${replay.time}</p>
+										</div>
+									</li>
+								</#list>
+								</ul>
+								<a class="allComments">点击获取更多</a>
+							</div>
 						</div>
 					</article>
 				</li>
+				</#list>
 				<li>
 					<article class="answerArticle" data-answer-id="13786" data-answer-approval-id="" data-answerer-id="270369">
 						<div class="description">
@@ -364,6 +389,87 @@
 		document.getElementById('answer-ueditor').style.display="block";
 		document.getElementsByClassName('submitDiv')[0].style.display="block";
 	}
+	function replyQuestion(){
+		var content = UE.getEditor('editor').getContent();
+		var questionId = document.URL.split("=")[1];
+		var url = document.URL;
+		$.ajax({
+			type:"POST",
+			url:"/org.xjtusicd3.partner/saveReplyQuestion.html",
+			data:{
+				"content":content,
+				"questionId":questionId,
+				"url":url
+			},
+			dataType:"json",
+			success:function(data){
+				if(data.value=="0"){
+					self.location='login.html';
+				}else if(data.value=="1"){
+				setTimeout("location.reload()",1000)
+					document.getElementById('success').style.display='block';
+					setTimeout("codefans()",3000);
+					
+				}else{
+				setTimeout("location.reload()",1000)
+					document.getElementById('chongfu').style.display='block';
+					setTimeout("codefans2()",3000);
+				}
+			}
+		})
+	}
+	
+	function codefans(){
+		var box=document.getElementById("success");
+		box.style.display="none"; 
+	}
+	function codefans2(){
+		var box=document.getElementById("chongfu");
+		box.style.display="none"; 
+	}
+	
+	//展开评论
+	function getCommentList(){
+		if(event.target.parentNode.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].style.display=="block"){
+			event.target.parentNode.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].style.display="none";
+		}else{
+			event.target.parentNode.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].style.display="block";
+		}
+	}
+	//添加评论回复
+	function saveComment(){
+		var questionId = document.URL.split("=")[1];
+		var content = event.target.parentNode.parentNode.getElementsByClassName("comment-Editor-input")[0].value;
+		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+		$.ajax({
+			type:"POST",
+			url:"/org.xjtusicd3.partner/saveCommunityComment.html",
+			data:{
+				"questionId":questionId,
+				"content":content,
+				"answerId":answerId
+			},
+			dataType:"json",
+			success:function(data){
+				jsondata=$.parseJSON(data);
+				if(jsondata.value=="0"){
+					self.location='login.html';
+				}else if(jsondata.value=="1"){
+				setTimeout("location.reload()",1000)
+					document.getElementById('success').style.display='block';
+					setTimeout("codefans()",3000);
+					
+				}else{
+				setTimeout("location.reload()",1000)
+					document.getElementById('chongfu').style.display='block';
+					setTimeout("codefans2()",3000);
+				}
+			}
+		})
+	}
 </script> 
+		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">评论成功</h2></div></div>
+		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
+
 </body>
 </html>

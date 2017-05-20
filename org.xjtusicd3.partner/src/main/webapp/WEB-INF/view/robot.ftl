@@ -97,7 +97,7 @@
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
 	            	<img src="images/logo.jpg" class="logo">
-	            	<span>智能小朵</span>
+	            	<span>IT运维智能化服务一体化平台</span>
 	        	</a>
     		</div>
 		</div>

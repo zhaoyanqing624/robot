@@ -24,6 +24,15 @@ public class CommentService {
 		CommentHelper.saveComment(UUID.randomUUID().toString(),faqquestionid,null,userid,comment,time,"0");
 	}
 	/*
+	 * zyq_question2_ajax_添加评论的回复
+	 */
+	public static void saveCommunityComment(String userid,String communityquestionId,String comment,String answerId){
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String time = format.format(date);
+	    CommentHelper.saveComment(UUID.randomUUID().toString(), null, communityquestionId, userid, comment, time, answerId);
+	}
+	/*
 	 * zyq_faq3_获得评论列表
 	 */
 	public static List<Faq3_CommentView> faq3_comment(String questionId) {

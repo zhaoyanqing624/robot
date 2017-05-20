@@ -85,7 +85,7 @@
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
 	            	<img src="images/logo.jpg" class="logo">
-	            	<span>个人信息</span>
+	            	<span>设备信息</span>
 	        	</a>
     		</div>
 		</div>
