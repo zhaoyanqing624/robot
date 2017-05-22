@@ -63,11 +63,12 @@ public class CommunityController {
 			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(q);
 			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
 			List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews(communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
+			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(q);
 			mv.addObject("answerList", question2_CommunityViews);
 			mv.addObject("userList", userPersistences);
 			mv.addObject("questionList", communityQuestionPersistences);
 			mv.addObject("classifyName", classifyPersistences.get(0).getFAQCLASSIFYNAME());
-			
+			mv.addObject("communityNumber", communityAnswerPersistences.size());
 		}
 		return mv;
 	}

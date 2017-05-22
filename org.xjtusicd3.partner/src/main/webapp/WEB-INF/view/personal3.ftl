@@ -188,6 +188,6 @@
 	<script src="zhao/address/js/main.js"></script> 
 	<script type="text/javascript" src="zhao/data/jedate/jquery.jedate.js"></script>
 	<script type="text/javascript" src="zhao/data/jedate/data.js"></script>
-	<script type="text/javascript" src="js/my.js"></script> 
+	<script type="text/javascript" src="js/my.js"></script>
 </body>
 </html>

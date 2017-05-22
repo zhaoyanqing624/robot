@@ -119,7 +119,7 @@
 			</div>
 			</#list>
 		<div id="sort">
-			<h2>1个回答</h2>
+			<h2>${communityNumber}个回答</h2>
 			<select>
 				<option value="time">时间排序</option>
 				<option value="recommended">赞数排序</option>
@@ -186,39 +186,14 @@
 									</li>
 								</#list>
 								</ul>
-								<a class="allComments">点击获取更多</a>
+								<#if answerList.communityNumber?eval gt 5>
+								<a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a>
+								</#if>
 							</div>
 						</div>
 					</article>
 				</li>
 				</#list>
-				<li>
-					<article class="answerArticle" data-answer-id="13786" data-answer-approval-id="" data-answerer-id="270369">
-						<div class="description">
-							<div class="answerer">
-								<img class="answerImg" src="new/front/images/avatar.jpg">
-								<div class="answer_name">
-									<a href="personal.html?userid=270369">
-										<span class="user_name">花开花独醉</span>
-											&nbsp;&nbsp;<span>盛年不重来，一日难再晨，及时当勉励，岁月不待人</span>
-									</a>
-								</div>
-								<span class="answer_time">4 天前</span>
-								<div><img src="images/bluepoint.png" class="bluepoint">贡献48个回答，获得24个赞</div>
-							</div>
-							<div class="fullDetail"><p>在键盘上按win+numlock（或者Fn+numlock）键进行切换回来就行了，应该是你关闭了小键盘导致的。</p></div>
-						</div>
-						<div class="options">
-							<ul>
-									<li class="special"><a data-fun="toVote" class="unVoted"><span class="status">点赞</span>  |  <span class="number">4</span></a></li>
-								<li><a data-fun="toComment"><span>评论 </span><span class="number">1</span></a></li>
-									<li><a data-fun="toSave"><span>收藏</span></a></li>
-								
-								
-							</ul>
-						</div>
-					</article>
-				</li>
 		</ul>
 	</div>
 			
@@ -463,6 +438,32 @@
 				setTimeout("location.reload()",1000)
 					document.getElementById('chongfu').style.display='block';
 					setTimeout("codefans2()",3000);
+				}
+			}
+		})
+	}
+	//获取更多评论
+	function getMoreComment(){
+		var html = event.target.parentNode.getElementsByClassName("commentList")[0].innerHTML;
+		var startnumber = event.target.parentNode.getElementsByClassName("commentList")[0].getElementsByTagName("li").length;
+		var questionId = document.URL.split("=")[1];
+		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.id;
+		alert(answerId);
+		$.ajax({
+			type:"POST",
+			url:"/org.xjtusicd3.partner/getMoreComment.html",
+			data:{
+				"questionId":questionId,
+				"startnumber":startnumber,
+				"answerId":answerId
+			},
+			dataType:"json",
+			success:function(data){
+				jsondata=$.parseJSON(data);
+				if(jsondata.value=="0"){
+					self.location='login.html';
+				}else if(jsondata.value=="1"){
+					
 				}
 			}
 		})

@@ -20,7 +20,7 @@ import org.xjtusicd3.database.model.EquipmentPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.database.model.User_Equipment_HistoryPersistence;
 import org.xjtusicd3.partner.filter.LOCALMAC;
-import org.xjtusicd3.partner.filter.SystemDriver;
+import org.xjtusicd3.partner.filter.SystemDrivers;
 import org.xjtusicd3.partner.filter.SystemPatch;
 import org.xjtusicd3.partner.filter.SystemSigar;
 import org.xjtusicd3.partner.filter.SystemSoftware;
@@ -36,7 +36,7 @@ public class EquipmentService {
 		String macaddress = localmac.getMacAddress();
 		List<EquipmentPersistence> list = EquipmentHelper.getEquipmentList(macaddress);
 		//获取本机基本信息
-		SystemDriver systemDriver = new SystemDriver();
+		SystemDrivers systemDriver = new SystemDrivers();
 		String[] EquipmentModel = systemDriver.getEquipmentModel().split(",");
 		String equipmentmodel = EquipmentModel[0];
 		String equipmenttime = EquipmentModel[1];
@@ -338,10 +338,12 @@ public class EquipmentService {
 	/*
 	 * zyq_personal3_设备信息展示
 	 */
-	public static List<Personal3_EquipmentView> personal3_EquipmentView(String email){
+	public static List<Personal3_EquipmentView> personal3_EquipmentView(String email) throws UnknownHostException, SocketException{
+		LOCALMAC localmac = new LOCALMAC();
+		String macaddress = localmac.getMacAddress();
 		List<Personal3_EquipmentView> personal3_EquipmentViews = new ArrayList<Personal3_EquipmentView>();
 		List<UserPersistence> uList = UserHelper.getEmail(email);
-		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipmentByID(uList.get(0).getUSERID());
+		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipmentByID(macaddress);
 		for(CurrentEquipmentPersistence currentEquipmentPersistence:currentEquipmentPersistences){
 			List<Personal3_EquipmentConfigureView> personal3_EquipmentConfigureViews = new ArrayList<Personal3_EquipmentConfigureView>();
 			List<CurrentConfigurePersistence> configurePersistences = CurrentConfigureHelper.getCurrentConfigure(currentEquipmentPersistence.getEQUIPMENTID(),"补丁");
@@ -359,9 +361,7 @@ public class EquipmentService {
 			view.setPatchViews(personal3_EquipmentConfigureViews);
 			view.setSoftViews(personal3_EquipmentConfigureViews2);;
 			personal3_EquipmentViews.add(view);
-			
 		}
 		return personal3_EquipmentViews;
-		
 	}
 }

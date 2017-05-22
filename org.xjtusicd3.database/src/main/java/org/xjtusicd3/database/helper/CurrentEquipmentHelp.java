@@ -18,10 +18,10 @@ public class CurrentEquipmentHelp {
 		session.close();
 		return list;
 	}
-	public static List<CurrentEquipmentPersistence> currentEquipmentByID(String userid){
+	public static List<CurrentEquipmentPersistence> currentEquipmentByID(String macaddress){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
-		List<CurrentEquipmentPersistence> list = mapper.currentEquipmentByID(userid);
+		List<CurrentEquipmentPersistence> list = mapper.currentEquipmentByID(macaddress);
 		session.close();
 		return list;
 	}

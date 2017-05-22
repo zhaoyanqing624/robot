@@ -31,7 +31,7 @@ public class EquipmentController {
 		if (useremail==null) {
 			return "redirect:login.html";
 		}else {
-			EquipmentService.saveCurrentEquipment(useremail); 
+			EquipmentService.saveCurrentEquipment(useremail);
 		}
 		return null;
 	}
@@ -39,7 +39,7 @@ public class EquipmentController {
 	 * zyq_personal3_当前设备展示
 	 */
 	@RequestMapping(value="personal3",method=RequestMethod.GET)
-	public ModelAndView personal3(HttpSession session,HttpServletRequest request){
+	public ModelAndView personal3(HttpSession session,HttpServletRequest request) throws UnknownHostException, SocketException, SigarException{
 		String useremail = (String) session.getAttribute("UserEmail");
 		if (useremail==null) {
 			return new ModelAndView("login");

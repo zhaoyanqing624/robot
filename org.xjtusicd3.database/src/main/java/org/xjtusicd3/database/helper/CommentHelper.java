@@ -28,12 +28,22 @@ public class CommentHelper {
 		return list;
 	}
 	/*
-	 * zyq_question2_查看评论
+	 * zyq_question2_查看回复
 	 */
 	public static List<CommentPersistence> question2_getComment(String questionid,String parentId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
 		List<CommentPersistence> list = mapper.question2_getComment(questionid,parentId);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_question2_查看回复_前五条
+	 */
+	public static List<CommentPersistence> question2_getComment_Limit(String questionid,String parentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.question2_getComment_Limit(questionid,parentId);
 		session.close();
 		return list;
 	}
@@ -44,6 +54,16 @@ public class CommentHelper {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
 		List<CommentPersistence> list = mapper.question2_getComment2(answerId,userId,content);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_question2_获得更多的回复
+	 */
+	public static List<CommentPersistence> question2_getMoreComment(String questionId,String answerId,int startnumber){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.question2_getMoreComment(questionId,answerId,startnumber);
 		session.close();
 		return list;
 	}

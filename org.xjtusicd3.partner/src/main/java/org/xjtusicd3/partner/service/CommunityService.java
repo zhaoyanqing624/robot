@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
@@ -371,7 +370,8 @@ public class CommunityService {
 			question2_CommunityView.setTime(communityAnswerPersistence.getTIME());
 			
 			//查看评论数
-			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment(communityAnswerPersistence.getCOMMUNITYQUESTIONID(), communityAnswerPersistence.getCOMMUNITYANSWERID());
+			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment_Limit(communityAnswerPersistence.getCOMMUNITYQUESTIONID(), communityAnswerPersistence.getCOMMUNITYANSWERID());
+			List<CommentPersistence> commentPersistences2 = CommentHelper.question2_getComment(communityAnswerPersistence.getCOMMUNITYQUESTIONID(), communityAnswerPersistence.getCOMMUNITYANSWERID());
 			for(CommentPersistence commentPersistence:commentPersistences){
 				Question2_CommunityReplayView question2_CommunityReplayView = new Question2_CommunityReplayView();
 				List<UserPersistence> userPersistences2 = UserHelper.getEmail_id(commentPersistence.getUSERID());
@@ -381,7 +381,7 @@ public class CommunityService {
 				question2_CommunityReplayView.setCommunity(commentPersistence.getCOMMENTCONTENT());
 				question2_CommunityReplayViews.add(question2_CommunityReplayView);
 			}
-			String communityNumber = Integer.toString(commentPersistences.size());
+			String communityNumber = Integer.toString(commentPersistences2.size());
 			question2_CommunityView.setCommunityNumber(communityNumber);
 			question2_CommunityView.setLikesNumber(communityAnswerPersistence.getLIKES());
 			question2_CommunityView.setReplay(question2_CommunityReplayViews);
