@@ -72,7 +72,7 @@
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
 	            	<img src="images/logo.jpg" class="logo">
-	            	<span>小朵问题中心</span>
+	            	<span>IT运维智能化服务一体化平台——问题中心</span>
 	        	</a>
     		</div>
 		</div>
@@ -491,7 +491,6 @@
 					},
 					dataType:"json",
 					success:function(data){
-					alert(data);
 						jsondata=$.parseJSON(data);
 						if(jsondata.value=="0"){
 							self.location='login.html';
@@ -610,5 +609,6 @@
 		</script>
 		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">提交成功</h2></div></div>
 		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
+
 </body>
 </html>

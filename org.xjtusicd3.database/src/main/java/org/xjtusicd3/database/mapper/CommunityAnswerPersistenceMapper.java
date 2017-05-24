@@ -10,7 +10,7 @@ public interface CommunityAnswerPersistenceMapper extends IBaseDao<CommunityAnsw
 	/*
 	 * zyq_question_问题展示
 	 */
-	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} ORDER BY TIME DESC")
+	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} ORDER BY TIME ASC")
 	List<CommunityAnswerPersistence> question_CommunityAnswer(String communityquestionId);
 	/*
 	 * zyq_question_判断问题是否有最佳答案

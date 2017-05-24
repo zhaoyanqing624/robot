@@ -73,7 +73,7 @@
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
 	            	<img src="images/logo.jpg" class="logo">
-	            	<span>小朵知识库</span>
+	            	<span>IT运维智能化服务一体化平台——知识库</span>
 	        	</a>
     		</div>
 		</div>

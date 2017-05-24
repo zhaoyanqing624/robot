@@ -5,8 +5,8 @@ import java.util.List;
 import com.registry.RegistryKey;
 import com.registry.RegistryValue;
 
-public class SystemDriver {
-    	public static void main(String[] args) {
+public class SystemDrivers {
+//    	public static void main(String[] args) {
 //    		System.out.println(getCPU());
 //    		System.out.println(getEquipmentModel());
 //    		System.out.println(getGraphicCard());
@@ -15,9 +15,11 @@ public class SystemDriver {
 //    		System.out.println(getStorage());
 //    		getMotherBoard();
 //    		System.out.println(getMotherBoard());
-//    		getNetworkCard();
 //    		System.out.println(getOSID());
-System.out.println(getMotherBoard());
+//System.out.println(getMotherBoard());
+//		}
+		public static String teString(){
+			return "zhao";
 		}
     	public static String getCPU(){
         	//获取CPU名称

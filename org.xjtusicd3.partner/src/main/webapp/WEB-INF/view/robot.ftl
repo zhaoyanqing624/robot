@@ -72,7 +72,7 @@
 		                            <div class="top_icon"></div>
 		                            <ul class="ul_list">
 		                                <li><a href="personal.html">个人信息</a></li>
-		                                <li><a href="personal3.html">我的设备</a></li>
+		                                <li><a href="personal3.html" onclick="getCurrentEquipment()">我的设备</a></li>
 		                                <li><a href="personal2.html">我的主页</a></li>
 		                                <li><a href="notice.html">消息通知</a></li>
 		                            </ul>
@@ -97,7 +97,7 @@
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
 	            	<img src="images/logo.jpg" class="logo">
-	            	<span>智能小朵</span>
+	            	<span>IT运维智能化服务一体化平台</span>
 	        	</a>
     		</div>
 		</div>
@@ -310,6 +310,16 @@
 	});
 	</script>
 	<script type="text/javascript" src="js/chat.js"></script>
-	
+	<script>
+		function getCurrentEquipment(){
+			 $.ajax({
+			 type: "POST",
+			 url: "/org.xjtusicd3.partner/getCurrentEquipment.html",            
+			 dataType: "json",
+			 success: function(data){
+			      }
+			 })
+		}
+	</script>
 </body>
 </html>

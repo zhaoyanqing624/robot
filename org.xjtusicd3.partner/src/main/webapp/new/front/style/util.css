@@ -64,7 +64,7 @@
 }
 .queryBox .text {
     float: left;
-    width: 430px;
+    width: 337px;
     height: 30px;
     padding: 0 10px;
     border: 1px solid #b9b9b9;
@@ -86,7 +86,7 @@ a.logoCon {
 }
 a.logoCon .logo {
     float: left;
-    width: 165px;
+    width: 210px;
     height: 130px;
 }
 a.logoCon span {
