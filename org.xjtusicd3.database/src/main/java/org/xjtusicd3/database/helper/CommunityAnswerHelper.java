@@ -19,6 +19,26 @@ public class CommunityAnswerHelper{
 		return list;
 	}
 	/*
+	 * zyq_question_问题展示_best
+	 */
+	public static List<CommunityAnswerPersistence> question_CommunityAnswer_best(String communityquestionId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		List<CommunityAnswerPersistence> list = mapper.question_CommunityAnswer_best(communityquestionId);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_question_问题展示_other	
+	 */
+	public static List<CommunityAnswerPersistence> question_CommunityAnswer_other(String communityquestionId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		List<CommunityAnswerPersistence> list = mapper.question_CommunityAnswer_other(communityquestionId);
+		session.close();
+		return list;
+	}
+	/*
 	 * zyq_question_判断问题是否有最佳答案
 	 */
 	public static List<CommunityAnswerPersistence> question_iscurrentAnswer(String questionid,int isbest){
@@ -28,16 +48,7 @@ public class CommunityAnswerHelper{
 		session.close();
 		return list;
 	}
-	/*
-	 * zyq_question_获取用户点赞数量
-	 */
-	public static int likesNumber(){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
-		int likesNumber = mapper.likesNumber();
-		session.close();
-		return likesNumber;
-	}
+
 	/*
 	 * zyq_question_获取用户点评论数
 	 */
@@ -66,5 +77,32 @@ public class CommunityAnswerHelper{
 		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
 		mapper.save(communityAnswerPersistence);
 		session.close();
+	}
+	//查看用户被点赞数量
+	public static List<CommunityAnswerPersistence> getCommunityAnswerLike(String userId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		List<CommunityAnswerPersistence> list = mapper.getCommunityAnswerLike(userId);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_question2_ajax_设置为最佳答案
+	 */
+	public static void saveBestAnswer(String answerId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		mapper.saveBestAnswer(answerId);
+		session.close();
+	}
+	/*
+	 * zyq_question_问题展示_byAnswerID
+	 */
+	public static List<CommunityAnswerPersistence> question_CommunityAnswerId(String communityanswerId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		List<CommunityAnswerPersistence> list = mapper.question_CommunityAnswerId(communityanswerId);
+		session.close();
+		return list;
 	}
 }

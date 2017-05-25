@@ -9,11 +9,11 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
-    <link rel="stylesheet" type="text/css" href="new/front/style/utilDetails.css" />
     <link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/body.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="new/front/style/utilDetails.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/header.js"></script>
@@ -102,8 +102,8 @@
 				<!-- 问题查询列表 -->
 				<ul id="searchResult">
 					<#list communityViews as communityViews>
-					<li>
-						<article id="${communityViews.communityId}_">
+					<li id="${communityViews.communityId}_">
+						<article >
 							<div class="tag">
 								<ul>
 									<li>${communityViews.classifyName}</li>
@@ -149,9 +149,14 @@
 							</div>
 							<div class="options">
 								<ul>
-									<li class="special"><a data-fun="toVote" class="unVoted fm_ele" fm-type="button" fm-name="answer_vote" fm-operation="click" fm-zoon="option_area"><span class="status">点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a></li>
+									<li class="special">
+										<#if communityViews.isLike="0">
+										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
+										<#else>
+										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
+										</#if>
+									</li>
 									<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">${communityViews.communityNumber}</span></a></li>
-									<li><a data-fun="toSave" class="fm_ele" fm-type="button" fm-name="answer_favorite" fm-operation="click" fm-zoon="option_area"><span>收藏</span></a></li>
 									<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
 								</ul>
 							</div>
@@ -174,7 +179,7 @@
 							</div>
 							<div class="options">
 								<ul>
-									<li class="special"><a onclick="create_edit(this)" class="unFocused fm_ele" ><span class="status" id="${communityViews.communityId}">回答</span></a></li>
+									<li class="special"><a onclick="create_edit()" class="unFocused fm_ele" ><span class="status" id="${communityViews.communityId}">回答</span></a></li>
 									<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">${communityViews.communityNumber}</span></a></li>
 									<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
 								</ul>
@@ -188,7 +193,7 @@
 				
 				<div id="loadStatus">
 					<div id="loading" class="">
-						<span>加载中</span>
+						<span>点击查看更多</span>
 						<div class="spinner">
   							<div class="bounce1"></div>
   							<div class="bounce2"></div>
@@ -239,46 +244,12 @@
 				<h1 id="desH">添加问题的详细描述</h1>					
 				<script id="editor" type="text/plain" style="width:650px;height:300px;margin-left:34px;margin-top:20px;"></script>
 			<button id="toStep2">下一步</button>				</div>				<div id="tag-s" class="hidden">					<a href="javascript:" id="close"></a>					<h1 id="tagH">添加标签</h1>					<h2>可选</h2>					<p id="titP">“asfdsdafa”</p>					<ul id="systemTag">
+			<#list classifyList as classifyList>
 			<li>
-				<input type="checkbox" name="category_id" value="1" data-text="个人电脑">
-				<label>个人电脑</label>
+				<input type="checkbox" name="category_id" value="${classifyList.FAQCLASSIFYID}">
+				<label>${classifyList.FAQCLASSIFYNAME}</label>
 			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="2" data-text="智能手机">
-				<label>智能手机</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="3" data-text="平板电脑">
-				<label>平板电脑</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="4" data-text="网络安全">
-				<label>网络安全</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="5" data-text="影音数码">
-				<label>影音数码</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="6" data-text="硬件外设">
-				<label>硬件外设</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="7" data-text="操作系统">
-				<label>操作系统</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="8" data-text="智能设备">
-				<label>智能设备</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="9" data-text="评测选购">
-				<label>评测选购</label>
-			</li>
-			<li>
-				<input type="checkbox" name="category_id" value="10" data-text="应用软件">
-				<label>应用软件</label>
-			</li>
+			</#list>
 		</ul>					
 		<ul id="customTag"></ul>					
 		<div></div>					
@@ -450,13 +421,13 @@
 					}
 				})
 			}
-			function create_edit(obj){
+			function create_edit(){
 				var a = document.getElementById(event.target.id+"_");
 				if(document.getElementById('userNameText')==null){
 					self.location='login.html';
 				}else{
-					if(a.lastChild.id=="addcomment"){
-						a.lastChild.remove();
+					if(a.children[0].lastChild.id=="addcomment"){
+						a.children[0].lastChild.remove();
 					}else{
 						var b = document.getElementById('userNameText').textContent;
 						$.ajax({
@@ -471,7 +442,7 @@
 								var oDiv = document.createElement('div');
 								oDiv.setAttribute("id","addcomment");
 		    					oDiv.innerHTML  = '<div class="comment"><img class="deco" src="images/dia-deco.png"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="'+jsondata[0].aVATAR+'"><input id="input_'+a.id.replace(/_/,"")+'" class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="addComment()" id="button_'+a.id.replace(/_/,"")+'">评论</button></div><ul class="commentList"></ul></div></div>';
-		    					a.appendChild(oDiv);
+		    					a.children[0].appendChild(oDiv);
 							}
 						})
 					}
@@ -606,6 +577,80 @@
 					$('.wrapper-dropdown-3').removeClass('active');
 				});
 			});
+			
+			$('#loading').click(function() {
+				var startnumber = document.getElementById("searchResult").childElementCount;
+				var type = document.URL.split("type=")[1];
+				var c = document.URL.split("c=")[1].split("&")[0];
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getMoreCommunity.html",
+					data:{
+						"startnumber":startnumber,
+						"type":type,
+						"c":c
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							for(var i in data.communityViews){
+								if(data.communityViews[i].userId!=null){
+									if(data.communityViews[i].answer.length>100){
+										var htmls = document.getElementById("searchResult").innerHTML;
+										document.getElementById("searchResult").innerHTML = htmls+ '<li id="'+data.communityViews[i].communityId+'_'+'"><article ><div class="tag"><ul><li>'+data.communityViews[i].classifyName+'</li><li class="type">回答</li></ul><div class="time"><p>'+data.communityViews[i].time+'</p></div></div><div class="title"><h2><a href="question2.html?q='+data.communityViews[i].communityId+'">'+data.communityViews[i].communityTitle+'</a></h2></div><div class="description"><div class="answerer" data-id="270369"><img class="answerImg" src="'+data.communityViews[i].userImage+'"><div><a href=""><span class="user_name">'+data.communityViews[i].userName+'</span>&nbsp;&nbsp;<span>'+data.communityViews[i].signature+'</span></a></div><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.communityViews[i].totalCommunityNumber+'个回答，获得'+data.communityViews[i].totalLikesNumber+'个赞</div></div><div class="detail"><div class="detailP">'+data.communityViews[i].answer.substr(0,100)+'......'+'<span class="readMore">查看更多</span></div></div><div class="fullDetail hidden"><p>'+data.communityViews[i].answer+'</p></div></div><div class="options"><ul><li class="special"><a  class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">'+data.communityViews[i].likesNumber+'</span></a></li><li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">'+data.communityViews[i].communityNumber+'</span></a></li><span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span></ul></div></article></li>';
+									}else{
+										var htmls = document.getElementById("searchResult").innerHTML;
+										document.getElementById("searchResult").innerHTML = htmls+ '<li id="'+data.communityViews[i].communityId+'_'+'"><article ><div class="tag"><ul><li>'+data.communityViews[i].classifyName+'</li><li class="type">回答</li></ul><div class="time"><p>'+data.communityViews[i].time+'</p></div></div><div class="title"><h2><a href="question2.html?q='+data.communityViews[i].communityId+'">'+data.communityViews[i].communityTitle+'</a></h2></div><div class="description"><div class="detail"><div class="detailP">'+data.communityViews[i].answer+'</div></div><div class="fullDetail hidden"><p>'+data.communityViews[i].answer+'</p></div></div><div class="options"><ul><li class="special"><a  class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">'+data.communityViews[i].likesNumber+'</span></a></li><li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">'+data.communityViews[i].communityNumber+'</span></a></li><span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span></ul></div></article></li>';
+									}
+								}else{
+									if(data.communityViews[i].communityQuestion>100){
+										var htmls = document.getElementById("searchResult").innerHTML;
+										document.getElementById("searchResult").innerHTML = htmls+ '<li id="'+data.communityViews[i].communityId+'_'+'"><article ><div class="tag"><ul><li>'+data.communityViews[i].classifyName+'</li><li class="type">回答</li></ul><div class="time"><p>'+data.communityViews[i].time+'</p></div></div><div class="title"><h2><a href="question2.html?q='+data.communityViews[i].communityId+'">'+data.communityViews[i].communityTitle+'</a></h2></div><div class="description"><div class="detail"><div class="detailP">'+data.communityViews[i].communityQuestion.substr(0,100)+'......'+'<span class="readMore">查看更多</span></div></div><div class="fullDetail hidden"><p>'+data.communityViews[i].communityQuestion+'</p></div></div><div class="options"><ul><li class="special"><a onclick="create_edit(this)" class="unFocused fm_ele" ><span class="status" id="'+data.communityViews[i].communityId+'">回答</span></a></li><li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">'+communityViews.communityNumber+'</span></a></li><span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span></ul></div></article></li>';										
+									}else{
+										var htmls = document.getElementById("searchResult").innerHTML;
+										document.getElementById("searchResult").innerHTML = htmls+ '<li id="'+data.communityViews[i].communityId+'_'+'"><article ><div class="tag"><ul><li>'+data.communityViews[i].classifyName+'</li><li class="type">回答</li></ul><div class="time"><p>'+data.communityViews[i].time+'</p></div></div><div class="title"><h2><a href="question2.html?q='+data.communityViews[i].communityId+'">'+data.communityViews[i].communityTitle+'</a></h2></div><div class="description"><div class="detail"><div class="detailP">'+data.communityViews[i].communityQuestion+'</div></div><div class="fullDetail hidden"><p>'+data.communityViews[i].communityQuestion+'</p></div></div><div class="options"><ul><li class="special"><a onclick="create_edit(this)" class="unFocused fm_ele" ><span class="status" id="'+data.communityViews[i].communityId+'">回答</span></a></li><li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">'+data.communityViews[i].communityNumber+'</span></a></li><span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span></ul></div></article></li>';	
+									}
+								}
+							}
+							if(data.endnumber<data.totalnumber){
+								startnumber = data.endnumber;
+							}else{
+								document.getElementById("loading").remove();
+							}
+						}
+					}
+				})
+			});
+	//点赞
+	function getAgreeAnswer(){
+		var questionid = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+		var questionId = questionid.replace(/_/,"")
+		if(questionid!="searchResult"){
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveAgreeAnswer2.html",
+				data:{
+					"questionId":questionId
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementById(questionid).getElementsByClassName("status")[0].innerHTML="已点赞";
+						var number = parseInt(document.getElementById(questionid).getElementsByClassName("number")[0].innerHTML);
+						document.getElementById(questionid).getElementsByClassName("number")[0].innerHTML = number+1;
+					}else if(data.value=="2"){
+						document.getElementById(questionid).getElementsByClassName("status")[0].innerHTML="点赞";
+						var number = parseInt(document.getElementById(questionid).getElementsByClassName("number")[0].innerHTML);
+						document.getElementById(questionid).getElementsByClassName("number")[0].innerHTML = number-1;
+					}
+				}
+			})
+		}
+	}
 		</script>
 		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">提交成功</h2></div></div>
 		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>

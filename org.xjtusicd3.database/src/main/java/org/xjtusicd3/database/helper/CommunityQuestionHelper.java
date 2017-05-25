@@ -11,10 +11,10 @@ public class CommunityQuestionHelper{
 	/*
 	 * zyq_ajax_question的增加
 	 */
-	public static void saveCommunityQuestion(String id,String time,String title,String content,String classifyid,String userid,String collection,String scan,String userquestionid,int isanswer){
+	public static void saveCommunityQuestion(String id,String time,String title,String content,String classifyid,String userid,String scan,String userquestionid,int isanswer){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
-		mapper.saveCommunityQuestion(id,time,title,content,classifyid,userid,collection,scan,userquestionid,0);
+		mapper.saveCommunityQuestion(id,time,title,content,classifyid,userid,scan,userquestionid,isanswer);
 		session.close();
 	}
 	/*
@@ -47,10 +47,10 @@ public class CommunityQuestionHelper{
 	/*
 	 * zyq_question_问题展示_根据是否有答案
 	 */
-	public static List<CommunityQuestionPersistence> question_getCommunity_isanswer(){
+	public static List<CommunityQuestionPersistence> question_getCommunity_isanswer(int startnumber){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
-		List<CommunityQuestionPersistence> list = mapper.question_getCommunity_isanswer();
+		List<CommunityQuestionPersistence> list = mapper.question_getCommunity_isanswer(startnumber);
 		session.close();
 		return list;
 	}

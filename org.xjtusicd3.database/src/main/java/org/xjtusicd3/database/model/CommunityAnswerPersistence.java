@@ -14,8 +14,6 @@ public class CommunityAnswerPersistence{
 	private String TIME;
 	@TableField(columnName="CONTENT")
 	private String CONTENT;
-	@TableField(columnName="LIKES")
-	private String LIKES;
 	@TableField(columnName="ISBESTANSWER")
 	private int ISBESTANSWER;
 	@TableField(columnName="COMMUNITYQUESTIONID")
@@ -41,12 +39,6 @@ public class CommunityAnswerPersistence{
 	}
 	public void setCONTENT(String cONTENT) {
 		CONTENT = cONTENT;
-	}
-	public String getLIKES() {
-		return LIKES;
-	}
-	public void setLIKES(String lIKES) {
-		LIKES = lIKES;
 	}
 	public int getISBESTANSWER() {
 		return ISBESTANSWER;

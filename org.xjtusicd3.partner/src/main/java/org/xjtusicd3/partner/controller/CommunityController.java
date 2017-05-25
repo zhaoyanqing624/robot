@@ -32,9 +32,10 @@ public class CommunityController {
 	 * zyq_question_右侧类别
 	 */
 	@RequestMapping(value="question",method=RequestMethod.GET)
-	public ModelAndView question(String c,String type,HttpServletRequest request){
-		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.community_classify();
-		List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(type,c);
+	public ModelAndView question(String c,String type,HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
+		List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(useremail,0,type,c);
 		ModelAndView mv = new ModelAndView("question");
 		mv.addObject("classifyList", classifyPersistences);
 		mv.addObject("communityViews", question_CommunityViews);
@@ -50,6 +51,43 @@ public class CommunityController {
 		return mv;
 	}
 	/*
+	 * zyq_question_ajax_获取更多问题
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getMoreCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getMoreCommunity(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
+		String type = request.getParameter("type");
+		String c = request.getParameter("c");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(useremail,startnumber,type,c);
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.question_ClassifyListByName(c, "0");
+			List<CommunityQuestionPersistence> communityQuestionPersistences = null;
+			if (type=="all") {
+				communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity(classifyPersistences.get(0).getFAQCLASSIFYID());
+				jsonObject.put("totalnumber", communityQuestionPersistences.size());
+			}else if (type=="1") {
+				communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2(classifyPersistences.get(0).getFAQCLASSIFYID(), 1);
+				jsonObject.put("totalnumber", communityQuestionPersistences.size());
+			}else if (type=="0") {
+				communityQuestionPersistences = CommunityQuestionHelper.question_getCommunity2(classifyPersistences.get(0).getFAQCLASSIFYID(), 0);
+				jsonObject.put("totalnumber", communityQuestionPersistences.size());
+			}
+			jsonObject.put("value", "1");
+			jsonObject.put("endnumber", startnumber+question_CommunityViews.size());
+			jsonObject.put("communityViews", question_CommunityViews);
+			String result = JsonUtil.toJsonString(jsonObject); 
+			System.out.println(result);
+			return result;
+		}
+	}
+	/*
 	 * zyq_question2_问题内容展示
 	 */
 	@RequestMapping(value="question2",method=RequestMethod.GET)
@@ -62,16 +100,21 @@ public class CommunityController {
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
 			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(q);
 			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
-			List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews(communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
+			List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews_best(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
+			List<Question2_CommunityView> question2_CommunityViews2 = CommunityService.question2_CommunityViews_other(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
 			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(q);
-			mv.addObject("answerList", question2_CommunityViews);
+			mv.addObject("answerList_best", question2_CommunityViews);
+			mv.addObject("answerList_other", question2_CommunityViews2);
 			mv.addObject("userList", userPersistences);
 			mv.addObject("questionList", communityQuestionPersistences);
 			mv.addObject("classifyName", classifyPersistences.get(0).getFAQCLASSIFYNAME());
 			mv.addObject("communityNumber", communityAnswerPersistences.size());
+			mv.addObject("userid", userPersistences.get(0).getUSERID());
+			mv.addObject("_userid", communityQuestionPersistences.get(0).getUSERID());
 		}
 		return mv;
 	}
+	
 	/*
 	 * zyq_ajax_question的增加
 	 */
@@ -88,13 +131,13 @@ public class CommunityController {
 		}else {
 			String title = request.getParameter("title");
 			String content = request.getParameter("description");
-			String classifynumber = request.getParameter("check_val");
+			String classifyId = request.getParameter("check_val");
 			
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
 			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_iscurrent(userPersistences.get(0).getUSERID(), title);
 
 			if (communityQuestionPersistences.size()==0) {
-				CommunityService.savaCommunityQuestion(useremail, title, content, classifynumber);
+				CommunityService.savaCommunityQuestion(useremail, title, content, classifyId);
 				jsonObject.put("value", "1");
 				jsonObject.put("url",url);
 				String result = JsonUtil.toJsonString(jsonObject); 
