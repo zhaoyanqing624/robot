@@ -20,7 +20,7 @@
 		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
 	
-<!--SPring MVC 主要的Sevlet -->
+	<!--SPring MVC 主要的Sevlet -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -35,5 +35,17 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
-
+	
+	
+	 <!-- pushlet -->  
+	 <servlet>  
+	    <servlet-name>pushlet</servlet-name>  
+	    <servlet-class>nl.justobjects.pushlet.servlet.Pushlet</servlet-class>  
+	    <load-on-startup>1</load-on-startup>  
+	</servlet>  
+	<servlet-mapping>  
+	    <servlet-name>pushlet</servlet-name>  
+	    <url-pattern>/pushlet.srv</url-pattern>  
+	</servlet-mapping> 
+	
 </web-app>

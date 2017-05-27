@@ -18,9 +18,9 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("test");
 		return mv;
 	}
-	@RequestMapping(value="test2",method=RequestMethod.GET)
-	public ModelAndView test2(){
-		ModelAndView mv = new ModelAndView("test2");
+	@RequestMapping(value="push",method=RequestMethod.GET)
+	public ModelAndView push(){
+		ModelAndView mv = new ModelAndView("push");
 		return mv;
 	}
 	@RequestMapping(value="index",method=RequestMethod.GET)

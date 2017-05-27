@@ -14,6 +14,22 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/css.css" rel="stylesheet">
     <link rel="stylesheet" href="css/all.css">
+    <script src="js/ajax-pushlet-client.js"></script>
+    <script type="text/javascript">
+    	PL.parameters.push('uid');
+    	PL.parameters.push('77528570@qq.com');  
+		PL._init();     
+		PL.joinListen('/mipc/he');  
+		function onData(event) {  
+		    
+		    if(event.get("mess")=="1"){  
+				alert("有新的消息");  
+		    }  
+		  
+		    // 离开    
+		    // PL.leave();    
+		}   
+	</script> 
 </head>
 <body>
 	<div class="header" id="head">      

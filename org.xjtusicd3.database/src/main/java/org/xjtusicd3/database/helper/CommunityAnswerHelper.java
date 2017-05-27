@@ -105,4 +105,14 @@ public class CommunityAnswerHelper{
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_notice_查看评论是否通知
+	 */
+	public static List<CommunityAnswerPersistence> notice_ByUserId(String userid,int isnotice){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		List<CommunityAnswerPersistence> list = mapper.notice_ByUserId(userid,isnotice);
+		session.close();
+		return list;
+	}
 }
