@@ -352,3 +352,36 @@ article .options ul li a {
 #backToAnswerP {
 	bottom: 50px
 }
+.iknow-qb_home_icons {
+    font-family: iknow-qb_home_icons!important;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    outline: 0;
+}
+.answer-best {
+    width: 21px;
+    height: 28px;
+    display: -moz-inline-box;
+    -moz-box-orient: vertical;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    color: #4ACA5D;
+    font-size: 28px;
+    zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe68f;' );
+}
+.answer-title {
+    margin-top: 2px;
+    height: 26px;
+    font-size: 22px;
+    color: #35b558;
+    font-weight: 100;
+}
+.answer-title {
+    font-weight: 400;
+}

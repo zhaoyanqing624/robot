@@ -3,6 +3,7 @@ package org.xjtusicd3.database.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 
@@ -12,16 +13,23 @@ public interface CommunityAnswerPersistenceMapper extends IBaseDao<CommunityAnsw
 	 */
 	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} ORDER BY TIME ASC")
 	List<CommunityAnswerPersistence> question_CommunityAnswer(String communityquestionId);
+	
+	/*
+	 * zyq_question_问题展示_best
+	 */
+	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} AND ISBESTANSWER='1' ORDER BY TIME ASC")
+	List<CommunityAnswerPersistence> question_CommunityAnswer_best(String communityquestionId);
+	/*
+	 * zyq_question_问题展示_other
+	 */
+	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} AND ISBESTANSWER='0' ORDER BY TIME ASC")
+	List<CommunityAnswerPersistence> question_CommunityAnswer_other(String communityquestionId);
 	/*
 	 * zyq_question_判断问题是否有最佳答案
 	 */
 	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} AND ISBESTANSWER=#{1}")
 	List<CommunityAnswerPersistence> question_iscurrentAnswer(String questionid,int isbest);
-	/*
-	 * zyq_question_获取用户点赞数量
-	 */
-	@Select("SELECT SUM(TBL_CommunityAnswer.LIKES) FROM TBL_CommunityAnswer")
-	int likesNumber();
+
 	/*
 	 * zyq_question_获取用户点评论数
 	 */
@@ -32,5 +40,18 @@ public interface CommunityAnswerPersistenceMapper extends IBaseDao<CommunityAnsw
 	 */
 	@Select("SELECT * FROM TBL_CommunityAnswer WHERE USERID=#{0} AND CONTENT=#{1} AND COMMUNITYQUESTIONID=#{2}")
 	List<CommunityAnswerPersistence> question_IsCommunityAnswer(String userid, String content,String questionId);
+	//查看用户被点赞数量
+	@Select("SELECT * FROM TBL_CommunityAnswer,TBL_Agree WHERE TBL_CommunityAnswer.COMMUNITYANSWERID=TBL_Agree.COMMUNITYANSWERID AND TBL_CommunityAnswer.USERID=#{0}")
+	List<CommunityAnswerPersistence> getCommunityAnswerLike(String userId);
+	/*
+	 * zyq_question2_ajax_设置为最佳答案
+	 */
+	@Update("UPDATE TBL_CommunityAnswer SET ISBESTANSWER='1' WHERE COMMUNITYANSWERID=#{0}")
+	void saveBestAnswer(String answerId);
+	/*
+	 * zyq_question_问题展示_byAnswerID
+	 */
+	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYANSWERID=#{0}")
+	List<CommunityAnswerPersistence> question_CommunityAnswerId(String communityanswerId);
 	
 }

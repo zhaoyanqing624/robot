@@ -19,7 +19,15 @@ public class Question_CommunityView {
 	private String totalCommunityNumber;
 	private String totalLikesNumber;
 	
+	private String isLike;//判断是否点赞
 	
+	
+	public String getIsLike() {
+		return isLike;
+	}
+	public void setIsLike(String isLike) {
+		this.isLike = isLike;
+	}
 	public String getClassifyName() {
 		return classifyName;
 	}

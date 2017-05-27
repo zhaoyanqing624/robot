@@ -140,60 +140,288 @@
 			<div class="submitDiv" style="display:none"><button id="answerSubmit" onclick="replyQuestion()">提交</button></div>
 		</div>
 		<ul id="searchResult">
-				<#list answerList as answerList>
-				<li id="${answerList.answerId}">
-					<article class="answerArticle">
-						<div class="description">
-							<div class="answerer">
-								<img class="answerImg" src="${answerList.userImage}">
-								<div class="answer_name">
-									<a href="personal2.html?userid=270369">
-										<span class="user_name">${answerList.userName}</span>
-											&nbsp;&nbsp;<span>${answerList.signature}</span>
-									</a>
+				<#if answerList_best?size gt 2>
+					<#list answerList_best as answerList_best>
+					<li id="${answerList_best.answerId}">
+						<article class="answerArticle">
+							<#if answerList_best.isBestAnswer=="1">
+							<div class="hd line ">
+								<div id="act-link-banner-wp" class="grid-r">
+									<span class="iknow-qb_home_icons answer-type answer-best grid "><img src="images/best.png"/></span>
+									<span class="answer-title h2 grid">最佳答案</span>
 								</div>
-								<span class="answer_time">${answerList.time}</span>
-								<div><img src="images/bluepoint.png" class="bluepoint">贡献${answerList.totalAnswer}个回答，获得${answerList.totalLikes}个赞</div>
 							</div>
-							<div class="fullDetail"><p>${answerList.answer}</p></div>
-						</div>
-						<div class="options">
-							<ul>
-								<li class="special"><a data-fun="toVote" class="unVoted"><span class="status">点赞</span>  |  <span class="number">${answerList.likesNumber}</span></a></li>
-								<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList.communityNumber}</span></a></li>
-								<li><a data-fun="toSave"><span>收藏</span></a></li>
-							</ul>
-						</div>
-					   <div class="comment" style="display:none">
-							<img class="deco" src="images/dia-deco.png" style="left:106px">
-							<div class="comment-outer">
-								<#list userList as userList>
-								<div class="comment-Editor">
-									<img class="userImg" src="${userList.AVATAR}">
-									<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
-									<button class="submitComment" onclick="saveComment()">评论</button>
+							</#if>
+							<div class="description">
+								<div class="answerer">
+									<img class="answerImg" src="${answerList_best.userImage}">
+									<div class="answer_name">
+										<a href="personal2.html?userid=270369">
+											<span class="user_name">${answerList_best.userName}</span>
+												&nbsp;&nbsp;<span>${answerList_best.signature}</span>
+										</a>
+									</div>
+									<span class="answer_time">${answerList_best.time}</span>
+									<div><img src="images/bluepoint.png" class="bluepoint">贡献${answerList_best.totalAnswer}个回答，获得${answerList_best.totalLikes}个赞</div>
 								</div>
-								</#list>
-								<ul class="commentList">
-								<#list answerList.replay as replay>
-									<li>
-										<img class="userImg" src="${replay.userImage}">
-										<div class="commentDetail">
-											<p class="userName">${replay.userName}</p>
-											<p class="content">${replay.community}</p>
-											<p class="commentTime">${replay.time}</p>
-										</div>
+								<div class="fullDetail"><p>${answerList_best.answer}</p></div>
+							</div>
+							<div class="options">
+								<ul>
+									<li class="special">
+										<#if answerList_best.isLike="0">
+										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${answerList_best.likesNumber}</span></a>
+										<#else>
+										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${answerList_best.likesNumber}</span></a>
+										</#if>
 									</li>
-								</#list>
+									<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_best.communityNumber}</span></a></li>
+									<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
 								</ul>
-								<#if answerList.communityNumber?eval gt 5>
-								<a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a>
-								</#if>
 							</div>
-						</div>
-					</article>
-				</li>
-				</#list>
+						   <div class="comment" style="display:none">
+								<img class="deco" src="images/dia-deco.png" style="left:106px">
+								<div class="comment-outer">
+									<#list userList as userList>
+									<div class="comment-Editor">
+										<img class="userImg" src="${userList.AVATAR}">
+										<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
+										<button class="submitComment" onclick="saveComment()">评论</button>
+									</div>
+									</#list>
+									<ul class="commentList">
+									<#list answerList_best.replay as replay>
+										<li>
+											<img class="userImg" src="${replay.userImage}">
+											<div class="commentDetail">
+												<p class="userName">${replay.userName}</p>
+												<p class="content">${replay.community}</p>
+												<p class="commentTime">${replay.time}</p>
+											</div>
+										</li>
+									</#list>
+									</ul>
+									<#if answerList_best.communityNumber?eval gt 5>
+									<a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a>
+									</#if>
+								</div>
+							</div>
+						</article>
+					</li>
+					</#list>
+					
+					<#list answerList_other as answerList_other>
+					<li id="${answerList_other.answerId}">
+						<article class="answerArticle">
+							<#if answerList_other.isBestAnswer=="1">
+							<div class="hd line ">
+								<div id="act-link-banner-wp" class="grid-r">
+									<span class="iknow-qb_home_icons answer-type answer-best grid "><img src="images/best.png"/></span>
+									<span class="answer-title h2 grid">最佳答案</span>
+								</div>
+							</div>
+							</#if>
+							<div class="description">
+								<div class="answerer">
+									<img class="answerImg" src="${answerList_other.userImage}">
+									<div class="answer_name">
+										<a href="personal2.html?userid=270369">
+											<span class="user_name">${answerList_other.userName}</span>
+												&nbsp;&nbsp;<span>${answerList_other.signature}</span>
+										</a>
+									</div>
+									<span class="answer_time">${answerList_other.time}</span>
+									<div><img src="images/bluepoint.png" class="bluepoint">贡献${answerList_other.totalAnswer}个回答，获得${answerList_other.totalLikes}个赞</div>
+								</div>
+								<div class="fullDetail"><p>${answerList_other.answer}</p></div>
+							</div>
+							<div class="options">
+								<ul>
+									<li class="special">
+										<#if answerList_other.isLike="0">
+										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
+										<#else>
+										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
+										</#if>
+									</li>
+									<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_other.communityNumber}</span></a></li>
+									<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
+								</ul>
+							</div>
+						   <div class="comment" style="display:none">
+								<img class="deco" src="images/dia-deco.png" style="left:106px">
+								<div class="comment-outer">
+									<#list userList as userList>
+									<div class="comment-Editor">
+										<img class="userImg" src="${userList.AVATAR}">
+										<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
+										<button class="submitComment" onclick="saveComment()">评论</button>
+									</div>
+									</#list>
+									<ul class="commentList">
+									<#list answerList_other.replay as replay>
+										<li>
+											<img class="userImg" src="${replay.userImage}">
+											<div class="commentDetail">
+												<p class="userName">${replay.userName}</p>
+												<p class="content">${replay.community}</p>
+												<p class="commentTime">${replay.time}</p>
+											</div>
+										</li>
+									</#list>
+									</ul>
+									<#if answerList_other.communityNumber?eval gt 5>
+									<a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a>
+									</#if>
+								</div>
+							</div>
+						</article>
+					</li>
+					</#list>
+				<#else>
+					<#if userid==_userid>
+						<#list answerList_other as answerList_other>
+						<li id="${answerList_other.answerId}">
+							<article class="answerArticle">
+								<#if answerList_other.isBestAnswer=="1">
+								<div class="hd line ">
+									<div id="act-link-banner-wp" class="grid-r">
+										<span class="iknow-qb_home_icons answer-type answer-best grid "><img src="images/best.png"></span>
+										<span class="answer-title h2 grid">最佳答案</span>
+									</div>
+								</div>
+								</#if>
+								<div class="description">
+									<div class="answerer">
+										<img class="answerImg" src="${answerList_other.userImage}">
+										<div class="answer_name">
+											<a href="personal2.html?userid=270369">
+												<span class="user_name">${answerList_other.userName}</span>
+													&nbsp;&nbsp;<span>${answerList_other.signature}</span>
+											</a>
+										</div>
+										<span class="answer_time">${answerList_other.time}</span>
+										<div><img src="images/bluepoint.png" class="bluepoint">贡献${answerList_other.totalAnswer}个回答，获得${answerList_other.totalLikes}个赞</div>
+									</div>
+									<div class="fullDetail"><p>${answerList_other.answer}</p></div>
+								</div>
+								<div class="options">
+									<ul>
+										<#if userid!=answerList_other.userId>
+											<li class="special"><a data-fun="toVote" class="unVoted" onclick="getBestAnswer()"><span class="status">设为最佳答案</span></a></li>
+										</#if>
+										<li class="special">
+											<#if answerList_other.isLike="0">
+											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
+											<#else>
+											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
+											</#if>
+										</li>
+										<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_other.communityNumber}</span></a></li>
+										<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
+									</ul>
+								</div>
+							   <div class="comment" style="display:none">
+									<img class="deco" src="images/dia-deco.png" style="left:106px">
+									<div class="comment-outer">
+										<#list userList as userList>
+										<div class="comment-Editor">
+											<img class="userImg" src="${userList.AVATAR}">
+											<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
+											<button class="submitComment" onclick="saveComment()">评论</button>
+										</div>
+										</#list>
+										<ul class="commentList">
+										<#list answerList_other.replay as replay>
+											<li>
+												<img class="userImg" src="${replay.userImage}">
+												<div class="commentDetail">
+													<p class="userName">${replay.userName}</p>
+													<p class="content">${replay.community}</p>
+													<p class="commentTime">${replay.time}</p>
+												</div>
+											</li>
+										</#list>
+										</ul>
+										<#if answerList_other.communityNumber?eval gt 5>
+										<a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a>
+										</#if>
+									</div>
+								</div>
+							</article>
+						</li>
+						</#list>
+					<#else>
+						<#list answerList_other as answerList_other>
+						<li id="${answerList_other.answerId}">
+							<article class="answerArticle">
+								<#if answerList_other.isBestAnswer=="1">
+								<div class="hd line ">
+									<div id="act-link-banner-wp" class="grid-r">
+										<span class="iknow-qb_home_icons answer-type answer-best grid "><img src="images/best.png"></span>
+										<span class="answer-title h2 grid">最佳答案</span>
+									</div>
+								</div>
+								</#if>
+								<div class="description">
+									<div class="answerer">
+										<img class="answerImg" src="${answerList_other.userImage}">
+										<div class="answer_name">
+											<a href="personal2.html?userid=270369">
+												<span class="user_name">${answerList_other.userName}</span>
+													&nbsp;&nbsp;<span>${answerList_other.signature}</span>
+											</a>
+										</div>
+										<span class="answer_time">${answerList_other.time}</span>
+										<div><img src="images/bluepoint.png" class="bluepoint">贡献${answerList_other.totalAnswer}个回答，获得${answerList_other.totalLikes}个赞</div>
+									</div>
+									<div class="fullDetail"><p>${answerList_other.answer}</p></div>
+								</div>
+								<div class="options">
+									<ul>
+										<li class="special">
+											<#if answerList_other.isLike="0">
+											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
+											<#else>
+											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
+											</#if>
+										</li>
+										<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_other.communityNumber}</span></a></li>
+										<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
+									</ul>
+								</div>
+							   <div class="comment" style="display:none">
+									<img class="deco" src="images/dia-deco.png" style="left:106px">
+									<div class="comment-outer">
+										<#list userList as userList>
+										<div class="comment-Editor">
+											<img class="userImg" src="${userList.AVATAR}">
+											<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
+											<button class="submitComment" onclick="saveComment()">评论</button>
+										</div>
+										</#list>
+										<ul class="commentList">
+										<#list answerList_other.replay as replay>
+											<li>
+												<img class="userImg" src="${replay.userImage}">
+												<div class="commentDetail">
+													<p class="userName">${replay.userName}</p>
+													<p class="content">${replay.community}</p>
+													<p class="commentTime">${replay.time}</p>
+												</div>
+											</li>
+										</#list>
+										</ul>
+										<#if answerList_other.communityNumber?eval gt 5>
+										<a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a>
+										</#if>
+									</div>
+								</div>
+							</article>
+						</li>
+						</#list>
+					</#if>
+				</#if>
 		</ul>
 	</div>
 			
@@ -448,7 +676,7 @@
 		var startnumber = event.target.parentNode.getElementsByClassName("commentList")[0].getElementsByTagName("li").length;
 		var questionId = document.URL.split("=")[1];
 		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.id;
-		alert(answerId);
+		
 		$.ajax({
 			type:"POST",
 			url:"/org.xjtusicd3.partner/getMoreComment.html",
@@ -459,18 +687,96 @@
 			},
 			dataType:"json",
 			success:function(data){
-				jsondata=$.parseJSON(data);
-				if(jsondata.value=="0"){
+				if(data.value=="0"){
 					self.location='login.html';
-				}else if(jsondata.value=="1"){
-					
+				}else if(data.value=="1"){
+					for(var i in data.commentList){
+						var htmls = document.getElementById(answerId).getElementsByClassName("commentList")[0].innerHTML;
+						document.getElementById(answerId).getElementsByClassName("commentList")[0].innerHTML = htmls+ '<li><img class="userImg" src="'+data.commentList[i].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].userName+'</p><p class="content">'+data.commentList[i].community+'</p><p class="commentTime">'+data.commentList[i].time+'</p></div></li>';
+					}
+					if(data.endnumber<data.totalnumber){
+						startnumber = data.endnumber;
+					}else{
+						document.getElementById(answerId).getElementsByClassName("allComments")[0].remove();
+					}
 				}
 			}
 		})
 	}
+	
+	//点赞
+	function getAgreeAnswer(){
+		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+		if(answerId!="searchResult"){
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveAgreeAnswer.html",
+				data:{
+					"answerId":answerId
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementById(answerId).getElementsByClassName("status")[0].innerHTML="已点赞";
+						var number = parseInt(document.getElementById(answerId).getElementsByClassName("number")[0].innerHTML);
+						document.getElementById(answerId).getElementsByClassName("number")[0].innerHTML = number+1;
+					}else if(data.value=="2"){
+						document.getElementById(answerId).getElementsByClassName("status")[0].innerHTML="点赞";
+						var number = parseInt(document.getElementById(answerId).getElementsByClassName("number")[0].innerHTML);
+						document.getElementById(answerId).getElementsByClassName("number")[0].innerHTML = number-1;
+					}
+				}
+			})
+		}
+	}
+	//收藏
+	function getCollectionAnswer(){
+		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+		if(answerId!="searchResult"){
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveCollectionAnswer.html",
+				data:{
+					"answerId":answerId
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementById(answerId).getElementsByClassName("shoucang")[0].innerHTML="已收藏";
+					}else if(data.value=="2"){
+						document.getElementById(answerId).getElementsByClassName("shoucang")[0].innerHTML="收藏";
+					}
+				}
+			})
+		}
+	}
+	//设置为最佳答案
+	function getBestAnswer(){
+		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+		if(answerId!="searchResult"){
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveBestAnswer.html",
+				data:{
+					"answerId":answerId
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						location.reload();
+					}
+				}
+			})
+		}
+	}
 </script> 
 		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">评论成功</h2></div></div>
 		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
-
 </body>
 </html>

@@ -98,16 +98,6 @@ public class ClassifyHelper {
 		return classifyParentId;
 	}
 	/*
-	 * zyq_community_获取问题分类
-	 */
-	public static List<ClassifyPersistence> community_classify(){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
-		List<ClassifyPersistence> list = mapper.FirstClassify_community();
-		session.close();
-		return list;
-	}
-	/*
 	 * zyq_question_查看问答模块的分类
 	 */
 	public static List<ClassifyPersistence> question_ClassifyListByName(String ClassifyName,String type){

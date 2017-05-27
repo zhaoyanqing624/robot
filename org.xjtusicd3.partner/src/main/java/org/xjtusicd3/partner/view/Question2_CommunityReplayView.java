@@ -5,6 +5,14 @@ public class Question2_CommunityReplayView {
 	private String userImage;
 	private String community;
 	private String time;
+	private String userId;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getUserName() {
 		return userName;
 	}

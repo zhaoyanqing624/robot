@@ -20,8 +20,6 @@ public class CommunityQuestionPersistence{
 	private String CLASSIFYID;
 	@TableField(columnName="USERID")
 	private String USERID;
-	@TableField(columnName="COLLECTION")
-	private String COLLECTION;
 	@TableField(columnName="SCAN")
 	private String SCAN;
 	@TableField(columnName="USERQUESTIONID")
@@ -57,12 +55,6 @@ public class CommunityQuestionPersistence{
 	}
 	public void setUSERID(String uSERID) {
 		USERID = uSERID;
-	}
-	public String getCOLLECTION() {
-		return COLLECTION;
-	}
-	public void setCOLLECTION(String cOLLECTION) {
-		COLLECTION = cOLLECTION;
 	}
 	public String getSCAN() {
 		return SCAN;

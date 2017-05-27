@@ -10,14 +10,54 @@ public class Question2_CommunityView {
 	private String answer;
 	private String userImage;
 	private String userName;
+	private String userId;
 	private String signature;
 	private String totalAnswer;
 	private String totalLikes;
+	
 	private String likesNumber;
 	private String communityNumber;
 	private String time;
+	
+	private String isLike;//判断是否点赞
+	private String isCollection;//判断是否收藏
+	private String isBestAnswer;//判断是否最佳答案
+	
 	private List<Question2_CommunityReplayView> replay;
 	
+		
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getIsBestAnswer() {
+		return isBestAnswer;
+	}
+
+	public void setIsBestAnswer(String isBestAnswer) {
+		this.isBestAnswer = isBestAnswer;
+	}
+
+	public String getIsLike() {
+		return isLike;
+	}
+
+	public void setIsLike(String isLike) {
+		this.isLike = isLike;
+	}
+
+	public String getIsCollection() {
+		return isCollection;
+	}
+
+	public void setIsCollection(String isCollection) {
+		this.isCollection = isCollection;
+	}
+
 	public List<Question2_CommunityReplayView> getReplay() {
 		return replay;
 	}
