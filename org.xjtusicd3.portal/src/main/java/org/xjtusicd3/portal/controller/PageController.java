@@ -29,6 +29,8 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("problemindex");
  	   return mv;
     }
+	 
+	
 	
 	@RequestMapping(value="changeindex",method=RequestMethod.GET)
     public ModelAndView  change(){

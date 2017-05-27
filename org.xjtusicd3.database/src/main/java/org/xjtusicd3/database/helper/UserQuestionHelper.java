@@ -20,4 +20,13 @@ public class UserQuestionHelper
 			
 
 		}
+		//删除用户问题信息
+		public static void deleteUserQuestion(String userquestionid) 
+		{
+			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+			UserQuestionPersistenceMapper mapper = session.getMapper(UserQuestionPersistenceMapper.class);
+			mapper.deleteUserQuestion(userquestionid);  
+			session.close();
+			
+		}
 }

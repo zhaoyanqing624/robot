@@ -119,7 +119,17 @@ public class UserHelper {
 			List<UserPersistence> userlist = mapper.getAllUserInfo();
 			session.close();
 			return userlist;
-			
-
+		}
+		
+	/**
+	 * ZPZ
+	 */
+		//修改用户名
+		//zyq_个人密码修改
+		public static void updateUser(String userid, String username){
+			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+			UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+			mapper.updateUser(userid, username);
+			session.close();
 		}
 }

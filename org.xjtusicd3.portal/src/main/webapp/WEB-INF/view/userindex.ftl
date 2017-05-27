@@ -101,7 +101,7 @@
 
 									<div class="btn-group">
 
-										<button id="sample_editable_1_new" class="btn green">
+										<button  class="btn green" onclick="window.location='addUserInformation.html'">
 
 										<i class="icon-plus">增加用户</i>
 
@@ -109,7 +109,7 @@
 
 									</div>
 
-									<div class="btn-group pull-right">
+									<!-- <div class="btn-group pull-right">
 
 										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
 
@@ -125,7 +125,7 @@
 
 										</ul>
 
-									</div>
+									</div> -->
 
 								</div>
 
@@ -144,9 +144,11 @@
 
 											<th>用户创建时间</th>
 
-											<th>Edit</th>
+											<th>操作</th>
 
-											<th>Delete</th>
+											<th>操作</th>
+											
+											<th>查看用户详情</th>
 
 										</tr>
 
@@ -166,9 +168,11 @@
 
 											<td class="center">${userlist.CREATETIME}</td>
 
-											<td><a class="edit" href="javascript:;">Edit</a></td>
+											<td><a class="userinfo"  href="/org.xjtusicd3.portal/editUserInformation.html?u=${userlist.USERID}">编辑</a></td>
 
-											<td><a class="delete" href="javascript:;">Delete</a></td>
+											<td><a  onclick="deleteUser()">删除</a></td>
+											
+											<td><a class="userinfo" href="/org.xjtusicd3.portal/showUserInfo.html?u=${userlist.USERID}">查看用户信息</a></td>
 
 										</tr>
 										</#list>
@@ -191,7 +195,7 @@
 				<!-- END PAGE CONTENT -->
 
 			</div>
-
+0
 			<!-- END PAGE CONTAINER-->
         </div>
     </div>
@@ -262,6 +266,31 @@
 
 		});
 
+	</script>
+	
+	<script type="text/javascript">
+		function deleteUser() {
+			var userEmail = event.target.parentNode.parentNode.children[1].innerHTML;
+			var present_row = event.target.parentNode.parentNode;
+			 if (confirm("确认删除？")) {
+				 $.ajax({
+						type:"post",
+						url:"/org.xjtusicd3.portal/deleteUser.html",
+						data:{
+							"userEmail":userEmail
+						},
+						dataType:"json",
+						success:function(data){
+							alert("删除成功");
+							present_row.remove();
+						}
+					}); 
+             }else
+            	 {
+            	 return;
+            	 }
+			
+		}
 	</script>
 
 
