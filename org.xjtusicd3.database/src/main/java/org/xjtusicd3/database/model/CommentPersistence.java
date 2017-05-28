@@ -22,6 +22,15 @@ public class CommentPersistence {
 	private String COMMENTTIME;
 	@TableField(columnName="COMMENTPARENTID")
 	private String COMMENTPARENTID;
+	@TableField(columnName="ISNOTICE")
+	private int ISNOTICE;
+	
+	public int getISNOTICE() {
+		return ISNOTICE;
+	}
+	public void setISNOTICE(int iSNOTICE) {
+		ISNOTICE = iSNOTICE;
+	}
 	public String getCOMMENTID() {
 		return COMMENTID;
 	}

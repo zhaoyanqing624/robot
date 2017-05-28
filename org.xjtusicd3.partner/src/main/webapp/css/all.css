@@ -272,7 +272,7 @@
 .n-tab {
     position: relative;
     z-index: 1;
-        padding-left: 30px;
+        padding-left: 12px;
 
 }
 .n-tab li.active {
@@ -361,7 +361,6 @@ li.active a {
     width: 100%;
     box-sizing: border-box;
     border-bottom: 1px solid #d9dde1;
-    overflow: hidden;
 }
 .notice-list .notice-box {
     padding: 20px 10px;
@@ -405,7 +404,7 @@ li.active a {
     height: 55px;
     position: absolute;
     right: 10px;
-    top: 5px;
+    top: 40px;
     width: 30px;
     overflow: visible;
 }
@@ -826,13 +825,14 @@ a.chatSend {
     top: 0;
 }
 .setup-popl {
-    padding: 0 36px;
+	padding: 0 36px;
     background-color: #fff;
     position: absolute;
-    width: 640px;
+    width: 598px;
     left: 50%;
     top: 104px;
     margin-left: -335px;
+    display: none;
     z-index: 1001;
 }
 .setup-coverLayer {

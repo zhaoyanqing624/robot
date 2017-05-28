@@ -18,7 +18,15 @@ public class AgreePersistence {
 	private String TOUSERID ;
 	@TableField(columnName="TIME")
 	private String TIME;
+	@TableField(columnName="ISNOTICE")
+	private int ISNOTICE;
 	
+	public int getISNOTICE() {
+		return ISNOTICE;
+	}
+	public void setISNOTICE(int iSNOTICE) {
+		ISNOTICE = iSNOTICE;
+	}
 	public String getTOUSERID() {
 		return TOUSERID;
 	}

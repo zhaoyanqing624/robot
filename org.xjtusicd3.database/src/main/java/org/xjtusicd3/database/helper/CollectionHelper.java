@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.CollectionPersistenceMapper;
 import org.xjtusicd3.database.model.CollectionPersistence;
+import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 
 public class CollectionHelper {
@@ -33,7 +34,15 @@ public class CollectionHelper {
 		Date date=new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
-		mapper.saveCollection(UUID.randomUUID().toString(),communityanswerId,userPersistences.get(0).getUSERID(),time);
+	    //判断是否为自己收藏
+	    List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswerId(communityanswerId);
+	    int isnotice = 0;
+	    if(userPersistences.get(0).getUSERID().equals(communityAnswerPersistences.get(0).getUSERID())){
+	    	isnotice = 0;
+	    }else {
+			isnotice = 1;
+		}
+		mapper.saveCollection(UUID.randomUUID().toString(),communityanswerId,userPersistences.get(0).getUSERID(),time,isnotice);
 		session.close();
 	}
 	/*

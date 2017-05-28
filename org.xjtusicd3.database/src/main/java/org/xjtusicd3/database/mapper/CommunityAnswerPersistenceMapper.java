@@ -56,7 +56,7 @@ public interface CommunityAnswerPersistenceMapper extends IBaseDao<CommunityAnsw
 	/*
 	 * zyq_notice_查看评论是否通知
 	 */
-	@Select("SELECT * FROM TBL_CommunityAnswer WHERE USERID=#{0} AND ISNOTICE=#{1}")
-	List<CommunityAnswerPersistence> notice_ByUserId(String userid, int isnotice);
+	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} AND ISNOTICE=#{1}")
+	List<CommunityAnswerPersistence> notice_CommunityAnswer(String communityquestionid, int isnotice);
 	
 }

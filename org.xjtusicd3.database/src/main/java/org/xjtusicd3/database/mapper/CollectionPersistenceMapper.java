@@ -17,8 +17,8 @@ public interface CollectionPersistenceMapper extends IBaseDao<CollectionPersiste
 	/*
 	 * zyq_question2_ajax_添加收藏
 	 */
-	@Insert("INSERT INTO TBL_Collection(COLLECTIONID,COMMUNITYANSWERID,USERID,TIME) VALUES (#{0},#{1},#{2},#{3})")
-	void saveCollection(String collectionid, String communityanswerId, String userid, String time);
+	@Insert("INSERT INTO TBL_Collection(COLLECTIONID,COMMUNITYANSWERID,USERID,TIME,ISNOTICE) VALUES (#{0},#{1},#{2},#{3},#{4})")
+	void saveCollection(String collectionid, String communityanswerId, String userid, String time,int isnotice);
 	/*
 	 * zyq_question2_删除收藏
 	 */

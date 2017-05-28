@@ -18,6 +18,15 @@ public class CollectionPersistence {
 	private String USERID;
 	@TableField(columnName="TIME")
 	private String TIME;
+	@TableField(columnName="ISNOTICE")
+	private int ISNOTICE;
+	
+	public int getISNOTICE() {
+		return ISNOTICE;
+	}
+	public void setISNOTICE(int iSNOTICE) {
+		ISNOTICE = iSNOTICE;
+	}
 	public String getCOLLECTIONID() {
 		return COLLECTIONID;
 	}

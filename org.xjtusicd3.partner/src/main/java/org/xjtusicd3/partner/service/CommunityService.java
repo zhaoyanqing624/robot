@@ -357,7 +357,13 @@ public class CommunityService {
 		communityAnswerPersistence.setISBESTANSWER(0);
 		communityAnswerPersistence.setCOMMUNITYQUESTIONID(questionId);
 		communityAnswerPersistence.setUSERID(userid);
-		communityAnswerPersistence.setISNOTICE(0);
+		//查询是否回答的是自己的问题
+		List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(questionId);
+		if (userid==communityAnswerPersistence.getUSERID()) {
+			communityAnswerPersistence.setISNOTICE(0);
+		}else {
+			communityAnswerPersistence.setISNOTICE(1);
+		}
 		CommunityAnswerHelper.addComment(communityAnswerPersistence);
 	}
 	/*
@@ -481,13 +487,22 @@ public class CommunityService {
 		communityAnswerPersistence.setCOMMUNITYQUESTIONID(questionId);
 		communityAnswerPersistence.setCONTENT(content);
 		communityAnswerPersistence.setISBESTANSWER(0);
-		communityAnswerPersistence.setISNOTICE(0);
+		communityAnswerPersistence.setISNOTICE(1);
 	    Date date=new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
 		communityAnswerPersistence.setTIME(time);
 		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
 		communityAnswerPersistence.setUSERID(userPersistences.get(0).getUSERID());
+		//判断是否为自己回复
+		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(questionId);
+		int isnotice = 0;
+		if (userPersistences.get(0).getUSERID().equals(communityAnswerPersistences.get(0).getUSERID())) {
+			isnotice = 0;
+		}else {
+			isnotice = 1;
+		}
+		communityAnswerPersistence.setISNOTICE(isnotice);
 		CommunityAnswerHelper.addComment(communityAnswerPersistence);
 	}
 }

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
@@ -42,5 +44,20 @@ public class MessageController {
 		List<UserPersistence> list = UserHelper.getUserInfo(username);
 		String result = JsonUtil.toJsonString(list);
 		return result;
+	}
+	/*
+	 * zyq_notice_消息通知
+	 */
+	@RequestMapping(value="notice",method=RequestMethod.GET)
+	public ModelAndView notice(HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String userid = (String) session.getAttribute("UserId");
+		if (useremail==null) {
+			return new ModelAndView("login");
+		}else {
+			ModelAndView mv = new ModelAndView("notice");
+			mv.addObject("uid", userid);
+			return mv;
+		}
 	}
 }

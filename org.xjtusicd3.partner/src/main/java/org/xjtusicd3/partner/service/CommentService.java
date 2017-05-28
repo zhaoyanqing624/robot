@@ -6,9 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
+import org.xjtusicd3.database.helper.CommunityAnswerHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
+import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.view.Faq2_faqUserView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
@@ -23,7 +27,15 @@ public class CommentService {
 		Date date=new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
-		CommentHelper.saveComment(UUID.randomUUID().toString(),faqquestionid,null,userid,comment,time,"0");
+	    //查看是否回答自己的FAQ
+	    List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(faqquestionid);
+	    int isnotice = 0;
+	    if (userid.equals(answerPersistences.get(0).getUSERID())) {
+			isnotice = 0;
+		}else {
+			isnotice = 1;
+		}
+		CommentHelper.saveComment(UUID.randomUUID().toString(),faqquestionid,null,userid,comment,time,"0",isnotice);
 	}
 	/*
 	 * zyq_question2_ajax_添加评论的回复
@@ -32,7 +44,15 @@ public class CommentService {
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
-	    CommentHelper.saveComment(UUID.randomUUID().toString(), null, communityquestionId, userid, comment, time, answerId);
+	    //查看是否回复了自己的评论
+	    List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswerId(answerId);
+	    int isnotice = 0;
+	    if (userid.equals(communityAnswerPersistences.get(0).getUSERID())) {
+			isnotice = 0;
+		}else {
+			isnotice = 1;
+		}
+	    CommentHelper.saveComment(UUID.randomUUID().toString(), null, communityquestionId, userid, comment, time, answerId,isnotice);
 	}
 	/*
 	 * zyq_faq3_获得评论列表

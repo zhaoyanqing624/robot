@@ -17,7 +17,7 @@
     <script src="js/ajax-pushlet-client.js"></script>
     <script type="text/javascript">
     	PL.parameters.push('uid');
-    	PL.parameters.push('77528570@qq.com');  
+    	PL.parameters.push('${uid}');  
 		PL._init();     
 		PL.joinListen('/mipc/he');  
 		function onData(event) {  
@@ -83,94 +83,77 @@
 		<div id="main" style="min-height:825px">
 
 <div id="notices" class="noticesPage">
-    <ul class="n-tab clearfix">
-    <li class="active">
-        <a id="not_new" href="notice.html">通知<span class="not-num">(3)</span></a>
-    </li>
-    <li>
-        <a id="msg_new" href="message.html" class="">私信<span class="msg-num" style="display: none;"></span></a>
-    </li>
-    
-</ul>
-
+	<ul class="n-tab clearfix">
+	    <li class="active">
+	        <a id="not_new" href="notice.html">通知<span class="not-num">(3)</span></a>
+	    </li>
+	    <li>
+	        <a id="msg_new" href="message.html" class="">私信<span class="msg-num" style="display: none;"></span></a>
+	    </li>
+	</ul>
     <div class="content">
-        
         <div class="title-bar">
-	<a class="tip-setting" href="#" onclick="tongzhishezhi()">通知设置</a>
-    <a class="tag-read-btn" href="#">全部标记为已读</a>
-	<p class="tip-test">系统自动清理三个月前的已读通知</p>
-</div>
+			<a class="tip-setting" href="#" onclick="tongzhishezhi()">通知设置</a>
+		    <a class="tag-read-btn" href="#">全部标记为已读</a>
+			<p class="tip-test">系统自动清理三个月前的已读通知</p>
+        </div>
 
-<div id="Prompt-layer" class="Prompt-layer">
-	<div class="clearfix Prompt-succ-layer Prompt-error-layer">
-		<i class="Prompt-layer-icon succicon"></i>
-		<span class="Prompt-layer-text"></span>
+	<div id="Prompt-layer" class="Prompt-layer">
+		<div class="clearfix Prompt-succ-layer Prompt-error-layer">
+			<i class="Prompt-layer-icon succicon"></i>
+			<span class="Prompt-layer-text"></span>
+		</div>
+	</div>
+	
+	<div class="notice-list">
+    	<div id="840249" class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+       		<div class="notice-box clearfix">
+            	<p class="notice-type ">系统</p>
+        		<div class="notice-show-box">
+            		<p class="notice-con "> 您的电脑有<a target="_blank" href="/wenda/detail/344192">48个软件</a>可以更新</p>
+           			<h5 class="notice-date">11:47:09</h5>
+        		</div>
+        		<div class="del-box clearfix">
+            		<a onclick="deletenotice()" class="del-notice" title="删除此通知">
+                		<i class="fa fa-trash-o"></i>
+            		</a>
+        		</div>
+        	</div>
+		</div>
+		
+		<div id="second">
+	    	<div id="815382" class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+	        	<div class="notice-box clearfix">
+	            	<p class="notice-type " style="    color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">问吧</p>
+	            	<div class="notice-show-box">
+	                	<p class="notice-con ">你的提问<a target="_blank" href="/wenda/detail/338293">window补丁怎么下载</a>有新的回复</p>
+	                	<h5 class="notice-date">2017-03-01 22:00:07</h5>
+	            	</div>
+		            <div class="del-box clearfix">
+		                <a onclick="deletenotice()" class="del-notice" title="删除此通知">
+		                	<i class="fa fa-trash-o"></i>
+		                </a>
+		            </div>
+	        	</div>
+			</div>
+			
+	    	<div id="604172" class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+	        	<div class="notice-box clearfix">
+	            	<p class="notice-type " style="    color: #05c953;border: 1px solid #05c953;background: #a9fba8;">知识库</p>
+	            	<div class="notice-show-box">
+	            		<p class="notice-con "> 你的知识库：“<a target="_blank" href="/wenda/detail/338486">如何更新软件的问题</a>” 有新的回复</p>
+	                	<h5 class="notice-date">2016-12-12 23:00:02</h5>
+	           		</div>
+		            <div class="del-box clearfix">
+		                <a onclick="deletenotice()" class="del-notice" title="删除此通知">
+		                    <i class="fa fa-trash-o"></i>
+		                </a>
+		            </div>
+	        	</div>
+			</div>
+		</div>
 	</div>
 </div>
-<div class="notice-list">
-    
-        	<div note-id="840249" class="notice">
-        <div class="notice-box clearfix">
-                            <p class="notice-type ">系统</p>
-            
-        
-            <div class="notice-show-box">
-                <p class="notice-con ">
-                    您的电脑有<a target="_blank" href="/wenda/detail/344192">48个软件</a>可以更新
-                </p>
-                <h5 class="notice-date">11:47:09</h5>
-            </div>
-            <div class="del-box clearfix">
-                <a href="javascript:void(0)" class="del-notice" title="删除此通知">
-                    <i class="icon icon-del"></i>
-                </a>
-            </div>
-        </div>
-	</div>
-    	<div note-id="815382" class="notice">
-        <div class="notice-box clearfix">
-                            <p class="notice-type " style="    color: #14191e;
-    border: 1px solid #14191e;
-    background: #00aeef;">问吧</p>
-            
-        
-            <div class="notice-show-box">
-                <p class="notice-con ">
-                    你的提问<a target="_blank" href="/wenda/detail/338293">window补丁怎么下载</a>有新的回复
-                </p>
-                <h5 class="notice-date">2017-03-01 22:00:07</h5>
-            </div>
-            <div class="del-box clearfix">
-                <a href="javascript:void(0)" class="del-notice" title="删除此通知">
-                    <i class="icon icon-del"></i>
-                </a>
-            </div>
-        </div>
-	</div>
-    	<div note-id="604172" class="notice">
-        <div class="notice-box clearfix">
-                            <p class="notice-type " style="    color: #4233b7;
-    border: 1px solid #4233b7;
-    background: #eee;">知识库</p>
-            
-        
-            <div class="notice-show-box">
-                <p class="notice-con ">
-                    你的知识库：“<a target="_blank" href="/wenda/detail/338486">如何更新软件的问题</a>” 有新的回复
-                </p>
-                <h5 class="notice-date">2016-12-12 23:00:02</h5>
-            </div>
-            <div class="del-box clearfix">
-                <a href="javascript:void(0)" class="del-notice" title="删除此通知">
-                    <i class="icon icon-del"></i>
-                </a>
-            </div>
-        </div>
-	</div>
-        
-        
-</div>
-    </div>
     
     
     <div id="js-setup-popl" class="setup-popl" style="display:none">
@@ -309,6 +292,40 @@
     		document.getElementById("js-setup-popl").style.display="none";
     		document.getElementById("bg_tongzhi").style.display="none";
     	}
+    	//防止mouseover多次触发
+    	function contains(parentNode, childNode) 
+		{
+		    if (parentNode.contains) {
+		        return parentNode != childNode && parentNode.contains(childNode);
+		    } else {
+		        return !!(parentNode.compareDocumentPosition(childNode) & 16);
+		    }
+		}
+		function checkHover(e,target)
+		{
+		    if (getEvent(e).type=="mouseover")  {
+		        return !contains(target,getEvent(e).relatedTarget||getEvent(e).fromElement) && !((getEvent(e).relatedTarget||getEvent(e).fromElement)===target);
+		    } else {
+		        return !contains(target,getEvent(e).relatedTarget||getEvent(e).toElement) && !((getEvent(e).relatedTarget||getEvent(e).toElement)===target);
+		    }
+		}
+		function getEvent(e){
+		    return e||window.event;
+		}
+
+		function showdelete(e, obj){
+		    if(checkHover(e,obj)){
+			event.target.parentNode.getElementsByClassName("del-box clearfix")[0].style.display="block";
+		  }
+		}
+    	function hiddendelete(e, obj){
+    		if(checkHover(e,obj)){
+			event.target.parentNode.getElementsByClassName("del-box clearfix")[0].style.display="none";
+		  }
+    	}
+		function deletenotice(){
+			event.target.parentNode.parentNode.parentNode.parentNode.style.display="none";
+		}
     </script>
 </body>
 </html>

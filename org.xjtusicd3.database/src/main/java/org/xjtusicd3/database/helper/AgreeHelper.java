@@ -24,7 +24,14 @@ public class AgreeHelper {
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
 	    List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswerId(communityanswerId);
-		mapper.saveAgree(UUID.randomUUID().toString(),communityanswerId,userPersistences.get(0).getUSERID(),communityAnswerPersistences.get(0).getUSERID(),time);
+	    //判断这个赞是否为自己的
+	    int isnotice = 0;
+	    if (userPersistences.get(0).getUSERID().equals(communityAnswerPersistences.get(0).getUSERID())) {
+			isnotice = 0;
+		}else {
+			isnotice = 1;
+		}
+		mapper.saveAgree(UUID.randomUUID().toString(),communityanswerId,userPersistences.get(0).getUSERID(),communityAnswerPersistences.get(0).getUSERID(),time,isnotice);
 		session.close();
 	}
 	/*

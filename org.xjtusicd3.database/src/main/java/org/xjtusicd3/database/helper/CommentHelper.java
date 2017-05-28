@@ -11,10 +11,10 @@ public class CommentHelper {
 	/*
 	 * zyq_faq3_ajax_添加评论
 	 */
-	public static void saveComment(String commentid,String faqquestionid,String communityquestionid,String userid,String commentcont,String commenttime,String commentparentid){
+	public static void saveComment(String commentid,String faqquestionid,String communityquestionid,String userid,String commentcont,String commenttime,String commentparentid,int isnotice){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
-		mapper.saveComment(commentid,faqquestionid,communityquestionid,userid,commentcont,commenttime,commentparentid);
+		mapper.saveComment(commentid,faqquestionid,communityquestionid,userid,commentcont,commenttime,commentparentid,isnotice);
 		session.close();
 	}
 	/*

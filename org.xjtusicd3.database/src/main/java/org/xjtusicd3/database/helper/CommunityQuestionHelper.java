@@ -71,5 +71,15 @@ public class CommunityQuestionHelper{
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_notice_查询用户的提问
+	 */
+	public static List<CommunityQuestionPersistence> notice_CommunityQuestion(String userid){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> list = mapper.notice_CommunityQuestion(userid);
+		session.close();
+		return list;
+	}
 	
 }

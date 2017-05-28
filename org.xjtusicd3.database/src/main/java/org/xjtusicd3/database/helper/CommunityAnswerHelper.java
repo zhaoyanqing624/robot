@@ -108,10 +108,10 @@ public class CommunityAnswerHelper{
 	/*
 	 * zyq_notice_查看评论是否通知
 	 */
-	public static List<CommunityAnswerPersistence> notice_ByUserId(String userid,int isnotice){
+	public static List<CommunityAnswerPersistence> notice_CommunityAnswer(String communityquestionid,int isnotice){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
-		List<CommunityAnswerPersistence> list = mapper.notice_ByUserId(userid,isnotice);
+		List<CommunityAnswerPersistence> list = mapper.notice_CommunityAnswer(communityquestionid,isnotice);
 		session.close();
 		return list;
 	}

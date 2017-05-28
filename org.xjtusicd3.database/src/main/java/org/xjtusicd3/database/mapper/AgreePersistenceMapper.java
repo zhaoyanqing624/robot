@@ -12,8 +12,8 @@ public interface AgreePersistenceMapper extends IBaseDao<AgreePersistence, Strin
 	/*
 	 * zyq_question2_对于答案点赞
 	 */
-	@Insert("INSERT INTO TBL_Agree(AGREEID,COMMUNITYANSWERID,USERID,TOUSERID,TIME) VALUES (#{0},#{1},#{2},#{3},#{4})")
-	void saveAgree(String agreeid, String communityanswerId, String userid,String touserid,String time);
+	@Insert("INSERT INTO TBL_Agree(AGREEID,COMMUNITYANSWERID,USERID,TOUSERID,TIME,ISNOTICE) VALUES (#{0},#{1},#{2},#{3},#{4},#{5})")
+	void saveAgree(String agreeid, String communityanswerId, String userid,String touserid,String time,int isnotice);
 	/*
 	 * zyq_question2_查看点赞表
 	 */

@@ -118,6 +118,8 @@ public class UserController {
 			if (list.size()==0) {
 				return "redirect:login.html";
 			}else {
+				List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
+				session.setAttribute("UserId", list2.get(0).getUSERID());
 				session.setAttribute("UserEmail", email);
 				return "redirect:robot.html";
 			}
@@ -131,6 +133,8 @@ public class UserController {
 				if (list.size()==0) {
 					return "redirect:login.html";
 				}else {
+					List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
+					session.setAttribute("UserId", list2.get(0).getUSERID());
 					session.setAttribute("UserEmail", email);
 					return "redirect:"+urlPath+"";
 				}
