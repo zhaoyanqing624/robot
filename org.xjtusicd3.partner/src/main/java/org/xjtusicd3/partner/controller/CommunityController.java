@@ -35,20 +35,24 @@ public class CommunityController {
 	public ModelAndView question(String c,String type,HttpServletRequest request,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
-		List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(useremail,0,type,c);
-		ModelAndView mv = new ModelAndView("question");
-		mv.addObject("classifyList", classifyPersistences);
-		mv.addObject("communityViews", question_CommunityViews);
-		String typename = "";
-		if (type.equals("all")) {
-			typename="全部";
-		}else if (type.equals("1")) {
-			typename="已解决";
-		}else if (type.equals("2")) {
-			typename="待回答";
+		if(useremail==null){
+			return new ModelAndView("login");
+		}else {
+			List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(useremail,0,type,c);
+			ModelAndView mv = new ModelAndView("question");
+			mv.addObject("classifyList", classifyPersistences);
+			mv.addObject("communityViews", question_CommunityViews);
+			String typename = "";
+			if (type.equals("all")) {
+				typename="全部";
+			}else if (type.equals("1")) {
+				typename="已解决";
+			}else if (type.equals("2")) {
+				typename="待回答";
+			}
+			mv.addObject("typename", typename);
+			return mv;
 		}
-		mv.addObject("typename", typename);
-		return mv;
 	}
 	/*
 	 * zyq_question_ajax_获取更多问题

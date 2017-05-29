@@ -39,7 +39,7 @@ public class HelloWorldPlushlet{
 				List<UserPersistence> userPersistences = UserHelper.getEmail_id(userId);
 				JSONObject jsonObject = new JSONObject();
 				//判定论坛的的回答
-				List<Notice_NoticeView> notice_NoticeViews = NoticeService.
+//				List<Notice_NoticeView> notice_NoticeViews = NoticeService.
 				List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.notice_CommunityQuestion(userId);
 				if (communityQuestionPersistences.size()!=0) {
 					for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){

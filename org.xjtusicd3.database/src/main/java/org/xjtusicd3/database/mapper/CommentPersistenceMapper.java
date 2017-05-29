@@ -19,6 +19,11 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0} ORDER BY COMMENTTIME ASC")
 	List<CommentPersistence> getComment(String faqquestionid);
 	/*
+	 * zyq_faq3_查看评论_查看更多
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0} ORDER BY COMMENTTIME ASC LIMIT #{1},5")
+	List<CommentPersistence> getCommentMore(String faqquestionid, int startnumber);
+	/*
 	 * zyq_question2_查看回复
 	 */
 	@Select("SELECT * FROM TBL_Comment WHERE COMMUNITYQUESTIONID=#{0} AND COMMENTPARENTID=#{1} ORDER BY COMMENTTIME ASC")
@@ -38,5 +43,6 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	 */
 	@Select("SELECT * FROM TBL_Comment WHERE COMMUNITYQUESTIONID=#{0} AND COMMENTPARENTID=#{1} ORDER BY COMMENTTIME ASC LIMIT #{2},5 ")
 	List<CommentPersistence> question2_getMoreComment(String questionId, String answerId, int startnumber);
+
 
 }

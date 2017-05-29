@@ -57,9 +57,9 @@ public class CommentService {
 	/*
 	 * zyq_faq3_获得评论列表
 	 */
-	public static List<Faq3_CommentView> faq3_comment(String questionId) {
+	public static List<Faq3_CommentView> faq3_comment(String questionId,int startnumber) {
 		List<Faq3_CommentView> faq3_CommentViews = new ArrayList<Faq3_CommentView>();
-		List<CommentPersistence> commentPersistences = CommentHelper.getComment(questionId);
+		List<CommentPersistence> commentPersistences = CommentHelper.getCommentMore(questionId,startnumber);
 		for(CommentPersistence commentPersistence : commentPersistences){
 			List<Faq2_faqUserView> faq2_faqUserViews = new ArrayList<Faq2_faqUserView>();
 			List<UserPersistence> userPersistences = UserHelper.getEmail_id(commentPersistence.getUSERID());
@@ -69,6 +69,7 @@ public class CommentService {
 			}
 			Faq3_CommentView faq3_CommentView = new Faq3_CommentView(commentPersistence);
 			faq3_CommentView.setUserViews(faq2_faqUserViews);
+			faq3_CommentView.setCommentId(commentPersistence.getCOMMENTID());
 			faq3_CommentViews.add(faq3_CommentView);
 		}
 		return faq3_CommentViews;

@@ -5,9 +5,17 @@ import java.util.List;
 import org.xjtusicd3.database.model.CommentPersistence;
 
 public class Faq3_CommentView {
+	private String CommentId;
 	private String CommentTime;
 	private String CommentContent;
 	private List<Faq2_faqUserView> userViews;
+	
+	public String getCommentId() {
+		return CommentId;
+	}
+	public void setCommentId(String commentId) {
+		CommentId = commentId;
+	}
 	public String getCommentTime() {
 		return CommentTime;
 	}

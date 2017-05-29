@@ -10,7 +10,11 @@
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/utilDetails.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="zhao/lunbo/js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -143,13 +147,16 @@
                 </div>
                 <div class="comment">
                     <h3>发表评论</h3>
-                    <textarea class="textarea" id="content"></textarea>
-                    <div class="clearfix commentScoreBtn">
+                    <textarea class="textarea" id="content" placeholder="点击此处编辑评论" style="display:block" onclick="showeditor()"></textarea>
+                    <div id="answer-ueditor" class="edui-default" style="width:645px;font-size:14px;display:none;margin-left: 32px;">
+						<script id="editor" name="content" type="text/plain"></script>
+					</div>
+                    <div class="clearfix commentScoreBtn"  style="display:none">
                         <input type="button" value="发表评论" class="publishCommentBtn" onclick="comment()">
                     </div>
                     <h3>文章评论</h3>
                     <#list comment as comment>
-                    <ul class="commentList" id="commentContent">
+                    <ul class="commentList" id="${comment.commentId}" >
                     	<li class="commentLiContent">
                     		<#list comment.userViews as user>
                     		<div class="userContent clearfix">
@@ -158,13 +165,38 @@
                     		</div>
                     		</#list>
                     		<div class="clearfix content">
-                    		<a href="javascript:void(0);" class="commentReplay" onclick="openreply(this,'10085849254','10097837826','11717','793')">回复</a>
-                    		<p class="text">${comment.commentContent}</p>
+	                    		<a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复</a>
+	                    		<p class="text">${comment.commentContent}</p>
                     		</div>
+                    		<ul class="subCommentList" style="display:none">
+                    			<li class="_commentlist" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+                    				<div class="userContent clearfix">
+                    					<span class="username">新手3215 回复：新手0352</span>
+                    					<span class="line">|</span><span class="time">2017-05-29 18:18:36</span>
+                    				</div>
+                    				<div class="clearfix content">
+                    					<a href="javascript:void(0);" class="commentReplay" onclick="deleteComment()" style="display:none"><i class="fa fa-trash-o"></i></a>
+                    					<p class="text">更新一下驱动</p>
+                    				</div>
+                    			</li>
+                    			<li class="_commentlist" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+                    				<div class="userContent clearfix">
+                    					<span class="username">新手3215 回复：新手0352</span>
+                    					<span class="line">|</span><span class="time">2017-05-29 18:18:36</span>
+                    				</div>
+                    				<div class="clearfix content">
+                    					<a href="javascript:void(0);" class="commentReplay" onclick="deleteComment()" style="display:none"><i class="fa fa-trash-o"></i></a>
+                    					<p class="text">更新一下驱动</p>
+                    				</div>
+                    			</li>
+                    		</ul>
+                    		<div class="commentReplayUser">回复：<span class="username_span" style="color:#F00"></span></div>
+                    		<textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea>
+                    		<p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p>
                     	</li>
                     </ul>
                     </#list>
-                    <p class="ac hidden" id="querymorelink">
+                    <p class="ac" id="querymorelink">
                         <a href="javascript:void(0);" onclick="querymorecomment()">查看更多...</a>
                     </p>
                 </div>
@@ -215,10 +247,123 @@
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
+    <script type="text/javascript">
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor',{
+    	initialFrameHeight:200,
+    	initialFrameWidth:700
+    });
+    function isFocus(e){
+        alert(UE.getEditor('editor').isFocus());
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function setblur(e){
+        UE.getEditor('editor').blur();
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function insertHtml() {
+        var value = prompt('插入html代码', '');
+        UE.getEditor('editor').execCommand('insertHtml', value)
+    }
+    function createEditor() {
+        enableBtn();
+        UE.getEditor('editor');
+    }
+    function getAllHtml() {
+        alert(UE.getEditor('editor').getAllHtml())
+    }
+    function getContent() {
+        var arr = [];
+        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getContent());
+        alert(arr.join("\n"));
+    }
+    function getPlainTxt() {
+        var arr = [];
+        arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getPlainTxt());
+        alert(arr.join('\n'))
+    }
+    function setContent(isAppendTo) {
+        var arr = [];
+        arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+        UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
+        alert(arr.join("\n"));
+    }
+    function setDisabled() {
+        UE.getEditor('editor').setDisabled('fullscreen');
+        disableBtn("enable");
+    }
+
+    function setEnabled() {
+        UE.getEditor('editor').setEnabled();
+        enableBtn();
+    }
+
+    function getText() {
+        //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+        var range = UE.getEditor('editor').selection.getRange();
+        range.select();
+        var txt = UE.getEditor('editor').selection.getText();
+        alert(txt)
+    }
+
+    function getContentTxt() {
+        var arr = [];
+        arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+        arr.push("编辑器的纯文本内容为：");
+        arr.push(UE.getEditor('editor').getContentTxt());
+        alert(arr.join("\n"));
+    }
+    function hasContent() {
+        var arr = [];
+        arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+        arr.push("判断结果为：");
+        arr.push(UE.getEditor('editor').hasContents());
+        alert(arr.join("\n"));
+    }
+    function setFocus() {
+        UE.getEditor('editor').focus();
+    }
+    function deleteEditor() {
+        disableBtn();
+        UE.getEditor('editor').destroy();
+    }
+    function disableBtn(str) {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            if (btn.id == str) {
+                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+            } else {
+                btn.setAttribute("disabled", "true");
+            }
+        }
+    }
+    function enableBtn() {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+        }
+    }
+
+    function getLocalData () {
+        alert(UE.getEditor('editor').execCommand( "getlocaldata" ));
+    }
+
+    function clearLocalData () {
+        UE.getEditor('editor').execCommand( "clearlocaldata" );
+        alert("已清空草稿箱")
+    }
+</script>
 	<script type="text/javascript">
 		function comment(){
 		var faqtitle = document.getElementById("detailTplWrapper").getElementsByClassName("title")[0].innerHTML;
-		var comment = document.getElementById("content").value;
+		var comment = UE.getEditor('editor').getContent();
 			$.ajax({
 				type:"POST",
 				url:"/org.xjtusicd3.partner/saveComment.html",
@@ -235,6 +380,59 @@
 					}
 				}
 			})
+		}
+		function showeditor(){
+			document.getElementById('content').style.display="none";
+			document.getElementById('answer-ueditor').style.display="block";
+			document.getElementsByClassName('clearfix commentScoreBtn')[0].style.display="block";
+		}
+		function openreply(){
+			commentid = event.target.parentNode.parentNode.parentNode.id;
+			document.getElementById(commentid).getElementsByClassName('subCommentList')[0].style.display="block";
+			document.getElementById(commentid).getElementsByClassName('commentReplayText')[0].style.display="block";
+			document.getElementById(commentid).getElementsByClassName('ac')[0].style.display="block";
+			document.getElementById(commentid).getElementsByClassName('commentReplayUser')[0].style.display="block";
+			username = event.target.parentNode.parentNode.getElementsByClassName('username')[0].innerHTML;
+			document.getElementById(commentid).getElementsByClassName('username_span')[0].innerHTML=username;
+		}
+		function replycomment(){
+			var questionId = document.URL.split("=")[1];
+			var comment = event.target.parentNode.parentNode.getElementsByClassName("commentReplayText")[0].value;
+			
+		}
+		//防止mouseover多次触发
+    	function contains(parentNode, childNode) 
+		{
+		    if (parentNode.contains) {
+		        return parentNode != childNode && parentNode.contains(childNode);
+		    } else {
+		        return !!(parentNode.compareDocumentPosition(childNode) & 16);
+		    }
+		}
+		function checkHover(e,target)
+		{
+		    if (getEvent(e).type=="mouseover")  {
+		        return !contains(target,getEvent(e).relatedTarget||getEvent(e).fromElement) && !((getEvent(e).relatedTarget||getEvent(e).fromElement)===target);
+		    } else {
+		        return !contains(target,getEvent(e).relatedTarget||getEvent(e).toElement) && !((getEvent(e).relatedTarget||getEvent(e).toElement)===target);
+		    }
+		}
+		function getEvent(e){
+		    return e||window.event;
+		}
+
+		function showdelete(e, obj){
+		    if(checkHover(e,obj)){
+			event.target.parentNode.getElementsByClassName("commentReplay")[0].style.display="block";
+		  }
+		}
+    	function hiddendelete(e, obj){
+    		if(checkHover(e,obj)){
+			event.target.parentNode.getElementsByClassName("commentReplay")[0].style.display="none";
+		  }
+    	}
+    	function deleteComment(){
+			event.target.parentNode.parentNode.parentNode.style.display="none";
 		}
 	</script> 
 </body>
