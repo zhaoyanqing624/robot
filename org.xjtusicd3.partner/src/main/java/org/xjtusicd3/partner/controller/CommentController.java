@@ -39,13 +39,15 @@ public class CommentController {
 	public String saveComment(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		String faqtitle = request.getParameter("faqtitle");
 		String comment = request.getParameter("comment");
+		String faqusername = request.getParameter("faqusername");
 		String useremail = (String) session.getAttribute("UserEmail");
 		if (useremail==null) {
 			return "0";
 		}else {
 			List<UserPersistence> uList = UserHelper.getEmail(useremail);
 			List<QuestionPersistence> faqlist = QuestionHelper.faq3_faqcontent_title(faqtitle);
-			CommentService.addComment(uList.get(0).getUSERID(),faqlist.get(0).getFAQQUESTIONID(),comment);
+			List<UserPersistence> userPersistences = UserHelper.getEmail_name(faqusername);
+			CommentService.addComment(uList.get(0).getUSERID(),faqlist.get(0).getFAQQUESTIONID(),comment,userPersistences.get(0).getUSERID());
 			return "1";
 		}
 	 }
@@ -101,9 +103,42 @@ public class CommentController {
 		}else {
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
 			//判断回复是否重复提交
-			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment2(answerId, userPersistences.get(0).getUSERID(), content);
+			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment2(answerId, userPersistences.get(0).getUSERID(), content,questionId);
 			if (commentPersistences.size()==0) {
 				CommentService.saveCommunityComment(userPersistences.get(0).getUSERID(), questionId, content, answerId);
+				jsonObject.put("value", "1");
+				String result = JsonUtil.toJsonString(jsonObject); 
+				return result;
+				
+			}else{
+				jsonObject.put("value", "2");
+				String result = JsonUtil.toJsonString(jsonObject); 
+				return result;
+			}
+		}
+	}
+	/*
+	 * zyq_faq3_ajax_添加知识库评论
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveFaqComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String saveFaqComment(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail"); 
+		String questionId = request.getParameter("questionId");
+		String commentId = request.getParameter("commentId");
+		String content = request.getParameter("comment");
+		String duo = request.getParameter("duo");//判断是回复评论还是回复回复
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			//判断回复是否重复提交
+			List<CommentPersistence> commentPersistences = CommentHelper.faq3_getComment(commentId,userPersistences.get(0).getUSERID(), content,questionId);
+			if (commentPersistences.size()==0) {
+				CommentService.saveFaqComment(userPersistences.get(0).getUSERID(), questionId, content, commentId,duo);
 				jsonObject.put("value", "1");
 				String result = JsonUtil.toJsonString(jsonObject); 
 				return result;

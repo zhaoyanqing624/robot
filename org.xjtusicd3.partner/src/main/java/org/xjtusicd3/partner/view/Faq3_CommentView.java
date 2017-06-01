@@ -8,8 +8,22 @@ public class Faq3_CommentView {
 	private String CommentId;
 	private String CommentTime;
 	private String CommentContent;
+	private String CommentNumber;
 	private List<Faq2_faqUserView> userViews;
+	private List<Faq3_CommentReplyView> replyViews;
 	
+	public String getCommentNumber() {
+		return CommentNumber;
+	}
+	public void setCommentNumber(String commentNumber) {
+		CommentNumber = commentNumber;
+	}
+	public List<Faq3_CommentReplyView> getReplyViews() {
+		return replyViews;
+	}
+	public void setReplyViews(List<Faq3_CommentReplyView> replyViews) {
+		this.replyViews = replyViews;
+	}
 	public String getCommentId() {
 		return CommentId;
 	}

@@ -15,6 +15,7 @@ import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.view.Faq2_faqUserView;
+import org.xjtusicd3.partner.view.Faq3_CommentReplyView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Question2_CommunityReplayView;
 
@@ -23,7 +24,7 @@ public class CommentService {
 	/*
 	 * zyq_faq3_ajax_添加评论
 	 */
-	public static void addComment(String userid, String faqquestionid, String comment) {
+	public static void addComment(String userid, String faqquestionid, String comment,String faquserid) {
 		Date date=new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
@@ -35,7 +36,7 @@ public class CommentService {
 		}else {
 			isnotice = 1;
 		}
-		CommentHelper.saveComment(UUID.randomUUID().toString(),faqquestionid,null,userid,comment,time,"0",isnotice);
+		CommentHelper.saveComment(UUID.randomUUID().toString(),faqquestionid,null,userid,comment,time,"0",isnotice,faquserid);
 	}
 	/*
 	 * zyq_question2_ajax_添加评论的回复
@@ -52,14 +53,35 @@ public class CommentService {
 		}else {
 			isnotice = 1;
 		}
-	    CommentHelper.saveComment(UUID.randomUUID().toString(), null, communityquestionId, userid, comment, time, answerId,isnotice);
+	    CommentHelper.saveComment(UUID.randomUUID().toString(), null, communityquestionId, userid, comment, time, answerId,isnotice,null);
+	}
+	/*
+	 * zyq_faq3_ajax_添加评论的回复
+	 */
+	public static void saveFaqComment(String userid,String faqquestionId,String comment,String commentId,String duo){
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String time = format.format(date);
+	    //查看是否回复了自己的评论
+	    List<CommentPersistence> commentPersistences = CommentHelper.faq3_getCommentById(commentId);
+	    int isnotice = 0;
+	    if (userid.equals(commentPersistences.get(0).getUSERID())) {
+			isnotice = 0;
+		}else {
+			isnotice = 1;
+		}
+	    if (duo.equals("1")) {
+	    	CommentHelper.saveComment(UUID.randomUUID().toString(), faqquestionId, null, userid, comment, time, commentId,isnotice,commentPersistences.get(0).getUSERID());
+		}else {
+			CommentHelper.saveComment(UUID.randomUUID().toString(), faqquestionId, null, userid, comment, time, commentId,isnotice,null);
+		}
 	}
 	/*
 	 * zyq_faq3_获得评论列表
 	 */
 	public static List<Faq3_CommentView> faq3_comment(String questionId,int startnumber) {
 		List<Faq3_CommentView> faq3_CommentViews = new ArrayList<Faq3_CommentView>();
-		List<CommentPersistence> commentPersistences = CommentHelper.getCommentMore(questionId,startnumber);
+		List<CommentPersistence> commentPersistences = CommentHelper.getCommentMore(questionId,startnumber,"0");
 		for(CommentPersistence commentPersistence : commentPersistences){
 			List<Faq2_faqUserView> faq2_faqUserViews = new ArrayList<Faq2_faqUserView>();
 			List<UserPersistence> userPersistences = UserHelper.getEmail_id(commentPersistence.getUSERID());
@@ -67,9 +89,33 @@ public class CommentService {
 				Faq2_faqUserView userView = new Faq2_faqUserView(userPersistence);
 				faq2_faqUserViews.add(userView);
 			}
+			List<Faq3_CommentReplyView> faq3_CommentReplyViews = new ArrayList<Faq3_CommentReplyView>();
+			List<CommentPersistence> commentPersistences2 = CommentHelper.faq3_getCommentReply(commentPersistence.getCOMMENTID());
+			for(CommentPersistence commentPersistence2:commentPersistences2){
+				Faq3_CommentReplyView faq3_CommentReplyView = new Faq3_CommentReplyView();
+				List<UserPersistence> userNameList = UserHelper.getEmail_id(commentPersistence2.getUSERID());
+				faq3_CommentReplyView.setUserName(userNameList.get(0).getUSERNAME());
+				List<CommentPersistence> cList = CommentHelper.faq3_getCommentById(commentPersistence2.getCOMMENTPARENTID());
+				List<UserPersistence> toUserNameList = UserHelper.getEmail_id(cList.get(0).getUSERID());
+				faq3_CommentReplyView.setToUserName(toUserNameList.get(0).getUSERNAME());
+				faq3_CommentReplyView.setTime(commentPersistence2.getCOMMENTTIME());
+				faq3_CommentReplyView.setComment(commentPersistence2.getCOMMENTCONTENT());
+				faq3_CommentReplyView.setCommentId(commentPersistence2.getCOMMENTID());
+				faq3_CommentReplyView.setParrentId(commentPersistence2.getCOMMENTPARENTID());
+				List<CommentPersistence> commentPersistences3 = CommentHelper.faq3_getCommentById(commentPersistence2.getCOMMENTPARENTID());
+				if (commentPersistences3.get(0).getCOMMENTPARENTID().equals("0")&&commentPersistence2.getTOUSERID()==null) {
+					faq3_CommentReplyView.setToUserName(null);
+				}else {
+					List<UserPersistence> userPersistences2 = UserHelper.getEmail_id(commentPersistence2.getTOUSERID());
+					faq3_CommentReplyView.setToUserName(userPersistences2.get(0).getUSERNAME());
+				}
+				faq3_CommentReplyViews.add(faq3_CommentReplyView);
+			}
 			Faq3_CommentView faq3_CommentView = new Faq3_CommentView(commentPersistence);
 			faq3_CommentView.setUserViews(faq2_faqUserViews);
+			faq3_CommentView.setReplyViews(faq3_CommentReplyViews);
 			faq3_CommentView.setCommentId(commentPersistence.getCOMMENTID());
+			faq3_CommentView.setCommentNumber(Integer.toString(commentPersistences2.size()));
 			faq3_CommentViews.add(faq3_CommentView);
 		}
 		return faq3_CommentViews;

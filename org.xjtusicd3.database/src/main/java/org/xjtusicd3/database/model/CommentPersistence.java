@@ -24,7 +24,16 @@ public class CommentPersistence {
 	private String COMMENTPARENTID;
 	@TableField(columnName="ISNOTICE")
 	private int ISNOTICE;
+	@TableField(columnName="TOUSERID")
+	private String TOUSERID;
 	
+	
+	public String getTOUSERID() {
+		return TOUSERID;
+	}
+	public void setTOUSERID(String tOUSERID) {
+		TOUSERID = tOUSERID;
+	}
 	public int getISNOTICE() {
 		return ISNOTICE;
 	}
@@ -73,4 +82,5 @@ public class CommentPersistence {
 	public void setCOMMENTPARENTID(String cOMMENTPARENTID) {
 		COMMENTPARENTID = cOMMENTPARENTID;
 	}
+	
 }

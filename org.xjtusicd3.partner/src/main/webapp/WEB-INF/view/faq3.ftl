@@ -164,33 +164,40 @@
                     			<span class="username">${user.userName}</span><span class="line">|</span><span class="time">${comment.commentTime}</span>
                     		</div>
                     		</#list>
-                    		<div class="clearfix content">
-	                    		<a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复</a>
-	                    		<p class="text">${comment.commentContent}</p>
+                    		<div class="clearfix content" >
+	                    		<a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复(${comment.commentNumber})</a>
+	                    		<p class="text" >${comment.commentContent}</p>
                     		</div>
                     		<ul class="subCommentList" style="display:none">
-                    			<li class="_commentlist" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
-                    				<div class="userContent clearfix">
-                    					<span class="username">新手3215 回复：新手0352</span>
-                    					<span class="line">|</span><span class="time">2017-05-29 18:18:36</span>
+                    			<#list comment.replyViews as reply>
+                    			<li id="${reply.commentId}" class="_commentlist" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+                    				<div class="userContent clearfix" id="${reply.toUserName}">
+                    					<#if reply.toUserName ??>
+                    						<span class="username">
+                    							<span class="zhao">${reply.userName}</span> 回复：${reply.toUserName}
+	                    					</span>
+                    					<#else>
+	                    					<span class="username">
+	                    						<span class="zhao">${reply.userName}</span> 评论
+	                    					</span>
+                    					</#if>
+                    					<span class="line">|</span><span class="time">${reply.time}</span>
                     				</div>
-                    				<div class="clearfix content">
+                    				<#if UserEmail ??>
+                    				<div class="clearfix content" onclick="replyOther()" style="cursor:pointer">
                     					<a href="javascript:void(0);" class="commentReplay" onclick="deleteComment()" style="display:none"><i class="fa fa-trash-o"></i></a>
-                    					<p class="text">更新一下驱动</p>
+                    					<p class="text">${reply.comment}</p>
                     				</div>
-                    			</li>
-                    			<li class="_commentlist" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
-                    				<div class="userContent clearfix">
-                    					<span class="username">新手3215 回复：新手0352</span>
-                    					<span class="line">|</span><span class="time">2017-05-29 18:18:36</span>
-                    				</div>
+                    				<#else>
                     				<div class="clearfix content">
-                    					<a href="javascript:void(0);" class="commentReplay" onclick="deleteComment()" style="display:none"><i class="fa fa-trash-o"></i></a>
-                    					<p class="text">更新一下驱动</p>
+                    					<a  class="commentReplay"  style="display:none"></a>
+                    					<p class="text">${reply.comment}</p>
                     				</div>
+                    				</#if>
                     			</li>
+                    			</#list>
                     		</ul>
-                    		<div class="commentReplayUser">回复：<span class="username_span" style="color:#F00"></span></div>
+                    		<div class="commentReplayUser" id="">回复：<span class="username_span" style="color:#F00" ></span>:<span class="content_span" style="color:#F00"></span></div>
                     		<textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea>
                     		<p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p>
                     	</li>
@@ -362,14 +369,16 @@
 </script>
 	<script type="text/javascript">
 		function comment(){
-		var faqtitle = document.getElementById("detailTplWrapper").getElementsByClassName("title")[0].innerHTML;
-		var comment = UE.getEditor('editor').getContent();
+			var faqusername = document.getElementsByClassName("username")[0].innerHTML;
+			var faqtitle = document.getElementById("detailTplWrapper").getElementsByClassName("title")[0].innerHTML;
+			var comment = UE.getEditor('editor').getContent();
 			$.ajax({
 				type:"POST",
 				url:"/org.xjtusicd3.partner/saveComment.html",
 				data:{
 					"faqtitle":faqtitle,
-					"comment":comment
+					"comment":comment,
+					"faqusername":faqusername
 				},
 				dataType:"json",
 				success:function(data){
@@ -387,18 +396,67 @@
 			document.getElementsByClassName('clearfix commentScoreBtn')[0].style.display="block";
 		}
 		function openreply(){
-			commentid = event.target.parentNode.parentNode.parentNode.id;
-			document.getElementById(commentid).getElementsByClassName('subCommentList')[0].style.display="block";
-			document.getElementById(commentid).getElementsByClassName('commentReplayText')[0].style.display="block";
-			document.getElementById(commentid).getElementsByClassName('ac')[0].style.display="block";
-			document.getElementById(commentid).getElementsByClassName('commentReplayUser')[0].style.display="block";
-			username = event.target.parentNode.parentNode.getElementsByClassName('username')[0].innerHTML;
-			document.getElementById(commentid).getElementsByClassName('username_span')[0].innerHTML=username;
+			if(event.target.parentNode.parentNode.getElementsByClassName('subCommentList')[0].style.display=="none"){
+				commentid = event.target.parentNode.parentNode.parentNode.id;
+				document.getElementById(commentid).getElementsByClassName('subCommentList')[0].style.display="block";
+				document.getElementById(commentid).getElementsByClassName('commentReplayText')[0].style.display="block";
+				document.getElementById(commentid).getElementsByClassName('ac')[0].style.display="block";
+				document.getElementById(commentid).getElementsByClassName('commentReplayUser')[0].style.display="block";
+				username = event.target.parentNode.parentNode.getElementsByClassName('username')[0].innerHTML;
+				document.getElementById(commentid).getElementsByClassName('username_span')[0].innerHTML=username;
+				document.getElementById(commentid).getElementsByClassName('commentReplayUser')[0].id=commentid+"_"
+			}else{
+				commentid = event.target.parentNode.parentNode.parentNode.id;
+				document.getElementById(commentid).getElementsByClassName('subCommentList')[0].style.display="none";
+				document.getElementById(commentid).getElementsByClassName('commentReplayText')[0].style.display="none";
+				document.getElementById(commentid).getElementsByClassName('ac')[0].style.display="none";
+				document.getElementById(commentid).getElementsByClassName('commentReplayUser')[0].style.display="none";
+			}
 		}
 		function replycomment(){
 			var questionId = document.URL.split("=")[1];
 			var comment = event.target.parentNode.parentNode.getElementsByClassName("commentReplayText")[0].value;
+			var commentId = event.target.parentNode.parentNode.parentNode.id;
+			var duo = "";
+			if(event.target.parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML==""){
+				duo="0";
+			}else{
+				duo="1";
+			}
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveFaqComment.html",
+				data:{
+					"questionId":questionId,
+					"comment":comment,
+					"commentId":commentId,
+					"duo":duo
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+					setTimeout("location.reload()",1000)
+						document.getElementById('success').style.display='block';
+						setTimeout("codefans()",3000);
+						
+					}else{
+					setTimeout("location.reload()",1000)
+						document.getElementById('chongfu').style.display='block';
+						setTimeout("codefans2()",3000);
+					}
+				}
+			})
 			
+		}
+		function codefans(){
+			var box=document.getElementById("success");
+			box.style.display="none"; 
+		}
+		function codefans2(){
+			var box=document.getElementById("chongfu");
+			box.style.display="none"; 
 		}
 		//防止mouseover多次触发
     	function contains(parentNode, childNode) 
@@ -434,6 +492,25 @@
     	function deleteComment(){
 			event.target.parentNode.parentNode.parentNode.style.display="none";
 		}
+		function replyOther(){
+			var username = document.getElementById("zhao_hidden").innerHTML;
+			var content = event.target.parentNode.getElementsByClassName("text")[0].innerHTML;
+			if(content.length<10){
+				content = content;
+			}else{
+				content = content.substr(0,10)+"...";
+			}
+			var tousername = event.target.parentNode.parentNode.getElementsByClassName("zhao")[0].innerHTML;
+			var commentId = event.target.parentNode.parentNode.id;
+			if(username!=tousername){
+				event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("username_span")[0].innerHTML=tousername;
+				event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML=content;
+				event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("commentReplayUser")[0].id=commentId+"_";
+			}
+		}
 	</script> 
+		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">评论成功</h2></div></div>
+		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
+		<div id="zhao_hidden">${userName}</div>
 </body>
 </html>

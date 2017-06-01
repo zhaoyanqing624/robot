@@ -644,31 +644,7 @@
 		var questionId = document.URL.split("=")[1];
 		var content = event.target.parentNode.parentNode.getElementsByClassName("comment-Editor-input")[0].value;
 		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-		$.ajax({
-			type:"POST",
-			url:"/org.xjtusicd3.partner/saveCommunityComment.html",
-			data:{
-				"questionId":questionId,
-				"content":content,
-				"answerId":answerId
-			},
-			dataType:"json",
-			success:function(data){
-				jsondata=$.parseJSON(data);
-				if(jsondata.value=="0"){
-					self.location='login.html';
-				}else if(jsondata.value=="1"){
-				setTimeout("location.reload()",1000)
-					document.getElementById('success').style.display='block';
-					setTimeout("codefans()",3000);
-					
-				}else{
-				setTimeout("location.reload()",1000)
-					document.getElementById('chongfu').style.display='block';
-					setTimeout("codefans2()",3000);
-				}
-			}
-		})
+		
 	}
 	//获取更多评论
 	function getMoreComment(){
