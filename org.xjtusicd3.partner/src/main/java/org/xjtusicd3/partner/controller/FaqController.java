@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.ClassifyService;
@@ -100,10 +102,12 @@ public class FaqController {
 		List<ClassifyPersistence> classify2 = ClassifyService.faq2_classify2(classifyId);
 		List<ClassifyPersistence> classify = ClassifyService.faq2_classify(classifyId);
 		List<Faq3_faqContentView> faq3Views = QuestionService.faq3_faqcontent(q);
+		List<CommentPersistence> commentPersistences = CommentHelper.getComment(q);
 		List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(faq3Views.get(0).getQuestionId(),0);
 		if (useremail!=null) {
 			modelAndView.addObject("userName", userPersistences.get(0).getUSERNAME());
 		}
+		modelAndView.addObject("commentNumber", commentPersistences.size());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
 		modelAndView.addObject("faq3Views", faq3Views);

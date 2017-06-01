@@ -20,11 +20,12 @@ import org.xjtusicd3.database.model.AgreePersistence;
 import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
-import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.CommunityService;
+import org.xjtusicd3.partner.view.Faq3_CommentReplyView;
+import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Question2_CommunityReplayView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -44,6 +45,7 @@ public class CommentController {
 		if (useremail==null) {
 			return "0";
 		}else {
+			//查看评论是否重复提交
 			List<UserPersistence> uList = UserHelper.getEmail(useremail);
 			List<QuestionPersistence> faqlist = QuestionHelper.faq3_faqcontent_title(faqtitle);
 			List<UserPersistence> userPersistences = UserHelper.getEmail_name(faqusername);
@@ -151,7 +153,7 @@ public class CommentController {
 		}
 	}
 	/*
-	 * zyq_question2_ajax_查看更多评论
+	 * zyq_question2_ajax_查看更多回复
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
@@ -172,6 +174,56 @@ public class CommentController {
 			jsonObject.put("endnumber", startnumber+list.size());
 			jsonObject.put("commentList", list);
 			jsonObject.put("totalnumber", commentPersistences.size());
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_faq3_ajax_获得更多评论
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/queryMoreComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String queryMoreComment(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String questionId = request.getParameter("questionId");
+		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<CommentPersistence> commentPersistences = CommentHelper.getComment2(questionId,"0");
+			List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(questionId,startnumber);
+			jsonObject.put("value", "1");
+			jsonObject.put("endnumber", startnumber+faq3_CommentViews.size());
+			jsonObject.put("totalnumber", commentPersistences.size());
+			jsonObject.put("commentList", faq3_CommentViews);
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_faq3_ajax_获得更多回复
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/queryMoreReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String queryMoreReply(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String commentId = request.getParameter("commentid");
+		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<CommentPersistence> commentPersistences = CommentHelper.faq3_getCommentReply(commentId);
+			List<Faq3_CommentReplyView> faq3_CommentReplyViews = CommentService.faq3_CommentReplyViews(commentId,startnumber);
+			jsonObject.put("value", "1");
+			jsonObject.put("endnumber", startnumber+faq3_CommentReplyViews.size());
+			jsonObject.put("totalnumber", commentPersistences.size());
+			jsonObject.put("commentList", faq3_CommentReplyViews);
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}

@@ -69,7 +69,7 @@ public class UserService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		UserHelper.login_register(uuid.toString(),email,password,username,0,identification_number,time_stamp);
+		UserHelper.login_register(uuid.toString(),email,password,username,0,identification_number,time_stamp,"");
 		
 	}
 	public static boolean validateUserState(String email)

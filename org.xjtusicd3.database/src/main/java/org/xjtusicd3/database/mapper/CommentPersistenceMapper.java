@@ -19,6 +19,11 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0} ORDER BY COMMENTTIME ASC")
 	List<CommentPersistence> getComment(String faqquestionid);
 	/*
+	 * zyq_faq3_查看评论的数量
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0} AND COMMENTPARENTID=#{1} ORDER BY COMMENTTIME ASC")
+	List<CommentPersistence> getComment2(String faqquestionid,String parentId);
+	/*
 	 * zyq_faq3_查看评论_查看更多
 	 */
 	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0} AND COMMENTPARENTID=#{2} ORDER BY COMMENTTIME ASC LIMIT #{1},5")
@@ -56,12 +61,12 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	/*
 	 * zyq_faq3_查看子评论下的回复
 	 */
-	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} ORDER BY COMMENTTIME ASC")
+	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} ORDER BY COMMENTTIME ASC ")
 	List<CommentPersistence> faq3_getCommentReply(String parentId);
 	/*
 	 * zyq_faq3_查看子评论下的回复_更多回复
 	 */
-	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} AND ORDER BY COMMENTTIME ASC LIMIT #{1},5")
+	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} ORDER BY COMMENTTIME ASC LIMIT #{1},5")
 	List<CommentPersistence> faq3_getCommentReply_Limit(String parentId, int startnumber);
 
 

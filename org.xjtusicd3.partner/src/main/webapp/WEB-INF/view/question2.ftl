@@ -646,7 +646,7 @@
 		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
 		
 	}
-	//获取更多评论
+	//获取更多回复
 	function getMoreComment(){
 		var html = event.target.parentNode.getElementsByClassName("commentList")[0].innerHTML;
 		var startnumber = event.target.parentNode.getElementsByClassName("commentList")[0].getElementsByTagName("li").length;

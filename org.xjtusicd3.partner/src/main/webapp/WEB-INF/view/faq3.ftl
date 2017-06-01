@@ -163,7 +163,6 @@
                     			<span class="userPic"><img src="${user.userImage}"></span>
                     			<span class="username">${user.userName}</span><span class="line">|</span><span class="time">${comment.commentTime}</span>
                     		</div>
-                    		</#list>
                     		<div class="clearfix content" >
 	                    		<a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复(${comment.commentNumber})</a>
 	                    		<p class="text" >${comment.commentContent}</p>
@@ -183,7 +182,7 @@
                     					</#if>
                     					<span class="line">|</span><span class="time">${reply.time}</span>
                     				</div>
-                    				<#if UserEmail ??>
+                    				<#if userName ?? && reply.userName==userName>
                     				<div class="clearfix content" onclick="replyOther()" style="cursor:pointer">
                     					<a href="javascript:void(0);" class="commentReplay" onclick="deleteComment()" style="display:none"><i class="fa fa-trash-o"></i></a>
                     					<p class="text">${reply.comment}</p>
@@ -196,16 +195,20 @@
                     				</#if>
                     			</li>
                     			</#list>
+                    			<#if comment.commentNumber gt 5>
+                    			<p class="ac" id="querymorelink2"><a href="javascript:void(0);" onclick="querymorereply()">更多回复</a></p>
+                    			</#if>
                     		</ul>
+                    		</#list>
                     		<div class="commentReplayUser" id="">回复：<span class="username_span" style="color:#F00" ></span>:<span class="content_span" style="color:#F00"></span></div>
                     		<textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea>
                     		<p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p>
                     	</li>
                     </ul>
                     </#list>
-                    <p class="ac" id="querymorelink">
-                        <a href="javascript:void(0);" onclick="querymorecomment()">查看更多...</a>
-                    </p>
+                    <#if commentNumber gt 5>
+                    <p class="ac" id="querymorelink" class="display:block"><a href="javascript:void(0);" onclick="querymorecomment()">查看更多...</a></p>
+                    </#if>
                 </div>
             </div>
             
@@ -372,23 +375,29 @@
 			var faqusername = document.getElementsByClassName("username")[0].innerHTML;
 			var faqtitle = document.getElementById("detailTplWrapper").getElementsByClassName("title")[0].innerHTML;
 			var comment = UE.getEditor('editor').getContent();
-			$.ajax({
-				type:"POST",
-				url:"/org.xjtusicd3.partner/saveComment.html",
-				data:{
-					"faqtitle":faqtitle,
-					"comment":comment,
-					"faqusername":faqusername
-				},
-				dataType:"json",
-				success:function(data){
-					if(data=="0"){
-						self.location='login.html'; 
-					}else{
-						window.location.reload(); 
+			if(comment==""){
+				setTimeout("location.reload()",1000)
+				document.getElementById('null').style.display='block';
+				setTimeout("codefans()",3000);
+			}else{
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/saveComment.html",
+					data:{
+						"faqtitle":faqtitle,
+						"comment":comment,
+						"faqusername":faqusername
+					},
+					dataType:"json",
+					success:function(data){
+						if(data=="0"){
+							self.location='login.html'; 
+						}else{
+							window.location.reload(); 
+						}
 					}
-				}
-			})
+				})
+			}
 		}
 		function showeditor(){
 			document.getElementById('content').style.display="none";
@@ -489,9 +498,12 @@
 			event.target.parentNode.getElementsByClassName("commentReplay")[0].style.display="none";
 		  }
     	}
+    	//删除自己的评论
     	function deleteComment(){
 			event.target.parentNode.parentNode.parentNode.style.display="none";
 		}
+		
+		//特定回复某人的评论
 		function replyOther(){
 			var username = document.getElementById("zhao_hidden").innerHTML;
 			var content = event.target.parentNode.getElementsByClassName("text")[0].innerHTML;
@@ -508,9 +520,77 @@
 				event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("commentReplayUser")[0].id=commentId+"_";
 			}
 		}
+		//获取更多评论
+		function querymorecomment(){
+			html = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].innerHTML;
+			startnumber = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].getElementsByClassName("commentList").length;
+			var questionId = document.URL.split("=")[1];
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/queryMoreComment.html",
+				data:{
+					"questionId":questionId,
+					"startnumber":startnumber
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementById("querymorelink").remove();
+						if(data.endnumber<data.totalnumber){
+							startnumber = data.endnumber;
+							for(var i in data.commentList){
+								var htmls = document.getElementsByClassName("comment")[0].innerHTML;
+								document.getElementsByClassName("comment")[0].innerHTML = htmls+ '<ul class="commentList" id="'+data.commentList[i].commentId+'"><li class="commentLiContent"><div class="userContent clearfix"><span class="userPic"><img src="'+data.commentList[i].userViews[0].userImage+'"></span><span class="username">'+data.commentList[i].userViews[0].userName+'</span><span class="line">|</span><span class="time">'+data.commentList[i].commentTime+'</span></div><div class="clearfix content"><a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复('+data.commentList[i].commentNumber+')</a><p class="text"></p><p>'+data.commentList[i].commentContent+'</p><p></p></div><ul class="subCommentList" style="display:none"></ul><div class="commentReplayUser" id="">回复：<span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea><p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p></li></ul><p class="ac" id="querymorelink" class="display:block"><a href="javascript:void(0);" onclick="querymorecomment()">查看更多...</a></p>';
+							}
+						}else{
+							for(var i in data.commentList){
+								var htmls = document.getElementsByClassName("comment")[0].innerHTML;
+								document.getElementsByClassName("comment")[0].innerHTML = htmls+ '<ul class="commentList" id="'+data.commentList[i].commentId+'"><li class="commentLiContent"><div class="userContent clearfix"><span class="userPic"><img src="'+data.commentList[i].userViews[0].userImage+'"></span><span class="username">'+data.commentList[i].userViews[0].userName+'</span><span class="line">|</span><span class="time">'+data.commentList[i].commentTime+'</span></div><div class="clearfix content"><a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复('+data.commentList[i].commentNumber+')</a><p class="text"></p><p>'+data.commentList[i].commentContent+'</p><p></p></div><ul class="subCommentList" style="display:none"></ul><div class="commentReplayUser" id="">回复：<span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea><p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p></li></ul>';
+							}
+						}
+					}
+				}
+			})
+		}
+		//获取更多回复
+		function querymorereply(){
+			var commentid = event.target.parentNode.parentNode.parentNode.parentNode.id;
+			startnumber = event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("_commentlist").length;
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/queryMoreReply.html",
+				data:{
+					"commentid":commentid,
+					"startnumber":startnumber
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementById("querymorelink2").remove();
+						if(data.endnumber<data.totalnumber){
+							startnumber = data.endnumber;
+							for(var i in data.commentList){
+								var htmls = document.getElementsByClassName("subCommentList")[0].innerHTML;
+								document.getElementsByClassName("comment")[0].innerHTML = htmls+ '<ul class="commentList" id="'+data.commentList[i].commentId+'"><li class="commentLiContent"><div class="userContent clearfix"><span class="userPic"><img src="'+data.commentList[i].userViews[0].userImage+'"></span><span class="username">'+data.commentList[i].userViews[0].userName+'</span><span class="line">|</span><span class="time">'+data.commentList[i].commentTime+'</span></div><div class="clearfix content"><a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复('+data.commentList[i].commentNumber+')</a><p class="text"></p><p>'+data.commentList[i].commentContent+'</p><p></p></div><ul class="subCommentList" style="display:none"></ul><div class="commentReplayUser" id="">回复：<span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea><p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p></li></ul><p class="ac" id="querymorelink" class="display:block"><a href="javascript:void(0);" onclick="querymorecomment()">查看更多...</a></p>';
+							}
+						}else{
+							for(var i in data){
+								var htmls = document.getElementsByClassName("subCommentList")[0].innerHTML;
+								document.getElementsByClassName("subCommentList")[0].innerHTML = htmls+ '<ul class="commentList" id="'+data.commentList[i].commentId+'"><li class="commentLiContent"><div class="userContent clearfix"><span class="userPic"><img src="'+data.commentList[i].userViews[0].userImage+'"></span><span class="username">'+data.commentList[i].userViews[0].userName+'</span><span class="line">|</span><span class="time">'+data.commentList[i].commentTime+'</span></div><div class="clearfix content"><a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复('+data.commentList[i].commentNumber+')</a><p class="text"></p><p>'+data.commentList[i].commentContent+'</p><p></p></div><ul class="subCommentList" style="display:none"></ul><div class="commentReplayUser" id="">回复：<span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea><p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p></li></ul>';
+							}
+						}
+					}
+				}
+			})
+		}
 	</script> 
 		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">评论成功</h2></div></div>
 		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
-		<div id="zhao_hidden">${userName}</div>
+		<div class="success" id="null" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">内容不能为空</h2></div></div>
+		<div id="zhao_hidden" style="display:none">${userName}</div>
 </body>
 </html>

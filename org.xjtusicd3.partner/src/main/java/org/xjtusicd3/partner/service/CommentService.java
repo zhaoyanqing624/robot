@@ -90,7 +90,8 @@ public class CommentService {
 				faq2_faqUserViews.add(userView);
 			}
 			List<Faq3_CommentReplyView> faq3_CommentReplyViews = new ArrayList<Faq3_CommentReplyView>();
-			List<CommentPersistence> commentPersistences2 = CommentHelper.faq3_getCommentReply(commentPersistence.getCOMMENTID());
+			List<CommentPersistence> list = CommentHelper.faq3_getCommentReply(commentPersistence.getCOMMENTID());
+			List<CommentPersistence> commentPersistences2 = CommentHelper.faq3_getCommentReply_Limit(commentPersistence.getCOMMENTID(),0);
 			for(CommentPersistence commentPersistence2:commentPersistences2){
 				Faq3_CommentReplyView faq3_CommentReplyView = new Faq3_CommentReplyView();
 				List<UserPersistence> userNameList = UserHelper.getEmail_id(commentPersistence2.getUSERID());
@@ -115,7 +116,7 @@ public class CommentService {
 			faq3_CommentView.setUserViews(faq2_faqUserViews);
 			faq3_CommentView.setReplyViews(faq3_CommentReplyViews);
 			faq3_CommentView.setCommentId(commentPersistence.getCOMMENTID());
-			faq3_CommentView.setCommentNumber(Integer.toString(commentPersistences2.size()));
+			faq3_CommentView.setCommentNumber(Integer.toString(list.size()));
 			faq3_CommentViews.add(faq3_CommentView);
 		}
 		return faq3_CommentViews;
@@ -136,5 +137,27 @@ public class CommentService {
 			question2_CommunityReplayViews.add(question2_CommunityReplayView);
 		}
 		return question2_CommunityReplayViews;
+	}
+	/*
+	 * zyq_faq3_获得更多的回复
+	 */
+	public static List<Faq3_CommentReplyView> faq3_CommentReplyViews(String commentId,int startnumber){
+		List<Faq3_CommentReplyView> faq3_CommentReplyViews = new ArrayList<Faq3_CommentReplyView>();
+		List<CommentPersistence> commentPersistences = CommentHelper.faq3_getCommentReply_Limit(commentId, startnumber);
+		for(CommentPersistence commentPersistence:commentPersistences){
+			Faq3_CommentReplyView faq3_CommentReplyView = new Faq3_CommentReplyView();
+			faq3_CommentReplyView.setComment(commentPersistence.getCOMMENTCONTENT());
+			faq3_CommentReplyView.setCommentId(commentPersistence.getCOMMENTID());
+			faq3_CommentReplyView.setTime(commentPersistence.getCOMMENTTIME());
+			List<UserPersistence> userPersistences = UserHelper.getEmail_id(commentPersistence.getUSERID());
+			if (commentPersistence.getTOUSERID()!=null) {
+				List<UserPersistence> userPersistences2 = UserHelper.getEmail_id(commentPersistence.getTOUSERID());
+				faq3_CommentReplyView.setToUserName(userPersistences2.get(0).getUSERNAME());
+			}
+			faq3_CommentReplyView.setUserName(userPersistences.get(0).getUSERNAME());
+			faq3_CommentReplyView.setParrentId(commentPersistence.getCOMMENTPARENTID());
+			faq3_CommentReplyViews.add(faq3_CommentReplyView);
+		}
+		return faq3_CommentReplyViews;
 	}
 }

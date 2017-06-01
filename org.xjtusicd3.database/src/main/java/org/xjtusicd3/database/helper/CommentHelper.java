@@ -28,6 +28,16 @@ public class CommentHelper {
 		return list;
 	}
 	/*
+	 * zyq_faq3_查看faq下评论的数量
+	 */
+	public static List<CommentPersistence> getComment2(String faqquestionid,String parentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.getComment2(faqquestionid,parentId);
+		session.close();
+		return list;
+	}
+	/*
 	 * zyq_faq3_查看评论_查看更多
 	 */
 	public static List<CommentPersistence> getCommentMore(String faqquestionid,int startnumber,String parentId){
