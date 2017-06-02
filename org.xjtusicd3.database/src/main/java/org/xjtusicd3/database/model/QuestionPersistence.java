@@ -26,8 +26,6 @@ public class QuestionPersistence {
 	private String MODIFYTIME;
 	@TableField(columnName="MODIFYNUMBER")
 	private String MODIFYNUMBER;
-	@TableField(columnName="SCORE")
-	private float SCORE;
 	@TableField(columnName="FAQSTATE")
 	private int FAQSTATE;
 	public String getFAQQUESTIONID() {
@@ -83,12 +81,6 @@ public class QuestionPersistence {
 	}
 	public void setMODIFYNUMBER(String mODIFYNUMBER) {
 		MODIFYNUMBER = mODIFYNUMBER;
-	}
-	public float getSCORE() {
-		return SCORE;
-	}
-	public void setSCORE(float sCORE) {
-		SCORE = sCORE;
 	}
 	public int getFAQSTATE() {
 		return FAQSTATE;

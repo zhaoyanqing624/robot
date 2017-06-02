@@ -913,7 +913,8 @@
 }
 .knowledgeDetail .shareBox {
     float: right;
-    padding-top: 30px;
+    padding-top: 0px;
+    height: 45px;
 }
 
 .knowledgeDetail .shareBox a.share,
@@ -928,12 +929,12 @@
 .knowledgeDetail .shareBox .heart {
     width: 22px;
     height: 21px;
-    background: url(../images/gray_start.png) no-repeat;
+    background: url(/org.xjtusicd3.partner/images/gray_start.png) no-repeat;
 }
 .knowledgeDetail .shareBox .redheart {
     width: 22px;
     height: 21px;
-    background: url(../images/red_start.png) no-repeat;
+    background: url(/org.xjtusicd3.partner//images/red_start.png) no-repeat;
 }
 .knowledgeDetail .btnWrapper {
     float: left;
@@ -2290,4 +2291,11 @@ table a.gridLink {
 	margin-left: 40px;
 	margin-top:50px;
 	display:none
+}
+.shareBox_hidden{
+	position: absolute;
+    z-index: 10;
+    width: 28%;
+    height: 2%;
+    display: none;
 }

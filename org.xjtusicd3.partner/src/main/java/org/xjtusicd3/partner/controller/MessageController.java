@@ -39,7 +39,6 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/getUserInfo"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
 	public String getUserInfo(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
 		String username = request.getParameter("username");
 		List<UserPersistence> list = UserHelper.getUserInfo(username);
 		String result = JsonUtil.toJsonString(list);

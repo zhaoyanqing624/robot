@@ -87,7 +87,6 @@ public class Faq3_faqContentView {
 		this.FaqScan = questionPersistence.getSCAN();
 		this.FaqCollection = questionPersistence.getCOLLECTION();
 		this.FaqWritetime = questionPersistence.getMODIFYNUMBER();
-		this.FaqScore = questionPersistence.getSCORE();
 	}
 	public Faq3_faqContentView(){
 		

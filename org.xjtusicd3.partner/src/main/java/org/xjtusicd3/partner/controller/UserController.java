@@ -1,12 +1,7 @@
 package org.xjtusicd3.partner.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -17,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.eclipse.jetty.server.Authentication.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +27,6 @@ import org.xjtusicd3.database.model.ITPersistence;
 import org.xjtusicd3.database.model.PayPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.CopyFile;
-import org.xjtusicd3.partner.filter.DeleteFile;
 import org.xjtusicd3.partner.filter.RegexAddress;
 import org.xjtusicd3.partner.service.UserService;
 import org.xjtusicd3.partner.view.UserView;
@@ -121,7 +114,7 @@ public class UserController {
 				List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
 				session.setAttribute("UserId", list2.get(0).getUSERID());
 				session.setAttribute("UserEmail", email);
-				return "redirect:robot.html";
+				return "redirect:"+urlPath;
 			}
 		}else {
 			if(urlPath==null){
@@ -136,7 +129,7 @@ public class UserController {
 					List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
 					session.setAttribute("UserId", list2.get(0).getUSERID());
 					session.setAttribute("UserEmail", email);
-					return "redirect:"+urlPath+"";
+					return "redirect:"+urlPath;
 				}
 			}
 		}
@@ -148,10 +141,9 @@ public class UserController {
 	 */
 	@RequestMapping(value="/loginout",method=RequestMethod.GET)
 	public String loginout(HttpSession session,HttpServletRequest request){
-		ModelAndView modelAndView = null;
 		String urlPath = (String) session.getAttribute("urlPath");
 		session.invalidate();
-		return "redirect:"+urlPath+"";
+		return "redirect:"+urlPath;
 	}
 	/*
 	 * personal_个人信息
@@ -168,8 +160,7 @@ public class UserController {
 			if(address==null){
 				
 			}else {
-				RegexAddress regexAddress = new RegexAddress();
-				mv.addObject("address", regexAddress.replaceAddress(address));
+				mv.addObject("address", RegexAddress.replaceAddress(address));
 			}
 			mv.addObject("personal_list", list);
 			return mv;
@@ -198,7 +189,6 @@ public class UserController {
 			String province = userView.getProvince();
 			String city = userView.getCity();
 			String district = userView.getDistrict();
-			RegexAddress regexAddress = new RegexAddress();
 			if (province==null&&city==null&&district==null) {
 				address = list.get(0).getUSERADDRESS();
 			}else {
@@ -217,7 +207,6 @@ public class UserController {
 	public String updateUserPassword(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
-		String repassword2 = request.getParameter("repassword2");
 		String useremail = (String) session.getAttribute("UserEmail");
 		if (useremail==null) {
 			return "redirect:login.html";

@@ -13,16 +13,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CollectionHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.helper.ScoreHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
+import org.xjtusicd3.database.model.ScorePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.QuestionService;
+import org.xjtusicd3.partner.service.ScoreService;
 import org.xjtusicd3.partner.view.Faq1_ClassifyView;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
@@ -34,7 +39,12 @@ public class FaqController {
 	@RequestMapping(value="faq",method=RequestMethod.GET)
 	public ModelAndView faq(HttpSession session,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("faq");
-		String urlPath = request.getServletPath();
+		String urlPath="";
+		if (request.getQueryString()==null) {
+			urlPath = request.getServletPath();
+		}else {
+			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		}
 		session.setAttribute("urlPath", urlPath);
 		return mv;
 	}
@@ -51,8 +61,13 @@ public class FaqController {
 		}
 		modelAndView.addObject("faq1_list", list);
 		modelAndView.addObject("faq1_list2", list2);
-		String urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
-		session.setAttribute("urlPath", urlPath);
+		String urlPath="";
+		if (request.getQueryString()==null) {
+			urlPath = request.getServletPath();
+		}else {
+			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		}
+		session.setAttribute("urlPath", urlPath);;
 		return modelAndView;
 	}
 	/*
@@ -67,7 +82,12 @@ public class FaqController {
 		modelAndView.addObject("faq2_list", classify);
 		modelAndView.addObject("faq2_list2", classify2);
 		modelAndView.addObject("faq2_list3", faq2Views);
-		String urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		String urlPath="";
+		if (request.getQueryString()==null) {
+			urlPath = request.getServletPath();
+		}else {
+			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		}
 		session.setAttribute("urlPath", urlPath);
 		return modelAndView;
 	}
@@ -104,15 +124,39 @@ public class FaqController {
 		List<Faq3_faqContentView> faq3Views = QuestionService.faq3_faqcontent(q);
 		List<CommentPersistence> commentPersistences = CommentHelper.getComment(q);
 		List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(faq3Views.get(0).getQuestionId(),0);
+		//FAQ的总评分展示
+		List<ScorePersistence> FAQlist = ScoreHelper.getScoreList(q);
+		float totalscore = ScoreHelper.getScore(q);
+		int number;
+		if (totalscore==0) {
+			number = 1;
+		}else {
+			number = FAQlist.size();
+		}
+		float score = totalscore/number;
+		modelAndView.addObject("score", score);
 		if (useremail!=null) {
 			modelAndView.addObject("userName", userPersistences.get(0).getUSERNAME());
+			//判断用户是否收藏
+			List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(useremail, q);
+			modelAndView.addObject("collection", collectionPersistences.size());
+			//判断用户是否评分
+			List<ScorePersistence> scorePersistences = ScoreHelper.getScoreList(q);
+			modelAndView.addObject("scoreList", scorePersistences);
+			modelAndView.addObject("scoreSize", scorePersistences.size());
 		}
 		modelAndView.addObject("commentNumber", commentPersistences.size());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
 		modelAndView.addObject("faq3Views", faq3Views);
 		modelAndView.addObject("comment", faq3_CommentViews);
-		String urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		
+		String urlPath="";
+		if (request.getQueryString()==null) {
+			urlPath = request.getServletPath();
+		}else {
+			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		}
 		session.setAttribute("urlPath", urlPath);
 		return modelAndView;
 	}
@@ -158,5 +202,27 @@ public class FaqController {
 		String urlPath = request.getHeader("REFERER");
 		session.setAttribute("urlPath", urlPath);
 		return mv;
+	}
+	/*
+	 * zyq_faq3_ajax_FAQ评分
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveFAQscore"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String saveFAQscore(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String questionId = request.getParameter("questionId");
+		float score = Float.parseFloat(request.getParameter("score"));
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			ScoreService.saveFAQscore(questionId, userPersistences.get(0).getUSERID(), score);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject);
+			return result;
+		}
 	}
 }

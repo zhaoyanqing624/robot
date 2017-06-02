@@ -315,6 +315,34 @@ public class CommentController {
 		}
 	}
 	/*
+	 * zyq_question2_ajax_收藏
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveCollectionFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String saveCollectionFAQ(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String questionId = request.getParameter("questionId");
+		List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(useremail, questionId);
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			if (collectionPersistences.size()==0) {
+				CollectionHelper.saveCollection2(useremail, questionId);
+				jsonObject.put("value", "1");
+				String result = JsonUtil.toJsonString(jsonObject); 
+				return result;
+			}else {
+				CollectionHelper.deleteCollection(collectionPersistences.get(0).getCOLLECTIONID());
+				jsonObject.put("value", "2");
+				String result = JsonUtil.toJsonString(jsonObject); 
+				return result;
+			}
+		}
+	}
+	/*
 	 * zyq_question2_ajax_设为最佳答案
 	 */
 	@ResponseBody
@@ -331,6 +359,26 @@ public class CommentController {
 			CommunityAnswerHelper.saveBestAnswer(answerId);
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_faq3_ajax_删除自己的回复
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/deleteReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String deleteReply(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String commentId = request.getParameter("commentId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			CommentHelper.deleteReply(commentId);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject);
 			return result;
 		}
 	}

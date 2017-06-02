@@ -86,7 +86,6 @@ public class QuestionService {
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	String time = format.format(date);
 		questionPersistence.setMODIFYTIME(time);
-		questionPersistence.setSCORE(0);
 		questionPersistence.setFAQDESCRIPTION(description);
 		questionPersistence.setMODIFYNUMBER("1");
 		questionPersistence.setFAQSTATE(1);

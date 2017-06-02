@@ -28,6 +28,7 @@ import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.PayPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
+import org.xjtusicd3.database.mapper.ScorePersistenceMapper;
 import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
@@ -83,6 +84,7 @@ public class SqlSessionManager {
 			configuration.addMapper(CommentPersistenceMapper.class);
 			configuration.addMapper(AgreePersistenceMapper.class);
 			configuration.addMapper(CollectionPersistenceMapper.class);
+			configuration.addMapper(ScorePersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

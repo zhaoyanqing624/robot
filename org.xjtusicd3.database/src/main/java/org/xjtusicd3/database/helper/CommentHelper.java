@@ -127,4 +127,13 @@ public class CommentHelper {
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_faq3_ajax_删除自己的回复
+	 */
+	public static void deleteReply(String commentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		mapper.deleteReply(commentId);
+		session.close();
+	} 
 }

@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.xjtusicd3.database.helper.UserHelper;
-import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.EquipmentService;
 import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
@@ -45,7 +43,6 @@ public class EquipmentController {
 			return new ModelAndView("login");
 		}else {
 			ModelAndView mv = new ModelAndView("personal3");
-			List<UserPersistence> uList = UserHelper.getEmail(useremail);
 			List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(useremail);
 			mv.addObject("personal3_list", list);
 			return mv;

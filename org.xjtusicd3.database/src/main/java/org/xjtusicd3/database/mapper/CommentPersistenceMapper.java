@@ -2,6 +2,7 @@ package org.xjtusicd3.database.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.xjtusicd3.database.logic.IBaseDao;
@@ -68,6 +69,11 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	 */
 	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} ORDER BY COMMENTTIME ASC LIMIT #{1},5")
 	List<CommentPersistence> faq3_getCommentReply_Limit(String parentId, int startnumber);
+	/*
+	 * zyq_faq3_ajax_删除自己的回复
+	 */
+	@Delete("DELETE FROM TBL_Comment WHERE COMMENTID=#{0}")
+	void deleteReply(String commentId);
 
 
 }

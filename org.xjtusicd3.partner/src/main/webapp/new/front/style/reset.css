@@ -96,7 +96,9 @@ textarea {
 .ac {
     text-align: center;
 }
-
+.ac2 {
+    text-align: center;
+}
 .ar {
     text-align: right;
 }
@@ -129,8 +131,9 @@ textarea {
 }
 .clearfix {
     +zoom: 1;
+    position:relaitve;
 }
-
+	
 .pb20 {
     padding-bottom: 20px;
 }
