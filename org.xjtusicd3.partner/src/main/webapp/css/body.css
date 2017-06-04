@@ -268,7 +268,8 @@ article .comment p.userName {
 }
 
 article .comment p.content {
-	color: #6b6b6b
+	color: #6b6b6b;
+	cursor: pointer;
 }
 
 article .comment p.commentTime {
@@ -367,4 +368,10 @@ article .answer-editor .draftStatus {
 	height: 20px;
 	margin-right: 5px;
 	background-image: url(../img/fold.png)
+}
+.replyOther_div{
+	margin-left: 48px;
+    margin-top: -20px;
+    height: 30px;
+    display: none;
 }

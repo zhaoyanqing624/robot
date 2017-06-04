@@ -31,10 +31,10 @@ public class CommunityAnswerHelper{
 	/*
 	 * zyq_question_问题展示_other	
 	 */
-	public static List<CommunityAnswerPersistence> question_CommunityAnswer_other(String communityquestionId){
+	public static List<CommunityAnswerPersistence> question_CommunityAnswer_other(String communityquestionId,int startNumber){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
-		List<CommunityAnswerPersistence> list = mapper.question_CommunityAnswer_other(communityquestionId);
+		List<CommunityAnswerPersistence> list = mapper.question_CommunityAnswer_other(communityquestionId,startNumber);
 		session.close();
 		return list;
 	}

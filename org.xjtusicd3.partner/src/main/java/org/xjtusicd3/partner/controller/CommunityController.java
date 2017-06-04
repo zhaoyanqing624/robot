@@ -12,15 +12,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
 import org.xjtusicd3.database.helper.CommunityQuestionHelper;
+import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.CommunityService;
+import org.xjtusicd3.partner.service.QuestionService;
+import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Question2_CommunityView;
 import org.xjtusicd3.partner.view.Question_CommunityView;
 
@@ -35,9 +43,6 @@ public class CommunityController {
 	public ModelAndView question(String c,String type,HttpServletRequest request,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
-		if(useremail==null){
-			return new ModelAndView("login");
-		}else {
 			List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(useremail,0,type,c);
 			ModelAndView mv = new ModelAndView("question");
 			mv.addObject("classifyList", classifyPersistences);
@@ -51,8 +56,8 @@ public class CommunityController {
 				typename="待回答";
 			}
 			mv.addObject("typename", typename);
+			mv.addObject("userEmail", useremail);
 			return mv;
-		}
 	}
 	/*
 	 * zyq_question_ajax_获取更多问题
@@ -105,7 +110,8 @@ public class CommunityController {
 			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(q);
 			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
 			List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews_best(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
-			List<Question2_CommunityView> question2_CommunityViews2 = CommunityService.question2_CommunityViews_other(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
+			int startNumber = 0;
+			List<Question2_CommunityView> question2_CommunityViews2 = CommunityService.question2_CommunityViews_other(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID(),startNumber);
 			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(q);
 			mv.addObject("answerList_best", question2_CommunityViews);
 			mv.addObject("answerList_other", question2_CommunityViews2);
@@ -114,6 +120,7 @@ public class CommunityController {
 			mv.addObject("classifyName", classifyPersistences.get(0).getFAQCLASSIFYNAME());
 			mv.addObject("communityNumber", communityAnswerPersistences.size());
 			mv.addObject("userid", userPersistences.get(0).getUSERID());
+			mv.addObject("userName", userPersistences.get(0).getUSERNAME());
 			mv.addObject("_userid", communityQuestionPersistences.get(0).getUSERID());
 		}
 		return mv;
@@ -185,6 +192,33 @@ public class CommunityController {
 				return result;
 			}
 			
+		}
+		
+	}
+	/*
+	 * zyq_question2_ajax_获得更多评论
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/queryMoreComment2"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String queryMoreComment2(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String questionId = request.getParameter("questionId");
+		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(questionId);
+			List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews_other(useremail, questionId, startnumber);
+			jsonObject.put("value", "1");
+			jsonObject.put("endnumber", startnumber+question2_CommunityViews.size());
+			jsonObject.put("totalnumber", answerPersistences.size());
+			jsonObject.put("commentList", question2_CommunityViews);
+			String result = JsonUtil.toJsonString(jsonObject); 
+			System.out.println(result);
+			return result;
 		}
 	}
 }

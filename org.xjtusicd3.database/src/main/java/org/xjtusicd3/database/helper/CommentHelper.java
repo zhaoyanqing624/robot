@@ -78,6 +78,16 @@ public class CommentHelper {
 		return list;
 	}
 	/*
+	 * zyq_question2_查看回复的回复
+	 */
+	public static List<CommentPersistence> question2_getComment3(String answerId,String userId,String content,String questionId,String touserId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.question2_getComment3(answerId,userId,content,questionId,touserId);
+		session.close();
+		return list;
+	}
+	/*
 	 * zyq_faq3_查看评论
 	 */
 	public static List<CommentPersistence> faq3_getComment(String commentId,String userId,String content,String questionId){

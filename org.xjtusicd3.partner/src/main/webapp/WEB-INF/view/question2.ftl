@@ -140,7 +140,7 @@
 			<div class="submitDiv" style="display:none"><button id="answerSubmit" onclick="replyQuestion()">提交</button></div>
 		</div>
 		<ul id="searchResult">
-				<#if answerList_best?size gt 2>
+				<#if answerList_best?size gt 0>
 					<#list answerList_best as answerList_best>
 					<li id="${answerList_best.answerId}">
 						<article class="answerArticle">
@@ -169,14 +169,20 @@
 							<div class="options">
 								<ul>
 									<li class="special">
-										<#if answerList_best.isLike="0">
+										<#if answerList_best.isLike=="0">
 										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${answerList_best.likesNumber}</span></a>
 										<#else>
 										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${answerList_best.likesNumber}</span></a>
 										</#if>
 									</li>
 									<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_best.communityNumber}</span></a></li>
-									<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
+									<li>
+										<#if answerList_best.isCollection=="0">
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a>
+										<#else>
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a>
+										</#if>
+									</li>
 								</ul>
 							</div>
 						   <div class="comment" style="display:none">
@@ -185,17 +191,21 @@
 									<#list userList as userList>
 									<div class="comment-Editor">
 										<img class="userImg" src="${userList.AVATAR}">
+										<div class="replyOther_div" id="">
+											<span class="username_span" style="color:#F00"></span>:
+											<span class="content_span" style="color:#F00"></span>
+										</div>
 										<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
 										<button class="submitComment" onclick="saveComment()">评论</button>
 									</div>
 									</#list>
 									<ul class="commentList">
 									<#list answerList_best.replay as replay>
-										<li>
+										<li id="${replay.commentId}">
 											<img class="userImg" src="${replay.userImage}">
 											<div class="commentDetail">
-												<p class="userName">${replay.userName}</p>
-												<p class="content">${replay.community}</p>
+												<p class="userName">${replay.userName}<span class="touserName">    ${replay.touserName}</span></p>
+												<p class="content" onclick="replyOther()">${replay.community}</p>
 												<p class="commentTime">${replay.time}</p>
 											</div>
 										</li>
@@ -238,14 +248,20 @@
 							<div class="options">
 								<ul>
 									<li class="special">
-										<#if answerList_other.isLike="0">
+										<#if answerList_other.isLike=="0">
 										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
 										<#else>
 										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
 										</#if>
 									</li>
 									<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_other.communityNumber}</span></a></li>
-									<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
+									<li>
+										<#if answerList_best.isCollection=="0">
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a>
+										<#else>
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a>
+										</#if>
+									</li>
 								</ul>
 							</div>
 						   <div class="comment" style="display:none">
@@ -254,17 +270,21 @@
 									<#list userList as userList>
 									<div class="comment-Editor">
 										<img class="userImg" src="${userList.AVATAR}">
+										<div class="replyOther_div" id="">
+											<span class="username_span" style="color:#F00"></span>:
+											<span class="content_span" style="color:#F00"></span>
+										</div>
 										<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
 										<button class="submitComment" onclick="saveComment()">评论</button>
 									</div>
 									</#list>
 									<ul class="commentList">
 									<#list answerList_other.replay as replay>
-										<li>
+										<li id="${replay.commentId}">
 											<img class="userImg" src="${replay.userImage}">
 											<div class="commentDetail">
-												<p class="userName">${replay.userName}</p>
-												<p class="content">${replay.community}</p>
+												<p class="userName">${replay.userName}<span class="touserName">    ${replay.touserName}</span></p>
+												<p class="content" onclick="replyOther()">${replay.community}</p>
 												<p class="commentTime">${replay.time}</p>
 											</div>
 										</li>
@@ -311,14 +331,20 @@
 											<li class="special"><a data-fun="toVote" class="unVoted" onclick="getBestAnswer()"><span class="status">设为最佳答案</span></a></li>
 										</#if>
 										<li class="special">
-											<#if answerList_other.isLike="0">
+											<#if answerList_other.isLike=="0">
 											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
 											<#else>
 											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${answerList_other.likesNumber}</span></a>
 											</#if>
 										</li>
 										<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_other.communityNumber}</span></a></li>
-										<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
+										<li>
+										<#if answerList_best.isCollection=="0">
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a>
+										<#else>
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a>
+										</#if>
+									</li>
 									</ul>
 								</div>
 							   <div class="comment" style="display:none">
@@ -327,17 +353,21 @@
 										<#list userList as userList>
 										<div class="comment-Editor">
 											<img class="userImg" src="${userList.AVATAR}">
+											<div class="replyOther_div" id="">
+												<span class="username_span" style="color:#F00"></span>:
+												<span class="content_span" style="color:#F00"></span>
+											</div>
 											<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
 											<button class="submitComment" onclick="saveComment()">评论</button>
 										</div>
 										</#list>
 										<ul class="commentList">
 										<#list answerList_other.replay as replay>
-											<li>
+											<li id="${replay.commentId}">
 												<img class="userImg" src="${replay.userImage}">
 												<div class="commentDetail">
-													<p class="userName">${replay.userName}</p>
-													<p class="content">${replay.community}</p>
+													<p class="userName">${replay.userName}<span class="touserName">    ${replay.touserName}</span></p>
+													<p class="content" onclick="replyOther()">${replay.community}</p>
 													<p class="commentTime">${replay.time}</p>
 												</div>
 											</li>
@@ -387,7 +417,13 @@
 											</#if>
 										</li>
 										<li><a onclick="getCommentList()"><span>评论 </span><span class="number">${answerList_other.communityNumber}</span></a></li>
-										<li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li>
+										<li>
+										<#if answerList_best.isCollection=="0">
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a>
+										<#else>
+										<a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a>
+										</#if>
+									</li>
 									</ul>
 								</div>
 							   <div class="comment" style="display:none">
@@ -396,17 +432,21 @@
 										<#list userList as userList>
 										<div class="comment-Editor">
 											<img class="userImg" src="${userList.AVATAR}">
+											<div class="replyOther_div" id="">
+												<span class="username_span" style="color:#F00"></span>:
+												<span class="content_span" style="color:#F00"></span>
+											</div>
 											<input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true">
 											<button class="submitComment" onclick="saveComment()">评论</button>
 										</div>
 										</#list>
 										<ul class="commentList">
 										<#list answerList_other.replay as replay>
-											<li>
+											<li id="${replay.commentId}">
 												<img class="userImg" src="${replay.userImage}">
 												<div class="commentDetail">
-													<p class="userName">${replay.userName}</p>
-													<p class="content">${replay.community}</p>
+													<p class="userName">${replay.userName}<span class="touserName">    ${replay.touserName}</span></p>
+													<p class="content" onclick="replyOther()">${replay.community}</p>
 													<p class="commentTime">${replay.time}</p>
 												</div>
 											</li>
@@ -422,10 +462,21 @@
 						</#list>
 					</#if>
 				</#if>
+				
 		</ul>
+		
 	</div>
-			
-		</div>                
+	<div id="loadStatus">
+		<div id="loading" class="">
+			<span>点击查看更多</span>
+			<div class="spinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+	</div>
+		</div> 
             </div>
             
             <div class="rightBarWrapper">
@@ -596,30 +647,35 @@
 		var content = UE.getEditor('editor').getContent();
 		var questionId = document.URL.split("=")[1];
 		var url = document.URL;
-		$.ajax({
-			type:"POST",
-			url:"/org.xjtusicd3.partner/saveReplyQuestion.html",
-			data:{
-				"content":content,
-				"questionId":questionId,
-				"url":url
-			},
-			dataType:"json",
-			success:function(data){
-				if(data.value=="0"){
-					self.location='login.html';
-				}else if(data.value=="1"){
-				setTimeout("location.reload()",1000)
-					document.getElementById('success').style.display='block';
-					setTimeout("codefans()",3000);
-					
-				}else{
-				setTimeout("location.reload()",1000)
-					document.getElementById('chongfu').style.display='block';
-					setTimeout("codefans2()",3000);
+		if(content==""){
+			document.getElementById('null').style.display='block';
+			setTimeout("codefans3()",3000);
+		}else{
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveReplyQuestion.html",
+				data:{
+					"content":content,
+					"questionId":questionId,
+					"url":url
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+					setTimeout("location.reload()",1000)
+						document.getElementById('success').style.display='block';
+						setTimeout("codefans()",3000);
+						
+					}else{
+					setTimeout("location.reload()",1000)
+						document.getElementById('chongfu').style.display='block';
+						setTimeout("codefans2()",3000);
+					}
 				}
-			}
-		})
+			})
+		}
 	}
 	
 	function codefans(){
@@ -630,7 +686,10 @@
 		var box=document.getElementById("chongfu");
 		box.style.display="none"; 
 	}
-	
+	function codefans3(){
+		var box=document.getElementById("null");
+		box.style.display="none"; 
+	}
 	//展开评论
 	function getCommentList(){
 		if(event.target.parentNode.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].style.display=="block"){
@@ -641,10 +700,78 @@
 	}
 	//添加评论回复
 	function saveComment(){
+		id = event.target.parentNode.getElementsByClassName("replyOther_div")[0].id;
 		var questionId = document.URL.split("=")[1];
 		var content = event.target.parentNode.parentNode.getElementsByClassName("comment-Editor-input")[0].value;
 		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-		
+		if(id==""){
+			if(content==""){
+				document.getElementById('null').style.display='block';
+				setTimeout("codefans3()",3000);
+			}else{
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/saveCommunityComment.html",
+					data:{
+						"questionId":questionId,
+						"content":content,
+						"answerId":answerId
+					},
+					dataType:"json",
+					success:function(data){
+						jsondata=$.parseJSON(data);
+						if(jsondata.value=="0"){
+							self.location='login.html';
+						}else if(jsondata.value=="1"){
+						setTimeout("location.reload()",1000)
+							document.getElementById('success').style.display='block';
+							setTimeout("codefans()",3000);
+							
+						}else{
+						setTimeout("location.reload()",1000)
+							document.getElementById('chongfu').style.display='block';
+							setTimeout("codefans2()",3000);
+						}
+					}
+				})
+			}
+		}else{
+			if(content==""){
+				document.getElementById('null').style.display='block';
+				setTimeout("codefans3()",3000);
+			}else{
+				var name = event.target.parentNode.getElementsByClassName("username_span")[0].innerHTML;
+				var length = name.length;
+				var tousername = name.substring(1,length); 
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/saveCommunityReply.html",
+					data:{
+						"questionId":questionId,
+						"content":content,
+						"answerId":answerId,
+						"tousername":tousername
+					},
+					dataType:"json",
+					success:function(data){
+						sondata=$.parseJSON(data);
+						if(jsondata.value=="0"){
+							self.location='login.html';
+						}else if(jsondata.value=="1"){
+						setTimeout("location.reload()",1000)
+							document.getElementById('success').style.display='block';
+							setTimeout("codefans()",3000);
+							
+						}else{
+						setTimeout("location.reload()",1000)
+							document.getElementById('chongfu').style.display='block';
+							setTimeout("codefans2()",3000);
+						}
+					}
+				})
+			}
+		}
+
 	}
 	//获取更多回复
 	function getMoreComment(){
@@ -751,8 +878,126 @@
 			})
 		}
 	}
+	//回复别人的回复
+	function replyOther(){
+		var commentId = event.target.parentNode.parentNode.id;
+		document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("replyOther_div")[0].style.display="block";
+		document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("comment-Editor-input")[0].style.margin="0 48px";
+		document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("replyOther_div")[0].id="_"+commentId;
+		var username = document.getElementById("zhao_hidden").innerHTML;
+		var tousername = event.target.parentNode.getElementsByClassName("userName")[0].innerHTML.split("<span")[0];
+		var tocomment = event.target.parentNode.getElementsByClassName("content")[0].innerHTML;
+		if(username==tousername){
+			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("replyOther_div")[0].style.display="none";
+			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("comment-Editor-input")[0].style.margin="0 15px";
+			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("replyOther_div")[0].id="";
+			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("username_span")[0].innerHTML="";
+			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML="";
+		}else{
+			if(tocomment.length<20){
+				tocomment = tocomment;
+			}else{
+				tocomment = tocomment.substr(0,20)+"...";
+			}
+			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("username_span")[0].innerHTML="@"+tousername;
+			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML=tocomment;
+		}
+	}
+	//查看更多评论
+		$('#loading').click(function() {
+			var startnumber = document.getElementById("searchResult").childElementCount;
+			var questionId = document.URL.split("q=")[1];
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/queryMoreComment2.html",
+				data:{
+					"startnumber":startnumber,
+					"questionId":questionId
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						for(var i in data.commentList){
+							var html = document.getElementById("searchResult").innerHTML;
+							if(data.commentList[i].isLike=="0"){
+								if(data.commentList[i].isCollection=="0"){
+									if(parseInt(data.commentList[i].communityNumber)<5){
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="'+data.commentList[0].userImage+'"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}else{
+										
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="'+data.commentList[0].userImage+'"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul><a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}
+								}else{
+									if(parseInt(data.commentList[i].communityNumber)<5){
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="‘+data.commentList[0].userImage+’"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}else{
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="‘+data.commentList[0].userImage+’"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul><a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}
+								}
+							}else{
+								if(data.commentList[i].isCollection=="0"){
+									if(parseInt(data.commentList[i].communityNumber)<5){
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="‘+data.commentList[0].userImage+’"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}else{
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="‘+data.commentList[0].userImage+’"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul><a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}
+								}else{
+									if(parseInt(data.commentList[i].communityNumber)<5){
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="‘+data.commentList[0].userImage+’"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}else{
+										document.getElementById("searchResult").innerHTML = html + '<li id="'+data.commentList[i].answerId+'"><article class="answerArticle"><div class="description"><div class="answerer"><img class="answerImg" src="'+data.commentList[i].userImage+'"><div class="answer_name"><a href="personal2.html?userid='+data.commentList[i].userId+'"><span class="user_name">'+data.commentList[i].userName+'</span>&nbsp;&nbsp;<span>'+data.commentList[i].signature+'</span></a></div><span class="answer_time">'+data.commentList[i].time+'</span><div><img src="images/bluepoint.png" class="bluepoint">贡献'+data.commentList[i].totalAnswer+'个回答，获得'+data.commentList[i].totalLikes+'个赞</div></div><div class="fullDetail"><p></p>'+data.commentList[i].answer+'<p></p></div></div><div class="options"><ul><li class="special"><a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">'+data.commentList[i].likesNumber+'</span></a></li><li><a onclick="getCommentList()"><span>评论 </span><span class="number">'+data.commentList[i].communityNumber+'</span></a></li><li><a data-fun="toSave"><span class="shoucang" onclick="getCollectionAnswer()">已收藏</span></a></li></ul></div><div class="comment" style="display:none"><img class="deco" src="images/dia-deco.png" style="left:106px"><div class="comment-outer"><div class="comment-Editor"><img class="userImg" src="‘+data.commentList[0].userImage+’"><div class="replyOther_div" id=""><span class="username_span" style="color:#F00"></span>:<span class="content_span" style="color:#F00"></span></div><input class="comment-Editor-input" type="text" placeholder="添加一个评论" growing-track="true"><button class="submitComment" onclick="saveComment()">评论</button></div><ul class="commentList"></ul><a class="allComments" id="allComments" onclick="getMoreComment()">点击获取更多</a></div></div></article></li>';
+										for(var j in data.commentList[i].replay){
+											var htmls = document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML;
+											document.getElementById(data.commentList[i].answerId).getElementsByClassName("commentList")[0].innerHTML = htmls + '<li id="'+data.commentList[i].replay[j].commentId+'"><img class="userImg" src="'+data.commentList[i].replay[j].userImage+'"><div class="commentDetail"><p class="userName">'+data.commentList[i].replay[j].userName+'<span class="touserName">    '+data.commentList[i].replay[j].touserName+'</span></p><p class="content" onclick="replyOther()">'+data.commentList[i].replay[j].community+'</p><p class="commentTime">'+data.commentList[i].replay[j].time+'</p></div></li>';
+										}
+									}
+								}
+							}
+
+						}
+						if(data.endnumber<data.totalnumber){
+							startnumber = data.endnumber;
+						}else{
+							document.getElementById("loading").remove();
+						}
+					}
+				}
+			})
+		});
 </script> 
 		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">评论成功</h2></div></div>
 		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
+		<div class="success" id="null" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">内容不能为空</h2></div></div>
+		<div id="zhao_hidden" style="display:none">${userName}</div>
 </body>
 </html>

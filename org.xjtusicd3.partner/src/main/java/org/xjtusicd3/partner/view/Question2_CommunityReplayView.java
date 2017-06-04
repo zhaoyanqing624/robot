@@ -1,12 +1,26 @@
 package org.xjtusicd3.partner.view;
 
 public class Question2_CommunityReplayView {
+	private String commentId;
 	private String userName;
 	private String userImage;
 	private String community;
 	private String time;
 	private String userId;
+	private String touserName;
 	
+	public String getTouserName() {
+		return touserName;
+	}
+	public void setTouserName(String touserName) {
+		this.touserName = touserName;
+	}
+	public String getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(String commentId) {
+		this.commentId = commentId;
+	}
 	public String getUserId() {
 		return userId;
 	}

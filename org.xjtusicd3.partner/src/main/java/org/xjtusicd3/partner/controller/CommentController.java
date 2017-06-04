@@ -120,6 +120,40 @@ public class CommentController {
 		}
 	}
 	/*
+	 * zyq_question2_ajax_添加评论的回复的回复
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveCommunityReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	public String saveCommunityReply(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail"); 
+		String questionId = request.getParameter("questionId");
+		String answerId = request.getParameter("answerId");
+		String content = request.getParameter("content");
+		String toUserName = request.getParameter("tousername");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			//判断回复的回复是否重复提交
+			List<UserPersistence> userPersistences2 = UserHelper.getEmail_name(toUserName);
+			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment3(answerId, userPersistences.get(0).getUSERID(), content,questionId,userPersistences2.get(0).getUSERID());
+			if (commentPersistences.size()==0) {
+				CommentService.saveCommunityReply(userPersistences.get(0).getUSERID(), questionId, content, answerId,userPersistences2.get(0).getUSERID());
+				jsonObject.put("value", "1");
+				String result = JsonUtil.toJsonString(jsonObject); 
+				return result;
+				
+			}else{
+				jsonObject.put("value", "2");
+				String result = JsonUtil.toJsonString(jsonObject); 
+				return result;
+			}
+		}
+	}
+	/*
 	 * zyq_faq3_ajax_添加知识库评论
 	 */
 	@ResponseBody
@@ -266,13 +300,13 @@ public class CommentController {
 		String questionId = request.getParameter("questionId");
 		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_iscurrentAnswer(questionId, 1);
 		String answerId = communityAnswerPersistences.get(0).getCOMMUNITYANSWERID();
-		List<AgreePersistence> agreePersistences = AgreeHelper.getAgree(useremail, answerId);
 		JSONObject jsonObject = new JSONObject();
 		if (useremail==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
+			List<AgreePersistence> agreePersistences = AgreeHelper.getAgree(useremail, answerId);
 			if (agreePersistences.size()==0) {
 				AgreeHelper.saveAgree(useremail, answerId);
 				jsonObject.put("value", "1");

@@ -884,7 +884,8 @@ embed, img, video {
 }
 
 #loadStatus>div {
-	margin: 10px 0
+	margin: 10px 0;
+	cursor: pointer
 }
 
 #loadStatus button {

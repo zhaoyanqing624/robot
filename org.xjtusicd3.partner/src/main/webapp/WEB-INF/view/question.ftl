@@ -39,10 +39,10 @@
                 </div>
                 <div class="header_top_wrap_right">
 		            <ul>
-		              <#if UserEmail??>
+		              <#if userEmail??>
 		                <div class="unlogin">
 		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
+		                    <li class="loginLinkLi" id="userNameText">您好：${userEmail}</li>
 		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
@@ -150,10 +150,14 @@
 							<div class="options">
 								<ul>
 									<li class="special">
-										<#if communityViews.isLike="0">
-										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
+										<#if userEmail ??>
+											<#if communityViews.isLike="1">
+											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
+											<#else>
+											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
+											</#if>
 										<#else>
-										<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
+											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
 										</#if>
 									</li>
 									<li><a data-fun="toComment" class="fm_ele" fm-type="button" fm-name="answer_comment" fm-operation="click" fm-zoon="option_area"><span>评论 </span><span class="number">${communityViews.communityNumber}</span></a></li>

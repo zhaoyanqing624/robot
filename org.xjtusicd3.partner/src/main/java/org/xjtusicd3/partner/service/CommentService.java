@@ -56,6 +56,16 @@ public class CommentService {
 	    CommentHelper.saveComment(UUID.randomUUID().toString(), null, communityquestionId, userid, comment, time, answerId,isnotice,null);
 	}
 	/*
+	 * zyq_question2_ajax_添加评论的回复的回复
+	 */
+	public static void saveCommunityReply(String userid,String communityquestionId,String comment,String answerId,String touserId){
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String time = format.format(date);
+	    int isnotice = 1;
+	    CommentHelper.saveComment(UUID.randomUUID().toString(), null, communityquestionId, userid, comment, time, answerId,isnotice,touserId);
+	}
+	/*
 	 * zyq_faq3_ajax_添加评论的回复
 	 */
 	public static void saveFaqComment(String userid,String faqquestionId,String comment,String commentId,String duo){

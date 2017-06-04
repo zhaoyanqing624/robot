@@ -104,6 +104,9 @@ public class UserController {
 	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request){
 		String useremail = (String) session.getAttribute("UserEmail");
 		String urlPath = (String) session.getAttribute("urlPath");
+		if (urlPath==null) {
+			urlPath = "robot.html";
+		}
 		if (useremail==null) {
 			String email = userView.getUserEmail();
 			String password = userView.getUserPassword();
@@ -117,9 +120,6 @@ public class UserController {
 				return "redirect:"+urlPath;
 			}
 		}else {
-			if(urlPath==null){
-				return "redirect:login.html";
-			}else {
 				String email = userView.getUserEmail();
 				String password = userView.getUserPassword();
 				List<UserPersistence> list = UserHelper.getEmail2(email, password);
@@ -131,7 +131,6 @@ public class UserController {
 					session.setAttribute("UserEmail", email);
 					return "redirect:"+urlPath;
 				}
-			}
 		}
 		
 		
