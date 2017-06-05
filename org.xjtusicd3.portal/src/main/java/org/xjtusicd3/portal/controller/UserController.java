@@ -85,7 +85,7 @@ public class UserController
 	}
 	
 	/*
-	 * zpz_showUserInfo
+	 * zpz_showUserInfoDetail
 	 */
 	@RequestMapping(value="showUserInfo",method=RequestMethod.GET)
 	public ModelAndView showUserInfo(String u){

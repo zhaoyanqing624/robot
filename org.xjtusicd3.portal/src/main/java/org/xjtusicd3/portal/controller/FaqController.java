@@ -14,6 +14,7 @@ import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.portal.service.FaqService;
+import org.xjtusicd3.portal.view.KnowledgeindexView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -21,13 +22,13 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 public class FaqController {
 	/*
-	 * zpz_faq_²é¿´faq
+	 * zpz_showFAQ
 	 */
 	@RequestMapping(value="knowledgeindex",method=RequestMethod.GET)
     public ModelAndView  knowledge(){
  	   ModelAndView mv=new ModelAndView("knowledgeindex");
- 	   String result = FaqService.getFaq();
- 	   mv.addObject("result", result);
+ 	   List<KnowledgeindexView> knowledgeindexViews = FaqService.knowledgeindexViews();
+ 	   mv.addObject("faqList", knowledgeindexViews);
  	   return mv;
     }
 

@@ -1,5 +1,6 @@
 package org.xjtusicd3.portal.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.spi.DirStateFactory.Result;
@@ -9,6 +10,7 @@ import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
+import org.xjtusicd3.portal.view.KnowledgeindexView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -47,5 +49,20 @@ public class FaqService {
 	public static void main(String[] args) {
 		tsettset();
 	}
-
+	/*
+	 * zpz_knowledgeindex_FAQ的展示
+	 */
+	public static List<KnowledgeindexView> knowledgeindexViews(){
+		List<KnowledgeindexView> knowledgeindexViews = new ArrayList<KnowledgeindexView>();
+		List<QuestionPersistence> questionPersistences = QuestionHelper.getFaq();
+		for(QuestionPersistence questionPersistence:questionPersistences){
+			KnowledgeindexView knowledgeindexView = new KnowledgeindexView();
+			knowledgeindexView.setFaqTitle(questionPersistence.getFAQTITLE());
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(questionPersistence.getFAQCLASSIFYID());
+			knowledgeindexView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			knowledgeindexView.setFaqKeyWord(questionPersistence.getFAQKEYWORDS());
+			knowledgeindexViews.add(knowledgeindexView);
+		}
+		return knowledgeindexViews;
+	}
 }
