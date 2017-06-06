@@ -79,6 +79,16 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	 */
 	@Delete("DELETE FROM TBL_Comment WHERE COMMENTID=#{0}")
 	void deleteReply(String commentId);
+	/*
+	 * zyq_notice_pushlet_查看评论的回复
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE COMMUNITYQUESTIONID=#{0} AND COMMENTPARENTID=#{1} AND TOUSERID IS NULL AND ISNOTICE=#{2}")
+	List<CommentPersistence> notice_getComment(String communityquestionId, String commentId,int isnotice);
+	/*
+	 * zyq_notice_pushlet_查看评论的回复的回复
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE COMMUNITYQUESTIONID=#{0} AND COMMENTPARENTID=#{1} AND TOUSERID IS NOT NULL AND ISNOTICE=#{2}")
+	List<CommentPersistence> notice_getReply(String communityquestionId, String commentId,int isnotice);
 
 
 }

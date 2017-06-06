@@ -1,20 +1,43 @@
 package org.xjtusicd3.partner.view;
 
 public class Notice_NoticeCommunityView {
-	private String CommunityQuestionId;
-	private String CommunityQuestion;
+	private String noticeId;
+	private String notice;
+	private String parentId;
+	private String questionId;
 	private String value;
-	public String getCommunityQuestionId() {
-		return CommunityQuestionId;
+	private String time;
+	
+	
+	public String getTime() {
+		return time;
 	}
-	public void setCommunityQuestionId(String communityQuestionId) {
-		CommunityQuestionId = communityQuestionId;
+	public void setTime(String time) {
+		this.time = time;
 	}
-	public String getCommunityQuestion() {
-		return CommunityQuestion;
+	public String getQuestionId() {
+		return questionId;
 	}
-	public void setCommunityQuestion(String communityQuestion) {
-		CommunityQuestion = communityQuestion;
+	public void setQuestionId(String questionId) {
+		this.questionId = questionId;
+	}
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+	public String getNoticeId() {
+		return noticeId;
+	}
+	public void setNoticeId(String noticeId) {
+		this.noticeId = noticeId;
+	}
+	public String getNotice() {
+		return notice;
+	}
+	public void setNotice(String notice) {
+		this.notice = notice;
 	}
 	public String getValue() {
 		return value;

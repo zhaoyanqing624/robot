@@ -145,5 +145,25 @@ public class CommentHelper {
 		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
 		mapper.deleteReply(commentId);
 		session.close();
-	} 
+	}
+	/*
+	 * zyq_notice_pushlet_查看评论的回复
+	 */
+	public static List<CommentPersistence> notice_getComment(String communityquestionId,String commentId,int isnotice){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.notice_getComment(communityquestionId,commentId,isnotice);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_notice_pushlet_查看评论的回复的回复
+	 */
+	public static List<CommentPersistence> notice_getReply(String communityquestionId,String commentId,int isnotice){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.notice_getReply(communityquestionId,commentId,isnotice);
+		session.close();
+		return list;
+	}
 }

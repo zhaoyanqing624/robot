@@ -971,5 +971,6 @@ keyframes bouncedelay { 0%,100%,80%{
 }
 
 .readMore {
-	color: #67add5
+	color: #67add5;
+	cursor:pointer
 }

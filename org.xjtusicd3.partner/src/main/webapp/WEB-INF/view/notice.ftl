@@ -20,11 +20,9 @@
     	PL.parameters.push('${uid}');  
 		PL._init();     
 		PL.joinListen('/mipc/he');  
-		function onData(event) {  
-		    
-		    if(event.get("mess")=="1"){  
-				alert("有新的消息");  
-		    }  
+		function onData(event) {
+			alert(decodeURIComponent(event.get("mess")));
+			
 		  
 		    // 离开    
 		    // PL.leave();    
