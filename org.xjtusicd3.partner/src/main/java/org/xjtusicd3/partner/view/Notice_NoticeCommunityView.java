@@ -2,6 +2,7 @@ package org.xjtusicd3.partner.view;
 
 public class Notice_NoticeCommunityView {
 	private String noticeId;
+	private String name;
 	private String notice;
 	private String parentId;
 	private String questionId;
@@ -9,6 +10,12 @@ public class Notice_NoticeCommunityView {
 	private String time;
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getTime() {
 		return time;
 	}

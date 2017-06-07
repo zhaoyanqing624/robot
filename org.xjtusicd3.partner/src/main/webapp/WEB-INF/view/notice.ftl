@@ -21,7 +21,46 @@
 		PL._init();     
 		PL.joinListen('/mipc/he');  
 		function onData(event) {
-			alert(decodeURIComponent(event.get("mess")));
+			var result = decodeURIComponent(event.get("mess"));
+			var jsonresult = strToJson(result);
+			function strToJson(str){ 
+				return JSON.parse(str); 
+			}
+			for(var i in jsonresult){
+				//判断是否存在
+				if(!!document.getElementById(jsonresult[i].noticeId)){
+					
+				}else{
+					var oDiv = document.createElement('div');
+					oDiv.id = jsonresult[i].noticeId;
+					document.getElementById("second").appendChild(oDiv);
+					document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
+					var from = jsonresult[i].value.split("_")[0];
+					var how = jsonresult[i].value.split("_")[1];
+					var name =jsonresult[i].name;
+					var notice = jsonresult[i].notice; 
+					if(name.length<20){
+						name = name;
+					}else{
+						name = name.substr(0,20)+"...";
+					}	
+					if(notice.length<20){
+						notice = notice;
+					}else{
+						notice = notice.substr(0,20)+"...";					
+					}
+					var time = jsonresult[i].time;
+					time = time.split('');
+					time.splice()
+					alert(time);
+					if(jsonresult[i].value=="问吧_有了新的评论"){
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的提问：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的评论“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+jsonresult[i].time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
+					}else if(jsonresult[i].value=="问吧_有了新的回复"){
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的评论：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+jsonresult[i].time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
+					}
+					
+				}
+			} 
 			
 		  
 		    // 离开    
