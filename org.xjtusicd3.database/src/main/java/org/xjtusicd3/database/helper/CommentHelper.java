@@ -157,12 +157,46 @@ public class CommentHelper {
 		return list;
 	}
 	/*
+	 * zyq_notice_查看FAQ的评论
+	 */
+	public static List<CommentPersistence> notice_getFaqComment(String faqquestionId,String parentId,int isnotice){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.notice_getFaqComment(faqquestionId,parentId,isnotice);
+		session.close();
+		return list;
+	}
+	public static List<CommentPersistence> notice_getFaqComment2(String userId,String parentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.notice_getFaqComment2(userId,parentId);
+		session.close();
+		return list;
+	}
+	/*
 	 * zyq_notice_pushlet_查看评论的回复的回复
 	 */
 	public static List<CommentPersistence> notice_getReply(String communityquestionId,String commentId,int isnotice){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
 		List<CommentPersistence> list = mapper.notice_getReply(communityquestionId,commentId,isnotice);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_notice_查看FAQ评论的回复
+	 */
+	public static List<CommentPersistence> notice_getFaqReply(String parentId,int isnotice) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.notice_getFaqReply(parentId,isnotice);
+		session.close();
+		return list;
+	}
+	public static List<CommentPersistence> notice_getFaqReply2(String parentId,int isnotice) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.notice_getFaqReply2(parentId,isnotice);
 		session.close();
 		return list;
 	}

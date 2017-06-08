@@ -85,10 +85,24 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	@Select("SELECT * FROM TBL_Comment WHERE COMMUNITYQUESTIONID=#{0} AND COMMENTPARENTID=#{1} AND TOUSERID IS NULL AND ISNOTICE=#{2}")
 	List<CommentPersistence> notice_getComment(String communityquestionId, String commentId,int isnotice);
 	/*
+	 * zyq_notice_查看FAQ的评论
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0} AND COMMENTPARENTID=#{1} AND ISNOTICE=#{2}")
+	List<CommentPersistence> notice_getFaqComment(String faqquestionId,String parentId,int isnotice);
+	@Select("SELECT * FROM TBL_Comment WHERE USERID=#{0} AND COMMENTPARENTID=#{1}")
+	List<CommentPersistence> notice_getFaqComment2(String userId,String parentId);
+	/*
 	 * zyq_notice_pushlet_查看评论的回复的回复
 	 */
 	@Select("SELECT * FROM TBL_Comment WHERE COMMUNITYQUESTIONID=#{0} AND COMMENTPARENTID=#{1} AND TOUSERID IS NOT NULL AND ISNOTICE=#{2}")
 	List<CommentPersistence> notice_getReply(String communityquestionId, String commentId,int isnotice);
+	/*
+	 * zyq_notice_查看FAQ评论的回复
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} AND TOUSERID IS NULL AND ISNOTICE=#{1}")
+	List<CommentPersistence> notice_getFaqReply(String parentId,int isnotice);
+	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} AND TOUSERID IS NOT NULL AND ISNOTICE=#{1}")
+	List<CommentPersistence> notice_getFaqReply2(String parentId,int isnotice);
 
 
 }

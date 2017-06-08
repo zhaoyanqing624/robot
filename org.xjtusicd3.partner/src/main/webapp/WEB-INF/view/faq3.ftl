@@ -18,15 +18,7 @@
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/starScore.js"></script>
-    <script type="text/javascript">
-    $(function(){
-    	 
-	    window.location.hash = "#184c8d07-c5a4-4648-9160-d7f07887f814";
-	    var evt = document.createEvent("MouseEvents");
-	    evt.initEvent("click", true, true);   
-	    document.getElementById("liuduoduo").dispatchEvent(evt); 
-    }) 
-    </script>
+
 </head>
 <body>
 	<div class="header" id="head">      
