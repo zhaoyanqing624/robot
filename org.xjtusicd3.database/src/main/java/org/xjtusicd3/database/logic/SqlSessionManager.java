@@ -24,15 +24,16 @@ import org.xjtusicd3.database.mapper.CurrentEquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
 import org.xjtusicd3.database.mapper.EquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.ITPersistenceMapper;
-import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
+import org.xjtusicd3.database.mapper.LogPersistenceMapper;
 import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.PayPersistenceMapper;
+import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
 import org.xjtusicd3.database.mapper.ScorePersistenceMapper;
+import org.xjtusicd3.database.mapper.ServerPersistenceMapper;
 import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
-import org.xjtusicd3.database.mapper.LogPersistenceMapper;
 import org.xjtusicd3.database.mapper.User_Equipment_HistoryPersistenceMapper;
 
 
@@ -85,6 +86,7 @@ public class SqlSessionManager {
 			configuration.addMapper(AgreePersistenceMapper.class);
 			configuration.addMapper(CollectionPersistenceMapper.class);
 			configuration.addMapper(ScorePersistenceMapper.class);
+			configuration.addMapper(ServerPersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

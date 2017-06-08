@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.database.model.UserQuestionPersistence;
 
 public interface UserQuestionPersistenceMapper
@@ -15,4 +17,6 @@ public interface UserQuestionPersistenceMapper
 	//zpz_删除用户问题信息
 		@Delete("DELETE FROM TBL_UserQuestion WHERE TBL_User.USERQUESTIONID=#{0}")
 		public void deleteUserQuestion(String userQuestionId);
+		
+		
 }

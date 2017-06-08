@@ -68,8 +68,7 @@
 							aria-expanded="true">知识库首页</a></li>
 						<li class=""><a data-toggle="tab" href="#tab-2"
 							aria-expanded="false">知识库管理</a></li>
-						<li class=""><a data-toggle="tab" href="#tab-3"
-							aria-expanded="false">知识库设置</a></li>
+						 
 					</ul>
 					<div class="tab-content">
 
@@ -289,7 +288,7 @@
 
 						<div id="tab-2" class="tab-pane">
 
-							<html>
+						
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeIn">
 
@@ -584,15 +583,7 @@
 		type="text/javascript"></script>
 
 	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--[if lt IE 9]>
-
-	<script src="media/js/excanvas.min.js"></script>
-
-	<script src="media/js/respond.min.js"></script>  
-
-	<![endif]-->
-
+ 
 	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
 	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>

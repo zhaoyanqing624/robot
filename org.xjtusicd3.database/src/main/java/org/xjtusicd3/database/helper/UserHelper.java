@@ -132,4 +132,14 @@ public class UserHelper {
 			mapper.updateUser(userid, username);
 			session.close();
 		}
+		/*
+		 *	通过用户ID获取到用户名 
+		 */
+		public static List<UserPersistence> getUserNameById(String UserId){
+			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+			UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+			List<UserPersistence> list = mapper.getUserNameById(UserId);
+			session.close();
+			return list;
+		}
 }

@@ -82,4 +82,16 @@ public class CommunityQuestionHelper{
 		return list;
 	}
 	
+	//zpz_获取社区问题
+		public static List<CommunityQuestionPersistence> getAllCommunityQuestion()
+		{
+			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+			CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+			List<CommunityQuestionPersistence> communityquestionlist = mapper.getAllCommunityQuestion();
+			session.close();
+			return communityquestionlist;
+			
+
+		}
+	
 }

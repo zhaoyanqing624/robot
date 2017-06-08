@@ -7,117 +7,259 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 客户管理</title>
+    <title>日志信息</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <style>
+        /* Additional style to fix warning dialog position */
+
+        #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+    </style>
+    
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+	 
+
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="media/image/favicon.ico" />
 
 </head>
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
-        <div class="col-sm-8" style="width:100%">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <span class="text-muted small pull-right">最后更新：<i class="fa fa-clock-o"></i> 2015-09-01 12:00</span>
-                    <h2>日志管理AAA</h2>
-                    <#list log_list as log>
-								${log.logid} 
-							</#list>
-                    <p>
-                        所有用户必须通过验证
-                    </p>
-                    <div class="input-group">
-                        <input type="text" placeholder="查找用户" class="input form-control">
-                        <span class="input-group-btn">
-                                        <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> 搜索</button>
-                                </span>
-                    </div>
-                    <div class="clients-list">
-                        <ul class="nav nav-tabs">
-                            <span class="pull-right small text-muted">1406条记录
-                            </span>
-                            <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i>日志记录</a>
-                            </li>
-                            <!--<li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i> 部门</a>-->
-                            <!--</li>-->
-                        </ul>
-                        <div class="tab-content">
-                            <div id="tab-1" class="tab-pane active">
-                                <div class="full-height-scroll">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-hover">
-                                            <tbody>
-                                            <tr>
-                                                <td><a data-toggle="tab" href="#contact-1" class="client-link">1</a>
-                                                </td>
-                                                <td>撤销事件请求</td>
-                                                <#list log_list as log>
-													${log.LOGMETHOD} 
-												</#list>
-                                                <td class="client-status"><span class="label label-primary">2015-09-01 12:00</span>
-                                            </td>
-                                                <td class="contact-type"><i class="fa fa-check-circle-o"> </i>
-                                                </td>
-                                                <td>袁悦</td>
+        <div class="col-sm-12">
+             <!-- BEGIN PAGE CONTENT-->
 
-                                                <td class="contact-type"><i class="fa fa-check-circle-o"> </i>
-                                                </td>
-                                                <td>逻辑地址</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a data-toggle="tab" href="#contact-2" class="client-link">2</a>
-                                                </td>
-                                                <td>用户修改个人信息</td>
-                                                <td class="client-status"><span class="label label-primary">2015-09-01 12:00</span>
-                                            </td>
-                                                <td class="contact-type"><i class="fa fa-check-circle-o"> </i>
-                                                </td>
-                                                <td class="">王利锋</td>
+				<div class="row-fluid">
 
-                                                <td class="contact-type"><i class="fa fa-check-circle-o"> </i>
-                                                </td>
-                                                <td>逻辑地址</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+					<div class="span12">
 
-                    </div>
-                </div>
-            </div>
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+						<div class="portlet box blue">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-edit"></i>用户信息列表</div>
+
+								<div class="tools">
+
+									<a href="javascript:;" class="collapse"></a>
+
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+									<a href="javascript:;" class="reload"></a>
+									
+									
+
+									<a href="javascript:;" class="remove"></a>
+
+								</div>
+
+							</div>
+
+							<div class="portlet-body">
+
+								 
+
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+
+									<thead>
+
+										<tr>
+
+										
+											<th>操作用户</th>
+
+											<th>对应方法</th>
+
+											<th>日志时间</th>
+
+											<th>操作</th>
+
+											<th>操作</th>
+											
+											<th>查看日志详情</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody>
+										<#list allUserList as userlist>
+										<tr class="">
+
+											<td>
+                								${userlist.USERNAME}
+                								
+                							</td>
+											 
+
+											<td class="center">${userlist.USERADDRESS}</td>
+
+											<td class="center">${userlist.CREATETIME}</td>
+
+											<td><a class="userinfo"  href="/org.xjtusicd3.portal/editUserInformation.html?u=${userlist.USERID}">编辑</a></td>
+
+											<td><a  onclick="deleteUser()">删除</a></td>
+											
+											<td><a class="userinfo" href="/org.xjtusicd3.portal/showUserInfo.html?u=${userlist.USERID}">查看用户信息</a></td>
+
+										</tr>
+										</#list>
+										 
+
+									</tbody>
+
+								</table>
+
+							</div>
+
+						</div>
+
+						<!-- END EXAMPLE TABLE PORTLET-->
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE CONTENT -->
+
+			</div>
+
+			<!-- END PAGE CONTAINER-->
         </div>
-
     </div>
-</div>
+ 
 
 <!-- 全局js -->
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+ 
 
 <!-- 自定义js -->
 <script src="js/content.js?v=1.0.0"></script>
+ 
 
-<script>
-    $(function () {
-        $('.full-height-scroll').slimScroll({
-            height: '100%'
-        });
-    });
-</script>
+<!-- BEGIN CORE PLUGINS -->
 
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--[if lt IE 9]>
+
+	<script src="media/js/excanvas.min.js"></script>
+
+	<script src="media/js/respond.min.js"></script>  
+
+	<![endif]-->   
+
+	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+
+	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	<script src="media/js/app.js"></script>
+
+	<script src="media/js/table-editable.js"></script>    
+
+	<script>
+
+		jQuery(document).ready(function() {       
+
+		   App.init();
+
+		   TableEditable.init();
+
+		});
+
+	</script>
+	
+	<script type="text/javascript">
+		function deleteUser() {
+			var userEmail = event.target.parentNode.parentNode.children[1].innerHTML;
+			var present_row = event.target.parentNode.parentNode;
+			 if (confirm("确认删除？")) {
+				 $.ajax({
+						type:"post",
+						url:"/org.xjtusicd3.portal/deleteUser.html",
+						data:{
+							"userEmail":userEmail
+						},
+						dataType:"json",
+						success:function(data){
+							alert("删除成功");
+							present_row.remove();
+						}
+					}); 
+             }else
+            	 {
+            	 return;
+            	 }
+			
+		}
+	</script>
 
 
 </body>

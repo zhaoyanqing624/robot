@@ -44,4 +44,9 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	@Select("SELECT * FROM TBL_CommunityQuestion WHERE USERID=#{0}")
 	List<CommunityQuestionPersistence> notice_CommunityQuestion(String userid);
 
+	/*
+	 * zpz_get all community question
+	 */
+	@Select("SELECT * FROM TBL_CommunityQuestion")
+	List<CommunityQuestionPersistence> getAllCommunityQuestion();
 }

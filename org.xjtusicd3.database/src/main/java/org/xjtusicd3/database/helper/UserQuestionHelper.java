@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
+import org.xjtusicd3.database.mapper.UserPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
+import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.database.model.UserQuestionPersistence;
 
 public class UserQuestionHelper
@@ -29,4 +32,5 @@ public class UserQuestionHelper
 			session.close();
 			
 		}
+	
 }

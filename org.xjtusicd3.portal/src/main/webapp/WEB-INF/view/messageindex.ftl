@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -12,13 +11,25 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <style>
+        /* Additional style to fix warning dialog position */
+
+        #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+    </style>
+    
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
 
 	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
@@ -53,8 +64,8 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content  animated fadeInRight">
     <div class="row">
-        <div class="col-sm-4" style="width: 100%;">
-            <!-- BEGIN PAGE CONTENT-->
+        <div class="col-sm-12">
+             <!-- BEGIN PAGE CONTENT-->
 
 				<div class="row-fluid">
 
@@ -66,7 +77,7 @@
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-edit"></i>留言列表</div>
+								<div class="caption"><i class="icon-edit"></i>留言信息列表</div>
 
 								<div class="tools">
 
@@ -75,6 +86,8 @@
 									<a href="#portlet-config" data-toggle="modal" class="config"></a>
 
 									<a href="javascript:;" class="reload"></a>
+									
+									
 
 									<a href="javascript:;" class="remove"></a>
 
@@ -84,11 +97,11 @@
 
 							<div class="portlet-body">
 
-								<div class="clearfix">
+								<!-- <div class="clearfix">
 
 									<div class="btn-group">
 
-										<button id="sample_editable_1_new" class="btn green">
+										<button  class="btn green" onclick="window.location='addUserInformation.html'">
 
 										<i class="icon-plus">增加用户</i>
 
@@ -96,66 +109,42 @@
 
 									</div>
 
-									<div class="btn-group pull-right">
-
-										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-
-										</button>
-
-										<ul class="dropdown-menu pull-right">
-
-											<li><a href="#">Print</a></li>
-
-											<li><a href="#">Save as PDF</a></li>
-
-											<li><a href="#">Export to Excel</a></li>
-
-										</ul>
-
-									</div>
-
-								</div>
+								</div> -->
 
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 
 									<thead>
 
 										<tr>
-
 										
-											<th>留言用户</th>
+											<th>留言用户邮箱</th>
 
-											<th>用户邮箱</th>
+											<th>留言内容</th>
 
-											<th>用户电话</th>
+											<th>用户留言时间</th>
 
-											<th>用户留言内容</th>
+											<th>操作</th>
 
-											<th>Edit</th>
-
-											<th>Delete</th>
+											<th>查看留言详情</th>
 
 										</tr>
 
 									</thead>
 
 									<tbody>
-										<#list advise_list as advise>
-										<tr class="">
+										<#list advise_list as adviselist>
+										<tr class="" id="${adviselist.ADVISEID}">
 
-											<td>
-                								${advise.NAME}
-                								
-                							</td>
-											<td>${advise.EMAIL}</td>
+											 
+											<td>${adviselist.EMAIL}</td>
 
-											<td class="center">${advise.PHONE}</td>
+											<td class="center">${adviselist.TEXT}</td>
 
-											<td class="center">${advise.TEXT}</td>
+											<td class="center">${adviselist.ADVISETIME}</td>
 
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
+											<td><a  onclick="deleteAdvise()">删除</a></td>
+											
+											<td><a class="userinfo" href="/org.xjtusicd3.portal/showUserInfo.html?u=${adviselist.ADVISEID}">查看留言信息</a></td>
 
 										</tr>
 										</#list>
@@ -181,31 +170,17 @@
 
 			<!-- END PAGE CONTAINER-->
         </div>
-         
-
     </div>
-
-
-</div>
+ 
 
 <!-- 全局js -->
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/jquery-ui-1.10.4.min.js"></script>
+ 
 
 <!-- 自定义js -->
 <script src="js/content.js?v=1.0.0"></script>
-
-<script>
-    $(document).ready(function () {
-        $(".sortable-list").sortable({
-            connectWith: ".connectList"
-        }).disableSelection();
-
-    });
-</script>
-
-
+ 
 
 <!-- BEGIN CORE PLUGINS -->
 
@@ -264,8 +239,31 @@
 		});
 
 	</script>
-
-
+	
+	<script type="text/javascript">
+		function deleteAdvise() {
+			var adviseid = event.target.parentNode.parentNode.id;
+    		 var present_row = event.target.parentNode.parentNode;
+			 if (confirm("确认删除？")) {
+				 $.ajax({
+						type:"post",
+						url:"/org.xjtusicd3.portal/deleteAdvise.html",
+						data:{
+							"adviseid":adviseid
+						},
+						dataType:"json",
+						success:function(data){
+							alert("删除成功");
+							present_row.remove();
+						}
+					}); 
+             }else
+            	 {
+            	 return;
+            	 } 
+			
+		}
+	</script>
 
 
 </body>

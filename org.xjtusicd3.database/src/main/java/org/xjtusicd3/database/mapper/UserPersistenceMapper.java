@@ -60,4 +60,8 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 //	public List<UserPersistence> updateUserInfo(String username,String email,String address,String Createtime);
 	@Update("UPDATE TBL_User SET USERNAME=#{1} WHERE USERID=#{0}")
 	public void updateUser(String userid,String username);
+	
+	//zpz_通过id获取用户名
+			@Select("SELECT * FROM TBL_User WHERE USERID=#{0}")
+			public List<UserPersistence> getUserNameById(String UserId);
 }

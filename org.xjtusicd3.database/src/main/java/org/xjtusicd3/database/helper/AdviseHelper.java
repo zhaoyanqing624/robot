@@ -29,4 +29,11 @@ public class AdviseHelper{
 		mapper.save(advisePersistence);
 		session.close();
 	}
+	//zpz--deleteAdvise
+		public static void deleteAdvise(String adviseId){
+			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+			AdvisePersistenceMapper mapper = session.getMapper(AdvisePersistenceMapper.class);
+			mapper.deleteAdvise(adviseId);  
+			session.close();
+		} 
 }
