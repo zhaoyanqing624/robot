@@ -161,6 +161,6 @@ public class NoticeService {
 		return list;
 	}
 	public static void main(String[] args) {
-		notice_NoticeViews("fa2f2884-985d-44e0-89b8-0454d0feaeac");
+		notice_NoticeViews("2555a73e-429d-4f64-9074-5e69738e7669");
 	}
 }
