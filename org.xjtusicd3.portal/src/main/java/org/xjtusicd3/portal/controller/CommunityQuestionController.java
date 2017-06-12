@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.portal.service.CommunityQuestionService;
+import org.xjtusicd3.portal.view.ProblemindexView;
 
 
 @Controller
@@ -21,7 +22,7 @@ public class CommunityQuestionController {
 	public ModelAndView getCommunityQuestion()
 	{
 		ModelAndView mv = new ModelAndView("problemindex");
-		List<CommunityQuestionPersistence> communityquestionlist = CommunityQuestionService.getAllCommunityQuestion();
+		List<ProblemindexView> communityquestionlist = CommunityQuestionService.problemindexViews();
 		mv.addObject("cqlist",communityquestionlist);
 		return mv;
 		

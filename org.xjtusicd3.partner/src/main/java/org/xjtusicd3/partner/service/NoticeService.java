@@ -9,12 +9,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
 import org.xjtusicd3.database.helper.CommunityQuestionHelper;
+import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.partner.view.Notice_NoticeCommunityView;
 
 
@@ -25,15 +29,63 @@ public class NoticeService {
 	 */
 	public static List<Notice_NoticeCommunityView> notice_NoticeViews(String userid){
 		List<Notice_NoticeCommunityView> notice_NoticeCommunityViews = new ArrayList<Notice_NoticeCommunityView>();
-		List<Notice_NoticeCommunityView> notice_NoticeCommunityViews2 = new ArrayList<Notice_NoticeCommunityView>();
-		List<Notice_NoticeCommunityView> notice_NoticeCommunityViews3 = new ArrayList<Notice_NoticeCommunityView>();
-		//查看论坛_评论
+		//产看FAQ_评论
+		List<AnswerPersistence> answerPersistences2 = AnswerHelper.notice_faqanswerList(userid);
+		if (answerPersistences2.size()!=0) {
+			for(AnswerPersistence answerPersistence:answerPersistences2){
+				List<CommentPersistence> commentPersistences = CommentHelper.notice_getFaqComment(answerPersistence.getFAQQUESTIONID(), "0", 1);
+				if (commentPersistences.size()!=0) {
+					Notice_NoticeCommunityView notice_NoticeCommunityView = new Notice_NoticeCommunityView();
+					List<QuestionPersistence> questionPersistences = QuestionHelper.faq3_faqcontent(answerPersistence.getFAQQUESTIONID());
+					notice_NoticeCommunityView.setName(questionPersistences.get(0).getFAQTITLE());
+					notice_NoticeCommunityView.setNotice(commentPersistences.get(0).getCOMMENTCONTENT());
+					notice_NoticeCommunityView.setNoticeId(commentPersistences.get(0).getCOMMENTID());
+					notice_NoticeCommunityView.setQuestionId(answerPersistence.getFAQQUESTIONID());
+					notice_NoticeCommunityView.setTime(commentPersistences.get(0).getCOMMENTTIME());
+					notice_NoticeCommunityView.setValue("知识库_有了新的评论");
+					notice_NoticeCommunityViews.add(notice_NoticeCommunityView);
+				}
+				
+				
+			}
+		}
+		//查看FAQ_回复以及回复的回复
+		List<CommentPersistence> faqCommentList = CommentHelper.notice_getFaqComment2(userid, "0");
+		if (faqCommentList.size()!=0) {
+			for(CommentPersistence commentPersistence:faqCommentList){
+				List<CommentPersistence> reply = CommentHelper.notice_getFaqReply(commentPersistence.getCOMMENTID(),1);
+				if (reply.size()!=0) {
+					Notice_NoticeCommunityView notice_NoticeCommunityView = new Notice_NoticeCommunityView();
+					notice_NoticeCommunityView.setName(commentPersistence.getCOMMENTCONTENT());
+					notice_NoticeCommunityView.setNotice(reply.get(0).getCOMMENTCONTENT());
+					notice_NoticeCommunityView.setNoticeId(reply.get(0).getCOMMENTID());
+					notice_NoticeCommunityView.setQuestionId(commentPersistence.getFAQQUESTIONID());
+					notice_NoticeCommunityView.setTime(reply.get(0).getCOMMENTTIME());
+					notice_NoticeCommunityView.setValue("知识库_有了新的回复");
+					notice_NoticeCommunityViews.add(notice_NoticeCommunityView);
+				}
+				
+				List<CommentPersistence> reply2 = CommentHelper.notice_getFaqReply2(commentPersistence.getCOMMENTID(), 1);
+				if (reply2.size()!=0) {
+					Notice_NoticeCommunityView notice_NoticeCommunityView = new Notice_NoticeCommunityView();
+					notice_NoticeCommunityView.setName(commentPersistence.getCOMMENTCONTENT());
+					notice_NoticeCommunityView.setNotice(reply2.get(0).getCOMMENTCONTENT());
+					notice_NoticeCommunityView.setNoticeId(reply2.get(0).getCOMMENTID());
+					notice_NoticeCommunityView.setParentId(reply2.get(0).getCOMMENTPARENTID());
+					notice_NoticeCommunityView.setQuestionId(commentPersistence.getFAQQUESTIONID());
+					notice_NoticeCommunityView.setTime(reply2.get(0).getCOMMENTTIME());
+					notice_NoticeCommunityView.setValue("知识库_有了新的回复@");
+					notice_NoticeCommunityViews.add(notice_NoticeCommunityView);
+				}
+			}
+		}
+		//查看问吧_评论
 		List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.notice_CommunityQuestion(userid);
-		Notice_NoticeCommunityView notice_NoticeCommunityView = new Notice_NoticeCommunityView();
 		if (communityQuestionPersistences.size()!=0) {
 			for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
 				List<CommunityAnswerPersistence> answerPersistences = CommunityAnswerHelper.notice_CommunityAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 				if (answerPersistences.size()!=0) {
+					Notice_NoticeCommunityView notice_NoticeCommunityView = new Notice_NoticeCommunityView();
 					notice_NoticeCommunityView.setName(communityQuestionPersistence.getTITLE());
 					notice_NoticeCommunityView.setQuestionId(answerPersistences.get(0).getCOMMUNITYQUESTIONID());
 					notice_NoticeCommunityView.setNoticeId(answerPersistences.get(0).getCOMMUNITYANSWERID());
@@ -44,41 +96,38 @@ public class NoticeService {
 				}
 			}
 		}
-		//查看论坛
-		
+		//查看问吧
 		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer_userId(userid);
 		if (communityAnswerPersistences.size()!=0) {
 			for(CommunityAnswerPersistence communityAnswerPersistence:communityAnswerPersistences){
-				//查看论坛_回复
+				//查看问吧_回复
 				List<CommentPersistence> commentPersistences = CommentHelper.notice_getComment(communityAnswerPersistence.getCOMMUNITYQUESTIONID(),communityAnswerPersistence.getCOMMUNITYANSWERID(),1);
 				if (commentPersistences.size()!=0) {
-					Notice_NoticeCommunityView notice_NoticeCommunityView2 = new Notice_NoticeCommunityView();
-					notice_NoticeCommunityView2.setName(communityAnswerPersistence.getCONTENT());
-					notice_NoticeCommunityView2.setQuestionId(commentPersistences.get(0).getCOMMUNITYQUESTIONID());
-					notice_NoticeCommunityView2.setNoticeId(commentPersistences.get(0).getCOMMENTID());
-					notice_NoticeCommunityView2.setParentId(commentPersistences.get(0).getCOMMENTPARENTID());
-					notice_NoticeCommunityView2.setNotice(commentPersistences.get(0).getCOMMENTCONTENT());
-					notice_NoticeCommunityView2.setValue("问吧_有了新的回复");
-					notice_NoticeCommunityView2.setTime(commentPersistences.get(0).getCOMMENTTIME());
-					notice_NoticeCommunityViews2.add(notice_NoticeCommunityView2);
+					Notice_NoticeCommunityView notice_NoticeCommunityView = new Notice_NoticeCommunityView();
+					notice_NoticeCommunityView.setName(communityAnswerPersistence.getCONTENT());
+					notice_NoticeCommunityView.setQuestionId(commentPersistences.get(0).getCOMMUNITYQUESTIONID());
+					notice_NoticeCommunityView.setNoticeId(commentPersistences.get(0).getCOMMENTID());
+					notice_NoticeCommunityView.setParentId(commentPersistences.get(0).getCOMMENTPARENTID());
+					notice_NoticeCommunityView.setNotice(commentPersistences.get(0).getCOMMENTCONTENT());
+					notice_NoticeCommunityView.setValue("问吧_有了新的回复");
+					notice_NoticeCommunityView.setTime(commentPersistences.get(0).getCOMMENTTIME());
+					notice_NoticeCommunityViews.add(notice_NoticeCommunityView);
 				}
 				
-				//查看论坛_回复的回复
+				//查看问吧_回复的回复
 				List<CommentPersistence> commentPersistences2 = CommentHelper.notice_getReply(communityAnswerPersistence.getCOMMUNITYQUESTIONID(), communityAnswerPersistence.getCOMMUNITYANSWERID(),1);
 				if (commentPersistences2.size()!=0) {
-					Notice_NoticeCommunityView notice_NoticeCommunityView3 = new Notice_NoticeCommunityView();
-					notice_NoticeCommunityView3.setName(communityAnswerPersistence.getCONTENT());
-					notice_NoticeCommunityView3.setQuestionId(commentPersistences2.get(0).getCOMMUNITYQUESTIONID());
-					notice_NoticeCommunityView3.setNoticeId(commentPersistences2.get(0).getCOMMENTID());
-					notice_NoticeCommunityView3.setNotice(commentPersistences2.get(0).getCOMMENTCONTENT());
-					notice_NoticeCommunityView3.setParentId(commentPersistences2.get(0).getCOMMENTPARENTID());
-					notice_NoticeCommunityView3.setValue("问吧_有了新的回复@");
-					notice_NoticeCommunityView3.setTime(commentPersistences2.get(0).getCOMMENTTIME());
-					notice_NoticeCommunityViews3.add(notice_NoticeCommunityView3);
+					Notice_NoticeCommunityView notice_NoticeCommunityView = new Notice_NoticeCommunityView();
+					notice_NoticeCommunityView.setName(communityAnswerPersistence.getCONTENT());
+					notice_NoticeCommunityView.setQuestionId(commentPersistences2.get(0).getCOMMUNITYQUESTIONID());
+					notice_NoticeCommunityView.setNoticeId(commentPersistences2.get(0).getCOMMENTID());
+					notice_NoticeCommunityView.setNotice(commentPersistences2.get(0).getCOMMENTCONTENT());
+					notice_NoticeCommunityView.setParentId(commentPersistences2.get(0).getCOMMENTPARENTID());
+					notice_NoticeCommunityView.setValue("问吧_有了新的回复@");
+					notice_NoticeCommunityView.setTime(commentPersistences2.get(0).getCOMMENTTIME());
+					notice_NoticeCommunityViews.add(notice_NoticeCommunityView);
 				}
 			}
-			notice_NoticeCommunityViews.addAll(notice_NoticeCommunityViews2);
-			notice_NoticeCommunityViews.addAll(notice_NoticeCommunityViews3);
 
 		}
 		String rString = JsonUtil.toJsonString(notice_NoticeCommunityViews);

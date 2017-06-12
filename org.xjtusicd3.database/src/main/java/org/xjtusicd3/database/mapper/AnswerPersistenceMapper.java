@@ -12,5 +12,10 @@ public interface AnswerPersistenceMapper extends IBaseDao<AnswerPersistence, Str
 	 */
 	@Select("SELECT * FROM TBL_FAQanswer WHERE FAQQUESTIONID=#{0}")
 	public List<AnswerPersistence> faq3_faqContent(String QuestionId);
+	/*
+	 * zyq_notice_ajax_查询FAQ评论通知
+	 */
+	@Select("SELECT * FROM TBL_FAQanswer WHERE USERID=#{0}")
+	public List<AnswerPersistence> notice_faqanswerList(String userId);
 
 }

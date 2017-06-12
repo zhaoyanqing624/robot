@@ -138,7 +138,7 @@ public class UserHelper {
 		public static List<UserPersistence> getUserNameById(String UserId){
 			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 			UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-			List<UserPersistence> list = mapper.getUserNameById(UserId);
+			List<UserPersistence> list = mapper.getEmail_id(UserId);
 			session.close();
 			return list;
 		}

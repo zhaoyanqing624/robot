@@ -21,7 +21,9 @@ public class UserQuestionService
 		return userquestionlist;
 		
 	}
-	
+	/*
+	 * incidentindex_userQuestion展示
+	 */
 	public static List<IncidentindexView> incidentindexViews() 
 	{
 		List<IncidentindexView> incidentindexViews = new ArrayList<IncidentindexView>();
@@ -30,8 +32,32 @@ public class UserQuestionService
 		{
 			IncidentindexView incidentindexView = new IncidentindexView();
 			incidentindexView.setUserQuestionTime(userQuestionPersistence.getQUESTIONTIME());
+			incidentindexView.setUserQuestionId(userQuestionPersistence.getUSERQUESTIONID());
 			incidentindexView.setUserQuestionTitle(userQuestionPersistence.getQUESTIONTITLE());
 			List<UserPersistence> userPersistences =UserHelper.getUserNameById(userQuestionPersistence.getUSERID());
+			incidentindexView.setUserName(userPersistences.get(0).getUSERNAME());
+			incidentindexViews.add(incidentindexView);
+		}
+		
+		
+		return incidentindexViews;
+	}
+	
+	/*
+	 * incidentindex_userQuestion详细信息展示
+	 */
+	public static List<IncidentindexView> getUserQuestionDetail(String UserQuestionId) 
+	{
+		List<IncidentindexView> incidentindexViews = new ArrayList<IncidentindexView>();
+		List<UserQuestionPersistence> userQuestionPersistences = UserQuestionHelper.getUserQuestion(UserQuestionId);
+		for (UserQuestionPersistence userQuestionPersistence : userQuestionPersistences)
+		{
+			IncidentindexView incidentindexView = new IncidentindexView();
+			incidentindexView.setUserQuestionTime(userQuestionPersistence.getQUESTIONTIME());
+			incidentindexView.setUserQuestionId(userQuestionPersistence.getUSERQUESTIONID());
+			incidentindexView.setUserQuestionTitle(userQuestionPersistence.getQUESTIONTITLE());
+			List<UserPersistence> userPersistences =UserHelper.getUserNameById(userQuestionPersistence.getUSERID());
+			incidentindexView.setUserName(userPersistences.get(0).getUSERNAME());
 			incidentindexViews.add(incidentindexView);
 		}
 		

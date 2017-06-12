@@ -68,7 +68,7 @@
 							aria-expanded="true">事件首页</a></li>
 						<li class=""><a data-toggle="tab" href="#tab-2"
 							aria-expanded="false">事件管理</a></li>
-						 
+
 					</ul>
 					<div class="tab-content">
 
@@ -288,48 +288,49 @@
 
 						<div id="tab-2" class="tab-pane">
 
-						
-<body class="gray-bg">
-	<div class="wrapper wrapper-content animated fadeIn">
 
-		<div class="row">
-			<div class="col-sm-6" style="width: 100%">
-				<div class="tabs-container">
-					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" href="#tab-31"
-							aria-expanded="true">待处理事件</a></li>
-						<li class=""><a data-toggle="tab" href="#tab-32"
-							aria-expanded="false">已处理事件</a></li>
+							<body class="gray-bg">
+								<div class="wrapper wrapper-content animated fadeIn">
 
-					</ul>
-					<div class="tab-content">
+									<div class="row">
+										<div class="col-sm-6" style="width: 100%">
+											<div class="tabs-container">
+												<ul class="nav nav-tabs">
+													<li class="active"><a data-toggle="tab" href="#tab-31"
+														aria-expanded="true">待处理事件</a></li>
+													<li class=""><a data-toggle="tab" href="#tab-32"
+														aria-expanded="false">已处理事件</a></li>
 
-						<div id="tab-31" class="tab-pane active">
-							<div class="ibox-content">
-											<!-- BEGIN EXAMPLE TABLE PORTLET-->
+												</ul>
+												<div class="tab-content">
 
-											<div class="portlet box blue">
+													<div id="tab-31" class="tab-pane active">
+														<div class="ibox-content">
+															<!-- BEGIN EXAMPLE TABLE PORTLET-->
 
-												<div class="portlet-title">
+															<div class="portlet box blue">
 
-													<div class="caption">
-														<i class="icon-edit"></i>待处理事件列表
-													</div>
+																<div class="portlet-title">
 
-													<div class="tools">
+																	<div class="caption">
+																		<i class="icon-edit"></i>待处理事件列表
+																	</div>
 
-														<a href="javascript:;" class="collapse"></a> <a
-															href="#portlet-config" data-toggle="modal" class="config"></a>
-														<a href="javascript:;" class="reload"></a> <a
-															href="javascript:;" class="remove"></a>
+																	<div class="tools">
 
-													</div>
+																		<a href="javascript:;" class="collapse"></a> <a
+																			href="#portlet-config" data-toggle="modal"
+																			class="config"></a> <a href="javascript:;"
+																			class="reload"></a> <a href="javascript:;"
+																			class="remove"></a>
 
-												</div>
+																	</div>
 
-												<div class="portlet-body">
+																</div>
 
-													<!-- <div class="clearfix">
+																<div class="portlet-body">
+
+																	<!-- <div class="clearfix">
 
 														<div class="btn-group">
 
@@ -362,185 +363,182 @@
 
 													</div> -->
 
-													<table
-														class="table table-striped table-hover table-bordered"
-														id="sample_editable_1">
+																	<table
+																		class="table table-striped table-hover table-bordered"
+																		id="sample_editable_1">
 
-														<thead>
+																		<thead>
 
-															<tr>
-
-
-																<th>问题名称</th>
-
-																<th>提问用户</th>
-
-																<th>问题时间</th>
-
-																<th>操作</th>
-
-																<th>操作</th>
-
-																<th>查看问题详情</th>
-
-															</tr>
-
-														</thead>
-
-														<tbody>
-															<#list userQuestionList as uqlist>
-															<tr class="">
-
-																<td>${uqlist.classifyName}</td>
-																<td>${uqlist.faqTitle}</td>
-
-																<td class="center">${uqlist.faqKeyWord}</td>
-
-																 
-
-																<td><a class="faq"
-																	href="/org.xjtusicd3.portal/editUserInformation.html?u=${userlist.USERID}">编辑</a></td>
-
-																<td><a onclick="deleteUser()">删除</a></td>
-
-																<td><a class="faq"
-																	href="/org.xjtusicd3.portal/showUserInfo.html?u=${userlist.USERID}">查看用户信息</a></td>
-
-															</tr>
-															</#list>
+																			<tr>
 
 
-														</tbody>
+																				<th>问题名称</th>
 
-													</table>
+																				<th>提问用户</th>
 
-												</div>
+																				<th>问题时间</th>
 
-											</div>
+																				<th>操作</th>
 
-											<!-- END EXAMPLE TABLE PORTLET-->
+																				<th>操作</th>
 
-									 
-							</div>
-						</div>
-						
-						 <div id="tab-32" class="tab-pane">
-							<div class="ibox-content">
+																				<th>查看问题详情</th>
 
-								 
-									<!-- BEGIN PAGE CONTENT-->
+																			</tr>
 
-								 
+																		</thead>
 
-											<!-- BEGIN EXAMPLE TABLE PORTLET-->
+																		<tbody>
+																			<#list userQuestionList as uqlist>
+																			<tr class="">
 
-											<div class="portlet box blue">
+																				<td>${uqlist.classifyName}</td>
+																				<td>${uqlist.faqTitle}</td>
 
-												<div class="portlet-title">
+																				<td class="center">${uqlist.faqKeyWord}</td>
 
-													<div class="caption">
-														<i class="icon-edit"></i>已处理事件列表
+
+
+																				<td><a class="faq"
+																					href="/org.xjtusicd3.portal/editUserQuestionInformation.html?u=${uqlist.USERID}">编辑</a></td>
+
+																				<td><a onclick="deleteUserQuestion()">删除</a></td>
+
+																				<td><a class="faq"
+																					href="/org.xjtusicd3.portal/showUserQuestion.html?u=${uqlist.USERID}">查看用户信息</a></td>
+
+																			</tr>
+																			</#list>
+
+
+																		</tbody>
+
+																	</table>
+
+																</div>
+
+															</div>
+
+															<!-- END EXAMPLE TABLE PORTLET-->
+
+
+														</div>
 													</div>
 
-													<div class="tools">
+													<div id="tab-32" class="tab-pane">
+														<div class="ibox-content">
 
-														<a href="javascript:;" class="collapse"></a> <a
-															href="#portlet-config" data-toggle="modal" class="config"></a>
-														<a href="javascript:;" class="reload"></a> <a
-															href="javascript:;" class="remove"></a>
 
+															<!-- BEGIN PAGE CONTENT-->
+
+
+
+															<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+															<div class="portlet box blue">
+
+																<div class="portlet-title">
+
+																	<div class="caption">
+																		<i class="icon-edit"></i>已处理事件列表
+																	</div>
+
+																	<div class="tools">
+
+																		<a href="javascript:;" class="collapse"></a> <a
+																			href="#portlet-config" data-toggle="modal"
+																			class="config"></a> <a href="javascript:;"
+																			class="reload"></a> <a href="javascript:;"
+																			class="remove"></a>
+
+																	</div>
+
+																</div>
+
+																<div class="portlet-body">
+
+
+
+																	<table
+																		class="table table-striped table-hover table-bordered"
+																		id="sample_editable_2">
+
+																		<thead>
+
+																			<tr>
+
+																				<th>问题名称</th>
+
+																				<th>提问用户</th>
+
+																				<th>问题时间</th>
+
+																				<th>操作</th>
+
+																				<th>查看问题详情</th>
+
+																			</tr>
+
+																		</thead>
+
+																		<tbody>
+																			<#list incidentList as incidentview>
+																			<tr class="" id = "${incidentview.UserQuestionId}">
+
+																				<td>${incidentview.userQuestionTitle}</td>
+																				<td>${incidentview.userName}</td>
+
+																				<td class="center">${incidentview.userQuestionTime}</td>
+
+																		
+
+																				<td><a onclick="deleteUserQuestion()">删除</a></td>
+
+																				<td><a class="userinfo"
+																					href="/org.xjtusicd3.portal/showUserQuestion.html?u=${incidentview.UserQuestionId}">查看事件信息</a></td>
+
+																			</tr>
+																			</#list>
+
+
+																		</tbody>
+
+																	</table>
+
+																</div>
+
+															</div>
+
+															<!-- END EXAMPLE TABLE PORTLET-->
+
+														</div>
 													</div>
 
-												</div>
-
-												<div class="portlet-body">
-
-												
-
-													<table
-														class="table table-striped table-hover table-bordered"
-														id="sample_editable_2">
-
-														<thead>
-
-															<tr>
-
-																<th>问题名称</th>
-
-																<th>提问用户</th>
-
-																<th>问题时间</th>
-
-																<th>操作</th>
-
-																<th>操作</th>
-
-																<th>查看问题详情</th>
-
-															</tr>
-
-														</thead>
-
-														<tbody>
-															<#list incidentview as incidentview>
-															<tr class="">
-
-																<td>${incidentview.QUESTIONTITLE}</td>
-																<td>${incidentview.USERNAME}</td>
-
-																<td class="center">${incidentview.QUESTIONTIME}</td>
-
-																 
-																<td><a class="userinfo"
-																	href="/org.xjtusicd3.portal/editUserInformation.html?u=${incidentview.USERID}">编辑</a></td>
-
-																<td><a onclick="deleteUser()">删除</a></td>
-
-																<td><a class="userinfo"
-																	href="/org.xjtusicd3.portal/showUserInfo.html?u=${incidentview.USERID}">查看用户信息</a></td>
-
-															</tr>
-															</#list>
 
 
-														</tbody>
 
-													</table>
 
 												</div>
-
 											</div>
 
-											<!-- END EXAMPLE TABLE PORTLET-->
- 
-							</div>
-						</div>
-						
-						 
+
+										</div>
+
+										<!-- 全局js -->
+										<script src="js/jquery.min.js?v=2.1.4"></script>
+										<script src="js/bootstrap.min.js?v=3.3.6"></script>
 
 
 
-					</div>
-				</div>
+										<!-- 自定义js -->
+										<script src="js/content.js?v=1.0.0"></script>
+							</body>
 
 
-			</div>
-
-			<!-- 全局js -->
-			<script src="js/jquery.min.js?v=2.1.4"></script>
-			<script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-			<!-- 自定义js -->
-			<script src="js/content.js?v=1.0.0"></script>
-</body>
-
-							</html>
 
 						</div>
 
-					 
+
 					</div>
 				</div>
 			</div>
@@ -573,7 +571,7 @@
 		type="text/javascript"></script>
 
 	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
- 
+
 	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
 	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>
@@ -599,7 +597,7 @@
 	<script src="media/js/app.js"></script>
 
 	<script src="media/js/table-editable.js"></script>
-    <script src="media/js/table-editable2.js"></script>
+	<script src="media/js/table-editable2.js"></script>
 	<script>
 		jQuery(document).ready(function() {
 

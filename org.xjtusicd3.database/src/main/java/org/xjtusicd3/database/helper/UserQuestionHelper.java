@@ -20,9 +20,18 @@ public class UserQuestionHelper
 			List<UserQuestionPersistence> userlist = mapper.getUserQuestion();
 			session.close();
 			return userlist;
-			
-
 		}
+		
+		//获取用户问题信息
+				public static List<UserQuestionPersistence> getUserQuestion(String UserQuestionId)
+				{
+					SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+					UserQuestionPersistenceMapper mapper = session.getMapper(UserQuestionPersistenceMapper.class);
+					List<UserQuestionPersistence> userlist = mapper.getUserQuestionById(UserQuestionId);
+					session.close();
+					return userlist;
+				}
+		
 		//删除用户问题信息
 		public static void deleteUserQuestion(String userquestionid) 
 		{

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
+import org.xjtusicd3.database.mapper.AdvisePersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
@@ -100,7 +101,7 @@ public class QuestionHelper {
 		return ClassifyId;
 	}
 	/*
-	 * zpz_
+	 * zpz_get faq information
 	 */
 	public static List<QuestionPersistence> getFaq(){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
@@ -109,4 +110,13 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+	/*
+	 * zpz_delete faq
+	 */
+			public static void deleteFAQ(String faqId){
+				SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+				QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+				mapper.deleteFAQquestion(faqId);  
+				session.close();
+			} 
 }

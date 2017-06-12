@@ -12,8 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CommunityQuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.service.CommunityService;
+import org.xjtusicd3.partner.view.Question_CommunityView;
+
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 public class MessageController {
@@ -58,5 +66,23 @@ public class MessageController {
 			mv.addObject("uid", userid);
 			return mv;
 		}
+	}
+	/*
+	 * zyq_ajax_更改消息通知的被查阅后的状态
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/updateNotice"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String updateNotice(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String type = request.getParameter("type");
+		String id = request.getParameter("id");
+		System.out.println(type + id);
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+		return null;
 	}
 }

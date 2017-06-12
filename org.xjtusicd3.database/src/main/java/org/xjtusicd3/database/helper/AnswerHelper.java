@@ -27,4 +27,15 @@ public class AnswerHelper {
 		session.close();
 		return list;
 	}
+	
+	/*
+	 * zyq_notice_ajax_查询FAQ评论通知
+	 */
+	public static List<AnswerPersistence> notice_faqanswerList(String userId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		AnswerPersistenceMapper mapper  = session.getMapper(AnswerPersistenceMapper.class);
+		List<AnswerPersistence> list = mapper.notice_faqanswerList(userId);
+		session.close();
+		return list;
+	}
 }

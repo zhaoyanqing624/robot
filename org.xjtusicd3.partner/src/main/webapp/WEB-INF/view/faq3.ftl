@@ -18,14 +18,114 @@
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/starScore.js"></script>
-    <script type="text/javascript">
+	<script type="text/javascript">
     $(function(){
-    	 
-	    window.location.hash = "#184c8d07-c5a4-4648-9160-d7f07887f814";
-	    var evt = document.createEvent("MouseEvents");
-	    evt.initEvent("click", true, true);   
-	    document.getElementById("liuduoduo").dispatchEvent(evt); 
-    }) 
+    	if(document.URL.indexOf("n=")>0){
+    		var i=0;
+    		var j=0;
+    		var z=0;
+    		var evt1 = document.createEvent("MouseEvents");
+    		var evt2 = document.createEvent("MouseEvents");
+    		var evt3 = document.createEvent("MouseEvents");
+    		var noticeId = document.URL.split("n=")[1].split("&p=")[0];
+    		var parentId = document.URL.split("p=")[1].split("&q=")[0];
+    		//模拟点击查看更多评论
+    		var commentNumber = ${commentNumber};
+    		commentNumber = Math.ceil(commentNumber/5);
+    		if(document.getElementById(parentId)==null){//页面没有此评论
+	    		for(i=0;i<commentNumber;i++){
+				    evt1.initEvent("click", true, true);
+	    			document.getElementById("querymorelink").firstChild.dispatchEvent(evt1);
+	    			if(document.getElementById(parentId)!=null){
+	    				break;
+	    			}
+	    		}
+	    		document.getElementById(parentId).getElementsByClassName("subCommentList")[0].style.display=="block";
+	    		if(document.getElementById(noticeId)==null){
+	    			for(j=0;j<100;j++){
+	   					evt2.initEvent("click", true, true);   
+	    				document.getElementById(parentId).getElementsByClassName("commentReplay")[0].dispatchEvent(evt2);
+	    				if(document.getElementById(noticeId)!=null){
+	    					break;
+	    				} 
+	    			}
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				}else{
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				} 
+    		}else if(document.getElementById(parentId)!=null){//页面有此评论
+    			var evt = document.createEvent("MouseEvents");
+    			evt.initEvent("click", true, true);
+	    		document.getElementById(parentId).getElementsByClassName("commentReplay")[0].dispatchEvent(evt);
+				if(document.getElementById(noticeId)==null){
+	    			for(z=0;z<100;z++){
+	   					evt3.initEvent("click", true, true);   
+	    				document.getElementById(parentId).getElementsByClassName("ac2")[0].firstChild.dispatchEvent(evt3);
+	    				if(document.getElementById(noticeId)!=null){
+	    					break;
+	    				} 
+	    			}
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				}else{
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				} 		
+    		}
+    	}else{
+    		var parentId = document.URL.split("p=")[1].split("&q=")[0];
+    		//模拟点击查看更多评论
+    		var commentNumber = ${commentNumber};
+    		commentNumber = Math.ceil(commentNumber/5);
+    		if(document.getElementById(parentId)==null){//页面没有此评论
+    			for(i=0;i<commentNumber;i++){
+    				var evt1 = document.createEvent("MouseEvents");
+				    evt1.initEvent("click", true, true);
+	    			document.getElementById("querymorelink").firstChild.dispatchEvent(evt1);
+	    			if(document.getElementById(parentId)!=null){
+	    				break;
+	    			}
+	    		}
+		    	mScroll(parentId);
+		    	function mScroll(id){
+			    	$("html,body").stop(true);
+			    	$("html,body").animate({
+			    		scrollTop: $("#"+id).offset().top
+			    	}, 800);
+			    }
+    		}else{
+		    	mScroll(parentId);
+		    	function mScroll(id){
+			    	$("html,body").stop(true);
+			    	$("html,body").animate({
+			    		scrollTop: $("#"+id).offset().top
+			    	}, 800);
+			    }
+    		}
+    	}
+    }); 
     </script>
 </head>
 <body>
@@ -432,7 +532,7 @@
 			}
 		}
 		function replycomment(){
-			var questionId = document.URL.split("=")[1];
+			var questionId = document.URL.split("q=")[1].split("#")[0];
 			var comment = event.target.parentNode.parentNode.getElementsByClassName("commentReplayText")[0].value;
 			var commentId = event.target.parentNode.parentNode.parentNode.id;
 			var duo = "";
@@ -556,7 +656,7 @@
 		function querymorecomment(){
 			html = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].innerHTML;
 			startnumber = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].getElementsByClassName("commentList").length;
-			var questionId = document.URL.split("=")[1];
+			var questionId = document.URL.split("q=")[1].split("#")[0];
 			$.ajax({
 				type:"POST",
 				url:"/org.xjtusicd3.partner/queryMoreComment.html",
@@ -625,7 +725,7 @@
 		}
 		//点赞
 		function favorite(){
-			var questionId = document.URL.split("=")[1];
+			var questionId = document.URL.split("q=")[1].split("#")[0];
 			$.ajax({
 				type:"POST",
 				url:"/org.xjtusicd3.partner/saveCollectionFAQ.html",
@@ -646,7 +746,7 @@
 		}
 		//评分
 		function score(){
-			var questionId = document.URL.split("=")[1];
+			var questionId = document.URL.split("q=")[1].split("#")[0];
 			var score = event.target.parentNode.parentNode.getElementsByClassName("fenshu")[0].innerHTML;
 			$.ajax({
 				type:"POST",

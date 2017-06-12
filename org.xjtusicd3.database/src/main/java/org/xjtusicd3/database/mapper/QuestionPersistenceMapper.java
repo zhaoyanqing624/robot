@@ -3,7 +3,9 @@ package org.xjtusicd3.database.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
@@ -48,4 +50,17 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion,TBL_FAQanswer WHERE TBL_FAQquestion.FAQQUESTIONID=TBL_FAQanswer.FAQQUESTIONID AND TBL_FAQquestion.FAQTITLE=#{0} AND TBL_FAQanswer.USERID=#{1}")
 	public List<QuestionPersistence> faqadd_iscurrent(String faqtitle, String userid);
+	
+	/*
+	 * zpz_delete faq of TBL_FAQquestion
+	 */
+	@Delete("DELETE FROM TBL_FAQquestion WHERE TBL_FAQquestion.FAQQUESTIONID=#{0}")
+	public void deleteFAQquestion(String faqQuestionId);
+	
+	/* 
+	 * zpz_edit faq of TBL_FAQquestion
+	 */
+	@Update("UPDATE TBL_FAQquestion SET FAQKEYWORDS=#{1} WHERE FAQTITLE=#{0}")
+	public void updateFAQquestion(String faqTitle,String faqKeyWords);
+	
 }

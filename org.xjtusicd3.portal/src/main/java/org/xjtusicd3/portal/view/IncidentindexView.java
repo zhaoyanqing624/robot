@@ -3,19 +3,31 @@ package org.xjtusicd3.portal.view;
 public class IncidentindexView 
 {
 	private String userQuestionTitle;
-	private String user;
+	private String userName;
 	private String userQuestionTime;
+	private String UserQuestionId;
+	public String getUserQuestionId()
+	{
+		return UserQuestionId;
+	}
+	public void setUserQuestionId(String userQuestionId)
+	{
+		UserQuestionId = userQuestionId;
+	}
 	public String getUserQuestionTitle() {
 		return userQuestionTitle;
 	}
 	public void setUserQuestionTitle(String userQuestionTitle) {
 		this.userQuestionTitle = userQuestionTitle;
 	}
-	public String getUser() {
-		return user;
+	 
+	public String getUserName()
+	{
+		return userName;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
 	}
 	public String getUserQuestionTime() {
 		return userQuestionTime;

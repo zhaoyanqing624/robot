@@ -34,11 +34,10 @@
 					var oDiv = document.createElement('div');
 					oDiv.id = jsonresult[i].noticeId;
 					document.getElementById("second").appendChild(oDiv);
-					document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
 					var from = jsonresult[i].value.split("_")[0];
 					var how = jsonresult[i].value.split("_")[1];
-					var name =jsonresult[i].name;
-					var notice = jsonresult[i].notice; 
+					var name =jsonresult[i].name.replace(/<.*?>/ig,"");
+					var notice = jsonresult[i].notice.replace(/<.*?>/ig,""); 
 					if(name.length<20){
 						name = name;
 					}else{
@@ -51,12 +50,26 @@
 					}
 					var time = jsonresult[i].time;
 					time = time.split('');
-					time.splice()
-					alert(time);
+					time.splice(10,1,' ');
+					time = time.join('');
 					if(jsonresult[i].value=="问吧_有了新的评论"){
-						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的提问：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的评论“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+jsonresult[i].time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
+						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的提问：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的评论“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
 					}else if(jsonresult[i].value=="问吧_有了新的回复"){
-						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的评论：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+jsonresult[i].time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
+						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的评论：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
+					}else if(jsonresult[i].value=="问吧_有了新的回复@"){
+						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的回复：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
+					}else if(jsonresult[i].value=="知识库_有了新的评论"){
+						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的提问：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的评论“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';					
+					}else if(jsonresult[i].value=="知识库_有了新的回复"){
+						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的评论：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';					
+					}else if(jsonresult[i].value=="知识库_有了新的回复@"){
+						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的回复：“<a class="notice-question" target="_blank" href="faq3.html?p='+jsonresult[i].parentId+'&q='+jsonresult[i].questionId+'" onclick="updatenotice()">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="faq3.html?n='+jsonresult[i].noticeId+'&p='+jsonresult[i].parentId+'&q='+jsonresult[i].questionId+'">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';					
 					}
 					
 				}
@@ -159,34 +172,26 @@
 		</div>
 		
 		<div id="second">
-	    	<div id="815382" class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
-	        	<div class="notice-box clearfix">
-	            	<p class="notice-type " style="    color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">问吧</p>
-	            	<div class="notice-show-box">
-	                	<p class="notice-con ">你的提问<a target="_blank" href="/wenda/detail/338293">window补丁怎么下载</a>有新的回复</p>
-	                	<h5 class="notice-date">2017-03-01 22:00:07</h5>
-	            	</div>
+		</div>
+		
+		<div id="third">
+			<div note-id="1025407" class="notice">
+		        <div class="notice-box clearfix">
+		                            <p class="notice-type  already-read ">慕课</p>
+					
+		        
+		            <div class="notice-show-box">
+		                <p class="notice-con pass ">
+		                    luckyforever关注了你，<a target="_blank" href="/u/3674640/fans">点此查看</a>
+		                </p>
+		                <h5 class="notice-date">2017-05-09 22:32:24</h5>
+		            </div>
 		            <div class="del-box clearfix">
-		                <a onclick="deletenotice()" class="del-notice" title="删除此通知">
-		                	<i class="fa fa-trash-o"></i>
+		                <a href="javascript:void(0)" class="del-notice" title="删除此通知">
+		                    <i class="icon icon-del"></i>
 		                </a>
 		            </div>
-	        	</div>
-			</div>
-			
-	    	<div id="604172" class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
-	        	<div class="notice-box clearfix">
-	            	<p class="notice-type " style="    color: #05c953;border: 1px solid #05c953;background: #a9fba8;">知识库</p>
-	            	<div class="notice-show-box">
-	            		<p class="notice-con "> 你的知识库：“<a target="_blank" href="/wenda/detail/338486">如何更新软件的问题</a>” 有新的回复</p>
-	                	<h5 class="notice-date">2016-12-12 23:00:02</h5>
-	           		</div>
-		            <div class="del-box clearfix">
-		                <a onclick="deletenotice()" class="del-notice" title="删除此通知">
-		                    <i class="fa fa-trash-o"></i>
-		                </a>
-		            </div>
-	        	</div>
+		        </div>
 			</div>
 		</div>
 	</div>
@@ -363,6 +368,26 @@
 		function deletenotice(){
 			event.target.parentNode.parentNode.parentNode.parentNode.style.display="none";
 		}
+		function updatenotice(){
+			var type = event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("notice-type ")[0].innerHTML;
+			var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
+			alert(id)
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/updateNotice.html",
+				data:{
+					"id":id,
+					"type":type
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}
+				}
+			})
+		}
+		
     </script>
 </body>
 </html>

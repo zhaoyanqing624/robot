@@ -27,11 +27,20 @@ public class UserQuestionController
 	{
 		ModelAndView mv = new ModelAndView("incidentindex");
 		List<IncidentindexView> incidentindexViews = UserQuestionService.incidentindexViews();
-		mv.addObject("incidentview",incidentindexViews);
+		mv.addObject("incidentList",incidentindexViews);
 		return mv;
 		
 	}
-	
+	/*
+	 * zpz_showUserQuestionInfoDetail
+	 */
+	@RequestMapping(value="showUserQuestion",method=RequestMethod.GET)
+	public ModelAndView showUserQuestion(String u){
+		List<IncidentindexView> incidentindexViews = UserQuestionService.getUserQuestionDetail(u);
+		ModelAndView modelAndView = new ModelAndView("showUserQuestion");
+		modelAndView.addObject("userQuestionInfoList", incidentindexViews);
+		return modelAndView;
+	}
 //	/*
 //	 * ZPZ_deleteUserQuestion
 //	 */

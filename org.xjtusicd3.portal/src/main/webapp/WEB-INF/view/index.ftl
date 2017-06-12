@@ -123,13 +123,7 @@
                 <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                     <span class="ng-scope"></span>
                 </li>
-                <li>
-                    <a class="J_menuItem" href="fileindex.html">
-                        <i class="fa fa-file"></i>
-                        <span class="nav-label">文件管理</span>
-                        <span class="nav-label"></span>
-                    </a>
-                </li>
+                 
                 <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                     <span class="ng-scope"></span>
                 </li>
