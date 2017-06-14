@@ -36,12 +36,12 @@ public class ConfigureHelper {
 		session.close();
 	}
 	/*
-	 * zyq_获取所有的设备信息
+	 * zpz_获取部分的设备信息
 	 */
-	public static List<ConfigurePersistence> getPartConfig(){
+	public static List<ConfigurePersistence> getAllConfig(){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		ConfigurePersistenceMapper mapper = session.getMapper(ConfigurePersistenceMapper.class);
-		List<ConfigurePersistence> list = mapper.getPartConfig();
+		List<ConfigurePersistence> list = mapper.getAllConfig();
 		session.close();
 		return list;
 	}

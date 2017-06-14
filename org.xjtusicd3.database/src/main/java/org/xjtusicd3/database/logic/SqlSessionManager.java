@@ -25,6 +25,7 @@ import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
 import org.xjtusicd3.database.mapper.EquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.ITPersistenceMapper;
 import org.xjtusicd3.database.mapper.LogPersistenceMapper;
+import org.xjtusicd3.database.mapper.MessagePersistenceMapper;
 import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.PayPersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;

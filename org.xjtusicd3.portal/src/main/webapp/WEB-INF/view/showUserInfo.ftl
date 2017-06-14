@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 基本表单</title>
+    <title>展示用户信息</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 

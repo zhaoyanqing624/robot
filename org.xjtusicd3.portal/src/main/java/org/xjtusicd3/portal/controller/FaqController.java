@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.AdviseHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.QuestionPersistence;
+import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.portal.service.FaqService;
 import org.xjtusicd3.portal.view.KnowledgeindexView;
 
@@ -32,4 +35,26 @@ public class FaqController {
  	   return mv;
     }
 
+	/*
+	 * ZPZ_deleteFAQ
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/deleteFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	public void deleteUser(HttpServletRequest request){
+		String faqId = request.getParameter("FAQID");
+		QuestionHelper.deleteFAQ(faqId);
+		System.out.println(faqId);
+	}
+	
+	/*
+	 * zpz_showFAQInfoDetail
+	 */
+	@RequestMapping(value="showFAQ",method=RequestMethod.GET)
+	public ModelAndView showUserInfo(String u){
+		List<KnowledgeindexView> knowledgeindexViews = FaqService.getFAQinfo_id(u);
+		ModelAndView modelAndView = new ModelAndView("showFAQ");
+		modelAndView.addObject("faqInfoList", knowledgeindexViews);
+		return modelAndView;
+	}
+	
 }

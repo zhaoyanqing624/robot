@@ -28,7 +28,7 @@
 	<script src="zhao/classify/js/knockout.js"></script>
 	<script>
 	$(function(){
-	var navData=[${string}];
+		var navData=[${string}];
 		ko.applyBindings({navData:navData});
 	})
 	</script>

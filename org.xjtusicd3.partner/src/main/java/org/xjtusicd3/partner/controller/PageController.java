@@ -109,9 +109,4 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("questionadd");
 		return mv;
 	}
-	@RequestMapping(value="message",method=RequestMethod.GET)
-	public ModelAndView message(){
-		ModelAndView mv = new ModelAndView("message");
-		return mv;
-	}
 }

@@ -27,6 +27,7 @@ public class AnswerHelper {
 		session.close();
 		return list;
 	}
+	
 	/*
 	 * zyq_notice_ajax_查询FAQ评论通知
 	 */

@@ -14,21 +14,13 @@ public class PageController {
  	   return mv;
     }
 	
-	@RequestMapping(value="incidentindex",method=RequestMethod.GET)
-    public ModelAndView  incident(){
- 	   ModelAndView mv=new ModelAndView("incidentindex");
- 	   return mv;
-    }
+	 
 	@RequestMapping(value="problemdetail",method=RequestMethod.GET)
     public ModelAndView  problemdetail(){
  	   ModelAndView mv=new ModelAndView("problemdetail");
  	   return mv;
     }
-	@RequestMapping(value="problemindex",method=RequestMethod.GET)
-    public ModelAndView  problem(){
- 	   ModelAndView mv=new ModelAndView("problemindex");
- 	   return mv;
-    }
+
 	 
 	
 	

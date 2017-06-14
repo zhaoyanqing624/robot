@@ -6,8 +6,10 @@ import java.util.List;
 import javax.naming.spi.DirStateFactory.Result;
 
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.portal.view.KnowledgeindexView;
@@ -58,6 +60,7 @@ public class FaqService {
 		for(QuestionPersistence questionPersistence:questionPersistences){
 			KnowledgeindexView knowledgeindexView = new KnowledgeindexView();
 			knowledgeindexView.setFaqTitle(questionPersistence.getFAQTITLE());
+			knowledgeindexView.setFaqId(questionPersistence.getFAQQUESTIONID());
 			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(questionPersistence.getFAQCLASSIFYID());
 			knowledgeindexView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 			knowledgeindexView.setFaqKeyWord(questionPersistence.getFAQKEYWORDS());
@@ -65,4 +68,24 @@ public class FaqService {
 		}
 		return knowledgeindexViews;
 	}
+	
+	public static List<KnowledgeindexView> getFAQinfo_id(String faqId){
+		List<KnowledgeindexView> knowledgeindexViews = new ArrayList<KnowledgeindexView>();
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faq3_faqcontent(faqId);
+		for(QuestionPersistence questionPersistence:questionPersistences){
+			KnowledgeindexView knowledgeindexView = new KnowledgeindexView();
+			knowledgeindexView.setFaqTitle(questionPersistence.getFAQTITLE());
+			knowledgeindexView.setFaqId(questionPersistence.getFAQQUESTIONID());
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(questionPersistence.getFAQCLASSIFYID());
+			knowledgeindexView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			knowledgeindexView.setFaqDescription(questionPersistence.getFAQDESCRIPTION());
+			List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(questionPersistence.getFAQQUESTIONID());
+			knowledgeindexView.setFaqContent(answerPersistences.get(0).getFAQCONTENT());
+			knowledgeindexView.setFaqKeyWord(questionPersistence.getFAQKEYWORDS());
+			knowledgeindexViews.add(knowledgeindexView);
+		}
+		return knowledgeindexViews;
+	}
+	
+	
 }

@@ -33,6 +33,17 @@ public class UserController
 		return mv;
 		
 	}
+	
+	/*
+	 * zpz_showUserInfoDetail
+	 */
+	@RequestMapping(value="showUserInfo",method=RequestMethod.GET)
+	public ModelAndView showUserInfo(String u){
+		List<UserPersistence> userPersistences = UserHelper.getEmail_id(u);
+		ModelAndView modelAndView = new ModelAndView("showUserInfo");
+		modelAndView.addObject("userInfoList", userPersistences);
+		return modelAndView;
+	}
 	//�����û�
 	@RequestMapping(value="adminAddUser",method=RequestMethod.GET)
 	public String adminAddUser(HttpServletRequest request,HttpServletResponse response){
@@ -84,16 +95,7 @@ public class UserController
 		System.out.println(userEmail);
 	}
 	
-	/*
-	 * zpz_showUserInfoDetail
-	 */
-	@RequestMapping(value="showUserInfo",method=RequestMethod.GET)
-	public ModelAndView showUserInfo(String u){
-		List<UserPersistence> userPersistences = UserHelper.getEmail_id(u);
-		ModelAndView modelAndView = new ModelAndView("showUserInfo");
-		modelAndView.addObject("userInfoList", userPersistences);
-		return modelAndView;
-	}
+
 	/*
 	 * zpz_addUserInfo
 	 */

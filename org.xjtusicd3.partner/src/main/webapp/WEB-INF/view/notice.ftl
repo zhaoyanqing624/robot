@@ -21,7 +21,7 @@
 		PL._init();     
 		PL.joinListen('/mipc/he');  
 		function onData(event) {
-			var result = decodeURIComponent(event.get("mess"));
+			var result = decodeURIComponent(event.get("notice"));
 			var jsonresult = strToJson(result);
 			function strToJson(str){ 
 				return JSON.parse(str); 
@@ -63,7 +63,7 @@
 						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的回复：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';
 					}else if(jsonresult[i].value=="知识库_有了新的评论"){
 						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
-						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的提问：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的评论“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';					
+						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的知识：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的评论“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';					
 					}else if(jsonresult[i].value=="知识库_有了新的回复"){
 						document.getElementById(jsonresult[i].noticeId).outerHTML = '<div id='+jsonresult[i].noticeId+' class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)"></div>';
 						document.getElementById(jsonresult[i].noticeId).innerHTML = '<div class="notice-box clearfix"><p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">'+from+'</p><div class="notice-show-box"><p class="notice-con ">你的评论：“<a class="notice-question" target="_blank" href="/wenda/detail/338293">'+name+'</a>”有新的回复“<a class="notice-answer" target="_blank" href="/wenda/detail/338293">'+notice+'</a>”</p><h5 class="notice-date">'+time+'</h5></div><div class="del-box clearfix"><a onclick="deletenotice()" class="del-notice" title="删除此通知"><i class="fa fa-trash-o"></i></a></div></div>';					
@@ -74,7 +74,6 @@
 					
 				}
 			} 
-			
 		  
 		    // 离开    
 		    // PL.leave();    
@@ -172,27 +171,105 @@
 		</div>
 		
 		<div id="second">
+		<#list secondList as secondList>
+			<div id=${secondList.noticeId} class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+				<div class="notice-box clearfix">
+					<#if secondList.value=="知识库_有了新的评论">
+						<p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">知识库</p>
+						<div class="notice-show-box">
+							<p class="notice-con ">你的知识：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的评论“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif secondList.value=="知识库_有了新的回复">
+						<p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">知识库</p>
+						<div class="notice-show-box">
+							<p class="notice-con ">你的评论：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif secondList.value=="知识库_有了新的回复@">
+						<p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">知识库</p>
+						<div class="notice-show-box">
+							<p class="notice-con ">你的回复：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif secondList.value=="问吧_有了新的评论">
+						<p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">问吧</p>
+						<div class="notice-show-box">
+							<p class="notice-con ">你的提问：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的评论“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif secondList.value=="问吧_有了新的回复">
+						<p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">问吧</p>
+						<div class="notice-show-box">
+							<p class="notice-con ">你的评论：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif secondList.value=="问吧_有了新的回复@">
+						<p class="notice-type " style="color: #0343fb;border: 1px solid #0343fb;background: #9be4ff;">问吧</p>
+						<div class="notice-show-box">
+							<p class="notice-con ">你的回复：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					</#if>
+					<div class="del-box clearfix" style="display: none;">
+						<a onclick="deletenotice()" class="del-notice" title="删除此通知">
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</#list>
 		</div>
 		
 		<div id="third">
-			<div note-id="1025407" class="notice">
-		        <div class="notice-box clearfix">
-		                            <p class="notice-type  already-read ">慕课</p>
-					
-		        
-		            <div class="notice-show-box">
-		                <p class="notice-con pass ">
-		                    luckyforever关注了你，<a target="_blank" href="/u/3674640/fans">点此查看</a>
-		                </p>
-		                <h5 class="notice-date">2017-05-09 22:32:24</h5>
-		            </div>
-		            <div class="del-box clearfix">
-		                <a href="javascript:void(0)" class="del-notice" title="删除此通知">
-		                    <i class="icon icon-del"></i>
-		                </a>
-		            </div>
-		        </div>
+			<#list thirdList as thirdList>
+			<div id=${thirdList.noticeId} class="notice" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+				<div class="notice-box clearfix">
+					<#if thirdList.value=="知识库_有了新的评论">
+						<p class="notice-type  already-read" >知识库</p>
+						<div class="notice-show-box">
+							<p class="notice-con pass ">你的知识：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的评论“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif thirdList.value=="知识库_有了新的回复">
+						<p class="notice-type  already-read" >知识库</p>
+						<div class="notice-show-box">
+							<p class="notice-con pass ">你的评论：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif thirdList.value=="知识库_有了新的回复@">
+						<p class="notice-type  already-read" >知识库</p>
+						<div class="notice-show-box">
+							<p class="notice-con pass ">你的回复：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif thirdList.value=="问吧_有了新的评论">
+						<p class="notice-type  already-read" >问吧</p>
+						<div class="notice-show-box">
+							<p class="notice-con pass ">你的提问：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的评论“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif thirdList.value=="问吧_有了新的回复">
+						<p class="notice-type  already-read" >问吧</p>
+						<div class="notice-show-box">
+							<p class="notice-con pass ">你的评论：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					<#elseif thirdList.value=="问吧_有了新的回复@">
+						<p class="notice-type  already-read" >问吧</p>
+						<div class="notice-show-box">
+							<p class="notice-con pass ">你的回复：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<h5 class="notice-date">2017-06-08 14:15:36</h5>
+						</div>
+					</#if>
+					<div class="del-box clearfix" style="display: none;">
+						<a onclick="deletenotice()" class="del-notice" title="删除此通知">
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</div>
+				</div>
 			</div>
+			</#list>
 		</div>
 	</div>
 </div>
@@ -367,17 +444,22 @@
     	}
 		function deletenotice(){
 			event.target.parentNode.parentNode.parentNode.parentNode.style.display="none";
-		}
-		function updatenotice(){
-			var type = event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("notice-type ")[0].innerHTML;
+			var type = event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("notice-type")[0].innerHTML;
 			var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
-			alert(id)
+			var zhao = event.target.parentNode.parentNode.parentNode.getElementsByTagName("p")[0].className;
+			var type2 ="";
+			if(zhao=="notice-type "){
+				type2 = event.target.parentNode.parentNode.parentNode.getElementsByClassName("notice-con")[0].innerHTML.substring(0,4);
+			}else{
+				type2 = event.target.parentNode.parentNode.parentNode.getElementsByClassName("notice-con pass")[0].innerHTML.substring(0,4);
+			}
 			$.ajax({
 				type:"POST",
-				url:"/org.xjtusicd3.partner/updateNotice.html",
+				url:"/org.xjtusicd3.partner/deleteNotice.html",
 				data:{
 					"id":id,
-					"type":type
+					"type":type,
+					"type2":type2
 				},
 				dataType:"json",
 				success:function(data){
@@ -386,6 +468,33 @@
 					}
 				}
 			})
+		}
+		function updatenotice(){
+			var zhao = event.target.parentNode.parentNode.parentNode.getElementsByTagName("p")[0].className;
+			if(zhao=="notice-type "){
+				var type = event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("notice-type")[0].innerHTML;
+				var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
+				var type2 = event.target.parentNode.innerHTML.substring(0,4);
+				document.getElementById(id).getElementsByClassName("notice-box clearfix")[0].getElementsByClassName("notice-type")[0].style="";
+				document.getElementById(id).getElementsByClassName("notice-box clearfix")[0].getElementsByClassName("notice-type")[0].className="notice-type  already-read";
+				document.getElementById(id).getElementsByClassName("notice-box clearfix")[0].getElementsByClassName("notice-con ")[0].className="notice-con pass ";
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/updateNotice.html",
+					data:{
+						"id":id,
+						"type":type,
+						"type2":type2
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}
+					}
+				})
+			}
+
 		}
 		
     </script>

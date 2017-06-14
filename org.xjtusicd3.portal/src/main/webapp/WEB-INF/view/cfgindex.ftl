@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>事件</title>
+    <title>配置</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -15,9 +15,45 @@
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-    <!-- jqgrid-->
-    <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+    
+    
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
+<link href="media/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+
+<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet"
+	type="text/css" />
+
+<link href="media/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css" />
+
+<link href="media/css/style-metro.css" rel="stylesheet" type="text/css" />
+
+<link href="media/css/style.css" rel="stylesheet" type="text/css" />
+
+<link href="media/css/style-responsive.css" rel="stylesheet"
+	type="text/css" />
+
+
+
+<link href="media/css/uniform.default.css" rel="stylesheet"
+	type="text/css" />
+
+<!-- END GLOBAL MANDATORY STYLES -->
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+
+<link rel="stylesheet" type="text/css"
+	href="media/css/select2_metro.css" />
+
+<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+
+<!-- END PAGE LEVEL STYLES -->
+
+<link rel="shortcut icon" href="media/image/favicon.ico" />
+    
+    
 </head>
 
 <body class="gray-bg">
@@ -33,13 +69,12 @@
                     </li>
                     <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">系统配置</a>
                     </li>
-                    <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">配置设置</a>
-                    </li>
+                    
                 </ul>
                 <div class="tab-content">
 
                     <div id="tab-1" class="tab-pane active">
-                        <!DOCTYPE html>
+                         <!DOCTYPE html>
                         <html>
 
                         <head>
@@ -252,7 +287,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 全局js -->
+						<!-- 全局js -->
                         <script src="js/jquery.min.js?v=2.1.4"></script>
                         <script src="js/bootstrap.min.js?v=3.3.6"></script>
                         <script src="js/plugins/layer/layer.min.js"></script>
@@ -264,33 +299,10 @@
                         </body>
 
                         </html>
-
-
                     </div>
 
                     <div id="tab-2" class="tab-pane">
-                        <!DOCTYPE html>
-                        <html>
-
-                        <head>
-
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-                            <title>设备配置</title>
-                            <meta name="keywords" content="">
-                            <meta name="description" content="">
-
-                            <link rel="shortcut icon" href="favicon.ico">
-                            <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-                            <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-                            <link href="css/animate.css" rel="stylesheet">
-                            <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
-                        </head>
-
-                        <body class="gray-bg">
+                         
                         <div class="wrapper wrapper-content animated fadeIn">
 
                             <div class="row">
@@ -306,30 +318,231 @@
                                         <div class="tab-content">
                                             <div id="tab-21" class="tab-pane active">
                                                 <div class="ibox-content">
-                                                    <div class="col-md-11" style="width: 100%">
-                                                        <div class="input-group">
-                                                            <input type="text" placeholder="请输入搜索内容" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                                                        </div>
-                                                    </div>
-                                                    </br>
+                                                  
                                                     <div class="jqGrid_wrapper">
-                                                        <table id="table_list_2"></table>
-                                                        <div id="pager_list_2"></div>
+                                                       
+									 
+
+											<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+											<div class="portlet box blue">
+
+												<div class="portlet-title">
+
+													<div class="caption">
+														<i class="icon-edit"></i>计算机配置列表
+													</div>
+
+													<div class="tools">
+
+														<a href="javascript:;" class="collapse"></a> <a
+															href="#portlet-config" data-toggle="modal" class="config"></a>
+														<a href="javascript:;" class="reload"></a> <a
+															href="javascript:;" class="remove"></a>
+
+													</div>
+
+												</div>
+
+												<div class="portlet-body">
+
+													 <div class="clearfix">
+
+														<div class="btn-group">
+
+															<button class="btn green"
+																onclick="window.location='addUserInformation.html'">
+
+																<i class="icon-plus">增加计算机设备</i>
+
+															</button>
+
+														</div>
+
+													</div> 
+
+													<table
+														class="table table-striped table-hover table-bordered"
+														id="sample_editable_1">
+
+														<thead>
+
+															<tr>
+
+
+																<th>计算机设备ID</th>
+ 
+																 <th>显卡</th>
+
+																<th>声卡</th>
+
+																<th>操作</th>
+
+																<th>操作</th>
+
+																<th>查看计算机设备详情</th>
+
+															</tr>
+
+														</thead>
+
+														<tbody>
+															<#list computerList as computerList>
+															<tr class="">
+
+																<td>${computerList.EQUIPMENTID}</td>
+																<td>${computerList.GRAPHICCARD}</td>
+
+																<td class="center">${computerList.AUDIOCARD}</td>
+
+																 
+
+																<td><a class="faq"
+																	href="/org.xjtusicd3.portal/editUserInformation.html?u=${computerList.EQUIPMENTID}">编辑</a></td>
+
+																<td><a onclick="deleteCfg()">删除</a></td>
+
+																<td><a class="faq"
+																	href="/org.xjtusicd3.portal/showUserInfo.html?u=${computerList.EQUIPMENTID}">查看设备信息</a></td>
+
+															</tr>
+															</#list>
+
+
+														</tbody>
+
+													</table>
+
+												</div>
+
+											</div>
+
+											<!-- END EXAMPLE TABLE PORTLET-->
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div id="tab-22" class="tab-pane">
                                                 <div class="ibox-content">
-                                                    <div class="col-md-11" style="width: 100%">
-                                                        <div class="input-group">
-                                                            <input type="text" placeholder="请输入搜索内容" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                                                        </div>
-                                                    </div>
+                                                     
                                                     <div class="jqGrid_wrapper">
-                                                        <table id="table_list_3"></table>
-                                                        <div id="pager_list_3"></div>
+                                                        
+									 
+
+											<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+											<div class="portlet box blue">
+
+												<div class="portlet-title">
+
+													<div class="caption">
+														<i class="icon-edit"></i>服务器配置列表
+													</div>
+
+													<div class="tools">
+
+														<a href="javascript:;" class="collapse"></a> <a
+															href="#portlet-config" data-toggle="modal" class="config"></a>
+														<a href="javascript:;" class="reload"></a> <a
+															href="javascript:;" class="remove"></a>
+
+													</div>
+
+												</div>
+
+												<div class="portlet-body">
+
+													 <div class="clearfix">
+
+														<div class="btn-group">
+
+															<button class="btn green"
+																onclick="window.location='addUserInformation.html'">
+
+																<i class="icon-plus">增加服务器设备</i>
+
+															</button>
+
+														</div>
+
+												<!-- 	<div class="btn-group pull-right">
+
+										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+
+										</button>
+
+										<ul class="dropdown-menu pull-right">
+
+											<li><a href="#">Print</a></li>
+
+											<li><a href="#">Save as PDF</a></li>
+
+											<li><a href="#">Export to Excel</a></li>
+
+										</ul>
+
+									</div> -->
+
+													</div> 
+
+													<table
+														class="table table-striped table-hover table-bordered"
+														id="sample_editable_2">
+
+														<thead>
+
+															<tr>
+
+
+																<th>服务器设备ID</th>
+
+																<th>BIOS</th>
+
+																<th>AVTIVEUSER</th>
+
+																<th>操作</th>
+
+																<th>操作</th>
+
+																<th>查看服务器设备详情</th>
+
+															</tr>
+
+														</thead>
+
+														<tbody>
+															<#list serverList as serverList>
+															<tr class="">
+
+																<td>${serverList.classifyName}</td>
+																<td>${serverList.faqTitle}</td>
+
+																<td class="center">${serverList.faqKeyWord}</td>
+
+																 
+
+																<td><a class="faq"
+																	href="/org.xjtusicd3.portal/editUserInformation.html?u=${serverList.USERID}">编辑</a></td>
+
+																<td><a onclick="deleteUser()">删除</a></td>
+
+																<td><a class="faq"
+																	href="/org.xjtusicd3.portal/showUserInfo.html?u=${serverList.USERID}">查看服务器设备信息</a></td>
+
+															</tr>
+															</#list>
+
+
+														</tbody>
+
+													</table>
+
+												</div>
+
+											</div>
+
+											<!-- END EXAMPLE TABLE PORTLET-->
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,59 +562,12 @@
                         </div>
 
 
-                        <!-- 全局js -->
-                        <script src="js/jquery.min.js?v=2.1.4"></script>
-                        <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-                        <!-- 自定义js -->
-                        <script src="js/content.js?v=1.0.0"></script>
-
-
-
-
-
-                        </body>
-
-                        </html>
+                        
 
                     </div>
 
                     <div id="tab-3" class="tab-pane">
-                        <!DOCTYPE html>
-                        <html>
-
-                        <head>
-
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-                            <title>${result}</title>
-                            <meta name="keywords" content="">
-                            <meta name="description" content="">
-
-                            <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-                            <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
-                            <!-- jqgrid-->
-                            <link href="css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
-
-                            <link href="css/animate.css" rel="stylesheet">
-                            <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
-                            <style>
-                                /* Additional style to fix warning dialog position */
-
-                                #alertmod_table_list_2 {
-                                    top: 900px !important;
-                                }
-                            </style>
-
-                        </head>
-
-                        <body class="gray-bg">
+                        
                         <div class="wrapper wrapper-content  animated fadeInRight">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -410,15 +576,125 @@
                                             <h5>系统配置</h5>
                                         </div>
                                         <div class="ibox-content">
-                                            <div class="col-md-11" style="width:100%;">
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="请输入搜索内容" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                                                </div>
-                                            </div>
+                                           
                                             <div class="jqGrid_wrapper">
-                                                <table id="table_list_4"></table>
-                                                <div id="pager_list_4"></div>
+                                                
+
+											<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+											<div class="portlet box blue">
+
+												<div class="portlet-title">
+
+													<div class="caption">
+														<i class="icon-edit"></i>系统配置列表
+													</div>
+
+													<div class="tools">
+
+														<a href="javascript:;" class="collapse"></a> <a
+															href="#portlet-config" data-toggle="modal" class="config"></a>
+														<a href="javascript:;" class="reload"></a> <a
+															href="javascript:;" class="remove"></a>
+
+													</div>
+
+												</div>
+
+												<div class="portlet-body">
+
+													<!-- <div class="clearfix">
+
+														<div class="btn-group">
+
+															<button class="btn green"
+																onclick="window.location='addUserInformation.html'">
+
+																<i class="icon-plus">增加FAQ</i>
+
+															</button>
+
+														</div>
+
+												 	<div class="btn-group pull-right">
+
+										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+
+										</button>
+
+										<ul class="dropdown-menu pull-right">
+
+											<li><a href="#">Print</a></li>
+
+											<li><a href="#">Save as PDF</a></li>
+
+											<li><a href="#">Export to Excel</a></li>
+
+										</ul>
+
+									</div> 
+
+													</div> -->
+
+													<table
+														class="table table-striped table-hover table-bordered"
+														id="sample_editable_3">
+
+														<thead>
+
+															<tr>
+
+
+																<th>配置名称</th>
+
+																<th>配置类型</th>
+
+																<th>URL</th>
+
+																<th>配置时间</th>
+
+																<th>操作</th>
+
+																<th>操作</th>
+
+																<th>查看配置详情</th>
+
+															</tr>
+
+														</thead>
+
+														<tbody>
+															<#list cfgList as cfgList>
+															<tr class="">
+
+																<td>${cfgList.CONFIGURENAME}</td>
+																<td>${cfgList.CONFIGURETYPE}</td>
+
+																<td class="center">${cfgList.URL}</td>
+
+																 <td class="center">${cfgList.CONFIGURETIME}</td>
+
+																<td><a class="faq"
+																	href="/org.xjtusicd3.portal/editUserInformation.html?u=${cfgList.USERID}">编辑</a></td>
+
+																<td><a onclick="deleteUser()">删除</a></td>
+
+																<td><a class="faq"
+																	href="/org.xjtusicd3.portal/showUserInfo.html?u=${cfgList.USERID}">查看配置信息</a></td>
+
+															</tr> 
+															</#list>
+
+
+														</tbody>
+
+													</table>
+
+												</div>
+
+											</div>
+
+											<!-- END EXAMPLE TABLE PORTLET-->
                                             </div>
                                         </div>
                                     </div>
@@ -427,205 +703,12 @@
                         </div>
 
 
-
-                        </body>
-
-                        </html>
+ 
 
 
                     </div>
 
-                    <div id="tab-4" class="tab-pane">
-                        <!DOCTYPE html>
-                        <html>
-
-                        <head>
-
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-                            <title>配置设置</title>
-                            <meta name="keywords" content="">
-                            <meta name="description" content="">
-
-                            <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-                            <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-                            <link href="css/animate.css" rel="stylesheet">
-                            <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
-                        </head>
-
-                        <body class="gray-bg">
-                        <div class="wrapper wrapper-content animated fadeIn">
-
-                            <div class="row">
-                                <div class="col-sm-6"  style="width: 100%">
-                                    <div class="tabs-container">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a data-toggle="tab" href="#tab-41" aria-expanded="true">配置分类</a>
-                                            </li>
-                                            <li class=""><a data-toggle="tab" href="#tab-42" aria-expanded="false">字段说明</a>
-                                            </li>
-
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div id="tab-41" class="tab-pane active">
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-sm-6" style="width: 100%">
-                                                            <div class="ibox float-e-margins">
-                                                                <div class="ibox-title">
-                                                                    <h5></h5>
-                                                                    <div class="ibox-tools">
-                                                                        <a class="collapse-link">
-                                                                            <i class="fa fa-chevron-up"></i>
-                                                                        </a>
-                                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-                                                                            <i class="fa fa-wrench"></i>
-                                                                        </a>
-                                                                        <ul class="dropdown-menu dropdown-user">
-                                                                            <li><a href="table_basic.html#">选项1</a>
-                                                                            </li>
-                                                                            <li><a href="table_basic.html#">选项2</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <a class="close-link">
-                                                                            <i class="fa fa-times"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="ibox-content">
-
-                                                                    <table class="table table-bordered">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th width="30%">一级分类</th>
-                                                                            <th width="70%">二级分类</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>网络相关</td>
-                                                                            <td>
-                                                                                <button>交换机</button>
-                                                                                <button>其他网络设备</button>
-                                                                                <button>1光纤</button>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>安全相关</td>
-                                                                            <td>
-                                                                                <button>监视器</button>
-                                                                                <button>摄像机</button>
-                                                                                <button>其他仪器</button>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>办公设备</td>
-                                                                            <td>
-                                                                                <button>笔记本</button>
-                                                                                <button>台式机</button>
-                                                                                <button>打印机</button>
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="tab-42" class="tab-pane">
-                                                <div class="panel-body">
-                                                    <div class="row">
-
-                                                        <div class="col-sm-6" style="width: 100%">
-                                                            <div class="ibox float-e-margins">
-                                                                <div class="ibox-title">
-                                                                    <h5>字段说明</h5>
-                                                                    <div class="ibox-tools">
-                                                                        <a class="collapse-link">
-                                                                            <i class="fa fa-chevron-up"></i>
-                                                                        </a>
-                                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-                                                                            <i class="fa fa-wrench"></i>
-                                                                        </a>
-                                                                        <ul class="dropdown-menu dropdown-user">
-                                                                            <li><a href="table_basic.html#">增加</a>
-                                                                            </li>
-                                                                            <li><a href="table_basic.html#">减少</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <a class="close-link">
-                                                                            <i class="fa fa-times"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="ibox-content">
-
-                                                                    <table class="table table-striped" width="100%">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <td><h5>报告时间</h5><small>事件或者请求提交的事件</small></td>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td><h5>优先级</h5><small>主要基于影响范围和紧急程度来决定。但同时需要结合当前的资源、技术等来判断</small></td>
-
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><h5>影响范围</h5><small>事主受到影响，可能因工作性质影响到团队甚至单位</small></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><h5>简要描述</h5><small>一句话描述事件，清晰扼要</small></td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-
-
-
-                        </div>
-
-
-                        <!-- 全局js -->
-                        <script src="js/jquery.min.js?v=2.1.4"></script>
-                        <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-                        <!-- 自定义js -->
-                        <script src="js/content.js?v=1.0.0"></script>
-
-
-
-
-
-                        </body>
-
-                        </html>
-                    </div>
+                 
                 </div>
 
 
@@ -651,14 +734,7 @@
 <!-- 自定义js -->
 <script src="js/content.js?v=1.0.0"></script>
 
-<!-- Peity -->
-<script src="js/plugins/peity/jquery.peity.min.js"></script>
-
-
-
-<!-- jqGrid -->
-<script src="js/plugins/jqgrid/i18n/grid.locale-cn.js?0820"></script>
-<script src="js/plugins/jqgrid/jquery.jqGrid.min.js?0820"></script>
+ 
 
 <script type="text/javascript">
     $(function() {
@@ -1756,341 +1832,84 @@
         });
     });
 </script>
+ 
+ 
+	<!-- BEGIN CORE PLUGINS -->
 
-<!-- Page-Level Scripts -->
-<script>
-    $(document).ready(function () {
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
-        $.jgrid.defaults.styleUI = 'Bootstrap';
-        // Examle data for jqGrid
-        var mydata = [
-            {
-                id: "19028811145",
-                brand:"戴尔INS15",
-                date: "2010-05-24",
-                ip: "192.168.1.1",
-                mac:"00-EA-01-23-90-EF",
-                status: "已返库"
-            },
-            {
-                id: "19028811145",
-                brand:"联想Y570",
-                date: "2013-02-21",
-                ip: "192.168.1.1",
-                mac:"00-EA-01-23-90-EF",
-                status: "在使用"
-            },
+	<script src="media/js/jquery-migrate-1.2.1.min.js"
+		type="text/javascript"></script>
 
-        ];
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-        // Configuration for jqGrid Example 2
-        $("#table_list_2").jqGrid({
-            data: mydata,
-            datatype: "local",
-            height: 450,
-            autowidth: true,
-            shrinkToFit: true,
-            rowNum: 20,
-            rowList: [10, 20, 30],
-            colNames: ['设备编号', '设备品牌', '入库时间','ip地址','mac地址','当前使用状态'],
-            colModel: [
-                {
-                    name: 'id',
-                    index: 'id',
-                    editable: true,
-                    width: 40,
-                    sorttype: "int",
-                    search: true,
-                    formatter:'showlink',
-                    formatoptions:{baseLinkUrl:"CfgDetail.html"}
-                },
+	<script src="media/js/jquery-ui-1.10.1.custom.min.js"
+		type="text/javascript"></script>
 
-                {
-                    name: 'brand',
-                    index: 'brand',
-                    editable: true,
-                    width: 120,
-                },
-                {
-                    name: 'date',
-                    index: 'date',
-                    editable: true,
-                    width: 90,
-                    sorttype: "date",
-                    formatter: "date"
-                },
-                {
-                    name: 'ip',
-                    index: 'ip',
-                    editable: true,
-                    width: 110,
-                },
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+ 
+	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-                {
-                    name: 'mac',
-                    index: 'mac',
-                    editable: true,
-                    width: 100
-                },
-                {
-                    name: 'status',
-                    index: 'status',
-                    editable: true,
-                    width: 70,
-                    sortable: false
-                }
-            ],
-            pager: "#pager_list_2",
-            viewrecords: true,
-            caption: "所有计算机设备",
-            add: true,
-            edit: true,
-            addtext: 'Add',
-            edittext: 'Edit',
-            hidegrid: false
-        });
+	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>
 
-        // Add selection
-        $("#table_list_2").setSelection(4, true);
+	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
 
+	<script src="media/js/jquery.uniform.min.js" type="text/javascript"></script>
 
-        // Setup buttons
-        $("#table_list_2").jqGrid('navGrid', '#pager_list_2', {
-            edit: true,
-            add: true,
-            del: true,
-            search: true
-        }, {
-            height: 200,
-            reloadAfterSubmit: true
-        });
+	<!-- END CORE PLUGINS -->
 
-        // Add responsive to jqGrid
-        $(window).bind('resize', function () {
-            var width = $('.jqGrid_wrapper').width();
-            $('#table_list_1').setGridWidth(width);
-            $('#table_list_2').setGridWidth(width);
-        });
-    });
-</script>
-<script>
-    $(document).ready(function () {
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-        $.jgrid.defaults.styleUI = 'Bootstrap';
-        // Examle data for jqGrid
-        var mydata = [
-            {
-                id: "8871",
-                brand:"惠普",
-                memory: "8GB",
-                date: "2016-01-14",
-                portSort:"SATA",
-                hardDisk: "400GB",
-                CPU: "1.6GHz",
-                serverType: "其他"
-            },
-            {
-                id: "8871",
-                brand:"联想",
-                memory: "16GB",
-                date: "2016-01-24",
-                portSort:"SAS",
-                hardDisk: "300GB",
-                CPU: "1.4GHz",
-                serverType: "机架式"
-            },
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
 
-        ];
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
 
-        // Configuration for jqGrid Example 2
-        $("#table_list_3").jqGrid({
-            data: mydata,
-            datatype: "local",
-            height: 450,
-            autowidth: true,
-            shrinkToFit: true,
-            rowNum: 20,
-            rowList: [10, 20, 30],
-            colNames: ['服务器型号', '服务器品牌', '标配内存','入库时间', '接口类型', '硬盘容量', '处理器主频','服务器类型'],
-            colModel: [
-                {
-                    name: 'id',
-                    index: 'id',
-                    editable: true,
-                    width: 40,
-                    sorttype: "int",
-                    search: true
-                },
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 
-                {
-                    name: 'brand',
-                    index: 'brand',
-                    editable: true,
-                    width: 120,
-                },
-                {
-                    name: 'memory',
-                    index: 'memory',
-                    editable: true,
-                    width: 50
-                },
+	<!-- END PAGE LEVEL PLUGINS -->
 
-                {
-                    name: 'date',
-                    index: 'date',
-                    editable: true,
-                    width: 90,
-                    sorttype: "date",
-                    formatter: "date"
-                },
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
-                {
-                    name: 'portSort',
-                    index: 'portSort',
-                    editable: true,
-                    width: 35,
-                    align: "center",
-                },
-                {
-                    name: 'hardDisk',
-                    index: 'hardDisk',
-                    editable: true,
-                    width: 110,
-                },
+	<script src="media/js/app.js"></script>
 
-                {
-                    name: 'CPU',
-                    index: 'CPU',
-                    editable: true,
-                    width: 50
-                },
-                {
-                    name: 'serverType',
-                    index: 'serverType',
-                    editable: true,
-                    width: 100,
-                    sortable: false
-                }
-            ],
-            pager: "#pager_list_3",
-            viewrecords: true,
-            caption: "所有服务器设备",
-            add: true,
-            edit: true,
-            addtext: 'Add',
-            edittext: 'Edit',
-            hidegrid: false
-        });
+	<script src="media/js/table-editable.js"></script>
+    <script src="media/js/table-editable2.js"></script>
+    <script src="media/js/table-editable3.js"></script>
+	<script>
+		jQuery(document).ready(function() {
 
-        // Add selection
-        $("#table_list_3").setSelection(4, true);
+			App.init();
 
+			TableEditable.init();
+			TableEditable2.init();
+			TableEditable3.init();
 
-        // Setup buttons
-        $("#table_list_3").jqGrid('navGrid', '#pager_list_3', {
-            edit: true,
-            add: true,
-            del: true,
-            search: true
-        }, {
-            height: 200,
-            reloadAfterSubmit: true
-        });
+		});
+	</script>
 
-        // Add responsive to jqGrid
-        $(window).bind('resize', function () {
-            var width = $('.jqGrid_wrapper').width();
-            $('#table_list_1').setGridWidth(width);
-            $('#table_list_3').setGridWidth(width);
-        });
-    });
-</script>
-<script>
-    $(document).ready(function () {
+	<script type="text/javascript">
+		function deleteUser() {
+			var userEmail = event.target.parentNode.parentNode.children[1].innerHTML;
+			var present_row = event.target.parentNode.parentNode;
+			if (confirm("确认删除？")) {
+				$.ajax({
+					type : "post",
+					url : "/org.xjtusicd3.portal/deleteUser.html",
+					data : {
+						"userEmail" : userEmail
+					},
+					dataType : "json",
+					success : function(data) {
+						alert("删除成功");
+						present_row.remove();
+					}
+				});
+			} else {
+				return;
+			}
 
-        $.jgrid.defaults.styleUI = 'Bootstrap';
-        // Examle data for jqGrid
-        var mydata = [${result}];
-
-        // Configuration for jqGrid Example 2
-        $("#table_list_4").jqGrid({
-            data: mydata,
-            datatype: "local",
-            height: 450,
-            autowidth: true,
-            shrinkToFit: true,
-            rowNum: 20,
-            rowList: [10, 20, 30],
-            colNames: ['配置ID', '配置厂家','配置名称', '配置类型'],
-            colModel: [
-                {
-                    name: 'id',
-                    index: 'id',
-                    editable: true,
-                    width: 20,
-                    sorttype: "int",
-                    search: true,
-                    formatter:'showlink',
-                    formatoptions:{baseLinkUrl:"SoftwareDetail.html"}
-                },
-
-                {
-                    name: 'configureProducer',
-                    index: 'configureProducer',
-                    editable: true,
-                    width: 30,
-                },
-                {
-                    name: 'configureName',
-                    index: 'configureName',
-                    editable: true,
-                    width: 100,
-                },
-
-
-                {
-                    name: 'configureType',
-                    index: 'configureType',
-                    editable: true,
-                    width: 30,
-                },
-
-                 
-            ],
-            pager: "#pager_list_4",
-            viewrecords: true,
-            caption: "配置详情",
-            add: true,
-            edit: true,
-            addtext: 'Add',
-            edittext: 'Edit',
-            hidegrid: false
-        });
-
-        // Add selection
-        $("#table_list_4").setSelection(4, true);
-
-
-        // Setup buttons
-        $("#table_list_4").jqGrid('navGrid', '#pager_list_4', {
-            edit: true,
-            add: true,
-            del: true,
-            search: true
-        }, {
-            height: 200,
-            reloadAfterSubmit: true
-        });
-
-        // Add responsive to jqGrid
-        $(window).bind('resize', function () {
-            var width = $('.jqGrid_wrapper').width();
-            $('#table_list_1').setGridWidth(width);
-            $('#table_list_4').setGridWidth(width);
-        });
-    });
-</script>
-
+		}
+	</script>
 
 </body>
 

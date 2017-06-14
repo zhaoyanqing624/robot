@@ -219,7 +219,6 @@ public class CommunityService {
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
-						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
 						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
@@ -233,7 +232,6 @@ public class CommunityService {
 						List<CommunityAnswerPersistence> list2 = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 						List<AgreePersistence> agreePersistences = AgreeHelper.getAgree_id(list2.get(0).getCOMMUNITYANSWERID());
 						question_CommunityView.setLikesNumber(Integer.toString(agreePersistences.size()));
-						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
 						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
@@ -272,7 +270,6 @@ public class CommunityService {
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
-						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
 						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
@@ -287,7 +284,6 @@ public class CommunityService {
 						List<CommunityAnswerPersistence> list2 = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 						List<AgreePersistence> agreePersistences = AgreeHelper.getAgree_id(list2.get(0).getCOMMUNITYANSWERID());
 						question_CommunityView.setLikesNumber(Integer.toString(agreePersistences.size()));
-						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
 						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
@@ -326,7 +322,6 @@ public class CommunityService {
 						question_CommunityView.setCommunityQuestion(communityQuestionPersistence.getCONTENT());
 						question_CommunityView.setTime(communityQuestionPersistence.getTIME());
 						question_CommunityView.setCommunityNumber(communityNumber);
-						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
 						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						question_CommunityViews.add(question_CommunityView);
 					}else {
@@ -340,7 +335,6 @@ public class CommunityService {
 						List<CommunityAnswerPersistence> list2 = CommunityAnswerHelper.question_iscurrentAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID(), 1);
 						List<AgreePersistence> agreePersistences = AgreeHelper.getAgree_id(list2.get(0).getCOMMUNITYANSWERID());
 						question_CommunityView.setLikesNumber(Integer.toString(agreePersistences.size()));
-						List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
 						question_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 						//获取用户信息
 						List<UserPersistence> userPersistences = UserHelper.getEmail_id(list.get(0).getUSERID());
