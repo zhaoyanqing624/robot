@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.MessageHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.MessagePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.MessageService;
 import org.xjtusicd3.partner.service.NoticeService;
@@ -202,9 +204,55 @@ public class MessageController {
 			return result;
 		}else {
 			List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,useremail);
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<MessagePersistence> mList = MessageHelper.getMessageContent1(postuserId, userPersistences.get(0).getUSERID(), 2);
+			if (mList.size()!=0) {
+				List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory(postuserId, userPersistences.get(0).getUSERID(), 2, 0);
+				jsonObject.put("messageHistory", message_MessageViews2);
+				
+			}
+			if (mList.size()<5) {
+				jsonObject.put("isMore", "0");
+			}else {
+				jsonObject.put("isMore", "1");
+			}
 			jsonObject.put("value", "1");
 			jsonObject.put("messageContentList", message_MessageViews);
 			String result = JsonUtil.toJsonString(jsonObject);
+			System.out.println(result);
+			return result;
+		}
+	}
+	/*
+	 * zyq_message_ajax_获取更多私信的历史记录
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getMoreMessageHistory"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getMoreMessageHistory(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String date = request.getParameter("date");
+		String postuserId = request.getParameter("touserId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<MessagePersistence> mList = MessageHelper.getMessageContent11(postuserId, userPersistences.get(0).getUSERID(), 2,date);
+			if (mList.size()!=0) {
+				List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory2(postuserId, userPersistences.get(0).getUSERID(), 2, date);
+				jsonObject.put("messageHistory", message_MessageViews2);
+				
+			}
+			if (mList.size()<5) {
+				jsonObject.put("isMore", "0");
+			}else {
+				jsonObject.put("isMore", "1");
+			}
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject);
+			System.out.println(result);
 			return result;
 		}
 	}

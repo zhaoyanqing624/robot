@@ -626,6 +626,7 @@ ol, ul {
 }
 #chat_container {
     width: 72.6%;
+    height:89%;
     border: none;
     background: 0 0;
     overflow: hidden;
@@ -648,7 +649,9 @@ ol, ul {
     color: #b0b4b9;
     border: 0;
     text-align: center;
-    background: url(data:image/gif;base64,R0lGODlhTgIBANUAAL+9vr69u729vb+9wL68vby8vLy8vrm9wLu7v…SVlpeYmZqbnJ2emUqhoqOkpaanGBuqq6tIrq+wRaFiGbG2r7O0YlW8W75Zd3W0ZWZpaEEAOw==) center center no-repeat;
+    background: url(/org.xjtusicd3.partner/images/line.gif) center center no-repeat;
+        font-size: 16px;
+    
 }
 .you .chat_avata {
     float: left;
@@ -1004,3 +1007,10 @@ a.chatSend {
 #messagenumber{
 	margin-left:15px;
 }
+.getmore{
+	color: #b0b4b9;
+    border: 0;
+    text-align: center;
+    cursor:pointer;
+}
+
