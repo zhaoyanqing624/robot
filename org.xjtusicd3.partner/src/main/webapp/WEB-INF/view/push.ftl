@@ -1,19 +1,46 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-	<script type="text/javascript" src="ajax-pushlet-client.js"></script>         
-        <script type="text/javascript">  
-            PL._init();   
-            PL.joinListen('/cuige/he');  
-            function onData(event) {   
-                alert(event.get("hw"));   
-                // 离开  
-                // PL.leave();  
-            }  
-        </script>  <h1>  
-            my first pushlet!  
-        </h1>  
-        </center> 
+<title>Testing websockets</title>
+</head>
+<body>
+  <div>
+    <input type="submit" value="Start" onclick="start()" />
+  </div>
+  <div id="messages"></div>
+  <script type="text/javascript">
+    var webSocket =
+      new WebSocket('ws://localhost:8080/org.xjtusicd3.partner/websocketserver');
+    webSocket.onerror = function(event) {
+      onError(event)
+    };
+ 
+    webSocket.onopen = function(event) {
+      onOpen(event)
+    };
+ 
+    webSocket.onmessage = function(event) {
+      onMessage(event)
+    };
+ 
+    function onMessage(event) {
+      document.getElementById('messages').innerHTML
+        += '<br />' + event.data;
+    }
+ 
+    function onOpen(event) {
+      document.getElementById('messages').innerHTML
+        = 'Connection established';
+    }
+ 
+    function onError(event) {
+      alert(event.data);
+    }
+ 
+    function start() {
+      webSocket.send('hello');
+      return false;
+    }
+  </script>
 </body>
 </html>

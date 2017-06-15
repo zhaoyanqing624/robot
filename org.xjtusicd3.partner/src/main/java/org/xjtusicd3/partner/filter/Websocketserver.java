@@ -21,7 +21,7 @@ public class Websocketserver {
 	private static Map<String, Websocketserver> online = new HashMap<String, Websocketserver>();
 	private static int count = 0;
 	private Session session;
-	private String username;
+	private String useremail;
 
 	/**
 	 * 握手成功（建立连接成功）时调用方法
@@ -40,9 +40,9 @@ public class Websocketserver {
 	 */
 	@OnClose
 	public void onClose() throws IOException {
-		online.remove(username);
+		online.remove(useremail);
 		for (String s : online.keySet()) {
-			sendMessage("{username:'"+username+"',type:4}", online.get(s).getSession());
+			sendMessage("{useremail:'"+useremail+"',type:4}", online.get(s).getSession());
 		}
 		System.out.println("有用户退出！");
 	}
@@ -59,8 +59,9 @@ public class Websocketserver {
 		switch ((int) messagejson.get("type")) {
 		case 1:
 			this.session = session;
-			this.username=messagejson.getString("username");
-			online.put((String) messagejson.get("username"), this);
+			this.useremail=messagejson.getString("useremail");
+			System.out.println(messagejson.getString("useremail"));
+			online.put((String) messagejson.get("useremail"), this);
 			messagejson.put("onlinelist",JSONArray.fromObject(online.keySet()).toString());
 			for (String s : online.keySet()) {
 				sendMessage(messagejson.toString(), online.get(s).getSession());
@@ -69,14 +70,14 @@ public class Websocketserver {
 		case 2:
 			for(String s:online.keySet()){
 				messagejson.put("isSelf", online.get(s).getSession().equals(session));
-				if(messagejson.get("sendto").equals(s)||messagejson.get("username").equals(s))
+				if(messagejson.get("sendto").equals(s)||messagejson.get("useremail").equals(s))
 				sendMessage(messagejson.toString(), online.get(s).getSession());
 			}
 			System.out.println(messagejson.toString());
 			break;
 		case 4:
-//			online.remove((String) messagejson.get("username"));			
-			System.out.println(messagejson.get("username"));
+//			online.remove((String) messagejson.get("useremail"));			
+			System.out.println(messagejson.get("useremail"));
 			break;
 		}
 	}
@@ -132,12 +133,12 @@ public class Websocketserver {
 		this.session = session;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getuseremail() {
+		return useremail;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setuseremail(String useremail) {
+		this.useremail = useremail;
 	}
 
 }

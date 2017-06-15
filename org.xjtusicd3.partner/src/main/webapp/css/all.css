@@ -447,7 +447,7 @@ ol, ul {
 }
 .msgbox {
     border-top: 1px solid #b7bbbf;
-    height: 620px;
+    height: 650px;
     overflow: hidden;
 }
 #left_panel {
@@ -547,7 +547,7 @@ ol, ul {
     -moz-osx-font-smoothing: grayscale;
 }
 #list_waper {
-    height: 560px;
+    height: 588px;
     margin: 0 0 5px;
     position: relative;
     background: #dfe3e6;
@@ -567,8 +567,12 @@ ol, ul {
     margin-bottom: 0;
 }
 #lastChat li, #result-list li {
-    height: 100%;
+    height: 80px;
     position: relative;
+
+}
+#lastChat li:hover{
+	background: #f3f5f7;
 }
 #result-list li, .user_list li {
     color: #1F2427;
@@ -577,8 +581,11 @@ ol, ul {
 }
 #result-list li .list-box, .user_list li .list-box {
     padding-bottom: 10px;
-    height: 49px;
+    height: 60px;
     border-bottom: 1px solid #b7bbbf;
+}
+#result-list li.active, .user_list li.active {
+    background: #f3f5f7;
 }
 #result-list li img, .user_list li img {
     border-radius: 22px;
@@ -618,13 +625,12 @@ ol, ul {
     margin-right: 10px;
 }
 #chat_container {
-    width: 830px;
+    width: 72.6%;
     border: none;
     background: 0 0;
     overflow: hidden;
     padding: 25px;
-    background-color: #f5f5f5;
-    display: none;
+    background-color: #f3f5f7;
 }
 #chat_content {
     height: 450px;
@@ -730,10 +736,10 @@ ol, ul {
     border-top: 1px solid #d9dde1;
     padding-top: 10px;
     visibility: visible;
+    display: none;
+    position: absolute;
     bottom: 0;
     width: 810px;
-        margin-top: 70px;
-    margin-left: -22px;
 }
 #chat_editor table td, #chat_editor table th {
     vertical-align: middle;
@@ -946,6 +952,55 @@ a.chatSend {
     line-height: 20px;
     color: #71777d;
 }
-
-
-
+.notice-list .notice .already-read {
+    border: 1px solid #d9dde1;
+    background: #fff;
+    color: #93999f;
+}
+.notice-list .notice .notice-show-box .pass {
+    color: #93999f;
+}
+.notice-list .notice .notice-show-box .notice-date {
+    font-weight: 400;
+    font-size: 14px;
+    color: #93999f;
+    line-height: 30px;
+}
+.notice-list .notice .notice-show-box .pass a {
+    color: #93999f;
+    padding: 0 5px;
+}
+#lastChat{
+	cursor:pointer;
+}
+.container {
+    width: 1200px;
+    background: #f3f5f7;
+    position: relative;
+}
+.container .header-banner {
+    background-color: #fff;
+}
+#msgUploadImg {
+    filter: alpha(opacity=0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+    cursor: default;
+    display: block;
+}
+.user_list li .msg-more {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: #93999f;
+    background: 0 0;
+}
+#messagenumber{
+	margin-left:15px;
+}

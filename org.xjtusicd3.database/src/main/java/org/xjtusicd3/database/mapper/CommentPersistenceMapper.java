@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.CommentPersistence;
 
@@ -103,6 +104,18 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	List<CommentPersistence> notice_getFaqReply(String parentId,int isnotice);
 	@Select("SELECT * FROM TBL_Comment WHERE COMMENTPARENTID=#{0} AND TOUSERID IS NOT NULL AND ISNOTICE=#{1}")
 	List<CommentPersistence> notice_getFaqReply2(String parentId,int isnotice);
-
-
+	/*
+	 * zyq_ajax_更改消息通知的被查阅后的状态
+	 */
+	//更改知识库的评论、回复、回复的回复以及问吧的回复、回复的回复
+	@Update("UPDATE TBL_Comment SET TBL_Comment.ISNOTICE=#{0} WHERE COMMENTID=#{1}")
+	void updateNotice(int isnotice,String id);
+	//更改问吧的评论
+	@Update("UPDATE TBL_CommunityAnswer SET TBL_CommunityAnswer.ISNOTICE=#{0} WHERE COMMUNITYANSWERID=#{1}")
+	void updateNotice2(int isnotice,String id);
+	//删除消息通知
+	@Update("UPDATE TBL_Comment SET TBL_Comment.ISNOTICE=#{0} WHERE COMMENTID=#{1}")
+	void deleteNotice(int i, String id);
+	@Update("UPDATE TBL_CommunityAnswer SET TBL_CommunityAnswer.ISNOTICE=#{0} WHERE COMMUNITYANSWERID=#{1}")
+	void deleteNotice2(int i, String id);
 }

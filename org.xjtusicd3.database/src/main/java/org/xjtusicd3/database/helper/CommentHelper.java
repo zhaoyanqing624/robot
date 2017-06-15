@@ -200,4 +200,34 @@ public class CommentHelper {
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_ajax_更改消息通知的被查阅后的状态
+	 */
+	//更改知识库的评论、回复、回复的回复以及问吧的回复、回复的回复
+	public static void updateNotice(String id) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		mapper.updateNotice(2,id);
+		session.close();
+	}
+	//更改问吧的评论
+	public static void updateNotice2(String id) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		mapper.updateNotice2(2,id);
+		session.close();
+	}
+	//删除消息通知
+	public static void deleteNotice(String id) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		mapper.deleteNotice(0,id);
+		session.close();
+	}
+	public static void deleteNotice2(String id) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		mapper.deleteNotice2(0,id);
+		session.close();
+	}
 }

@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
-import org.xjtusicd3.database.helper.ClassifyHelper;
-import org.xjtusicd3.database.helper.CommunityQuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
-import org.xjtusicd3.database.model.ClassifyPersistence;
-import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
-import org.xjtusicd3.partner.service.CommunityService;
-import org.xjtusicd3.partner.view.Question_CommunityView;
+import org.xjtusicd3.partner.service.MessageService;
+import org.xjtusicd3.partner.service.NoticeService;
+import org.xjtusicd3.partner.view.Message_MessageView;
+import org.xjtusicd3.partner.view.Notice_NoticeCommunityView;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -63,7 +61,27 @@ public class MessageController {
 			return new ModelAndView("login");
 		}else {
 			ModelAndView mv = new ModelAndView("notice");
+			List<Notice_NoticeCommunityView> notice_NoticeCommunityViews = NoticeService.notice_NoticeViews(userid,1);
+			List<Notice_NoticeCommunityView> notice_NoticeCommunityViews2 = NoticeService.notice_NoticeViews(userid,2);
 			mv.addObject("uid", userid);
+			mv.addObject("secondList", notice_NoticeCommunityViews);
+			mv.addObject("thirdList", notice_NoticeCommunityViews2);
+			return mv;
+		}
+	}
+	@RequestMapping(value="notice2",method=RequestMethod.GET)
+	public ModelAndView notice2(HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String userid = (String) session.getAttribute("UserId");
+		if (useremail==null) {
+			return new ModelAndView("login");
+		}else {
+			ModelAndView mv = new ModelAndView("notice2");
+			List<Notice_NoticeCommunityView> notice_NoticeCommunityViews = NoticeService.notice_NoticeViews(userid,1);
+			List<Notice_NoticeCommunityView> notice_NoticeCommunityViews2 = NoticeService.notice_NoticeViews(userid,2);
+			mv.addObject("uid", userid);
+			mv.addObject("secondList", notice_NoticeCommunityViews);
+			mv.addObject("thirdList", notice_NoticeCommunityViews2);
 			return mv;
 		}
 	}
@@ -75,14 +93,119 @@ public class MessageController {
 	public String updateNotice(HttpServletRequest request,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
 		String type = request.getParameter("type");
+		String type2 = request.getParameter("type2");
 		String id = request.getParameter("id");
-		System.out.println(type + id);
 		JSONObject jsonObject = new JSONObject();
 		if (useremail==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
+		}else {
+			NoticeService.updateNotice(id,type,type2);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
 		}
-		return null;
+	}
+	/*
+	 * zyq_ajax_把列表的消息通知删除
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/deleteNotice"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String deleteNotice(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String type = request.getParameter("type");
+		String type2 = request.getParameter("type2");
+		String id = request.getParameter("id");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			NoticeService.deleteNotice(id,type,type2);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_message_消息通知
+	 */
+	@RequestMapping(value="message",method=RequestMethod.GET)
+	public ModelAndView message(String u,HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String userid = (String) session.getAttribute("UserId");
+		if (useremail==null) {
+			return new ModelAndView("login");
+		}else {
+			ModelAndView mv = new ModelAndView("message");
+			if (u==null) {
+				List<Message_MessageView> message_MessageViews = MessageService.message_userList(userid);
+				mv.addObject("messageList", message_MessageViews);
+			}else{
+				List<UserPersistence> userPersistences = UserHelper.getEmail_id(u);
+				List<Message_MessageView> message_MessageViews = MessageService.message_userList(userid);
+				if (message_MessageViews.size()==0) {
+					mv.addObject("touserList", userPersistences);
+				}else{
+					for(Message_MessageView message_MessageView:message_MessageViews){
+						if (message_MessageView.getUserId().contains(u)) {
+							mv.addObject("messageList", message_MessageViews);
+						}else {
+							mv.addObject("touserList", userPersistences);
+							mv.addObject("messageList", message_MessageViews);
+						}
+					}
+				}
+
+			}
+			mv.addObject("uid", userid);
+			return mv;
+		}
+	}
+	/*
+	 * zyq_message_ajax_发送私信
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveMessage"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String saveMessage(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String content = request.getParameter("content");
+		String touserId = request.getParameter("touserId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			Message_MessageView message_MessageViews = MessageService.message_MessageView(useremail, touserId, content);
+			jsonObject.put("value", "1");
+			jsonObject.put("messageList", message_MessageViews);
+			String result = JsonUtil.toJsonString(jsonObject);
+			System.out.println(result);
+			return result;
+		}
+	}
+	/*
+	 * zyq_message_ajax_查询私信内容
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getMessage"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getMessage(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String postuserId = request.getParameter("touserId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,useremail);
+			jsonObject.put("value", "1");
+			jsonObject.put("messageContentList", message_MessageViews);
+			String result = JsonUtil.toJsonString(jsonObject);
+			return result;
+		}
 	}
 }

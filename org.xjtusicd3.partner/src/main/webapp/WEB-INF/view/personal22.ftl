@@ -17,7 +17,7 @@ function connect() {
 	// 判断当前浏览器是否支持WebSocket
 	if ('WebSocket' in window) {
 		websocket = new WebSocket(
-				"ws://localhost:8080/websocket_demo2/websocketserver");
+				"ws://localhost:8080/org.xjtusicd3.partner/websocketserver");
 	} else {
 		alert('Not support websocket')
 	}
@@ -177,7 +177,8 @@ $(document).ready(function() {
 	$("#openwindow").click(function(){
 		window.open("client.jsp","百度一下","width=820px,height=620px,scrollbars=no,resizable=no");
 	});
-});</script>
+});
+</script>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset2.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util2.css" />
