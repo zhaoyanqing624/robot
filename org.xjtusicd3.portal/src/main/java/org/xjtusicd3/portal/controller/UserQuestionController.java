@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.helper.UserQuestionHelper;
 import org.xjtusicd3.database.model.UserPersistence;
@@ -28,6 +29,8 @@ public class UserQuestionController
 		ModelAndView mv = new ModelAndView("incidentindex");
 		List<IncidentindexView> incidentindexViews = UserQuestionService.incidentindexViews();
 		mv.addObject("incidentList",incidentindexViews);
+		String result = JsonUtil.toJsonString(incidentindexViews);
+		System.out.println(result);
 		return mv;
 		
 	}

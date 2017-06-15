@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.database.model.LogPersistence;
 import org.xjtusicd3.portal.service.LogService;
+import org.xjtusicd3.portal.view.logindexView;
 
 @Controller
 public class LogController
@@ -20,8 +21,8 @@ public class LogController
 	public  ModelAndView advise()
 	{
 		ModelAndView mv = new ModelAndView("logindex");
-		List<LogPersistence> log = LogService.getLog();
-		mv.addObject("log_list",log);
+		List<logindexView> logindexViews = LogService.logindexViews();
+		mv.addObject("log_list",logindexViews);
 		return mv;
 	 
 		

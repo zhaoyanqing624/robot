@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title> - 基本表单</title>
+    <title>增加用户信息</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -26,7 +26,7 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>所有表单元素 <small>包括自定义样式的复选和单选按钮</small></h5>
+                        <h5>增加用户 <small> </small></h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -48,7 +48,7 @@
                     <div class="ibox-content">
                         <form method="get" class="form-horizontal">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">普通</label>
+                                <label class="col-sm-2 control-label">用户姓名</label>
 
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control">
@@ -56,14 +56,14 @@
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">带说明信息</label>
+                                <label class="col-sm-2 control-label">用户密码</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control"> <span class="help-block m-b-none">帮助文本，可能会超过一行，以块级元素显示</span>
+                                    <input type="text" class="form-control"> <span class="help-block m-b-none">最少六位密码</span>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">密码</label>
+                                <label class="col-sm-2 control-label">用户邮箱</label>
 
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" name="password">
@@ -71,31 +71,16 @@
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">提示</label>
+                                <label class="col-sm-2 control-label">住址信息</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" placeholder="提示信息" class="form-control">
+                                    <input type="text" placeholder="" class="form-control">
                                 </div>
                             </div>
+                             
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">禁用</label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" disabled="" placeholder="已被禁用" class="form-control">
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">静态控制</label>
-
-                                <div class="col-sm-10">
-                                    <p class="form-control-static">497915773@qq.com</p>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">复选框&amp;单选框
+                                <label class="col-sm-2 control-label">性别
                                     <br/>
                                     <small class="text-navy">普通Bootstrap元素</small>
                                 </label>

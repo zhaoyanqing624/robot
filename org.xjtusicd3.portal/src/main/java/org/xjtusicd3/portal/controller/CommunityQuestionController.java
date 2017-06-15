@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.portal.service.CommunityQuestionService;
+import org.xjtusicd3.portal.service.FaqService;
+import org.xjtusicd3.portal.view.KnowledgeindexView;
 import org.xjtusicd3.portal.view.ProblemindexView;
 
 
@@ -26,6 +28,17 @@ public class CommunityQuestionController {
 		mv.addObject("cqlist",communityquestionlist);
 		return mv;
 		
+	}
+
+	/*
+	 * zpz_showFAQInfoDetail
+	 */
+	@RequestMapping(value="showProblem",method=RequestMethod.GET)
+	public ModelAndView showProblem(String u){
+		List<ProblemindexView> problemindexViews = CommunityQuestionService.getCommunityQuestionById(u);
+		ModelAndView modelAndView = new ModelAndView("showProblem");
+		modelAndView.addObject("problemList", problemindexViews);
+		return modelAndView;
 	}
 	 
 }

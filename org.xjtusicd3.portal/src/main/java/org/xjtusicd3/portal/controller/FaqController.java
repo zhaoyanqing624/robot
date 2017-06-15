@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.AdviseHelper;
+import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.QuestionPersistence;
@@ -55,6 +57,19 @@ public class FaqController {
 		ModelAndView modelAndView = new ModelAndView("showFAQ");
 		modelAndView.addObject("faqInfoList", knowledgeindexViews);
 		return modelAndView;
+	}
+	/*
+	 * zpz_ajax_addProblemToFAQ
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/addProblemToFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String addProblemToFAQ(HttpServletRequest request,HttpSession session){
+		String problemID = request.getParameter("problemID");
+		JSONObject jsonObject = new JSONObject();
+		FaqService.addProblemToFAQ(problemID);
+		jsonObject.put("value", "1");
+		String result = JsonUtil.toJsonString(jsonObject);
+		return result;
 	}
 	
 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>问题信息展示</title>
+    <title>编辑FAQ</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -20,94 +20,100 @@
 </head>
 
 <body class="gray-bg">
- <#list problemList as pls>
     <div class="wrapper wrapper-content animated fadeInRight">
-         
        
         <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
-               
                     <div class="ibox-title">
-                        <h5>问题信息</h5>
-                         
+                        <h5>编辑FAQ <small> </small></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="form_basic.html#">选项1</a>
+                                </li>
+                                <li><a href="form_basic.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
                     </div>
+                    <#list userInfoList as l>
                     <div class="ibox-content">
-                        <form method="get" class="form-horizontal">
+                        <form method="post" action="editUserInformation2.html" class="form-horizontal">
+                        <input type="hidden" name="userid" value="${l.USERID}"/>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">问题标题</label>
+                                <label class="col-sm-2 control-label">用户名</label>
 
                                 <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.problemTitle}</p>
+                                    <input type="text" class="form-control" name="username" value="${l.USERNAME}" >
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">问题类别</label>
+                                <label class="col-sm-2 control-label">用户邮箱</label>
 
                                 <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.problemClassify}</p>
+                                    <input type="text" name="useremail" class="form-control" value="${l.USEREMAIL}" >
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">提问用户</label>
-
+                                <label class="col-sm-2 control-label">带说明信息</label>
                                 <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.problemUser}</p>
+                                    <input type="text" class="form-control"> <span class="help-block m-b-none">帮助文本，可能会超过一行，以块级元素显示</span>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">提问时间</label>
+                                <label class="col-sm-2 control-label">密码</label>
 
                                 <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.problemTime}</p>
+                                    <input type="password" class="form-control" name="password">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">提问内容</label>
+                                <label class="col-sm-2 control-label">提示</label>
 
                                 <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.problemContent}</p>
+                                    <input type="text" placeholder="提示信息" class="form-control">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">对应回复</label>
+                                <label class="col-sm-2 control-label">禁用</label>
 
                                 <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.USERSIGNATURE}</p>
+                                    <input type="text" disabled="" placeholder="已被禁用" class="form-control">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">回复时间</label>
+                                <label class="col-sm-2 control-label">静态控制</label>
 
                                 <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.CREATETIME}</p>
+                                    <p class="form-control-static">497915773@qq.com</p>
                                 </div>
                             </div>
+                          
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">回复用户</label>
-
-                                <div class="col-sm-10">
-                                    <p class="form-control-static">${pls.AVATAR}</p>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" onclick="javascript:history.back(-1);">返回</button>
-                                     
+                              
+                                    <button class="btn btn-primary" type="submit">修改</button>
+                                    <button class="btn btn-white" onclick="javascript:history.back(-1);">返回</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-					
                 </div>
             </div>
         </div>
@@ -133,7 +139,7 @@
     </script>
 
     
-     
+    
 
 </body>
 

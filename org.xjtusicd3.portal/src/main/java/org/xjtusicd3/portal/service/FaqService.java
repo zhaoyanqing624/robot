@@ -1,16 +1,23 @@
 package org.xjtusicd3.portal.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.naming.spi.DirStateFactory.Result;
 
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CommunityAnswerHelper;
+import org.xjtusicd3.database.helper.CommunityQuestionHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CommunityAnswerPersistence;
+import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.portal.view.KnowledgeindexView;
 
@@ -85,6 +92,28 @@ public class FaqService {
 			knowledgeindexViews.add(knowledgeindexView);
 		}
 		return knowledgeindexViews;
+	}
+	/*
+	 * zpz_ajax_addProblemToFAQ
+	 */
+	public static void addProblemToFAQ(String problemID)
+	{
+		List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(problemID);
+		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(problemID);
+		//开始存入FAQ问题
+		QuestionPersistence questionPersistence = new QuestionPersistence();
+		questionPersistence.setFAQQUESTIONID(UUID.randomUUID().toString());
+		questionPersistence.setFAQTITLE(communityQuestionPersistences.get(0).getTITLE());
+    	Date date=new Date();
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	String time = format.format(date);
+    	questionPersistence.setMODIFYTIME(time);
+    	questionPersistence.setSCAN("0");
+    	QuestionHelper.save(questionPersistence);
+    	
+		AnswerPersistence answerPersistence = new AnswerPersistence();
+		
+		CommunityQuestionHelper.dele
 	}
 	
 	

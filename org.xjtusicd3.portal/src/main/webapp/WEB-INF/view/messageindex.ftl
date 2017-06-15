@@ -243,6 +243,7 @@
 	<script type="text/javascript">
 		function deleteAdvise() {
 			var adviseid = event.target.parentNode.parentNode.id;
+			alert(adviseid);
     		 var present_row = event.target.parentNode.parentNode;
 			 if (confirm("确认删除？")) {
 				 $.ajax({

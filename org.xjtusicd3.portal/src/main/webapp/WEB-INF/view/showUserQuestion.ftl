@@ -57,45 +57,7 @@
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">性别</label>
-
-                                <div class="col-sm-10">
-                                    <p class="form-control-static">${ls.GENDER}</p>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">用户地址</label>
-
-                                <div class="col-sm-10">
-                                    <p class="form-control-static">${ls.USERADDRESS}</p>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">用户签名</label>
-
-                                <div class="col-sm-10">
-                                    <p class="form-control-static">${ls.USERSIGNATURE}</p>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">创建时间</label>
-
-                                <div class="col-sm-10">
-                                    <p class="form-control-static">${ls.CREATETIME}</p>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">用户头像路径</label>
-
-                                <div class="col-sm-10">
-                                    <p class="form-control-static">${ls.AVATAR}</p>
-                                </div>
-                            </div>
+                             
                             <div class="hr-line-dashed"></div>
                             
                             <div class="form-group">

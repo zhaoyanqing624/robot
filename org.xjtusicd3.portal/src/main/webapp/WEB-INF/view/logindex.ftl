@@ -111,34 +111,29 @@
 											<th>日志时间</th>
 
 											<th>操作</th>
-
-											<th>操作</th>
 											
-											<th>查看日志详情</th>
 
 										</tr>
 
 									</thead>
 
 									<tbody>
-										<#list allUserList as userlist>
+										<#list log_list as lglist>
 										<tr class="">
 
 											<td>
-                								${userlist.USERNAME}
+                								${lglist.logUser}
                 								
                 							</td>
 											 
 
-											<td class="center">${userlist.USERADDRESS}</td>
+											<td class="center">${lglist.logMethod}</td>
 
-											<td class="center">${userlist.CREATETIME}</td>
-
-											<td><a class="userinfo"  href="/org.xjtusicd3.portal/editUserInformation.html?u=${userlist.USERID}">编辑</a></td>
+											<td class="center">${lglist.logTime}</td>
 
 											<td><a  onclick="deleteUser()">删除</a></td>
 											
-											<td><a class="userinfo" href="/org.xjtusicd3.portal/showUserInfo.html?u=${userlist.USERID}">查看用户信息</a></td>
+											 
 
 										</tr>
 										</#list>

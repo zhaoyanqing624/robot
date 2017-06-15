@@ -11,6 +11,38 @@ public class ProblemindexView
 	private String problemAnswerId;
 	private String problemAnswer;
 	private String problemAnswerTime;
+	public String getProblemAnswerId()
+	{
+		return problemAnswerId;
+	}
+	public void setProblemAnswerId(String problemAnswerId)
+	{
+		this.problemAnswerId = problemAnswerId;
+	}
+	public String getProblemAnswer()
+	{
+		return problemAnswer;
+	}
+	public void setProblemAnswer(String problemAnswer)
+	{
+		this.problemAnswer = problemAnswer;
+	}
+	public String getProblemAnswerTime()
+	{
+		return problemAnswerTime;
+	}
+	public void setProblemAnswerTime(String problemAnswerTime)
+	{
+		this.problemAnswerTime = problemAnswerTime;
+	}
+	public String getProblemAnswerUser()
+	{
+		return problemAnswerUser;
+	}
+	public void setProblemAnswerUser(String problemAnswerUser)
+	{
+		this.problemAnswerUser = problemAnswerUser;
+	}
 	private String problemAnswerUser;
 	public String getProblemId()
 	{

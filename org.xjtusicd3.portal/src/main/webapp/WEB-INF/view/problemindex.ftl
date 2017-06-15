@@ -380,7 +380,7 @@
 
 																				<th>提问时间</th>
 
-																				<th>操作</th>
+																				 
 
 																				<th>操作</th>
 
@@ -401,8 +401,7 @@
 
 																				<td class="center">${cqlist.problemTime}</td>
 
-																				<td><a class="faq"
-																					href="/org.xjtusicd3.portal/editProblem.html?u=${cqlist.problemId}">编辑</a></td>
+															 
 
 																				<td><a onclick="deleteUser()">删除</a></td>
 
@@ -480,6 +479,8 @@
 																				<th>操作</th>
 
 																				<th>操作</th>
+																				
+																				<th>操作</th>
 
 																				<th>查看详情</th>
 
@@ -488,20 +489,22 @@
 																		</thead>
 
 																		<tbody>
-																			<#list cqlist1 as cqlist>
-																			<tr class="">
+																			<#list cqlist as cqlist>
+																			<tr class="" id = "${cqlist.problemId}">
 
-																				<td>${cqlist.TITLE}</td>
-																				<td>${cqlist.faqTitle}</td>
+																				<td>${cqlist.problemTitle}</td>
+																				<td>${cqlist.problemClassify}</td>
 
-																				<td class="center">${cqlist.TIME}</td>
+																				<td class="center">${cqlist.problemUser}</td>
 
-																				<td class="center">${cqlist.TIME}</td>
+																				<td class="center">${cqlist.problemTime}</td>
 
 																				<td><a class="faq"
 																					href="/org.xjtusicd3.portal/editUserInformation.html?u=${communityquestionlist.USERID}">编辑</a></td>
 
 																				<td><a onclick="deleteUser()">删除</a></td>
+
+																				<td><a onclick="addProblemtoFAQ()">加入至FAQ</a></td>
 
 																				<td><a class="faq"
 																					href="/org.xjtusicd3.portal/showUserInfo.html?u=${communityquestionlist.USERID}">查看问题详情</a></td>
@@ -618,6 +621,31 @@
 </script>
 
 <script type="text/javascript">
+	function addProblemtoFAQ() {
+		var problemID = event.target.parentNode.parentNode.id;
+		alert(problemID)
+		var present_row = event.target.parentNode.parentNode;
+		if (confirm("确认添加至FAQ？")) {
+			$.ajax({
+				type : "post",
+				url : "/org.xjtusicd3.portal/addProblemToFAQ.html",
+				data : {
+					"problemID" : problemID
+				},
+				dataType : "json",
+				success : function(data) {
+					alert("添加成功");
+					present_row.remove();
+				}
+			});
+		} else {
+			return;
+		}
+
+	}
+</script>
+
+<script type="text/javascript">
 	function deleteUser() {
 		var userEmail = event.target.parentNode.parentNode.children[1].innerHTML;
 		var present_row = event.target.parentNode.parentNode;
@@ -640,7 +668,6 @@
 
 	}
 </script>
-
 
 </body>
 

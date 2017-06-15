@@ -483,7 +483,7 @@
 
 																		<tbody>
 																			<#list incidentList as incidentview>
-																			<tr class="" id = "${incidentview.UserQuestionId}">
+																			<tr class="" id = "${incidentview.userQuestionId}">
 
 																				<td>${incidentview.userQuestionTitle}</td>
 																				<td>${incidentview.userName}</td>
@@ -495,7 +495,7 @@
 																				<td><a onclick="deleteUserQuestion()">删除</a></td>
 
 																				<td><a class="userinfo"
-																					href="/org.xjtusicd3.portal/showUserQuestion.html?u=${incidentview.UserQuestionId}">查看事件信息</a></td>
+																					href="/org.xjtusicd3.portal/showUserQuestion.html?u=${incidentview.userQuestionId}">查看事件信息</a></td>
 
 																			</tr>
 																			</#list>
@@ -610,13 +610,13 @@
 	</script>
 
 	<script type="text/javascript">
-		function deleteUser() {
+		function deleteUserQuestion() {
 			var userEmail = event.target.parentNode.parentNode.children[1].innerHTML;
 			var present_row = event.target.parentNode.parentNode;
 			if (confirm("确认删除？")) {
 				$.ajax({
 					type : "post",
-					url : "/org.xjtusicd3.portal/deleteUser.html",
+					url : "/org.xjtusicd3.portal/deleteUserQuestion.html",
 					data : {
 						"userEmail" : userEmail
 					},
