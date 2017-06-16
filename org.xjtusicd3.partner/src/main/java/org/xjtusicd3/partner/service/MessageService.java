@@ -12,6 +12,7 @@ import java.util.UUID;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.MessageHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.MessageHistoryPersistence;
 import org.xjtusicd3.database.model.MessagePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.view.Message_MessageView;
@@ -84,11 +85,24 @@ public class MessageService {
 				message_MessageView.setNumber(Integer.toString(messagePersistences2.size()));
 				message_MessageViews.add(message_MessageView);
 			}else{
-				message_MessageView.setUserImage(userPersistences.get(0).getAVATAR());
-				message_MessageView.setUserName(userPersistences.get(0).getUSERNAME());
-				message_MessageView.setUserId(userPersistences.get(0).getUSERID());
-				message_MessageView.setNumber("0");
-				message_MessageViews.add(message_MessageView);
+				List<MessageHistoryPersistence> messageHistoryPersistences = MessageHelper.getMessageHistoryList(userPersistences.get(0).getUSERID(), userId);
+				if (messageHistoryPersistences.size()==0) {
+					message_MessageView.setUserImage(userPersistences.get(0).getAVATAR());
+					message_MessageView.setUserName(userPersistences.get(0).getUSERNAME());
+					message_MessageView.setUserId(userPersistences.get(0).getUSERID());
+					message_MessageView.setNumber("0");
+					message_MessageViews.add(message_MessageView);
+				}else {
+					String time = messageHistoryPersistences.get(0).getTIMEMARK();
+					List<MessagePersistence> messagePersistences3 = MessageHelper.getMessageContent_time(userPersistences.get(0).getUSERID(), userId, 2, time);
+					if (messagePersistences3.size()!=0) {
+						message_MessageView.setUserImage(userPersistences.get(0).getAVATAR());
+						message_MessageView.setUserName(userPersistences.get(0).getUSERNAME());
+						message_MessageView.setUserId(userPersistences.get(0).getUSERID());
+						message_MessageView.setNumber("0");
+						message_MessageViews.add(message_MessageView);
+					}
+				}
 			}
 		}
 		List<Message_MessageView> list = ListSort(message_MessageViews);
@@ -113,9 +127,7 @@ public class MessageService {
 		});
 		return list;
 	}
-	public static void main(String[] args) {
-		message_userList("fa2f2884-985d-44e0-89b8-0454d0feaeac");
-	}
+
 	/*
 	 * zyq_message_ajax_查询私信内容
 	 */
@@ -160,9 +172,10 @@ public class MessageService {
 		List<Message_MessageView> list = ListSort2(message_MessageViews);
 		return list;
 	}
-	public static List<Message_MessageView> message_getMessageHistory2(String postuserId,String getuserId,int state,String date){
+	//比较时间
+	public static List<Message_MessageView> message_getMessageHistory_time(String postuserId,String getuserId,int state,int startnumber,String time){
 		List<Message_MessageView> message_MessageViews = new ArrayList<Message_MessageView>();
-		List<MessagePersistence> messagePersistences = MessageHelper.getMessageContent21(postuserId, getuserId, 2,date);
+		List<MessagePersistence> messagePersistences = MessageHelper.getMessageContent2_time(postuserId, getuserId, 2, 0,time);
 		if (messagePersistences.size()!=0) {
 			for(MessagePersistence messagePersistence:messagePersistences){
 				Message_MessageView message_MessageView = new Message_MessageView();
@@ -178,7 +191,25 @@ public class MessageService {
 		List<Message_MessageView> list = ListSort2(message_MessageViews);
 		return list;
 	}
-	//对list里面的元素进行number的排序
+	public static List<Message_MessageView> message_getMessageHistory2(String postuserId,String getuserId,int state,String date){
+		List<Message_MessageView> message_MessageViews = new ArrayList<Message_MessageView>();
+		List<MessagePersistence> messagePersistences = MessageHelper.getMessageContent21(postuserId, getuserId, 2,date);
+		if (messagePersistences.size()!=0) {
+			for(MessagePersistence messagePersistence:messagePersistences){
+				Message_MessageView message_MessageView = new Message_MessageView();
+				message_MessageView.setContent(messagePersistence.getMESSAGECONTENT());
+				List<UserPersistence> uList = UserHelper.getEmail_id(messagePersistence.getPOSTUSERID());
+				message_MessageView.setUserImage(uList.get(0).getAVATAR());
+				message_MessageView.setUserId(messagePersistence.getPOSTUSERID());
+				message_MessageView.setTime(messagePersistence.getMESSAGETIME());
+				message_MessageView.setMessageId(messagePersistence.getMESSAGEID());
+				message_MessageViews.add(message_MessageView);
+			}
+		}
+		List<Message_MessageView> list = ListSort3(message_MessageViews);
+		return list;
+	}
+	//对list里面的元素进行time的排序
 	private static List<Message_MessageView> ListSort2(List<Message_MessageView> list){
 		Collections.sort(list,new Comparator<Message_MessageView>() {
 			@Override
@@ -202,5 +233,47 @@ public class MessageService {
 			}
 		});
 		return list;
+	}
+	private static List<Message_MessageView> ListSort3(List<Message_MessageView> list){
+		Collections.sort(list,new Comparator<Message_MessageView>() {
+			@Override
+			public int compare(Message_MessageView o1, Message_MessageView o2) {
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				try {
+					Date dt1 = format.parse(o1.getTime());
+					Date dt2 = format.parse(o2.getTime());
+					if (dt1.getTime()<dt2.getTime()) {
+						return 1;
+					}else if (dt1.getTime()>dt2.getTime()) {
+						return -1;
+					}else {
+						return 0;
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return 0;
+			}
+		});
+		return list;
+	}
+	/*
+	 * zyq_message_ajax_删除私信列表
+	 */
+	public static void deleteMessageList(String postuserId, String getuserId) {
+		List<MessagePersistence> messagePersistences = MessageHelper.getMessageContent1(postuserId, getuserId, 2);
+		String time = messagePersistences.get(0).getMESSAGETIME();
+    	List<MessageHistoryPersistence> messageHistoryPersistences = MessageHelper.getMessageHistoryList(postuserId,getuserId);
+    	if (messageHistoryPersistences.size()==0) {
+			MessageHistoryPersistence messageHistoryPersistence = new MessageHistoryPersistence();
+			messageHistoryPersistence.setMESSAGEHISTORYID(UUID.randomUUID().toString());
+			messageHistoryPersistence.setPOSTUSERID(postuserId);
+			messageHistoryPersistence.setGETUSERID(getuserId);
+			messageHistoryPersistence.setTIMEMARK(time);
+			MessageHelper.save(messageHistoryPersistence);
+		}else {
+			MessageHelper.updateMessageHistory(messageHistoryPersistences.get(0).getMESSAGEHISTORYID(),time);
+		}
 	}
 }

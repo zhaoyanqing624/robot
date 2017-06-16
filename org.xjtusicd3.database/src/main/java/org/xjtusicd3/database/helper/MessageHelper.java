@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
+import org.xjtusicd3.database.mapper.MessageHistoryPersistenceMapper;
 import org.xjtusicd3.database.mapper.MessagePersistenceMapper;
+import org.xjtusicd3.database.model.MessageHistoryPersistence;
 import org.xjtusicd3.database.model.MessagePersistence;
 
 public class MessageHelper {
@@ -54,6 +56,13 @@ public class MessageHelper {
 		session.close();
 		return list;
 	}
+	public static List<MessagePersistence> getMessageContent_time(String postuserId, String getuserId, int state,String time) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
+		List<MessagePersistence> list = mapper.getMessageContent_time(postuserId,getuserId,state,time);
+		session.close();
+		return list;
+	}
 	public static void updateMessageState(String messageId,int state) {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
@@ -70,10 +79,26 @@ public class MessageHelper {
 		session.close();
 		return list;
 	}
+	//比较时间
+	public static List<MessagePersistence> getMessageContent1_time(String postuserId, String getuserId, int state,String time) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
+		List<MessagePersistence> list = mapper.getMessageContent1_time(postuserId,getuserId,state,time);
+		session.close();
+		return list;
+	}
 	public static List<MessagePersistence> getMessageContent2(String postuserId, String getuserId, int state,int startnumber) {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
 		List<MessagePersistence> list = mapper.getMessageContent2(postuserId,getuserId,state,startnumber);
+		session.close();
+		return list;
+	}
+	//比较时间
+	public static List<MessagePersistence> getMessageContent2_time(String postuserId, String getuserId, int state,int startnumber,String time) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
+		List<MessagePersistence> list = mapper.getMessageContent2_time(postuserId,getuserId,state,startnumber,time,1);
 		session.close();
 		return list;
 	}
@@ -93,5 +118,33 @@ public class MessageHelper {
 		List<MessagePersistence> list = mapper.getMessageContent21(postuserId,getuserId,state,date);
 		session.close();
 		return list;
+	}
+	/*
+	 * zyq_message_查看私信历史列表
+	 */
+	public static List<MessageHistoryPersistence> getMessageHistoryList(String postuserId, String getuserId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		MessageHistoryPersistenceMapper mapper = session.getMapper(MessageHistoryPersistenceMapper.class);
+		List<MessageHistoryPersistence> list = mapper.getMessageHistoryList(postuserId,getuserId);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_message——记录私信历史
+	 */
+	public static void save(MessageHistoryPersistence messageHistoryPersistence){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		MessageHistoryPersistenceMapper mapper = session.getMapper(MessageHistoryPersistenceMapper.class);
+		mapper.save(messageHistoryPersistence);
+		session.close();
+	}
+	/*
+	 * zyq_message_更改私信的时间
+	 */
+	public static void updateMessageHistory(String messagehistoryid, String time) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		MessageHistoryPersistenceMapper mapper = session.getMapper(MessageHistoryPersistenceMapper.class);
+		mapper.updateMessageHistory(messagehistoryid,time);
+		session.close();
 	}
 }

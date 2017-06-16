@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.MessageHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.MessageHistoryPersistence;
 import org.xjtusicd3.database.model.MessagePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.MessageService;
@@ -185,7 +186,6 @@ public class MessageController {
 			jsonObject.put("value", "1");
 			jsonObject.put("messageList", message_MessageViews);
 			String result = JsonUtil.toJsonString(jsonObject);
-			System.out.println(result);
 			return result;
 		}
 	}
@@ -203,24 +203,43 @@ public class MessageController {
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,useremail);
+			//查看是否之前关闭过聊天
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
-			List<MessagePersistence> mList = MessageHelper.getMessageContent1(postuserId, userPersistences.get(0).getUSERID(), 2);
-			if (mList.size()!=0) {
-				List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory(postuserId, userPersistences.get(0).getUSERID(), 2, 0);
-				jsonObject.put("messageHistory", message_MessageViews2);
-				
-			}
-			if (mList.size()<5) {
-				jsonObject.put("isMore", "0");
+			List<MessageHistoryPersistence> historyPersistences = MessageHelper.getMessageHistoryList(postuserId, userPersistences.get(0).getUSERID());
+			if (historyPersistences.size()==0) {
+				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,useremail);
+				List<MessagePersistence> mList = MessageHelper.getMessageContent1(postuserId, userPersistences.get(0).getUSERID(), 2);
+				if (mList.size()!=0) {
+					List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory(postuserId, userPersistences.get(0).getUSERID(), 2, 0);
+					jsonObject.put("messageHistory", message_MessageViews2);
+				}
+				if (mList.size()<5) {
+					jsonObject.put("isMore", "0");
+				}else {
+					jsonObject.put("isMore", "1");
+				}
+				jsonObject.put("value", "1");
+				jsonObject.put("messageContentList", message_MessageViews);
+				String result = JsonUtil.toJsonString(jsonObject);
+				return result;
 			}else {
-				jsonObject.put("isMore", "1");
+				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,useremail);
+				List<MessagePersistence> mList = MessageHelper.getMessageContent1_time(postuserId, userPersistences.get(0).getUSERID(), 2,historyPersistences.get(0).getTIMEMARK());
+				if (mList.size()!=0) {
+					List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory_time(postuserId, userPersistences.get(0).getUSERID(), 2, 0,historyPersistences.get(0).getTIMEMARK());
+					jsonObject.put("messageHistory", message_MessageViews2);
+				}
+				if (mList.size()<5) {
+					jsonObject.put("isMore", "0");
+				}else {
+					jsonObject.put("isMore", "1");
+				}
+				jsonObject.put("value", "1");
+				jsonObject.put("messageContentList", message_MessageViews);
+				String result = JsonUtil.toJsonString(jsonObject);
+				return result;
 			}
-			jsonObject.put("value", "1");
-			jsonObject.put("messageContentList", message_MessageViews);
-			String result = JsonUtil.toJsonString(jsonObject);
-			System.out.println(result);
-			return result;
+
 		}
 	}
 	/*
@@ -252,7 +271,28 @@ public class MessageController {
 			}
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject);
-			System.out.println(result);
+			return result;
+		}
+	}
+	
+	/*
+	 * zyq_message_ajax_删除私信列表
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/deleteMessageList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String deleteMessageList(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String postuserId = request.getParameter("id");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			MessageService.deleteMessageList(postuserId,userPersistences.get(0).getUSERID());
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject);
 			return result;
 		}
 	}

@@ -998,7 +998,7 @@ a.chatSend {
 .user_list li .msg-more {
     position: absolute;
     top: 30px;
-    right: 20px;
+    right: 30px;
     font-size: 24px;
     text-align: center;
     color: #93999f;
@@ -1012,5 +1012,20 @@ a.chatSend {
     border: 0;
     text-align: center;
     cursor:pointer;
+}
+.more-box {
+	margin-top: -30px;
+    display: none;
+    position: absolute;
+    width: 70px;
+    height: 20px;
+    background: #f3f5f7;
+    font-size: 14px;
+    color: #000;
+    -webkit-box-shadow: 0 5px 20px rgba(0,0,0,.3)!important;
+    -moz-box-shadow: 0 5px 20px rgba(0,0,0,.3)!important;
+    box-shadow: 0 5px 20px rgba(0,0,0,.3)!important;
+    z-index: 1;
+    text-align: center;
 }
 

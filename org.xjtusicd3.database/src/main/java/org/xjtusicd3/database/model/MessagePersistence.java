@@ -20,6 +20,7 @@ public class MessagePersistence {
 	private String POSTUSERID;
 	@TableField(columnName="GETUSERID")
 	private String GETUSERID;
+
 	public String getMESSAGEID() {
 		return MESSAGEID;
 	}
