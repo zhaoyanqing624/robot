@@ -34,6 +34,41 @@
 		PL.joinListen('/mipc/she');  
 		function onData(event) {
 			var result = decodeURIComponent(event.get("message"));
+			var replyNumber = decodeURIComponent(event.get("messageNumber"));
+			var jsonresult = strToJson(result);
+			var jsonreplyNumber = strToJson(replyNumber);
+			function strToJson(str){ 
+				return JSON.parse(str); 
+			}
+			for(var i in jsonresult){
+				var content = jsonresult[i].content;
+				var lastContent = jsonresult[i].lastContent;
+				var messageId = jsonresult[i].messageId;
+				var time = jsonresult[i].time;
+				time = time.split('');
+				time.splice(10,1,' ');
+				time = time.join('');
+				var userId = jsonresult[i].userId;
+				var userImage = jsonresult[i].userImage;
+				if(lastContent.length<30){
+					lastContent = lastContent;
+				}else{
+					lastContent = lastContent.substr(0,30)+"...";
+				}	
+				if(document.getElementById("lastChat"+userId).className!="active"){
+					document.getElementById("messagenumber"+userId).innerHTML = "("+jsonreplyNumber+")";
+					document.getElementById("lastChat"+userId).getElementsByClassName("theLastMsg")[0].innerHTML = lastContent;
+				}
+				
+				if(document.getElementById(messageId)==null){
+					var html = document.getElementById("userchatUl"+userId).innerHTML;
+					if(userId==document.getElementById("zhao_hidden").innerHTML){
+						document.getElementById("userchatUl"+userId).innerHTML = html + '<li class="me"  id="'+messageId+'"><div class="chat_avata"><a href="personal2.html?u='+userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+userImage+'"></a></div><div class="a_msg_info"><pre>'+content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+time+'</small></li>';
+					}else{
+						document.getElementById("userchatUl"+userId).innerHTML = html + '<li class="you" id="'+messageId+'"><div class="chat_avata"><a href="personal2.html?u='+userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+userImage+'"></a></div><div class="a_msg_info"><pre>'+content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+time+'</small></li>';
+					}
+				}
+			}
 		    // 离开    
 		    // PL.leave();    
 		}   
@@ -144,7 +179,9 @@
 		                    		<img src="${messageList.userImage}" alt="luckyforever" width="40" height="40"> 					     	
 		                    		<div class="info"><h5>${messageList.userName}
 		                    			<#if messageList.number!=0>
-		                    			<span id="messagenumber">(${messageList.number})</span></h5>
+		                    			<span id="messagenumber${messageList.userId}">(${messageList.number})</span></h5>
+		                    			<#else>
+		                    			<span id="messagenumber${messageList.userId}"></span></h5>
 		                    			</#if>
 		                    		<#if messageList.lastContent?length gt 30>
 		                    			<p class="theLastMsg">${messageList.lastContent[0..30]}...</p></div>	
@@ -165,7 +202,9 @@
 		                    		<img src="${messageList.userImage}" alt="luckyforever" width="40" height="40"> 					     	
 		                    		<div class="info"><h5>${messageList.userName}
 		                    			<#if messageList.number!=0>
-		                    			<span id="messagenumber">(${messageList.number})</span></h5>
+		                    			<span id="messagenumber${messageList.userId}">(${messageList.number})</span></h5>
+		                    			<#else>
+		                    			<span id="messagenumber${messageList.userId}"></span></h5>
 		                    			</#if>
 		                    		<#if messageList.lastContent?length gt 30>
 		                    			<p class="theLastMsg">${messageList.lastContent[0..30]}...</p></div>	
@@ -201,16 +240,16 @@
             <div id="chat_content" class="scrollbar-macosx">
             	<#if touserList ??>
 	                <#list touserList as touserList>
-	            		<ul id="userchatUl${touserList.USERID}" class="userchatUl" style="display:block">
+	            		<ul id="userchatUl${touserList.USERID}" class="userchatUl" style="display:none">
 	            			
 	            		</ul>
 	            	</#list>
 	            	<#list messageList as messageList>
-	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:block"></ul>
+	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:none"></ul>
 	            	</#list>
 	            <#else>
 	            	<#list messageList as messageList>
-	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:block"></ul>
+	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:none"></ul>
 	            	</#list>
             	</#if>
             	
@@ -350,9 +389,10 @@
 			var userid = $(this)[0].id.split("lastChat")[1];
 			var usercontentid = "userchatUl"+userid;
 			$('#'+usercontentid).css('display','block').siblings("ul").css('display','none');
-			if(document.getElementById("messagenumber")!=null){
-				document.getElementById("messagenumber").innerHTML="";
+			if(document.getElementById("messagenumber"+userid)!=null){
+				document.getElementById("messagenumber"+userid).innerHTML="";
 			}
+			document.getElementById("lastChat"+userid).getElementsByClassName("theLastMsg")[0].innerHTML="";
 			var touserId = document.getElementById("lastChat").getElementsByClassName("active")[0].id.split("lastChat")[1];
 			//点击列表后开始查询
 			$.ajax({
@@ -422,7 +462,7 @@
 						}else{
 							if(data.isMore=="1"){
 								var html = document.getElementById("userchatUl"+touserId).innerHTML;
-								document.getElementById("userchatUl"+touserId).innerHTML = html+'<li><div class="getmore"><strong style="width:130px;" onclick="getMoreMessageHistory()">查看更多记录</strong></div></li>';
+								document.getElementById("userchatUl"+touserId).innerHTML = '<li><div class="getmore"><strong style="width:130px;" onclick="getMoreMessageHistory()">查看更多记录</strong></div></li>'+html;
 								for(var i in data.messageContentList){
 									var html = document.getElementById("userchatUl"+touserId).innerHTML;
 									if(document.getElementById(data.messageContentList[i].messageId)==null){

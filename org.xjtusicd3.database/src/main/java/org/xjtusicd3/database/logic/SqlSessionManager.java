@@ -33,6 +33,7 @@ import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
 import org.xjtusicd3.database.mapper.ScorePersistenceMapper;
 import org.xjtusicd3.database.mapper.ServerPersistenceMapper;
+import org.xjtusicd3.database.mapper.SharePersistenceMapper;
 import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
@@ -91,6 +92,7 @@ public class SqlSessionManager {
 			configuration.addMapper(ServerPersistenceMapper.class);
 			configuration.addMapper(MessagePersistenceMapper.class);
 			configuration.addMapper(MessageHistoryPersistenceMapper.class);
+			configuration.addMapper(SharePersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

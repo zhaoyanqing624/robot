@@ -18,6 +18,8 @@ public interface MessagePersistenceMapper extends IBaseDao<MessagePersistence, S
 	 */
 	@Select("SELECT POSTUSERID FROM TBL_Message WHERE GETUSERID=#{0} AND (MESSAGESTATE=#{1} || MESSAGESTATE=#{2}) GROUP BY POSTUSERID")
 	List<MessagePersistence> getUserList(String userId, int state,int state2);
+	@Select("SELECT POSTUSERID FROM TBL_Message WHERE GETUSERID=#{0} AND MESSAGESTATE=#{1} GROUP BY POSTUSERID")
+	List<MessagePersistence> getUserList_pushlet(String userId, int state);
 	@Select("SELECT * FROM TBL_Message WHERE POSTUSERID=#{0} AND GETUSERID=#{1} AND MESSAGESTATE=#{2} ORDER BY MESSAGETIME DESC")
 	List<MessagePersistence> getMessageUser(String userid, String userId2, int state);
 	/*
@@ -25,7 +27,7 @@ public interface MessagePersistenceMapper extends IBaseDao<MessagePersistence, S
 	 */
 	@Select("SELECT * FROM TBL_Message WHERE POSTUSERID=#{0} AND GETUSERID=#{1} AND MESSAGESTATE=#{2} ORDER BY MESSAGETIME")
 	List<MessagePersistence> getMessageContent(String postuserId, String getuserId, int state);
-	@Select("SELECT * FROM TBL_Message WHERE STR_TO_DATE(MESSAGETIME,'%Y-%m-%d %H:%i:%s')>STR_TO_DATE(#{3},'%Y-%m-%d %H:%i:%s') AND ((POSTUSERID=#{0} AND GETUSERID=#{1}) OR (POSTUSERID=#{1} AND GETUSERID=#{0})) AND  MESSAGESTATE=#{2} ORDER BY MESSAGETIME")
+	@Select("SELECT * FROM TBL_Message WHERE STR_TO_DATE(MESSAGETIME,'%Y-%m-%d %H:%i:%s')>STR_TO_DATE(#{3},'%Y-%m-%d %H:%i:%s') AND ((POSTUSERID=#{0} AND GETUSERID=#{1}) OR (POSTUSERID=#{1} AND GETUSERID=#{0})) AND  MESSAGESTATE=#{2} ORDER BY MESSAGETIME LIMIT 5")
 	List<MessagePersistence> getMessageContent_time(String postuserId, String getuserId, int state,String time);
 	/*
 	 * zyq_message_ajax_更改私信的状态
@@ -40,8 +42,8 @@ public interface MessagePersistenceMapper extends IBaseDao<MessagePersistence, S
 	//比较时间
 	@Select("SELECT * FROM TBL_Message WHERE STR_TO_DATE(MESSAGETIME,'%Y-%m-%d %H:%i:%s')>STR_TO_DATE(#{3},'%Y-%m-%d %H:%i:%s') AND ((POSTUSERID=#{0} AND GETUSERID=#{1}) OR (POSTUSERID=#{1} AND GETUSERID=#{0})) AND MESSAGESTATE=#{2} ORDER BY MESSAGETIME DESC")
 	List<MessagePersistence> getMessageContent1_time(String postuserId, String getuserId, int state,String time);
-	@Select("SELECT * FROM TBL_Message WHERE ((POSTUSERID=#{0} AND GETUSERID=#{1}) OR (POSTUSERID=#{1} AND GETUSERID=#{0})) AND MESSAGESTATE=#{2} ORDER BY MESSAGETIME DESC LIMIT #{3},5")
-	List<MessagePersistence> getMessageContent2(String postuserId, String getuserId, int state,int startnumber);
+	@Select("SELECT * FROM TBL_Message WHERE ((POSTUSERID=#{0} AND GETUSERID=#{1}) OR (POSTUSERID=#{1} AND GETUSERID=#{0})) AND (MESSAGESTATE=#{4} || MESSAGESTATE=#{2}) ORDER BY MESSAGETIME DESC LIMIT #{3},5")
+	List<MessagePersistence> getMessageContent2(String postuserId, String getuserId, int state,int startnumber,int state2);
 	//比较时间
 	@Select("SELECT * FROM TBL_Message WHERE STR_TO_DATE(MESSAGETIME,'%Y-%m-%d %H:%i:%s')>STR_TO_DATE(#{4},'%Y-%m-%d %H:%i:%s')	AND ((POSTUSERID=#{0} AND GETUSERID=#{1}) OR (POSTUSERID=#{1} AND GETUSERID=#{0})) AND (MESSAGESTATE=#{5} || MESSAGESTATE=#{2}) ORDER BY MESSAGETIME DESC LIMIT #{3},5")
 	List<MessagePersistence> getMessageContent2_time(String postuserId, String getuserId, int state,int startnumber,String time,int state2);

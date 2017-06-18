@@ -3,6 +3,7 @@ package org.xjtusicd3.partner.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -178,17 +179,20 @@ public class UserController {
 			return "redirect:login.html";
 		}else {
 			List<UserPersistence> list = UserHelper.getEmail(useremail);
-			if (list.get(0).getGENDER()!=null) {
-				 usersex = list.get(0).getGENDER();
-			}else {
-				 usersex = userView.getUserSex();
+			if(userView.getUserSex()==null&&userView.getUserSex2()==null){
+				usersex = list.get(0).getGENDER();
+			}else if (userView.getUserSex()!=null&&userView.getUserSex2()==null) {
+				usersex = userView.getUserSex();
+			}else if (userView.getUserSex()==null&&userView.getUserSex2()!=null) {
+				usersex = userView.getUserSex2();
 			}
 			String username = userView.getUserName();
 			String userbirthday = userView.getUserBirthday();
 			String province = userView.getProvince();
 			String city = userView.getCity();
 			String district = userView.getDistrict();
-			if (province==null&&city==null&&district==null) {
+			System.out.println(province=="");
+			if (province==""&&city==""&&district=="") {
 				address = list.get(0).getUSERADDRESS();
 			}else {
 				address = "0"+province+"1"+city+"2"+district+"3";
@@ -276,15 +280,20 @@ public class UserController {
 	 * zyq_personal2_个人信息
 	 */
 	@RequestMapping(value="personal2",method=RequestMethod.GET)
-	public ModelAndView personal2(HttpServletRequest request,HttpSession session){
-		
+	public ModelAndView personal2(String u,HttpServletRequest request,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
+		List<UserPersistence> list = new ArrayList<UserPersistence>();
 		if (useremail==null) {
 			return new ModelAndView("login");
 		}else {
 			//主页页面
 			ModelAndView mv = new ModelAndView("personal2");
-			List<UserPersistence> list = UserHelper.getEmail(useremail);
+			if (u==null) {
+				list = UserHelper.getEmail(useremail);
+			}else {
+				list = UserHelper.getEmail_id(u);
+			}
+			
 			List<ITPersistence> list2 = ITHelper.IT(list.get(0).getUSERID());
 			if (list2.size()!=0) {
 				mv.addObject("GOODWORK", list2.get(0).getGOODWORK());

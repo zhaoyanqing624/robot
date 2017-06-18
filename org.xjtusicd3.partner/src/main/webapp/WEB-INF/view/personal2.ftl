@@ -140,7 +140,7 @@
 		</div><!-- .slider end -->
 		</#list>
 	</div>	
-<div class="u-container" id="zhao1" style="display:none;">
+<div class="u-container" id="zhao1" style="display:block;">
 		<div class=" page-home js-usercard-box" id="notices">
 			<div class="dyanmic-title-wrap">
 	    		<p class="dynamic-title">Ta的动态 </p>

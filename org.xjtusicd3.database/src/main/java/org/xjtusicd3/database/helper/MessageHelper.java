@@ -39,6 +39,13 @@ public class MessageHelper {
 		session.close();
 		return list;
 	}
+	public static List<MessagePersistence> getUserList_pushlet(String userId, int state) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
+		List<MessagePersistence> list = mapper.getUserList_pushlet(userId,state);
+		session.close();
+		return list;
+	}
 	public static List<MessagePersistence> getMessageUser(String userid, String userId2, int state) {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
@@ -90,7 +97,7 @@ public class MessageHelper {
 	public static List<MessagePersistence> getMessageContent2(String postuserId, String getuserId, int state,int startnumber) {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		MessagePersistenceMapper mapper = session.getMapper(MessagePersistenceMapper.class);
-		List<MessagePersistence> list = mapper.getMessageContent2(postuserId,getuserId,state,startnumber);
+		List<MessagePersistence> list = mapper.getMessageContent2(postuserId,getuserId,state,startnumber,1);
 		session.close();
 		return list;
 	}

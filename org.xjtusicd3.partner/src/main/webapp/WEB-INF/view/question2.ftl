@@ -117,6 +117,19 @@
 					<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
 				</ul>
 			</div>
+			<#if IsIT=="1">
+			<div class="options" id="shareCommunity">
+                <#if IsShare=="0">
+	                <ul>
+						<li class="special"><a data-fun="toFocus" class="unFocused" onclick="saveShare()"><span class="status">分享</span>  |  <span class="number"> </span></a></li>
+					</ul>
+            	<#elseif IsShare=="1">
+            		<ul>
+						<li class="special"><a data-fun="toFocus" class="unFocused" onclick="saveShare()"><span class="status">已分享</span>  |  <span class="number">√</span></a></li>
+					</ul>
+            	</#if>
+			</div>
+			</#if>
 			</#list>
 		<div id="sort">
 			<h2>${communityNumber}个回答</h2>
@@ -903,6 +916,31 @@
 			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML=tocomment;
 		}
 	}
+	//分享communityQuestion
+		function saveShare(){
+			var questionId = document.URL.split("q=")[1];
+			var from = "communityQuestion";
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveShare.html",
+				data:{
+					"questionId":questionId,
+					"from":from
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementById("shareCommunity").getElementsByClassName("status")[0].innerHTML = "已分享";
+						document.getElementById("shareCommunity").getElementsByClassName("number")[0].innerHTML = "√";
+					}else{
+						document.getElementById("shareCommunity").getElementsByClassName("status")[0].innerHTML = "分享";
+						document.getElementById("shareCommunity").getElementsByClassName("number")[0].innerHTML = "";
+					}
+				}
+			})
+		}
 	//查看更多评论
 		$('#loading').click(function() {
 			var startnumber = document.getElementById("searchResult").childElementCount;

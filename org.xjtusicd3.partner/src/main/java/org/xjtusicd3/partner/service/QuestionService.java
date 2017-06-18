@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.helper.ShareHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
@@ -98,5 +99,20 @@ public class QuestionService {
 		List<UserPersistence> list = UserHelper.getEmail(useremail);
 		answerPersistence.setUSERID(list.get(0).getUSERID());
 		AnswerHelper.save(answerPersistence);
+	}
+	/*
+	 * zyq_faq3_ajax_分享的增加
+	 */
+	public static void saveShare(String userId,String faqquestionId){
+    	Date date=new Date();
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	String time = format.format(date);
+		ShareHelper.saveShare(UUID.randomUUID().toString(),userId,time,faqquestionId);
+	}
+	public static void saveShare2(String userId,String faqquestionId){
+    	Date date=new Date();
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	String time = format.format(date);
+		ShareHelper.saveShare2(UUID.randomUUID().toString(),userId,time,faqquestionId);
 	}
 }

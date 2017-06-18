@@ -212,6 +212,8 @@ public class MessageController {
 				if (mList.size()!=0) {
 					List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory(postuserId, userPersistences.get(0).getUSERID(), 2, 0);
 					jsonObject.put("messageHistory", message_MessageViews2);
+					String string = JsonUtil.toJsonString(message_MessageViews2);
+					System.out.println(string);
 				}
 				if (mList.size()<5) {
 					jsonObject.put("isMore", "0");
@@ -228,6 +230,8 @@ public class MessageController {
 				if (mList.size()!=0) {
 					List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory_time(postuserId, userPersistences.get(0).getUSERID(), 2, 0,historyPersistences.get(0).getTIMEMARK());
 					jsonObject.put("messageHistory", message_MessageViews2);
+					String string = JsonUtil.toJsonString(message_MessageViews2);
+					System.out.println(string);
 				}
 				if (mList.size()<5) {
 					jsonObject.put("isMore", "0");

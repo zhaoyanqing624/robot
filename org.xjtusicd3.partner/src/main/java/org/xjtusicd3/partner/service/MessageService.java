@@ -72,39 +72,42 @@ public class MessageService {
 		List<Message_MessageView> message_MessageViews = new ArrayList<Message_MessageView>();
 		//有信息的用户
 		List<MessagePersistence> messagePersistences = MessageHelper.getUserList(userId,1,2);
-		for(MessagePersistence messagePersistence:messagePersistences){
-			Message_MessageView message_MessageView = new Message_MessageView();
-			List<UserPersistence> userPersistences = UserHelper.getEmail_id(messagePersistence.getPOSTUSERID());
-			//判断是否存在新的私信
-			List<MessagePersistence> messagePersistences2 = MessageHelper.getMessageContent(userPersistences.get(0).getUSERID(), userId, 1);
-			if (messagePersistences2.size()!=0) {
-				message_MessageView.setUserImage(userPersistences.get(0).getAVATAR());
-				message_MessageView.setUserName(userPersistences.get(0).getUSERNAME());
-				message_MessageView.setUserId(userPersistences.get(0).getUSERID());
-				message_MessageView.setLastContent(messagePersistences2.get(0).getMESSAGECONTENT());
-				message_MessageView.setNumber(Integer.toString(messagePersistences2.size()));
-				message_MessageViews.add(message_MessageView);
-			}else{
-				List<MessageHistoryPersistence> messageHistoryPersistences = MessageHelper.getMessageHistoryList(userPersistences.get(0).getUSERID(), userId);
-				if (messageHistoryPersistences.size()==0) {
+		if (messagePersistences.size()!=0) {
+			for(MessagePersistence messagePersistence:messagePersistences){
+				Message_MessageView message_MessageView = new Message_MessageView();
+				List<UserPersistence> userPersistences = UserHelper.getEmail_id(messagePersistence.getPOSTUSERID());
+				//判断是否存在新的私信
+				List<MessagePersistence> messagePersistences2 = MessageHelper.getMessageContent(userPersistences.get(0).getUSERID(), userId, 1);
+				if (messagePersistences2.size()!=0) {
 					message_MessageView.setUserImage(userPersistences.get(0).getAVATAR());
 					message_MessageView.setUserName(userPersistences.get(0).getUSERNAME());
 					message_MessageView.setUserId(userPersistences.get(0).getUSERID());
-					message_MessageView.setNumber("0");
+					message_MessageView.setLastContent(messagePersistences2.get(0).getMESSAGECONTENT());
+					message_MessageView.setNumber(Integer.toString(messagePersistences2.size()));
 					message_MessageViews.add(message_MessageView);
-				}else {
-					String time = messageHistoryPersistences.get(0).getTIMEMARK();
-					List<MessagePersistence> messagePersistences3 = MessageHelper.getMessageContent_time(userPersistences.get(0).getUSERID(), userId, 2, time);
-					if (messagePersistences3.size()!=0) {
+				}else{
+					List<MessageHistoryPersistence> messageHistoryPersistences = MessageHelper.getMessageHistoryList(userPersistences.get(0).getUSERID(), userId);
+					if (messageHistoryPersistences.size()==0) {
 						message_MessageView.setUserImage(userPersistences.get(0).getAVATAR());
 						message_MessageView.setUserName(userPersistences.get(0).getUSERNAME());
 						message_MessageView.setUserId(userPersistences.get(0).getUSERID());
 						message_MessageView.setNumber("0");
 						message_MessageViews.add(message_MessageView);
+					}else {
+						String time = messageHistoryPersistences.get(0).getTIMEMARK();
+						List<MessagePersistence> messagePersistences3 = MessageHelper.getMessageContent_time(userPersistences.get(0).getUSERID(), userId, 2, time);
+						if (messagePersistences3.size()!=0) {
+							message_MessageView.setUserImage(userPersistences.get(0).getAVATAR());
+							message_MessageView.setUserName(userPersistences.get(0).getUSERNAME());
+							message_MessageView.setUserId(userPersistences.get(0).getUSERID());
+							message_MessageView.setNumber("0");
+							message_MessageViews.add(message_MessageView);
+						}
 					}
 				}
 			}
 		}
+
 		List<Message_MessageView> list = ListSort(message_MessageViews);
 		return list;
 	}
@@ -149,6 +152,34 @@ public class MessageService {
 				MessageHelper.updateMessageState(messagePersistence.getMESSAGEID(),2);
 			}
 		}
+		return message_MessageViews;
+	}
+	/*
+	 * zyq_message_pushlet_推送未读的消息
+	 */
+	public static List<Message_MessageView> message_getMessage_pushlet(String getuserId){
+		List<Message_MessageView> message_MessageViews = new ArrayList<>();
+		List<MessagePersistence> messagePersistences = MessageHelper.getUserList_pushlet(getuserId, 1);
+		if(messagePersistences.size()!=0){
+			for(MessagePersistence messagePersistence:messagePersistences){
+				List<MessagePersistence> messagePersistences1 = MessageHelper.getMessageContent1(messagePersistence.getPOSTUSERID(), getuserId, 1);
+				if (messagePersistences1.size()!=0) {
+					for(MessagePersistence messagePersistence1:messagePersistences1){
+						Message_MessageView message_MessageView = new Message_MessageView();
+						message_MessageView.setContent(messagePersistence1.getMESSAGECONTENT());
+						message_MessageView.setLastContent(messagePersistences1.get(0).getMESSAGECONTENT());
+						List<UserPersistence> uList = UserHelper.getEmail_id(messagePersistence1.getPOSTUSERID());
+						message_MessageView.setUserImage(uList.get(0).getAVATAR());
+						message_MessageView.setUserId(messagePersistence1.getPOSTUSERID());
+						message_MessageView.setTime(messagePersistence1.getMESSAGETIME());
+						message_MessageView.setMessageId(messagePersistence1.getMESSAGEID());
+						message_MessageViews.add(message_MessageView);
+					}
+				}
+			}
+		}
+		String string = JsonUtil.toJsonString(message_MessageViews);
+		System.out.println(string);
 		return message_MessageViews;
 	}
 	/*
@@ -275,5 +306,8 @@ public class MessageService {
 		}else {
 			MessageHelper.updateMessageHistory(messageHistoryPersistences.get(0).getMESSAGEHISTORYID(),time);
 		}
+	}
+	public static void main(String[] args) {
+		message_getMessage_pushlet("fa2f2884-985d-44e0-89b8-0454d0feaeac");
 	}
 }

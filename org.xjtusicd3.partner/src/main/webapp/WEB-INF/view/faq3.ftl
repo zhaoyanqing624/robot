@@ -237,6 +237,15 @@
 	                            <#else>
 	                            	<a href="javascript:void(0);" id="favoriteHeart" class="share heart" onclick="favorite()"></a>
 	                            </#if>
+	                            <#if IsIT=="1">
+	                            	<span class="share">|</span>
+	                            	<span class="share">推荐：</span>
+	                            	<#if IsShare=="0">
+	                            		<div class="social-share fl share-component"><a class="fa fa-share-alt" style="font-size:21px;margin-top: 9px;color:#9c9c9c" onclick="saveShare()"></a></div>
+	                            	<#elseif IsShare=="1">
+	                            		<div class="social-share fl share-component"><a class="fa fa-share-alt" style="font-size:21px;margin-top: 9px;color:red" onclick="saveShare()"></a></div>
+	                            	</#if>
+	                            </#if>
 	                        </div>
 	                        <#if scoreSize gt 0>
 	                        	<#list scoreList as scoreList>
@@ -761,6 +770,34 @@
 						self.location='login.html';
 					}else if(data.value=="1"){
 						document.getElementsByClassName("shareBox_hidden")[0].style.display="block";
+					}
+				}
+			})
+		}
+		//分享
+		function saveShare(){
+			var state;
+			if(document.getElementsByClassName("fa fa-share-alt")[0].style.color!="red"){
+				state=1;
+			}else{
+				state=2;
+			}
+			var questionId = document.URL.split("q=")[1];
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveShare.html",
+				data:{
+					"questionId":questionId,
+					"state":state
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementsByClassName("fa fa-share-alt")[0].style.color="red";
+					}else{
+						document.getElementsByClassName("fa fa-share-alt")[0].style.color="#9c9c9c";
 					}
 				}
 			})

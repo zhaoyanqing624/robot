@@ -15,14 +15,18 @@ import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.CollectionHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
+import org.xjtusicd3.database.helper.ITHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.ScoreHelper;
+import org.xjtusicd3.database.helper.ShareHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
+import org.xjtusicd3.database.model.ITPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.ScorePersistence;
+import org.xjtusicd3.database.model.SharePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
@@ -144,7 +148,21 @@ public class FaqController {
 			List<ScorePersistence> scorePersistences = ScoreHelper.getScoreList(q);
 			modelAndView.addObject("scoreList", scorePersistences);
 			modelAndView.addObject("scoreSize", scorePersistences.size());
+			//判断是否有分享内容的权利
+			List<ITPersistence> list = ITHelper.IT(userPersistences.get(0).getUSERID());
+			if (list.size()==0) {
+				modelAndView.addObject("IsIT", "0");
+			}else{
+				modelAndView.addObject("IsIT", "1");
+				List<SharePersistence> sharePersistences = ShareHelper.getShareList_ID(userPersistences.get(0).getUSERID(),q);
+				if (sharePersistences.size()==0) {
+					modelAndView.addObject("IsShare", "0");
+				}else {
+					modelAndView.addObject("IsShare", "1");
+				}
+			}
 		}
+
 		modelAndView.addObject("commentNumber", commentPersistences.size());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
@@ -223,6 +241,59 @@ public class FaqController {
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject);
 			return result;
+		}
+	}
+	/*
+	 * zyq_faq3_ajax_FAQ推荐
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/saveShare"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String saveShare(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String questionId = request.getParameter("questionId");
+		String state = request.getParameter("state");
+		String from = request.getParameter("from");
+		System.out.println(from);
+		JSONObject jsonObject = new JSONObject();
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else {
+			if (from.equals("communityQuestion")) {
+				List<SharePersistence> lPersistences = ShareHelper.getShareList_ID2(userPersistences.get(0).getUSERID(), questionId);
+				if (lPersistences.size()==0) {
+					QuestionService.saveShare2(userPersistences.get(0).getUSERID(), questionId);
+					jsonObject.put("value", "1");
+					String result = JsonUtil.toJsonString(jsonObject);
+					return result;
+				}else {
+					ShareHelper.deleteShare(lPersistences.get(0).getSHAREID());
+					jsonObject.put("value", "2");
+					String result = JsonUtil.toJsonString(jsonObject);
+					return result;
+				}
+			}else {
+				if (state.equals("1")) {
+					QuestionService.saveShare(userPersistences.get(0).getUSERID(), questionId);
+					jsonObject.put("value", "1");
+					String result = JsonUtil.toJsonString(jsonObject);
+					return result;
+				}else {
+					List<SharePersistence> lPersistences = ShareHelper.getShareList_ID(userPersistences.get(0).getUSERID(), questionId);
+					if (lPersistences.size()==0) {
+						jsonObject.put("value", "1");
+						String result = JsonUtil.toJsonString(jsonObject);
+						return result;
+					}else {
+						ShareHelper.deleteShare(lPersistences.get(0).getSHAREID());
+						jsonObject.put("value", "2");
+						String result = JsonUtil.toJsonString(jsonObject);
+						return result;
+					}
+				}
+			}
 		}
 	}
 }

@@ -1,12 +1,12 @@
 package org.xjtusicd3.partner.filter;
 
 import java.io.UnsupportedEncodingException;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.List;
 
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.partner.service.MessageService;
 import org.xjtusicd3.partner.service.NoticeService;
+import org.xjtusicd3.partner.view.Message_MessageView;
 import org.xjtusicd3.partner.view.Notice_NoticeCommunityView;
 
 import nl.justobjects.pushlet.core.Dispatcher;
@@ -54,7 +54,17 @@ public class Plushlet{
 			for(int i = 0;i<sessions.length;i++){
 				String userId = sessions[i].getEvent().getField("uid");
 				Event event = Event.createDataEvent("/mipc/she");
-				event.setField("message", "zhuduo");
+				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage_pushlet(userId);
+				String result = JsonUtil.toJsonString(message_MessageViews);
+				String messageNumber=Integer.toString(message_MessageViews.size());
+				try {
+					result=java.net.URLEncoder.encode(result, "UTF-8");
+					messageNumber=java.net.URLEncoder.encode(messageNumber, "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					event.setField("message", "异常错误！");
+				}
+				event.setField("message", result);
+				event.setField("messageNumber", messageNumber);
 				Dispatcher.getInstance().unicast(event, sessions[i].getId()); 
 			}
 		}
