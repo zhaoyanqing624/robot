@@ -21,16 +21,22 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ITHelper;
 import org.xjtusicd3.database.helper.PayHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.ITPersistence;
 import org.xjtusicd3.database.model.PayPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.CopyFile;
 import org.xjtusicd3.partner.filter.RegexAddress;
+import org.xjtusicd3.partner.service.CommunityService;
 import org.xjtusicd3.partner.service.UserService;
+import org.xjtusicd3.partner.view.Question2_CommunityView;
 import org.xjtusicd3.partner.view.UserView;
+
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 public class UserController {
@@ -282,16 +288,26 @@ public class UserController {
 	@RequestMapping(value="personal2",method=RequestMethod.GET)
 	public ModelAndView personal2(String u,HttpServletRequest request,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
+		String userId = (String) session.getAttribute("UserId");
 		List<UserPersistence> list = new ArrayList<UserPersistence>();
 		if (useremail==null) {
 			return new ModelAndView("login");
 		}else {
 			//主页页面
 			ModelAndView mv = new ModelAndView("personal2");
-			if (u==null) {
+			if (u==null||u==userId) {
 				list = UserHelper.getEmail(useremail);
+//				UserService.personal2_indexList(useremail);
+				mv.addObject("IsMy", "1");
 			}else {
 				list = UserHelper.getEmail_id(u);
+				mv.addObject("IsMy", "0");
+				List<PayPersistence> payPersistences = PayHelper.getpayList(userId,u);
+				if (payPersistences.size()==0) {
+					mv.addObject("payList","0");
+				}else {
+					mv.addObject("payList","1");
+				}
 			}
 			
 			List<ITPersistence> list2 = ITHelper.IT(list.get(0).getUSERID());
@@ -305,6 +321,7 @@ public class UserController {
 			mv.addObject("personal2_list", list);
 			mv.addObject("paynumber", payPersistences.size());//关注人数
 			mv.addObject("bepaynumber", payPersistences2.size());//粉丝数
+			mv.addObject("uid", userId);
 			return mv;
 		}
 		
@@ -321,6 +338,57 @@ public class UserController {
 		String result = JsonUtil.toJsonString(userPersistences);
 		System.out.println(result);
 		return result;
+	}
+	
+	/*
+	 * zyq_personal2_关注
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/savePay"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String savePay(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String touserId = request.getParameter("touserId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			String userId = userPersistences.get(0).getUSERID();
+			List<PayPersistence> payPersistences = PayHelper.getpayList(userId, touserId);
+			if (payPersistences.size()==0) {
+				UserService.savePay(userId,touserId);
+			}
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_personal2_取消关注
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/deletePay"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String deletePay(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String touserId = request.getParameter("touserId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			String userId = userPersistences.get(0).getUSERID();
+			List<PayPersistence> payPersistences = PayHelper.getpayList(userId, touserId);
+			if (payPersistences.size()!=0) {
+				PayHelper.deletePay(userId,touserId);
+			}
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
 	}
 	
 }

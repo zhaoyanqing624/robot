@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import org.xjtusicd3.database.helper.ITHelper;
+import org.xjtusicd3.database.helper.PayHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.ITPersistence;
+import org.xjtusicd3.database.model.PayPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.IdentificationNumber;
 import org.xjtusicd3.partner.filter.ValidateEmail;
+import org.xjtusicd3.partner.view.Personal2_indexList;
 
 public class UserService {
 	/*
@@ -92,4 +97,56 @@ public class UserService {
     /*
      * zyq_personal2_展示自己的主页
      */
+	public static void personal2_indexList(String useremail) {
+		List<Personal2_indexList> personal2_indexLists = new ArrayList<Personal2_indexList>();
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		//查找关注的对象
+		List<PayPersistence> payPersistences = PayHelper.payList(userPersistences.get(0).getUSERID());
+		if(payPersistences.size()!=0){
+			for(PayPersistence payPersistence:payPersistences){
+				List<UserPersistence> userPersistences2 = UserHelper.getEmail_id(payPersistence.getBEPAYUSERID());
+				for(UserPersistence userPersistence:userPersistences2){
+					Personal2_indexList personal2_indexList = new Personal2_indexList();
+					personal2_indexList.setUserId(userPersistences.get(0).getUSERID());
+					personal2_indexList.setUserName(userPersistences.get(0).getUSERNAME());
+					personal2_indexList.setUserImage(userPersistences.get(0).getAVATAR());
+					personal2_indexList.setFrom("关注了用户");
+					personal2_indexList.setTouserId(userPersistence.getUSERID());
+					personal2_indexList.setTouserName(userPersistence.getUSERNAME());
+					personal2_indexList.setTouserImage(userPersistence.getAVATAR());
+					personal2_indexList.setTouserSex(userPersistence.getGENDER());
+					personal2_indexList.setTouserAddress(userPersistence.getUSERADDRESS());
+					List<ITPersistence> itPersistences = ITHelper.IT(userPersistence.getUSERID());
+					personal2_indexList.setTouserJob(itPersistences.get(0).getGOODWORK());
+					personal2_indexList.setTime(payPersistence.getTIME());
+					personal2_indexLists.add(personal2_indexList);
+				}
+			}
+		}
+		//查找出关注的对象
+		List<PayPersistence> payPersistences1 = PayHelper.bepayList(userPersistences.get(0).getUSERID());
+		if (payPersistences1.size()!=0) {
+			for(PayPersistence payPersistence:payPersistences1){
+				Personal2_indexList personal2_indexList = new Personal2_indexList();
+				List<UserPersistence> userPersistences2 = UserHelper.getEmail_id(payPersistence.getPAYUSERID());
+				personal2_indexList.setUserId(userPersistences.get(0).getUSERID());
+				personal2_indexList.setUserName(userPersistences.get(0).getUSERNAME());
+				personal2_indexList.setUserImage(userPersistences.get(0).getAVATAR());
+			}
+		}
+	}
+	/*
+	 * zyq_personal2_关注
+	 */
+	public static void savePay(String userId, String touserId) {
+		PayPersistence payPersistence = new PayPersistence();
+		payPersistence.setPAYID(UUID.randomUUID().toString());
+		payPersistence.setPAYUSERID(userId);
+		payPersistence.setBEPAYUSERID(touserId);
+		Date date=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = format.format(date);
+        payPersistence.setTIME(time);
+        PayHelper.savePay(payPersistence);
+	}
 }

@@ -14,6 +14,15 @@ public class PayPersistence {
 	private String PAYUSERID;
 	@TableField(columnName="BEPAYUSERID")
 	private String BEPAYUSERID;
+	@TableField(columnName="TIME")
+	private String TIME;
+	
+	public String getTIME() {
+		return TIME;
+	}
+	public void setTIME(String tIME) {
+		TIME = tIME;
+	}
 	public String getPAYID() {
 		return PAYID;
 	}

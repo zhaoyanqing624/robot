@@ -25,4 +25,32 @@ public class PayHelper {
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_personal2_关注
+	 */
+	public static void savePay(PayPersistence payPersistence) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		mapper.save(payPersistence);
+		session.close();
+	}
+	/*
+	 * zyq_personal2_查看关注列表
+	 */
+	public static List<PayPersistence> getpayList(String userId,String touserId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		List<PayPersistence> list  = mapper.getpayList(userId,touserId);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_personal2_取消关注
+	 */
+	public static void deletePay(String userId, String touserId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		mapper.deletePay(userId,touserId);
+		session.close();
+	}
 }

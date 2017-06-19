@@ -105,12 +105,13 @@
         			<div class="user-pic" data-is-fans="" data-is-follows="">
             			<div class="user-pic-bg"></div><!--user-pic-big end-->
             			<img class="img" src="${picture.AVATAR}" alt="">
+            		<#if IsMy=="0">
                     <div class="friend mail js-already-follow  " id="yiguanzhu0" onmouseover="showGuanzhu();" onmouseout="hideGuanzhu();" style="display:none;" >
                          <a href="message.html" target="_blank"><i class="fa fa-envelope"></i></a>
 							<div class="u-info-tips u-info-alreadyfollow-tip" data-type="2" id="yiguanzhu" style="display:none" >    
     							<span class="title">已成功关注Ta</span>
     							<p class="content">关注后可及时了解Ta的动态，并可向Ta发送即时消息。</p>
-        						<a onclick="quguanzhu()" class="cancel-follow" data-uid="3940996">取消关注</a>    
+        						<a onclick="quguanzhu()" class="cancel-follow" >取消关注</a>    
 							</div>
                     </div>
                     <div class="friend group_add js-add-follow" id="weiguanzhu0" onmouseover="showAddGuanzhu();" onmouseout="hideAddGuanzhu();" style="display:block;" onclick="guanzhu()">
@@ -120,6 +121,7 @@
     							<p class="content">关注后可及时了解Ta的动态信息，并可向Ta发送即时消息</p>
 							</div>
                     </div>
+                    </#if>
 		        <ul>
 		        <li>
 		            <a onclick="c_index()" class="active" id="c_index">
@@ -457,5 +459,64 @@
     </div>
     	<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script type="text/javascript" src="js/my.js"></script>
+		<script>
+			function guanzhu(){
+				var touserId = document.URL.split("u=")[1];
+				var userId = '${uid}';
+				if(userId!=touserId){
+					$.ajax({
+						type:"POST",
+						url:"/org.xjtusicd3.partner/savePay.html",
+						data:{
+							"touserId":touserId
+						},
+						dataType:"json",
+						success:function(data){
+							if(data.value=="0"){
+								self.location='login.html';
+							}else if(data.value=="1"){
+								document.getElementById("weiguanzhu0").style.display="none";
+	    						document.getElementById("yiguanzhu0").style.display="block";
+							}
+						}
+					})
+				}
+			}
+			function quguanzhu(){
+				var touserId = document.URL.split("u=")[1];
+				var userId = '${uid}';
+				if(userId!=touserId){
+					$.ajax({
+						type:"POST",
+						url:"/org.xjtusicd3.partner/deletePay.html",
+						data:{
+							"touserId":touserId
+						},
+						dataType:"json",
+						success:function(data){
+							if(data.value=="0"){
+								self.location='login.html';
+							}else if(data.value=="1"){
+								document.getElementById("weiguanzhu0").style.display="block";
+	    						document.getElementById("yiguanzhu0").style.display="none";
+							}
+						}
+					})
+				}
+			}
+		</script>
+		<script>
+	    	$(document).ready(function(){
+	    		if('${IsMy}'=="0"){
+	    			if('${payList}'=="0"){
+	    				document.getElementById("weiguanzhu0").style.display="block";
+	    				document.getElementById("yiguanzhu0").style.display="none";
+	    			}else if('${payList}'=="1"){
+	    				document.getElementById("weiguanzhu0").style.display="none";
+	    				document.getElementById("yiguanzhu0").style.display="block";
+	    			}
+	    		}
+	    	})
+	    </script>
 </body>
 </html>

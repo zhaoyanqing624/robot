@@ -15,7 +15,7 @@ public class Main {
 			System.out.println(uuid.toString());
 		}
 		
-//    	Date date=new Date();
+//    	  Date date=new Date();
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        String time = format.format(date);
 //        System.out.println(time);
