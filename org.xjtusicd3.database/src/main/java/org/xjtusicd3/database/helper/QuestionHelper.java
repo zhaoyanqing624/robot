@@ -113,10 +113,42 @@ public class QuestionHelper {
 	/*
 	 * zpz_delete faq
 	 */
-			public static void deleteFAQ(String faqId){
-				SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-				QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-				mapper.deleteFAQquestion(faqId);  
-				session.close();
-			} 
+	public static void deleteFAQ(String faqId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		mapper.deleteFAQquestion(faqId);  
+		session.close();
+	}
+	/*
+	 * zyq_personal2_查看自己是否有FAQ
+	 */
+	public static List<QuestionPersistence> personal2_faq(String userId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.personal2_faq(userId);
+		session.close();
+		return list;
+	}
+	public static List<QuestionPersistence> personal2_faq_Limit(String userId,int startNumber,int number){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.personal2_faq_Limit(userId,startNumber,number);
+		session.close();
+		return list;
+	}
+	public static List<QuestionPersistence> personal2_faq_Limit_Time(String userId,int startNumber,int number,String time){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.personal2_faq_Limit_Time(userId,startNumber,number,time);
+		session.close();
+		return list;
+	}
+	//判断是创建知识还是修改知识
+	public static List<QuestionPersistence> personal2_Ismodify(String faqquestionid, String modifynumber) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.personal2_Ismodify(faqquestionid,modifynumber);
+		session.close();
+		return list;
+	}
 }

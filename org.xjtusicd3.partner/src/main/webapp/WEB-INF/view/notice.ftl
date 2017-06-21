@@ -29,7 +29,7 @@
 			for(var i in jsonresult){
 				//判断是否存在
 				if(!!document.getElementById(jsonresult[i].noticeId)){
-					
+				
 				}else{
 					var oDiv = document.createElement('div');
 					oDiv.id = jsonresult[i].noticeId;
@@ -189,7 +189,7 @@
 					<#elseif secondList.value=="知识库_有了新的回复@">
 						<p class="notice-type " style="color: #05c953;border: 1px solid #05c953;background: #a9fba8;">知识库</p>
 						<div class="notice-show-box">
-							<p class="notice-con ">你的回复：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<p class="notice-con ">你的回复：“<a class="notice-question" target="_blank" href="robot.html" onclick="updatenotice()">${secondList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${secondList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
 							<h5 class="notice-date">2017-06-08 14:15:36</h5>
 						</div>
 					<#elseif secondList.value=="问吧_有了新的评论">
@@ -240,7 +240,7 @@
 					<#elseif thirdList.value=="知识库_有了新的回复@">
 						<p class="notice-type  already-read" >知识库</p>
 						<div class="notice-show-box">
-							<p class="notice-con pass ">你的回复：“<a class="notice-question" target="_blank" href="" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
+							<p class="notice-con pass ">你的回复：“<a class="notice-question" target="_blank" href="faq3.html?p=${thirdList.parentId}&q=${thirdList.questionId}" onclick="updatenotice()">${thirdList.name?replace('<(.|\n)+?>','','r')}</a>”有新的回复“<a class="notice-answer" target="_blank" href="">${thirdList.notice?replace('<(.|\n)+?>','','r')}</a>”</p>
 							<h5 class="notice-date">2017-06-08 14:15:36</h5>
 						</div>
 					<#elseif thirdList.value=="问吧_有了新的评论">

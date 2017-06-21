@@ -88,4 +88,24 @@ public class CollectionHelper {
 		}
 		session.close();
 	}
+	/*
+	 * zyq_personal2_ajax_获取收藏FAQ
+	 */
+	public static List<CollectionPersistence> getCollectionFaq(String userid,int startNumber,int number) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
+		List<CollectionPersistence> list = mapper.getCollectionFaq(userid,startNumber,number);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_personal2_ajax_获取收藏根据Id
+	 */
+	public static List<CollectionPersistence> getCollectionFaqList(String faqId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
+		List<CollectionPersistence> list = mapper.getCollectionFaqList(faqId);
+		session.close();
+		return list;
+	}
 }

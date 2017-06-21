@@ -69,6 +69,8 @@ public class MessageController {
 			mv.addObject("uid", userid);
 			mv.addObject("secondList", notice_NoticeCommunityViews);
 			mv.addObject("thirdList", notice_NoticeCommunityViews2);
+			System.out.println(JsonUtil.toJsonString(notice_NoticeCommunityViews2));
+			System.out.println(JsonUtil.toJsonString(notice_NoticeCommunityViews));
 			return mv;
 		}
 	}

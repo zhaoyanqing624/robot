@@ -62,5 +62,18 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Update("UPDATE TBL_FAQquestion SET FAQKEYWORDS=#{1} WHERE FAQTITLE=#{0}")
 	public void updateFAQquestion(String faqTitle,String faqKeyWords);
+	/*
+	 * zyq_personal2_查看自己是否有FAQ
+	 */
+	@Select("SELECT * FROM TBL_FAQquestion,TBL_FAQanswer WHERE TBL_FAQquestion.FAQQUESTIONID=TBL_FAQanswer.FAQQUESTIONID AND TBL_FAQanswer.USERID=#{0}")
+	public List<QuestionPersistence> personal2_faq(String userId);
+	@Select("SELECT * FROM TBL_FAQquestion,TBL_FAQanswer WHERE TBL_FAQquestion.FAQQUESTIONID=TBL_FAQanswer.FAQQUESTIONID AND TBL_FAQanswer.USERID=#{0} ORDER BY TBL_FAQquestion.MODIFYTIME DESC LIMIT #{1},#{2}")
+	public List<QuestionPersistence> personal2_faq_Limit(String userId,int startNumber,int number);
+	@Select("SELECT * FROM TBL_FAQquestion,TBL_FAQanswer WHERE TBL_FAQquestion.FAQQUESTIONID=TBL_FAQanswer.FAQQUESTIONID AND TBL_FAQanswer.USERID=#{0} AND STR_TO_DATE(TBL_FAQquestion.MODIFYTIME,'%Y-%m-%d %H:%i')<STR_TO_DATE(#{3},'%Y-%m-%d %H:%i') ORDER BY TBL_FAQquestion.MODIFYTIME DESC LIMIT #{1},#{2}")
+	public List<QuestionPersistence> personal2_faq_Limit_Time(String userId,int startNumber,int number,String time);
+	//判断是创建知识还是修改知识
+	@Select("SELECT * FROM TBL_FAQquestion WHERE FAQQUESTIONID=#{0} AND MODIFYNUMBER=#{1}")
+	public List<QuestionPersistence> personal2_Ismodify(String faqquestionid, String modifynumber);
+	
 	
 }

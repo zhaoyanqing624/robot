@@ -59,4 +59,52 @@ public class ShareHelper {
 		mapper.deleteShare(shareid);
 		session.close();
 	}
+	/*
+	 * zyq_personal2_个人信息_查看关注人推荐的FAQ
+	 */
+	public static List<SharePersistence> getShareList_FAQ(String userId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		SharePersistenceMapper mapper = session.getMapper(SharePersistenceMapper.class);
+		List<SharePersistence> list = mapper.getShareList_FAQ(userId);
+		session.close();
+		return list;
+	}
+	public static List<SharePersistence> getShareList_FAQ_Limit(String userId,int startNumber,int number){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		SharePersistenceMapper mapper = session.getMapper(SharePersistenceMapper.class);
+		List<SharePersistence> list = mapper.getShareList_FAQ_Limit(userId,startNumber,number);
+		session.close();
+		return list;
+	}
+	public static List<SharePersistence> getShareList_FAQ_Limit_Time(String userId,int startNumber,int number,String time){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		SharePersistenceMapper mapper = session.getMapper(SharePersistenceMapper.class);
+		List<SharePersistence> list = mapper.getShareList_FAQ_Limit_Time(userId,startNumber,number,time);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_personal2_个人信息_查看关注人推荐的communityQuestion
+	 */
+	public static List<SharePersistence> getShareList_community(String userId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		SharePersistenceMapper mapper = session.getMapper(SharePersistenceMapper.class);
+		List<SharePersistence> list = mapper.getShareList_community(userId);
+		session.close();
+		return list;
+	}
+	public static List<SharePersistence> getShareList_community_Limit(String userId,int startNumber,int number){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		SharePersistenceMapper mapper = session.getMapper(SharePersistenceMapper.class);
+		List<SharePersistence> list = mapper.getShareList_community_Limit(userId,startNumber,number);
+		session.close();
+		return list;
+	}
+	public static List<SharePersistence> getShareList_community_Limit_Time(String userId,int startNumber,int number,String time){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		SharePersistenceMapper mapper = session.getMapper(SharePersistenceMapper.class);
+		List<SharePersistence> list = mapper.getShareList_community_Limit_Time(userId,startNumber,number,time);
+		session.close();
+		return list;
+	}
 }

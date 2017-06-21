@@ -18,6 +18,20 @@ public class PayHelper {
 		session.close();
 		return list;
 	}
+	public static List<PayPersistence> payList_Limit(String userid,int startNumber,int number){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		List<PayPersistence> list  = mapper.payList_Limit(userid,startNumber,number);
+		session.close();
+		return list;
+	}
+	public static List<PayPersistence> payList_Limit_Time(String userid,int startNumber,int number,String time){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		List<PayPersistence> list  = mapper.payList_Limit_Time(userid,startNumber,number,time);
+		session.close();
+		return list;
+	}
 	public static List<PayPersistence> bepayList(String beuserid){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
@@ -52,5 +66,29 @@ public class PayHelper {
 		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
 		mapper.deletePay(userId,touserId);
 		session.close();
+	}
+	/*
+	 * zyq_personal2_个人主页关注别人展示
+	 */
+	public static List<PayPersistence> payList_time(String userid, String time) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		List<PayPersistence> list = mapper.payList_time(userid,time);
+		session.close();
+		return list;
+	}
+	public static List<PayPersistence> payList_time_Limit(String userid, String time,int startNumber,int number) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		List<PayPersistence> list = mapper.payList_time_Limit(userid,time,startNumber,number);
+		session.close();
+		return list;
+	}
+	public static List<PayPersistence> payList_time_Limit_Time(String userid, String time,int startNumber,int number,String time2) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		PayPersistenceMapper mapper = session.getMapper(PayPersistenceMapper.class);
+		List<PayPersistence> list = mapper.payList_time_Limit_Time(userid,time,startNumber,number,time2);
+		session.close();
+		return list;
 	}
 }

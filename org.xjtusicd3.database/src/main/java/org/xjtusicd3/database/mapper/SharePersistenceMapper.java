@@ -33,4 +33,22 @@ public interface SharePersistenceMapper extends IBaseDao<SharePersistence, Strin
 	void saveShare(String shareId, String userId, String time, String faqquestionId);
 	@Insert("INSERT INTO TBL_Share(TBL_Share.SHAREID,TBL_Share.USERID,TBL_Share.TIME,TBL_Share.FAQQUESTIONID,TBL_Share.COMMUNITYQUESTIONID) VALUES (#{0},#{1},#{2},NULL,#{3})")
 	void saveShare2(String shareId, String userId, String time, String faqquestionId);
+	/*
+	 * zyq_personal2_个人信息_查看关注人推荐的FAQ
+	 */
+	@Select("SELECT * FROM TBL_Share WHERE USERID=#{0} AND COMMUNITYQUESTIONID IS NULL")
+	List<SharePersistence> getShareList_FAQ(String userId);
+	@Select("SELECT * FROM TBL_Share WHERE USERID=#{0} AND COMMUNITYQUESTIONID IS NULL ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<SharePersistence> getShareList_FAQ_Limit(String userId,int startNumber,int number);
+	@Select("SELECT * FROM TBL_Share WHERE USERID=#{0} AND COMMUNITYQUESTIONID IS NULL AND STR_TO_DATE(TIME,'%Y-%m-%d %H:%i')>STR_TO_DATE(#{3},'%Y-%m-%d %H:%i') ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<SharePersistence> getShareList_FAQ_Limit_Time(String userId,int startNumber,int number,String time);
+	/*
+	 * zyq_personal2_个人信息_查看关注人推荐的communityQuestion
+	 */
+	@Select("SELECT * FROM TBL_Share WHERE USERID=#{0} AND FAQQUESTIONID IS NULL")
+	List<SharePersistence> getShareList_community(String userId);
+	@Select("SELECT * FROM TBL_Share WHERE USERID=#{0} AND FAQQUESTIONID IS NULL ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<SharePersistence> getShareList_community_Limit(String userId,int startNumber,int number);
+	@Select("SELECT * FROM TBL_Share WHERE USERID=#{0} AND FAQQUESTIONID IS NULL AND STR_TO_DATE(TIME,'%Y-%m-%d %H:%i')>STR_TO_DATE(#{3},'%Y-%m-%d %H:%i') ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<SharePersistence> getShareList_community_Limit_Time(String userId,int startNumber,int number,String time);
 }

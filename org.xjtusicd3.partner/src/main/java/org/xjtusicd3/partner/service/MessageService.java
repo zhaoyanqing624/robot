@@ -178,8 +178,6 @@ public class MessageService {
 				}
 			}
 		}
-		String string = JsonUtil.toJsonString(message_MessageViews);
-		System.out.println(string);
 		return message_MessageViews;
 	}
 	/*
@@ -306,8 +304,5 @@ public class MessageService {
 		}else {
 			MessageHelper.updateMessageHistory(messageHistoryPersistences.get(0).getMESSAGEHISTORYID(),time);
 		}
-	}
-	public static void main(String[] args) {
-		message_getMessage_pushlet("fa2f2884-985d-44e0-89b8-0454d0feaeac");
 	}
 }

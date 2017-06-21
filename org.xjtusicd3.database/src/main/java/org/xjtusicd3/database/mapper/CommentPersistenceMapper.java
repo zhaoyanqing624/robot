@@ -118,4 +118,9 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	void deleteNotice(int i, String id);
 	@Update("UPDATE TBL_CommunityAnswer SET TBL_CommunityAnswer.ISNOTICE=#{0} WHERE COMMUNITYANSWERID=#{1}")
 	void deleteNotice2(int i, String id);
+	/*
+	 * zyq_personal2_查看评论的FAQ
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE USERID=#{0} AND COMMENTPARENTID=#{1} ORDER BY COMMENTTIME DESC LIMIT #{2},#{3}")
+	List<CommentPersistence> personal2_getFaqComment_Limit(String userId,String parentId,int startNumber,int number);
 }

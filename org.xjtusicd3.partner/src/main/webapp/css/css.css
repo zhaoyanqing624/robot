@@ -4023,7 +4023,8 @@ body {
 	font-size: 18px;
 	line-height: 24px;
 	text-align: center;
-	font-weight: 700
+	font-weight: 700;
+	cursor:pointer;
 }
 
 .user-head-info .study-info .item span {
@@ -4719,7 +4720,8 @@ body {
 	text-align: center;
 	font-size: 16px;
 	height: 95px;
-	line-height: 95px
+	line-height: 95px;
+	cursor:pointer
 }
 
 .pb24 {
@@ -4738,10 +4740,16 @@ body {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background: url(./static/image/gender.png) no-repeat;
+	background: url(../static/image/gender.png) no-repeat;
 	vertical-align: -3px
 }
-
+.sexSecret{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url(../static/image/secret.png) no-repeat;
+	vertical-align: -3px
+}
 .girl {
 	background-position: 0 -17px
 }
@@ -4953,9 +4961,9 @@ body {
 .page-home .item .content .body .content {
 	padding-top: 24px;
 	width: 100%;
-	float: right;
 	line-height: 30px;
-	color: #4C545C
+	color: #4C545C;
+	float:right;
 }
 
 .page-home .item .content .body .content .subtitle, .page-home .item .content .body .content .subtitle a
@@ -5072,12 +5080,12 @@ body {
 
 .page-home .item.newanswer .content .body {
 	padding: 25px;
-	height: 85px
+	height: 157px
 }
 
 .page-home .item.newanswer .content .body .content {
 	padding-top: 0;
-	width: 798px
+	width: 690px
 }
 
 .page-home .item.newanswer .content .body .content .detail {
@@ -5102,7 +5110,7 @@ body {
 
 .page-home .item.newuser .content .body {
 	padding: 25px;
-	height: 40px
+	height: 94px
 }
 
 .page-home .item.newuser .content .body .content {
@@ -5348,7 +5356,7 @@ body {
     background-color: #f8fafc;
     margin-left: 18px;
     margin-bottom: 15px;
-    min-height: 114px;
+    min-height: 162px;
 }
 .concern-list ul {
     margin-left: -18px;
@@ -5468,4 +5476,36 @@ body {
     line-height: 420px;
     font-size: 18px;
     color: #b5b9bc;
+}
+.ques-answer .answer-con {
+    margin-top: 20px;
+    position: relative;
+}
+.user {
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #14191e;
+}
+.answer-content {
+    color: #14191e;
+    line-height: 28px;
+    font-size: 14px;
+    margin-top: 2px;
+    word-break: break-all;
+}
+.about-info span {
+    font-size: 14px;
+    line-height: 20px;
+    color: #b5b9bc;
+    text-align: left;
+}
+.about-info a, .ques-answer .about-info span {
+    font-size: 14px;
+    line-height: 20px;
+    color: #b5b9bc;
+    text-align: left;
+}
+.duo{
+	border: 1px dashed #9a1f1f;
 }

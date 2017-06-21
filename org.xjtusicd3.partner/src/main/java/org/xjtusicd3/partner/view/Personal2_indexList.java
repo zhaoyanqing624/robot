@@ -18,7 +18,16 @@ public class Personal2_indexList {
 	private String title;
 	private String content;
 	private String from;
+	private String fromImage;
 	
+	
+	
+	public String getFromImage() {
+		return fromImage;
+	}
+	public void setFromImage(String fromImage) {
+		this.fromImage = fromImage;
+	}
 	public String getTouserImage() {
 		return touserImage;
 	}

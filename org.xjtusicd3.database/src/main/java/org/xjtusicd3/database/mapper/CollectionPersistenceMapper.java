@@ -34,5 +34,15 @@ public interface CollectionPersistenceMapper extends IBaseDao<CollectionPersiste
 	 */
 	@Delete("DELETE FROM TBL_Collection WHERE COLLECTIONID=#{0}")
 	void deleteCollection(String collectionid);
+	/*
+	 * zyq_personal2_ajax_获取收藏FAQ
+	 */
+	@Select("SELECT * FROM TBL_Collection WHERE USERID=#{0} AND COMMUNITYANSWERID IS NULL ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<CollectionPersistence> getCollectionFaq(String userid,int startNumber,int number);
+	/*
+	 * zyq_personal2_ajax_获取收藏根据Id
+	 */
+	@Select("SELECT * FROM TBL_Collection WHERE FAQQUESTIONID=#{0} AND COMMUNITYANSWERID IS NULL")
+	List<CollectionPersistence> getCollectionFaqList(String faqId);
 	
 }

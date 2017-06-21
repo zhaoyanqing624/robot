@@ -100,15 +100,15 @@
     		var commentNumber = ${commentNumber};
     		commentNumber = Math.ceil(commentNumber/5);
     		if(document.getElementById(parentId)==null){//页面没有此评论
-    			for(i=0;i<commentNumber;i++){
-    				var evt1 = document.createEvent("MouseEvents");
-				    evt1.initEvent("click", true, true);
-	    			document.getElementById("querymorelink").firstChild.dispatchEvent(evt1);
-	    			if(document.getElementById(parentId)!=null){
+    			for(var i1=0;i1<commentNumber;i1++){
+    				var evt4 = document.createEvent("MouseEvents");
+    				evt4.initEvent("click", true, true); 
+	    			document.getElementById("querymorelink").getElementsByTagName("a")[0].dispatchEvent(evt4);
+	    			if(document.getElementById(parentId)!=""){
 	    				break;
 	    			}
 	    		}
-		    	mScroll(parentId);
+	    		mScroll(parentId);
 		    	function mScroll(id){
 			    	$("html,body").stop(true);
 			    	$("html,body").animate({
@@ -663,8 +663,7 @@
 		}
 		//获取更多评论
 		function querymorecomment(){
-			html = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].innerHTML;
-			startnumber = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].getElementsByClassName("commentList").length;
+			startnumber = document.getElementsByClassName("comment")[0].getElementsByClassName("commentList").length;
 			var questionId = document.URL.split("q=")[1].split("#")[0];
 			$.ajax({
 				type:"POST",
@@ -678,7 +677,9 @@
 					if(data.value=="0"){
 						self.location='login.html';
 					}else if(data.value=="1"){
-						document.getElementById("querymorelink").remove();
+						if(document.getElementById("querymorelink")!=null){
+							document.getElementById("querymorelink").remove();
+						}
 						if(data.endnumber<data.totalnumber){
 							startnumber = data.endnumber;
 							for(var i in data.commentList){

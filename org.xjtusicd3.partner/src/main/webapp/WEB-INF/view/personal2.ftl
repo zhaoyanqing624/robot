@@ -25,7 +25,7 @@
                 <div class="header_top_wrap_left">
 		            <ul>
 		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
-		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
+		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1" >知识库</a></li>
 		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
 		                <li>
 		                    <a class="new_a" href="service.html">关于我们</a>
@@ -70,7 +70,7 @@
 		<div id="main">
 			<div class="bg-other user-head-info">
 				<#list personal2_list as list>
-    			<div class="user-info">
+    			<div class="user-info" id="${list.USERID}">
         			<h3 class="user-name clearfix">
             		<span>${list.USERNAME}</span>
         			</h3>
@@ -147,88 +147,65 @@
 			<div class="dyanmic-title-wrap">
 	    		<p class="dynamic-title">Ta的动态 </p>
 			</div>
-           <div class="item newanswer">
-                <a class="fl" href="/u/3940996" target="_blank">
-                   	<img src="http://img.mukewang.com/545864000001644402200220-40-40.jpg" class="userHead  js-usercard-dialog " width="40" height="40" data-userid="3940996">
+			<#assign n = indexList?size />
+			<#if n gt 5>
+			<#assign n =5 />
+			</#if>
+			<#if n!=0>
+			<#list 0..(n-1) as i>
+			<#assign ls = indexList[i] />
+			<#assign isNew = indexListIstrue[i] />
+			<#if ls.how=="在问吧提问"||ls.how=="推荐了问题">
+           	<div class="item newanswer">
+                <a class="fl" href="personal2.html?u=${ls.userId}" target="_blank">
+                   	<img src="${ls.userImage}" class="userHead  js-usercard-dialog " width="40" height="40">
                	</a>
                 <div class="content fr">    
                     <div class="head">
                         <div class="name"> 
-                            <a class=" js-usercard-dialog " href="/u/3940996" data-userid="3940996" target="_blank">黄智强</a>
+                            <a class=" js-usercard-dialog " href="personal2.html?u=${ls.userId}"  target="_blank">${ls.userName}</a>
                         </div>
-                        <div class="time">3小时前</div> 
-                        <div class="title">在问吧发布了问题</div>
+                        <div class="time">${ls.time?substring(0,16)}</div> 
+                        <div class="title">${ls.how}</div>
                     </div>
                     <div class="body pr">
-                        <a class="fl" href="/wenda/5" target="_blank">
-                        	<img src="http://img.mukewang.com/563affe40001680c00900090.jpg" width="40" height="40" title="Html/CSS">
+                    	<a class="fl" href="question.html?c=${ls.from}&type=all" target="_blank">
+                            <img src="${ls.fromImage}" width="150" height="110">
                         </a>
                         <div class="content">
                             <div class="tag">   
                             	<span>来自</span> 
-                                	<a href="/wenda/5" target="_blank">
-                                    	<span class="ml10">个人电脑</span> 
+                                	<a href="question.html?c=${ls.from}&type=all" target="_blank">
+                                    	<span class="ml10">${ls.from}</span> 
                                     </a>
                             </div>
                             <div class="subtitle">
-                            	<a href="/wenda/detail/343802" target="_blank"> 数组 + 号是什么意思 我一删掉就无法显示了。 </a>
+                            	<a href="question2.html?q=${ls.questionId}" target="_blank">${ls.content}</a>
                             </div> 
                         </div>
                     </div>
                	</div>
                 <div class="cb"></div>
             </div>
-
-			<div class="item newanswer">
-                <a class="fl" href="/u/3940996" target="_blank">
-                   	<img src="http://img.mukewang.com/545864000001644402200220-40-40.jpg" class="userHead  js-usercard-dialog " width="40" height="40" data-userid="3940996">
-               	</a>
-                <div class="content fr">    
-                    <div class="head">
-                        <div class="name"> 
-                            <a class=" js-usercard-dialog " href="/u/3940996" data-userid="3940996" target="_blank">黄智强</a>
-                        </div>
-                        <div class="time">3小时前</div> 
-                        <div class="title">在问吧回答了问题</div>
-                    </div>
-                    <div class="body pr">
-                        <a class="fl" href="/wenda/5" target="_blank">
-                        	<img src="http://img.mukewang.com/563affe40001680c00900090.jpg" width="40" height="40" title="Html/CSS">
-                        </a>
-                        <div class="content">
-                            <div class="tag">   
-                            	<span>来自</span> 
-                                	<a href="/wenda/5" target="_blank">
-                                    	<span class="ml10">个人电脑</span> 
-                                    </a>
-                            </div>
-                            <div class="subtitle">
-                            	<a href="/wenda/detail/343802" target="_blank"> 数组 + 号是什么意思 我一删掉就无法显示了。 </a>
-                            </div> 
-                        </div>
-                    </div>
-               	</div>
-                <div class="cb"></div>
-            </div>
-            
+			<#elseif ls.how=="创建了知识"||ls.how=="修改了知识"||ls.how=="推荐了知识">
             <div class="item newarticlescrap">
-                    <span class=" pa share js-share" data-shareid="share_12030172"></span>
-                    <a href="/u/10000" target="_blank">
-                    <img src="http://img.mukewang.com/57a322f00001e4ae02560256-40-40.jpg" class="userHead  js-usercard-dialog  " width="40" height="40" data-userid="10000">
-                    </a>
+                    <span class=" pa share js-share"></span>
+                    <a class="fl" href="personal2.html?u=${ls.userId}" target="_blank">
+                   		<img src="${ls.userImage}" class="userHead  js-usercard-dialog " width="40" height="40">
+               		</a>
                     <div class="content fr">   
                         <div class="head">
                             <div class="name"> 
-                                <a class=" js-usercard-dialog " href="/u/10000" data-userid="10000" target="_blank">朵女神</a>
+                                <a class=" js-usercard-dialog " href="personal2.html?u=${ls.userId}"  target="_blank">${ls.userName}</a>
                             </div>
-                            <div class="time">1天前</div> 
-                            <div class="title">创建了知识</div>
+                            <div class="time">${ls.time?substring(0,16)}</div> 
+                            <div class="title">${ls.how}</div>
                         </div>
-                        <a href="/article/16835" target="_blank">
+                        <a href="faq3.html?q=${ls.questionId}" target="_blank">
                             <div class="body pr">
                                  <div class="content">
-                                        <div class="subtitle">自信可改变未来，问谁又能做到</div> 
-                                        <div class="detail ">自信可改变未来，问谁又能做到 前言：应广大人民群众的要求，我决定写这一篇如何从一个屌丝逆袭的手记。至于为何换个马甲，是因为里面有些东西不想让别人知道是我发的。内容非常多，但是我都做了标题，不想看的可以选择性的看。我还是建议看一下的，为什么写这些呢，其实是想让你们了解一下，我也有不堪的过去，我也是一步一步走来的，我可以，你们也可以。 如果大家觉得对自己有帮助，可以点个赞，顺便分享...</div>
+                                        <div class="subtitle">${ls.title}</div> 
+                                        <div class="detail ">${ls.content}</div>
                                         <div class="cb"></div>
                                  </div>
                             </div>
@@ -236,11 +213,54 @@
                     </div>
                     <div class="cb"></div>
         	</div>
-</div>
-
-     <p class="js-noreload     dynamicLoad js-dynamicLoadwrap">
-          <span class="js-dynamicLoad  ">下拉显示更多</span>
+        	<#elseif ls.how=="关注了用户">
+        	<div class="item newuser">
+                    <a class="fl" href="personal2.html?u=${ls.userId}" target="_blank">
+                   		<img src="${ls.userImage}" class="userHead  js-usercard-dialog " width="40" height="40">
+               		</a>
+                    <div class="content fr">   
+                        <div class="head">
+                            <div class="name"> 
+                                <a class=" js-usercard-dialog " href="personal2.html?u=${ls.userId}" target="_blank">${ls.userName}</a>
+                            </div>
+                            <div class="time">${ls.time?substring(0,16)}</div> 
+                            <div class="title">${ls.how}</div>
+                        </div> 
+                        <div class="body pr">
+                            <a class="fl" href="personal2.html?u=${ls.touserId}" target="_blank">
+                                <img class=" js-usercard-dialog   mr10" src="${ls.touserImage}" width="40" height="40">
+                            </a>
+                            <div class="content">
+                                <div class="subtitle">
+                                    <a class=" js-usercard-dialog " href="personal2.html?u=${ls.touserId}"  target="_blank">${ls.touserName}</a>
+                                </div> 
+                                <div class="tag ">
+                                	 <#if ls.touserSex=="男">
+                                	 	<span class="gender mr10"></span>
+                                	 <#elseif ls.touserSex=="女">
+                                	 	<span class="gender girl mr10"></span>
+                                	 <#else>
+                                	 	<span class="sexSecret mr10"></span>
+                                	 </#if>	
+                                     <span class="mr10">${ls.touserAddress?split("0")[1]?split("1")[0]}</span> 
+                                     <span class="mr10">${ls.touserAddress?split("1")[1]?split("2")[0]}</span>
+                                     <span class="mr10">${ls.touserAddress?split("2")[1]?split("3")[0]}</span>
+                                     <span class="mr10">${ls.touserJob}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cb"></div>
+                </div>
+        	</#if>
+        	</#list>
+        </#if>
+	</div>
+	<#if indexListSize gt 5>
+     <p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreIndex">
+          <span class="js-dynamicLoad " onclick="getMoreIndex()">下拉显示更多</span>
      </p>
+    </#if>
 </div><!-- .container end -->
 
 
@@ -248,78 +268,18 @@
 					<div class="investment_f">
 			  			<div class="investment_title">
 			    			<div class="on">我的知识</div>
-			    			<div>我的收藏</div>
-						    <div>我的评论</div>
+			    			<div onclick="getCollectFaq()">我的收藏</div>
+						    <div onclick="getCommentFaq()">我的评论</div>
 					    </div>
 			  			<div class="investment_con">
-						    <div class="article-main">
-						    <p class="notattend">你还没有任何原创知识，快去<a href="/article/publish" class="red" target="_blank">发表知识</a>吧</p>
+						    <div class="article-main" id="zhao2_article-main">
 			    			</div>
 						    <div class="investment_con_list">
-						    	<div id="articleMain" class="article-main">
-									<div id="articlesList" class="articles-list">
-                 						<div class="list-item article-item ">
-            								<h3 class="item-title">
-	                							<a target="_blank" href="/article/16835" class="title-detail">自信可改变未来，问谁又能做到</a>
-	                                            <span class="original">原创</span>
-                            				</h3>
-								            <div class="">
-	               								 <p class="item-bd">自信可改变未来，问谁又能做到 前言：应广大人民群众的要求，我决定写这一篇如何从一个屌丝逆袭的手记。至于为何换个马甲，是因为里面有些东西不想让别人知道是我发的。内容非常多，但是我都做了标题，不想看的可以选择性的看。我还是建议看一下的，为什么写这些呢，其实是想让你们了解一下，我也有不堪的过去，我也是一步一步走来的，我可以，...</p>
-	            							</div>
-	            							<div class="item-btm clearfix">
-	                							<ul class="l left-info">
-	                                            	<li class="hd-pic">
-	                            						<a class="publisher-name" href="/u/1008447/articles" target="_blank">神秘路人甲</a>
-	                       							</li>
-	                                            </ul>
-               									<div class="r right-info">
-                    								<div class="favorite l">
-                       									 <i class="icon sns-thumb-up-outline"></i><em> 1606浏览</em>
-                    								</div>
-								                    <div class="favorite l">
-								                        <i class="icon sns-thumb-up-outline"></i><em> 116点赞</em>
-								                    </div>
-								                    <div class=" l">
-								                        <i class="icon sns-comment"></i><em> 40评论</em>
-								                    </div>
-               									 </div>
-                           					 </div>
-       									 </div>
-									</div>
+						    	<div  class="article-main" id="zhao2_article-main2">
 								</div>
 						    </div>
-						    
 				    		<div class="investment_con_list">
-						    	<div id="articleMain" class="article-main">
-									<div id="articlesList" class="articles-list">
-                 						<div class="list-item article-item ">
-            								<h3 class="item-title">
-	                							<a target="_blank" href="/article/16835" class="title-detail">自信可改变未来，问谁又能做到</a>
-	                                            <span class="original">原创</span>
-                            				</h3>
-								            <div class="">
-	               								 <p class="item-bd">自信可改变未来，问谁又能做到 前言：应广大人民群众的要求，我决定写这一篇如何从一个屌丝逆袭的手记。至于为何换个马甲，是因为里面有些东西不想让别人知道是我发的。内容非常多，但是我都做了标题，不想看的可以选择性的看。我还是建议看一下的，为什么写这些呢，其实是想让你们了解一下，我也有不堪的过去，我也是一步一步走来的，我可以，...</p>
-	            							</div>
-	            							<div class="item-btm clearfix">
-	                							<ul class="l left-info">
-	                                            	<li class="hd-pic">
-	                            						<a class="publisher-name" href="/u/1008447/articles" target="_blank">神秘路人甲</a>
-	                       							</li>
-	                                            </ul>
-               									<div class="r right-info">
-                    								<div class="favorite l">
-                       									 <i class="icon sns-thumb-up-outline"></i><em> 1606浏览</em>
-                    								</div>
-								                    <div class="favorite l">
-								                        <i class="icon sns-thumb-up-outline"></i><em> 116点赞</em>
-								                    </div>
-								                    <div class=" l">
-								                        <i class="icon sns-comment"></i><em> 40评论</em>
-								                    </div>
-               									 </div>
-                           					 </div>
-       									 </div>
-									</div>
+						    	<div class="article-main" id="zhao2_article-main3">
 								</div>
 						    </div>
 			  			</div>
@@ -334,7 +294,7 @@
 						    <div>我的关注</div>
 					    </div>
 			  			<div class="investment_con">
-						    <div class="article-main">
+						    <div class="article-main" id="zhao3_article-main">
 						    	<div class="ques-list">
                         			<div class="ques-answer">
             							<div class="tag-img">
@@ -353,9 +313,9 @@
         							</div><!-- .ques-answer end -->
     							</div>
 			    			</div>
-						    <div class="investment_con_list">
+						    <div class="investment_con_list" id="zhao3_article-main2">
 						    	<div class="ques-list">
-            						<div class="ques-answer">
+            						<div class="ques-answer" >
         								<div class="tag-img">
                                         	<a href="/wenda/3" target="_blank">
                     							<img src="http://img.mukewang.com/563afff200010a9f00900090.jpg" title="JAVA">
@@ -379,7 +339,7 @@
 								</div>
 						    </div>
 						    
-						    <div class="investment_con_list">
+						    <div class="investment_con_list" id="zhao3_article-main3">
 						    	<div class="ques-list">
                         			<div class="ques-answer">
             							<div class="tag-img">
@@ -406,43 +366,20 @@
 <div class="u-container" id="zhao4" style="display:none;">
 					<div class="investment_f">
 			  			<div class="investment_title" id="investment_title">
-			    			<div class="on">我的关注</div>
-			    			<div>我的粉丝</div>
+			    			<div class="on" onclick="guanzhubutton()">我的关注</div>
+			    			<div onclick="beiguanzhubutton()">我的粉丝</div>
 					    </div>
 			  			<div class="investment_con">
 						    <div class="article-main">
 						    	<div class="concern-list">
 									<ul>
-										<li class="box">
-				 							<div class="left-img">
-				 								<a href="/u/3806692" target="_blank"><img src="http://img.mukewang.com/57a991b80001a15406500634-100-100.jpg" class="top_head"></a>
-				 							</div>
-				 							<div class="right-c">
-				 								<div class="title">
-				 									<a href="/u/3806692" target="_blank"><span class="nickname">TerryG</span></a>
-				 										<ul class="icon-list">
-				 										 	<li class="u-icon imooc-teacher">
-				 											</li>
-				 										</ul>
-				 								</div>
-				 							<p class="desc" title="全栈工程师">全栈工程师</p>
-				 								<div class="fs-line">
-				 									<a  class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">0</em></span></a>
-						 							<a href="/u/3806692/fans" class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">103</em></span></a>					 				
-				 								</div>
-				 								<div class="btn-line" data-is_self="1" data-is-fans="0">
-													<a href="Javascript:" data-uid="3806692" class="btn-o btn-gray-o hide js-concern-mutual">互相关注</a>
-													<a href="Javascript:" data-uid="3806692" class="btn-o btn-gray-o  js-concern-already">已关注</a>
-													<a href="/u/3674640/messages?uid=3806692" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a>
-												</div>
-				 							</div>
-				 						</li>
 									</ul>
 								</div>
 			    			</div>
 						    <div class="investment_con_list">
-						    	<div class="ques-list">
-            						<div class="nodata">您还没有任何粉丝</div>
+						    	<div class="concern-list">
+						    		<ul>
+									</ul>
 								</div>
 						    </div>
 			  			</div>
@@ -503,6 +440,542 @@
 						}
 					})
 				}
+			}
+			function c_index(){
+				document.getElementById("c_index").className="active";
+				document.getElementById("c_know").className="";
+				document.getElementById("c_question").className="";
+				zhao1.style.display="block";
+				zhao2.style.display="none";
+				zhao3.style.display="none";
+				zhao4.style.display="none";
+			}
+			//展示知识库
+			function c_know(){
+				document.getElementById("c_index").className="";
+				document.getElementById("c_know").className="active";
+				document.getElementById("c_question").className="";
+				zhao2.style.display="block";
+				zhao1.style.display="none";
+				zhao3.style.display="none";
+				zhao4.style.display="none";
+				//获取我的知识
+				var userId = document.getElementsByClassName("user-info")[0].id;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getpersonalFaq.html",
+					data:{
+						"userId":userId
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.faqView==""){
+								document.getElementById("zhao2_article-main").innerHTML='<p class="notattend">你还没有任何原创知识，快去<a href="faq.html" class="red" target="_blank">发表知识</a>吧</p>';
+							}else{
+								if(document.getElementById("getMoreFaq1")!=null){
+									document.getElementById("getMoreFaq1").remove();
+								}
+								for(var i in data.faqView){
+									if(document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0]==null){
+										document.getElementById("zhao2").getElementsByClassName("article-main")[0].innerHTML='<div  class="article-main"><div  class="articles-list"></div></div>';
+									}
+									if(document.getElementById("myfaq"+data.faqView[i].faqId)==null){
+										var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
+										document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html + ' <div class="list-item article-item" id="myfaq'+data.faqView[i].faqId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao"> <p class="item-bd">'+data.faqView[i].content+'......</p> </div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[0].commentNumber+'评论</em> </div> </div> </div> </div> ';
+										var duo="";
+										for(var j=0;j<4;j++){
+											duo = duo + document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[i].getElementsByTagName("p")[j].outerHTML;
+										}
+										document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[i].innerHTML=duo;
+									}
+								}
+								if(data.faqView[0].isMore=="1"){
+									var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
+									document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreFaq1"> <span class="js-dynamicLoad " onclick="getMoreFaq1()">下拉显示更多</span> </p>';
+								}
+							}
+						}
+					}
+				})
+			}
+			function getMoreFaq1(){
+				var startnumber = document.getElementById("zhao2_article-main").getElementsByClassName("list-item article-item").length;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getMoreFaq1.html",
+					data:{
+						"startnumber":startnumber
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(document.getElementById("getMoreFaq1")!=null){
+								document.getElementById("getMoreFaq1").remove();
+							}
+							for(var i in data.faqView){
+								if(document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0]==null){
+									document.getElementById("zhao2").getElementsByClassName("article-main")[0].innerHTML='<div  class="article-main"><div  class="articles-list"></div></div>';
+								}
+								if(document.getElementById("myfaq"+data.faqView[i].faqId)==null){
+									var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
+									document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html + ' <div class="list-item article-item" id="myfaq'+data.faqView[i].faqId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao"> <p class="item-bd">'+data.faqView[i].content+'......</p> </div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[0].commentNumber+'评论</em> </div> </div> </div> </div> ';
+									var duo="";
+									var addnumber = eval(startnumber)+eval(i);
+									for(var j=0;j<4;j++){
+										duo = duo + document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[addnumber].getElementsByTagName("p")[j].outerHTML;
+									}
+									document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[addnumber].innerHTML=duo;
+								}
+							}
+							if(data.faqView[0].isMore=="1"){
+								var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
+								document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreFaq1"> <span class="js-dynamicLoad " onclick="getMoreFaq1()">下拉显示更多</span> </p>';
+							}
+						}
+					}
+				})
+			}
+			function c_question(){
+				document.getElementById("c_index").className="";
+				document.getElementById("c_know").className="";
+				document.getElementById("c_question").className="active";
+				zhao3.style.display="block";
+				zhao1.style.display="none";
+				zhao2.style.display="none";
+				zhao4.style.display="none";
+				var userId = document.getElementsByClassName("user-info")[0].id;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getpersonalCommunity.html",
+					data:{
+						"userId":userId
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.communityView==""){
+								document.getElementById("zhao3_article-main").innerHTML='<p class="notattend">你还没有任何原创知识，快去<a href="faq.html" class="red" target="_blank">发表知识</a>吧</p>';
+							}else{
+								if(document.getElementById("getMoreFaq1")!=null){
+									document.getElementById("getMoreFaq1").remove();
+								}
+								for(var i in data.faqView){
+									if(document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0]==null){
+										document.getElementById("zhao2").getElementsByClassName("article-main")[0].innerHTML='<div  class="article-main"><div  class="articles-list"></div></div>';
+									}
+									if(document.getElementById("myfaq"+data.faqView[i].faqId)==null){
+										var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
+										document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html + ' <div class="list-item article-item" id="myfaq'+data.faqView[i].faqId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao"> <p class="item-bd">'+data.faqView[i].content+'......</p> </div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[0].commentNumber+'评论</em> </div> </div> </div> </div> ';
+										var duo="";
+										for(var j=0;j<4;j++){
+											duo = duo + document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[i].getElementsByTagName("p")[j].outerHTML;
+										}
+										document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[i].innerHTML=duo;
+									}
+								}
+								if(data.faqView[0].isMore=="1"){
+									var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
+									document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreFaq1"> <span class="js-dynamicLoad " onclick="getMoreFaq1()">下拉显示更多</span> </p>';
+								}
+							}
+						}
+					}
+				})
+			}
+			function guanzhubutton(){
+				zhao1.style.display="none";
+				zhao2.style.display="none";
+				zhao3.style.display="none";
+				zhao4.style.display="block";
+				document.getElementById("investment_title").getElementsByTagName("div")[0].className="on";
+				document.getElementById("investment_title").getElementsByTagName("div")[1].className="";
+				document.getElementById("zhao4").getElementsByClassName("article-main")[0].style.display="block";
+				document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].style.display="none";
+				//获取关注
+				var userId = document.getElementsByClassName("user-info")[0].id;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getPay.html",
+					data:{
+						"userId":userId
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.payView==""){
+								document.getElementById("zhao4").getElementsByClassName("article-main")[0].innerHTML='<div class="ques-list"><div class="nodata">您还没有关注任何人</div></div>';
+							}else{
+								for(var i in data.payView){
+									if(document.getElementById("pay"+data.payView[i].userId)==null){
+										var html = document.getElementById("zhao4").getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML;
+										if(data.payView[i].work==null){
+											if(data.payView[i].isTogetherPay=="1"){
+												document.getElementById("zhao4").getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="pay'+data.payView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><img src="'+data.payView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><span class="nickname">'+data.payView[i].userName+'</span></a></div><p class="desc"></p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.payView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.payView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">互相关注</a><a href="message.html?u='+data.payView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}else{
+												document.getElementById("zhao4").getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="pay'+data.payView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><img src="'+data.payView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><span class="nickname">'+data.payView[i].userName+'</span></a></div><p class="desc"></p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.payView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.payView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">已关注</a><a href="message.html?u='+data.payView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}
+										}else{
+											if(data.payView[i].isTogetherPay=="1"){
+												document.getElementById("zhao4").getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="pay'+data.payView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><img src="'+data.payView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><span class="nickname">'+data.payView[i].userName+'</span></a><ul class="icon-list"><li class="u-icon imooc-teacher"></li></ul></div><p class="desc">'+data.payView[i].work+'</p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.payView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.payView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">互相关注</a><a href="message.html?u='+data.payView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}else{
+												document.getElementById("zhao4").getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="pay'+data.payView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><img src="'+data.payView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.payView[i].userId+'" target="_blank"><span class="nickname">'+data.payView[i].userName+'</span></a><ul class="icon-list"><li class="u-icon imooc-teacher"></li></ul></div><p class="desc">'+data.payView[i].work+'</p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.payView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.payView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">已关注</a><a href="message.html?u='+data.payView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				})
+			}
+			function beiguanzhubutton(){
+				zhao1.style.display="none";
+				zhao2.style.display="none";
+				zhao3.style.display="none";
+				zhao4.style.display="block";
+				document.getElementById("investment_title").getElementsByTagName("div")[0].className="";
+				document.getElementById("investment_title").getElementsByTagName("div")[1].className="on";
+				document.getElementById("zhao4").getElementsByClassName("article-main")[0].style.display="none";
+				document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].style.display="block";
+				//获取粉丝
+				var userId = document.getElementsByClassName("user-info")[0].id;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getbePay.html",
+					data:{
+						"userId":userId
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.bepayView==""){
+								document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].innerHTML='<div class="ques-list"><div class="nodata">您还没有任何粉丝关注</div></div>';
+							}else{
+								for(var i in data.bepayView){
+									if(document.getElementById("bepay"+data.bepayView[i].userId)==null){
+										var html = document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML;
+										if(data.bepayView[i].work==null){
+											if(data.bepayView[i].isTogetherPay=="1"){
+												document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="bepay'+data.bepayView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><img src="'+data.bepayView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><span class="nickname">'+data.bepayView[i].userName+'</span></a></div><p class="desc"></p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.bepayView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.bepayView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">互相关注</a><a href="message.html?u='+data.bepayView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}else{
+												document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="bepay'+data.bepayView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><img src="'+data.bepayView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><span class="nickname">'+data.bepayView[i].userName+'</span></a></div><p class="desc"></p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.bepayView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.bepayView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">已关注</a><a href="message.html?u='+data.bepayView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}
+										}else{
+											if(data.bepayView[i].isTogetherPay=="1"){
+												document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="bepay'+data.bepayView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><img src="'+data.bepayView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><span class="nickname">'+data.bepayView[i].userName+'</span></a><ul class="icon-list"><li class="u-icon imooc-teacher"></li></ul></div><p class="desc">'+data.bepayView[i].work+'</p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.bepayView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.bepayView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">互相关注</a><a href="message.html?u='+data.bepayView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}else{
+												document.getElementById("zhao4").getElementsByClassName("investment_con_list")[0].getElementsByClassName("concern-list")[0].getElementsByTagName("ul")[0].innerHTML = html + '<li class="box" id="bepay'+data.bepayView[i].userId+'"><div class="left-img"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><img src="'+data.bepayView[i].userImage+'" class="top_head"></a></div><div class="right-c"><div class="title"><a href="personal2.html?u='+data.bepayView[i].userId+'" target="_blank"><span class="nickname">'+data.bepayView[i].userName+'</span></a><ul class="icon-list"><li class="u-icon imooc-teacher"></li></ul></div><p class="desc">'+data.bepayView[i].work+'</p><div class="fs-line"><a class="u-target"><span class="group"><em>关注</em><em class="u-margin-l-5">'+data.bepayView[0].payNumber+'</em></span></a><a class="u-target u-margin-l-15"><span class="group"><em>粉丝</em><em class="u-margin-l-5">'+data.bepayView[i].bepayNumber+'</em></span></a></div><div class="btn-line" ><a href="Javascript:" class="btn-o btn-gray-o  js-concern-already">已关注</a><a href="message.html?u='+data.bepayView[i].userId+'" target="_blank" class="btn-o btn-gray-o  js-concern-msg">私信</a></div></div></li>';
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				})
+			}
+			function getMoreIndex(){
+				var userId = document.getElementsByClassName("user-info")[0].id;
+	    		var time1=document.getElementById("notices").getElementsByClassName("time")[0].innerHTML;
+	    		var time2=document.getElementById("notices").getElementsByClassName("time")[0].innerHTML;
+	    		var time3=document.getElementById("notices").getElementsByClassName("time")[0].innerHTML;
+	    		var time11=document.getElementById("notices").getElementsByClassName("time")[0].innerHTML;
+	    		var time22=document.getElementById("notices").getElementsByClassName("time")[0].innerHTML;
+	    		var time33=document.getElementById("notices").getElementsByClassName("time")[0].innerHTML;
+	    		//获取作者的关注
+	    		var size1 = document.getElementById("notices").getElementsByClassName("item newuser").length;
+	    		if(size1!=0){
+		    		for(var i=0;i<size1;i++){
+		    			var url = document.getElementById("notices").getElementsByClassName("item newuser")[i].getElementsByClassName("fl")[0].href;
+		    			var touserId = url.split("u=")[1];
+		    			if(userId==touserId){
+			    			var time1_1 = document.getElementById("notices").getElementsByClassName("item newuser")[i].getElementsByClassName("time")[0].innerHTML;
+							if((new Date(time1_1).getTime()) <(new Date(time1).getTime())){
+								time1 = time1_1;
+							}
+		    			}else{
+		    				var time11_11 = document.getElementById("notices").getElementsByClassName("item newuser")[i].getElementsByClassName("time")[0].innerHTML;
+		    				if((new Date(time11_11).getTime()) <(new Date(time11).getTime())){
+								time11 = time11_11;
+							}
+		    			}
+		    		}
+	    		}
+	    		//获取作者的faq
+	    		var size2 = document.getElementById("notices").getElementsByClassName("item newarticlescrap").length;
+	    		if(size2!=0){
+	    			for(var i=0;i<size2;i++){
+	    				var url = document.getElementById("notices").getElementsByClassName("item newarticlescrap")[i].getElementsByClassName("fl")[0].href;
+	    				var touserId = url.split("u=")[1];
+	    				if(userId==touserId){
+	    					var time2_2 = document.getElementById("notices").getElementsByClassName("item newarticlescrap")[i].getElementsByClassName("time")[0].innerHTML;
+	    					if((new Date(time2_2).getTime()) <(new Date(time2).getTime())){
+								time2 = time2_2;
+							}
+	    				}else{
+	    					var time22_22 = document.getElementById("notices").getElementsByClassName("item newuser")[i].getElementsByClassName("time")[0].innerHTML;
+		    				if((new Date(time22_22).getTime()) <(new Date(time22).getTime())){
+								time22 = time22_22;
+							}
+	    				}
+	    			}
+	    		}
+	    		//获取作者的community
+	    		var size3 = document.getElementById("notices").getElementsByClassName("item newanswer").length;
+	    		if(size3!=0){
+	    			var time3_3;
+	    			for(var i=0;i<size3;i++){
+	    				var url = document.getElementById("notices").getElementsByClassName("item newanswer")[i].getElementsByClassName("fl")[0].href;
+	    				var touserId = url.split("u=")[1];
+	    				if(userId==touserId){
+	    					var time3_3 = document.getElementById("notices").getElementsByClassName("item newanswer")[i].getElementsByClassName("time")[0].innerHTML;
+	    					if((new Date(time3_3).getTime()) <(new Date(time3).getTime())){
+								time3 = time3_3;
+							}
+	    				}else{
+	    					var time33_33 = document.getElementById("notices").getElementsByClassName("item newanswer")[i].getElementsByClassName("time")[0].innerHTML;
+	    					if((new Date(time33_33).getTime()) <(new Date(time33).getTime())){
+								time33 = time33_33;
+							}
+	    				}
+	    			}
+	    		}
+	    		
+		    	$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getMoreIndex.html",
+					data:{
+						"time1":time1,
+						"time2":time2,
+						"time3":time3,
+						"time11":time11,
+						"time22":time22,
+						"time33":time33
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else{
+							if(data.personalIndexSize>=5){
+								for(var i=0;i<5;i++){
+									if(data.personalIndex[i].how=="创建了知识"||data.personalIndex[i].how=="修改了知识"||data.personalIndex[i].how=="推荐了知识"){
+										document.getElementById("getMoreIndex").remove();
+										var html = document.getElementById("notices").innerHTML;
+										document.getElementById("notices").innerHTML = html + '<div class="item newarticlescrap"> <span class=" pa share js-share"></span> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'"  target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <a href="faq3.html?q='+data.personalIndex[i].questionId+'" target="_blank"> <div class="body pr"> <div class="content"> <div class="subtitle">'+data.personalIndex[i].title+'</div> <div class="detail ">'+data.personalIndex[i].content+'</div> <div class="cb"></div> </div> </div> </a> </div> <div class="cb"></div> </div>';
+										var htmls = document.getElementById("zhao1").innerHTML;
+										document.getElementById("zhao1").innerHTML = htmls + '<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreIndex"> <span class="js-dynamicLoad " onclick="getMoreIndex()">下拉显示更多</span> </p>';
+									}else if(data.personalIndex[i].how=="在问吧提问"||data.personalIndex[i].how=="推荐了问题"){
+										document.getElementById("getMoreIndex").remove();
+										var html = document.getElementById("notices").innerHTML;
+										document.getElementById("notices").innerHTML = html + '<div class="item newanswer"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'"  target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="question.html?c='+data.personalIndex[i].from+'&type=all" target="_blank"> <img src="'+data.personalIndex[i].fromImage+'" width="150" height="110"> </a><div class="content"> <div class="tag"> <span>来自</span> <a href="question.html?c='+data.personalIndex[i].from+'&type=all" target="_blank"> <span class="ml10">'+data.personalIndex[i].from+'</span> </a> </div> <div class="subtitle"> <a href="question2.html?q='+data.personalIndex[i].questionId+'" target="_blank">'+data.personalIndex[i].content+'</a> </div> </div> </div> </div> <div class="cb"></div> </div>';
+										var htmls = document.getElementById("zhao1").innerHTML;
+										document.getElementById("zhao1").innerHTML = htmls + '<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreIndex"> <span class="js-dynamicLoad " onclick="getMoreIndex()">下拉显示更多</span> </p>';
+									}else if(data.personalIndex[i].how=="关注了用户"){
+										document.getElementById("getMoreIndex").remove();
+										var html = document.getElementById("notices").innerHTML;
+										if(data.personalIndex[i].touserSex=="男"){
+											document.getElementById("notices").innerHTML = html + '<div class="item newuser"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].touserId+'" target="_blank"> <img class=" js-usercard-dialog   mr10" src="'+data.personalIndex[i].touserImage+'" width="40" height="40"> </a> <div class="content"> <div class="subtitle"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].touserId+'"  target="_blank">'+data.personalIndex[i].touserName+'</a> </div> <div class="tag "> <span class="gender mr10"></span>  <span class="mr10">'+data.personalIndex[i].touserAddress.split("0")[1].split("1")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("1")[1].split("2")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("2")[1].split("3")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserJob+'</span> </div> </div> </div> </div> <div class="cb"></div> </div>';
+										}else if(data.personalIndex[i].touserSex=="女"){
+											document.getElementById("notices").innerHTML = html + '<div class="item newuser"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].touserId+'" target="_blank"> <img class=" js-usercard-dialog   mr10" src="'+data.personalIndex[i].touserImage+'" width="40" height="40"> </a> <div class="content"> <div class="subtitle"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].touserId+'"  target="_blank">'+data.personalIndex[i].touserName+'</a> </div> <div class="tag "> <span class="gender girl mr10"></span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("0")[1].split("1")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("1")[1].split("2")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("2")[1].split("3")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserJob+'</span> </div> </div> </div> </div> <div class="cb"></div> </div>';
+										}else{
+											document.getElementById("notices").innerHTML = html + '<div class="item newuser"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].touserId+'" target="_blank"> <img class=" js-usercard-dialog   mr10" src="'+data.personalIndex[i].touserImage+'" width="40" height="40"> </a> <div class="content"> <div class="subtitle"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].touserId+'"  target="_blank">'+data.personalIndex[i].touserName+'</a> </div> <div class="tag "> <span class="sexSecret mr10"></span><span class="mr10">'+data.personalIndex[i].touserAddress.split("0")[1].split("1")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("1")[1].split("2")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("2")[1].split("3")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserJob+'</span> </div> </div> </div> </div> <div class="cb"></div> </div>';
+										}
+										var htmls = document.getElementById("zhao1").innerHTML;
+										document.getElementById("zhao1").innerHTML = htmls + '<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreIndex"> <span class="js-dynamicLoad " onclick="getMoreIndex()">下拉显示更多</span> </p>';
+									}
+								}
+							}else{
+								document.getElementById("getMoreIndex").remove();
+								for(var i in data.personalIndex){
+									if(data.personalIndex[i].how=="创建了知识"||data.personalIndex[i].how=="修改了知识"||data.personalIndex[i].how=="推荐了知识"){
+										var html = document.getElementById("notices").innerHTML;
+										document.getElementById("notices").innerHTML = html + '<div class="item newarticlescrap"> <span class=" pa share js-share"></span> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'"  target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <a href="faq3.html?q='+data.personalIndex[i].questionId+'" target="_blank"> <div class="body pr"> <div class="content"> <div class="subtitle">'+data.personalIndex[i].title+'</div> <div class="detail ">'+data.personalIndex[i].content+'</div> <div class="cb"></div> </div> </div> </a> </div> <div class="cb"></div> </div>';
+									}else if(data.personalIndex[i].how=="在问吧提问"||data.personalIndex[i].how=="推荐了问题"){
+										var html = document.getElementById("notices").innerHTML;
+										document.getElementById("notices").innerHTML = html + '<div class="item newanswer"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'"  target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="question.html?c='+data.personalIndex[i].from+'&type=all" target="_blank"> <img src="'+data.personalIndex[i].fromImage+'" width="150" height="110"> </a><div class="content"> <div class="tag"> <span>来自</span> <a href="question.html?c='+data.personalIndex[i].from+'&type=all" target="_blank"> <span class="ml10">'+data.personalIndex[i].from+'</span> </a> </div> <div class="subtitle"> <a href="question2.html?q='+data.personalIndex[i].questionId+'" target="_blank">'+data.personalIndex[i].content+'</a> </div> </div> </div> </div> <div class="cb"></div> </div>';
+									}else if(data.personalIndex[i].how=="关注了用户"){
+										var html = document.getElementById("notices").innerHTML;
+										if(data.personalIndex[i].touserSex=="男"){
+											document.getElementById("notices").innerHTML = html + '<div class="item newuser"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].touserId+'" target="_blank"> <img class=" js-usercard-dialog   mr10" src="'+data.personalIndex[i].touserImage+'" width="40" height="40"> </a> <div class="content"> <div class="subtitle"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].touserId+'"  target="_blank">'+data.personalIndex[i].touserName+'</a> </div> <div class="tag "> <span class="gender mr10"></span>  <span class="mr10">'+data.personalIndex[i].touserAddress.split("0")[1].split("1")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("1")[1].split("2")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("2")[1].split("3")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserJob+'</span> </div> </div> </div> </div> <div class="cb"></div> </div>';
+										}else if(data.personalIndex[i].touserSex=="女"){
+											document.getElementById("notices").innerHTML = html + '<div class="item newuser"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].touserId+'" target="_blank"> <img class=" js-usercard-dialog   mr10" src="'+data.personalIndex[i].touserImage+'" width="40" height="40"> </a> <div class="content"> <div class="subtitle"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].touserId+'"  target="_blank">'+data.personalIndex[i].touserName+'</a> </div> <div class="tag "> <span class="gender girl mr10"></span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("0")[1].split("1")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("1")[1].split("2")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("2")[1].split("3")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserJob+'</span> </div> </div> </div> </div> <div class="cb"></div> </div>';
+										}else{
+											document.getElementById("notices").innerHTML = html + '<div class="item newuser"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank"> <img src="'+data.personalIndex[i].userImage+'" class="userHead  js-usercard-dialog " width="40" height="40"> </a> <div class="content fr"> <div class="head"> <div class="name"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].userId+'" target="_blank">'+data.personalIndex[i].userName+'</a> </div> <div class="time">'+data.personalIndex[i].time.substring(0,16)+'</div> <div class="title">'+data.personalIndex[i].how+'</div> </div> <div class="body pr"> <a class="fl" href="personal2.html?u='+data.personalIndex[i].touserId+'" target="_blank"> <img class=" js-usercard-dialog   mr10" src="'+data.personalIndex[i].touserImage+'" width="40" height="40"> </a> <div class="content"> <div class="subtitle"> <a class=" js-usercard-dialog " href="personal2.html?u='+data.personalIndex[i].touserId+'"  target="_blank">'+data.personalIndex[i].touserName+'</a> </div> <div class="tag "> <span class="sexSecret mr10"></span><span class="mr10">'+data.personalIndex[i].touserAddress.split("0")[1].split("1")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("1")[1].split("2")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserAddress.split("2")[1].split("3")[0]+'</span> <span class="mr10">'+data.personalIndex[i].touserJob+'</span> </div> </div> </div> </div> <div class="cb"></div> </div>';
+										}
+									}
+								}
+							}
+						}
+					}
+				})
+			}
+			function getCollectFaq(){
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getCollectFaq.html",
+					data:{
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.faqView==""){
+								document.getElementById("zhao2_article-main2").innerHTML='<p class="notattend">你还没有收藏任何原创知识，快去<a href="faq.html" class="red" target="_blank">发表知识</a>吧</p>';
+							}else{
+								for(var i in data.faqView){
+									if(document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0]==null){
+										document.getElementById("zhao2_article-main2").innerHTML='<div  class="article-main"><div  class="articles-list"></div></div>';
+									}
+									if(document.getElementById("mycollec"+data.faqView[i].faqId)==null){
+										var html = document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML;
+										document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML=html + '<div class="list-item article-item" id="mycollec'+data.faqView[i].faqId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao">'+data.faqView[i].content+'</div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[i].commentNumber+'评论</em> </div> </div> </div> </div>';
+										var duo="";
+										for(var j=0;j<4;j++){
+											duo = duo + document.getElementById("zhao2_article-main2").getElementsByClassName("zhao")[i].getElementsByTagName("p")[j].outerHTML;
+										}
+										document.getElementById("zhao2_article-main2").getElementsByClassName("zhao")[i].innerHTML=duo;
+									}
+								}
+								if(document.getElementById("getMoreCollection")==null){
+									if(data.faqView[0].isMore=="1"){
+										var html = document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML;
+										document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreCollection"> <span class="js-dynamicLoad " onclick="getMoreCollectFaq()">点击显示更多</span> </p>';
+									}
+								}
+							}
+						}
+					}
+				})
+			}
+			function getMoreCollectFaq(){
+				var startnumber = document.getElementById("zhao2_article-main2").getElementsByClassName("list-item article-item").length;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getMoreCollectFaq.html",
+					data:{
+						"startnumber":startnumber
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(document.getElementById("getMoreCollection")!=null){
+								document.getElementById("getMoreCollection").remove();
+							}
+							var number = document.getElementById("zhao2_article-main2").getElementsByClassName("list-item article-item").length;
+							for(var i in data.faqView){
+								if(document.getElementById("mycollec"+data.faqView[i].faqId)==null){
+									var html = document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML;
+									document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML=html + '<div class="list-item article-item" id="mycollec'+data.faqView[i].faqId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao">'+data.faqView[i].content+'</div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[i].commentNumber+'评论</em> </div> </div> </div> </div>';
+									var duo="";
+									var addnumber = eval(number)+eval(i);
+									for(var j=0;j<4;j++){
+										duo = duo + document.getElementById("zhao2_article-main2").getElementsByClassName("zhao")[addnumber].getElementsByTagName("p")[j].outerHTML;
+									}
+									document.getElementById("zhao2_article-main2").getElementsByClassName("zhao")[addnumber].innerHTML=duo;
+								}
+							}
+							if(document.getElementById("getMoreCollection")==null){
+								if(data.faqView[0].isMore=="1"){
+									var html = document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML;
+									document.getElementById("zhao2_article-main2").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreCollection"> <span class="js-dynamicLoad " onclick="getMoreCollectFaq()">点击显示更多</span> </p>';
+								}
+							}
+						}
+					}
+				})
+			}
+			function getCommentFaq(){
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getCommentFaq.html",
+					data:{
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.faqView==""){
+								document.getElementById("zhao2_article-main3").innerHTML='<p class="notattend">你还没有评论任何知识，快去<a href="faq.html" class="red" target="_blank">知识首页查看</a>吧</p>';
+							}else{
+								for(var i in data.faqView){
+									if(document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0]==null){
+										document.getElementById("zhao2_article-main3").innerHTML='<div  class="article-main"><div  class="articles-list"></div></div>';
+									}
+									if(document.getElementById("mycomment"+data.faqView[i].replyId)==null){
+										var html = document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML;
+										document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML=html + '<div class="list-item article-item" id="mycomment'+data.faqView[i].replyId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao">'+data.faqView[i].content+'</div> <div class="duo"> <div class="answer-con"> <div class="user">我的回答</div><div class="answer-content"> <a href="faq3.html?p='+data.faqView[i].parentId+'&q='+data.faqView[i].faqId+'" target="_blank" style="color:#0683ff">'+data.faqView[i].reply+'</a> </div> </div> <div class="about-info"> <span class="time">'+data.faqView[i].replytime.substring(0,16)+'</span> <a href="faq3.html?p='+data.faqView[i].parentId+'&q='+data.faqView[i].faqId+'" target="_blank" class="reply-num">'+data.faqView[i].replyNumber+'个回复</a> </div></div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[i].commentNumber+'评论</em> </div> </div> </div> </div>';
+										var duo="";
+										for(var j=0;j<2;j++){
+											duo = duo + document.getElementById("zhao2_article-main3").getElementsByClassName("zhao")[i].getElementsByTagName("p")[j].outerHTML;
+										}
+										document.getElementById("zhao2_article-main3").getElementsByClassName("zhao")[i].innerHTML=duo+"........";
+									}
+								}
+								if(document.getElementById("getMoreCollection")==null){
+									if(data.faqView[0].isMore=="1"){
+										var html = document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML;
+										document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreComment"> <span class="js-dynamicLoad " onclick="getMoreCommentFaq()">点击显示更多</span> </p>';
+									}
+								}
+							}
+						}
+					}
+				})
+			}
+			function getMoreCommentFaq(){
+				var startnumber = document.getElementById("zhao2_article-main3").getElementsByClassName("list-item article-item").length;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getMoreCommentFaq.html",
+					data:{
+						"startnumber":startnumber
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(document.getElementById("getMoreComment")!=null){
+								document.getElementById("getMoreComment").remove();
+							}
+							var number = document.getElementById("zhao2_article-main3").getElementsByClassName("list-item article-item").length;
+							for(var i in data.faqView){
+								if(document.getElementById("mycomment"+data.faqView[i].faqId)==null){
+									var html = document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML;
+									document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML=html + '<div class="list-item article-item" id="mycomment'+data.faqView[i].replyId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao">'+data.faqView[i].content+'</div> <div class="duo"> <div class="answer-con"> <div class="user">我的回答</div><div class="answer-content"> <a href="faq3.html?p='+data.faqView[i].parentId+'&q='+data.faqView[i].faqId+'" target="_blank" style="color:#0683ff">'+data.faqView[i].reply+'</a> </div> </div> <div class="about-info"> <span class="time">'+data.faqView[i].replytime.substring(0,16)+'</span> <a href="faq3.html?p='+data.faqView[i].parentId+'&q='+data.faqView[i].faqId+'" target="_blank" class="reply-num">'+data.faqView[i].replyNumber+'个回复</a> </div></div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[i].commentNumber+'评论</em> </div> </div> </div> </div>';
+									var duo="";
+									var addnumber = eval(number)+eval(i);
+									for(var j=0;j<2;j++){
+										duo = duo + document.getElementById("zhao2_article-main3").getElementsByClassName("zhao")[addnumber].getElementsByTagName("p")[j].outerHTML;
+									}
+									document.getElementById("zhao2_article-main3").getElementsByClassName("zhao")[addnumber].innerHTML=duo;
+								}
+							}
+							if(document.getElementById("getMoreComment")==null){
+								if(data.faqView[0].isMore=="1"){
+									var html = document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML;
+									document.getElementById("zhao2_article-main3").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreComment"> <span class="js-dynamicLoad " onclick="getMoreCommentFaq()">点击显示更多</span> </p>';
+								}
+							}
+						}
+					}
+				})
 			}
 		</script>
 		<script>
