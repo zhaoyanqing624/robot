@@ -113,7 +113,7 @@ public class FaqService {
     	
 		AnswerPersistence answerPersistence = new AnswerPersistence();
 		
-		CommunityQuestionHelper.dele
+		 
 	}
 	
 	
