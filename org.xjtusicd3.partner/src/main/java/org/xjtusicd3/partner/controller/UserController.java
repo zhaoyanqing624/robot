@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -309,6 +311,9 @@ public class UserController {
 				list = UserHelper.getEmail_id(u);
 				mv.addObject("IsMy", "0");
 				List<PayPersistence> payPersistences = PayHelper.getpayList(userId,u);
+				List<Personal2_indexList> lists = UserService.personal2_indexList(useremail);
+				mv.addObject("indexList", lists);
+				mv.addObject("indexListSize", lists.size());
 				if (payPersistences.size()==0) {
 					mv.addObject("payList","0");
 				}else {
@@ -616,4 +621,113 @@ public class UserController {
 			return result;
 		}
 	}
+	/*
+	 * zyq_personal2_ajax_获取更多问吧的问题
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getMoreCommunity1"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getMoreCommunity1(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<Personal2_CommunityView> personal2_CommunityViews = UserService.getMoreCommunity(userPersistences.get(0).getUSERID(),startnumber);
+			jsonObject.put("communityView", personal2_CommunityViews);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_personal2_ajax_获取问吧的关注答案
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getPayCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getPayCommunity(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String userId = request.getParameter("userId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<Personal2_CommunityView> personal2_CommunityViews = UserService.getPayCommunity(userId);
+			jsonObject.put("communityView", personal2_CommunityViews);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_personal2_ajax_获取更多问吧的关注答案
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getMorePayCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getMorePayCommunity(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<Personal2_CommunityView> personal2_CommunityViews = UserService.getMorePayCommunity(userPersistences.get(0).getUSERID(),startnumber);
+			jsonObject.put("communityView", personal2_CommunityViews);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_personal2_ajax_获取问吧的回答
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getReplyCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getReplyCommunity(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		String userId = request.getParameter("userId");
+		JSONObject jsonObject = new JSONObject();
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<Personal2_CommunityView> personal2_CommunityViews = UserService.getReplyCommunity(userId);
+			jsonObject.put("communityView", personal2_CommunityViews);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+	/*
+	 * zyq_personal2_ajax_获取更多问吧的回答
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getMoreReplyCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getMoreReplyCommunity(HttpServletRequest request,HttpSession session){
+		String useremail = (String) session.getAttribute("UserEmail");
+		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		JSONObject jsonObject = new JSONObject();
+		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}else{
+			List<Personal2_CommunityView> personal2_CommunityViews = UserService.getMoreReplyCommunity(userPersistences.get(0).getUSERID(),startnumber);
+			jsonObject.put("communityView", personal2_CommunityViews);
+			jsonObject.put("value", "1");
+			String result = JsonUtil.toJsonString(jsonObject); 
+			return result;
+		}
+	}
+
 }

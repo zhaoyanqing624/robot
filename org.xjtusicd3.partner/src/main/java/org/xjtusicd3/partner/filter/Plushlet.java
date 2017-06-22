@@ -27,10 +27,10 @@ public class Plushlet{
 			Session[] sessions = SessionManager.getInstance().getSessions();
 			for(int i = 0;i<sessions.length;i++){
 				String userId = sessions[i].getEvent().getField("uid");
-				Event event = Event.createDataEvent("/mipc/he");
-				//判定论坛的的评论
 				List<Notice_NoticeCommunityView> Notice_NoticeCommunityView = NoticeService.notice_NoticeViews(userId,1);
 				if (Notice_NoticeCommunityView.size()!=0) {
+					Event event = Event.createDataEvent("/mipc/he");
+					//判定论坛的的评论
 					String result2 = JsonUtil.toJsonString(Notice_NoticeCommunityView);
 					try {
 						result2=java.net.URLEncoder.encode(result2, "UTF-8");
@@ -55,9 +55,9 @@ public class Plushlet{
 			Session[] sessions = SessionManager.getInstance().getSessions();
 			for(int i = 0;i<sessions.length;i++){
 				String userId = sessions[i].getEvent().getField("uid");
-				Event event = Event.createDataEvent("/mipc/she");
 				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage_pushlet(userId);
 				if (message_MessageViews.size()!=0) {
+					Event event = Event.createDataEvent("/mipc/she");
 					String result = JsonUtil.toJsonString(message_MessageViews);
 					String messageNumber=Integer.toString(message_MessageViews.size());
 					try {

@@ -8,6 +8,7 @@ public class Personal2_CommunityView {
 	private String questionId;
 	private String time;
 	private String answerNumber;
+	private String isMore;
 	
 	
 	private String isreply;
@@ -15,6 +16,14 @@ public class Personal2_CommunityView {
 	private String content;
 	private String replyNumber;
 	private String replyTime;
+	
+	
+	public String getIsMore() {
+		return isMore;
+	}
+	public void setIsMore(String isMore) {
+		this.isMore = isMore;
+	}
 	public String getClassifyId() {
 		return classifyId;
 	}

@@ -44,5 +44,10 @@ public interface CollectionPersistenceMapper extends IBaseDao<CollectionPersiste
 	 */
 	@Select("SELECT * FROM TBL_Collection WHERE FAQQUESTIONID=#{0} AND COMMUNITYANSWERID IS NULL")
 	List<CollectionPersistence> getCollectionFaqList(String faqId);
+	/*
+	 * zyq_personal2_ajax_获取问吧的关注答案
+	 */
+	@Select("SELECT * FROM TBL_Collection WHERE FAQQUESTIONID IS NULL AND USERID=#{0} ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<CollectionPersistence> personal2_PayCommunity_Limit(String userId, int startNumber, int number);
 	
 }

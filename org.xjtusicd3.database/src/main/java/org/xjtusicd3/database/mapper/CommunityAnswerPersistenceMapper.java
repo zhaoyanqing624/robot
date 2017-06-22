@@ -58,5 +58,10 @@ public interface CommunityAnswerPersistenceMapper extends IBaseDao<CommunityAnsw
 	 */
 	@Select("SELECT * FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0} AND ISNOTICE=#{1}")
 	List<CommunityAnswerPersistence> notice_CommunityAnswer(String communityquestionid, int isnotice);
+	/*
+	 * zyq_personal2_查看问题的回答
+	 */
+	@Select("SELECT * FROM TBL_CommunityAnswer WHERE USERID=#{0} ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<CommunityAnswerPersistence> personal2_ReplyCommunity(String userId,int startNumber,int number);
 	
 }

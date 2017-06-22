@@ -699,9 +699,6 @@ public class UserService {
 		return personal2_FaqViews;
 	}
 	
-	public static void main(String[] args) {
-		getCommentFaq("2555a73e-429d-4f64-9074-5e69738e7669");
-	}
 	/*
 	 * zyq_personal2_ajax_获取更多FAQ的评论
 	 */
@@ -759,9 +756,154 @@ public class UserService {
 			personal2_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
 			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
 			personal2_CommunityView.setAnswerNumber(Integer.toString(communityAnswerPersistences.size()));
+			if (communityQuestionPersistences.size()==5) {
+				personal2_CommunityView.setIsMore("1");
+			}else{
+				personal2_CommunityView.setIsMore("0");
+			}
 			personal2_CommunityViews.add(personal2_CommunityView);
 		}
 		return personal2_CommunityViews;
 	}
-
+	/*
+	 * zyq_personal2_ajax_获取更多问吧的问题
+	 */
+	public static List<Personal2_CommunityView> getMoreCommunity(String userid, int startnumber) {
+		List<Personal2_CommunityView> personal2_CommunityViews = new ArrayList<Personal2_CommunityView>();
+		List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.notice_CommunityQuestion_Limit(userid, startnumber, 5);
+		for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
+			Personal2_CommunityView personal2_CommunityView = new Personal2_CommunityView();
+			personal2_CommunityView.setQuestionId(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
+			personal2_CommunityView.setTime(communityQuestionPersistence.getTIME());
+			personal2_CommunityView.setTitle(communityQuestionPersistence.getTITLE());
+			personal2_CommunityView.setClassifyId(communityQuestionPersistence.getCLASSIFYID());
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+			personal2_CommunityView.setClassifyImage(classifyPersistences.get(0).getFAQCLASSIFYIMAGE());
+			personal2_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(communityQuestionPersistence.getCOMMUNITYQUESTIONID());
+			personal2_CommunityView.setAnswerNumber(Integer.toString(communityAnswerPersistences.size()));
+			if (communityQuestionPersistences.size()==5) {
+				personal2_CommunityView.setIsMore("1");
+			}else{
+				personal2_CommunityView.setIsMore("0");
+			}
+			personal2_CommunityViews.add(personal2_CommunityView);
+		}
+		return personal2_CommunityViews;
+	}
+	/*
+	 * zyq_personal2_ajax_获取问吧的关注答案
+	 */
+	public static List<Personal2_CommunityView> getPayCommunity(String userId) {
+		List<Personal2_CommunityView> personal2_CommunityViews = new ArrayList<Personal2_CommunityView>();
+		List<CollectionPersistence> collectionPersistences = CollectionHelper.personal2_PayCommunity_Limit(userId,0,5);
+		for(CollectionPersistence collectionPersistence:collectionPersistences){
+			Personal2_CommunityView personal2_CommunityView = new Personal2_CommunityView();
+			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswerId(collectionPersistence.getCOMMUNITYANSWERID());
+			personal2_CommunityView.setQuestionId(communityAnswerPersistences.get(0).getCOMMUNITYQUESTIONID());
+			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(communityAnswerPersistences.get(0).getCOMMUNITYQUESTIONID());
+			personal2_CommunityView.setTitle(communityQuestionPersistences.get(0).getTITLE());
+			personal2_CommunityView.setClassifyId(communityQuestionPersistences.get(0).getCLASSIFYID());
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
+			personal2_CommunityView.setClassifyImage(classifyPersistences.get(0).getFAQCLASSIFYIMAGE());
+			personal2_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			personal2_CommunityView.setContent(communityAnswerPersistences.get(0).getCONTENT());
+			List<CommentPersistence> commentPersistences = CommentHelper.faq3_getCommentReply(communityAnswerPersistences.get(0).getCOMMUNITYANSWERID());
+			personal2_CommunityView.setReplyTime(communityAnswerPersistences.get(0).getTIME());
+			personal2_CommunityView.setReplyNumber(Integer.toString(commentPersistences.size()));
+			if (collectionPersistences.size()==5) {
+				personal2_CommunityView.setIsMore("1");
+			}else{
+				personal2_CommunityView.setIsMore("0");
+			}
+			personal2_CommunityViews.add(personal2_CommunityView);
+		}
+		return personal2_CommunityViews;
+	}
+	public static List<Personal2_CommunityView> getMorePayCommunity(String userid, int startnumber) {
+		List<Personal2_CommunityView> personal2_CommunityViews = new ArrayList<Personal2_CommunityView>();
+		List<CollectionPersistence> collectionPersistences = CollectionHelper.personal2_PayCommunity_Limit(userid,startnumber,5);
+		for(CollectionPersistence collectionPersistence:collectionPersistences){
+			Personal2_CommunityView personal2_CommunityView = new Personal2_CommunityView();
+			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswerId(collectionPersistence.getCOMMUNITYANSWERID());
+			personal2_CommunityView.setQuestionId(communityAnswerPersistences.get(0).getCOMMUNITYQUESTIONID());
+			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(communityAnswerPersistences.get(0).getCOMMUNITYQUESTIONID());
+			personal2_CommunityView.setTitle(communityQuestionPersistences.get(0).getTITLE());
+			personal2_CommunityView.setClassifyId(communityQuestionPersistences.get(0).getCLASSIFYID());
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
+			personal2_CommunityView.setClassifyImage(classifyPersistences.get(0).getFAQCLASSIFYIMAGE());
+			personal2_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			personal2_CommunityView.setContent(communityAnswerPersistences.get(0).getCONTENT());
+			List<CommentPersistence> commentPersistences = CommentHelper.faq3_getCommentReply(communityAnswerPersistences.get(0).getCOMMUNITYANSWERID());
+			personal2_CommunityView.setReplyTime(communityAnswerPersistences.get(0).getTIME());
+			personal2_CommunityView.setReplyNumber(Integer.toString(commentPersistences.size()));
+			if (collectionPersistences.size()==5) {
+				personal2_CommunityView.setIsMore("1");
+			}else{
+				personal2_CommunityView.setIsMore("0");
+			}
+			personal2_CommunityViews.add(personal2_CommunityView);
+		}
+		return personal2_CommunityViews;
+	}
+	public static List<Personal2_CommunityView> getReplyCommunity(String userId) {
+		List<Personal2_CommunityView> personal2_CommunityViews = new ArrayList<Personal2_CommunityView>();
+		//查看评论
+		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.personal2_ReplyCommunity(userId,0,5);
+		for(CommunityAnswerPersistence communityAnswerPersistence:communityAnswerPersistences){
+			Personal2_CommunityView personal2_CommunityView = new Personal2_CommunityView();
+			personal2_CommunityView.setQuestionId(communityAnswerPersistence.getCOMMUNITYQUESTIONID());
+			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(communityAnswerPersistence.getCOMMUNITYQUESTIONID());
+			personal2_CommunityView.setTitle(communityQuestionPersistences.get(0).getTITLE());
+			personal2_CommunityView.setClassifyId(communityQuestionPersistences.get(0).getCLASSIFYID());
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
+			personal2_CommunityView.setClassifyImage(classifyPersistences.get(0).getFAQCLASSIFYIMAGE());
+			personal2_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			personal2_CommunityView.setContent(communityAnswerPersistence.getCONTENT());
+			List<CommentPersistence> commentPersistences = CommentHelper.faq3_getCommentReply(communityAnswerPersistence.getCOMMUNITYANSWERID());
+			personal2_CommunityView.setReplyTime(communityAnswerPersistence.getTIME());
+			personal2_CommunityView.setReplyNumber(Integer.toString(commentPersistences.size()));
+			if (communityAnswerPersistences.size()==5) {
+				personal2_CommunityView.setIsMore("1");
+			}else{
+				personal2_CommunityView.setIsMore("0");
+			}
+			personal2_CommunityView.setIsreply("0");
+			personal2_CommunityViews.add(personal2_CommunityView);
+		}
+		return personal2_CommunityViews;
+	}
+	public static void main(String[] args) {
+		getReplyCommunity("fa2f2884-985d-44e0-89b8-0454d0feaeac");
+	}
+	/*
+	 * zyq_personal2_ajax_获取更多问吧的回答
+	 */
+	public static List<Personal2_CommunityView> getMoreReplyCommunity(String userid,int startNumber) {
+		List<Personal2_CommunityView> personal2_CommunityViews = new ArrayList<Personal2_CommunityView>();
+		//查看评论
+		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.personal2_ReplyCommunity(userid,startNumber,5);
+		for(CommunityAnswerPersistence communityAnswerPersistence:communityAnswerPersistences){
+			Personal2_CommunityView personal2_CommunityView = new Personal2_CommunityView();
+			personal2_CommunityView.setQuestionId(communityAnswerPersistence.getCOMMUNITYQUESTIONID());
+			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(communityAnswerPersistence.getCOMMUNITYQUESTIONID());
+			personal2_CommunityView.setTitle(communityQuestionPersistences.get(0).getTITLE());
+			personal2_CommunityView.setClassifyId(communityQuestionPersistences.get(0).getCLASSIFYID());
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
+			personal2_CommunityView.setClassifyImage(classifyPersistences.get(0).getFAQCLASSIFYIMAGE());
+			personal2_CommunityView.setClassifyName(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			personal2_CommunityView.setContent(communityAnswerPersistence.getCONTENT());
+			List<CommentPersistence> commentPersistences = CommentHelper.faq3_getCommentReply(communityAnswerPersistence.getCOMMUNITYANSWERID());
+			personal2_CommunityView.setReplyTime(communityAnswerPersistence.getTIME());
+			personal2_CommunityView.setReplyNumber(Integer.toString(commentPersistences.size()));
+			if (communityAnswerPersistences.size()==5) {
+				personal2_CommunityView.setIsMore("1");
+			}else{
+				personal2_CommunityView.setIsMore("0");
+			}
+			personal2_CommunityView.setIsreply("0");
+			personal2_CommunityViews.add(personal2_CommunityView);
+		}
+		return personal2_CommunityViews;
+	}
 }

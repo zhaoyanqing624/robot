@@ -1,9 +1,9 @@
 package org.xjtusicd3.database.helper;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
@@ -13,7 +13,7 @@ import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
-
+import com.mysql.jdbc.log.LogFactory;
 public class CollectionHelper {
 	/*
 	 * zyq_question2_ajax_收藏
@@ -105,6 +105,16 @@ public class CollectionHelper {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
 		List<CollectionPersistence> list = mapper.getCollectionFaqList(faqId);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_personal2_ajax_获取问吧的关注答案
+	 */
+	public static List<CollectionPersistence> personal2_PayCommunity_Limit(String userId, int startNumber, int number) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
+		List<CollectionPersistence> list = mapper.personal2_PayCommunity_Limit(userId,startNumber,number);
 		session.close();
 		return list;
 	}

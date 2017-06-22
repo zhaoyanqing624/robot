@@ -129,15 +129,19 @@
 		            </a>
 		        </li>
 		        <li>
+		        	<#if IsMy=="1">
 		            <a onclick="c_know()" id="c_know">
 		            <i class="fa fa-lightbulb-o"></i><span>知识库</span><b class="fa fa-angle-right"></b>
 		            </a>
+		            </#if>
 		        </li>
 		        <li>
+		        	<#if IsMy=="1">
 		            <a onclick="c_question()" id="c_question">
 		            <i class="fa fa-question"></i><span>问&nbsp;&nbsp;&nbsp;&nbsp;吧</span><b class="fa fa-angle-right"></b>
 		            </a>
-		        </li>     
+		            </#if>
+		        </li>
 		        </ul>
 		</div><!-- .slider end -->
 		</#list>
@@ -290,75 +294,16 @@
 					<div class="investment_f">
 			  			<div class="investment_title">
 			    			<div class="on">我的提问</div>
-			    			<div>我的回答</div>
-						    <div>我的关注</div>
+			    			<div onclick="getPayCommunity()">我的关注</div>
+						    <div onclick="getReplyCommunity()">我的回答</div>
 					    </div>
 			  			<div class="investment_con">
 						    <div class="article-main" id="zhao3_article-main">
-						    	<div class="ques-list">
-                        			<div class="ques-answer">
-            							<div class="tag-img">
-                                             <a href="/wenda/3" target="_blank">
-                        						<img src="http://img.mukewang.com/563afff200010a9f00900090.jpg" alt="JAVA" title="JAVA">
-                    						</a>
-                                        </div><!--.tag-img end-->
-            							<div class="from-tag">来自<a href="/wenda/3" target="_blank">JAVA</a></div><!--.from-tag end-->
-            							<div class="ques-con">
-                							<a href="/wenda/detail/338293" class="ques-con-content" title="想学习框架，SSH好还是SSM好，新手" target="_blank">想学习框架，SSH好还是SSM好，新手</a>
-            							</div><!-- .ques-con end-->
-            							<div class="about-info">
-							                <span class="time">2016-12-10</span>
-							                <a href="/wenda/detail/338293" target="_blank" class="reply-num">4个回答</a>
-							            </div><!-- .about-info end -->
-        							</div><!-- .ques-answer end -->
-    							</div>
 			    			</div>
 						    <div class="investment_con_list" id="zhao3_article-main2">
-						    	<div class="ques-list">
-            						<div class="ques-answer" >
-        								<div class="tag-img">
-                                        	<a href="/wenda/3" target="_blank">
-                    							<img src="http://img.mukewang.com/563afff200010a9f00900090.jpg" title="JAVA">
-                							</a>
-                                        </div><!--.tag-img end-->
-        								<div class="from-tag">来自<a href="/wenda/3" target="_blank">JAVA</a></div><!--.from-tag end-->
-        								<div class="ques-con">
-            								<a href="/wenda/detail/338293" target="_blank" class="ques-con-content" title="想学习框架，SSH好还是SSM好，新手">想学习框架，SSH好还是SSM好，新手</a>
-        								</div><!-- .ques-con end-->
-								        <div class="answer-con" data-answer-id="2">
-								            <div class="user">我的回答</div>
-								            <div class="answer-content">
-								                <a href="/wenda/wdanswer/217416" target="_blank">不知道哪个适合初学者</a>
-								            </div>
-								        </div><!--.answer-con end-->
-								        <div class="about-info">
-								            <span class="time">2016-12-10</span>
-								            <a href="/wenda/wdanswer/217416" target="_blank" class="reply-num">1个回复</a>
-								        </div><!-- .about-info end -->
-								    </div><!-- .ques-answer end -->
-								</div>
 						    </div>
-						    
 						    <div class="investment_con_list" id="zhao3_article-main3">
-						    	<div class="ques-list">
-                        			<div class="ques-answer">
-            							<div class="tag-img">
-                                             <a href="/wenda/3" target="_blank">
-                        						<img src="http://img.mukewang.com/563afff200010a9f00900090.jpg" alt="JAVA" title="JAVA">
-                    						</a>
-                                        </div><!--.tag-img end-->
-            							<div class="from-tag">来自<a href="/wenda/3" target="_blank">JAVA</a></div><!--.from-tag end-->
-            							<div class="ques-con">
-                							<a href="/wenda/detail/338293" class="ques-con-content" title="想学习框架，SSH好还是SSM好，新手" target="_blank">想学习框架，SSH好还是SSM好，新手</a>
-            							</div><!-- .ques-con end-->
-            							<div class="about-info">
-							                <span class="time">2016-12-10</span>
-							                <a href="/wenda/detail/338293" target="_blank" class="reply-num">4个回答</a>
-							            </div><!-- .about-info end -->
-        							</div><!-- .ques-answer end -->
-    							</div>
 						    </div>
-				    		
 			  			</div>
 					</div>
 </div><!-- .container end -->
@@ -561,28 +506,167 @@
 							self.location='login.html';
 						}else if(data.value=="1"){
 							if(data.communityView==""){
-								document.getElementById("zhao3_article-main").innerHTML='<p class="notattend">你还没有任何原创知识，快去<a href="faq.html" class="red" target="_blank">发表知识</a>吧</p>';
+								document.getElementById("zhao3_article-main").innerHTML='<p class="notattend">你还没有任何提问记录，快去<a href="question.html?c=all&type=all" class="red" target="_blank">问题中心</a>吧</p>';
 							}else{
-								if(document.getElementById("getMoreFaq1")!=null){
-									document.getElementById("getMoreFaq1").remove();
+								if(document.getElementById("getMoreCommunity")!=null){
+									document.getElementById("getMoreCommunity").remove();
 								}
-								for(var i in data.faqView){
-									if(document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0]==null){
-										document.getElementById("zhao2").getElementsByClassName("article-main")[0].innerHTML='<div  class="article-main"><div  class="articles-list"></div></div>';
+								for(var i in data.communityView){
+									if(document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0]==null){
+										document.getElementById("zhao3_article-main").innerHTML='<div class="ques-list"></div>';
 									}
-									if(document.getElementById("myfaq"+data.faqView[i].faqId)==null){
-										var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
-										document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html + ' <div class="list-item article-item" id="myfaq'+data.faqView[i].faqId+'"> <h3 class="item-title"> <a target="_blank" href="faq3.html?q='+data.faqView[i].faqId+'" class="title-detail">'+data.faqView[i].title+'</a></h3> <div class="zhao"> <p class="item-bd">'+data.faqView[i].content+'......</p> </div> <div class="item-btm clearfix"> <ul class="l left-info"> <li class="hd-pic"> <a class="publisher-name" href="personal2.html?u='+data.faqView[i].userId+'" target="_blank">'+data.faqView[i].username+'</a> </li> </ul> <div class="r right-info"> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].scanNumber+'浏览</em> </div> <div class="favorite l"> <i class="icon sns-thumb-up-outline"></i><em> '+data.faqView[i].collectionNumber+'收藏</em> </div> <div class=" l"> <i class="icon sns-comment"></i><em> '+data.faqView[0].commentNumber+'评论</em> </div> </div> </div> </div> ';
-										var duo="";
-										for(var j=0;j<4;j++){
-											duo = duo + document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[i].getElementsByTagName("p")[j].outerHTML;
+									if(document.getElementById("myCommunity"+data.communityView[i].questionId)==null){
+										var html = document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML;
+										document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML=html + '<div class="ques-answer" id="myCommunity'+data.communityView[i].questionId+'"> <div class="tag-img"> <a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank"> <img src="'+data.communityView[i].classifyImage+'"> </a> </div> <div class="from-tag">来自<a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank">'+data.communityView[i].classifyName+'</a></div> <div class="ques-con"> <a href="question2.html?q='+data.communityView[i].questionId+'" class="ques-con-content"  target="_blank">'+data.communityView[i].title+'</a> </div> <div class="about-info"> <span class="time">'+data.communityView[i].time.substring(0,16)+'</span> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank" class="reply-num">'+data.communityView[i].answerNumber+'个回答</a> </div> </div> ';
+									}
+								}
+								if(data.communityView[0].isMore=="1"){
+									var html = document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML;
+									document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreCommunity"> <span class="js-dynamicLoad " onclick="getMoreCommunity()">点击显示更多</span> </p>';
+								}
+							}
+						}
+					}
+				})
+			}
+			function getMoreCommunity(){
+				var startnumber = document.getElementById("zhao3_article-main").getElementsByClassName("ques-answer").length;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getMoreCommunity1.html",
+					data:{
+						"startnumber":startnumber
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(document.getElementById("getMoreCommunity")!=null){
+								document.getElementById("getMoreCommunity").remove();
+							}
+							for(var i in data.communityView){
+								if(document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0]==null){
+									document.getElementById("zhao3_article-main").innerHTML='<div class="ques-list"></div>';
+								}
+								if(document.getElementById("myCommunity"+data.communityView[i].questionId)==null){
+									var html = document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML;
+									document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML=html + '<div class="ques-answer" id="myCommunity'+data.communityView[i].questionId+'"> <div class="tag-img"> <a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank"> <img src="'+data.communityView[i].classifyImage+'"> </a> </div> <div class="from-tag">来自<a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank">'+data.communityView[i].classifyName+'</a></div> <div class="ques-con"> <a href="question2.html?q='+data.communityView[i].questionId+'" class="ques-con-content"  target="_blank">'+data.communityView[i].title+'</a> </div> <div class="about-info"> <span class="time">'+data.communityView[i].time.substring(0,16)+'</span> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank" class="reply-num">'+data.communityView[i].answerNumber+'个回答</a> </div> </div> ';
+								}
+							}
+							if(data.communityView[0].isMore=="1"){
+								var html = document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML;
+								document.getElementById("zhao3_article-main").getElementsByClassName("ques-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreCommunity"> <span class="js-dynamicLoad " onclick="getMoreCommunity()">点击显示更多</span> </p>';
+							}
+						}
+					}
+				})
+			}
+			function getPayCommunity(){
+				var userId = document.getElementsByClassName("user-info")[0].id;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getPayCommunity.html",
+					data:{
+						"userId":userId
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.communityView==""){
+								document.getElementById("zhao3_article-main2").innerHTML='<p class="notattend">你还没有关注提问记录，快去<a href="question.html?c=all&type=all" class="red" target="_blank">问题中心</a>吧</p>';
+							}else{
+								if(document.getElementById("getMorePayCommunity")!=null){
+									document.getElementById("getMorePayCommunity").remove();
+								}
+								for(var i in data.communityView){
+									if(document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0]==null){
+										document.getElementById("zhao3_article-main2").innerHTML='<div class="ques-list"></div>';
+									}
+									if(document.getElementById("payCommunity"+data.communityView[i].questionId)==null){
+										var html = document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML;
+										document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML=html + '<div class="ques-answer" id="payCommunity'+data.communityView[i].questionId+'"> <div class="tag-img"> <a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank"> <img src="'+data.communityView[i].classifyImage+'"> </a> </div> <div class="from-tag">来自<a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank">'+data.communityView[i].classifyName+'</a></div> <div class="ques-con"> <a href="question2.html?q='+data.communityView[i].questionId+'" class="ques-con-content"  target="_blank">'+data.communityView[i].title+'</a> </div><div class="answer-con" > <div class="user">最佳答案</div> <div class="answer-content"> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank">'+data.communityView[i].content+'</a> </div> </div> <div class="about-info"> <span class="time">'+data.communityView[i].replyTime.substring(0,16)+'</span> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank" class="reply-num">'+data.communityView[i].replyNumber+'个回复</a> </div> </div> ';
+									}
+								}
+								if(data.communityView[0].isMore=="1"){
+									var html = document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML;
+									document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMorePayCommunity"> <span class="js-dynamicLoad " onclick="getMorePayCommunity()">点击显示更多</span> </p>';
+								}
+							}
+						}
+					}
+				})
+			}
+			function getMorePayCommunity(){
+				var startnumber = document.getElementById("zhao3_article-main2").getElementsByClassName("ques-answer").length;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getMorePayCommunity.html",
+					data:{
+						"startnumber":startnumber
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(document.getElementById("getMorePayCommunity")!=null){
+								document.getElementById("getMorePayCommunity").remove();
+							}
+							for(var i in data.communityView){
+								if(document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0]==null){
+									document.getElementById("zhao3_article-main2").innerHTML='<div class="ques-list"></div>';
+								}
+								if(document.getElementById("payCommunity"+data.communityView[i].questionId)==null){
+									var html = document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML;
+									document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML=html + '<div class="ques-answer" id="payCommunity'+data.communityView[i].questionId+'"> <div class="tag-img"> <a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank"> <img src="'+data.communityView[i].classifyImage+'"> </a> </div> <div class="from-tag">来自<a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank">'+data.communityView[i].classifyName+'</a></div> <div class="ques-con"> <a href="question2.html?q='+data.communityView[i].questionId+'" class="ques-con-content"  target="_blank">'+data.communityView[i].title+'</a> </div><div class="answer-con" > <div class="user">最佳答案</div> <div class="answer-content"> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank">'+data.communityView[i].content+'</a> </div> </div> <div class="about-info"> <span class="time">'+data.communityView[i].replyTime.substring(0,16)+'</span> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank" class="reply-num">'+data.communityView[i].replyNumber+'个回复</a> </div> </div> ';
+								}
+							}
+							if(data.communityView[0].isMore=="1"){
+								var html = document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML;
+								document.getElementById("zhao3_article-main2").getElementsByClassName("ques-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMorePayCommunity"> <span class="js-dynamicLoad " onclick="getMorePayCommunity()">点击显示更多</span> </p>';
+							}
+						}
+					}
+				})
+			}
+			function getReplyCommunity(){
+				var userId = document.getElementsByClassName("user-info")[0].id;
+				$.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/getReplyCommunity.html",
+					data:{
+						"userId":userId
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else if(data.value=="1"){
+							if(data.communityView==""){
+								document.getElementById("zhao3_article-main3").innerHTML='<p class="notattend">你还没有回复提问记录，快去<a href="question.html?c=all&type=all" class="red" target="_blank">问题中心</a>吧</p>';
+							}else{
+								if(document.getElementById("getMorePayCommunity")!=null){
+									document.getElementById("getMorePayCommunity").remove();
+								}
+								for(var i in data.communityView){
+									if(document.getElementById("zhao3_article-main3").getElementsByClassName("ques-list")[0]==null){
+										document.getElementById("zhao3_article-main3").innerHTML='<div class="ques-list"></div>';
+									}
+									if(document.getElementById("replyCommunity"+data.communityView[i].questionId)==null){
+										var html = document.getElementById("zhao3_article-main3").getElementsByClassName("ques-list")[0].innerHTML;
+										if(data.communityView[i].isreply=="0"){
+											document.getElementById("zhao3_article-main3").getElementsByClassName("ques-list")[0].innerHTML=html + '<div class="ques-answer" id="replyCommunity'+data.communityView[i].questionId+'"> <div class="tag-img"> <a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank"> <img src="'+data.communityView[i].classifyImage+'"> </a> </div> <div class="from-tag">来自<a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank">'+data.communityView[i].classifyName+'</a></div> <div class="ques-con"> <a href="question2.html?q='+data.communityView[i].questionId+'" class="ques-con-content"  target="_blank">'+data.communityView[i].title+'</a> </div><div class="answer-con" > <div class="user">我的评论</div> <div class="answer-content"> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank">'+data.communityView[i].content+'</a> </div> </div> <div class="about-info"> <span class="time">'+data.communityView[i].replyTime.substring(0,16)+'</span> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank" class="reply-num">'+data.communityView[i].replyNumber+'个回复</a> </div> </div> ';
+										}else{
+											document.getElementById("zhao3_article-main3").getElementsByClassName("ques-list")[0].innerHTML=html + '<div class="ques-answer" id="replyCommunity'+data.communityView[i].questionId+'"> <div class="tag-img"> <a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank"> <img src="'+data.communityView[i].classifyImage+'"> </a> </div> <div class="from-tag">来自<a href="question.html?c='+data.communityView[i].classifyName+'&type=all" target="_blank">'+data.communityView[i].classifyName+'</a></div> <div class="ques-con"> <a href="question2.html?q='+data.communityView[i].questionId+'" class="ques-con-content"  target="_blank">'+data.communityView[i].title+'</a> </div><div class="answer-con" > <div class="user">我的回复</div> <div class="answer-content"> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank">'+data.communityView[i].content+'</a> </div> </div> <div class="about-info"> <span class="time">'+data.communityView[i].replyTime.substring(0,16)+'</span> <a href="question2.html?q='+data.communityView[i].questionId+'" target="_blank" class="reply-num">'+data.communityView[i].replyNumber+'个回复</a> </div> </div> ';
 										}
-										document.getElementById("zhao2_article-main").getElementsByClassName("zhao")[i].innerHTML=duo;
 									}
 								}
-								if(data.faqView[0].isMore=="1"){
-									var html = document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML;
-									document.getElementById("zhao2_article-main").getElementsByClassName("articles-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getMoreFaq1"> <span class="js-dynamicLoad " onclick="getMoreFaq1()">下拉显示更多</span> </p>';
+								if(data.communityView[0].isMore=="1"){
+									var html = document.getElementById("zhao3_article-main3").getElementsByClassName("ques-list")[0].innerHTML;
+									document.getElementById("zhao3_article-main3").getElementsByClassName("ques-list")[0].innerHTML=html+'<p class="js-noreload dynamicLoad js-dynamicLoadwrap" id="getReplyCommunity"> <span class="js-dynamicLoad " onclick="getReplyCommunity()">点击显示更多</span> </p>';
 								}
 							}
 						}
@@ -989,7 +1073,15 @@
 	    				document.getElementById("yiguanzhu0").style.display="block";
 	    			}
 	    		}
+	    		if(document.URL.indexOf("u=")>0){
+	    			if(document.getElementById("duoduo").innerHTML==document.URL.split("u=")[1]){
+						window.location.href = document.URL.split("?u=")[0];		    			
+	    			}else{
+	    				document.URL = document.URL;
+	    			}
+	    		}
 	    	})
 	    </script>
+	    <div id="duoduo" style="display:none">${uid}</div>
 </body>
 </html>
