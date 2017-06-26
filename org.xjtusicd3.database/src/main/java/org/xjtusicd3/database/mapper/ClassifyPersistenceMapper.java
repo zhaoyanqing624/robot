@@ -20,6 +20,8 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	public List<ClassifyPersistence> FirstClassify_robot();
 	@Select("SELECT TBL_FAQclassify.FAQCLASSIFYID,TBL_FAQclassify.FAQCLASSIFYNAME,sum(TBL_FAQquestion.COLLECTION) as a FROM TBL_FAQclassify,TBL_FAQquestion WHERE TBL_FAQclassify.FAQCLASSIFYID=TBL_FAQquestion.FAQCLASSIFYID AND TBL_FAQclassify.FAQPARENTID=#{0} GROUP BY TBL_FAQquestion.FAQCLASSIFYID ORDER BY a DESC LIMIT 4")
 	public List<ClassifyPersistence> SecondClassify_robot(String ParentId);
+	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQPARENTID=#{0}")
+	public List<ClassifyPersistence> SecondClassify_total(String ParentId);
 
 	/*
 	 * zyq_faq、faq1_上侧的第二级分类
@@ -47,5 +49,4 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	 */
 	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQCLASSIFYNAME=#{0} AND FAQPARENTID=#{1}")
 	public List<ClassifyPersistence> question_ClassifyListByName(String ClassifyName,String type);
-	
 }

@@ -21,7 +21,11 @@ public class PageController {
  	   return mv;
     }
 
-	 
+	@RequestMapping(value="test",method=RequestMethod.GET)
+    public ModelAndView  test(){
+ 	   ModelAndView mv=new ModelAndView("test");
+ 	   return mv;
+    }
 	
 	
 	@RequestMapping(value="changeindex",method=RequestMethod.GET)

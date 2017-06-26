@@ -113,10 +113,10 @@ public class QuestionHelper {
 	/*
 	 * zpz_delete faq
 	 */
-			public static void deleteFAQ(String faqId){
-				SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-				QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-				mapper.deleteFAQquestion(faqId);  
-				session.close();
-			} 
+	public static void deleteFAQ(String faqId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		mapper.deleteFAQquestion(faqId);  
+		session.close();
+	}
 }

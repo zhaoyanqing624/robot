@@ -55,6 +55,9 @@
 
 <link rel="shortcut icon" href="media/image/favicon.ico" />
 
+<!-- echarts JS -->
+	<script src="media/js/echarts.js"></script>
+
 </head>
 
 <body class="gray-bg">
@@ -103,8 +106,8 @@
 						<div class="row row-sm text-center">
 							<div class="col-xs-6">
 								<div class="panel padder-v item">
-									<div class="h1 text-info font-thin h1">521</div>
-									<span class="text-muted text-xs">未处理事件</span>
+									<div class="h1 text-info font-thin h1">0</div>
+									<span class="text-muted text-xs">未处理问题</span>
 									<div class="top text-right w-full">
 										<i class="fa fa-caret-down text-warning m-r-sm"></i>
 									</div>
@@ -112,8 +115,8 @@
 							</div>
 							<div class="col-xs-6">
 								<div class="panel padder-v item bg-info">
-									<div class="h1 text-fff font-thin h1">521</div>
-									<span class="text-muted text-xs">已处理事件</span>
+									<div class="h1 text-fff font-thin h1">8</div>
+									<span class="text-muted text-xs">已处理问题</span>
 									<div class="top text-right w-full">
 										<i class="fa fa-caret-down text-warning m-r-sm"></i>
 									</div>
@@ -143,126 +146,34 @@
 						<div class="ibox float-e-margins">
 							<div class="ibox-title"
 								style="border-bottom: none; background: #fff;">
-								<h5>近一个月事件数呈现</h5>
+								 
 							</div>
 							<div class="ibox-content" style="border-top: none;">
-								<div id="flot-line-chart-moving" style="height: 217px;"></div>
+								<div id="lineChart" style="height: 217px;"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-9" style="padding-right: 0;">
-						<div class="ibox float-e-margins">
-							<div class="ibox-title"
-								style="border-bottom: none; background: #fff;">
-								<h5>配置变化</h5>
-							</div>
-							<div class="ibox-content" style="border-top: none;">
-								<div id="yesterday" style="height: 217px;"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3" style="padding-left: 0;">
-						<div class="ibox float-e-margins">
-							<div class="ibox-content"
-								style="border-top: none; background-color: #e4eaec;">
-								<h5>事件完成比</h5>
-								<div class="progress progress-striped active">
-									<div style="width: 75%" aria-valuemax="100" aria-valuemin="0"
-										aria-valuenow="75" role="progressbar" class="progress-bar">
-										<span class="sr-only"></span>
-									</div>
-								</div>
-								<h5>事件回访比</h5>
-								<div class="progress progress-striped active">
-									<div style="width: 75%" aria-valuemax="100" aria-valuemin="0"
-										aria-valuenow="75" role="progressbar"
-										class="progress-bar progress-bar-warning">
-										<span class="sr-only"></span>
-									</div>
-								</div>
-								<h5>不满意度</h5>
-								<div class="progress progress-striped active">
-									<div style="width: 75%" aria-valuemax="100" aria-valuemin="0"
-										aria-valuenow="75" role="progressbar"
-										class="progress-bar .progress-bar-danger">
-										<span class="sr-only"></span>
-									</div>
-								</div>
-								<h5>事件</h5>
-								<div class="progress progress-striped active">
-									<div style="width: 75%" aria-valuemax="100" aria-valuemin="0"
-										aria-valuenow="75" role="progressbar"
-										class="progress-bar progress-bar-info">
-										<span class="sr-only"></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				 
 
 			</div>
 			<div class="col-sm-2">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>任务列表</h5>
+						<h5>问题列表</h5>
 					</div>
 					<div class="ibox-content">
 						<ul class="todo-list m-t small-list ui-sortable">
 							<li><a href="widgets.html#" class="check-link"><i
 									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
+								class="m-l-xs todo-completed">12312312312</span></li>
 							<li><a href="widgets.html#" class="check-link"><i
 									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
+								class="m-l-xs  todo-completed">测试222222222222</span></li>
 							<li><a href="widgets.html#" class="check-link"><i
 									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-
-
+								class="m-l-xs todo-completed">测试11111111111</span></li>
+							 
 						</ul>
 					</div>
 				</div>
@@ -380,8 +291,6 @@
 
 																				<th>提问时间</th>
 
-																				 
-
 																				<th>操作</th>
 
 																				<th>查看详情</th>
@@ -391,7 +300,7 @@
 																		</thead>
 
 																		<tbody>
-																			<#list cqlist as cqlist>
+																			<#list cqlist1 as cqlist>
 																			<tr class="" id = "${cqlist.problemId}">
 
 																				<td>${cqlist.problemTitle}</td>
@@ -668,6 +577,136 @@
 
 	}
 </script>
+
+
+	<script type="text/javascript">
+		 
+	        var myChart = echarts.init(document.getElementById('pieChart'));
+			
+			var option = {
+				backgroundColor : '#2c343c',
+
+				title : {
+					text : '各FAQ占比',
+					left : 'center',
+					top : 20,
+					textStyle : {
+						color : '#ccc'
+					}
+				},
+
+				tooltip : {
+					trigger : 'item',
+					formatter : "{a} <br/>{b} : {c} ({d}%)"
+				},
+
+				visualMap : {
+					show : false,
+					min : 80,
+					max : 600,
+					inRange : {
+						colorLightness : [ 0, 1 ]
+					}
+				},
+				series : [ {
+					name : '访问来源',
+					type : 'pie',
+					radius : '55%',
+					center : [ '50%', '50%' ],
+					data : ${result}.sort(function(a, b) {
+						return a.value - b.value;
+					}),
+					roseType : 'radius',
+					label : {
+						normal : {
+							textStyle : {
+								color : 'rgba(255, 255, 255, 0.3)'
+							}
+						}
+					},
+					labelLine : {
+						normal : {
+							lineStyle : {
+								color : 'rgba(255, 255, 255, 0.3)'
+							},
+							smooth : 0.2,
+							length : 10,
+							length2 : 20
+						}
+					},
+					itemStyle : {
+						normal : {
+							color : '#c23531',
+							shadowBlur : 200,
+							shadowColor : 'rgba(0, 0, 0, 0.5)'
+						}
+					},
+
+					animationType : 'scale',
+					animationEasing : 'elasticOut',
+					animationDelay : function(idx) {
+						return Math.random() * 200;
+					}
+				} ]
+			};
+		 
+			myChart.setOption(option);
+	</script>
+
+
+	<script type="text/javascript">
+		 
+	        var myChart = echarts.init(document.getElementById('lineChart'));
+			
+			var option = {
+				    title: {
+				        text: '近七日问题数'
+				    },
+				    tooltip: {
+				        trigger: 'axis'
+				    },
+				    legend: {
+				        data:['未处理问题','已处理问题']
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    toolbox: {
+				        feature: {
+				            saveAsImage: {}
+				        }
+				    },
+				    xAxis: {
+				        type: 'category',
+				        boundaryGap: false,
+				        data: ['6.20','6.21','6.22','6.23','6.24','6.25','昨日']
+				    },
+				    yAxis: {
+				        type: 'value'
+				    },
+				    series: [
+				        {
+				            name:'未处理问题',
+				            type:'line',
+				            stack: '总量',
+				            data:[0, 0, 0, 0,0,  0, 0]
+				        },
+				        {
+				            name:'已处理问题',
+				            type:'line',
+				            stack: '总量',
+				            data:[0,0, 1, 0, 1, 4,2]
+				        }, 
+				    ]
+				};
+
+		 
+			myChart.setOption(option);
+	</script>
+
 
 </body>
 

@@ -107,4 +107,14 @@ public class ClassifyHelper {
 		session.close();
 		return list;
 	}
+	/*
+	 * zpz_查看分类的第二子类
+	 */
+	public static List<ClassifyPersistence> SecondClassify_total(String parentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.SecondClassify_total(parentId);
+		session.close();
+		return list;
+	}
 }

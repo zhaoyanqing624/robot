@@ -55,9 +55,6 @@ public class FaqService {
 		System.out.println(result);
 		return result;
 	}
-	public static void main(String[] args) {
-		tsettset();
-	}
 	/*
 	 * zpz_knowledgeindex_FAQ的展示
 	 */
@@ -112,9 +109,34 @@ public class FaqService {
     	QuestionHelper.save(questionPersistence);
     	
 		AnswerPersistence answerPersistence = new AnswerPersistence();
-		
-		 
 	}
 	
+	/*
+	 * zpz_konwStatisticsView
+	 */
+	public static String konwStatisticsView(){
+		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
+		JSONArray jsonArray = new JSONArray();
+		for(ClassifyPersistence classifyPersistence:classifyPersistences){
+			List<ClassifyPersistence> classifyPersistences2 = ClassifyHelper.SecondClassify_total(classifyPersistence.getFAQCLASSIFYID());
+			int a = 0;
+			for(ClassifyPersistence classifyPersistence2:classifyPersistences2){
+				int number = QuestionHelper.pageTotal(classifyPersistence2.getFAQCLASSIFYID());
+				a = a + number;
+			}
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("value", a);
+			jsonObject.put("name",classifyPersistence.getFAQCLASSIFYNAME());
+			jsonArray.add(jsonObject);
+		}
+		String result = JsonUtil.toJsonString(jsonArray);
+		System.out.println(result);
+		return result;
+	}
+	
+	public static void main(String[] args)
+	{
+		konwStatisticsView();
+	}
 	
 }

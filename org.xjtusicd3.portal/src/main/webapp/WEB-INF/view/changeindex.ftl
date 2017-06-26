@@ -55,6 +55,9 @@
 
 <link rel="shortcut icon" href="media/image/favicon.ico" />
 
+<!-- echarts JS -->
+	<script src="media/js/echarts.js"></script>
+
 </head>
 
 <body class="gray-bg">
@@ -205,69 +208,7 @@
 				</div>
 
 			</div>
-			<div class="col-sm-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>任务列表</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="todo-list m-t small-list ui-sortable">
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs todo-completed">机房失火</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-check-square"></i> </a> <span
-								class="m-l-xs  todo-completed">软件更新</span></li>
-							<li><a href="widgets.html#" class="check-link"><i
-									class="fa fa-square-o"></i> </a> <span class="m-l-xs">电脑黑屏</span> <small
-								class="label label-primary"><i class="fa fa-clock-o"></i>
-									1小时</small></li>
-
-
-						</ul>
-					</div>
-				</div>
-			</div>
+			 
 		</div>
 	</div>
 	<!-- 全局js -->
@@ -643,6 +584,81 @@
 			}
 
 		}
+	</script>
+
+
+	<script type="text/javascript">
+		 
+	        var myChart = echarts.init(document.getElementById('pieChart'));
+			
+			var option = {
+				backgroundColor : '#2c343c',
+
+				title : {
+					text : '各FAQ占比',
+					left : 'center',
+					top : 20,
+					textStyle : {
+						color : '#ccc'
+					}
+				},
+
+				tooltip : {
+					trigger : 'item',
+					formatter : "{a} <br/>{b} : {c} ({d}%)"
+				},
+
+				visualMap : {
+					show : false,
+					min : 80,
+					max : 600,
+					inRange : {
+						colorLightness : [ 0, 1 ]
+					}
+				},
+				series : [ {
+					name : '访问来源',
+					type : 'pie',
+					radius : '55%',
+					center : [ '50%', '50%' ],
+					data : ${result}.sort(function(a, b) {
+						return a.value - b.value;
+					}),
+					roseType : 'radius',
+					label : {
+						normal : {
+							textStyle : {
+								color : 'rgba(255, 255, 255, 0.3)'
+							}
+						}
+					},
+					labelLine : {
+						normal : {
+							lineStyle : {
+								color : 'rgba(255, 255, 255, 0.3)'
+							},
+							smooth : 0.2,
+							length : 10,
+							length2 : 20
+						}
+					},
+					itemStyle : {
+						normal : {
+							color : '#c23531',
+							shadowBlur : 200,
+							shadowColor : 'rgba(0, 0, 0, 0.5)'
+						}
+					},
+
+					animationType : 'scale',
+					animationEasing : 'elasticOut',
+					animationDelay : function(idx) {
+						return Math.random() * 200;
+					}
+				} ]
+			};
+		 
+			myChart.setOption(option);
 	</script>
 
 

@@ -33,7 +33,9 @@ public class FaqController {
     public ModelAndView  knowledge(){
  	   ModelAndView mv=new ModelAndView("knowledgeindex");
  	   List<KnowledgeindexView> knowledgeindexViews = FaqService.knowledgeindexViews();
+ 	   String result = FaqService.konwStatisticsView();
  	   mv.addObject("faqList", knowledgeindexViews);
+ 	   mv.addObject("result", result);
  	   return mv;
     }
 

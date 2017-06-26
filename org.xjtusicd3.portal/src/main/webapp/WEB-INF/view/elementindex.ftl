@@ -17,6 +17,9 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
+	<!-- echarts JS -->
+	<script src="media/js/echarts.js"></script>
+
 </head>
 
 <body class="gray-bg">
@@ -30,6 +33,9 @@
                             <div class="panel padder-v item">
                                 <div class="h1 text-info font-thin h1">521</div>
                                 <span class="text-muted text-xs">未处理事件</span>
+                                
+                                
+                                
                                 <div class="top text-right w-full">
                                     <i class="fa fa-caret-down text-warning m-r-sm"></i>
                                 </div>
@@ -1318,6 +1324,90 @@
             doPlot($(this).text());
         });
     });
+</script>
+<script type="text/javascript">
+	$(function()
+		{
+			var container = $("echarts-pie");
+			var 
+			
+			option = {
+				    backgroundColor: '#2c343c',
+
+				    title: {
+				        text: 'Customized Pie',
+				        left: 'center',
+				        top: 20,
+				        textStyle: {
+				            color: '#ccc'
+				        }
+				    },
+
+				    tooltip : {
+				        trigger: 'item',
+				        formatter: "{a} <br/>{b} : {c} ({d}%)"
+				    },
+
+				    visualMap: {
+				        show: false,
+				        min: 80,
+				        max: 600,
+				        inRange: {
+				            colorLightness: [0, 1]
+				        }
+				    },
+				    series : [
+				        {
+				            name:'访问来源',
+				            type:'pie',
+				            radius : '55%',
+				            center: ['50%', '50%'],
+				            data:[
+				                {value:335, name:'直接访问'},
+				                {value:310, name:'邮件营销'},
+				                {value:274, name:'联盟广告'},
+				                {value:235, name:'视频广告'},
+				                {value:400, name:'搜索引擎'}
+				            ].sort(function (a, b) { return a.value - b.value; }),
+				            roseType: 'radius',
+				            label: {
+				                normal: {
+				                    textStyle: {
+				                        color: 'rgba(255, 255, 255, 0.3)'
+				                    }
+				                }
+				            },
+				            labelLine: {
+				                normal: {
+				                    lineStyle: {
+				                        color: 'rgba(255, 255, 255, 0.3)'
+				                    },
+				                    smooth: 0.2,
+				                    length: 10,
+				                    length2: 20
+				                }
+				            },
+				            itemStyle: {
+				                normal: {
+				                    color: '#c23531',
+				                    shadowBlur: 200,
+				                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+				                }
+				            },
+
+				            animationType: 'scale',
+				            animationEasing: 'elasticOut',
+				            animationDelay: function (idx) {
+				                return Math.random() * 200;
+				            }
+				        }
+				    ]
+				};
+			
+		}		
+	);
+
+
 </script>
 </body>
 
