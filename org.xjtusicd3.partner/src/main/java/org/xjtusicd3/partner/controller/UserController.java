@@ -7,14 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,23 +21,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
-import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ITHelper;
 import org.xjtusicd3.database.helper.PayHelper;
 import org.xjtusicd3.database.helper.UserHelper;
-import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.ITPersistence;
 import org.xjtusicd3.database.model.PayPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.CopyFile;
 import org.xjtusicd3.partner.filter.RegexAddress;
-import org.xjtusicd3.partner.service.CommunityService;
 import org.xjtusicd3.partner.service.UserService;
 import org.xjtusicd3.partner.view.Personal2_CommunityView;
 import org.xjtusicd3.partner.view.Personal2_FaqView;
 import org.xjtusicd3.partner.view.Personal2_PayView;
 import org.xjtusicd3.partner.view.Personal2_indexList;
-import org.xjtusicd3.partner.view.Question2_CommunityView;
 import org.xjtusicd3.partner.view.UserView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -728,6 +722,10 @@ public class UserController {
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 
 }
