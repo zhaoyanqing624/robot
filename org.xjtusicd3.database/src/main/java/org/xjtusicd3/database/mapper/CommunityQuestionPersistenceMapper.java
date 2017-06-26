@@ -43,7 +43,10 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	 */
 	@Select("SELECT * FROM TBL_CommunityQuestion WHERE USERID=#{0}")
 	List<CommunityQuestionPersistence> notice_CommunityQuestion(String userid);
-
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE USERID=#{0} ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<CommunityQuestionPersistence> notice_CommunityQuestion_Limit(String userid,int startNumber,int number);
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE USERID=#{0} AND STR_TO_DATE(TIME,'%Y-%m-%d %H:%i')<STR_TO_DATE(#{3},'%Y-%m-%d %H:%i') ORDER BY TIME DESC LIMIT #{1},#{2}")
+	List<CommunityQuestionPersistence> notice_CommunityQuestion_Limit_Time(String userid,int startNumber,int number,String time);
 	/*
 	 * zpz_get all community question
 	 */

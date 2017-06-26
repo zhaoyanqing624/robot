@@ -14,21 +14,19 @@ import org.springframework.web.servlet.ModelAndView;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
-import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
 import org.xjtusicd3.database.helper.CommunityQuestionHelper;
-import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.helper.ITHelper;
+import org.xjtusicd3.database.helper.ShareHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.ClassifyPersistence;
-import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
+import org.xjtusicd3.database.model.ITPersistence;
+import org.xjtusicd3.database.model.SharePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
-import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.CommunityService;
-import org.xjtusicd3.partner.service.QuestionService;
-import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Question2_CommunityView;
 import org.xjtusicd3.partner.view.Question_CommunityView;
 
@@ -113,6 +111,22 @@ public class CommunityController {
 			int startNumber = 0;
 			List<Question2_CommunityView> question2_CommunityViews2 = CommunityService.question2_CommunityViews_other(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID(),startNumber);
 			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(q);
+			//判断是否有分享内容的权利
+			List<ITPersistence> list = ITHelper.IT(userPersistences.get(0).getUSERID());
+			if (list.size()==0) {
+				mv.addObject("IsIT", "0");
+			}else{
+				mv.addObject("IsIT", "1");
+				List<SharePersistence> sharePersistences = ShareHelper.getShareList_ID2(userPersistences.get(0).getUSERID(),q);
+				List<CommunityAnswerPersistence> communityAnswerPersistences2 = CommunityAnswerHelper.question_iscurrentAnswer(q, 1);
+				if (communityAnswerPersistences2.size()!=0) {
+					if (sharePersistences.size()==0) {
+						mv.addObject("IsShare", "0");
+					}else {
+						mv.addObject("IsShare", "1");
+					}
+				}
+			}
 			mv.addObject("answerList_best", question2_CommunityViews);
 			mv.addObject("answerList_other", question2_CommunityViews2);
 			mv.addObject("userList", userPersistences);

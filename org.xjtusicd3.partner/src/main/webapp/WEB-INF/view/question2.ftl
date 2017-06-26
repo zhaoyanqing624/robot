@@ -22,6 +22,115 @@
     <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+    <script type="text/javascript">
+    $(function(){
+    	if(document.URL.indexOf("n=")>0){
+    		var i=0;
+    		var j=0;
+    		var z=0;
+    		var evt1 = document.createEvent("MouseEvents");
+    		var evt2 = document.createEvent("MouseEvents");
+    		var evt3 = document.createEvent("MouseEvents");
+    		var noticeId = document.URL.split("n=")[1].split("&p=")[0];
+    		var parentId = document.URL.split("p=")[1].split("&q=")[0];
+    		//模拟点击查看更多评论
+    		var commentNumber = ${commentNumber};
+    		commentNumber = Math.ceil(commentNumber/5);
+    		if(document.getElementById(parentId)==null){//页面没有此评论
+	    		for(i=0;i<commentNumber;i++){
+				    evt1.initEvent("click", true, true);
+	    			document.getElementById("querymorelink").firstChild.dispatchEvent(evt1);
+	    			if(document.getElementById(parentId)!=null){
+	    				break;
+	    			}
+	    		}
+	    		document.getElementById(parentId).getElementsByClassName("subCommentList")[0].style.display=="block";
+	    		if(document.getElementById(noticeId)==null){
+	    			for(j=0;j<100;j++){
+	   					evt2.initEvent("click", true, true);   
+	    				document.getElementById(parentId).getElementsByClassName("commentReplay")[0].dispatchEvent(evt2);
+	    				if(document.getElementById(noticeId)!=null){
+	    					break;
+	    				} 
+	    			}
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				}else{
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				} 
+    		}else if(document.getElementById(parentId)!=null){//页面有此评论
+    			var evt = document.createEvent("MouseEvents");
+    			evt.initEvent("click", true, true);
+	    		document.getElementById(parentId).getElementsByClassName("commentReplay")[0].dispatchEvent(evt);
+				if(document.getElementById(noticeId)==null){
+	    			for(z=0;z<100;z++){
+	   					evt3.initEvent("click", true, true);   
+	    				document.getElementById(parentId).getElementsByClassName("ac2")[0].firstChild.dispatchEvent(evt3);
+	    				if(document.getElementById(noticeId)!=null){
+	    					break;
+	    				} 
+	    			}
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				}else{
+			    	mScroll(noticeId);
+			    	function mScroll(id){
+				    	$("html,body").stop(true);
+				    	$("html,body").animate({
+				    		scrollTop: $("#"+id).offset().top
+				    	}, 800);
+				    }
+				} 		
+    		}
+    	}else{
+    		var parentId = document.URL.split("p=")[1].split("&q=")[0];
+    		//模拟点击查看更多评论
+    		var commentNumber = ${commentNumber};
+    		commentNumber = Math.ceil(commentNumber/5);
+    		if(document.getElementById(parentId)==null){//页面没有此评论
+    			for(var i1=0;i1<commentNumber;i1++){
+    				var evt4 = document.createEvent("MouseEvents");
+    				evt4.initEvent("click", true, true); 
+	    			document.getElementById("querymorelink").getElementsByTagName("a")[0].dispatchEvent(evt4);
+	    			if(document.getElementById(parentId)!=""){
+	    				break;
+	    			}
+	    		}
+	    		mScroll(parentId);
+		    	function mScroll(id){
+			    	$("html,body").stop(true);
+			    	$("html,body").animate({
+			    		scrollTop: $("#"+id).offset().top
+			    	}, 800);
+			    }
+    		}else{
+		    	mScroll(parentId);
+		    	function mScroll(id){
+			    	$("html,body").stop(true);
+			    	$("html,body").animate({
+			    		scrollTop: $("#"+id).offset().top
+			    	}, 800);
+			    }
+    		}
+    	}
+    }); 
+    </script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -117,6 +226,19 @@
 					<span class="fold"><a data-fun="fold"><span class="foldicon"></span>收起</a></span>
 				</ul>
 			</div>
+			<#if IsIT=="1">
+			<div class="options" id="shareCommunity">
+                <#if IsShare=="0">
+	                <ul>
+						<li class="special"><a data-fun="toFocus" class="unFocused" onclick="saveShare()"><span class="status">分享</span>  |  <span class="number"> </span></a></li>
+					</ul>
+            	<#elseif IsShare=="1">
+            		<ul>
+						<li class="special"><a data-fun="toFocus" class="unFocused" onclick="saveShare()"><span class="status">已分享</span>  |  <span class="number">√</span></a></li>
+					</ul>
+            	</#if>
+			</div>
+			</#if>
 			</#list>
 		<div id="sort">
 			<h2>${communityNumber}个回答</h2>
@@ -328,7 +450,7 @@
 								<div class="options">
 									<ul>
 										<#if userid!=answerList_other.userId>
-											<li class="special"><a data-fun="toVote" class="unVoted" onclick="getBestAnswer()"><span class="status">设为最佳答案</span></a></li>
+											<li class="special"><a data-fun="toVote" class="unVoted" onclick="getBestAnswer(event)"><span class="status">设为最佳答案</span></a></li>
 										</#if>
 										<li class="special">
 											<#if answerList_other.isLike=="0">
@@ -858,7 +980,7 @@
 		}
 	}
 	//设置为最佳答案
-	function getBestAnswer(){
+	function getBestAnswer(event){
 		var answerId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
 		if(answerId!="searchResult"){
 			$.ajax({
@@ -903,6 +1025,31 @@
 			document.getElementById(commentId).parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML=tocomment;
 		}
 	}
+	//分享communityQuestion
+		function saveShare(){
+			var questionId = document.URL.split("q=")[1];
+			var from = "communityQuestion";
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveShare.html",
+				data:{
+					"questionId":questionId,
+					"from":from
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementById("shareCommunity").getElementsByClassName("status")[0].innerHTML = "已分享";
+						document.getElementById("shareCommunity").getElementsByClassName("number")[0].innerHTML = "√";
+					}else{
+						document.getElementById("shareCommunity").getElementsByClassName("status")[0].innerHTML = "分享";
+						document.getElementById("shareCommunity").getElementsByClassName("number")[0].innerHTML = "";
+					}
+				}
+			})
+		}
 	//查看更多评论
 		$('#loading').click(function() {
 			var startnumber = document.getElementById("searchResult").childElementCount;

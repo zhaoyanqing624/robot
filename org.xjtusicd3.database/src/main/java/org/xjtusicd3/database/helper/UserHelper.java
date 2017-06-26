@@ -121,9 +121,6 @@ public class UserHelper {
 			return userlist;
 		}
 		
-	/**
-	 * ZPZ
-	 */
 		//修改用户名
 		//zyq_个人密码修改
 		public static void updateUser(String userid, String username){

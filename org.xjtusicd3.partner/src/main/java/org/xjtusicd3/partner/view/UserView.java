@@ -9,6 +9,7 @@ public class UserView {
 	private String UserPassword2;
 	private String UserEmail;
 	private String UserSex;
+	private String UserSex2;
 	private String UserBirthday;
 	private String UserAddress;
 	private String UserBrief;
@@ -17,6 +18,12 @@ public class UserView {
 	private String City;
 	private String District;
 	
+	public String getUserSex2() {
+		return UserSex2;
+	}
+	public void setUserSex2(String userSex2) {
+		UserSex2 = userSex2;
+	}
 	public String getUserId() {
 		return UserId;
 	}
@@ -111,6 +118,7 @@ public class UserView {
 		this.City = getCity();
 		this.District = getDistrict();
 		this.UserPassword2 = getUserPassword2();
+		this.UserSex2 = getUserSex2();
 	}
 	
 	public UserView(){

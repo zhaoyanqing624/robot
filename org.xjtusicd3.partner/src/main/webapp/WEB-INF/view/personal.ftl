@@ -24,7 +24,7 @@
 	<script src="zhao/password/js/register.js"></script>
     <script type="text/javascript" src="jedate/jquery.jedate.js"></script>
 	<style>
-		.datainp { width: 128px; height: 35px; border: 1px #A5D2EC solid; }
+		.datainp { width: 128px; height: 35px; border: 1px #A5D2EC solid; text-indent: 12px;}
 		.datep { margin-bottom: 40px; line-height: 24px; margin-right: 15px; }
 		.wicon { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAQCAYAAADj5tSrAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNi8xNS8xNGnF/oAAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAAoElEQVQ4jWPceOnNfwYqAz9dYRQ+E7UtwAaGjyUsDAyYYUgJ2HT5LXZLcEmSCnA6duOlN///////H0bDALl8dPH/////Z8FuNW6Qtvw2nL3lyjsGBgYGhlmRqnj1kGwJuqHIlhJlCXq8EOITEsdqCXLEbbr8FisfFkTo+vBZRFZwERNEFFkCiw90nxJtCalxQmzegltCzVyP1RJq5HZ8AABuNZr0628DMwAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-position: right center;    margin-left: -13px; }
 		.showcase-form textarea .ng-dirty.ng-invalid,
@@ -179,7 +179,7 @@
 												            <span class="check-image"></span>
 												            <span class="radiobox-content">男</span>
 												        </label>
-												        <input type="radio" name="UserSex" class="rdolist"  />
+												        <input type="radio" name="UserSex2" class="rdolist" value="女" />
 												        <label class="rdobox">
 												            <span class="check-image"></span>
 												            <span class="radiobox-content">女</span>

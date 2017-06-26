@@ -115,4 +115,11 @@ public class CommunityAnswerHelper{
 		session.close();
 		return list;
 	}
+	public static List<CommunityAnswerPersistence> personal2_ReplyCommunity(String userId,int startNumber,int number){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityAnswerPersistenceMapper mapper = session.getMapper(CommunityAnswerPersistenceMapper.class);
+		List<CommunityAnswerPersistence> list = mapper.personal2_ReplyCommunity(userId,startNumber,number);
+		session.close();
+		return list;
+	}
 }

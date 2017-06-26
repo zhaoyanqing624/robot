@@ -230,4 +230,14 @@ public class CommentHelper {
 		mapper.deleteNotice2(0,id);
 		session.close();
 	}
+	/*
+	 * zyq_personal2_ajax_获取FAQ的评论
+	 */
+	public static List<CommentPersistence> personal2_getFaqComment_Limit(String userId,String parentId,int startNumber,int number) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.personal2_getFaqComment_Limit(userId,parentId,startNumber,number);
+		session.close();
+		return list;
+	}
 }

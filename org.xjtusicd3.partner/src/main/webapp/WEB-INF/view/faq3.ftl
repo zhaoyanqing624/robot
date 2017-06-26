@@ -100,15 +100,15 @@
     		var commentNumber = ${commentNumber};
     		commentNumber = Math.ceil(commentNumber/5);
     		if(document.getElementById(parentId)==null){//页面没有此评论
-    			for(i=0;i<commentNumber;i++){
-    				var evt1 = document.createEvent("MouseEvents");
-				    evt1.initEvent("click", true, true);
-	    			document.getElementById("querymorelink").firstChild.dispatchEvent(evt1);
-	    			if(document.getElementById(parentId)!=null){
+    			for(var i1=0;i1<commentNumber;i1++){
+    				var evt4 = document.createEvent("MouseEvents");
+    				evt4.initEvent("click", true, true); 
+	    			document.getElementById("querymorelink").getElementsByTagName("a")[0].dispatchEvent(evt4);
+	    			if(document.getElementById(parentId)!=""){
 	    				break;
 	    			}
 	    		}
-		    	mScroll(parentId);
+	    		mScroll(parentId);
 		    	function mScroll(id){
 			    	$("html,body").stop(true);
 			    	$("html,body").animate({
@@ -236,6 +236,15 @@
 	                            	<a href="javascript:void(0);" id="favoriteHeart" class="share redheart" onclick="favorite()"></a>
 	                            <#else>
 	                            	<a href="javascript:void(0);" id="favoriteHeart" class="share heart" onclick="favorite()"></a>
+	                            </#if>
+	                            <#if IsIT=="1">
+	                            	<span class="share">|</span>
+	                            	<span class="share">推荐：</span>
+	                            	<#if IsShare=="0">
+	                            		<div class="social-share fl share-component"><a class="fa fa-share-alt" style="font-size:21px;margin-top: 9px;color:#9c9c9c" onclick="saveShare()"></a></div>
+	                            	<#elseif IsShare=="1">
+	                            		<div class="social-share fl share-component"><a class="fa fa-share-alt" style="font-size:21px;margin-top: 9px;color:red" onclick="saveShare()"></a></div>
+	                            	</#if>
 	                            </#if>
 	                        </div>
 	                        <#if scoreSize gt 0>
@@ -654,8 +663,7 @@
 		}
 		//获取更多评论
 		function querymorecomment(){
-			html = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].innerHTML;
-			startnumber = event.target.parentNode.parentNode.parentNode.getElementsByClassName("comment")[0].getElementsByClassName("commentList").length;
+			startnumber = document.getElementsByClassName("comment")[0].getElementsByClassName("commentList").length;
 			var questionId = document.URL.split("q=")[1].split("#")[0];
 			$.ajax({
 				type:"POST",
@@ -669,7 +677,9 @@
 					if(data.value=="0"){
 						self.location='login.html';
 					}else if(data.value=="1"){
-						document.getElementById("querymorelink").remove();
+						if(document.getElementById("querymorelink")!=null){
+							document.getElementById("querymorelink").remove();
+						}
 						if(data.endnumber<data.totalnumber){
 							startnumber = data.endnumber;
 							for(var i in data.commentList){
@@ -761,6 +771,34 @@
 						self.location='login.html';
 					}else if(data.value=="1"){
 						document.getElementsByClassName("shareBox_hidden")[0].style.display="block";
+					}
+				}
+			})
+		}
+		//分享
+		function saveShare(){
+			var state;
+			if(document.getElementsByClassName("fa fa-share-alt")[0].style.color!="red"){
+				state=1;
+			}else{
+				state=2;
+			}
+			var questionId = document.URL.split("q=")[1];
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/saveShare.html",
+				data:{
+					"questionId":questionId,
+					"state":state
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else if(data.value=="1"){
+						document.getElementsByClassName("fa fa-share-alt")[0].style.color="red";
+					}else{
+						document.getElementsByClassName("fa fa-share-alt")[0].style.color="#9c9c9c";
 					}
 				}
 			})

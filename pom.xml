@@ -7,15 +7,12 @@
   <name>Archetype - org.xjtusicd3</name>
   <url>http://maven.apache.org</url>
     <packaging>pom</packaging>
-  <modules>
-    <module>org.xjtusicd3.partner</module>
-    <module>org.xjtusicd3.portal</module>
-    
-    <module>org.xjtusicd3.database</module>
-    <module>org.xjtusicd3.common</module>
-    
-  </modules>
-  
+	  <modules>
+	    <module>org.xjtusicd3.partner</module>
+	    <module>org.xjtusicd3.portal</module>
+	    <module>org.xjtusicd3.database</module>
+	    <module>org.xjtusicd3.common</module>
+	  </modules>
   <repositories>  	   	    
         <repository>  
             <id>io.spring.repo.maven.release</id>  
@@ -71,8 +68,6 @@
                 <enabled>false</enabled>  
             </snapshots>  
         </repository>  
-  
-        
         <repository>  
             <id>central</id>  
             <name>Central Repository</name>  
@@ -83,7 +78,6 @@
         </repository>  
     </repositories> 
     <dependencies>
-
     </dependencies>
     
 </project>

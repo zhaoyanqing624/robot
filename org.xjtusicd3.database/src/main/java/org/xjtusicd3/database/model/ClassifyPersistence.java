@@ -15,6 +15,15 @@ public class ClassifyPersistence {
 	private String FAQCLASSIFYNAME;
 	@TableField(columnName="FAQPARENTID")
 	private String FAQPARENTID;
+	@TableField(columnName="FAQCLASSIFYIMAGE")
+	private String FAQCLASSIFYIMAGE;
+	
+	public String getFAQCLASSIFYIMAGE() {
+		return FAQCLASSIFYIMAGE;
+	}
+	public void setFAQCLASSIFYIMAGE(String fAQCLASSIFYIMAGE) {
+		FAQCLASSIFYIMAGE = fAQCLASSIFYIMAGE;
+	}
 	public String getFAQCLASSIFYID() {
 		return FAQCLASSIFYID;
 	}

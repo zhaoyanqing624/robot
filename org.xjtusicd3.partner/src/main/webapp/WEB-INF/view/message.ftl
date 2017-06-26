@@ -15,6 +15,17 @@
     <link href="css/bootstrap.min2.css" rel="stylesheet">
     <link href="css/css.css" rel="stylesheet">
     <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="includes/style.css">
+    <link rel="stylesheet" href="includes/prettify/prettify.css">
+    <link rel="stylesheet" href="css/scrollbar.css">
+    <script src="includes/prettify/prettify.js"></script>
+    <script src="includes/jquery.js"></script>
+    <script src="js/jquery.scrollbar.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('.scrollbar-macosx').scrollbar();
+        });
+    </script>
     <script src="js/ajax-pushlet-client.js"></script>
     <script type="text/javascript">
     	PL.parameters.push('uid');
@@ -23,6 +34,41 @@
 		PL.joinListen('/mipc/she');  
 		function onData(event) {
 			var result = decodeURIComponent(event.get("message"));
+			var replyNumber = decodeURIComponent(event.get("messageNumber"));
+			var jsonresult = strToJson(result);
+			var jsonreplyNumber = strToJson(replyNumber);
+			function strToJson(str){ 
+				return JSON.parse(str); 
+			}
+			for(var i in jsonresult){
+				var content = jsonresult[i].content;
+				var lastContent = jsonresult[i].lastContent;
+				var messageId = jsonresult[i].messageId;
+				var time = jsonresult[i].time;
+				time = time.split('');
+				time.splice(10,1,' ');
+				time = time.join('');
+				var userId = jsonresult[i].userId;
+				var userImage = jsonresult[i].userImage;
+				if(lastContent.length<30){
+					lastContent = lastContent;
+				}else{
+					lastContent = lastContent.substr(0,30)+"...";
+				}	
+				if(document.getElementById("lastChat"+userId).className!="active"){
+					document.getElementById("messagenumber"+userId).innerHTML = "("+jsonreplyNumber+")";
+					document.getElementById("lastChat"+userId).getElementsByClassName("theLastMsg")[0].innerHTML = lastContent;
+				}
+				
+				if(document.getElementById(messageId)==null){
+					var html = document.getElementById("userchatUl"+userId).innerHTML;
+					if(userId==document.getElementById("zhao_hidden").innerHTML){
+						document.getElementById("userchatUl"+userId).innerHTML = html + '<li class="me"  id="'+messageId+'"><div class="chat_avata"><a href="personal2.html?u='+userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+userImage+'"></a></div><div class="a_msg_info"><pre>'+content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+time+'</small></li>';
+					}else{
+						document.getElementById("userchatUl"+userId).innerHTML = html + '<li class="you" id="'+messageId+'"><div class="chat_avata"><a href="personal2.html?u='+userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+userImage+'"></a></div><div class="a_msg_info"><pre>'+content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+time+'</small></li>';
+					}
+				}
+			}
 		    // 离开    
 		    // PL.leave();    
 		}   
@@ -121,16 +167,21 @@
 		                    		<img src="${touserList.AVATAR}" alt="luckyforever" width="40" height="40"> 					     	
 		                    		<div class="info"><h5>${touserList.USERNAME}</h5><p class="theLastMsg"></p></div>					     	
 		                    	</div>
+		                    	<div class="more-box" style="left: 246px; display: none;">            					
+		                    		<span class="shield js-shield">关闭聊天</span>        					
+		                    	</div>
 		                    </li>
 		                    </#list>
 		                    <#list messageList as messageList>
 		                    <li id="lastChat${messageList.userId}" class=""> 							
 		                    	<div class="list-box">
-		                    		<div class="fa fa-caret-down msg-more js-msg-more" style="color: rgb(147, 153, 159);"></div>							
+		                    		<div class="fa fa-caret-down msg-more js-msg-more"  style="color: rgb(147, 153, 159);"></div>							
 		                    		<img src="${messageList.userImage}" alt="luckyforever" width="40" height="40"> 					     	
 		                    		<div class="info"><h5>${messageList.userName}
 		                    			<#if messageList.number!=0>
-		                    			<span id="messagenumber">(${messageList.number})</span></h5>
+		                    			<span id="messagenumber${messageList.userId}">(${messageList.number})</span></h5>
+		                    			<#else>
+		                    			<span id="messagenumber${messageList.userId}"></span></h5>
 		                    			</#if>
 		                    		<#if messageList.lastContent?length gt 30>
 		                    			<p class="theLastMsg">${messageList.lastContent[0..30]}...</p></div>	
@@ -138,23 +189,31 @@
 		                    			<p class="theLastMsg">${messageList.lastContent}</p></div>	
 		                    		</#if>
 		                    	</div>
+		                    	<div class="more-box" style="left: 246px; display: none;">            					
+		                    		<span class="shield js-shield">关闭聊天</span>        					
+		                    	</div>
 		                    </li>
 		                    </#list>
 	                    <#else>
 		                    <#list messageList as messageList>
 		                    <li id="lastChat${messageList.userId}" class=""> 							
 		                    	<div class="list-box">
-		                    		<div class="fa fa-caret-down msg-more js-msg-more" style="color: rgb(147, 153, 159);"></div>							
+		                    		<div class="fa fa-caret-down msg-more js-msg-more"  style="color: rgb(147, 153, 159);"></div>							
 		                    		<img src="${messageList.userImage}" alt="luckyforever" width="40" height="40"> 					     	
 		                    		<div class="info"><h5>${messageList.userName}
 		                    			<#if messageList.number!=0>
-		                    			<span id="messagenumber">(${messageList.number})</span></h5>
+		                    			<span id="messagenumber${messageList.userId}">(${messageList.number})</span></h5>
+		                    			<#else>
+		                    			<span id="messagenumber${messageList.userId}"></span></h5>
 		                    			</#if>
 		                    		<#if messageList.lastContent?length gt 30>
 		                    			<p class="theLastMsg">${messageList.lastContent[0..30]}...</p></div>	
 		                    		<#else>
 		                    			<p class="theLastMsg">${messageList.lastContent}</p></div>	
 		                    		</#if>
+		                    	</div>
+		                    	<div class="more-box" style="left: 246px; display: none;">            					
+		                    		<span class="shield js-shield">关闭聊天</span>        					
 		                    	</div>
 		                    </li>
 		                    </#list>
@@ -176,25 +235,26 @@
             </div>
         </div>
         <!-- 聊天面板 -->
-        <div id="chat_container">
-            <div id="chat_content" class="ps-container">
+        <div id="chat_container" class="content">
+        	<div class="demo">
+            <div id="chat_content" class="scrollbar-macosx">
             	<#if touserList ??>
 	                <#list touserList as touserList>
-	            		<ul id="userchatUl${touserList.USERID}" class="userchatUl" style="display:block"></ul>
+	            		<ul id="userchatUl${touserList.USERID}" class="userchatUl" style="display:none">
+	            			
+	            		</ul>
 	            	</#list>
 	            	<#list messageList as messageList>
-	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:block"></ul>
+	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:none"></ul>
 	            	</#list>
 	            <#else>
 	            	<#list messageList as messageList>
-	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:block"></ul>
+	            		<ul id="userchatUl${messageList.userId}" class="userchatUl" style="display:none"></ul>
 	            	</#list>
             	</#if>
             	
-            	<ul id="userchatUl10000" uid="10000" class="userchatUl" style="display:none">
-            		<li><div class="timeLine"> <strong style="width:130px;">2016-07-26</strong></div> </li>
-            	</ul>
 			</div>  <!-- 聊天内容显示区 -->
+			</div>
             <!-- 聊天input -->
 			<div id="chat_editor" style="display: block;">
                 <form method="post" action="/u/3674640/uploadimg?1497343130681" enctype="multipart/form-data" id="upLoadForm" target="imageFrame">
@@ -275,19 +335,64 @@
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
     <script type="text/javascript" src="new/front/js/util.js"></script>
-    <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/autosize.js"></script>
     <script>
     	$(document).ready(function(){
     		autosize(document.querySelectorAll('textarea'));
     	})
+    	//关闭私信
+		$(function() {
+		    $(".fa&.fa-caret-down&.msg-more&.js-msg-more").click(function(event) {
+		    	var id = event.target.parentNode.parentNode.id;
+				var myDiv = document.getElementById(id).getElementsByClassName("more-box")[0];
+		        // showDiv();//调用显示DIV方法
+		        $(myDiv).toggle();
+		        $(document).one("click",
+		        function() { //对document绑定一个影藏Div方法
+		            $(myDiv).hide();
+		        });
+		        event.stopPropagation(); //阻止事件向上冒泡
+			    $(myDiv).click(function(event) {
+			        event.stopPropagation(); //阻止事件向上冒泡
+			    });
+		        function showDiv() {
+				    $(myDiv).fadeIn();
+				}	
+		    });
+		    
+		    $(".shield&.js-shield").click(function(event) {
+		    	var id = event.target.parentNode.parentNode.id.split("lastChat")[1];
+		    	document.getElementById("lastChat"+id).remove();
+		    	document.getElementById("userchatUl"+id).remove();
+			    $.ajax({
+					type:"POST",
+					url:"/org.xjtusicd3.partner/deleteMessageList.html",
+					data:{
+						"id":id
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.value=="0"){
+							self.location='login.html';
+						}else{
+							
+						}
+					}
+				})
+		    })
+		});　　　　
+  		
+
     	//好友私信列表显示
 		$('#lastChat').find('li').click(function(){
 			$(this).addClass("active").siblings("li").removeClass("active");
 			var userid = $(this)[0].id.split("lastChat")[1];
 			var usercontentid = "userchatUl"+userid;
 			$('#'+usercontentid).css('display','block').siblings("ul").css('display','none');
-			document.getElementById("messagenumber").innerHTML="";
+			if(document.getElementById("messagenumber"+userid)!=null){
+				document.getElementById("messagenumber"+userid).innerHTML="";
+			}
+			document.getElementById("lastChat"+userid).getElementsByClassName("theLastMsg")[0].innerHTML="";
 			var touserId = document.getElementById("lastChat").getElementsByClassName("active")[0].id.split("lastChat")[1];
 			//点击列表后开始查询
 			$.ajax({
@@ -301,15 +406,89 @@
 					if(data.value=="0"){
 						self.location='login.html';
 					}else{
-						for(var i in data.messageContentList){
-							var html = document.getElementById("userchatUl"+touserId).innerHTML;
-							if(document.getElementById(data.messageContentList[i].messageId)==null){
-								document.getElementById("userchatUl"+touserId).innerHTML = html + '<li class="you" id="'+data.messageContentList[i].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageContentList[i].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageContentList[i].userImage+'"></a></div><div class="a_msg_info" id="4426066"><pre>'+data.messageContentList[i].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageContentList[i].time+'</small></li>';
+						if(data.messageContentList==""){
+							if(data.messageHistory!=""){
+								if(data.isMore=="1"){
+									var html = document.getElementById("userchatUl"+touserId).innerHTML;
+									if(document.getElementById("userchatUl"+touserId).getElementsByClassName("getmore")[0]==null){
+										document.getElementById("userchatUl"+touserId).innerHTML ='<li><div class="getmore"><strong style="width:130px;" onclick="getMoreMessageHistory()">查看更多记录</strong></div></li>'+ html;
+									}
+									for(var j in data.messageHistory){
+										if(data.messageHistory[j].userId==document.getElementById("zhao_hidden").innerHTML){
+											if(document.getElementById(data.messageHistory[j].messageId)==null){
+											 	if(document.getElementById(data.messageHistory[j].time.substring(0,10))==null){
+											 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+											 		document.getElementById("userchatUl"+touserId).innerHTML =htmls + '<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>';
+											 	}
+												var html = document.getElementById("userchatUl"+touserId).innerHTML;
+												document.getElementById("userchatUl"+touserId).innerHTML = html+'<li class="me" id="'+data.messageHistory[j].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageHistory[j].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageHistory[j].userImage+'"></a></div><div class="a_msg_info"><pre>'+data.messageHistory[j].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageHistory[j].time+'</small></li>';
+											}
+											
+										}else{
+											if(document.getElementById(data.messageHistory[j].messageId)==null){
+												if(document.getElementById(data.messageHistory[j].time.substring(0,10))==null){
+											 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+											 		document.getElementById("userchatUl"+touserId).innerHTML =htmls + '<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>';
+											 	}
+												var html = document.getElementById("userchatUl"+touserId).innerHTML;
+												document.getElementById("userchatUl"+touserId).innerHTML = html+'<li class="you" id="'+data.messageHistory[j].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageHistory[j].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageHistory[j].userImage+'"></a></div><div class="a_msg_info"><pre>'+data.messageHistory[j].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageHistory[j].time+'</small></li>';
+											}
+										}
+									}
+								}else{
+									for(var j in data.messageHistory){
+										if(data.messageHistory[j].userId==document.getElementById("zhao_hidden").innerHTML){
+											if(document.getElementById(data.messageHistory[j].messageId)==null){
+												if(document.getElementById(data.messageHistory[j].time.substring(0,10))==null){
+											 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+											 		document.getElementById("userchatUl"+touserId).innerHTML =htmls + '<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>';
+											 	}
+												var html = document.getElementById("userchatUl"+touserId).innerHTML;
+												document.getElementById("userchatUl"+touserId).innerHTML = html+'<li class="me" id="'+data.messageHistory[j].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageHistory[j].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageHistory[j].userImage+'"></a></div><div class="a_msg_info"><pre>'+data.messageHistory[j].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageHistory[j].time+'</small></li>';
+											}
+										}else{
+											if(document.getElementById(data.messageHistory[j].messageId)==null){
+												if(document.getElementById(data.messageHistory[j].time.substring(0,10))==null){
+											 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+											 		document.getElementById("userchatUl"+touserId).innerHTML =htmls + '<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>';
+											 	}
+												var html = document.getElementById("userchatUl"+touserId).innerHTML;
+												document.getElementById("userchatUl"+touserId).innerHTML = html+'<li class="you" id="'+data.messageHistory[j].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageHistory[j].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageHistory[j].userImage+'"></a></div><div class="a_msg_info"><pre>'+data.messageHistory[j].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageHistory[j].time+'</small></li>';
+											}
+										}
+									}
+								}
+							}
+						}else{
+							if(data.isMore=="1"){
+								var html = document.getElementById("userchatUl"+touserId).innerHTML;
+								document.getElementById("userchatUl"+touserId).innerHTML = '<li><div class="getmore"><strong style="width:130px;" onclick="getMoreMessageHistory()">查看更多记录</strong></div></li>'+html;
+								for(var i in data.messageContentList){
+									var html = document.getElementById("userchatUl"+touserId).innerHTML;
+									if(document.getElementById(data.messageContentList[i].messageId)==null){
+										if(document.getElementById(data.messageContentList[i].time.substring(0,10))==null){
+									 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+									 		document.getElementById("userchatUl"+touserId).innerHTML =htmls + '<li id="'+data.messageContentList[i].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageContentList[i].time.substring(0,10)+'</strong></div></li>';
+									 	}
+										document.getElementById("userchatUl"+touserId).innerHTML = html + '<li class="you" id="'+data.messageContentList[i].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageContentList[i].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageContentList[i].userImage+'"></a></div><div class="a_msg_info" id="4426066"><pre>'+data.messageContentList[i].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageContentList[i].time+'</small></li>';
+									}
+								}
+							}else{
+								for(var i in data.messageContentList){
+									var html = document.getElementById("userchatUl"+touserId).innerHTML;
+									if(document.getElementById(data.messageContentList[i].messageId)==null){
+										if(document.getElementById(data.messageContentList[i].time.substring(0,10))==null){
+									 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+									 		document.getElementById("userchatUl"+touserId).innerHTML =htmls + '<li id="'+data.messageContentList[i].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageContentList[i].time.substring(0,10)+'</strong></div></li>';
+									 	}
+										document.getElementById("userchatUl"+touserId).innerHTML = html + '<li class="you" id="'+data.messageContentList[i].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageContentList[i].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageContentList[i].userImage+'"></a></div><div class="a_msg_info" id="4426066"><pre>'+data.messageContentList[i].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageContentList[i].time+'</small></li>';
+									}
+								}
 							}
 						}
 					}
 				}
-			})			
+			});			
 		})
     </script>
     <script>
@@ -331,10 +510,68 @@
 						var html = document.getElementById("userchatUl"+touserId).innerHTML;
 						document.getElementById("userchatUl"+touserId).innerHTML= html + '<li class="me"><div class="chat_avata"><a href="personal2.html?u='+data.messageList.userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageList.userImage+'"></a></div><div class="a_msg_info"><pre>'+data.messageList.content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageList.time+'</small></li>';
 						document.getElementById("textInput").value="";
+						alert(document.getElementById("userchatUl"+touserId).getElementsByClassName("scroll-bar")[0].innerHTML)
+					}
+				}
+			})
+    	}
+    	function getMoreMessageHistory(){
+    		var touserId = document.getElementById("lastChat").getElementsByClassName("active")[0].id.split("lastChat")[1];
+    		var date = document.getElementById("userchatUl"+touserId).getElementsByClassName("time")[0].innerHTML;
+			$.ajax({
+				type:"POST",
+				url:"/org.xjtusicd3.partner/getMoreMessageHistory.html",
+				data:{
+					"date":date,
+					"touserId":touserId
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.value=="0"){
+						self.location='login.html';
+					}else{
+						document.getElementById("userchatUl"+touserId).getElementsByClassName("getmore")[0].parentNode.remove();
+						if(data.messageHistory!=""){
+							for(var j in data.messageHistory){
+								if(data.messageHistory[j].userId==document.getElementById("zhao_hidden").innerHTML){
+									if(document.getElementById(data.messageHistory[j].messageId)==null){
+										var html = document.getElementById("userchatUl"+touserId).innerHTML;
+										document.getElementById("userchatUl"+touserId).innerHTML = '<li class="me" id="'+data.messageHistory[j].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageHistory[j].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageHistory[j].userImage+'"></a></div><div class="a_msg_info"><pre>'+data.messageHistory[j].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageHistory[j].time+'</small></li>'+html;
+									 	if(document.getElementById(data.messageHistory[j].time.substring(0,10))==null){
+									 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+									 		document.getElementById("userchatUl"+touserId).innerHTML ='<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>'+htmls;
+									 	}else{
+									 		document.getElementById(data.messageHistory[j].time.substring(0,10)).remove();
+									 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+									 		document.getElementById("userchatUl"+touserId).innerHTML ='<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>'+htmls;
+									 	}
+									}
+								}else{
+									if(document.getElementById(data.messageHistory[j].messageId)==null){
+										var html = document.getElementById("userchatUl"+touserId).innerHTML;
+										document.getElementById("userchatUl"+touserId).innerHTML = '<li class="you" id="'+data.messageHistory[j].messageId+'"><div class="chat_avata"><a href="personal2.html?u='+data.messageHistory[j].userId+'" target="_blank"><img width="40" height="40" class="img_border_one" src="'+data.messageHistory[j].userImage+'"></a></div><div class="a_msg_info"><pre>'+data.messageHistory[j].content+'</pre><i class="arrow_left_b"></i></div><small class="time">'+data.messageHistory[j].time+'</small></li>'+html;
+										if(document.getElementById(data.messageHistory[j].time.substring(0,10))==null){
+									 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+									 		document.getElementById("userchatUl"+touserId).innerHTML ='<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>'+htmls;
+									 	}else{
+									 		document.getElementById(data.messageHistory[j].time.substring(0,10)).remove();
+									 		var htmls = document.getElementById("userchatUl"+touserId).innerHTML;
+									 		document.getElementById("userchatUl"+touserId).innerHTML ='<li id="'+data.messageHistory[j].time.substring(0,10)+'"><div class="timeLine"><strong style="width:130px;">'+data.messageHistory[j].time.substring(0,10)+'</strong></div></li>'+htmls;
+									 	}
+									}
+								}
+							}
+						}
+						if(data.isMore=="1"){
+							document.getElementById("zhao_hidden").className="1";
+							var htmlss = document.getElementById("userchatUl"+touserId).innerHTML;
+							document.getElementById("userchatUl"+touserId).innerHTML = '<li><div class="getmore"><strong style="width:130px;" onclick="getMoreMessageHistory()">查看更多记录</strong></div></li>'+htmlss;
+						}
 					}
 				}
 			})
     	}
     </script>
+    <div id="zhao_hidden" style="display:none" class="0">${uid}</div>
 </body>
 </html>
