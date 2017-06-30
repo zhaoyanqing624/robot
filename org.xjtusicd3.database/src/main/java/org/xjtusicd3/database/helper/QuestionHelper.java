@@ -119,8 +119,6 @@ public class QuestionHelper {
 		mapper.deleteFAQquestion(faqId);  
 		session.close();
 	}
-<<<<<<< HEAD
-=======
 	/*
 	 * zyq_personal2_查看自己是否有FAQ
 	 */
@@ -153,5 +151,4 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
->>>>>>> branch 'master' of https://github.com/zhaoyanqing624/robot.git
 }

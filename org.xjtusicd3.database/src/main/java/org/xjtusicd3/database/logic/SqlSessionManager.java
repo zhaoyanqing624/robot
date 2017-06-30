@@ -25,11 +25,8 @@ import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
 import org.xjtusicd3.database.mapper.EquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.ITPersistenceMapper;
 import org.xjtusicd3.database.mapper.LogPersistenceMapper;
-<<<<<<< HEAD
-=======
 import org.xjtusicd3.database.mapper.MessageHistoryPersistenceMapper;
 import org.xjtusicd3.database.mapper.MessagePersistenceMapper;
->>>>>>> branch 'master' of https://github.com/zhaoyanqing624/robot.git
 import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.PayPersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
@@ -93,12 +90,9 @@ public class SqlSessionManager {
 			configuration.addMapper(CollectionPersistenceMapper.class);
 			configuration.addMapper(ScorePersistenceMapper.class);
 			configuration.addMapper(ServerPersistenceMapper.class);
-<<<<<<< HEAD
-=======
 			configuration.addMapper(MessagePersistenceMapper.class);
 			configuration.addMapper(MessageHistoryPersistenceMapper.class);
 			configuration.addMapper(SharePersistenceMapper.class);
->>>>>>> branch 'master' of https://github.com/zhaoyanqing624/robot.git
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;
