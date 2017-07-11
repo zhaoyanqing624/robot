@@ -1,7 +1,6 @@
 package org.xjtusicd3.partner.NLP;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -126,30 +125,4 @@ public class TextSimilarity {
         });
         return frequency;
     }
-    
-    public static void main(String[] args) {
-    	List<NLP_Word> list = new ArrayList<NLP_Word>();
-    	NLP_Word nlp_Word = new NLP_Word();
-    	nlp_Word.setText("安全");
-    	nlp_Word.setFrequency(0);
-    	list.add(nlp_Word); 
-    	NLP_Word nlp_Word2 = new NLP_Word();
-    	nlp_Word2.setText("措施");
-    	nlp_Word2.setFrequency(0);
-    	list.add(nlp_Word2);
-    	NLP_Word nlp_Word3 = new NLP_Word();
-    	nlp_Word3.setText("安全");
-    	nlp_Word3.setFrequency(0);
-    	list.add(nlp_Word3); 
-    	
-    	List<NLP_Word> list2 = new ArrayList<NLP_Word>();
-    	NLP_Word nlp_Word1 = new NLP_Word();
-    	nlp_Word1.setText("安全帽");
-    	nlp_Word1.setFrequency(0);
-    	list2.add(nlp_Word1); 
-    	
-    	
-    	System.out.println(similarScore(list,list2));
-	}
-    
 }
