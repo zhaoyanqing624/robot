@@ -128,6 +128,7 @@
         				<ul class="media-list chat-list">
 							<br>
 							<div id="chat01_content">
+
 							</div>
 							<br>
 						</ul>
@@ -155,7 +156,7 @@
                         <ul>
                             <li style="right: 0px; top: -20px;">
                             	<p id="colored-button" class="text-center">
-        							<a class="btn float-buttons waves-effect waves-button waves-float">确 认</a>
+        							<a class="btn float-buttons waves-effect waves-button waves-float" onclick="chatWithRobot()">确 认</a>
     							</p>
                             </li>
                         </ul>

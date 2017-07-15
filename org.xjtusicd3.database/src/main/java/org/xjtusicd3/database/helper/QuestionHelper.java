@@ -119,6 +119,7 @@ public class QuestionHelper {
 		mapper.deleteFAQquestion(faqId);  
 		session.close();
 	}
+	
 	/*
 	 * zyq_personal2_查看自己是否有FAQ
 	 */
@@ -151,15 +152,28 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+
 	
 	/*
 	 * zpz_get faq count
 	 */
-	public static int getFaqTotal(){
+	public static int getFaqTotal1(){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
 		int faqTotal = mapper.FaqTotal();
 		session.close();
 		return faqTotal;
 	}
+
+	/*
+	 * zyq_robot_查看所以faq的信息
+	 */
+	public static List<QuestionPersistence> getFaqTotal(){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.getFaqTotal();
+		session.close();
+		return list;
+	}
+
 }

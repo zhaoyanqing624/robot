@@ -34,7 +34,7 @@ public class FaqController {
  	   ModelAndView mv=new ModelAndView("knowledgeindex");
  	   List<KnowledgeindexView> knowledgeindexViews = FaqService.knowledgeindexViews();
  	   String result = FaqService.konwStatisticsView();
- 	   int faqTotal = QuestionHelper.getFaqTotal();
+ 	   int faqTotal = QuestionHelper.getFaqTotal1();
  	   mv.addObject("faqList", knowledgeindexViews);
  	   mv.addObject("result", result);
  	   mv.addObject("total",faqTotal);

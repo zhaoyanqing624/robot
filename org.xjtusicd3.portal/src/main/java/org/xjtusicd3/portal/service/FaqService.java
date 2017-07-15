@@ -140,7 +140,7 @@ public class FaqService {
 	public static int FaqTotal()
 	{
 		int Total;
-		Total = QuestionHelper.getFaqTotal();
+		Total = QuestionHelper.getFaqTotal1();
 		return Total;
 	}
 	public static void main(String[] args)

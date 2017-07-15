@@ -8,6 +8,7 @@
 }
 .media:first-child {
     margin-top: 0;
+        margin-bottom: 30px;
 }
 .media, .media .media {
     margin-top: 15px;
@@ -33,6 +34,14 @@
     border-radius: 4px;
     position: relative;
     max-width: 500px;
+}
+.chat-pop2 {
+    background-color: #cfe8fc;
+    padding: 8px;
+    border-radius: 4px;
+    position: relative;
+    max-width: 500px;
+    float:right;
 }
 .media > .pull-right {
     margin-left: 10px;

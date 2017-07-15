@@ -31,7 +31,7 @@ color: #fff; }
 .content { width: 185%; height: auto; margin-left: -13.1%;
     margin-top: -4.5%; text-align: center; }
 .chatBox { width: 89.9%; height: 600px; margin: 0 auto; position: relative; }
-.chatLeft { border-right: 1px #bebebe solid; width: 61.4%; height: 117%; float: left; }
+.chatLeft { border-right: 1px #bebebe solid; width: 60.2%; height: 117%; float: left; }
 .chatRight { width: 27.7%; height: auto; float: right; }
 .chat01_title, .chat03_title { background: url('../img/title_bg.jpg') repeat-x 0 0; height: 30px; position: relative; }
 .talkTo { }

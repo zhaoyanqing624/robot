@@ -127,17 +127,17 @@ public class UserController {
 				return "redirect:"+urlPath;
 			}
 		}else {
-				String email = userView.getUserEmail();
-				String password = userView.getUserPassword();
-				List<UserPersistence> list = UserHelper.getEmail2(email, password);
-				if (list.size()==0) {
-					return "redirect:login.html";
-				}else {
-					List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
-					session.setAttribute("UserId", list2.get(0).getUSERID());
-					session.setAttribute("UserEmail", email);
-					return "redirect:"+urlPath;
-				}
+			String email = userView.getUserEmail();
+			String password = userView.getUserPassword();
+			List<UserPersistence> list = UserHelper.getEmail2(email, password);
+			if (list.size()==0) {
+				return "redirect:login.html";
+			}else {
+				List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
+				session.setAttribute("UserId", list2.get(0).getUSERID());
+				session.setAttribute("UserEmail", email);
+				return "redirect:"+urlPath;
+			}
 		}
 		
 		
