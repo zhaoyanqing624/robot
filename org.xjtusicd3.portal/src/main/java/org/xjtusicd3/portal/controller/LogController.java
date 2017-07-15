@@ -25,7 +25,6 @@ public class LogController
 		mv.addObject("log_list",logindexViews);
 		return mv;
 	 
-		
 	}
 	 
 }

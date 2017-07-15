@@ -124,8 +124,8 @@
 							</div>
 							<div class="col-xs-6">
 								<div class="panel padder-v item bg-primary">
-									<div class="h1 text-fff font-thin h1">521</div>
-									<span class="text-muted text-xs">事件回访数</span>
+									<div class="h1 text-fff font-thin h1">0</div>
+									<span class="text-muted text-xs">今日未处理问题数</span>
 									<div class="top text-right w-full">
 										<i class="fa fa-caret-down text-warning m-r-sm"></i>
 									</div>
@@ -133,8 +133,8 @@
 							</div>
 							<div class="col-xs-6">
 								<div class="panel padder-v item">
-									<div class="font-thin h1">129</div>
-									<span class="text-muted text-xs">更新配置数</span>
+									<div class="font-thin h1">0</div>
+									<span class="text-muted text-xs">今日已处理问题数</span>
 									<div class="bottom text-left">
 										<i class="fa fa-caret-up text-warning m-l-sm"></i>
 									</div>
@@ -682,7 +682,7 @@
 				    xAxis: {
 				        type: 'category',
 				        boundaryGap: false,
-				        data: ['6.20','6.21','6.22','6.23','6.24','6.25','昨日']
+				        data: ['6.26','6.27','6.28','6.29','6.30','7.1','昨日']
 				    },
 				    yAxis: {
 				        type: 'value'

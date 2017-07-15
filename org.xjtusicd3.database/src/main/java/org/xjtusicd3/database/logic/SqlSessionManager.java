@@ -25,15 +25,15 @@ import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
 import org.xjtusicd3.database.mapper.EquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.ITPersistenceMapper;
 import org.xjtusicd3.database.mapper.LogPersistenceMapper;
-<<<<<<< HEAD
-=======
 import org.xjtusicd3.database.mapper.MessageHistoryPersistenceMapper;
 import org.xjtusicd3.database.mapper.MessagePersistenceMapper;
->>>>>>> branch 'master' of https://github.com/zhaoyanqing624/robot.git
 import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.PayPersistenceMapper;
+import org.xjtusicd3.database.mapper.PermissionPersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.mapper.RobotPersistenceMapper;
+import org.xjtusicd3.database.mapper.RolePermissionPersistenceMapper;
+import org.xjtusicd3.database.mapper.RolePersistenceMapper;
 import org.xjtusicd3.database.mapper.ScorePersistenceMapper;
 import org.xjtusicd3.database.mapper.ServerPersistenceMapper;
 import org.xjtusicd3.database.mapper.SharePersistenceMapper;
@@ -41,6 +41,7 @@ import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
 import org.xjtusicd3.database.mapper.User_Equipment_HistoryPersistenceMapper;
+import org.xjtusicd3.database.model.RolePermissionPersistence;
 
 
 
@@ -78,6 +79,7 @@ public class SqlSessionManager {
 			configuration.addMapper(RobotPersistenceMapper.class);
 			configuration.addMapper(AdvisePersistenceMapper.class);
 			configuration.addMapper(LogPersistenceMapper.class);
+			configuration.addMapper(PermissionPersistenceMapper.class);
 			configuration.addMapper(CommunityQuestionPersistenceMapper.class);
 			configuration.addMapper(CommunityAnswerPersistenceMapper.class);
 			configuration.addMapper(ComputerPersistenceMapper.class);
@@ -90,15 +92,15 @@ public class SqlSessionManager {
 			configuration.addMapper(PayPersistenceMapper.class);
 			configuration.addMapper(CommentPersistenceMapper.class);
 			configuration.addMapper(AgreePersistenceMapper.class);
+			configuration.addMapper(RolePersistenceMapper.class);
 			configuration.addMapper(CollectionPersistenceMapper.class);
 			configuration.addMapper(ScorePersistenceMapper.class);
 			configuration.addMapper(ServerPersistenceMapper.class);
-<<<<<<< HEAD
-=======
+			configuration.addMapper(RolePermissionPersistenceMapper.class);
 			configuration.addMapper(MessagePersistenceMapper.class);
 			configuration.addMapper(MessageHistoryPersistenceMapper.class);
 			configuration.addMapper(SharePersistenceMapper.class);
->>>>>>> branch 'master' of https://github.com/zhaoyanqing624/robot.git
+ 
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

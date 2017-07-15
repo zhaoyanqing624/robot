@@ -106,7 +106,7 @@
 										
 											<th>操作用户</th>
 
-											<th>对应方法</th>
+											<th>操作</th>
 
 											<th>日志时间</th>
 
@@ -127,7 +127,7 @@
                 							</td>
 											 
 
-											<td class="center">${lglist.logMethod}</td>
+											<td class="center"> ${lglist.logMethod}</td>
 
 											<td class="center">${lglist.logTime}</td>
 

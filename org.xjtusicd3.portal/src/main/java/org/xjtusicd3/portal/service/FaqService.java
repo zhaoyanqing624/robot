@@ -115,6 +115,7 @@ public class FaqService {
 	 * zpz_konwStatisticsView
 	 */
 	public static String konwStatisticsView(){
+		int Total = 0 ;
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
 		JSONArray jsonArray = new JSONArray();
 		for(ClassifyPersistence classifyPersistence:classifyPersistences){
@@ -128,12 +129,20 @@ public class FaqService {
 			jsonObject.put("value", a);
 			jsonObject.put("name",classifyPersistence.getFAQCLASSIFYNAME());
 			jsonArray.add(jsonObject);
+			Total =Total + a;
 		}
 		String result = JsonUtil.toJsonString(jsonArray);
 		System.out.println(result);
+		System.out.println(Total);
 		return result;
 	}
 	
+	public static int FaqTotal()
+	{
+		int Total;
+		Total = QuestionHelper.getFaqTotal();
+		return Total;
+	}
 	public static void main(String[] args)
 	{
 		konwStatisticsView();

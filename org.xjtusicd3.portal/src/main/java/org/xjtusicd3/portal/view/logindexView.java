@@ -2,7 +2,25 @@ package org.xjtusicd3.portal.view;
 
 public class logindexView
 {
+	private String logId;
+	private String logUersId;
 	private String logUser;
+	public String getLogId()
+	{
+		return logId;
+	}
+	public void setLogId(String logId)
+	{
+		this.logId = logId;
+	}
+	public String getLogUersId()
+	{
+		return logUersId;
+	}
+	public void setLogUersId(String logUersId)
+	{
+		this.logUersId = logUersId;
+	}
 	private String logMethod;
 	private String logTime;
 	public String getLogUser()

@@ -44,6 +44,7 @@
       </div>
       <div class="cont_forms" >
         <div class="cont_img_back_"> <img src="zhao/login_register/po.jpg" alt="" /> </div>
+        
         <form  action="saveLogin.html" method="post">
         <div class="cont_form_login"> <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
           <h2>LOGIN</h2>
@@ -54,6 +55,7 @@
           <button class="btn_login"  data-dialog="somedialog" id="login">登录</button>
         </div>
         </form>
+        
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
           <h2>SIGN UP</h2>
           <input type="text" class="inputElem" id="me" placeholder="邮箱" oninput="_email2()"/>

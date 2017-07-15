@@ -1,17 +1,15 @@
 package org.xjtusicd3.portal.service;
 
+ 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.xjtusicd3.common.util.JsonUtil;
+import java.util.Date;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.helper.UserQuestionHelper;
-import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.database.model.UserQuestionPersistence;
 import org.xjtusicd3.portal.view.IncidentindexView;
-
-import com.alibaba.fastjson.JSONObject;
 
 public class UserQuestionService
 {
@@ -63,6 +61,22 @@ public class UserQuestionService
 		
 		
 		return incidentindexViews;
+	}
+	
+	//get analysis result of user question
+	public static String dataAnalysis()
+	{
+		Date date=new Date();
+		
+        SimpleDateFormat format = new SimpleDateFormat("MM.dd");
+        String problemTime = format.format(date);
+        System.out.println(problemTime);
+		return null;
+		
+	}
+	public static void main(String[] args)
+	{
+		dataAnalysis();
 	}
 	
 //	//获取用户信息

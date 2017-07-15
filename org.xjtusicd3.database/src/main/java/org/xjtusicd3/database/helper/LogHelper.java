@@ -22,4 +22,15 @@ public class LogHelper
 		return log;
 		
 	}
+	
+	/*
+	 * zyq_get log
+	 */
+	public static void getLog(String logId,String userId,String logPermission,String logTime)
+	{
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		LogPersistenceMapper mapper = session.getMapper(LogPersistenceMapper.class);
+		mapper.log_info(logId, userId, logPermission, logTime);
+		session.close();
+	}
 }

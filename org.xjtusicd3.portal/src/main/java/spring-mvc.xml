@@ -55,4 +55,29 @@
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <!--拦截器-->
+	<mvc:interceptors>    
+	    <mvc:interceptor>    
+	        <!--匹配的是url路径， 如果不配置或/**,将拦截所有的Controller-->  
+	        <mvc:mapping path="/index" />  
+	        <mvc:mapping path="/incidentindex" />  
+	        <mvc:mapping path="/problemindex" />  
+	        <mvc:mapping path="/changeindex" />  
+	        <mvc:mapping path="/cfgindex" />  
+	        <mvc:mapping path="/knowledgeindex" />  
+	        <mvc:mapping path="/spiderindex" />
+	        <mvc:mapping path="/logindex" />   
+	        <mvc:mapping path="/userindex" />
+	        <mvc:mapping path="/rbacindex" /> 
+	        <mvc:mapping path="/messageindex" /> 
+	        <bean class="org.xjtusicd3.portal.interceptor.CommonInterceptor"></bean>    
+	    </mvc:interceptor>  
+	    
+	    <!--当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法-->  
+	    <mvc:interceptor>
+	        <!--匹配的是url路径， 如果不配置或/**,将拦截所有的Controller-->  
+	        <mvc:mapping path="/background/*" />  
+	        <bean class="org.xjtusicd3.portal.interceptor.adminInterceptor"></bean>    
+	    </mvc:interceptor>
+	</mvc:interceptors>
 </beans>

@@ -36,16 +36,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                             <i class="fa fa-wrench"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="SuperRBAC.html">普通用户</a>
-                            </li>
-                            <li><a href="SuperRBAC.html">管理员</a>
-                            </li>
-                            <li><a href="SuperRBAC.html">IT运维员</a>
-                            </li>
-                            <li><a href="SuperRBAC.html">超级管理员</a>
-                            </li>
-                        </ul>
+                       
                         <a class="close-link">
                             <i class="fa fa-times"></i>
                         </a>
@@ -56,156 +47,35 @@
                     <!--<div class="">-->
                         <!--<a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">添加权限</a>-->
                     <!--</div>-->
-
-                    <div class="">
-                        <a href="#" class="btn btn-primary ">普通用户</a>
-                    </div>
-
+ 
+				
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="editable">
                         <thead>
                         <tr>
-                            <th></th>
-                            <th>显示</th>
-                            <th>访问</th>
-                            <th>提交</th>
-                            <th>修改</th>
+                            <th width="10%"><input type="checkbox" id="checkAll"/></th>
+							<th width="15%">角色名称</th>
+							<th width="60%">拥有的权限</th>
+							<th width="15%">操作</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <#list rolePer_list as rbacList>
                         <tr class="gradeX">
-                            <td>提问</td>
-                            <td><div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example1.1">
-                                    <label class="onoffswitch-label" for="example1.1">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div>
+                            <td><input type="checkbox" id=" "/></td>
+                            <td> ${rbacList.roleName}
                             </td>
-                            <td><div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example1.2">
-                                    <label class="onoffswitch-label" for="example1.2">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                            <td class="center"><div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example1.3">
-                                    <label class="onoffswitch-label" for="example1.3">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                            <td class="center"><div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example1.4">
-                                    <label class="onoffswitch-label" for="example1.4">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
+                          
+                            <td class="center">${rbacList.permission} </td>
+                            <td><a  onclick="deleteAdvise()">操作权限</a></td>
                         </tr>
-                        <tr class="gradeC">
-                            <td>发帖</td>
-                            <td>
-                                <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example2.1">
-                                    <label class="onoffswitch-label" for="example2.1">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div>
-                            </td>
-                            <td> <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example2.2">
-                                    <label class="onoffswitch-label" for="example2.2">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                            <td class="center"> <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example2.3">
-                                    <label class="onoffswitch-label" for="example2.3">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                            <td class="center"> <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example2.4">
-                                    <label class="onoffswitch-label" for="example2.4">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td>知识库</td>
-                            <td> <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example3.1">
-                                    <label class="onoffswitch-label" for="example3.1">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div>
-                            </td>
-                            <td> <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example3.2">
-                                    <label class="onoffswitch-label" for="example3.2">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                            <td class="center"> <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example3.3">
-                                    <label class="onoffswitch-label" for="example3.3">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                            <td class="center"> <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox" checked class="onoffswitch-checkbox" id="example3.4">
-                                    <label class="onoffswitch-label" for="example3.4">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div></td>
-                        </tr>
-
+                    
+						</#list>
                         </tbody>
-                        <!--<tfoot>-->
-                        <!--<tr>-->
-                            <!--<th>渲染引擎</th>-->
-                            <!--<th>浏览器</th>-->
-                            <!--<th>平台</th>-->
-                            <!--<th>引擎版本</th>-->
-                            <!--<th>CSS等级</th>-->
-                        <!--</tr>-->
-                        <!--</tfoot>-->
+                        
                     </table>
-
+			
+			 
+			
                 </div>
             </div>
         </div>

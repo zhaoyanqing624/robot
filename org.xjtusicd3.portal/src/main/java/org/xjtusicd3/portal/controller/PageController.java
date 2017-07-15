@@ -1,9 +1,15 @@
 package org.xjtusicd3.portal.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.portal.service.UserService;
 
 @Controller
 public class PageController {
@@ -20,13 +26,6 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("problemdetail");
  	   return mv;
     }
-
-	@RequestMapping(value="test",method=RequestMethod.GET)
-    public ModelAndView  test(){
- 	   ModelAndView mv=new ModelAndView("test");
- 	   return mv;
-    }
-	
 	
 	@RequestMapping(value="changeindex",method=RequestMethod.GET)
     public ModelAndView  change(){
@@ -60,13 +59,9 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("incidentdetail3");
  	   return mv;
     }
-	@RequestMapping(value="rbacindex",method=RequestMethod.GET)
-    public ModelAndView  rbac(){
- 	   ModelAndView mv=new ModelAndView("rbacindex");
- 	   return mv;
-    }
+ 
 	@RequestMapping(value="index",method=RequestMethod.GET)
-    public ModelAndView  index(){
+    public ModelAndView  index(HttpServletRequest req){
  	   ModelAndView mv=new ModelAndView("index");
  	   return mv;
     }
@@ -79,6 +74,11 @@ public class PageController {
 	 @RequestMapping(value="login",method=RequestMethod.GET)
      public ModelAndView  login(){
   	   ModelAndView mv=new ModelAndView("login");
+  	   return mv;
+     }
+	 @RequestMapping(value="login2",method=RequestMethod.GET)
+     public ModelAndView  login2(){
+  	   ModelAndView mv=new ModelAndView("login2");
   	   return mv;
      }
 	 @RequestMapping(value="register",method=RequestMethod.GET)

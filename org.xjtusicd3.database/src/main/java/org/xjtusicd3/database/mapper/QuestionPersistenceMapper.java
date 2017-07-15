@@ -74,6 +74,8 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	//判断是创建知识还是修改知识
 	@Select("SELECT * FROM TBL_FAQquestion WHERE FAQQUESTIONID=#{0} AND MODIFYNUMBER=#{1}")
 	public List<QuestionPersistence> personal2_Ismodify(String faqquestionid, String modifynumber);
+	@Select("select count(*) from TBL_FAQquestion")
+	public int FaqTotal();
 	
 	
 }

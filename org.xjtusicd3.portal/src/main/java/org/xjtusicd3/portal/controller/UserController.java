@@ -5,24 +5,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.MvcNamespaceHandler;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.portal.service.UserService;
-
-import com.jayway.jsonpath.spi.Mode;
+import org.xjtusicd3.portal.view.UserView;
 
 @Controller
 public class UserController 
 {
 	/*
-	 * zpz_�õ�user
+	 * zpz_show User information
 	 */
 	@RequestMapping(value="userindex",method=RequestMethod.GET)
 	public ModelAndView user()
@@ -44,45 +41,21 @@ public class UserController
 		modelAndView.addObject("userInfoList", userPersistences);
 		return modelAndView;
 	}
-	//�����û�
-	@RequestMapping(value="adminAddUser",method=RequestMethod.GET)
-	public String adminAddUser(HttpServletRequest request,HttpServletResponse response){
-
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		//�ж������Ƿ�ע��
-		List<UserPersistence> list = UserHelper.getEmail(email);
-		if (list.size()==0) {
-			UserService.login_register(email, password);
-			return "0";
-		}else {
-			if (UserHelper.getEmail2(email, password).size()==0) {
-				if (UserService.validateUserState(email)==false) {
-					if (UserService.validateEmail(email)==true) {
-						return "1";
-					}else {
-						UserHelper.deleteUser(email);
-						UserService.login_register(email, password);
-						return "0";
-					}
-				}else {
-					return "1";
-				}
-			}else {
-				if (UserService.validateUserState(email)==false) {
-					if (UserService.validateEmail(email)==true) {
-						return "2";
-					}else {
-						UserHelper.deleteUser(email);
-						UserService.login_register(email, password);
-						return "0";
-					}
-				}else {
-					return "1";
-				}
-			}
-		}
 	
+	//login admin
+	@RequestMapping(value="adminLogin",method=RequestMethod.POST)
+	public String adminLogin(UserView userView,HttpServletRequest request,HttpServletResponse response){
+		String email = request.getParameter("userName");
+		String password = request.getParameter("userPassword");
+		List<UserPersistence> list = UserHelper.getEmail2(email, password);
+		if (list.size()==0) 
+		{
+			return "redirect:login.html";
+		}else 
+		{
+			request.getSession().setAttribute("user", list.get(0));
+			return "redirect:index.html" ;
+		}	
 	}
 	/*
 	 * ZPZ_deleteUser

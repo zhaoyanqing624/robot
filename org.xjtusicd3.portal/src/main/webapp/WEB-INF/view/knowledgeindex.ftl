@@ -117,7 +117,7 @@
 							</div>
 							<div class="col-xs-6">
 								<div class="panel padder-v item bg-info">
-									<div class="h1 text-fff font-thin h1">11518</div>
+									<div class="h1 text-fff font-thin h1">${total}</div>
 									<span class="text-muted text-xs">FAQ总数</span>
 									<div class="top text-right w-full">
 										<i class="fa fa-caret-down text-warning m-r-sm"></i>
@@ -527,73 +527,38 @@
 		 
 	        var myChart = echarts.init(document.getElementById('pieChart'));
 			
-			var option = {
-				backgroundColor : '#2c343c',
-
-				title : {
-					text : '各FAQ占比',
-					left : 'center',
-					top : 20,
-					textStyle : {
-						color : '#ccc'
-					}
-				},
-
-				tooltip : {
-					trigger : 'item',
-					formatter : "{a} <br/>{b} : {c} ({d}%)"
-				},
-
-				visualMap : {
-					show : false,
-					min : 80,
-					max : 600,
-					inRange : {
-						colorLightness : [ 0, 1 ]
-					}
-				},
-				series : [ {
-					name : '具体数据',
-					type : 'pie',
-					radius : '55%',
-					center : [ '50%', '50%' ],
-					data : ${result}.sort(function(a, b) {
-						return a.value - b.value;
-					}),
-					roseType : 'radius',
-					label : {
-						normal : {
-							textStyle : {
-								color : 'rgba(255, 255, 255, 0.3)'
-							}
-						}
-					},
-					labelLine : {
-						normal : {
-							lineStyle : {
-								color : 'rgba(255, 255, 255, 0.3)'
-							},
-							smooth : 0.2,
-							length : 10,
-							length2 : 20
-						}
-					},
-					itemStyle : {
-						normal : {
-							color : '#c23531',
-							shadowBlur : 200,
-							shadowColor : 'rgba(0, 0, 0, 0.5)'
-						}
-					},
-
-					animationType : 'scale',
-					animationEasing : 'elasticOut',
-					animationDelay : function(idx) {
-						return Math.random() * 200;
-					}
-				} ]
-			};
-		 
+	        var option = {
+	        	    title : {
+	        	        text: '知识库FAQ占比',
+	        	        subtext: '来自后台数据库',
+	        	        x:'center'
+	        	    },
+	        	    tooltip : {
+	        	        trigger: 'item',
+	        	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	        	    },
+	        	    legend: {
+	        	        orient: 'vertical',
+	        	        left: 'left',
+	        	        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+	        	    },
+	        	    series : [
+	        	        {
+	        	            name: '所占百分比',
+	        	            type: 'pie',
+	        	            radius : '55%',
+	        	            center: ['50%', '60%'],
+	        	            data:${result},
+	        	            itemStyle: {
+	        	                emphasis: {
+	        	                    shadowBlur: 10,
+	        	                    shadowOffsetX: 0,
+	        	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	        	                }
+	        	            }
+	        	        }
+	        	    ]
+	        	};
 			myChart.setOption(option);
 	</script>
 

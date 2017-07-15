@@ -26,14 +26,18 @@ public class UserQuestionController
 	@RequestMapping(value="incidentindex",method=RequestMethod.GET)
 	public ModelAndView userQuestion()
 	{
+		
 		ModelAndView mv = new ModelAndView("incidentindex");
 		List<IncidentindexView> incidentindexViews = UserQuestionService.incidentindexViews();
 		mv.addObject("incidentList",incidentindexViews);
+		 
+	 
 		String result = JsonUtil.toJsonString(incidentindexViews);
 		System.out.println(result);
 		return mv;
 		
 	}
+	
 	/*
 	 * zpz_showUserQuestionInfoDetail
 	 */
@@ -44,6 +48,10 @@ public class UserQuestionController
 		modelAndView.addObject("userQuestionInfoList", incidentindexViews);
 		return modelAndView;
 	}
+	/*
+	 * zpz_user problem data
+	 */
+	
 //	/*
 //	 * ZPZ_deleteUserQuestion
 //	 */
