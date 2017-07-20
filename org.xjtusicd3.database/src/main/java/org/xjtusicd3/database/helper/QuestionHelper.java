@@ -161,4 +161,14 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_faq_查看用户动态
+	 */
+	public static List<QuestionPersistence> faq_userDynamics(){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faq_userDynamics();
+		session.close();
+		return list;
+	}
 }

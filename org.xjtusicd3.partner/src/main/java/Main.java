@@ -14,10 +14,10 @@ import org.slf4j.LoggerFactory;
 public class Main {  
 	public static void main(String[] args) {
 		final Logger logger = LoggerFactory.getLogger(Main.class);
-		logger.info("测试：{}", "输出日志");
+		//logger.info("测试：{}", "输出日志");
 		for (int i=1;i<11;i++){
 			UUID uuid = UUID.randomUUID();
-			logger.info("测试：{}","meiguo");
+			//logger.info("测试：{}","meiguo");
 			System.out.println(uuid.toString());
 		}
 		

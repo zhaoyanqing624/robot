@@ -144,6 +144,7 @@ public class Segmentation_ansj {
 			robot_Chat robot_Chat = new robot_Chat();
 			String[] resultArray = s.split("\t");
 			double value = segmentation_ansj.similarScoreSecond(nList, resultArray[1]);
+			System.out.println(value);
 			if (value>=0.4) {
 				robot_Chat.setQuestionId(resultArray[0]);
 				robot_Chat.setValue(value);
@@ -157,7 +158,7 @@ public class Segmentation_ansj {
 	
 	public static void main(String[] args) throws Exception {
 //		segmentation_txt();
-		similarScoreFirst("拿着苹果手机吃着苹果");
+		similarScoreFirst("我的联想电脑无辜蓝屏了");
 	}
 	
 }

@@ -20,7 +20,8 @@
 		            <ul>
 		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
 		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
-		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="question.html?c=all&type=all" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="advise.html" data-pos="categorys_1_1">意见建议</a></li>
 		                <li>
 		                    <a class="new_a" href="service.html">关于我们</a>
 		                </li>
@@ -143,7 +144,7 @@
 					    <p class="textp">小朵知识库是众人参与可协作的知识分享平台。</p>
 					    <p class="linkWrapper">
 					    <a href="javascript:void(0);" onclick="window.open('faqadd.html');">创建知识</a>
-					    <a href=""javascript:void(0);" onclick="window.open('question.html');" >我要提问</a>
+					    <a href=""javascript:void(0);" onclick="window.open('question.html?c=all&type=all');" >我要提问</a>
 					    </p>
 				</div>
 				<div class="barBox2 " id="" data="1" style="left:0px;top:645px;z-index:1;width:340px;">

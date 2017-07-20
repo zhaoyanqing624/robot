@@ -22,7 +22,8 @@
 		            <ul>
 		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
 		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
-		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="question.html?c=all&type=all" data-pos="categorys_1_1">问题中心</a></li>
+		                <li><a class="new_a" href="advise.html" data-pos="categorys_1_1">意见建议</a></li>
 		                <li>
 		                    <a class="new_a" href="service.html">关于我们</a>
 		                </li>
@@ -250,17 +251,27 @@
     			<ul class="knowledge clearfix" id="konwledge-first">
 				</ul>
     		</div>
-			<div class="barBox contribution " id="contribution" data="1" style="left:0px;top:660px;z-index:1;height:130px;">
-                	<h3 class="box-title">我想贡献</h3>
-				    <p class="textp">小朵知识库是众人参与可协作的知识分享平台。</p>
-				    <p class="linkWrapper">
-				    <a href="faqadd.html" class="writer" target="_blank">创建知识</a>
-				    <a href="question.html" class="question" target="_blank">我要提问</a>
-				    </p>
+			<div class="barBox contribution " id="contribution" data="1" style="left:0px;top:447px;z-index:1;height:130px;">
+            	<h3 class="box-title">我想贡献</h3>
+			    <p class="textp">小朵知识库是众人参与可协作的知识分享平台。</p>
+			    <p class="linkWrapper">
+			    <a href="faqadd.html" class="writer" target="_blank">创建知识</a>
+			    <a href="question.html?c=all&type=all" class="question" target="_blank">我要提问</a>
+			    </p>
 			</div>
-			<div class="barBox " id="dynamicBox" data="1" style="left:0px;top:836px;z-index:1"><h3 class="box-title">用户动态</h3><ul class="dynamicList"><li class="dynamicItem"><p class="dynamicTime">2017-04-05 15:19:32</p><p class="dynamicDesc">ai2019191: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10访问小米路由器硬盘的操作方法</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 15:01:16</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10系统lol安全组件加载失败怎么办</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 14:47:35</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10搜狗输入法用户遭遇winlogon.exe应用程序错误怎么解决</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 14:45:11</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10新建虚拟桌面的方法</a>”</p></li><li class="dynamicItem"><p class="dynamicTime">2017-04-05 14:25:15</p><p class="dynamicDesc">初心_2056789: 发布“<a href="http://iknow.lenovo.com.cn/detail/dc_.html">Win10网页突然变大的应对措施</a>”</p></li></ul></div><div class="barBox " id="userBox" data="1" style="left:0px;top:445px;z-index:1"><h3 class="box-title">用户原创</h3><a class="more" href="/list/o.html">更多 &gt;</a><ul><li><span>1</span><a href="/detail/dc_KB020486.html" style="margin-left:10px;margin-right: 8px;">判断笔记本能不能装ssd</a><label>忐忑</label></li><li><span>2</span><a href="/detail/dc_KB023202.html" style="margin-left:10px;margin-right: 8px;">机械键盘的分类与选择</a><label>新手9552</label></li><li><span>3</span><a href="/detail/dc_KB023200.html" style="margin-left:10px;margin-right: 8px;">VR、AR、MR的区别</a><label>新手9552</label></li><li><span>4</span><a href="/detail/dc_KB023899.html" style="margin-left:10px;margin-right: 8px;">如何查看是否有人蹭网</a><label>初心_2056789</label></li><li><span>5</span><a href="/detail/dc_KB022885.html" style="margin-left:10px;margin-right: 8px;">Win10如何去掉通知区域网络图标上的感叹号</a><label>新手7977</label></li></ul></div><div class=" " id="" data="1" style="left:0px;top:238px;z-index:1">
-                    <input type="hidden" class="data" value="16"><a href="" onclick="clickadd()"><img src=""></a></div><div class="barAdBox " id="" data="1" style="left:0px;top:209px;z-index:1">
-                    <input type="hidden" class="data" value="23"><a href="http://iknow.lenovo.com/detail/dc_KB022987.html" onclick="clickadd()"><img src="images/erweima.PNG"></a></div></div>
+			<div class="barBox " id="dynamicBox" data="1" style="left:0px;top:621px;z-index:1">
+				<h3 class="box-title">用户动态</h3>
+				<ul class="dynamicList">
+					<#list userDynamics as userDynamics>
+					<li class="dynamicItem">
+						<p class="dynamicTime">${userDynamics.time}</p><p class="dynamicDesc"><a href="personal2.html?p=${userDynamics.userId}">${userDynamics.userName}</a>: ${userDynamics.how}“<a href="faq3.html?q=${userDynamics.faqId}">${userDynamics.faqTitle}</a>”</p>
+					</li>
+					</#list>
+				</ul>
+			</div>
+			<div class=" " id="" data="1" style="left:0px;top:238px;z-index:1">
+                <input type="hidden" class="data" value="16"><a  onclick="clickadd()"><img src=""></a></div><div class="barAdBox " id="" data="1" style="left:0px;top:209px;z-index:1">
+                <input type="hidden" class="data" value="23"><a  onclick="clickadd()"><img src="images/erweima.PNG"></a></div></div>
         	</div>
 	</div>            
     <div id="foot" class="footer">

@@ -36,6 +36,7 @@ import org.xjtusicd3.partner.view.Faq1_ClassifyView;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
+import org.xjtusicd3.partner.view.Faq_UserDynamics;
 
 import com.alibaba.fastjson.JSONObject;
 @Controller
@@ -49,7 +50,10 @@ public class FaqController {
 		}else {
 			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
 		}
+		//查询所有用户发表知识的状态
+		List<Faq_UserDynamics> userDynamics = QuestionService.userDynamics();
 		session.setAttribute("urlPath", urlPath);
+		mv.addObject("userDynamics", userDynamics);
 		return mv;
 	}
 	/*
