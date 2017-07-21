@@ -31,12 +31,15 @@ import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.QuestionService;
+import org.xjtusicd3.partner.service.RobotService;
 import org.xjtusicd3.partner.service.ScoreService;
 import org.xjtusicd3.partner.view.Faq1_ClassifyView;
+import org.xjtusicd3.partner.view.Faq1_UserActive;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
 import org.xjtusicd3.partner.view.Faq_UserDynamics;
+import org.xjtusicd3.partner.view.robot_Chat;
 
 import com.alibaba.fastjson.JSONObject;
 @Controller
@@ -64,11 +67,15 @@ public class FaqController {
 		ModelAndView modelAndView = new ModelAndView("faq1");
 		List<ClassifyPersistence> list = ClassifyHelper.faq1_ClassifyName(p);
 		List<Faq1_ClassifyView> list2 = ClassifyService.faq1_ClassifyView(p);
+		List<Faq1_UserActive> faq1_UserActives = CommentService.faq1_userActive();
+		List<Faq1_UserActive> faq1_UserActives2 = CommentService.faq1_userActive_week();
 		if (list == null || list.size()==0) {
 			return null;
 		}
 		modelAndView.addObject("faq1_list", list);
 		modelAndView.addObject("faq1_list2", list2);
+		modelAndView.addObject("userActive", faq1_UserActives);
+		modelAndView.addObject("userActiveWeek", faq1_UserActives2);
 		String urlPath="";
 		if (request.getQueryString()==null) {
 			urlPath = request.getServletPath();
@@ -87,9 +94,13 @@ public class FaqController {
 		List<ClassifyPersistence> classify2 = ClassifyService.faq2_classify2(c);
 		List<ClassifyPersistence> classify = ClassifyService.faq2_classify(c);
 		List<Faq2_faqContentView> faq2Views = QuestionService.faqlist_faq2(c,1);
+		List<Faq1_UserActive> faq1_UserActives = CommentService.faq1_userActive();
+		List<Faq1_UserActive> faq1_UserActives2 = CommentService.faq1_userActive_week();
 		modelAndView.addObject("faq2_list", classify);
 		modelAndView.addObject("faq2_list2", classify2);
 		modelAndView.addObject("faq2_list3", faq2Views);
+		modelAndView.addObject("userActive", faq1_UserActives);
+		modelAndView.addObject("userActiveWeek", faq1_UserActives2);
 		String urlPath="";
 		if (request.getQueryString()==null) {
 			urlPath = request.getServletPath();
@@ -122,7 +133,7 @@ public class FaqController {
 	 * faq3_知识内容
 	 */
 	@RequestMapping(value="faq3",method=RequestMethod.GET)
-	public ModelAndView faqContent(HttpSession session,HttpServletRequest request,String q){
+	public ModelAndView faqContent(HttpSession session,HttpServletRequest request,String q) throws Exception{
 		String useremail = (String) session.getAttribute("UserEmail");
 		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
 		ModelAndView modelAndView = new ModelAndView("faq3");
@@ -166,13 +177,14 @@ public class FaqController {
 				}
 			}
 		}
-
+		//查看相似的问题
+		List<robot_Chat> robot_Chats = RobotService.getRobotAnswer(faq3Views.get(0).getFaqTitle());
 		modelAndView.addObject("commentNumber", commentPersistences.size());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
 		modelAndView.addObject("faq3Views", faq3Views);
 		modelAndView.addObject("comment", faq3_CommentViews);
-		
+		modelAndView.addObject("faqSimilarity", robot_Chats);
 		String urlPath="";
 		if (request.getQueryString()==null) {
 			urlPath = request.getServletPath();

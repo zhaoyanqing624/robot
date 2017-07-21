@@ -1,0 +1,21 @@
+$(document).ready(function(){
+	$('#onebyone_slider').oneByOne({
+		className:'oneByOne1',
+		easeType:'random',
+		slideShow:true,
+		delay:200,
+		slideShowDelay:4000
+	})
+});
+$(".leifeng-tab&.js-leifeng-tab&.day").click(function(){
+	$(".leifeng-tab-box-min&.day").css('display','block');
+	$(".leifeng-tab-box-min&.week").css('display','none');
+	$(".leifeng-tab&.js-leifeng-tab&.day").addClass("active");
+	$(".leifeng-tab&.js-leifeng-tab&.week").removeClass("active");
+});
+$(".leifeng-tab&.js-leifeng-tab&.week").click(function(){
+	$(".leifeng-tab-box-min&.day").css('display','none');
+	$(".leifeng-tab-box-min&.week").css('display','block');
+	$(".leifeng-tab&.js-leifeng-tab&.day").removeClass("active");
+	$(".leifeng-tab&.js-leifeng-tab&.week").addClass("active");
+});

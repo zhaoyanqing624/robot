@@ -107,17 +107,26 @@ public class CommunityQuestionHelper{
 
 		}
 		
-		//zpz_get community problem by ID
-				public static List<CommunityQuestionPersistence> getCommunityQuestionById(String communityProblemId)
-				{
-					SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-					CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
-					List<CommunityQuestionPersistence> communityquestionlist = mapper.question2_getCommunity(communityProblemId);
-					session.close();
-					return communityquestionlist;
-					
+	//zpz_get community problem by ID
+			public static List<CommunityQuestionPersistence> getCommunityQuestionById(String communityProblemId)
+			{
+				SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+				CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+				List<CommunityQuestionPersistence> communityquestionlist = mapper.question2_getCommunity(communityProblemId);
+				session.close();
+				return communityquestionlist;
+				
 
-				}
+			}
+	/*
+	 * zyq_question2_设为最佳答案
+	 */
+	public static void updateBestAnswer(String questionId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		mapper.updateBestAnswer(questionId);
+		session.close();
+	}
 		
 	
 }

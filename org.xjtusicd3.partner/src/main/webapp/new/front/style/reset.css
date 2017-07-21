@@ -144,3 +144,14 @@ textarea {
 .mb10 {
     margin-bottom: 10px;
 }
+.barBox2  .box-title .leifeng-tab.active {
+    border-color: #f01414;
+}
+.barBox2  .box-title .leifeng-tab {
+    cursor: pointer;
+    font-size: 14px;
+    float: right;
+    height: 39px;
+    border-bottom: 2px solid transparent;
+    margin-left: 25px;
+}

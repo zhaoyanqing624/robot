@@ -123,4 +123,14 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	 */
 	@Select("SELECT * FROM TBL_Comment WHERE USERID=#{0} AND COMMENTPARENTID=#{1} ORDER BY COMMENTTIME DESC LIMIT #{2},#{3}")
 	List<CommentPersistence> personal2_getFaqComment_Limit(String userId,String parentId,int startNumber,int number);
+	/*
+	 * zyq_faq1_查看活跃用户
+	 */
+	@Select("SELECT USERID,count(USERID) as NUM FROM TBL_Comment WHERE STR_TO_DATE(COMMENTTIME,'%Y-%m-%d')=STR_TO_DATE(#{0},'%Y-%m-%d') GROUP BY USERID ORDER BY NUM DESC LIMIT 10")
+	List<CommentPersistence> faq1_userActive(String time);
+	/*
+	 * zyq_faq1_查看活跃用户_按周查询
+	 */
+	@Select("SELECT USERID,count(USERID) as NUM FROM TBL_Comment WHERE STR_TO_DATE(COMMENTTIME,'%Y-%m-%d')<STR_TO_DATE(#{0},'%Y-%m-%d') AND STR_TO_DATE(COMMENTTIME,'%Y-%m-%d')>STR_TO_DATE(#{1},'%Y-%m-%d') GROUP BY USERID ORDER BY NUM DESC LIMIT 10")
+	List<CommentPersistence> faq1_userActiveWeek(String time, String time2);
 }

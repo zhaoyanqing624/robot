@@ -402,9 +402,11 @@ var Util = {
     },
     showPersonCenter: function(){
         $("#my_center").children(".my_service_list").stop().slideDown(300);
+        document.getElementsByClassName("my_service_list")[0].style.height="126px";
     },
     hidePersonCenter: function(){
         $("#my_center").children(".my_service_list").stop().slideUp(300);
+        document.getElementsByClassName("my_service_list")[0].style.height="126px";
     }
 
 }

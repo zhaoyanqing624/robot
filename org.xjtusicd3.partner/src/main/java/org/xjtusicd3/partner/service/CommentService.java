@@ -2,6 +2,7 @@ package org.xjtusicd3.partner.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -9,11 +10,15 @@ import java.util.UUID;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
+import org.xjtusicd3.database.helper.CommunityQuestionHelper;
+import org.xjtusicd3.database.helper.ITHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
+import org.xjtusicd3.database.model.ITPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.view.Faq1_UserActive;
 import org.xjtusicd3.partner.view.Faq2_faqUserView;
 import org.xjtusicd3.partner.view.Faq3_CommentReplyView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
@@ -170,4 +175,69 @@ public class CommentService {
 		}
 		return faq3_CommentReplyViews;
 	}
+	/*
+	 * zyq_question2_设为最佳答案
+	 */
+	public static void saveBestAnswer(String questionId,String answerId) {
+		CommunityAnswerHelper.saveBestAnswer(answerId);
+		CommunityQuestionHelper.updateBestAnswer(questionId);
+	}
+	/*
+	 * zyq_faq1_查看活跃用户
+	 */
+	public static List<Faq1_UserActive> faq1_userActive() {
+		List<Faq1_UserActive> faq1_UserActives = new ArrayList<Faq1_UserActive>();
+  	    Date date=new Date();
+  	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+  	    String time = format.format(date);
+		List<CommentPersistence> commentPersistences = CommentHelper.faq1_userActive(time);
+		for(CommentPersistence commentPersistence:commentPersistences){
+			Faq1_UserActive faq1_UserActive = new Faq1_UserActive();
+			faq1_UserActive.setUserId(commentPersistence.getUSERID());
+			List<UserPersistence> userPersistences = UserHelper.getEmail_id(commentPersistence.getUSERID());
+			faq1_UserActive.setUserImage(userPersistences.get(0).getAVATAR());
+			List<ITPersistence> itPersistences = ITHelper.IT(commentPersistence.getUSERID());
+			if (itPersistences.size()!=0) {
+				faq1_UserActive.setWork(itPersistences.get(0).getGOODWORK());
+			}
+			faq1_UserActive.setUserName(userPersistences.get(0).getUSERNAME());
+			faq1_UserActive.setFaqNumber(commentPersistence.getNUM());
+			faq1_UserActives.add(faq1_UserActive);
+		}
+		return faq1_UserActives;
+	}
+	/*
+	 * zyq_faq1_查看活跃用户_按周查询
+	 */
+	public static List<Faq1_UserActive> faq1_userActive_week() {
+		List<Faq1_UserActive> faq1_UserActives = new ArrayList<Faq1_UserActive>();
+  	    Date date=new Date();
+  	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+  	    String time = format.format(date);
+  	    String time2 = getdate(-7);
+		List<CommentPersistence> commentPersistences = CommentHelper.faq1_userActiveWeek(time,time2);
+		for(CommentPersistence commentPersistence:commentPersistences){
+			Faq1_UserActive faq1_UserActive = new Faq1_UserActive();
+			faq1_UserActive.setUserId(commentPersistence.getUSERID());
+			List<UserPersistence> userPersistences = UserHelper.getEmail_id(commentPersistence.getUSERID());
+			faq1_UserActive.setUserImage(userPersistences.get(0).getAVATAR());
+			List<ITPersistence> itPersistences = ITHelper.IT(commentPersistence.getUSERID());
+			if (itPersistences.size()!=0) {
+				faq1_UserActive.setWork(itPersistences.get(0).getGOODWORK());
+			}
+			faq1_UserActive.setUserName(userPersistences.get(0).getUSERNAME());
+			faq1_UserActive.setFaqNumber(commentPersistence.getNUM());
+			faq1_UserActives.add(faq1_UserActive);
+		}
+		return faq1_UserActives;
+	}
+	public static String getdate(int i){ // //获取前后日期 i为正数 向后推迟i天，负数时向前提前i天
+		 Date dat = null;
+		 Calendar cd = Calendar.getInstance();
+		 cd.add(Calendar.DATE, i);
+		 dat = cd.getTime();
+		 SimpleDateFormat dformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 String time = dformat.format(dat);
+		 return time;
+	 }
 }

@@ -171,4 +171,7 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+	/*
+	 * zyq_faq3_查看问题相似的问题
+	 */
 }

@@ -3,6 +3,7 @@ package org.xjtusicd3.database.helper;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.CommentPersistenceMapper;
 import org.xjtusicd3.database.model.CommentPersistence;
@@ -237,6 +238,26 @@ public class CommentHelper {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
 		List<CommentPersistence> list = mapper.personal2_getFaqComment_Limit(userId,parentId,startNumber,number);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_faq1_查看活跃用户
+	 */
+	public static List<CommentPersistence> faq1_userActive(String time){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.faq1_userActive(time);
+		session.close();
+		return list;
+	}
+	/*
+	 * zyq_faq1_查看活跃用户_按周查询
+	 */
+	public static List<CommentPersistence> faq1_userActiveWeek(String time, String time2) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.faq1_userActiveWeek(time,time2);
 		session.close();
 		return list;
 	}

@@ -384,13 +384,14 @@ public class CommentController {
 	public String saveBestAnswer(HttpServletRequest request,HttpSession session){
 		String useremail = (String) session.getAttribute("UserEmail");
 		String answerId = request.getParameter("answerId");
+		String quesitonId = request.getParameter("quesitonId");
 		JSONObject jsonObject = new JSONObject();
 		if (useremail==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			CommunityAnswerHelper.saveBestAnswer(answerId);
+			CommentService.saveBestAnswer(quesitonId,answerId);
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;

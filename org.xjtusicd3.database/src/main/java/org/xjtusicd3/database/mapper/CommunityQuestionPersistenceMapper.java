@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 
@@ -52,4 +53,9 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	 */
 	@Select("SELECT * FROM TBL_CommunityQuestion")
 	List<CommunityQuestionPersistence> getAllCommunityQuestion();
+	/*
+	 * zyq_question2_设为最佳答案
+	 */
+	@Update("UPDATE TBL_CommunityQuestion SET ISANSWER=1 WHERE COMMUNITYQUESTIONID=#{0}")
+	void updateBestAnswer(String questionId);
 }
