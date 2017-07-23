@@ -27,7 +27,17 @@ public class CommentPersistence {
 	@TableField(columnName="TOUSERID")
 	private String TOUSERID;
 	
+	//查询用户的评论+回复数
+	@TableField(columnName="NUM")
+	private String NUM;
 	
+	
+	public String getNUM() {
+		return NUM;
+	}
+	public void setNUM(String nUM) {
+		NUM = nUM;
+	}
 	public String getTOUSERID() {
 		return TOUSERID;
 	}

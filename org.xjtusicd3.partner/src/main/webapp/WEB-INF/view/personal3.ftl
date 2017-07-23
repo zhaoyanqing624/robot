@@ -36,51 +36,9 @@
 	</style>
 </head>
 <body>
+	<!-- 头部开始 -->
 	<div class="header" id="head">      
-        <div class="loginRegistHead" role="banner">
-            <div class="content clearfix">
-                <div class="header_top_wrap_left">
-		            <ul>
-		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
-		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
-		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
-		                <li>
-		                    <a class="new_a" href="service.html">关于我们</a>
-		                </li>
-		            </ul> 
-                </div>
-                <div class="header_top_wrap_right">
-		            <ul>
-		              <#if UserEmail??>
-		                <div class="unlogin">
-		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
-		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
-		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-		                            <div class="top_icon"></div>
-		                            <ul class="ul_list">
-		                                <li><a href="personal.html">个人信息</a></li>
-		                                <li><a href="personal3.html">我的设备</a></li>
-		                                <li><a href="personal2.html">我的主页</a></li>
-		                                <li><a href="notice.html">消息通知</a></li>
-		                            </ul>
-		                        </div>
-		                    </li>
-		                    <li class="left_margin loginLinkLi"><a href="loginout.html" id="headExit">退出</a>
-		                    </li>
-		                </div>
-		             <#else>
-				       	<div class="unlogin">
-		                    <li class="unloginLinkLi">
-		                        <a href="login.html" id="headLogin" class="listen_btn" data-pos="categorys_1_2">登录/注册</a>
-		                        </li>
-		                    </li>
-		                </div>
-		             </#if>
-		            </ul> 
-                </div>
-            </div>
-        </div>
+        <#include "inc/incTop.ftl">
        	<div class="headContent">
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
@@ -90,89 +48,94 @@
     		</div>
 		</div>
     </div>
+     <!-- 头部结束 -->
+     
+	<!-- 主体开始 -->
     <div class="mainContent">
         <div class="contentWra clearfix">
         	<section id="shortcodes">
-        <div class="container">
-            <div id="tab-container">
-                <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                    <div class="col-md-6" style="width:100%;">
-                        <ul id="tab2" class="nav nav-pills">
-                            <li class="active"><a href="#tab2-item1" data-toggle="tab">电脑PC</a></li>
-                        </ul>
-                        <div class="tab-content" style="margin-left: 165px;margin-top: 30px;width: 1000px;float: left;">
-                            <div class="tab-pane fade active in" id="tab2-item1" style="width: 889px;float: left;">
-								<section id="portfolio-information" class="padding-top">
-							        <div class="container">
-							            <div class="row">
-							                <div class="col-sm-6" style="width:35%">
-							                    <img src="images/portfolio-details/hp8180.jpg" class="img-responsive" alt="">
-							                </div>
-							                <div class="col-sm-6">
-							                <#list personal3_list as list>
-							                    <div class="project-name overflow">
-							                        <h2 class="bold">${list.EQUIPMENTMODEL}</h2>
-							                        <ul class="nav navbar-nav navbar-default">
-							                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：${list.EQUIPMENTTIME}</span></li>
-							                        </ul>
-							                    </div>
-							                    <div class="project-info overflow">
-							                        <h3>硬件信息：</h3>
-							                        <ul class="elements">
-							                            <li><i class="fa fa-angle-right"></i> 处理器：${list.CPU}</li>
-							                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：${list.RAM}</li>
-							                            <li><i class="fa fa-angle-right"></i> 硬盘：${list.HARDDRIVER}</li>
-							                            <li><i class="fa fa-angle-right"></i> 网卡：${list.NETWORKCARD}</li>
-							                            <#if list.NETWORKCARD2 ??>
-							                            <li><i class="fa fa-angle-right"></i> 无线网卡：${list.NETWORKCARD2}</li>
-							                            </#if>
-							                            <li><i class="fa fa-angle-right"></i> 主板：${list.MOTHERBOARD}</li>
-							                            <li><i class="fa fa-angle-right"></i> 系统名称：${list.OS}</li>
-							                            
-							                        </ul>
-							                    </div>
+        		<div class="container">
+            		<div id="tab-container">
+                		<div class="row">
+                    		<div class="col-md-12"></div>
+                    		<div class="col-md-6" style="width:100%;">
+                        		<ul id="tab2" class="nav nav-pills">
+                            		<li class="active"><a href="#tab2-item1" data-toggle="tab">电脑PC</a></li>
+                        		</ul>
+                        		<div class="tab-content" style="margin-left: 165px;margin-top: 30px;width: 1000px;float: left;">
+                            		<div class="tab-pane fade active in" id="tab2-item1" style="width: 889px;float: left;">
+										<section id="portfolio-information" class="padding-top">
+							        		<div class="container">
+							            		<div class="row">
+							                		<div class="col-sm-6" style="width:35%">
+														<img src="images/portfolio-details/hp8180.jpg" class="img-responsive" alt="">
+							                		</div>
+							                		<div class="col-sm-6">
+													<#list personal3_list as list>
+							                    		<div class="project-name overflow">
+							                        		<h2 class="bold">${list.EQUIPMENTMODEL}</h2>
+									                        <ul class="nav navbar-nav navbar-default">
+									                            <li style="width:165px;margin-top: 16px;"><i class="fa fa-clock-o"></i><span>时间：${list.EQUIPMENTTIME}</span></li>
+									                        </ul>
+							                    		</div>
+									                    
+									                    <div class="project-info overflow">
+									                        <h3>硬件信息：</h3>
+									                        <ul class="elements">
+									                            <li><i class="fa fa-angle-right"></i> 处理器：${list.CPU}</li>
+									                            <li><i class="fa fa-angle-right"></i> 内存（RAM）：${list.RAM}</li>
+									                            <li><i class="fa fa-angle-right"></i> 硬盘：${list.HARDDRIVER}</li>
+									                            <li><i class="fa fa-angle-right"></i> 网卡：${list.NETWORKCARD}</li>
+									                            <#if list.NETWORKCARD2 ??>
+									                            <li><i class="fa fa-angle-right"></i> 无线网卡：${list.NETWORKCARD2}</li>
+									                            </#if>
+									                            <li><i class="fa fa-angle-right"></i> 主板：${list.MOTHERBOARD}</li>
+									                            <li><i class="fa fa-angle-right"></i> 系统名称：${list.OS}</li>
+									                            
+									                        </ul>
+									                    </div>
 							                   	
-							                    <div class="skills overflow" style="height:78px;" id="buding">
-							                        <h3>补丁信息：</h3>
-							                        <ul class="nav navbar-nav navbar-default">
-							                        	<a onclick="zhankai()" style="color:blue;margin-left:10px;" id="zhankaiall">展开</a>
-							                        	<#list list.patchViews as patchView>
-							                            <li style="float:left"><image src="ico/system.ico"></image><span>${patchView.CONFIGURENAME}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;"></span></li><br/>
-							                        	</#list>
-							                        </ul>
-							                    </div>
+									                    <div class="skills overflow" style="height:78px;" id="buding">
+									                        <h3>补丁信息：</h3>
+									                        <ul class="nav navbar-nav navbar-default">
+									                        	<a onclick="zhankai()" style="color:blue;margin-left:10px;" id="zhankaiall">展开</a>
+									                        	<#list list.patchViews as patchView>
+									                            <li style="float:left"><image src="ico/system.ico"></image><span>${patchView.CONFIGURENAME}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;"></span></li><br/>
+									                        	</#list>
+									                        </ul>
+									                    </div>
 							                    
-							                    <div class="client overflow" style="height:78px;" id="ruanjian">
-							                        <h3>软件信息：</h3>
-							                        <ul class="nav navbar-nav navbar-default">
-							                        	<a onclick="zhankai2()" style="color:blue;margin-left:10px;" id="zhankaiall2">展开</a>
-							                        	<#list list.softViews as softView>
-							                            <li style="float:left"><image src="ico/Python.ico"></image><span>${softView.CONFIGURENAME}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;">${softView.CONFIGUREVERSION}</span></li><br/>
-							                       		</#list>
-							                        </ul>
-							                    </div>
-							                </#list>  
-							                </div>
-							            </div>
-							        </div>
-							    </section>
-                        	</div>
-                        	
-                        </div>
-                    </div>
-                </div>
-            </div><!--/#table-container-->
-            <div class="padding"></div>
-        </div>
-    </section>
-		</div>
-        		
+									                    <div class="client overflow" style="height:78px;" id="ruanjian">
+									                        <h3>软件信息：</h3>
+									                        <ul class="nav navbar-nav navbar-default">
+									                        	<a onclick="zhankai2()" style="color:blue;margin-left:10px;" id="zhankaiall2">展开</a>
+									                        	<#list list.softViews as softView>
+									                            <li style="float:left"><image src="ico/Python.ico"></image><span>${softView.CONFIGURENAME}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #78ba32;">${softView.CONFIGUREVERSION}</span></li><br/>
+									                       		</#list>
+									                        </ul>
+									                    </div>
+							                		</#list>  
+							                		</div>
+							            		</div>
+							        		</div>
+							    		</section>
+                        			</div>    	
+                        		</div>
+                    		</div>
+               			 </div>
+            		</div><!--/#table-container-->
+            
+            		<div class="padding"></div>
+        		</div>
+    		</section>
+		</div>     		
     </div>
-    <div id="foot" class="footer">
-    	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
-    </div>
+    <!-- 主体结束 -->
+    
+    <!-- 底部开始 -->
+	<#include "/inc/incFoot.ftl">
+	<!-- 底部结束 -->
+    	
     	<script type="text/javascript" src="js/jquery.js"></script>
     	<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script src="zhao/radio&check/js/labelauty.js"></script>

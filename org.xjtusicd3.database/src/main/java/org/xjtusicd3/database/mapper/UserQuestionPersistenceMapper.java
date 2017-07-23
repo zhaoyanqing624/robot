@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.database.model.UserQuestionPersistence;
 
-public interface UserQuestionPersistenceMapper
+public interface UserQuestionPersistenceMapper extends IBaseDao<UserQuestionPersistence, String>
 {
 	//zpz_获取用户问题
 		@Select("SELECT * FROM TBL_UserQuestion")

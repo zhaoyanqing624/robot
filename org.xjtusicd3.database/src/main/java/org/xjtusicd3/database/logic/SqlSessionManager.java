@@ -99,11 +99,8 @@ public class SqlSessionManager {
 			configuration.addMapper(ScorePersistenceMapper.class);
 			configuration.addMapper(ServerPersistenceMapper.class);
 			configuration.addMapper(RolePermissionPersistenceMapper.class);
-			configuration.addMapper(ServerPersistenceMapper.class);
 			configuration.addMapper(MessagePersistenceMapper.class);
 			configuration.addMapper(MessageHistoryPersistenceMapper.class);
-			configuration.addMapper(SharePersistenceMapper.class);
- 
 			configuration.addMapper(SharePersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);

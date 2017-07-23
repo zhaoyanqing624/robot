@@ -127,7 +127,7 @@
                     <div class="chat01_content">
         				<ul class="media-list chat-list">
 							<br>
-							<div id="chat01_content">
+							<div id="chat01_content" >
 
 							</div>
 							<br>
@@ -156,7 +156,7 @@
                         <ul>
                             <li style="right: 0px; top: -20px;">
                             	<p id="colored-button" class="text-center">
-        							<a class="btn float-buttons waves-effect waves-button waves-float" onclick="chatWithRobot()">确 认</a>
+        							<a class="btn float-buttons waves-effect waves-button waves-float" onclick="chat()">确 认</a>
     							</p>
                             </li>
                         </ul>
@@ -185,7 +185,7 @@
 										<li class="macth_nav_li">
 										<span class="macth_xvnav_li_alist" data-bind="text:$data.title"></span>
 											<ul class="macth_xvnav_li_ul" data-bind="foreach:$data.content">
-												<li><a href="" data-bind="text:$data.faqTitle"></a></li>
+												<li><a onclick="chat2()" data-bind="text:$data.faqTitle"></a></li>
 											</ul>
 										</li>
 									</ul>

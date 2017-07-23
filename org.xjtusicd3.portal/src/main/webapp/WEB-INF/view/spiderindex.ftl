@@ -58,11 +58,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div class="input-group">
-                        <input type="text" placeholder="请输入搜索内容" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-
-                    </div>
+                     
                     <div class="jqGrid_wrapper">
                         <table id="table_list_2"></table>
                         <div id="pager_list_2"></div>
@@ -98,95 +94,20 @@
         var mydata = [
             {
                 id: "1",
-                date: "2015-05-25",
-                name: "FAQ直属库",
-                time: "2017.3.13",
-                location: "D:/FAQ/69816219.json",
-                information:"SpiderController > knowledge",
-                total: "123461"
+                date: "2017-05-25",
+                name: "IT运维常见问题与答案",
+                time: "2017.7.13",
+                total: "12886"
+                
             },
             {
                 id: "2",
-                date: "2015-05-25",
-                name: "爬取雾霾信息",
+                date: "2017-05-25",
+                name: "爬取软件",
                 time: "2017.3.13",
-                location: "D:/weather/6191951621.json",
-                information:"SpiderController > weather",
-                total: "1561651"
+                total: "181651"
             },
-            {
-                id: "3",
-                date: "2015-05-25",
-                name: "FAQ直属库",
-                time: "2017.3.13",
-                location: "D:/FAQ/69816219.json",
-                information:"SpiderController > knowledge",
-                total: "123461"
-            },
-            {
-                id: "4",
-                date: "2015-05-25",
-                name: "爬取雾霾信息",
-                time: "2017.3.13",
-                location: "D:/weather/6191951621.json",
-                information:"SpiderController > weather",
-                total: "1561651"
-            },
-            {
-                id: "5",
-                date: "2015-05-25",
-                name: "FAQ直属库",
-                time: "2017.3.13",
-                location: "D:/FAQ/69816219.json",
-                information:"SpiderController > knowledge",
-                total: "123461"
-            },
-            {
-                id: "6",
-                date: "2015-05-25",
-                name: "爬取雾霾信息",
-                time: "2017.3.13",
-                location: "D:/weather/6191951621.json",
-                information:"SpiderController > weather",
-                total: "1561651"
-            },
-            {
-                id: "7",
-                date: "2015-05-25",
-                name: "FAQ直属库",
-                time: "2017.3.13",
-                location: "D:/FAQ/69816219.json",
-                information:"SpiderController > knowledge",
-                total: "123461"
-            },
-            {
-                id: "8",
-                date: "2015-05-25",
-                name: "爬取雾霾信息",
-                time: "2017.3.13",
-                location: "D:/weather/6191951621.json",
-                information:"SpiderController > weather",
-                total: "1561651"
-            },
-            {
-                id: "9",
-                date: "2015-05-25",
-                name: "FAQ直属库",
-                time: "2017.3.13",
-                location: "D:/FAQ/69816219.json",
-                information:"SpiderController > knowledge",
-                total: "123461"
-            },
-            {
-                id: "10",
-                date: "2015-05-25",
-                name: "爬取雾霾信息",
-                time: "2017.3.13",
-                location: "D:/weather/6191951621.json",
-                information:"SpiderController > weather",
-                total: "1561651"
-            },
-
+             
         ];
 
 
@@ -200,7 +121,7 @@
             shrinkToFit: true,
             rowNum: 20,
             rowList: [10, 20, 30],
-            colNames: ['爬虫编号', '添加日期', '爬虫功能简介', '上次爬虫时间', '数据存储地址', '爬虫逻辑信息', '爬取数目'],
+            colNames: ['爬虫编号', '添加日期', '爬虫功能简介', '上次爬虫时间', '爬取数目'],
             colModel: [
                 {
                     name: 'id',
@@ -229,24 +150,8 @@
                     index: 'time',
                     editable: true,
                     width: 50,
-                    align: "right",
+                     
                     sorttype: "float",
-                },
-                {
-                    name: 'location',
-                    index: 'location',
-                    editable: true,
-                    width: 110,
-                    align: "right",
-                    sorttype: "float"
-                },
-                {
-                    name: 'information',
-                    index: 'information',
-                    editable: true,
-                    width: 110,
-                    align: "right",
-                    sorttype: "float"
                 },
                 {
                     name: 'total',

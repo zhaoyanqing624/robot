@@ -24,8 +24,7 @@ public class UserQuestionController
 	 * zpz_得到userQuestion
 	 */
 	@RequestMapping(value="incidentindex",method=RequestMethod.GET)
-	public ModelAndView userQuestion()
-	{
+	public ModelAndView userQuestion(){
 		
 		ModelAndView mv = new ModelAndView("incidentindex");
 		List<IncidentindexView> incidentindexViews = UserQuestionService.incidentindexViews();

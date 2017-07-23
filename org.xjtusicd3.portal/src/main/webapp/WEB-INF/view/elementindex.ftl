@@ -97,27 +97,27 @@
                 <div class="col-sm-3" style="padding-left:0;">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content" style="border-top:none;background-color:#e4eaec;">
-                            <h5>事件完成比</h5>
+                            <h5>问题处理率</h5>
                             <div class="progress progress-striped active">
-                                <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar">
+                                <div style="width: 95%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar">
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <h5>事件回访比</h5>
+                            <h5>变更处理率</h5>
                             <div class="progress progress-striped active">
-                                <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-warning">
+                                <div style="width: 80%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-warning">
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <h5>不满意度</h5>
+                            <h5>配置变更率</h5>
                             <div class="progress progress-striped active">
-                                <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar .progress-bar-danger">
+                                <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar .progress-bar-danger">
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <h5>事件</h5>
+                            <h5>问题回复率</h5>
                             <div class="progress progress-striped active">
-                                <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-info">
+                                <div style="width: 60%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-info">
                                     <span class="sr-only"></span>
                                 </div>
                             </div>

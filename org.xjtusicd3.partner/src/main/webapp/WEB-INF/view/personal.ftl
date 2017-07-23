@@ -38,50 +38,7 @@
 </head>
 <body>
 	<div class="header" id="head">      
-        <div class="loginRegistHead" role="banner">
-            <div class="content clearfix">
-                <div class="header_top_wrap_left">
-		            <ul>
-		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
-		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
-		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
-		                <li>
-		                    <a class="new_a" href="service.html">关于我们</a>
-		                </li>
-		            </ul> 
-                </div>
-                <div class="header_top_wrap_right">
-		             <ul>
-		              <#if UserEmail??>
-		                <div class="unlogin">
-		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
-		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
-		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-		                            <div class="top_icon"></div>
-		                            <ul class="ul_list">
-		                                <li><a href="personal.html">个人信息</a></li>
-		                                <li><a href="personal3.html">我的设备</a></li>
-		                                <li><a href="personal2.html">我的主页</a></li>
-		                                <li><a href="notice.html">消息通知</a></li>
-		                            </ul>
-		                        </div>
-		                    </li>
-		                    <li class="left_margin loginLinkLi"><a href="loginout.html" id="headExit">退出</a>
-		                    </li>
-		                </div>
-		             <#else>
-				       	<div class="unlogin">
-		                    <li class="unloginLinkLi">
-		                        <a href="login.html" id="headLogin" class="listen_btn" data-pos="categorys_1_2">登录/注册</a>
-		                        </li>
-		                    </li>
-		                </div>
-		             </#if>
-		            </ul> 
-                </div>
-            </div>
-        </div>
+        <#include "inc/incTop.ftl">
        	<div class="headContent">
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
@@ -91,6 +48,7 @@
     		</div>
 		</div>
     </div>
+    
     <div class="mainContent">
         <div class="contentWra clearfix">
         	<section id="shortcodes">
@@ -312,126 +270,19 @@
 		<a class="close-reveal-modal" id="cancelModal">&#215;</a>
 	</div>
 	<div class="reveal-modal-bg" id="modal_bg" style="display:none;cursor: pointer;"></div>
-    <script>
-
-	  </script>
-	   	<script type="text/javascript">
-		$("#date03").jeDate({
-		    isinitVal:true,
-		    festival:true,
-		    ishmsVal:false,
-		    minDate: '1900-01-01 00:00:00',
-		    maxDate: $.nowDate(0),
-		    format:"YYYY-MM-DD",
-		    zIndex:3000,
+	   	
+	<script type="text/javascript" src="new/front/js/util.js"></script>
+	<script src="zhao/radio&check/js/labelauty.js"></script>
+	<script src="js/view/personal.js"></script>
+	<script>
+		$(document).ready(function () {
+		    $(".rdolist").labelauty("rdolist", "rdo");
 		});
-		$("#update_").click(function(){
-			$("#subinfo").css('display','none');
-			$("#updateinfo").css('display','block');	
-		});
-		$("#submit_").click(function(){
-			$("#subinfo").css('display','block');
-			$("#updateinfo").css('display','none');
-		});
-		
-		$("#submitupdatePassword").click(function(){
-		var pw = /^\w{6,16}$/;
-		var rpw = $("#repassword2").val();
-	if(pw.test($("#password").val())&&pw.test($("#password2").val())&&(rpw==($("#password2").val()))){
-		$.ajax({
-			type:"POST",
-			url:"/org.xjtusicd3.partner/updateUserPassword.html",
-			data:{
-				"password":$("#password").val(),
-				"password2":$("#password2").val(),
-				"repassword2":$("#repassword2").val()
-			},
-			dataType:"json",
-			success:function(data){
-				if(data=="0"){
-					$(".spa2").text('新密码不能与原密码相同');
-				}if(data="1"){
-					$(".spa1").text('原密码错误');
-				}if(data="2"){
-					document.getElementById("modal_bg").style.display="block";
-					document.getElementById("myModal").style.visibility = "visible";
-				}
-			}
-		})
-		return true;
-	}else{
-		if($("#password").val()==""){
-			$(".spa1").text('请填写密码');
-		}
-		if($("#password2").val()==""){
-			$(".spa2").text('请填写密码');
-		}
-		if($("#repassword2").val()==""){
-			$(".spa3").text('请再次填写密码');
-		}
-		return false;
-	}
-});
-function _password(){
-	if($("#password").val()!=""){
-		var pw = /^\w{6,16}$/;
-		if(!(pw.test($("#password").val()))){
-			$(".spa1").text("密码由字母、数字、下划线组成且6-16位");
-			return false;
-		}else if (pw){
-			$(".spa1").text("");
-			return true;
-		}
-	}else{
-		$(".spa1").text("");
-	}
-}
-function _password2(){
-	if($("#password2").val()!=""){
-		var pw = /^\w{6,16}$/;
-		if(!(pw.test($("#password2").val()))){
-			$(".spa2").text("密码由字母、数字、下划线组成且6-16位");
-			return false;
-		}else if (pw){
-			$(".spa2").text("");
-			return true;
-		}
-	}else{
-		$(".spa2").text("");
-	}
-}
-function _repassword2(){
-	if($("#repassword2").val()!=""){
-		var pw = $("#password2").val();
-		if(!(pw==$("#repassword2").val())){
-			$(".spa3").text("两次输入的密码不一致");
-			return false;
-		}else if (pw){
-			$(".spa3").text("");
-			return true;
-		}
-	}else{
-		$(".spa3").text("");
-	}
-}
-//取消弹出框
-$("#cancelModal").click(function(){
-	document.getElementById("modal_bg").style.display="none";
-	document.getElementById("myModal").style.visibility = "hidden";
-	window.location.reload(); 
-})
-		</script>
-    	<script type="text/javascript" src="new/front/js/util.js"></script>
-		<script src="zhao/radio&check/js/labelauty.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".rdolist").labelauty("rdolist", "rdo");
-        });
 	</script>
 	
-	  <script src="zhao/address/js/distpicker.data.js"></script>
-	  <script src="zhao/address/js/distpicker.js"></script>
-	  <script src="zhao/address/js/main.js"></script>
+	 <script src="zhao/address/js/distpicker.data.js"></script>
+	 <script src="zhao/address/js/distpicker.js"></script>
+	 <script src="zhao/address/js/main.js"></script>
 
 </body>
 </html>

@@ -83,7 +83,10 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion")
 	public List<QuestionPersistence> getFaqTotal();
- 
-	
-	
+
+	/*
+	 * zyq_faq_查看用户动态
+	 */
+	@Select("SELECT * FROM TBL_FAQquestion ORDER BY MODIFYTIME DESC LIMIT 5")
+	public List<QuestionPersistence> faq_userDynamics();
 }

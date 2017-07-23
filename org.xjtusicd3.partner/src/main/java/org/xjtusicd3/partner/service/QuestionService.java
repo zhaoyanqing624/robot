@@ -16,6 +16,7 @@ import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
+import org.xjtusicd3.partner.view.Faq_UserDynamics;
 import org.xjtusicd3.partner.view.Faq2_faqUserView;
 import org.xjtusicd3.partner.view.Faq3_faqAnswer;
 
@@ -114,5 +115,29 @@ public class QuestionService {
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	String time = format.format(date);
 		ShareHelper.saveShare2(UUID.randomUUID().toString(),userId,time,faqquestionId);
+	}
+	/*
+	 * zyq_FAQ页面_用户动态
+	 */
+	public static List<Faq_UserDynamics> userDynamics(){
+		List<Faq_UserDynamics> userDynamics = new ArrayList<Faq_UserDynamics>();
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faq_userDynamics();
+		for(QuestionPersistence questionPersistence:questionPersistences){
+			Faq_UserDynamics faq_UserDynamics = new Faq_UserDynamics();
+			List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(questionPersistence.getFAQQUESTIONID());
+			List<UserPersistence> userPersistences = UserHelper.getUserNameById(answerPersistences.get(0).getUSERID());
+			faq_UserDynamics.setFaqId(questionPersistence.getFAQQUESTIONID());
+			faq_UserDynamics.setFaqTitle(questionPersistence.getFAQTITLE());
+			faq_UserDynamics.setTime(questionPersistence.getMODIFYTIME());
+			if (questionPersistence.getMODIFYNUMBER()=="1") {
+				faq_UserDynamics.setHow("发布");
+			}else {
+				faq_UserDynamics.setHow("修改");
+			}
+			faq_UserDynamics.setUserId(userPersistences.get(0).getUSERID());
+			faq_UserDynamics.setUserName(userPersistences.get(0).getUSERNAME());
+			userDynamics.add(faq_UserDynamics);
+		}
+		return userDynamics;
 	}
 }

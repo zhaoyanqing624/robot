@@ -12,6 +12,10 @@ import org.xjtusicd3.database.model.UserQuestionPersistence;
 
 public class UserQuestionHelper
 {
+	public static void main(String[] args)
+	{
+		System.out.println(getUserQuestion());
+	}
 	//获取用户问题信息
 		public static List<UserQuestionPersistence> getUserQuestion()
 		{
