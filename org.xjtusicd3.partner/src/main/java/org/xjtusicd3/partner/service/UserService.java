@@ -1,5 +1,7 @@
 package org.xjtusicd3.partner.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
 
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.AnswerHelper;
@@ -34,8 +37,8 @@ import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.SharePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.filter.IdentificationNumber;
+import org.xjtusicd3.partner.filter.MD5;
 import org.xjtusicd3.partner.filter.ValidateEmail;
-import org.xjtusicd3.partner.view.Message_MessageView;
 import org.xjtusicd3.partner.view.Personal2_CommunityView;
 import org.xjtusicd3.partner.view.Personal2_FaqView;
 import org.xjtusicd3.partner.view.Personal2_PayView;
@@ -43,9 +46,30 @@ import org.xjtusicd3.partner.view.Personal2_indexList;
 
 public class UserService {
 	/*
+	 * zyq_MD5加密判断是否登录
+	 */
+	public static boolean isLogin(String email,String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+		MD5 md5 = new MD5();
+		password = md5.EncoderByMd5(password);
+		List<UserPersistence> list = UserHelper.getEmail2(email, password);
+		if (list.isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	/*
+	 * zyq_MD5加密_密码修改 新密码加密
+	 */
+	 public static void updateUserPassword(String email,String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+		MD5 md5 = new MD5();
+		password = md5.EncoderByMd5(password);
+		UserHelper.updateUserPassword(email, password);
+	 }
+	/*
 	 * login_ajax_注册
 	 */
-	public static void login_register(String email,String password){
+	public static void login_register(String email,String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		UUID uuid = UUID.randomUUID();
 		String identification_number =genCodes(8, 1).get(0);
     	Date date=new Date();
@@ -53,7 +77,9 @@ public class UserService {
         SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMddHHmmss");
         String time_stamp = format.format(date);
         String time = format2.format(date);
-		String username = "会员"+ time + genCodes(6, 1).get(0); 
+		String username = "会员"+ time + genCodes(6, 1).get(0);
+		MD5 md5 = new MD5();
+		password = md5.EncoderByMd5(password);
 		//发送邮件验证信息
 		ValidateEmail validateEmail = new ValidateEmail();
 		try {
@@ -872,9 +898,6 @@ public class UserService {
 			personal2_CommunityViews.add(personal2_CommunityView);
 		}
 		return personal2_CommunityViews;
-	}
-	public static void main(String[] args) {
-		getReplyCommunity("fa2f2884-985d-44e0-89b8-0454d0feaeac");
 	}
 	/*
 	 * zyq_personal2_ajax_获取更多问吧的回答
