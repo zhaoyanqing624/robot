@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LoginFilter implements Filter {
-
-	public void destroy() {
+    public void destroy() {
 
 	}
 
@@ -56,11 +55,11 @@ public class LoginFilter implements Filter {
 			
 			String url = request.getServletPath() + (request.getPathInfo() == null ? "" : request.getPathInfo());
 			HttpSession session = request.getSession();
-			Object object = session.getAttribute("session_username");
+			Object object = session.getAttribute("UserEmail");
 			
-			//没有登录就不允许访问专利方面的链接
-			if (object==null&&(url.contains("inventorVisiual")||url.contains("inventorVisiual")||url.contains("companyVisiual")||url.contains("forum"))) {
-				response.sendRedirect(request.getContextPath() + "/user/login.html");
+			//没有登录就不允许访问页面的的链接
+			if (object==null&&(url.contains("advise")||url.contains("faqadd")||url.contains("message")||url.contains("notice")||url.contains("personal")||url.contains("personal2")||url.contains("personal3")||url.contains("personal4")||url.contains("question2"))) {
+				response.sendRedirect(request.getContextPath() + "/login.html");
 				return;
 			} 
 			chain.doFilter(servletRequest, servletResponse);

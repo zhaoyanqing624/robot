@@ -250,7 +250,66 @@
 					</div>
                     <div class="clearfix commentScoreBtn"  style="display:none">
                         <input type="button" value="发表评论" class="publishCommentBtn" onclick="comment()">
-                    </div>                  
+                    </div>
+                    <h3>文章评论</h3>
+                    <#list comment as comment>
+                    <ul class="commentList" id="${comment.commentId}" >
+                    	<li class="commentLiContent">
+                    		<#list comment.userViews as user>
+                    		<div class="userContent clearfix">
+                    			<span class="userPic"><img src="${user.userImage}"></span>
+                    			<span class="username">${user.userName}</span><span class="line">|</span><span class="time">${comment.commentTime}</span>
+                    		</div>
+                    		<div class="clearfix content" >
+	                    		<a href="javascript:void(0);" class="commentReplay" onclick="openreply()">回复(${comment.commentNumber})</a>
+	                    		<p class="text" >${comment.commentContent}</p>
+                    		</div>
+                    		<ul class="subCommentList" style="display:none">
+                    			<#list comment.replyViews as reply>
+                    			<li id="${reply.commentId}" class="_commentlist" onmouseover="showdelete(event,this)" onmouseout="hiddendelete(event,this)">
+                    				<div class="userContent clearfix" id="${reply.toUserName}">
+                    					<#if reply.toUserName ??>
+                    						<span class="username">
+                    							<span class="zhao">${reply.userName}</span> 回复：${reply.toUserName}
+	                    					</span>
+                    					<#else>
+	                    					<span class="username">
+	                    						<span class="zhao">${reply.userName}</span> 评论
+	                    					</span>
+                    					</#if>
+                    					<span class="line">|</span><span class="time">${reply.time}</span>
+                    				</div>
+                    				<#if userName ??>
+                    				<div class="clearfix content" onclick="replyOther()" style="cursor:pointer">
+                    					<a href="javascript:void(0);" class="commentReplay" onclick="deleteComment()" style="display:none">
+                    						<#if reply.userName==userName>
+                    						<i class="fa fa-trash-o"></i>
+                    						</#if>
+                    					</a>
+                    					<p class="text">${reply.comment}</p>
+                    				</div>
+                    				<#else>
+                    				<div class="clearfix content">
+                    					<a  class="commentReplay"  style="display:none"></a>
+                    					<p class="text">${reply.comment}</p>
+                    				</div>
+                    				</#if>
+                    			</li>
+                    			</#list>
+                    			<#if comment.commentNumber gt 5>
+                    			<p class="ac2" id="querymorelink2"><a href="javascript:void(0);" onclick="querymorereply()">更多回复</a></p>
+                    			</#if>
+                    		</ul>
+                    		</#list>
+                    		<div class="commentReplayUser" id="">回复：<span class="username_span" style="color:#F00" ></span>:<span class="content_span" style="color:#F00"></span></div>
+                    		<textarea class="commentReplayText" id="replycontenttext" style="display:none"></textarea>
+                    		<p class="ac" style="display:none"><input type="button" value="发表" class="replayBtn" onclick="replycomment()"></p>
+                    	</li>
+                    </ul>
+                    </#list>
+                    <#if commentNumber gt 5>
+                    <p class="ac" id="querymorelink" class="display:block"><a href="javascript:void(0);"  onclick="querymorecomment()">查看更多...</a></p>
+                    </#if>                  
                 </div>
                 <!-- 发表评论结束 -->
             </div>
