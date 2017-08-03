@@ -2,6 +2,7 @@ package org.xjtusicd3.database.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -58,4 +59,11 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	 */
 	@Update("UPDATE TBL_CommunityQuestion SET ISANSWER=1 WHERE COMMUNITYQUESTIONID=#{0}")
 	void updateBestAnswer(String questionId);
-}
+	/*
+	 * zpz将community question and answer add to FAQ,then delete these
+	 */
+	@Select("DELETE  FROM TBL_CommunityQuestion WHERE COMMUNITYQUESTIONID=#{0}")
+	public void deleteCommunityQuestion(String questionId);
+	@Select("DELETE  FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0}")
+	public void deleteCommunityAnswer(String questionId);
+} 

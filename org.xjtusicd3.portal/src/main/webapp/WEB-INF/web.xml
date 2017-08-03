@@ -22,7 +22,7 @@
 	 
 	<filter>
 		<filter-name>loginFilter</filter-name>
-		<filter-class>org.xjtusicd3.partner.filter.LoginFilter</filter-class>
+		<filter-class>org.xjtusicd3.portal.filter.LoginFilter</filter-class>
 	</filter>
 
 	<filter-mapping>

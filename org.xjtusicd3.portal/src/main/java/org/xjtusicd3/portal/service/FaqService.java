@@ -99,16 +99,28 @@ public class FaqService {
 		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(problemID);
 		//开始存入FAQ问题
 		QuestionPersistence questionPersistence = new QuestionPersistence();
-		questionPersistence.setFAQQUESTIONID(UUID.randomUUID().toString());
+		AnswerPersistence answerPersistence = new AnswerPersistence();
+		answerPersistence.setFAQANSWERID(communityAnswerPersistences.get(0).getCOMMUNITYANSWERID());
+		answerPersistence.setFAQCONTENT(communityAnswerPersistences.get(0).getCONTENT());
+		answerPersistence.setUSERID(communityAnswerPersistences.get(0).getUSERID());
+		questionPersistence.setFAQQUESTIONID(communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
+		answerPersistence.setFAQQUESTIONID(communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
 		questionPersistence.setFAQTITLE(communityQuestionPersistences.get(0).getTITLE());
+		questionPersistence.setFAQKEYWORDS(null);
+		questionPersistence.setFAQCLASSIFYID(communityQuestionPersistences.get(0).getCLASSIFYID());
+    	questionPersistence.setCOLLECTION("0");
+    	questionPersistence.setSCAN("0");
     	Date date=new Date();
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	String time = format.format(date);
     	questionPersistence.setMODIFYTIME(time);
-    	questionPersistence.setSCAN("0");
+    	questionPersistence.setFAQDESCRIPTION(communityQuestionPersistences.get(0).getCONTENT());
+    	questionPersistence.setMODIFYNUMBER("2");
+    	questionPersistence.setFAQSTATE(2);
     	QuestionHelper.save(questionPersistence);
-    	
-		AnswerPersistence answerPersistence = new AnswerPersistence();
+		AnswerHelper.save(answerPersistence);
+		CommunityQuestionHelper.deleteCommunityAnswerById(problemID);
+		CommunityQuestionHelper.deleteCommunityQuestionById(problemID);
 	}
 	
 	/*

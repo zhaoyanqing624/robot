@@ -1,5 +1,8 @@
 package org.xjtusicd3.portal.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +48,11 @@ public class UserController
 	//login admin
 	@RequestMapping(value="adminLogin",method=RequestMethod.POST)
 	public String adminLogin(UserView userView,HttpServletRequest request,HttpServletResponse response){
+		
+		
 		String email = request.getParameter("userName");
-		String password = request.getParameter("userPassword");
+		String psw = request.getParameter("userPassword");
+		String password = StringToMd5(psw);
 		List<UserPersistence> list = UserHelper.getEmail2(email, password);
 		if (list.size()==0) 
 		{
@@ -67,7 +73,7 @@ public class UserController
 		UserHelper.deleteUser(userEmail);
 		System.out.println(userEmail);
 	}
-	
+
 
 	/*
 	 * zpz_addUserInfo
@@ -106,4 +112,30 @@ public class UserController
 		modelAndView.addObject("allUserList",userlist);
 		return modelAndView;
 	}
+	//psw转md5
+	public static String StringToMd5(String psw) {  
+        {  
+            try {  
+                MessageDigest md5 = MessageDigest.getInstance("MD5");  
+                md5.update(psw.getBytes("UTF-8"));  
+                byte[] encryption = md5.digest();  
+  
+                StringBuffer strBuf = new StringBuffer();  
+                for (int i = 0; i < encryption.length; i++) {  
+                    if (Integer.toHexString(0xff & encryption[i]).length() == 1) {  
+                        strBuf.append("0").append(Integer.toHexString(0xff & encryption[i]));  
+                    } else {  
+                        strBuf.append(Integer.toHexString(0xff & encryption[i]));  
+                    }  
+                }  
+  
+                return strBuf.toString();  
+            } catch (NoSuchAlgorithmException e) {  
+                return "";  
+            } catch (UnsupportedEncodingException e) {  
+                return "";  
+            }  
+        }  
+    } 
+	
 }

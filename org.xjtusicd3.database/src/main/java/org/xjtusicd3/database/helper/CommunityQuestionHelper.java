@@ -115,9 +115,28 @@ public class CommunityQuestionHelper{
 				List<CommunityQuestionPersistence> communityquestionlist = mapper.question2_getCommunity(communityProblemId);
 				session.close();
 				return communityquestionlist;
-				
-
 			}
+			
+			//zpz_delete community problem by ID
+			public static void deleteCommunityQuestionById(String communityProblemId)
+			{
+				SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+				CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+				mapper.deleteCommunityQuestion(communityProblemId);
+				session.close();
+			 
+			}
+			
+			//zpz_delete community answer by ID
+			public static void deleteCommunityAnswerById(String communityProblemId)
+			{
+				SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+				CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+				mapper.deleteCommunityAnswer(communityProblemId);
+				session.close();
+				 
+			}
+			
 	/*
 	 * zyq_question2_设为最佳答案
 	 */
