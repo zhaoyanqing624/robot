@@ -37,15 +37,11 @@ public class EquipmentController {
 	 * zyq_personal3_当前设备展示
 	 */
 	@RequestMapping(value="personal3",method=RequestMethod.GET)
-	public ModelAndView personal3(HttpSession session,HttpServletRequest request) throws UnknownHostException, SocketException, SigarException{
+	public ModelAndView personal3(HttpSession session,HttpServletRequest request) throws UnknownHostException, SocketException, SigarException {
 		String useremail = (String) session.getAttribute("UserEmail");
-		if (useremail==null) {
-			return new ModelAndView("login");
-		}else {
-			ModelAndView mv = new ModelAndView("personal3");
-			List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(useremail);
-			mv.addObject("personal3_list", list);
-			return mv;
-		}
+		ModelAndView mv = new ModelAndView("personal3");
+		List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(useremail);
+		mv.addObject("personal3_list", list);
+		return mv;
 	}
 }

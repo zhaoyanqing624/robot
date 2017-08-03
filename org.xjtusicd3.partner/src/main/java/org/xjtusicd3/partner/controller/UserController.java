@@ -2,6 +2,8 @@ package org.xjtusicd3.partner.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +47,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveRegister"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
-	public String registerlist(HttpServletRequest request,HttpServletResponse response){
+	public String registerlist(HttpServletRequest request,HttpServletResponse response) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		//判断邮箱是否被注册
@@ -54,7 +56,7 @@ public class UserController {
 			UserService.login_register(email, password);
 			return "0";
 		}else {
-			if (UserHelper.getEmail2(email, password).size()==0) {
+			if (UserService.isLogin(email, password)==false) {
 				if (UserService.validateUserState(email)==false) {
 					if (UserService.validateEmail(email)==true) {
 						return "1";
@@ -108,39 +110,23 @@ public class UserController {
 	 * login_登录
 	 */
 	@RequestMapping(value="/saveLogin",method=RequestMethod.POST)
-	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request){
+	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		String useremail = (String) session.getAttribute("UserEmail");
 		String urlPath = (String) session.getAttribute("urlPath");
 		if (urlPath==null) {
 			urlPath = "robot.html";
 		}
-		if (useremail==null) {
-			String email = userView.getUserEmail();
-			String password = userView.getUserPassword();
-			List<UserPersistence> list = UserHelper.getEmail2(email, password);
-			if (list.size()==0) {
-				return "redirect:login.html";
-			}else {
-				List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
-				session.setAttribute("UserId", list2.get(0).getUSERID());
-				session.setAttribute("UserEmail", email);
-				return "redirect:"+urlPath;
-			}
+		String email = userView.getUserEmail();
+		String password = userView.getUserPassword();
+		boolean islogin = UserService.isLogin(email, password);
+		if (islogin==false) {
+			return "redirect:login.html";
 		}else {
-			String email = userView.getUserEmail();
-			String password = userView.getUserPassword();
-			List<UserPersistence> list = UserHelper.getEmail2(email, password);
-			if (list.size()==0) {
-				return "redirect:login.html";
-			}else {
-				List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
-				session.setAttribute("UserId", list2.get(0).getUSERID());
-				session.setAttribute("UserEmail", email);
-				return "redirect:"+urlPath;
-			}
+			List<UserPersistence> list2 = UserHelper.getEmail(userView.getUserEmail());
+			session.setAttribute("UserId", list2.get(0).getUSERID());
+			session.setAttribute("UserEmail", email);
+			return "redirect:"+urlPath;
 		}
-		
-		
 	}
 	/*
 	 * 用户退出
@@ -213,7 +199,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/updateUserPassword"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
-	public String updateUserPassword(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+	public String updateUserPassword(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
 		String useremail = (String) session.getAttribute("UserEmail");
@@ -223,8 +209,8 @@ public class UserController {
 			if (password==password2) {
 				return "0";
 			}else {
-				List<UserPersistence> list = UserHelper.getEmail2(useremail, password);
-				if (list.size()==0) {
+				boolean islogin = UserService.isLogin(useremail, password);
+				if (islogin==false) {
 					return "1";
 				}else {
 					UserHelper.updateUserPassword(useremail, password2);

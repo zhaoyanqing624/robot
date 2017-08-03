@@ -28,6 +28,9 @@ import org.xjtusicd3.partner.view.Personal3_EquipmentConfigureView;
 import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
 public class EquipmentService {
+	public static void main(String[] args) throws UnknownHostException, SocketException, SigarException {
+		saveCurrentEquipment("77528570@qq.com");
+	}
 	/*
 	 * zyq_ajax_实时获取当前设备资源
 	 */
