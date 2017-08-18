@@ -30,7 +30,7 @@ public class Main {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        String time = format.format(date);
 //        System.out.println(time);
-		EncoderByMd5("111111");
+//		EncoderByMd5("111111");
 		
 	}
 	public static String getdate(int i){ // //获取前后日期 i为正数 向后推迟i天，负数时向前提前i天

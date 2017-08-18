@@ -123,7 +123,7 @@ public class Segmentation_ansj {
 		for(QuestionPersistence questionPersistence:questionPersistences){
 			Result terms = ToAnalysis.parse(questionPersistence.getFAQTITLE(),forest);
 			String result = terms.recognition(StopLibrary.get()).toStringWithOutNature();
-			BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("library/faqKeywords.txt",true),"UTF-8"));
+			BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("E:/faqKeywords.txt",true),"UTF-8"));
 			String string = questionPersistence.getFAQQUESTIONID() + "\t"+result+"\r\n";
 			fileWriter.write(string);
 			fileWriter.flush();
@@ -136,7 +136,7 @@ public class Segmentation_ansj {
 	public static List<robot_Chat> robot_Chats(String comment) throws Exception{
 		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
 		List<NLP_Word> nList = segmentation_ansj.similarScoreFirst(comment);
-		File file = new File("library/faqKeywords.txt");//Text文件
+		File file = new File("E:/faqKeywords.txt");//Text文件
 		BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
 		String s = null;
 		List<robot_Chat> robot_Chats = new ArrayList<robot_Chat>();

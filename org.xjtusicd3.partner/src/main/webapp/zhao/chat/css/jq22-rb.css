@@ -8913,13 +8913,12 @@ hr.dots:before {
 }
 #login #owl-login,
 #register #owl-login {
-  width: 31%;
+  width: 26%;
   height: 15%;
   background-image: url("../images/owl-login.png");
   position: absolute;
   top: -14.6%;
-  left: 80%;
-  margin-left: -25%;
+  margin-left: -70%;
 }
 @media all and (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 1.5/1), (min-device-pixel-ratio: 1.5), (min-resolution: 138dpi), (min-resolution: 1.5dppx) {
   #login #owl-login,
