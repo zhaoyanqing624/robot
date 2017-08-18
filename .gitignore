@@ -2,6 +2,7 @@ ven build output.
 target/
 
 # Generated for Eclipse.
+model
 .settings/
 .project
 .classpath
