@@ -312,4 +312,26 @@ public class FaqController {
 			}
 		}
 	}
+	/**
+	 * author:zhaoyanqing
+	 * abstract:用来建立luence的知识库搜索
+	 * data:2017年8月20日 20:52:06
+	 */
+	@RequestMapping(value="faqSearch",method=RequestMethod.GET)
+	public ModelAndView faqSearch(HttpSession session,HttpServletRequest request){
+		ModelAndView modelAndView = new ModelAndView("faqSearch");
+		List<Faq1_UserActive> faq1_UserActives = CommentService.faq1_userActive();
+		List<Faq1_UserActive> faq1_UserActives2 = CommentService.faq1_userActive_week();
+		
+		modelAndView.addObject("userActive", faq1_UserActives);
+		modelAndView.addObject("userActiveWeek", faq1_UserActives2);
+		String urlPath="";
+		if (request.getQueryString()==null) {
+			urlPath = request.getServletPath();
+		}else {
+			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		}
+		session.setAttribute("urlPath", urlPath);
+		return modelAndView;
+	}
 }

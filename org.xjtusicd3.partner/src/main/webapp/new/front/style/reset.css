@@ -155,3 +155,15 @@ textarea {
     border-bottom: 2px solid transparent;
     margin-left: 25px;
 }
+.duoduo_button {
+    float: right;
+    width: 140px;
+    height: 20px;
+    line-height: 18px;
+    background: #68aae9;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Microsoft YaHei', Arial, sans-serif, \5b8b\4f53;
+    margin-top: 10px;
+    border-radius: 5px;
+}

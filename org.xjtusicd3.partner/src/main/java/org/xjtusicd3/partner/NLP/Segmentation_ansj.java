@@ -29,7 +29,13 @@ import org.xjtusicd3.database.model.NLP_Word;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.partner.view.robot_Chat;
 import org.xjtusicd3.partner.view.robot_ChatView;
+
 public class Segmentation_ansj {
+	/**
+	 * author:zhaoyanqing
+	 * abstract:利用ansj将分好的词，根据词频做VSM模型
+	 * date:2017年8月18日 18:51:34
+	 */
 	public static List<NLP_Word> similarScoreFirst(String text) throws Exception{
 		Forest forest = Library.makeForest("library/computer.dic");
 		Result terms = ToAnalysis.parse(text,forest);
@@ -52,6 +58,8 @@ public class Segmentation_ansj {
 		System.out.println(JsonUtil.toJsonString(list));
 		return list;
 	}
+	
+	
 	public static List<robot_ChatView> similarScoreSecond1() throws Exception{
 		Forest forest = Library.makeForest("library/computer.dic");
 		List<QuestionPersistence> questionPersistences = QuestionHelper.getFaqTotal();
@@ -114,29 +122,15 @@ public class Segmentation_ansj {
 		double score =  textSimilarity.similarScore(list, list1);
 		return score;
 	}
-	/*
-	 * 提取faq的问题开始分词加入文件
-	 */
-	public static void segmentation_txt() throws Exception{
-		Forest forest = Library.makeForest("library/computer.dic");
-		List<QuestionPersistence> questionPersistences = QuestionHelper.getFaqTotal();
-		for(QuestionPersistence questionPersistence:questionPersistences){
-			Result terms = ToAnalysis.parse(questionPersistence.getFAQTITLE(),forest);
-			String result = terms.recognition(StopLibrary.get()).toStringWithOutNature();
-			BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("E:/faqKeywords.txt",true),"UTF-8"));
-			String string = questionPersistence.getFAQQUESTIONID() + "\t"+result+"\r\n";
-			fileWriter.write(string);
-			fileWriter.flush();
-			fileWriter.close(); 
-		}
-	}
-	/*
-	 * 与txt提取的分好的词进行余弦
+	/**
+	 * author:zhaoyanqing
+	 * abstract:聊天机器人接口，用户根据自然语言提问，利用ansj将分好的词构建词频VSM模型，随后利用余弦进行相似度计算
+	 * date:2017年8月18日 18:51:34
 	 */
 	public static List<robot_Chat> robot_Chats(String comment) throws Exception{
 		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
 		List<NLP_Word> nList = segmentation_ansj.similarScoreFirst(comment);
-		File file = new File("E:/faqKeywords.txt");//Text文件
+		File file = new File("library/faqKeywords.txt");//Text文件
 		BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
 		String s = null;
 		List<robot_Chat> robot_Chats = new ArrayList<robot_Chat>();
@@ -154,11 +148,4 @@ public class Segmentation_ansj {
 		System.out.println(JsonUtil.toJsonString(robot_Chats));
 		return robot_Chats;
 	}
-	
-	public static void main(String[] args) throws Exception {
-//		segmentation_txt();
-//		similarScoreFirst("我的联想电脑无辜蓝屏了");
-		robot_Chats("电脑蓝屏了怎么办");
-	}
-	
 }
