@@ -28,6 +28,7 @@ import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.ScorePersistence;
 import org.xjtusicd3.database.model.SharePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.lucene.LuceneIndex;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.QuestionService;
@@ -316,15 +317,17 @@ public class FaqController {
 	 * author:zhaoyanqing
 	 * abstract:用来建立luence的知识库搜索
 	 * data:2017年8月20日 20:52:06
+	 * @throws Exception 
 	 */
-	@RequestMapping(value="faqSearch",method=RequestMethod.GET)
-	public ModelAndView faqSearch(HttpSession session,HttpServletRequest request){
+	@RequestMapping(value="/faqSearch",method=RequestMethod.POST)
+	public ModelAndView faqSearch(HttpSession session,HttpServletRequest request) throws Exception{
+		String queryStr = request.getParameter("queryString");
+		System.out.println(queryStr);
 		ModelAndView modelAndView = new ModelAndView("faqSearch");
-		List<Faq1_UserActive> faq1_UserActives = CommentService.faq1_userActive();
-		List<Faq1_UserActive> faq1_UserActives2 = CommentService.faq1_userActive_week();
-		
-		modelAndView.addObject("userActive", faq1_UserActives);
-		modelAndView.addObject("userActiveWeek", faq1_UserActives2);
+		LuceneIndex luceneIndex = new LuceneIndex();
+		List<QuestionPersistence> qList = luceneIndex.searchFAQ(queryStr);
+		List<Faq2_faqContentView> faq2List = luceneIndex.faq2_faqContentViews(qList, 0);
+		System.out.println(queryStr);
 		String urlPath="";
 		if (request.getQueryString()==null) {
 			urlPath = request.getServletPath();
@@ -332,6 +335,9 @@ public class FaqController {
 			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
 		}
 		session.setAttribute("urlPath", urlPath);
+		modelAndView.addObject("name", "zhaoyanqing");
+		modelAndView.addObject("faq2List", faq2List);
+		modelAndView.addObject("queryStr", queryStr);
 		return modelAndView;
 	}
 }

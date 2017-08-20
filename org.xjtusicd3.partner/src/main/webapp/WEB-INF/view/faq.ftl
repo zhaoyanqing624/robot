@@ -22,10 +22,12 @@
 	<#include "inc/incTop.ftl">
    		<div class="headContent">
 			<div class="headTop clearfix">
-				<div class="queryBox">
-					<input type="text" class="text" value="输入关键字" onfocus="if(this.value=='输入关键字')this.value='';" onblur="if(this.value=='')this.value='输入关键字';" id="keyWordText" onkeydown="if (event.keyCode == 13) {queryKnowledgeByKey();}" autocomplete="off">
-					<a href="javascript:void(0);" class="queryBtn" onclick="queryKnowledgeByKey()"></a>
-				</div>
+				<form class="avatar-form" action="faqSearchFAQ。html" enctype="multipart/form-data" method="post">
+					<div class="queryBox">
+						<input type="text" class="text" value="输入关键字" onfocus="if(this.value=='输入关键字')this.value='';" onblur="if(this.value=='')this.value='输入关键字';" id="keyWordText" onkeydown="if (event.keyCode == 13) {queryKnowledgeByKey();}" autocomplete="off">
+						<a href="javascript:void(0);" class="queryBtn"></a>
+					</div>
+				</form>
 				<a href="" class="logoCon">
 					<img src="images/logo.jpg" class="logo">
 					<span>IT运维智能化服务一体化平台——知识库</span>
