@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.ansj.domain.Result;
@@ -130,7 +131,8 @@ public class Segmentation_ansj {
 	public static List<robot_Chat> robot_Chats(String comment) throws Exception{
 		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
 		List<NLP_Word> nList = segmentation_ansj.similarScoreFirst(comment);
-		File file = new File("library/faqKeywords.txt");//Text文件
+		System.out.println(System.getProperty("user.dir"));
+		File file = new File("workspace/robot-master/org.xjtusicd3.partner/library/faqKeywords.txt");//Text文件
 		BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
 		String s = null;
 		List<robot_Chat> robot_Chats = new ArrayList<robot_Chat>();
