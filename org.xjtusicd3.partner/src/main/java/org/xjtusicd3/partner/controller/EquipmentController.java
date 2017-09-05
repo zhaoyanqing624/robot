@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.xjtusicd3.partner.filter.LOCALMAC;
 import org.xjtusicd3.partner.service.EquipmentService;
 import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
@@ -41,7 +42,10 @@ public class EquipmentController {
 		String useremail = (String) session.getAttribute("UserEmail");
 		ModelAndView mv = new ModelAndView("personal3");
 		List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(useremail);
+		LOCALMAC localmac = new LOCALMAC();
+		String macaddress = localmac.getMacAddress();
 		mv.addObject("personal3_list", list);
+		mv.addObject("macaddress", macaddress);
 		return mv;
 	}
 }
