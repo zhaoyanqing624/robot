@@ -18,6 +18,7 @@ import org.xjtusicd3.partner.filter.LOCALMAC;
 import org.xjtusicd3.partner.service.EquipmentService;
 import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
+
 @Controller
 public class EquipmentController {
 	/*
@@ -47,5 +48,19 @@ public class EquipmentController {
 		mv.addObject("personal3_list", list);
 		mv.addObject("macaddress", macaddress);
 		return mv;
+	}
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月6日 17:22:51
+	 * abstract:获取客户端的信息
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getInformation"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String getInformation(HttpServletRequest request,HttpSession session){
+		String macAddress = request.getParameter("macAddress");
+		String ipAddress = request.getParameter("ipAddress");
+		System.out.println("MAC地址"+macAddress);
+		System.out.println(ipAddress);
+		return ipAddress;
 	}
 }

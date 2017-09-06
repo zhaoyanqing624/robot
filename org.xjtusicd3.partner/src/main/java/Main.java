@@ -15,7 +15,11 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;  
-  
+/**
+ * author:zhaoyanqing
+ * date:2017年9月6日 17:22:51
+ * abstract:
+ */ 
 public class Main {  
 	public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 //		final Logger logger = LoggerFactory.getLogger(Main.class);
