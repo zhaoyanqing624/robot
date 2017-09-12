@@ -28,11 +28,63 @@ function getSysInfo(){
               document.write("<br/>");  
               document.write(p.MACAddress);
               document.write("<br/>");
-              zhao = p.MACAddress;
     	  }
       }
   }
-  alert(zhao);
+  //alert(system.Manufacturer);
+  //获取内存大小
+  var RAM = 0;
+  var memoryBank ="";
+  var d =new Enumerator (service.ExecQuery("SELECT * FROM Win32_PhysicalMemory"));
+  for (; !d.atEnd(); d.moveNext()) {
+      var p = d.item();
+      RAM = RAM + p.Capacity/(1024 * 1024 * 1024);
+      if(p.SerialNumber!=null){
+    	  memoryBank = memoryBank + p.SerialNumber+"/"+p.Capacity/(1024 * 1024 * 1024)+";";
+      }
+  }
+  //获取硬盘信息
+  var g =new Enumerator (service.ExecQuery("SELECT * FROM Win32_DiskDrive"));
+  for (; !g.atEnd(); g.moveNext()) {
+      var p = g.item();
+      //alert(p.Model);
+  }
+  //获取网卡
+  var h =new Enumerator (service.ExecQuery("SELECT * FROM Win32_NetworkAdapter"));
+  for (; !h.atEnd(); h.moveNext()) {
+      var p = h.item();
+      if(p.Description.substring(0,8)=="Intel(R)"){
+    	  alert(p.Name);
+      }
+  }
+  //获取操作系统
+  var j =new Enumerator (service.ExecQuery("SELECT * FROM Win32_OperatingSystem"));
+  for (; !j.atEnd(); j.moveNext()) {
+      var p = j.item();
+      //alert(p.SerialNumber);
+  }
+  //读取显卡
+  var xianka="";
+  var k =new Enumerator (service.ExecQuery("SELECT * FROM Win32_VideoController"));
+  for (; !k.atEnd(); k.moveNext()) {
+      var p = k.item();
+      xianka = xianka+p.Description+"("+p.DriverVersion+");";
+  }
+  //alert(xianka);
+  //读取声卡
+  var voice="";
+  var l =new Enumerator (service.ExecQuery("SELECT * FROM Win32_SoundDevice"));
+  for (; !l.atEnd(); l.moveNext()) {
+      var p = l.item();
+      if(voice.indexOf(p.Description)<0){
+    	  voice = voice+p.Description+";";
+      }
+  }
+  var q =new Enumerator (service.ExecQuery("SELECT * FROM Win32_BIOS"));
+  for (; !q.atEnd(); q.moveNext()) {
+      var p = q.item();
+      alert(p.ReleaseDate.substring(0,8));
+  }
   return {cpuType:cpuType,cpuCount:cpuCount,hostName:hostName,curUser:curUser,memCap:physicMenCap,mem:mem} 
 }
 var a = getSysInfo();
@@ -53,6 +105,7 @@ function Button4_onclick() {//主板信息
           document.write("<td>" + p.Product + "</td>");
           document.write("<td>" + p.SerialNumber + "</td>");
           document.write("<td>" + p.Version + "</td>");
+          document.write("<td>" + p.InstallDate + "</td>");
           document.write("</tr>");
     }
     document.write("</table>");
@@ -77,11 +130,16 @@ function button1_onclick() {//cpu 信息
           document.write("<td>" + p.ProcessorID + "</td>");
           document.write("<td>" + p.SystemName + "</td>");
           document.write("<td>" + p.ProcessorType + "</td>");
+          document.write("<td>" + p.InstallDate + "</td>");
           document.write("</tr>");
+          //alert(p.DataWidth)
     }
     document.write("</table>");
 }
 button1_onclick();
+
+
+
 </script>
 </head>
 <body>

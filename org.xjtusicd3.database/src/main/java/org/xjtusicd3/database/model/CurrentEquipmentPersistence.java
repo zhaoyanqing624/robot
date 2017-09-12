@@ -24,12 +24,12 @@ public class CurrentEquipmentPersistence {
 	private String RAM;
 	@TableField(columnName="HARDDRIVER")
 	private String HARDDRIVER;
+	@TableField(columnName="HARDDRIVERMODEL")
+	private String HARDDRIVERMODEL;
 	@TableField(columnName="STORAGE")
 	private String STORAGE;
 	@TableField(columnName="NETWORKCARD")
 	private String NETWORKCARD;
-	@TableField(columnName="NETWORKCARD2")
-	private String NETWORKCARD2;
 	@TableField(columnName="MOTHERBOARD")
 	private String MOTHERBOARD;
 	@TableField(columnName="OSNAME")
@@ -68,6 +68,12 @@ public class CurrentEquipmentPersistence {
 	public void setEQUIPMENTMODEL(String eQUIPMENTMODEL) {
 		EQUIPMENTMODEL = eQUIPMENTMODEL;
 	}
+	public String getEQUIPMENTTIME() {
+		return EQUIPMENTTIME;
+	}
+	public void setEQUIPMENTTIME(String eQUIPMENTTIME) {
+		EQUIPMENTTIME = eQUIPMENTTIME;
+	}
 	public String getIP() {
 		return IP;
 	}
@@ -86,6 +92,18 @@ public class CurrentEquipmentPersistence {
 	public void setRAM(String rAM) {
 		RAM = rAM;
 	}
+	public String getHARDDRIVER() {
+		return HARDDRIVER;
+	}
+	public void setHARDDRIVER(String hARDDRIVER) {
+		HARDDRIVER = hARDDRIVER;
+	}
+	public String getHARDDRIVERMODEL() {
+		return HARDDRIVERMODEL;
+	}
+	public void setHARDDRIVERMODEL(String hARDDRIVERMODEL) {
+		HARDDRIVERMODEL = hARDDRIVERMODEL;
+	}
 	public String getSTORAGE() {
 		return STORAGE;
 	}
@@ -98,12 +116,6 @@ public class CurrentEquipmentPersistence {
 	public void setNETWORKCARD(String nETWORKCARD) {
 		NETWORKCARD = nETWORKCARD;
 	}
-	public String getNETWORKCARD2() {
-		return NETWORKCARD2;
-	}
-	public void setNETWORKCARD2(String nETWORKCARD2) {
-		NETWORKCARD2 = nETWORKCARD2;
-	}
 	public String getMOTHERBOARD() {
 		return MOTHERBOARD;
 	}
@@ -115,6 +127,12 @@ public class CurrentEquipmentPersistence {
 	}
 	public void setOSNAME(String oSNAME) {
 		OSNAME = oSNAME;
+	}
+	public String getOSTYPE() {
+		return OSTYPE;
+	}
+	public void setOSTYPE(String oSTYPE) {
+		OSTYPE = oSTYPE;
 	}
 	public String getOSVERSION() {
 		return OSVERSION;
@@ -152,29 +170,10 @@ public class CurrentEquipmentPersistence {
 	public void setAUDIOCARD(String aUDIOCARD) {
 		AUDIOCARD = aUDIOCARD;
 	}
-	public String getOSTYPE() {
-		return OSTYPE;
-	}
-	public void setOSTYPE(String oSTYPE) {
-		OSTYPE = oSTYPE;
-	}
-	public String getHARDDRIVER() {
-		return HARDDRIVER;
-	}
-	public void setHARDDRIVER(String hARDDRIVER) {
-		HARDDRIVER = hARDDRIVER;
-	}
 	public String getTIMEREMARKS() {
 		return TIMEREMARKS;
 	}
 	public void setTIMEREMARKS(String tIMEREMARKS) {
 		TIMEREMARKS = tIMEREMARKS;
 	}
-	public String getEQUIPMENTTIME() {
-		return EQUIPMENTTIME;
-	}
-	public void setEQUIPMENTTIME(String eQUIPMENTTIME) {
-		EQUIPMENTTIME = eQUIPMENTTIME;
-	}
-	
 }

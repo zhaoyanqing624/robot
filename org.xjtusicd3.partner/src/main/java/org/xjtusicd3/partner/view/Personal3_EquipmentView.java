@@ -90,7 +90,6 @@ public class Personal3_EquipmentView {
 		this.RAM = currentEquipmentPersistence.getRAM();
 		this.HARDDRIVER = currentEquipmentPersistence.getHARDDRIVER();
 		this.NETWORKCARD = currentEquipmentPersistence.getNETWORKCARD();
-		this.NETWORKCARD2 = currentEquipmentPersistence.getNETWORKCARD2();
 		this.MOTHERBOARD = currentEquipmentPersistence.getMOTHERBOARD();
 		this.OS = currentEquipmentPersistence.getOSNAME()+" "+currentEquipmentPersistence.getOSTYPE();
 		this.EQUIPMENTTIME = currentEquipmentPersistence.getEQUIPMENTTIME();

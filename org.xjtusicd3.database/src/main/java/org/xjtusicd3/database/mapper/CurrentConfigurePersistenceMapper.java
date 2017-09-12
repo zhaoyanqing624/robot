@@ -2,6 +2,7 @@ package org.xjtusicd3.database.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -24,5 +25,18 @@ public interface CurrentConfigurePersistenceMapper extends IBaseDao<CurrentConfi
 	 */
 	@Select("SELECT * FROM TBL_CurrentConfigure WHERE EQUIPMENTID=#{0} AND CONFIGURETYPE=#{1}")
 	List<CurrentConfigurePersistence> getCurrentConfigure(String equipmentId,String type);
-
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月10日 09:19:59
+	 * abstract:根据设备ID 查看当前设备配置表
+	 */
+	@Select("SELECT * FROM TBL_CurrentConfigure WHERE EQUIPMENTID=#{0}")
+	List<CurrentConfigurePersistence> getCurrentConfigureOfSoftware(String equipmentId);
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月11日 23:01:08
+	 * abstract:根据设备ID 删除当前设备配置表
+	 */
+	@Delete("DELETE FROM TBL_CurrentConfigure WHERE EQUIPMENTID =#{0} AND CONFIGURETYPE=#{1}")
+	void deleteCurrentConfigure(String equipmentid,String type);
 }
