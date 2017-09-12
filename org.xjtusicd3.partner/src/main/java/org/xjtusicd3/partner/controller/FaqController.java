@@ -335,7 +335,7 @@ public class FaqController {
 			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
 		}
 		session.setAttribute("urlPath", urlPath);
-		modelAndView.addObject("name", "zhaoyanqing");
+		modelAndView.addObject("titleNumber", qList.size());
 		modelAndView.addObject("faq2List", faq2List);
 		modelAndView.addObject("queryStr", queryStr);
 		return modelAndView;

@@ -43,24 +43,6 @@
 			</div>
 		</div>
 <script type="text/javascript">
-	if (!!window.ActiveXObject){
-		var macAddress = "";
-		var locator = new ActiveXObject ("WbemScripting.SWbemLocator");  
-		var service = locator.ConnectServer(".");
-		var a = new Enumerator (service.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration"));
-		for (; !a.atEnd(); a.moveNext()) {
-		    var p = a.item();
-		    if (p.IPAddress==null) {
-		         continue;
-		    }else{
-		    	if(p.Description.substring(0,8)=="Intel(R)"){
-		            macAddress = p.MACAddress;
-		    	}
-		    }                           
-	    }
-		document.getElementById("equipment").href='personal3.html?e='+macAddress;
-	}else{
-		window.location.href='404.html';
-	}
+
 
 </script>

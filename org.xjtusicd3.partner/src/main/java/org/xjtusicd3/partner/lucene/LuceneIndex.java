@@ -13,8 +13,10 @@ import org.apache.lucene.search.highlight.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.xjtusicd3.common.util.JsonUtil;
+import org.xjtusicd3.database.helper.CollectionHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
+import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
@@ -183,10 +185,12 @@ public class LuceneIndex {
         	faq2View.setuList(userViews);
 			List<CommentPersistence> commentPersistences = CommentHelper.getComment(questionPersistence.get(i).getFAQQUESTIONID());
 			List<QuestionPersistence> questionPersistences = QuestionHelper.faq3_faqcontent(questionPersistence.get(i).getFAQQUESTIONID());
+			List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollectionFaqList(questionPersistence.get(i).getFAQQUESTIONID());
 			int number = commentPersistences.size();
 			faq2View.setCommentNumber(number);
 			faq2View.setFaqScan(questionPersistences.get(0).getSCAN());
 			faq2View.setFaqModifytime(questionPersistences.get(0).getMODIFYTIME());
+			faq2View.setFaqCollection(Integer.toString(collectionPersistences.size()));
 			faq2_faqContentViews.add(faq2View);
         }
 //        for(QuestionPersistence questionPersistence:qList){
@@ -210,4 +214,8 @@ public class LuceneIndex {
         System.out.println(JsonUtil.toJsonString(faq2_faqContentViews));
     	return faq2_faqContentViews;
     }
+    
+    public static void main(String[] args) {
+		
+	}
 }
