@@ -22,9 +22,9 @@
 	<#include "inc/incTop.ftl">
    		<div class="headContent">
 			<div class="headTop clearfix">
-				<form class="avatar-form" action="faqSearchFAQ。html" enctype="multipart/form-data" method="post">
+				<form class="avatar-form" action="faqSearch.html" enctype="multipart/form-data" method="post">
 					<div class="queryBox">
-						<input type="text" class="text" value="输入关键字" onfocus="if(this.value=='输入关键字')this.value='';" onblur="if(this.value=='')this.value='输入关键字';" id="keyWordText" onkeydown="if (event.keyCode == 13) {queryKnowledgeByKey();}" autocomplete="off">
+						<input type="text" class="text" value="输入关键字" onfocus="if(this.value=='输入关键字')this.value='';" onblur="if(this.value=='')this.value='输入关键字';" id="keyWordText" onkeydown="if (event.keyCode == 13) {queryKnowledgeByKey();}" autocomplete="off" name="queryString">
 						<a href="javascript:void(0);" class="queryBtn"></a>
 					</div>
 				</form>

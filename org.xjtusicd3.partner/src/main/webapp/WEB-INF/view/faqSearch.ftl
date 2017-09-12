@@ -47,7 +47,7 @@
                 <button class="width:50px">立即提问</button>
             </div>
                 <div class="searchResult clearfix">
-                    <span class="fr">共搜索到 <label id="searchCount">301</label> 篇文章${name}</span>
+                    <span class="fr">共搜索到 <label id="searchCount">${titleNumber}</label> 篇文章</span>
                     <span class="fl">关键字: <label id="searchKeyWord">${queryStr}</label></span>
                 </div>
                 <div class="searchListWrapper" id="searchTplWrapper" style="min-height: 0px;">
@@ -59,21 +59,24 @@
                             </p>
                         </li>
                         <li class="clearfix">
-                            <span class="userPic"><img src="/upload/userphoto/2016-08-26/57bf93619c8e4.gif"></span>
-                            <span class="username">忐忑</span>
+                        	<#list faq2List.uList as uList>
+                            <span class="userPic"><img src="${uList.userImage}" onclick="javascript:window.open('personal2.html?u=${uList.userId}')" style="cursor:pointer"></span>
+                            <span class="username" onclick="javascript:window.open('personal2.html?u=${uList.userId}')"  style="cursor:pointer">${uList.userName}</span>
                             <span class="dot">-</span>
-                            <span class="time">2016-09-05 11:58:14</span>
+                            </#list>
+                            <span class="time">${faq2List.faqModifytime}</span>
                             <span class="line">|</span>
-                            <span class="showCount">96</span>
-                            <span class="message">0</span>
-                            <span class="collection">0</span>
+                            <span class="showCount">${faq2List.faqScan}</span>
+                            <span class="message">${faq2List.commentNumber}</span>
+                            <span class="collection">${faq2List.faqCollection}</span>
+                        
                         </li>
-                        <li class="content"></li>
+                        <li class="content">${faq2List.faqDescription}</li>
                     </ul>
                 </#list>    
                 </div>
                 <input type="hidden" id="searchId" name="search_id" value="1687592">
-                <div class="topMoreTop" id="querymorelink" style="height: 32px;margin: 0 auto;padding-top: 14px;">
+                <div class="topMoreTop" id="querymorelink" style="height: 54px;margin: 0 auto;padding-top: 14px;">
                     <a href="javascript:void(0);" onclick="queryMoreTop()">加载更多</a>
                 </div>
             </div>
