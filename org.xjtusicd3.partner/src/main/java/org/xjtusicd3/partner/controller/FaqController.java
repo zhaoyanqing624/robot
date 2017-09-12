@@ -322,7 +322,6 @@ public class FaqController {
 	@RequestMapping(value="/faqSearch",method=RequestMethod.POST)
 	public ModelAndView faqSearch(HttpSession session,HttpServletRequest request) throws Exception{
 		String queryStr = request.getParameter("queryString");
-		System.out.println(queryStr);
 		ModelAndView modelAndView = new ModelAndView("faqSearch");
 		LuceneIndex luceneIndex = new LuceneIndex();
 		List<QuestionPersistence> qList = luceneIndex.searchFAQ(queryStr);
@@ -337,6 +336,7 @@ public class FaqController {
 		session.setAttribute("urlPath", urlPath);
 		modelAndView.addObject("faq2List", faq2List);
 		modelAndView.addObject("queryStr", queryStr);
+		modelAndView.addObject("titleNumber", qList.size());
 		return modelAndView;
 	}
 }
