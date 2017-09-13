@@ -283,6 +283,7 @@
     <script type="text/javascript" src="new/front/js/util.js"></script>
     <script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
     <script src="zhao/classify/js/navbar.js"></script>
+    
     <script type="text/javascript" src="js/view/getInformation.js" async="async"></script>
 	<script>
 	$(document).ready(function (ev) {
