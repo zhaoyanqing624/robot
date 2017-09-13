@@ -44,7 +44,7 @@
 		   <div class="leftMainWrapper">
             <div class="searchResult wenba">
       			求助网友，找到更多你想要的答案
-                <button class="width:50px">立即提问</button>
+                <button class="width:50px" onclick="javascript:window.open('question.html?c=all&type=all')">立即提问</button>
             </div>
                 <div class="searchResult clearfix">
                     <span class="fr">共搜索到 <label id="searchCount">${titleNumber}</label> 篇文章</span>
@@ -97,6 +97,35 @@
      
     <!-- Slider -->
 	<script type="text/javascript" src="new/front/js/util.js"></script>
+	<script>
+		function queryMoreTop(){
+			var queryStr = document.getElementById("searchKeyWord").innerHTML;
+			var starNumb = document.getElementById("searchTplWrapper").childElementCount;
+			$.ajax({
+				type : "POST",
+				url : "/org.xjtusicd3.partner/queryMoreResult.html",
+				data : {
+					"queryStr" : queryStr,
+					"starNumb" : starNumb
+				},
+				dataType : "json",
+				success : function(data) {
+					if (data.value == "0") {
+						self.location = 'login.html';
+					} else {
+						if(data.queryList==null){
+							document.getElementById("querymorelink").remove();
+						}else{
+							for(var i in data.queryList){
+								var htmls = document.getElementById("searchTplWrapper").innerHTML;
+								document.getElementById("searchTplWrapper").innerHTML = htmls + '<ul class="knowledgeList"> <li> <p class="title"> <a href="faq3.html?q='+data.queryList[i].questionId+'" target="_blank">'+data.queryList[i].faqTitle+'</a> </p> </li> <li class="clearfix"> <span class="userPic"><img src="'+data.queryList[i].uList[0].userImage+'" onclick="javascript:window.open("personal2.html?u='+data.queryList[i].uList[0].userId+'")" style="cursor:pointer"></span> <span class="username" onclick="javascript:window.open("personal2.html?u='+data.queryList[i].uList[0].userId+'")" style="cursor:pointer">'+data.queryList[i].uList[0].userName+'</span> <span class="dot">-</span> <span class="time">'+data.queryList[i].faqModifytime+'</span> <span class="line">|</span> <span class="showCount">'+data.queryList[i].faqScan+'</span> <span class="message">'+data.queryList[i].commentNumber+'</span> <span class="collection">'+data.queryList[i].faqCollection+'</span>  </li> <li class="content">'+data.queryList[i].faqDescription+'</li> </ul>';
+							}
+						}
+					}
+				}
+			})
+		}
+	</script>
 
 </body>
 </html>

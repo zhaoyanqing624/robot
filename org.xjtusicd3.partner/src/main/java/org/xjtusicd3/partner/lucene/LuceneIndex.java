@@ -123,7 +123,7 @@ public class LuceneIndex {
         Query query2=parser2.parse(q);
         booleanQuery.add(query, BooleanClause.Occur.SHOULD);
         booleanQuery.add(query2, BooleanClause.Occur.SHOULD);
-        TopDocs hits=is.search(booleanQuery.build(), 100);
+        TopDocs hits=is.search(booleanQuery.build(),10000);
         QueryScorer scorer=new QueryScorer(query);
         Fragmenter fragmenter = new SimpleSpanFragmenter(scorer);
         /**
@@ -170,8 +170,11 @@ public class LuceneIndex {
     /**
      * 封装List，展示在faq2页面
      */
-    public static List<Faq2_faqContentView> faq2_faqContentViews(List<QuestionPersistence> questionPersistence,int starNum){
+    public static List<Faq2_faqContentView> faq2_faqContentViews(List<QuestionPersistence> questionPersistence,int starNum,int totoalNum){
     	int endNum = starNum + 5;
+    	if (endNum>=totoalNum) {
+			endNum = totoalNum;
+		}
     	List<Faq2_faqContentView> faq2_faqContentViews = new ArrayList<Faq2_faqContentView>();
         for(int i = starNum;i<endNum;i++){
         	List<Faq2_faqUserView> userViews = new ArrayList<Faq2_faqUserView>();
