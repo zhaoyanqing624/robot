@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.json.Json;
 
-import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.RobotHelper;
