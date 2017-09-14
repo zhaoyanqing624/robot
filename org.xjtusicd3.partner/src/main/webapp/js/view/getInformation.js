@@ -91,7 +91,9 @@ function getInformationOfHardware(){
 	    	}
 	    }                           
     }
-	document.getElementById("equipment").href='personal3.html?e='+macAddress;
+	if(document.getElementById("equipment")!=null){
+		document.getElementById("equipment").href='personal3.html?e='+macAddress;
+	}
 	//获取计算机型号
 	var b = new Enumerator (service.ExecQuery("SELECT * FROM Win32_ComputerSystem")); 
 	for (; !b.atEnd(); b.moveNext()) {

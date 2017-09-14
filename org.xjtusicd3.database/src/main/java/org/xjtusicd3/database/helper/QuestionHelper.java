@@ -189,6 +189,13 @@ public class QuestionHelper {
 		return list;
 	}
 	/*
-	 * zyq_faq3_查看问题相似的问题
+	 * faq_按时间推荐
 	 */
+	public static List<QuestionPersistence> faq_recommend_Limit(int startnum) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faq_recommend_Limit(startnum);
+		session.close();
+		return list;
+	}
 }

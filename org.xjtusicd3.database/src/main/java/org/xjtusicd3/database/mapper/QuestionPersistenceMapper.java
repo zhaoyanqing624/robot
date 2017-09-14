@@ -89,4 +89,11 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion ORDER BY MODIFYTIME DESC LIMIT 5")
 	public List<QuestionPersistence> faq_userDynamics();
+	
+	/*
+	 * faq_按时间推荐_2017年9月14日21:16:18
+	 */
+	//@Select("SELECT FAQTITLE, MODIFYTIME, FAQDESCRIPTION  ,sum(SCAN+COLLECTION*10) as a FROM TBL_FAQquestion  ORDER BY a DESC LIMIT #{0},5")
+	@Select("SELECT * FROM TBL_FAQquestion ORDER BY MODIFYTIME DESC LIMIT #{0},5")
+	public List<QuestionPersistence> faq_recommend_Limit(int startnum);
 }

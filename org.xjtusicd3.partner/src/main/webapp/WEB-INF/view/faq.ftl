@@ -76,6 +76,7 @@
                 
                 <div class="topWrapper" id="tplWrapper">
 					<!-- 第一个模块的显示 -->
+					<#list faqlists as a>
 					<div class="topList clearfix">
                         <div class="imagesPotion">
                             <a href="/detail/dc_143417.html" target="_blank">
@@ -85,141 +86,26 @@
                         <ul class="topcontent">
                             <li>
                                 <p class="title">
-                                    <a href="/detail/dc_143417.html" target="_blank">如何在Windows 7安装U盘中加入USB3.0的支持</a>
+                                    <a href="/detail/dc_143417.html" target="_blank">${a.FAQTITLE }</a>
                                 </p>
                             </li>
                             <li class="clearfix">
                                 <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
                                 <span class="username">Iknow</span>
                                 <span class="dot">-</span>
-                                <span class="time">2015/11/04</span>
+                                <span class="time">${a.MODIFYTIME }</span>
                                 <span class="line">|</span>
-                                <span class="showCount">236955</span>
+                                <span class="showCount">${a.SCAN }</span>
                                 <span class="message">34</span>
-                                <span class="collection">78</span>
+                                <span class="collection">${a.COLLECTION }</span>
                             </li>
                             <li class="content">
-                            	原生Win7系统不包含USB3.0的驱动，所以无法使用USB3.0的U盘在USB3.0的设备上引导，且安装完系统后还需要重新安装USB3.0驱动。
+                            	${a.FAQDESCRIPTION }
                             </li>
                         </ul>
                     </div>
-                    	 
-					<!-- 第二个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_039949.html" target="_blank">
-                                <img src="images/test/22.jpg" alt="新扬天电脑所配USB键盘">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_039949.html" target="_blank">新扬天电脑所配USB键盘功能键驱动问题注意事项</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2015/11/07</span>
-                                <span class="line">|</span>
-                                <span class="showCount">148932</span>
-                                <span class="message">11</span>
-                                <span class="collection">7</span>
-                            </li>
-                            <li class="content">
-                            	2010年7月上市的新扬天电脑所配的USB键盘，F1-F12系统下会默认为快捷键（功能键），而非F1-F12实际功能，本文介绍了按键的切换调整方法，供参考。
-                            </li>
-                        </ul>
-					</div>
-                    
-					<!-- 第三个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_153184.html" target="_blank">
-                                <img src="images/test/23.jpg" alt="永久关闭Windows 10的自动更新">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_153184.html" target="_blank">永久关闭Windows 10的自动更新</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2016/10/26</span>
-                                <span class="line">|</span>
-                                <span class="showCount">44195</span>
-                                <span class="message">26</span>
-                                <span class="collection">86</span>
-                            </li>
-                            <li class="content">
-                            	本文介绍了永久关闭Win10自动更新的操作方法。
-                            </li>
-                        </ul>
-					</div>
-                    
-					<!-- 第四个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_141257.html" target="_blank">
-                                <img src="images/test/24.jpg" alt="Lenovo settings下载及使用介绍">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_141257.html" target="_blank">Lenovo settings下载及使用介绍</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2015/12/11</span>
-                                <span class="line">|</span>
-                                <span class="showCount">183724</span>
-                                <span class="message">19</span>
-                                <span class="collection">36</span>
-                            </li>
-                            <li class="content">
-                            	联想随机软件Lenovo settings界面展示，下载和使用方法介绍。
-                            </li>
-                        </ul>
-					</div>
-                    
-					<!-- 第五个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_152752.html" target="_blank">
-                                <img src="images/test/25.jpg" alt="小新Air12 LTE版如何4G上网">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_152752.html" target="_blank">小新Air12 LTE版如何4G上网？</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2016/10/08</span>
-                                <span class="line">|</span>
-                                <span class="showCount">9615</span>
-                                <span class="message">0</span>
-                                <span class="collection">5</span>
-                            </li>
-                            <li class="content">
-                            	本文介绍了小新Air12 LTE版4G上网的设置方法和常见问题。
-                            </li>
-                        </ul>
-                    </div>
-				</div>
+                    </#list>	 
+					
                 
                 <div class="topMoreTop" id="querymorelink">
                 

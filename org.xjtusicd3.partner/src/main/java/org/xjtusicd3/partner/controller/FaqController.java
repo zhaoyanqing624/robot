@@ -16,6 +16,7 @@ import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.CollectionHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.ITHelper;
+import org.xjtusicd3.database.helper.LogHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.ScoreHelper;
 import org.xjtusicd3.database.helper.ShareHelper;
@@ -24,6 +25,7 @@ import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.ITPersistence;
+import org.xjtusicd3.database.model.LogPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.ScorePersistence;
 import org.xjtusicd3.database.model.SharePersistence;
@@ -31,6 +33,7 @@ import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.lucene.LuceneIndex;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
+import org.xjtusicd3.partner.service.LogService;
 import org.xjtusicd3.partner.service.QuestionService;
 import org.xjtusicd3.partner.service.RobotService;
 import org.xjtusicd3.partner.service.ScoreService;
@@ -47,6 +50,7 @@ import com.alibaba.fastjson.JSONObject;
 public class FaqController {
 	@RequestMapping(value="faq",method=RequestMethod.GET)
 	public ModelAndView faq(HttpSession session,HttpServletRequest request){
+		String useremail = (String) session.getAttribute("UserEmail");
 		ModelAndView mv = new ModelAndView("faq");
 		String urlPath="";
 		if (request.getQueryString()==null) {
@@ -57,6 +61,22 @@ public class FaqController {
 		//查询所有用户发表知识的状态
 		List<Faq_UserDynamics> userDynamics = QuestionService.userDynamics();
 		session.setAttribute("urlPath", urlPath);
+		
+		
+		if(useremail==null){
+			//获取推荐faq_2017年9月14日21:43:52
+			int startnum = 0;
+			List<QuestionPersistence> faqlists = QuestionHelper.faq_recommend_Limit(startnum);
+			System.out.println("11111111111111111111111111111111");
+			mv.addObject("faqlists", faqlists);
+		}else{
+			//获取推荐faq_2017年9月14日21:43:52
+			int startnum = 0;
+			List<QuestionPersistence> faqlists = QuestionHelper.faq_recommend_Limit(startnum);
+			System.out.println("222222222222222222222222222222222222");
+			mv.addObject("faqlists", faqlists);
+		}
+		
 		mv.addObject("userDynamics", userDynamics);
 		return mv;
 	}
@@ -177,9 +197,17 @@ public class FaqController {
 					modelAndView.addObject("IsShare", "1");
 				}
 			}
+		
+			//添加用户访问日志_2017年9月14日22:01:31
+			LogService.addLog(userPersistences.get(0).getUSERID(),"http://localhost:8080/org.xjtusicd3.partner/faq3.html?q="+q);
 		}
 		//查看相似的问题
 		List<robot_Chat> robot_Chats = RobotService.getRobotAnswer(faq3Views.get(0).getFaqTitle());
+		
+		
+		
+		
+		
 		modelAndView.addObject("commentNumber", commentPersistences.size());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
