@@ -1,8 +1,6 @@
 package org.xjtusicd3.partner.NLP;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +21,6 @@ public class StopLibrary {
 	private static final Log LOG = LogFactory.getLog();
 
 	public static final String DEFAULT = "stop";
-	static String localurl="";
 
 	// 用户自定义词典
 	private static final Map<String, KV<String, StopRecognition>> STOP = new HashMap<>();
@@ -34,12 +31,7 @@ public class StopLibrary {
 				put(entry.getKey(), entry.getValue());
 			}
 		}
-		try {
-			localurl = new File("").getCanonicalPath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String localurl = System.getProperty("user.dir");
 		putIfAbsent(DEFAULT, localurl+"/workspace/robot-master/org.xjtusicd3.partner/library/stop.dic");
 	}
 
