@@ -1,6 +1,4 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,11 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="zhao/chat/css/waves.min.css">
 	<link rel="stylesheet" href="zhao/classify/css/ui.css">
 	<link rel="stylesheet" href="zhao/classify/css/style-rb.css">
-	<link rel="stylesheet" type="text/css" href="zhao/xuanzhuan/css/normalize.css" />
 	<link rel='stylesheet prefetch' href='http://www.jq22.com/jquery/font-awesome.4.6.0.css'>
-	<link rel='stylesheet prefetch' href='zhao/xuanzhuan/css/animate.min.css'>
-	<link rel="stylesheet" type="text/css" href="zhao/xuanzhuan/css/default.css">
-	<link rel="stylesheet" type="text/css" href="zhao/xuanzhuan/css/styles.css">
 	<script src="zhao/classify/js/jquery-1.9.1.min.js"></script>
 	<script src="zhao/classify/js/jquery.aimmenu.js"></script>
 	<script src="zhao/classify/js/knockout.js"></script>
@@ -194,28 +188,6 @@
 						</li>
 					</ul>
 				</div>
-		<div class="htmleaf-container">		
-		<div id='ss_menu'>
-		  <div onclick="window.open('faq.html')">
-		    <i class="fa fa-book" ></i>
-		  </div>
-		  <div onclick="window.open('question.html')">
-		    <i class="fa  fa-question-circle"></i>
-		  </div>
-		  <div onclick="window.open('worker.html')">
-		    <i class="fa fa-users"></i>
-		  </div>
-		  <div onclick="window.open('personal2.html')">
-		    <i class="fa fa-home"></i>
-		  </div>
-		  <div class='menu'>
-		    <div class='share' id='ss_toggle' data-rot='180'>
-		      <div class='circle'></div>
-		      <div class='bar'></div>
-		    </div>
-		  </div>
-		</div>		
-	</div>
 			</div>
 			<!--左侧导航 end-->
 			
@@ -283,34 +255,7 @@
     <script type="text/javascript" src="new/front/js/util.js"></script>
     <script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
     <script src="zhao/classify/js/navbar.js"></script>
-    <script src="js/view/getInformation.js"></script>
-	<script>
-	$(document).ready(function (ev) {
-	    var toggle = $('#ss_toggle');
-	    var menu = $('#ss_menu');
-	    var rot;
-	    $('#ss_toggle').on('click', function (ev) {
-	        rot = parseInt($(this).data('rot')) - 180;
-	        menu.css('transform', 'rotate(' + rot + 'deg)');
-	        menu.css('webkitTransform', 'rotate(' + rot + 'deg)');
-	        if (rot / 180 % 2 == 0) {
-	            toggle.parent().addClass('ss_active');
-	            toggle.addClass('close');
-	        } else {
-	            toggle.parent().removeClass('ss_active');
-	            toggle.removeClass('close');
-	        }
-	        $(this).data('rot', rot);
-	    });
-	    menu.on('transitionend webkitTransitionEnd oTransitionEnd', function () {
-	        if (rot / 180 % 2 == 0) {
-	            $('#ss_menu div i').addClass('ss_animate');
-	        } else {
-	            $('#ss_menu div i').removeClass('ss_animate');
-	        }
-	    });
-	});
-	</script>
+    <script src="js/view/getInformation.js"  async="async"></script>
 	<script type="text/javascript" src="js/chat.js"></script>
 </body>
 </html>
