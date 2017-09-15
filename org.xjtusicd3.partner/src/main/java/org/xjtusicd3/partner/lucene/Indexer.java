@@ -10,9 +10,12 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.nlpcn.commons.lang.tire.domain.Forest;
+import org.nlpcn.commons.lang.tire.library.Library;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.QuestionPersistence;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -53,6 +56,25 @@ public class Indexer {
 
 
     public static void main(String[] args) throws Exception {
-        new Indexer().index("E:\\Lucene");
+		String localurl = System.getProperty("user.dir");
+		File file = new File(localurl+"/luence");
+		if (file.exists()) {
+			deleteDir(file);
+		}else{
+			file.mkdir();
+			new Indexer().index(localurl+"/luence");
+		}
+    }
+    private static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
     }
 }
