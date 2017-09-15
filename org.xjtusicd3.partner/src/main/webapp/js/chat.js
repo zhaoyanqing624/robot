@@ -32,12 +32,12 @@ function robot_welcome(){
 //聊天
 function chat(){
 	chatWithRobot();
-	setTimeout("scroll()",800);
+	setTimeout("scroll()",2500);
 }
 //点击列表
 function chat2(){
 	chatWithRobot2();
-	setTimeout("scroll()",800);
+	setTimeout("scroll()",2500);
 }
 function chatWithRobot(){
 	var comment = document.getElementById("textarea").value;
@@ -107,7 +107,17 @@ function chatWithRobot(){
 }
 //robot——FAQ问题
 function chatWithRobot2(){
-	var comment = event.target.innerHTML;
+	var _event="";
+	if(navigator.userAgent.indexOf('Trident') > -1){//IE内核
+		_event = window.event.srcElement;
+	}else if(navigator.userAgent.indexOf('Presto') > -1){//opera内核
+		
+	}else if(navigator.userAgent.indexOf('AppleWebKit') > -1){//苹果、谷歌内核
+		_event = event.target;
+	}else if(navigator.userAgent.indexOf('Firefox') > -1){//火狐内核Gecko
+		
+	}
+	var comment = _event.innerHTML;
 	var comments = comment.replace(/\s+/g,"");
 	var html = document.getElementById("chat01_content").innerHTML;
 	if(comment.length == 0 || comment.match(/^\s+$/g)){
@@ -174,15 +184,15 @@ function chatWithRobot2(){
 }
 //滚动
 function scroll(){
-	var number = document.getElementById("chat01_content").childElementCount-2;
+	var number = document.getElementById("chat01_content").children.length-2;
 	scrollToLocation(number);
 }
 function scrollToLocation(number) {
 	var mainContainer = $('#chat01_content');
     //var scrollToContainer = $('#chat01_content').find('.media:last');//滚动到<div id="thisMainPanel">中类名为son-panel的最后一个div处
-    scrollToContainer = $('#chat01_content').find('.media:eq('+number+')');//滚动到<div id="thisMainPanel">中类名为son-panel的第六个处
+    var scrollToContainer = $('#chat01_content').find('.media:eq('+number+')');//滚动到<div id="thisMainPanel">中类名为son-panel的第六个处
     //动画效果
     $('.chat01_content').animate({
     	scrollTop: scrollToContainer.offset().top - mainContainer.offset().top + mainContainer.scrollTop()
-    }, 1000);//1.5秒滑动到指定位置
+    }, 1500);//1.5秒滑动到指定位置
 }
