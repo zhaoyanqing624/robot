@@ -76,44 +76,42 @@
                 
                 <div class="topWrapper" id="tplWrapper">
 					<!-- 第一个模块的显示 -->
-					<#list faqlists as a>
+					<#list faqlists as faqlists>
 					<div class="topList clearfix">
                         <div class="imagesPotion">
+                           
                             <a href="/detail/dc_143417.html" target="_blank">
-                                <img src="images/test/21.png" alt="">
+                                <img src="images/test/2${faqlists_index+1}.jpg" alt="">
                             </a>
                         </div>
                         <ul class="topcontent">
                             <li>
                                 <p class="title">
-                                    <a href="/detail/dc_143417.html" target="_blank">${a.FAQTITLE }</a>
+                                    <a href="faq3.html?q=${faqlists.FAQQUESTIONID} " target="_blank">${faqlists.FAQTITLE }</a>
                                 </p>
                             </li>
                             <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
+                             
+                                <span class="userPic"><img src="${userImage}"></span>
+                                <span class="username">${userName}</span>
                                 <span class="dot">-</span>
-                                <span class="time">${a.MODIFYTIME }</span>
+                                <span class="time">${faqlists.MODIFYTIME }</span>
                                 <span class="line">|</span>
-                                <span class="showCount">${a.SCAN }</span>
+                                <span class="showCount">${faqlists.SCAN }</span>
                                 <span class="message">34</span>
-                                <span class="collection">${a.COLLECTION }</span>
+                                <span class="collection">${faqlists.COLLECTION }</span>
                             </li>
                             <li class="content">
-                            	${a.FAQDESCRIPTION }
+                            	${faqlists.FAQDESCRIPTION }
                             </li>
                         </ul>
                     </div>
                     </#list>	 
 					
-                
-                <div class="topMoreTop" id="querymorelink">
-                
-                <div style="width: 118px;height: 32px;margin: 0 auto;padding-top: 14px;">
-                    <a href="javascript:void(0);">加载中</a>
-                    </div>
-                </div>          
+                                 
+                  
 			</div> 
+           </div>
            
            <!-- 右侧开始 -->
            <div class="rightBarWrapper">
@@ -144,6 +142,7 @@
 	<script type="text/javascript" src="zhao/lunbo_1/js/jquery.skitter.js"></script>
 	<script type="text/javascript" src="zhao/lunbo_1/js/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="new/front/js/util.js"></script>
+	<script type="text/javascript" src="js/view/faq.js"></script>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery(".box_skitter_large").skitter({

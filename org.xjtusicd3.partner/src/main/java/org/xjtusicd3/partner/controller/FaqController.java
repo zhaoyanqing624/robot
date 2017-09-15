@@ -42,6 +42,7 @@ import org.xjtusicd3.partner.view.Faq1_UserActive;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
+import org.xjtusicd3.partner.view.Faq_CommendView;
 import org.xjtusicd3.partner.view.Faq_UserDynamics;
 import org.xjtusicd3.partner.view.robot_Chat;
 
@@ -49,7 +50,7 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 public class FaqController {
 	@RequestMapping(value="faq",method=RequestMethod.GET)
-	public ModelAndView faq(HttpSession session,HttpServletRequest request){
+	public ModelAndView faq(HttpSession session,HttpServletRequest request,String q){
 		String useremail = (String) session.getAttribute("UserEmail");
 		ModelAndView mv = new ModelAndView("faq");
 		String urlPath="";
@@ -60,6 +61,9 @@ public class FaqController {
 		}
 		//查询所有用户发表知识的状态
 		List<Faq_UserDynamics> userDynamics = QuestionService.userDynamics();
+		List<UserPersistence> userInfo = UserHelper.getUserNameById(userDynamics.get(0).getUserId());
+		String userImage = userInfo.get(0).getAVATAR();
+		String userName = userInfo.get(0).getUSERNAME();
 		session.setAttribute("urlPath", urlPath);
 		
 		
@@ -67,19 +71,59 @@ public class FaqController {
 			//获取推荐faq_2017年9月14日21:43:52
 			int startnum = 0;
 			List<QuestionPersistence> faqlists = QuestionHelper.faq_recommend_Limit(startnum);
-			System.out.println("11111111111111111111111111111111");
+			//System.out.println(faqlists.get(0).getFAQQUESTIONID());
 			mv.addObject("faqlists", faqlists);
 		}else{
 			//获取推荐faq_2017年9月14日21:43:52
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
 			int startnum = 0;
-			List<QuestionPersistence> faqlists = QuestionHelper.faq_recommend_Limit(startnum);
-			System.out.println("222222222222222222222222222222222222");
+			List<Faq_CommendView> faqlists = QuestionService.user_recommend_Limit(userPersistences.get(0).getUSERID(),startnum);				
 			mv.addObject("faqlists", faqlists);
 		}
 		
 		mv.addObject("userDynamics", userDynamics);
+		mv.addObject("userImage", userImage);
+		mv.addObject("userName", userName);
 		return mv;
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:查看更多推荐
+	 * data:2017年9月15日16:48:57
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/getMoreFaqCommend"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String faqCommendList(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		int startnum = Integer.parseInt(request.getParameter("startnum"));
+		int startnum2 = startnum+5;
+		String useremail = (String) session.getAttribute("UserEmail");
+		JSONObject jsonObject = new JSONObject();
+		
+		if(useremail==null){
+			//获取推荐faq_2017年9月14日21:43:52		
+			List<QuestionPersistence> faqlists = QuestionHelper.faq_recommend_Limit(startnum);
+			jsonObject.put("faqlists", faqlists);
+		}else{
+			//获取推荐faq_2017年9月14日21:43:52
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
+			List<Faq_CommendView> faqlists = QuestionService.user_recommend_Limit(userPersistences.get(0).getUSERID(),startnum);				
+			jsonObject.put("faqlists", faqlists);
+		}
+		
+		
+		
+		//int faqTotal = QuestionHelper.pageTotal(ClassifyId);
+		//int pageTotal = (int) Math.ceil((double)faqTotal/(double)5);
+		//JSONObject jsonObject = new JSONObject();
+		jsonObject.put("startnum", startnum2);
+		//jsonObject.put("faqlist", faq2Views);
+		//jsonObject.put("pageTotal",pageTotal);
+		String faqCommend_list = JsonUtil.toJsonString(jsonObject);
+		return faqCommend_list;
+	 }
+	
+	
 	/*
 	 * faq、faq1_上侧的第二级分类
 	 */
@@ -199,7 +243,7 @@ public class FaqController {
 			}
 		
 			//添加用户访问日志_2017年9月14日22:01:31
-			LogService.addLog(userPersistences.get(0).getUSERID(),"http://localhost:8080/org.xjtusicd3.partner/faq3.html?q="+q);
+			LogService.addLog(userPersistences.get(0).getUSERID(),"/faq3.html?q="+q);
 		}
 		//查看相似的问题
 		List<robot_Chat> robot_Chats = RobotService.getRobotAnswer(faq3Views.get(0).getFaqTitle());
@@ -391,4 +435,6 @@ public class FaqController {
 			return JsonUtil.toJsonString(jsonObject);
 		}
 	}
+	
+	
 }

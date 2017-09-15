@@ -33,6 +33,17 @@ public class LogService {
 		LogHelper.addLog(logId,userId,faqPath,logTime);
         
 	}
+
+	/**
+	 * author:zzl
+	 * abstract:获取用户日志
+	 * data:2017年9月15日09:14:27
+	 * @param userid 
+	 */
+	public static List<LogPersistence> getLogs(String userid) {
+		List<LogPersistence> logs = LogHelper.getLogs(userid);
+		return logs;
+	}
 	
 	/*
 	 * zpz_knowledgeindex_FAQ的展示
@@ -50,18 +61,5 @@ public class LogService {
 //		}
 //		return logindexViews;
 //	}
-	/*
-	 * zpz_add_log
-	 */
-//	public static void saveLog(String userId,String logPermission)
-//	{
-//		logindexView logindexView = new logindexView();
-//		String logId = UUID.randomUUID().toString();
-//		logindexView.setLogUersId(userId);
-//		Date date=new Date();
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String logTime = format.format(date);
-//		logindexView.setLogTime(logTime);
-//		LogHelper.getLog(logId, userId, logPermission, logTime);
-//	}
+
 }

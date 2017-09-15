@@ -3,7 +3,9 @@ package org.xjtusicd3.database.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.IBaseDao;
+import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 
@@ -20,6 +22,7 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	public List<ClassifyPersistence> FirstClassify_robot();
 	@Select("SELECT TBL_FAQclassify.FAQCLASSIFYID,TBL_FAQclassify.FAQCLASSIFYNAME,sum(TBL_FAQquestion.COLLECTION) as a FROM TBL_FAQclassify,TBL_FAQquestion WHERE TBL_FAQclassify.FAQCLASSIFYID=TBL_FAQquestion.FAQCLASSIFYID AND TBL_FAQclassify.FAQPARENTID=#{0} GROUP BY TBL_FAQquestion.FAQCLASSIFYID ORDER BY a DESC LIMIT 4")
 	public List<ClassifyPersistence> SecondClassify_robot(String ParentId);
+
 	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQPARENTID=#{0}")
 	public List<ClassifyPersistence> SecondClassify_total(String ParentId);
 
@@ -49,4 +52,22 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	 */
 	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQCLASSIFYNAME=#{0} AND FAQPARENTID=#{1}")
 	public List<ClassifyPersistence> question_ClassifyListByName(String ClassifyName,String type);
+	
+	/**
+	 * author:zzl
+	 * abstract:获取当前问题分类的上一级分类
+	 * data:2017年9月15日10:00:03
+	 */
+	@Select("SELECT FAQPARENTID FROM TBL_FAQclassify WHERE FAQCLASSIFYID=#{0}")
+	public String faq_parentId(String faq_classifyId);
+	
+	/**
+	 * author:zzl
+	 * abstract:获取该父分类下的所有子分类
+	 * data:2017年9月15日10:07:11
+	 */
+	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQPARENTID=#{0} ")
+	public List<ClassifyPersistence> faq_classifyIds(String ParentId);
+	
+
 }

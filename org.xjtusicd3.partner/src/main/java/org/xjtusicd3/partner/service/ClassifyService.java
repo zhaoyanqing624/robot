@@ -105,5 +105,15 @@ public class ClassifyService {
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(classifyParentId);
 		return classifyPersistences;
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取该父分类下的所有子分类
+	 * data:2017年9月15日10:05:50
+	 */
+	public static List<ClassifyPersistence> faq_classifyIds(String parentId) {
+		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq_classifyIds(parentId);
+		return classifyPersistences;
+	}
 
 }

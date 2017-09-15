@@ -26,5 +26,14 @@ public interface LogPersistenceMapper extends IBaseDao<LogPersistence,String>
 	 * 前台添加日志_2017年9月14日22:21:59
 	 */
 	@Insert("INSERT INTO TBL_Log(TBL_Log.LOGID,TBL_Log.USERID,TBL_Log.LOGMETHOD,TBL_Log.LOGTIME) VALUES (#{0},#{1},#{2},#{3})")
-	public List<LogPersistence> addLog(String logId, String userId, String faqPath, String logTime);
+	public void addLog(String logId, String userId, String faqPath, String logTime);
+
+	/**
+	 * author:zzl
+	 * abstract:获取用户日志
+	 * data:2017年9月15日09:17:24
+	 * @param userid 
+	 */
+	@Select("SELECT * FROM TBL_Log WHERE USERID=#{0} ORDER BY LOGTIME DESC LIMIT 5")
+	public List<LogPersistence> getLogs(String userid);
 }
