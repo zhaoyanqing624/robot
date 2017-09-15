@@ -65,20 +65,20 @@ public class FaqController {
 		String userImage = userInfo.get(0).getAVATAR();
 		String userName = userInfo.get(0).getUSERNAME();
 		session.setAttribute("urlPath", urlPath);
-		
-		
+				
 		if(useremail==null){
 			//获取推荐faq_2017年9月14日21:43:52
 			int startnum = 0;
-			List<QuestionPersistence> faqlists = QuestionHelper.faq_recommend_Limit(startnum);
-			//System.out.println(faqlists.get(0).getFAQQUESTIONID());
+			List<Faq_CommendView> faqlists = QuestionService.faq_recommend_Limit(startnum);
 			mv.addObject("faqlists", faqlists);
+			System.out.println("未登录用户");
 		}else{
 			//获取推荐faq_2017年9月14日21:43:52
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
 			int startnum = 0;
 			List<Faq_CommendView> faqlists = QuestionService.user_recommend_Limit(userPersistences.get(0).getUSERID(),startnum);				
 			mv.addObject("faqlists", faqlists);
+			System.out.println("已登录用户");
 		}
 		
 		mv.addObject("userDynamics", userDynamics);

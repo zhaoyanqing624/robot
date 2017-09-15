@@ -206,7 +206,6 @@ public class QuestionHelper {
 	 * author:zzl
 	 * abstract:获取分类下faq具体信息
 	 * data:2017年9月15日10:27:38
-	 * @param startnum 
 	 */
 	public static List<QuestionPersistence> questionView(String parentId, int startnum) {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);

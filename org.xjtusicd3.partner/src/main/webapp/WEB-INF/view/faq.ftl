@@ -98,7 +98,7 @@
                                 <span class="time">${faqlists.MODIFYTIME }</span>
                                 <span class="line">|</span>
                                 <span class="showCount">${faqlists.SCAN }</span>
-                                <span class="message">34</span>
+                                <span class="message">${faqlists.COMMENTSUM}</span>
                                 <span class="collection">${faqlists.COLLECTION }</span>
                             </li>
                             <li class="content">

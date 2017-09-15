@@ -13,12 +13,21 @@ public class Faq_CommendView {
 	private String FAQTITLE;
 	private String MODIFYTIME;
 	private String FAQDESCRIPTION;
-	private String COLLECTION;
+	private int COLLECTION;
 	private String SCAN;
 	private String FAQCLASSIFYIMAGE;
+	private int COMMENTSUM;
 	
 	
 	
+	
+
+	public int getCOMMENTSUM() {
+		return COMMENTSUM;
+	}
+	public void setCOMMENTSUM(int cOMMENTSUM) {
+		COMMENTSUM = cOMMENTSUM;
+	}
 	public String getFAQCLASSIFYIMAGE() {
 		return FAQCLASSIFYIMAGE;
 	}
@@ -63,10 +72,11 @@ public class Faq_CommendView {
 	public void setFAQDESCRIPTION(String fAQDESCRIPTION) {
 		FAQDESCRIPTION = fAQDESCRIPTION;
 	}
-	public String getCOLLECTION() {
+	
+	public int getCOLLECTION() {
 		return COLLECTION;
 	}
-	public void setCOLLECTION(String cOLLECTION) {
+	public void setCOLLECTION(int cOLLECTION) {
 		COLLECTION = cOLLECTION;
 	}
 	public String getSCAN() {

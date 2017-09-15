@@ -31,7 +31,7 @@ public class LogService {
         logPersistence.setLogMethod(faqPath);
         logPersistence.setLogTime(logTime);
 		LogHelper.addLog(logId,userId,faqPath,logTime);
-        
+        System.out.println("添加了一条日志信息");
 	}
 
 	/**

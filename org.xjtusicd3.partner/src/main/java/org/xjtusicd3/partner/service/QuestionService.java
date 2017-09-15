@@ -7,14 +7,18 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.annotations.Select;
+import org.xjtusicd3.database.helper.AgreeHelper;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CollectionHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.ShareHelper;
 import org.xjtusicd3.database.helper.UserHelper;
+import org.xjtusicd3.database.model.AgreePersistence;
 import org.xjtusicd3.database.model.AnswerPersistence;
 import org.xjtusicd3.database.model.ClassifyPersistence;
+import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.LogPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
@@ -165,10 +169,14 @@ public class QuestionService {
 			Faq_CommendView faq_CommendView = new Faq_CommendView();
 			faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
 			faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
-			faq_CommendView.setCOLLECTION(questionPersistence.getCOLLECTION());
+			List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setCOLLECTION(collectionPersistences.size());
 			faq_CommendView.setSCAN(questionPersistence.getSCAN());
 			faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
 			faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+			List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+			System.out.println(questionPersistence.getFAQTITLE());
 			faq_CommendViews.add(faq_CommendView);
 		}
 		
@@ -177,6 +185,32 @@ public class QuestionService {
 		System.out.println(questionId);
 		System.out.println(faq_classifyId);
 		System.out.println(parentId);
+		return faq_CommendViews;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取未登录用户推荐列表
+	 * data:2017年9月15日19:46:03
+	 */
+	public static List<Faq_CommendView> faq_recommend_Limit(int startnum) {
+		//Faq_CommendView中信息不全、后续可补充
+		List<Faq_CommendView> faq_CommendViews = new ArrayList<Faq_CommendView>();
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faq_recommend_Limit(startnum);
+		for (QuestionPersistence questionPersistence:questionPersistences) {
+			Faq_CommendView faq_CommendView = new Faq_CommendView();
+			faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+			faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+			List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setCOLLECTION(collectionPersistences.size());
+			faq_CommendView.setSCAN(questionPersistence.getSCAN());
+			faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+			faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+			List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+			faq_CommendViews.add(faq_CommendView);
+			
+		}
 		return faq_CommendViews;
 	}
 }

@@ -50,4 +50,12 @@ public interface CollectionPersistenceMapper extends IBaseDao<CollectionPersiste
 	@Select("SELECT * FROM TBL_Collection WHERE FAQQUESTIONID IS NULL AND USERID=#{0} ORDER BY TIME DESC LIMIT #{1},#{2}")
 	List<CollectionPersistence> personal2_PayCommunity_Limit(String userId, int startNumber, int number);
 	
+	/**
+	 * author:zzl
+	 * abstract:获取faq收藏数
+	 * data:2017年9月15日19:55:57
+	 */
+	@Select("SELECT * FROM TBL_Collection WHERE FAQQUESTIONID=#{0}")
+	List<CollectionPersistence> agreeInfo(String faqquestionid);
+	
 }

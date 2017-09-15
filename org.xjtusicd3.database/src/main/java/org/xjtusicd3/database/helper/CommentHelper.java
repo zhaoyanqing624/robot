@@ -7,6 +7,7 @@ import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.CommentPersistenceMapper;
 import org.xjtusicd3.database.model.CommentPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
 
 public class CommentHelper {
 	/*
@@ -261,4 +262,18 @@ public class CommentHelper {
 		session.close();
 		return list;
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取评论数
+	 * data:2017年9月15日19:19:24
+	 */
+	public static List<CommentPersistence> commentInfo(String faqquestionId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommentPersistenceMapper mapper = session.getMapper(CommentPersistenceMapper.class);
+		List<CommentPersistence> list = mapper.commentInfo(faqquestionId);
+		session.close();
+		return list;
+	}
+	
 }

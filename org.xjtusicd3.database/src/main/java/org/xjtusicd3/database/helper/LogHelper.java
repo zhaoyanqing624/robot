@@ -43,6 +43,7 @@ public class LogHelper
 		LogPersistenceMapper mapper = session.getMapper(LogPersistenceMapper.class);
 		mapper.addLog(logId, userId,  faqPath, logTime);
 		session.close();
+		System.out.println("添加了一条日志信息2");
 	}
 
 	/**

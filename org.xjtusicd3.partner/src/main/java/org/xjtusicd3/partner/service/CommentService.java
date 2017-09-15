@@ -240,4 +240,17 @@ public class CommentService {
 		 String time = dformat.format(dat);
 		 return time;
 	 }
+	
+	/**
+	 * author:zzl
+	 * abstract:获取未登录用户推荐问题评论信息
+	 * data:2017年9月15日19:42:02
+	 */
+	public static int commentInfo(String faqquestionid) {
+		List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(faqquestionid);		
+		return commentPersistences.size();
+	}
+	
+	
+	
 }
