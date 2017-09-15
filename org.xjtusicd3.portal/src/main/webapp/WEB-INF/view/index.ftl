@@ -155,6 +155,16 @@
                     </a>
                 </li>
 
+ 				<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                    <span class="ng-scope"></span>
+                </li>
+
+				<li>
+                    <a class="J_menuItem" href="" onclick="logout()">
+                        <i class="fa fa-warning"></i>
+                        <span class="nav-label">退出</span>
+                    </a>
+                </li>
 
             </ul>
         </div>
@@ -170,6 +180,15 @@
     <!--右侧部分结束-->
 
 </div>
+
+<script language="JavaScript" type="text/javascript">
+    function logout(){
+         if (confirm("您确定要退出系统吗？"))
+        	 top.location = "login.html";
+         	
+         return false;
+    }
+</script>
 
 <!-- 全局js -->
 <script src="js/jquery.min.js?v=2.1.4"></script>

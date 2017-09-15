@@ -13,12 +13,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<listener>
-		<listener-class>org.xjtusicd3.portal.service.ServletContextListenerImpl</listener-class>
-	</listener>
-	<listener>
-		<listener-class>org.xjtusicd3.portal.service.HttpSessionListenerImpl</listener-class>
-	</listener>
 	 
 	<filter>
 		<filter-name>loginFilter</filter-name>

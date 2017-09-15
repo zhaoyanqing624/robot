@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,18 +48,18 @@ public class UserController
 	
 	//login admin
 	@RequestMapping(value="adminLogin",method=RequestMethod.POST)
-	public String adminLogin(UserView userView,HttpServletRequest request,HttpServletResponse response){
-		
-		
+	public String adminLogin(HttpSession session,UserView userView,HttpServletRequest request,HttpServletResponse response){
 		String email = request.getParameter("userName");
 		String psw = request.getParameter("userPassword");
 		String password = StringToMd5(psw);
+		System.out.println(password);
 		List<UserPersistence> list = UserHelper.getEmail2(email, password);
 		if (list.size()==0) 
 		{
 			return "redirect:login.html";
 		}else 
 		{
+			session.setAttribute("useremail", email);
 			request.getSession().setAttribute("user", list.get(0));
 			return "redirect:index.html" ;
 		}	

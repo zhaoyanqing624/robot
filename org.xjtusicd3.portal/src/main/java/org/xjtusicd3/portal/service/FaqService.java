@@ -119,8 +119,8 @@ public class FaqService {
     	questionPersistence.setFAQSTATE(2);
     	QuestionHelper.save(questionPersistence);
 		AnswerHelper.save(answerPersistence);
-		CommunityQuestionHelper.deleteCommunityAnswerById(problemID);
-		CommunityQuestionHelper.deleteCommunityQuestionById(problemID);
+//		CommunityQuestionHelper.deleteCommunityAnswerById(problemID);
+//		CommunityQuestionHelper.deleteCommunityQuestionById(problemID);
 	}
 	
 	/*

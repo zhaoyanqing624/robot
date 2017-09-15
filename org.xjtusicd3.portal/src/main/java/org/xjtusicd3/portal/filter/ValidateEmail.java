@@ -1,4 +1,4 @@
-package org.xjtusicd3.partner.filter;
+package org.xjtusicd3.portal.filter;
 
 import java.util.Date;
 

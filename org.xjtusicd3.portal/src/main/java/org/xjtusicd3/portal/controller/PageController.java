@@ -72,7 +72,7 @@ public class PageController {
     }
 
 	 @RequestMapping(value="login",method=RequestMethod.GET)
-     public ModelAndView  login(){
+     public ModelAndView login(){
   	   ModelAndView mv=new ModelAndView("login");
   	   return mv;
      }

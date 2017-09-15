@@ -1,4 +1,4 @@
-package org.xjtusicd3.partner.filter;
+package org.xjtusicd3.portal.filter;
 
 import java.io.IOException;
 
@@ -64,11 +64,11 @@ public class LoginFilter implements Filter {
 			
 			String url = request.getServletPath() + (request.getPathInfo() == null ? "" : request.getPathInfo());
 			HttpSession session = request.getSession();
-			Object object = session.getAttribute("session_username");
+			Object object = session.getAttribute("useremail");
 			
-			//没有登录就不允许访问后台链接
-			if (object==null&&(url.contains("incidentindex")||url.contains("problemindex")||url.contains("knowledgeindex")||url.contains("forum")||url.contains("forum")||url.contains("forum")||url.contains("forum")||url.contains("forum")||url.contains("forum"))) {
-				response.sendRedirect(request.getContextPath() + "/user/login.html");
+			//没有登录就不允许访问页面的的链接
+			if (object==null&&(url.contains("index")||url.contains("incidentindex")||url.contains("problemindex")||url.contains("changeindex")||url.contains("cfgindex")||url.contains("knowledgeindex")||url.contains("spiderindex")||url.contains("logindex")||url.contains("userindex")||url.contains("messageindex")||url.contains("rbacindex"))) {
+				response.sendRedirect(request.getContextPath() + "/login.html");
 				return;
 			} 
 			chain.doFilter(servletRequest, servletResponse);
@@ -76,10 +76,8 @@ public class LoginFilter implements Filter {
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
 
 	}
-	
 	
 
 }

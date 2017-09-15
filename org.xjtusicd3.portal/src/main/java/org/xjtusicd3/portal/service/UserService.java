@@ -10,7 +10,8 @@ import java.util.UUID;
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.UserPersistence;
-import org.xjtusicd3.partner.filter.ValidateEmail;
+import org.xjtusicd3.portal.filter.ValidateEmail;
+
 import com.alibaba.fastjson.JSONObject;
 
 public class UserService {
