@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>智能小朵-知识库</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
-    
+    <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />   
     <link rel="stylesheet" type="text/css" href="new/front/style/util-rb.css">
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
