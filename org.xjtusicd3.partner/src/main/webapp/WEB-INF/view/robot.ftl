@@ -37,14 +37,14 @@
         }
     </style>
 </head>
-<body>
+<body style="height: 100%">
 <style>
 	.container .wp .macth_xv_categorys .macth_xv_cat_catlist{display:block;}
 </style>
-	<div class="header" id="head">      
-        <div class="loginRegistHead" role="banner">
-            <div class="content clearfix" style="position: inherit;">
-                <div class="header_top_wrap_left">
+	<div class="header" id="head" style="height: 18%;width: 100%">      
+        <div class="loginRegistHead" role="banner" style="height: 20%;width: 100%">
+            <div class="content clearfix" style="position: inherit;" style="height: 100%;width: 100%">
+                <div class="header_top_wrap_left" style="height: 100%;width: 70%">
 		            <ul>
 		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
 		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1">知识库</a></li>
@@ -55,7 +55,7 @@
 		                </li>
 		            </ul> 
                 </div>
-                <div class="header_top_wrap_right">
+                <div class="header_top_wrap_right" style="height: 100%;;width: 30%">
 		              <ul>
 		              <#if UserEmail??>
 		                <div class="unlogin">
@@ -87,130 +87,131 @@
                 </div>
             </div>
         </div>
-       	<div class="headContent">
-    		<div class="headTop clearfix">
-	        	<a href="" class="logoCon">
-	            	<img src="images/logo.jpg" class="logo">
+       	
+       	<div class="headContent" style="height: 80%;width: 100%">
+    		<div class="headTop clearfix" style="height: 100%;width: 100%">
+	        	<a href="" class="logoCon" style="height: 100%;width: 70%">
+	            	<img src="images/logo.jpg" class="logo" style="width:13%;height: 70%;margin-left: 20%">
 	            	<span>IT运维智能化服务一体化平台</span>
 	        	</a>
     		</div>
 		</div>
     </div>
-    <div class="mainContent">
-        <div class="contentWra clearfix">
-        	<div id="login">
-    <div class="wrapper">
-        <div class="login">
-            <form action="#" method="post" class="container offset1 loginform">
-                <div id="owl-login" class="">
-                    <div class="hand"></div>
-                    <div class="hand hand-r"></div>
-                    <div class="arms">
-                        <div class="arm"></div>
-                        <div class="arm arm-r"></div>
-                    </div>
-                </div>
-                <div class="pad">
-<!--效果html开始-->
-    <div class="content">
-        <div class="chatBox">
-            <div class="chatLeft">
-                <div class="chat01">
-                    <div class="chat01_title">
-                    </div>
-                    <div class="chat01_content">
-        				<ul class="media-list chat-list">
-							<br>
-							<div id="chat01_content" >
-
-							</div>
-							<br>
-						</ul>
-                    </div>
-                </div>
-                <div class="chat02">
-                    <div class="chat02_title">
-                        <a class="chat02_title_btn ctb01" href="javascript:;"></a><a class="chat02_title_btn ctb02"
-                            href="javascript:;" title="选择文件">
-                            <embed width="15" height="16" flashvars="swfid=2556975203&amp;maxSumSize=50&amp;maxFileSize=50&amp;maxFileNum=1&amp;multiSelect=0&amp;uploadAPI=http%3A%2F%2Fupload.api.weibo.com%2F2%2Fmss%2Fupload.json%3Fsource%3D209678993%26tuid%3D1887188824&amp;initFun=STK.webim.ui.chatWindow.msgToolBar.upload.initFun&amp;sucFun=STK.webim.ui.chatWindow.msgToolBar.upload.sucFun&amp;errFun=STK.webim.ui.chatWindow.msgToolBar.upload.errFun&amp;beginFun=STK.webim.ui.chatWindow.msgToolBar.upload.beginFun&amp;showTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.showTipFun&amp;hiddenTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.hiddenTipFun&amp;areaInfo=0-16|12-16&amp;fExt=*.jpg;*.gif;*.jpeg;*.png|*&amp;fExtDec=选择图片|选择文件"
-                                data="upload.swf" wmode="transparent" bgcolor="" allowscriptaccess="always" allowfullscreen="true"
-                                scale="noScale" menu="false" type="application/x-shockwave-flash" src="http://service.weibo.com/staticjs/tools/upload.swf?v=36c9997f1313d1c4"
-                                id="swf_3140">
-                        </a><a class="chat02_title_btn ctb03" href="javascript:;" title="选择附件">
-                            <embed width="15" height="16" flashvars="swfid=2556975203&amp;maxSumSize=50&amp;maxFileSize=50&amp;maxFileNum=1&amp;multiSelect=0&amp;uploadAPI=http%3A%2F%2Fupload.api.weibo.com%2F2%2Fmss%2Fupload.json%3Fsource%3D209678993%26tuid%3D1887188824&amp;initFun=STK.webim.ui.chatWindow.msgToolBar.upload.initFun&amp;sucFun=STK.webim.ui.chatWindow.msgToolBar.upload.sucFun&amp;errFun=STK.webim.ui.chatWindow.msgToolBar.upload.errFun&amp;beginFun=STK.webim.ui.chatWindow.msgToolBar.upload.beginFun&amp;showTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.showTipFun&amp;hiddenTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.hiddenTipFun&amp;areaInfo=0-16|12-16&amp;fExt=*.jpg;*.gif;*.jpeg;*.png|*&amp;fExtDec=选择图片|选择文件"
-                                data="upload.swf" wmode="transparent" bgcolor="" allowscriptaccess="always" allowfullscreen="true"
-                                scale="noScale" menu="false" type="application/x-shockwave-flash" src="http://service.weibo.com/staticjs/tools/upload.swf?v=36c9997f1313d1c4"
-                                id="swf_3140">
-                        </a>
-                    </div>
-                    <div class="chat02_content">
-                        <textarea id="textarea"></textarea>
-                    </div>
-                    <div class="chat02_bar">
-                        <ul>
-                            <li style="right: 0px; top: -20px;">
-                            	<p id="colored-button" class="text-center">
-        							<a class="btn float-buttons waves-effect waves-button waves-float" onclick="chat()">确 认</a>
-    							</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="chatRight">
-				<div class="container clearfix mt-40">
-					<div class="wp navbar">
-	<div class="macth_xv_navlist">
-		<div class="macth_xv_menu">
-			<!--左侧导航 start-->
-			<div class="macth_xv_categorys">
-				<div class="macth_xv_cat_title">
-					<h2 class="macth_cat_name"><a>热点问题分类<b class="macth_xv_icon_bai"></b></a></h2>
-				</div>
-				<div class="macth_xv_cat_catlist ">
-					<ul class="macth-dropdown-menu" data-bind="foreach:navData">
-						<li class="macth_xvitem" data-bind="attr:{'data-submenu-id':$data.id}">
-							<h3>
-								<span><i><img src="zhao/classify/images/homeicon.png"></i></span><span class="macth_xvh3_a"><a href="javascript:void(0)" data-bind="text:$data.title"></a></span><s></s>
-							</h3>
-							<div data-bind="attr:{'id':$data.id}" class="macth_popover">
-								<div class="macth_popover-content">
-									<ul class="macth_content_ul"  data-bind="foreach:$data.content">
-										<li class="macth_nav_li">
-										<span class="macth_xvnav_li_alist" data-bind="text:$data.title"></span>
-											<ul class="macth_xvnav_li_ul" data-bind="foreach:$data.content">
-												<li><a onclick="chat2()" data-bind="text:$data.faqTitle"></a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
+  
+  
+	<div class="mainContent" style="height: 79%;width: 100%">
+		<div class="contentWra clearfix"  style="height: 72%;width: 68%;">
+			<div id="login" >
+    			<div class="wrapper" >
+        			<div class="login">
+            			<form action="#" method="post" class="container offset1 loginform">               		
+                			<div class="pad">
+								<!--效果html开始-->
+    							<div class="content">
+        							<div class="chatBox">
+										<div class="chatLeft" style="height: 117%;width: 60%;">
+                							<div class="chat01">
+                    							<div class="chat01_title"></div>
+                    							<div class="chat01_content">
+        											<ul class="media-list chat-list">
+														<br>
+														<div id="chat01_content" ></div>
+														<br>
+													</ul>
+							                    </div>
+							                </div>
+						                	<div class="chat02">
+						                    	<div class="chat02_title">
+						                        	<a class="chat02_title_btn ctb01" href="javascript:;"></a>
+						                        	<a class="chat02_title_btn ctb02" href="javascript:;" title="选择文件">
+						                            	<embed width="15" height="16" flashvars="swfid=2556975203&amp;maxSumSize=50&amp;maxFileSize=50&amp;maxFileNum=1&amp;multiSelect=0&amp;uploadAPI=http%3A%2F%2Fupload.api.weibo.com%2F2%2Fmss%2Fupload.json%3Fsource%3D209678993%26tuid%3D1887188824&amp;initFun=STK.webim.ui.chatWindow.msgToolBar.upload.initFun&amp;sucFun=STK.webim.ui.chatWindow.msgToolBar.upload.sucFun&amp;errFun=STK.webim.ui.chatWindow.msgToolBar.upload.errFun&amp;beginFun=STK.webim.ui.chatWindow.msgToolBar.upload.beginFun&amp;showTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.showTipFun&amp;hiddenTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.hiddenTipFun&amp;areaInfo=0-16|12-16&amp;fExt=*.jpg;*.gif;*.jpeg;*.png|*&amp;fExtDec=选择图片|选择文件"
+						                                data="upload.swf" wmode="transparent" bgcolor="" allowscriptaccess="always" allowfullscreen="true"
+						                                scale="noScale" menu="false" type="application/x-shockwave-flash" src="http://service.weibo.com/staticjs/tools/upload.swf?v=36c9997f1313d1c4"
+						                                id="swf_3140">
+						                        	</a>
+						                        	<a class="chat02_title_btn ctb03" href="javascript:;" title="选择附件">
+						                            <embed width="15" height="16" flashvars="swfid=2556975203&amp;maxSumSize=50&amp;maxFileSize=50&amp;maxFileNum=1&amp;multiSelect=0&amp;uploadAPI=http%3A%2F%2Fupload.api.weibo.com%2F2%2Fmss%2Fupload.json%3Fsource%3D209678993%26tuid%3D1887188824&amp;initFun=STK.webim.ui.chatWindow.msgToolBar.upload.initFun&amp;sucFun=STK.webim.ui.chatWindow.msgToolBar.upload.sucFun&amp;errFun=STK.webim.ui.chatWindow.msgToolBar.upload.errFun&amp;beginFun=STK.webim.ui.chatWindow.msgToolBar.upload.beginFun&amp;showTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.showTipFun&amp;hiddenTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.hiddenTipFun&amp;areaInfo=0-16|12-16&amp;fExt=*.jpg;*.gif;*.jpeg;*.png|*&amp;fExtDec=选择图片|选择文件"
+						                                data="upload.swf" wmode="transparent" bgcolor="" allowscriptaccess="always" allowfullscreen="true"
+						                                scale="noScale" menu="false" type="application/x-shockwave-flash" src="http://service.weibo.com/staticjs/tools/upload.swf?v=36c9997f1313d1c4"
+						                                id="swf_3140">
+						                        	</a>
+						                    	</div>
+							                    <div class="chat02_content">
+							                        <textarea id="textarea"></textarea>
+							                    </div>
+							                    <div class="chat02_bar">
+							                        <ul>
+							                            <li style="right: 0px; top: -20px;">
+							                            	<p id="colored-button" class="text-center">
+							        							<a class="btn float-buttons waves-effect waves-button waves-float" onclick="chat()">确 认</a>
+							    							</p>
+							                            </li>
+							                        </ul>
+							                    </div>
+						                	</div>
+            							</div>
+										<div class="chatRight" style="height: 12%;width: 28%;">
+											<div class="container clearfix mt-40">
+												<div class="wp navbar">
+													<div class="macth_xv_navlist">
+														<div class="macth_xv_menu">
+															<!--左侧导航 start-->
+															<div class="macth_xv_categorys">
+																<div class="macth_xv_cat_title">
+																	<h2 class="macth_cat_name">
+																		<a>热点问题分类<b class="macth_xv_icon_bai"></b></a>
+																	</h2>
+																</div>
+																<div class="macth_xv_cat_catlist ">
+																	<ul class="macth-dropdown-menu" data-bind="foreach:navData">
+																		<li class="macth_xvitem" data-bind="attr:{'data-submenu-id':$data.id}"  style="height: 6%;width: 100%;">
+																			<h3 style="height: 73%;width: 89%;">
+																				<span>
+																					<i><img src="zhao/classify/images/homeicon.png"></i>
+																				</span>
+																				<span class="macth_xvh3_a">
+																					<a href="javascript:void(0)" data-bind="text:$data.title"></a>
+																				</span>
+																				<s></s>
+																			</h3>
+																			<div data-bind="attr:{'id':$data.id}" class="macth_popover">
+																				<div class="macth_popover-content" style="height: 44%;width: 127%;">
+																					<ul class="macth_content_ul"  data-bind="foreach:$data.content">
+																						<li class="macth_nav_li">
+																						<span class="macth_xvnav_li_alist" data-bind="text:$data.title"></span>
+																							<ul class="macth_xvnav_li_ul" data-bind="foreach:$data.content">
+																								<li><a onclick="chat2()" data-bind="text:$data.faqTitle"></a></li>
+																							</ul>
+																						</li>
+																					</ul>
+																				</div>
+																			</div>
+																		</li>
+																	</ul>
+																</div>
+															</div>
+															<!--左侧导航 end-->					
+														</div>
+													</div>
+												</div>
+											</div>
+            							</div>           
+        							</div>
+    							</div>
+								<!--效果html结束-->
+                			</div>
+            			</form>
+        			</div>
+    			</div>
 			</div>
-			<!--左侧导航 end-->
-			
-		</div>
-	</div>
-	</div>
-</div>
-            </div>
-            
         </div>
     </div>
-<!--效果html结束-->
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-        </div>
-    </div>
-    <div id="foot" class="footer">
+        
+    <div id="foot" class="footer" style="margin-bottom: 1px">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
-        <script type="text/javascript" src="zhao/chat/js/waves.min.js"></script>
+        
+	<script type="text/javascript" src="zhao/chat/js/waves.min.js"></script>
     <script>
     $(function() {
         $('#login #textarea').focus(function() {

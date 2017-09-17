@@ -37,7 +37,7 @@
 	</style>
 </head>
 <body>
-	<div class="header" id="head">      
+	<div class="header" id="head" style="height: 18%;width: 100%">      
         <#include "inc/incTop.ftl">
        	<div class="headContent">
     		<div class="headTop clearfix">
@@ -49,8 +49,8 @@
 		</div>
     </div>
     
-    <div class="mainContent">
-        <div class="contentWra clearfix">
+    <div class="mainContent" style="height: 79%;width: 100%">
+        <div class="contentWra clearfix" >
         	<section id="shortcodes">
         <div class="container">
             <div id="tab-container">
@@ -260,7 +260,7 @@
 		</div>
         		
     </div>
-    <div id="foot" class="footer">
+    <div id="foot" class="footer" style="height: 3%;width: 100%;margin-bottom: 1px">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
     
