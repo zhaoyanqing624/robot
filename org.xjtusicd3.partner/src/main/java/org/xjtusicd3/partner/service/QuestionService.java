@@ -213,4 +213,15 @@ public class QuestionService {
 		}
 		return faq_CommendViews;
 	}
+	public static void main(String[] args) {
+		tset();
+	}
+	//test
+	public static void tset(){
+		String ClassifyId="f0e05ff9-b5f6-40c4-8253-61ae737299ee";
+		List<QuestionPersistence> questionPersistences = QuestionHelper.test(ClassifyId);
+		for(int i=0;i<questionPersistences.size();i++){
+			AnswerHelper.anserTest(questionPersistences.get(i).getFAQQUESTIONID());
+		}
+	}
 }

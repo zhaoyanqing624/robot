@@ -240,5 +240,12 @@ public class QuestionHelper {
 //		return list;
 //	}
 	
+	public static List<QuestionPersistence> test(String ClassifyId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.test_(ClassifyId);
+		session.close();
+		return list;
+	}
 	
 }
