@@ -110,4 +110,12 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID ,TBL_FAQquestion.FAQTITLE,TBL_FAQquestion.COLLECTION ,TBL_FAQquestion.SCAN, TBL_FAQquestion.MODIFYTIME,TBL_FAQquestion.FAQDESCRIPTION FROM TBL_FAQquestion ,TBL_FAQclassify WHERE TBL_FAQclassify.FAQPARENTID=#{0} AND TBL_FAQclassify.FAQCLASSIFYID = TBL_FAQquestion.FAQCLASSIFYID ORDER BY TBL_FAQquestion.MODIFYTIME DESC LIMIT #{1},5")
 	public List<QuestionPersistence> questionView(String parentId,int startnum);
+	
+	/**
+	 * author:zzl
+	 * abstract:推荐知识_根据收藏量推荐前4个
+	 * data:2017年9月17日19:53:48
+	 */
+	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID ,TBL_FAQquestion.FAQTITLE,TBL_FAQquestion.FAQDESCRIPTION FROM TBL_FAQquestion ,TBL_FAQclassify WHERE TBL_FAQclassify.FAQPARENTID=#{0} AND TBL_FAQclassify.FAQCLASSIFYID = TBL_FAQquestion.FAQCLASSIFYID ORDER BY TBL_FAQquestion.COLLECTION DESC LIMIT 4")
+	public List<QuestionPersistence> faqInfo_limit(String faqParentId);
 }

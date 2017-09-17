@@ -69,5 +69,13 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQPARENTID=#{0} ")
 	public List<ClassifyPersistence> faq_classifyIds(String ParentId);
 	
+	/**
+	 * author:zzl
+	 * abstract:获取一级分类信息
+	 * data:2017年9月17日19:33:32
+	 */
+	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQCLASSIFYID=#{0} ")
+	public List<ClassifyPersistence> getInfoById(String classifyId);
+	
 
 }

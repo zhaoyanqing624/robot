@@ -144,6 +144,19 @@ public class ClassifyHelper {
 		return list;
 	}
 	
+	/**
+	 * author:zzl
+	 * abstract:获取一级分类信息
+	 * data:2017年9月17日19:33:19
+	 */
+	public static List<ClassifyPersistence> getInfoById(String classifyId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.getInfoById(classifyId);
+		session.close();
+		return list;
+	}
+	
 
 	
 	

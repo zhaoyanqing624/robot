@@ -129,7 +129,10 @@ public class FaqController {
 	 */
 	@RequestMapping(value="faq1",method=RequestMethod.GET)
 	public ModelAndView classifyName2(HttpSession session,HttpServletRequest request,String p){
-		ModelAndView modelAndView = new ModelAndView("faq1");
+		ModelAndView modelAndView = new ModelAndView("faq1");		
+		//zzl_获取一级分类信息
+		List<ClassifyPersistence> classify1Info = ClassifyHelper.getInfoById(p);
+		//zzl_获取二级分类
 		List<ClassifyPersistence> list = ClassifyHelper.faq1_ClassifyName(p);
 		List<Faq1_ClassifyView> list2 = ClassifyService.faq1_ClassifyView(p);
 		List<Faq1_UserActive> faq1_UserActives = CommentService.faq1_userActive();
@@ -137,6 +140,12 @@ public class FaqController {
 		if (list == null || list.size()==0) {
 			return null;
 		}
+		
+		//zzl_推荐知识_根据收藏量推荐前4个_2017年9月17日19:45:11
+		List<Faq_CommendView> faq_list = QuestionService.faqInfo(p);
+		
+		modelAndView.addObject("faq_list", faq_list);
+		modelAndView.addObject("classifyInfo", classify1Info);
 		modelAndView.addObject("faq1_list", list);
 		modelAndView.addObject("faq1_list2", list2);
 		modelAndView.addObject("userActive", faq1_UserActives);

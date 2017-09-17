@@ -224,4 +224,27 @@ public class QuestionService {
 			AnswerHelper.anserTest(questionPersistences.get(i).getFAQQUESTIONID());
 		}
 	}
+
+	/**
+	 * author:zzl
+	 * abstract:推荐知识_根据收藏量推荐前4个
+	 * data:2017年9月17日19:47:28
+	 */
+	public static List<Faq_CommendView> faqInfo(String faqParentId) {
+		System.out.println("进入推荐知识");
+		List<Faq_CommendView> faq_CommendViews = new ArrayList<Faq_CommendView>();
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faqInfo_limit(faqParentId);
+		System.out.println(questionPersistences.size());
+		for (QuestionPersistence questionPersistence:questionPersistences) {
+			Faq_CommendView faq_CommendView = new Faq_CommendView();
+			faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+			faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+			System.out.println(questionPersistence.getFAQTITLE());
+			faq_CommendViews.add(faq_CommendView);
+		}		
+		
+		return faq_CommendViews;
+		
+	}
 }

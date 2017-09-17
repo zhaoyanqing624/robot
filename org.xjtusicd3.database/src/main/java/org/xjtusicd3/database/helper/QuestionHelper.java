@@ -248,4 +248,17 @@ public class QuestionHelper {
 		return list;
 	}
 	
+	/**
+	 * author:zzl
+	 * abstract:推荐知识_根据收藏量推荐前4个
+	 * data:2017年9月17日19:53:14
+	 */
+	public static List<QuestionPersistence> faqInfo_limit(String faqParentId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faqInfo_limit(faqParentId);
+		session.close();
+		return list;
+	}
+	
 }

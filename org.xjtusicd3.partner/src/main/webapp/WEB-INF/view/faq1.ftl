@@ -42,9 +42,12 @@
                     		<span class="type">所有分类</span>
                     	</a>
                     	<span> &gt; </span>
+                    	
+                    	<#list classifyInfo as classify1>
                     	<a href="/topic/c_1.html" id="oneNavStep">
-                    		<span id="productionName">操作系统</span>
+                    		<span id="productionName">${classify1.FAQCLASSIFYNAME }</span>
                     	</a>
+                    	</#list>
                     </p>
                     <input type="hidden" id="secondeType" value="c">
                     	<ul class="typeContent clearfix" id="typeTplWrapper">
@@ -58,26 +61,17 @@
                 <div class="recommendWrapper">
                     <p class="knowledgeType"><span class="type">推荐知识</span></p>
                    	 <div id="onebyone_slider">
-						<div class="oneByOne_item">
-							<span class="ob1_title">近期Win8.1、Win10系统出现不定时蓝屏</span>
-							<span class="ob1_description">近期Win8.1、Win10出现的蓝屏现象，可以通过本文提供的工具清除插件来解决。</span>
-							<img src="zhao/lunbo/images/header/1.jpg" class="ob1_img_device1"  />
+						<#list faq_list as b>
+						<div class="oneByOne_item">							
+							<span class="ob1_title">
+							<p class="title">
+                                    <a href="faq3.html?q=${b.FAQQUESTIONID} " target="_blank">${b.FAQTITLE }</a>
+                                </p>
+							</span>
+							<span class="ob1_description">${b.FAQDESCRIPTION}</span>
+							<img src="zhao/lunbo/images/header/${b_index+1}.jpg" class="ob1_img_device1"  />
 						</div>
-						<div class="oneByOne_item">
-							<span class="ob1_title">永久关闭Windows10自动更新</span>
-							<span class="ob1_description">本文介绍了永久关闭Win10自动更新的操作方法。</span>
-							<img src="zhao/lunbo/images/header/2.jpg" class="ob1_img_device1" alt="" />
-						</div>
-						<div class="oneByOne_item">
-							<span class="ob1_title">正式版Windows 10回退至Windows 7或Windows 8.1的功能介绍</span>
-							<span class="ob1_description">正式版Windows 10回退至Windows 7和Windows 8.1的功能介绍、操作步骤、风险提示。</span>
-							<img src="zhao/lunbo/images/header/3.jpg" class="ob1_img_device1" alt="" />
-						</div>
-						<div class="oneByOne_item">
-							<span class="ob1_title">如何安装或重新安装Windows 7</span>
-							<span class="ob1_description">本文介绍了使用光盘重新安装Windows 7操作系统的方法，因安装系统需要对硬盘进行格式化操作，为了避免重要数据的丢失，请事先把硬盘上的重要数据进行备份。</span>
-							<img src="zhao/lunbo/images/header/4.jpg" class="ob1_img_device1" alt="BubbleTips气泡提示Jquery插件" />
-						</div>
+						</#list>
 					</div>
                 </div>
                 
