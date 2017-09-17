@@ -38,4 +38,14 @@ public class AnswerHelper {
 		session.close();
 		return list;
 	}
+	
+	/*
+	 * 
+	 */
+	public static void anserTest(String questionId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		AnswerPersistenceMapper mapper  = session.getMapper(AnswerPersistenceMapper.class);
+		mapper.deleteTest(questionId);
+		session.close();
+	}
 }

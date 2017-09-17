@@ -11,6 +11,8 @@ import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 
 public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence, String>{
+	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID FROM TBL_FAQquestion WHERE TBL_FAQquestion.FAQCLASSIFYID=#{0}")
+	public List<QuestionPersistence> test_(String ClassifyId);
 	/*
 	 * zyq_robot-分类
 	 */
