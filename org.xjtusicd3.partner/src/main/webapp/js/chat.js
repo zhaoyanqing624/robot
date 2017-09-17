@@ -107,16 +107,7 @@ function chatWithRobot(){
 }
 //robot——FAQ问题
 function chatWithRobot2(){
-	var _event="";
-	if(navigator.userAgent.indexOf('Trident') > -1){//IE内核
-		_event = window.event.srcElement;
-	}else if(navigator.userAgent.indexOf('Presto') > -1){//opera内核
-		
-	}else if(navigator.userAgent.indexOf('AppleWebKit') > -1){//苹果、谷歌内核
-		_event = event.target;
-	}else if(navigator.userAgent.indexOf('Firefox') > -1){//火狐内核Gecko
-		
-	}
+	var _event= browserEvent();
 	var comment = _event.innerHTML;
 	var comments = comment.replace(/\s+/g,"");
 	var html = document.getElementById("chat01_content").innerHTML;

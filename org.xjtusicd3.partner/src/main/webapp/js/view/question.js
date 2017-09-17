@@ -53,7 +53,8 @@
 			});
 	//点赞
 	function getAgreeAnswer(){
-		var questionid = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+		var _event= browserEvent();
+		var questionid = _event.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id;
 		var questionId = questionid.replace(/_/,"")
 		if(questionid!="searchResult"){
 			$.ajax({
@@ -127,7 +128,8 @@
 			})
 		}
 		function create_edit(){
-			var a = document.getElementById(event.target.id+"_");
+			var _event= browserEvent();
+			var a = document.getElementById(_event.id+"_");
 			if(document.getElementById('userNameText')==null){
 				self.location='login.html';
 			}else{
@@ -155,7 +157,8 @@
 		}
 		
 		function addComment(){
-			var a = document.getElementById(event.target.id);
+			var _event= browserEvent();
+			var a = document.getElementById(_event.id);
 			var questionId = a.id.replace(/button_/,"");
 			var commentContent = document.getElementById('input_'+questionId).value;
 			$.ajax({
@@ -187,8 +190,9 @@
 		}
 		
 		function getClassify(){
+			var _event= browserEvent();
 			var url = window.location.href;
-			var classifyName = event.target.text;
+			var classifyName = _event.text;
 			if(classifyName=="话题"){
 				classifyName="all";
 			}
@@ -213,8 +217,9 @@
 		}
 		
 		function getType(){
+			var _event= browserEvent();
 			var url = window.location.href;
-			var typename = event.target.text;
+			var typename = _event.text;
 			var type;
 			if(typename=="全部"){
 				type = "all";

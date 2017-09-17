@@ -328,6 +328,7 @@
     <script type="text/javascript" src="new/front/js/util.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/view/ueditor.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/view/faq3.js"></script>
+	<script type="text/javascript" src="js/browserEvent.js"></script>
 	<script>
 	     scoreFun($("#startone"))
 	     scoreFun($("#starttwo"),{

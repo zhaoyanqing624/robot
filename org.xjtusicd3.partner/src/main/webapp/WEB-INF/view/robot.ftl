@@ -257,6 +257,7 @@
     <script src="zhao/classify/js/navbar.js"></script>
     <script src="js/view/getInformation.js"  async="async"></script>
 	<script type="text/javascript" src="js/chat.js"></script>
+	<script type="text/javascript" src="js/browserEvent.js"></script>
 	
 </body>
 </html>

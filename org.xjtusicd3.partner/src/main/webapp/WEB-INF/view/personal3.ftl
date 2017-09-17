@@ -21,6 +21,7 @@
 	<script src="zhao/upload/sitelogo/sitelogo.js"></script>
 	<script src="zhao/upload/bootstrap/js/bootstrap.min.js"></script>
 	<script src="zhao/password/js/register.js"></script>
+	<script type="text/javascript" src="js/view/personal3.js"></script>
 	<link type="text/css" rel="stylesheet" href="zhao/data/jedate/skin/jedate.css">
 	<style>
 		.datainp { width: 128px; height: 35px; border: 1px #A5D2EC solid; }
