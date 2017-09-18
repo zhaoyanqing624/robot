@@ -189,7 +189,6 @@ public class QuestionService {
 //		System.out.println(parentId);
 		return faq_CommendViews;
 	}
-	
 	/**
 	 * author:zzl
 	 * abstract:获取未登录用户推荐列表

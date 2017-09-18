@@ -116,4 +116,12 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID ,TBL_FAQquestion.FAQTITLE,TBL_FAQquestion.FAQDESCRIPTION FROM TBL_FAQquestion ,TBL_FAQclassify WHERE TBL_FAQclassify.FAQPARENTID=#{0} AND TBL_FAQclassify.FAQCLASSIFYID = TBL_FAQquestion.FAQCLASSIFYID ORDER BY TBL_FAQquestion.COLLECTION DESC LIMIT 4")
 	public List<QuestionPersistence> faqInfo_limit(String faqParentId);
+	/**
+	 * author:zhaoyanqing
+	 * abstract:对访问FAQ页面的浏览量进行增加
+	 * data:2017年9月18日 16:12:59
+	 */
+	@Update("UPDATE TBL_FAQquestion SET TBL_FAQquestion.SCAN=#{0}")
+	public void updateFAQScan(String faqScan);
+	
 }

@@ -215,6 +215,8 @@ public class FaqController {
 		List<Faq3_faqContentView> faq3Views = QuestionService.faq3_faqcontent(q);
 		List<CommentPersistence> commentPersistences = CommentHelper.getComment(q);
 		List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(q,0);
+		//登录FAQ 增加浏览量
+		QuestionHelper.updateFAQScan(q);
 		//FAQ的总评分展示
 		List<ScorePersistence> FAQlist = ScoreHelper.getScoreList(q);
 		float totalscore = ScoreHelper.getScore(q);

@@ -249,5 +249,18 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
-	
+	/**
+	 * author:zhaoyanqing
+	 * abstract:对访问FAQ页面的浏览量进行增加
+	 * data:2017年9月18日 16:12:59
+	 */
+	public static void updateFAQScan(String faqquestionid){
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faq3_faqcontent(faqquestionid);
+		int faqScan = Integer.parseInt(questionPersistences.get(0).getSCAN());
+		faqScan++;
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		mapper.updateFAQScan(Integer.toString(faqScan));
+		session.close();
+	}
 }
