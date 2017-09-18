@@ -121,7 +121,7 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 * abstract:对访问FAQ页面的浏览量进行增加
 	 * data:2017年9月18日 16:12:59
 	 */
-	@Update("UPDATE TBL_FAQquestion SET TBL_FAQquestion.SCAN=#{0}")
-	public void updateFAQScan(String faqScan);
+	@Update("UPDATE TBL_FAQquestion SET TBL_FAQquestion.SCAN=#{1} WHERE TBL_FAQquestion.FAQQUESTIONID=#{0}")
+	public void updateFAQScan(String faqquestionId,String faqScan);
 	
 }
