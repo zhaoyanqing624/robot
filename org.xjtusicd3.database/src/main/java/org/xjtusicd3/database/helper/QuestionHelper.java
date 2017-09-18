@@ -260,7 +260,7 @@ public class QuestionHelper {
 		faqScan++;
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-		mapper.updateFAQScan(Integer.toString(faqScan));
+		mapper.updateFAQScan(faqquestionid,Integer.toString(faqScan));
 		session.close();
 	}
 }
