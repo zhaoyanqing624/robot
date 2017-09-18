@@ -65,18 +65,19 @@ public class FaqController {
 		session.setAttribute("urlPath", urlPath);
 				
 		if(useremail==null){
-			//获取推荐faq_2017年9月14日21:43:52
+			//zzl_获取推荐faq_2017年9月14日21:43:52
 			int startnum = 0;
 			List<Faq_CommendView> faqlists = QuestionService.faq_recommend_Limit(startnum);
 			mv.addObject("faqlists", faqlists);
 			System.out.println("未登录用户");
 		}else{
-			//获取推荐faq_2017年9月14日21:43:52
+			//zzl_获取推荐faq_2017年9月14日21:43:52
+			System.out.println("已登录用户");
 			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
 			int startnum = 0;
 			List<Faq_CommendView> faqlists = QuestionService.user_recommend_Limit(userPersistences.get(0).getUSERID(),startnum);				
 			mv.addObject("faqlists", faqlists);
-			System.out.println("已登录用户");
+			
 		}
 		
 		mv.addObject("userDynamics", userDynamics);
@@ -85,41 +86,6 @@ public class FaqController {
 		return mv;
 	}
 	
-	/**
-	 * author:zzl
-	 * abstract:查看更多推荐
-	 * data:2017年9月15日16:48:57
-	 */
-	@ResponseBody
-	@RequestMapping(value={"/getMoreFaqCommend"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
-	public String faqCommendList(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-		int startnum = Integer.parseInt(request.getParameter("startnum"));
-		int startnum2 = startnum+5;
-		String useremail = (String) session.getAttribute("UserEmail");
-		JSONObject jsonObject = new JSONObject();
-		
-		if(useremail==null){
-			//获取推荐faq_2017年9月14日21:43:52		
-			List<QuestionPersistence> faqlists = QuestionHelper.faq_recommend_Limit(startnum);
-			jsonObject.put("faqlists", faqlists);
-		}else{
-			//获取推荐faq_2017年9月14日21:43:52
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
-			List<Faq_CommendView> faqlists = QuestionService.user_recommend_Limit(userPersistences.get(0).getUSERID(),startnum);				
-			jsonObject.put("faqlists", faqlists);
-		}
-		
-		
-		
-		//int faqTotal = QuestionHelper.pageTotal(ClassifyId);
-		//int pageTotal = (int) Math.ceil((double)faqTotal/(double)5);
-		//JSONObject jsonObject = new JSONObject();
-		jsonObject.put("startnum", startnum2);
-		//jsonObject.put("faqlist", faq2Views);
-		//jsonObject.put("pageTotal",pageTotal);
-		String faqCommend_list = JsonUtil.toJsonString(jsonObject);
-		return faqCommend_list;
-	 }
 	
 	
 	/*

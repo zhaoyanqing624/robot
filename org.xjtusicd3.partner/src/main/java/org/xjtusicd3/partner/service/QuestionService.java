@@ -156,37 +156,68 @@ public class QuestionService {
 		//Faq_CommendView中信息不全、后续可补充
 		List<Faq_CommendView> faq_CommendViews = new ArrayList<Faq_CommendView>();
 		List<LogPersistence> logPersistences = LogService.getLogs(userid);
-		String logMethod = "";
-		for(int i=0;i<logPersistences.size();i++){
-			if(logPersistences.get(i).getLogMethod().indexOf("faq3")!=-1){
-				logMethod = logPersistences.get(i).getLogMethod();
-				break;
+		if (logPersistences.size()==0) {
+			//zzl_用户首次登录时还没有log记录_依旧用faq_recommend_Limit推荐
+			List<QuestionPersistence> questionPersistences = QuestionHelper.faq_recommend_Limit(startnum);
+			for (QuestionPersistence questionPersistence:questionPersistences) {
+				Faq_CommendView faq_CommendView = new Faq_CommendView();
+				faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+				faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+				List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+				faq_CommendView.setCOLLECTION(collectionPersistences.size());
+				faq_CommendView.setSCAN(questionPersistence.getSCAN());
+				faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+				faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+				List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+				faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+				faq_CommendViews.add(faq_CommendView);
+				
 			}
+		}else {
+			String logMethod = "";
+			for(int i=0;i<logPersistences.size();i++){
+				if(logPersistences.get(i).getLogMethod().indexOf("faq3")!=-1){
+					//zzl_用户有log记录且日志前缀有faq3字样_截取/faq3.html?q=之后的ID号
+					logMethod = logPersistences.get(i).getLogMethod();
+					String questionId = logMethod.substring(13, logMethod.length()); 
+					String faq_classifyId = QuestionHelper.faqclassify(questionId);		
+					String parentId = ClassifyHelper.faq_parentId(faq_classifyId);
+					List<QuestionPersistence> questionPersistences = QuestionHelper.questionView(parentId,startnum);
+					for (QuestionPersistence questionPersistence:questionPersistences) {
+						Faq_CommendView faq_CommendView = new Faq_CommendView();
+						faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+						faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+						List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOLLECTION(collectionPersistences.size());
+						faq_CommendView.setSCAN(questionPersistence.getSCAN());
+						faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+						faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+						List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+						System.out.println(questionPersistence.getFAQTITLE());
+						faq_CommendViews.add(faq_CommendView);
+					}
+					break;
+				}else{
+					//zzl_用户有log记录且日志前缀没有faq3字样_依旧用faq_recommend_Limit推荐
+					List<QuestionPersistence> questionPersistences = QuestionHelper.faq_recommend_Limit(startnum);
+					for (QuestionPersistence questionPersistence:questionPersistences) {
+						Faq_CommendView faq_CommendView = new Faq_CommendView();
+						faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+						faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+						List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOLLECTION(collectionPersistences.size());
+						faq_CommendView.setSCAN(questionPersistence.getSCAN());
+						faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+						faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+						List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+						faq_CommendViews.add(faq_CommendView);
+				}
+			}
+			
 		}
-		String questionId = logMethod.substring(13, logMethod.length()); 
-		String faq_classifyId = QuestionHelper.faqclassify(questionId);		
-		String parentId = ClassifyHelper.faq_parentId(faq_classifyId);
-		List<QuestionPersistence> questionPersistences = QuestionHelper.questionView(parentId,startnum);
-		for (QuestionPersistence questionPersistence:questionPersistences) {
-			Faq_CommendView faq_CommendView = new Faq_CommendView();
-			faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
-			faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
-			List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
-			faq_CommendView.setCOLLECTION(collectionPersistences.size());
-			faq_CommendView.setSCAN(questionPersistence.getSCAN());
-			faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
-			faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
-			List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
-			faq_CommendView.setCOMMENTSUM(commentPersistences.size());
-			System.out.println(questionPersistence.getFAQTITLE());
-			faq_CommendViews.add(faq_CommendView);
 		}
-		
-						
-//		System.out.println(logMethod);
-//		System.out.println(questionId);
-//		System.out.println(faq_classifyId);
-//		System.out.println(parentId);
 		return faq_CommendViews;
 	}
 	/**
