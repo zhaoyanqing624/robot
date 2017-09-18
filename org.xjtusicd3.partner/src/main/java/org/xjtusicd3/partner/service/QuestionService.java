@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.ibatis.annotations.Select;
-import org.xjtusicd3.database.helper.AgreeHelper;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.CollectionHelper;
@@ -15,9 +13,7 @@ import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.ShareHelper;
 import org.xjtusicd3.database.helper.UserHelper;
-import org.xjtusicd3.database.model.AgreePersistence;
 import org.xjtusicd3.database.model.AnswerPersistence;
-import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.LogPersistence;
@@ -139,7 +135,7 @@ public class QuestionService {
 			faq_UserDynamics.setFaqId(questionPersistence.getFAQQUESTIONID());
 			faq_UserDynamics.setFaqTitle(questionPersistence.getFAQTITLE());
 			faq_UserDynamics.setTime(questionPersistence.getMODIFYTIME());
-			if (questionPersistence.getMODIFYNUMBER()=="1") {
+			if (questionPersistence.getMODIFYNUMBER().equals("1")) {
 				faq_UserDynamics.setHow("发布");
 			}else {
 				faq_UserDynamics.setHow("修改");
@@ -213,18 +209,6 @@ public class QuestionService {
 		}
 		return faq_CommendViews;
 	}
-	public static void main(String[] args) {
-		tset();
-	}
-	//test
-	public static void tset(){
-		String ClassifyId="f0e05ff9-b5f6-40c4-8253-61ae737299ee";
-		List<QuestionPersistence> questionPersistences = QuestionHelper.test(ClassifyId);
-		for(int i=0;i<questionPersistences.size();i++){
-			AnswerHelper.anserTest(questionPersistences.get(i).getFAQQUESTIONID());
-		}
-	}
-
 	/**
 	 * author:zzl
 	 * abstract:推荐知识_根据收藏量推荐前4个

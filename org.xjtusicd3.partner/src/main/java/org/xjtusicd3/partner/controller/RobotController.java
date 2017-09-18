@@ -27,7 +27,7 @@ public class RobotController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getRobotInfo"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="text/plain;charset=UTF-8")
-	public  String RobotInfo(HttpServletResponse response){
+	public String RobotInfo(HttpServletResponse response){
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		List<RobotPersistence> list = RobotService.robotinfo();
@@ -58,4 +58,28 @@ public class RobotController {
 		String result = JsonUtil.toJsonString(jsonObject);
 		return result;
 	}
+	/**
+	 * author:zhaoyanqing
+	 * abstract:robot页面 点击“提问技巧”
+	 * data:2017年9月17日 23:09:59
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/questionSkill"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="application/json;charset=UTF-8")
+	public String questionSkill(HttpSession session,HttpServletResponse response){
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		String useremail = (String) session.getAttribute("UserEmail");
+		JSONObject jsonObject = new JSONObject();
+		List<RobotPersistence> robotPersistences = RobotHelper.robotinfo();
+		jsonObject.put("robotInfo", robotPersistences);
+		if (useremail==null) {
+			jsonObject.put("value", "0");
+		}else {
+			jsonObject.put("value", "1");
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			jsonObject.put("robotUser", userPersistences);
+		}
+		String result = JsonUtil.toJsonString(jsonObject);
+		return result;
+	 }
 }

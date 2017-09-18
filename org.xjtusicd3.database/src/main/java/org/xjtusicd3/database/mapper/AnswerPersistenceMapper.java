@@ -2,7 +2,6 @@ package org.xjtusicd3.database.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.AnswerPersistence;
@@ -19,7 +18,4 @@ public interface AnswerPersistenceMapper extends IBaseDao<AnswerPersistence, Str
 	@Select("SELECT * FROM TBL_FAQanswer WHERE USERID=#{0}")
 	public List<AnswerPersistence> notice_faqanswerList(String userId);
 	
-	@Delete("DELETE FROM TBL_FAQanswer WHERE FAQQUESTIONID=#{0}")
-	public void deleteTest(String questionId);
-
 }

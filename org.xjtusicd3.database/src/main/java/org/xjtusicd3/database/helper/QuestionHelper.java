@@ -5,10 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
-import org.xjtusicd3.database.mapper.AdvisePersistenceMapper;
-import org.xjtusicd3.database.mapper.ClassifyPersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
-import org.xjtusicd3.database.model.ClassifyPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 
@@ -239,14 +236,6 @@ public class QuestionHelper {
 //		session.close();
 //		return list;
 //	}
-	
-	public static List<QuestionPersistence> test(String ClassifyId){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
-		List<QuestionPersistence> list = mapper.test_(ClassifyId);
-		session.close();
-		return list;
-	}
 	
 	/**
 	 * author:zzl
