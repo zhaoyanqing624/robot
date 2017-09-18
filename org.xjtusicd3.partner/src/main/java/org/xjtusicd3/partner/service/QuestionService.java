@@ -156,7 +156,13 @@ public class QuestionService {
 		//Faq_CommendView中信息不全、后续可补充
 		List<Faq_CommendView> faq_CommendViews = new ArrayList<Faq_CommendView>();
 		List<LogPersistence> logPersistences = LogService.getLogs(userid);
-		String logMethod = logPersistences.get(0).getLogMethod();
+		String logMethod = "";
+		for(int i=0;i<logPersistences.size();i++){
+			if(logPersistences.get(i).getLogMethod().indexOf("faq3")!=-1){
+				logMethod = logPersistences.get(i).getLogMethod();
+				break;
+			}
+		}
 		String questionId = logMethod.substring(13, logMethod.length()); 
 		String faq_classifyId = QuestionHelper.faqclassify(questionId);		
 		String parentId = ClassifyHelper.faq_parentId(faq_classifyId);
