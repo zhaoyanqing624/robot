@@ -183,10 +183,10 @@ public class QuestionService {
 		}
 		
 						
-		System.out.println(logMethod);
-		System.out.println(questionId);
-		System.out.println(faq_classifyId);
-		System.out.println(parentId);
+//		System.out.println(logMethod);
+//		System.out.println(questionId);
+//		System.out.println(faq_classifyId);
+//		System.out.println(parentId);
 		return faq_CommendViews;
 	}
 	
