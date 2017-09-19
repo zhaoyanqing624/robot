@@ -69,8 +69,10 @@
 						<li class="active"><a data-toggle="tab" href="#tab-1"
 							aria-expanded="true">配置首页</a></li>
 						<li class=""><a data-toggle="tab" href="#tab-2"
-							aria-expanded="false">设备资源</a></li>
+							aria-expanded="false">标准配置资源</a></li>	
 						<li class=""><a data-toggle="tab" href="#tab-3"
+							aria-expanded="false">设备资源</a></li>
+						<li class=""><a data-toggle="tab" href="#tab-4"
 							aria-expanded="false">系统配置</a></li>
 
 					</ul>
@@ -192,6 +194,149 @@
 						</div>
 
 						<div id="tab-2" class="tab-pane">
+
+							<div class="wrapper wrapper-content  animated fadeInRight">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="ibox ">
+											<div class="ibox-title">
+												<h5>系统配置</h5>
+											</div>
+											<div class="ibox-content">
+
+												<div class="jqGrid_wrapper">
+
+
+													<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+													<div class="portlet box blue">
+
+														<div class="portlet-title">
+
+															<div class="caption">
+																<i class="icon-edit"></i>系统配置列表
+															</div>
+
+															<div class="tools">
+
+																<a href="javascript:;" class="collapse"></a> <a
+																	href="#portlet-config" data-toggle="modal"
+																	class="config"></a> <a href="javascript:;"
+																	class="reload"></a> <a href="javascript:;"
+																	class="remove"></a>
+
+															</div>
+
+														</div>
+
+														<div class="portlet-body">
+
+															<!-- <div class="clearfix">
+
+														<div class="btn-group">
+
+															<button class="btn green"
+																onclick="window.location='addUserInformation.html'">
+
+																<i class="icon-plus">增加FAQ</i>
+
+															</button>
+
+														</div>
+
+												 	<div class="btn-group pull-right">
+
+										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+
+										</button>
+
+										<ul class="dropdown-menu pull-right">
+
+											<li><a href="#">Print</a></li>
+
+											<li><a href="#">Save as PDF</a></li>
+
+											<li><a href="#">Export to Excel</a></li>
+
+										</ul>
+
+									</div> 
+
+													</div> -->
+
+															<table
+																class="table table-striped table-hover table-bordered"
+																id="sample_editable_3">
+
+																<thead>
+
+																	<tr>
+
+
+																		<th>配置名称</th>
+
+																		<th>配置类型</th>
+
+																		<th>URL</th>
+
+																		<th>配置时间</th>
+
+																		<th>操作</th>
+
+																		<th>操作</th>
+
+																		<th>查看配置详情</th>
+
+																	</tr>
+
+																</thead>
+
+																<tbody>
+																	<#list cfgList as cfgList>
+																	<tr class="">
+
+																		<td>${cfgList.CONFIGURENAME}</td>
+																		<td>${cfgList.CONFIGURETYPE}</td>
+
+																		<td class="center">${cfgList.URL}</td>
+
+																		<td class="center">${cfgList.CONFIGURETIME}</td>
+
+																		<td><a class="faq"
+																			href="/org.xjtusicd3.portal/editUserInformation.html?u=${cfgList.USERID}">编辑</a></td>
+
+																		<td><a onclick="deleteUser()">删除</a></td>
+
+																		<td><a class="faq"
+																			href="/org.xjtusicd3.portal/showUserInfo.html?u=${cfgList.USERID}">查看配置信息</a></td>
+
+																	</tr>
+																	</#list>
+
+
+																</tbody>
+
+															</table>
+
+														</div>
+
+													</div>
+
+													<!-- END EXAMPLE TABLE PORTLET-->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+
+						</div>
+
+						<div id="tab-3" class="tab-pane">
 
 							<div class="wrapper wrapper-content animated fadeIn">
 
@@ -458,7 +603,7 @@
 
 						</div>
 
-						<div id="tab-3" class="tab-pane">
+						<div id="tab-4" class="tab-pane">
 
 							<div class="wrapper wrapper-content  animated fadeInRight">
 								<div class="row">
@@ -531,7 +676,7 @@
 
 															<table
 																class="table table-striped table-hover table-bordered"
-																id="sample_editable_3">
+																id="sample_editable_4">
 
 																<thead>
 
@@ -668,6 +813,7 @@
 	<script src="media/js/table-editable.js"></script>
 	<script src="media/js/table-editable2.js"></script>
 	<script src="media/js/table-editable3.js"></script>
+	<script src="media/js/table-editable4.js"></script>
 	<script>
 		jQuery(document).ready(function() {
 
@@ -676,7 +822,7 @@
 			TableEditable.init();
 			TableEditable2.init();
 			TableEditable3.init();
-
+			TableEditable4.init();
 		});
 	</script>
 

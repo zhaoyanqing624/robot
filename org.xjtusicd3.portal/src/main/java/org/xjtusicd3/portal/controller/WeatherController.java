@@ -13,7 +13,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
-
+//zhaoyanqing
 @Controller
 public class WeatherController implements PageProcessor{
 	private Site site = Site.me().setDomain("www.pm25.com");
