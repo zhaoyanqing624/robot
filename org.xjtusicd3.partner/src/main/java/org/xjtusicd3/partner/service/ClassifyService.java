@@ -3,7 +3,6 @@ package org.xjtusicd3.partner.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.reflection.wrapper.BaseWrapper;
 import org.xjtusicd3.database.helper.ClassifyHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.ClassifyPersistence;

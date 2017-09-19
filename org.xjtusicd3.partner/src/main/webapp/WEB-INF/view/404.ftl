@@ -34,7 +34,7 @@
                                     <img class="img-responsive" src="images/404.png" alt="">  
                                 </div>
                             </div>
-                            <h2>页面找不到了</h2>
+                            <h2>暂时不支持非IE浏览器</h2>
                             <p>小朵对此深表遗憾。</p>
                             <a href="robot.html" class="btn btn-error">返回首页</a>
                         </div>

@@ -54,4 +54,27 @@ public class CurrentConfigureHelper {
 		session.close();
 		return list;
 	}
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月10日 09:19:59
+	 * abstract:根据设备ID 查看当前设备配置表
+	 */
+	public static List<CurrentConfigurePersistence> getCurrentConfigure(String equipmentId){
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CurrentConfigurePersistenceMapper mapper = session.getMapper(CurrentConfigurePersistenceMapper.class);
+		List<CurrentConfigurePersistence> list = mapper.getCurrentConfigureOfSoftware(equipmentId);
+		session.close();
+		return list;
+	}
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月11日 23:01:08
+	 * abstract:根据设备ID 删除当前设备配置表
+	 */
+	public static void deleteCurrentConfigure(String equipmentid,String type) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CurrentConfigurePersistenceMapper mapper = session.getMapper(CurrentConfigurePersistenceMapper.class);
+		mapper.deleteCurrentConfigure(equipmentid,type);
+		session.close();
+	}
 }

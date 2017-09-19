@@ -15,7 +15,11 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;  
-  
+/**
+ * author:zhaoyanqing
+ * date:2017年9月6日 17:22:51
+ * abstract:
+ */ 
 public class Main {  
 	public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 //		final Logger logger = LoggerFactory.getLogger(Main.class);
@@ -30,7 +34,7 @@ public class Main {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        String time = format.format(date);
 //        System.out.println(time);
-		EncoderByMd5("111111");
+//		EncoderByMd5("111111");
 		
 	}
 	public static String getdate(int i){ // //获取前后日期 i为正数 向后推迟i天，负数时向前提前i天
@@ -61,4 +65,5 @@ public class Main {
         System.out.println(result);
         return result;
     }
+    
 }  

@@ -8,345 +8,122 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.hyperic.sigar.SigarException;
+import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.CurrentConfigureHelper;
 import org.xjtusicd3.database.helper.CurrentEquipmentHelp;
 import org.xjtusicd3.database.helper.EquipmentHelper;
 import org.xjtusicd3.database.helper.UserHelper;
-import org.xjtusicd3.database.helper.User_Equipment_HistoryHelper;
 import org.xjtusicd3.database.model.CurrentConfigurePersistence;
 import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
-import org.xjtusicd3.database.model.EquipmentPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
-import org.xjtusicd3.database.model.User_Equipment_HistoryPersistence;
 import org.xjtusicd3.partner.filter.LOCALMAC;
-import org.xjtusicd3.partner.filter.SystemDrivers;
-import org.xjtusicd3.partner.filter.SystemPatch;
-import org.xjtusicd3.partner.filter.SystemSigar;
-import org.xjtusicd3.partner.filter.SystemSoftware;
 import org.xjtusicd3.partner.view.Personal3_EquipmentConfigureView;
 import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
 public class EquipmentService {
-	public static void main(String[] args) throws UnknownHostException, SocketException, SigarException {
-		saveCurrentEquipment("77528570@qq.com");
-	}
-	/*
-	 * zyq_ajax_实时获取当前设备资源
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月9日 21:08:18
+	 * abstract:根据MAC地址查看当前配置是否存在
 	 */
-	public static void saveCurrentEquipment(String email) throws UnknownHostException, SocketException, SigarException{
-		LOCALMAC localmac = new LOCALMAC();
-		String macaddress = localmac.getMacAddress();
-		List<EquipmentPersistence> list = EquipmentHelper.getEquipmentList(macaddress);
-		//获取本机基本信息
-		SystemDrivers systemDriver = new SystemDrivers();
-		String[] EquipmentModel = systemDriver.getEquipmentModel().split(",");
-		String equipmentmodel = EquipmentModel[0];
-		String equipmenttime = EquipmentModel[1];
-		String cpu = systemDriver.getCPU();
-		String[] GraphicCard = systemDriver.getGraphicCard().split(",");
-		String graphiccard = GraphicCard[0];
-		String[] AudioCard = systemDriver.getAudioCard().split(",");
-		String audiocard = AudioCard[0];
-		String[] Storage = systemDriver.getStorage().split(",");
-		String storage = Storage[0];
-		String[] NetwordCard1 = systemDriver.getNetworkCard1().split(",");
-		String network1 = NetwordCard1[0];
-		String[] NetwordCard2 = systemDriver.getNetworkCard2().split(",");
-		String netword2 = NetwordCard2[0];
-		String[] MotherBoard = systemDriver.getMotherBoard().split(",");
-		String motherboard = MotherBoard[0]+" "+MotherBoard[1];
-		String osid = systemDriver.getOSID();
-		
-		SystemSigar systemSigar = new SystemSigar();
-		String ram = systemSigar.memory();
-		String harddriver = systemSigar.file();
-		String ip = systemSigar.property();
-		String[] OS = systemSigar.os().split(",");
-		String osname = OS[0];
-		String ostype = OS[1];
-		String osversion = OS[2];
-		
-		SystemPatch systemPatch = new SystemPatch();
-		List<String> PatchList = systemPatch.PatchList();
-		
-		SystemSoftware systemSoftware = new SystemSoftware();
-		List<String> SoftList = systemSoftware.SoftList();
-		
-		//如果为本地配置组
-		if (list.size()!=0) {
-			//是否已添加当前列表
-			List<CurrentEquipmentPersistence> list2 = CurrentEquipmentHelp.currentEquipment(macaddress);
-			List<User_Equipment_HistoryPersistence> list3 = User_Equipment_HistoryHelper.User_Equipment_HistoryList(list.get(0).getEQUIPMENTID());
-			if (list2.size()==0) {
-				CurrentEquipmentPersistence cep = new CurrentEquipmentPersistence();
-				UUID uuid = UUID.randomUUID();
-				cep.setEQUIPMENTID(uuid.toString());
-				cep.setMACADDRESS(macaddress);
-				cep.setEQUIPMENTMODEL(equipmentmodel);
-				cep.setEQUIPMENTTIME(equipmenttime);
-				cep.setRAM(ram);
-				cep.setHARDDRIVER(harddriver);
-				cep.setIP(ip);
-				cep.setCPU(cpu);
-				cep.setSTORAGE(storage);
-				cep.setNETWORKCARD(network1);
-				cep.setNETWORKCARD2(netword2);
-				cep.setMOTHERBOARD(motherboard);
-				cep.setOSNAME(osname);
-				cep.setOSTYPE(ostype);
-				cep.setOSVERSION(osversion);
-				cep.setOSID(osid);
-				cep.setUSERID(list3.get(0).getUSERID());
-				cep.setISNOTICE(0);
-				cep.setGRAPHICCARD(graphiccard);
-				cep.setAUDIOCARD(audiocard);
-		    	Date date=new Date();
-		        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		        String time = format.format(date);
-		        cep.setTIMEREMARKS(time);
-				CurrentEquipmentHelp.save(cep);
-				//添加补丁信息
-				for(int i=0;i<PatchList.size();i++){
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(uuid.toString());
-					ccp.setCONFIGUREVERSION("");
-					ccp.setCONFIGURENAME(PatchList.get(i).toString());
-					ccp.setCONFIGURETYPE("补丁");
-					CurrentConfigureHelper.saveCurrentConfigure(ccp);
-				}
-				//添加软件信息
-				for(int i=0;i<SoftList.size();i++){
-					String[] soft = SoftList.get(i).toString().split(",");
-					String softname = soft[0];
-					String softversion = soft[1];
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(uuid.toString());
-					ccp.setCONFIGUREVERSION(softversion);
-					ccp.setCONFIGURENAME(softname);
-					ccp.setCONFIGURETYPE("软件");
-					CurrentConfigureHelper.saveCurrentConfigure(ccp);
-				}
-				//添加驱动
-				CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), GraphicCard[1], GraphicCard[0], "驱动");
-				CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), AudioCard[1], AudioCard[0], "驱动");
-				if (NetwordCard1[0].length()>1) {
-					CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), NetwordCard1[1], NetwordCard1[0], "驱动");
-				}
-				if (NetwordCard2[0].length()>1) {
-					CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), NetwordCard2[1], NetwordCard2[0], "驱动");
-				}
-				CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), Storage[1], Storage[0], "驱动");
+	public static List<CurrentEquipmentPersistence> currentEquipment(String macAddress){
+		List<CurrentEquipmentPersistence> currentEquipmentPersistences = EquipmentHelper.getCurrentEquipmentList(macAddress);
+		return currentEquipmentPersistences;
+	}
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月9日 21:31:03
+	 * abstract:如果当前设备不存在当前设备表，将获取的计算机信息添加（add）到当前设备表;如果存在，则update
+	 */
+	public static void currentEquipment(String useremail,String macAddress,String ipAddress,String equipmentModel,String equipmentTime,String CPU,String RAM,String memoryBank,
+			String hardDrive,String hardDriveModel,String networkCard,String motherBoard,String osName,String osType,String osVersion,String osId,String graphicCard,String audioCard){
+	    //判断当前设备表是否包含此计算机
+	  	Date date=new Date();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String time = format.format(date);
+	    List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipment(macAddress);
+	    if (currentEquipmentPersistences.isEmpty()) {
+		    CurrentEquipmentPersistence currentEquipmentPersistence = new CurrentEquipmentPersistence();
+			currentEquipmentPersistence.setEQUIPMENTID(UUID.randomUUID().toString());
+			currentEquipmentPersistence.setMACADDRESS(macAddress);
+			currentEquipmentPersistence.setEQUIPMENTMODEL(equipmentModel);
+			currentEquipmentPersistence.setEQUIPMENTTIME(equipmentTime);
+			currentEquipmentPersistence.setIP(ipAddress);
+			currentEquipmentPersistence.setCPU(CPU);
+			currentEquipmentPersistence.setRAM(RAM);
+			currentEquipmentPersistence.setHARDDRIVER(hardDrive);
+			currentEquipmentPersistence.setHARDDRIVERMODEL(hardDriveModel);
+			currentEquipmentPersistence.setSTORAGE(memoryBank);
+			currentEquipmentPersistence.setNETWORKCARD(networkCard);
+			currentEquipmentPersistence.setMOTHERBOARD(motherBoard);
+			currentEquipmentPersistence.setOSNAME(osName);
+			currentEquipmentPersistence.setOSTYPE(osType);
+			currentEquipmentPersistence.setOSVERSION(osVersion);
+			currentEquipmentPersistence.setOSID(osId);
+			if (useremail==null) {
+				currentEquipmentPersistence.setUSERID("00000000-0000-0000-0000-000000000000");
 			}else {
-				CurrentEquipmentPersistence cep = new CurrentEquipmentPersistence();
-				cep.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
-				cep.setMACADDRESS(macaddress);
-				cep.setEQUIPMENTMODEL(equipmentmodel);
-				cep.setEQUIPMENTTIME(equipmenttime);
-				cep.setRAM(ram);
-				cep.setHARDDRIVER(harddriver);
-				cep.setIP(ip);
-				cep.setCPU(cpu);
-				cep.setSTORAGE(storage);
-				cep.setNETWORKCARD(network1);
-				cep.setNETWORKCARD2(netword2);
-				cep.setMOTHERBOARD(motherboard);
-				cep.setOSNAME(osname);
-				cep.setOSTYPE(ostype);
-				cep.setOSVERSION(osversion);
-				cep.setOSID(osid);
-				cep.setUSERID(list3.get(0).getUSERID());
-				cep.setISNOTICE(0);
-				cep.setGRAPHICCARD(graphiccard);
-				cep.setAUDIOCARD(audiocard);
-				Date date=new Date();
-		        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		        String time = format.format(date);
-		        cep.setTIMEREMARKS(time);
-				CurrentEquipmentHelp.update(cep);
-				//添加补丁信息
-				for(int i=0;i<PatchList.size();i++){
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
-					ccp.setCONFIGUREVERSION("");
-					ccp.setCONFIGURENAME(PatchList.get(i).toString());
-					ccp.setCONFIGURETYPE("补丁");
-					CurrentConfigureHelper.updataCurrentConfigure(ccp);
-				}
-				//添加软件信息
-				for(int i=0;i<SoftList.size();i++){
-					String[] soft = SoftList.get(i).toString().split(",");
-					String softname = soft[0];
-					String softversion = soft[1];
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
-					ccp.setCONFIGUREVERSION(softversion);
-					ccp.setCONFIGURENAME(softname);
-					ccp.setCONFIGURETYPE("软件");
-					CurrentConfigureHelper.updataCurrentConfigure(ccp);
-				}
-				//添加驱动
-				CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), GraphicCard[1], GraphicCard[0], "驱动");
-				CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), AudioCard[1], AudioCard[0], "驱动");
-				if (NetwordCard1[0].length()>1) {
-					CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), NetwordCard1[1], NetwordCard1[0], "驱动");
-				}
-				if (NetwordCard2[0].length()>1) {
-					CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), NetwordCard2[1], NetwordCard2[0], "驱动");
-				}
-				CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), Storage[1], Storage[0], "驱动");
+				List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+				currentEquipmentPersistence.setUSERID(userPersistences.get(0).getUSERID());
 			}
+			currentEquipmentPersistence.setISNOTICE(0);
+			currentEquipmentPersistence.setGRAPHICCARD(graphicCard);
+			currentEquipmentPersistence.setAUDIOCARD(audioCard);
+		    currentEquipmentPersistence.setTIMEREMARKS(time);
+	    	CurrentEquipmentHelp.save(currentEquipmentPersistence);
+		}else {
+			CurrentEquipmentHelp.updateCurrentEquipment(useremail,macAddress,ipAddress,equipmentModel,equipmentTime,CPU,RAM,memoryBank,
+					hardDrive,hardDriveModel,networkCard,motherBoard,osName,osType,osVersion,osId,graphicCard,audioCard,time);
 		}
-		//如果不是本地配置组
-		else {
-			List<CurrentEquipmentPersistence> list2 = CurrentEquipmentHelp.currentEquipment(macaddress);
-			List<UserPersistence> userPersistences = UserHelper.getEmail(email);
-			if (list2.size()==0) {
-				CurrentEquipmentPersistence cep = new CurrentEquipmentPersistence();
-				UUID uuid = UUID.randomUUID();
-				cep.setEQUIPMENTID(uuid.toString());
-				cep.setMACADDRESS(macaddress);
-				cep.setEQUIPMENTMODEL(equipmentmodel);
-				cep.setEQUIPMENTTIME(equipmenttime);
-				cep.setRAM(ram);
-				cep.setHARDDRIVER(harddriver);
-				cep.setIP(ip);
-				cep.setCPU(cpu);
-				cep.setSTORAGE(storage);
-				cep.setNETWORKCARD(network1);
-				cep.setNETWORKCARD2(netword2);
-				cep.setMOTHERBOARD(motherboard);
-				cep.setOSNAME(osname);
-				cep.setOSTYPE(ostype);
-				cep.setOSVERSION(osversion);
-				cep.setOSID(osid);
-				cep.setUSERID(userPersistences.get(0).getUSERID());
-				cep.setISNOTICE(0);
-				cep.setGRAPHICCARD(graphiccard);
-				cep.setAUDIOCARD(audiocard);
-		    	Date date=new Date();
-		        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		        String time = format.format(date);
-		        cep.setTIMEREMARKS(time);
-				CurrentEquipmentHelp.save(cep);
-				//添加补丁信息
-				for(int i=0;i<PatchList.size();i++){
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(uuid.toString());
-					ccp.setCONFIGUREVERSION("");
-					ccp.setCONFIGURENAME(PatchList.get(i).toString());
-					ccp.setCONFIGURETYPE("补丁");
-					CurrentConfigureHelper.saveCurrentConfigure(ccp);
-				}
-				//添加软件信息
-				for(int i=0;i<SoftList.size();i++){
-					String[] soft = SoftList.get(i).toString().split(",");
-					String softname = soft[0];
-					String softversion = soft[1];
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(uuid.toString());
-					ccp.setCONFIGUREVERSION(softversion);
-					ccp.setCONFIGURENAME(softname);
-					ccp.setCONFIGURETYPE("软件");
-					CurrentConfigureHelper.saveCurrentConfigure(ccp);
-				}
-				//添加驱动
-				CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), GraphicCard[1], GraphicCard[0], "驱动");
-				CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), AudioCard[1], AudioCard[0], "驱动");
-				if (NetwordCard1[0].length()>1) {
-					CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), NetwordCard1[1], NetwordCard1[0], "驱动");
-				}
-				if (NetwordCard2[0].length()>1) {
-					CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), NetwordCard2[1], NetwordCard2[0], "驱动");
-				}
-				CurrentConfigureHelper.saveCurrentConfigure_driver(UUID.randomUUID().toString(), uuid.toString(), Storage[1], Storage[0], "驱动");
-			}else {
-				CurrentEquipmentPersistence cep = new CurrentEquipmentPersistence();
-				cep.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
-				cep.setMACADDRESS(macaddress);
-				cep.setEQUIPMENTMODEL(equipmentmodel);
-				cep.setEQUIPMENTTIME(equipmenttime);
-				cep.setRAM(ram);
-				cep.setHARDDRIVER(harddriver);
-				cep.setIP(ip);
-				cep.setCPU(cpu);
-				cep.setSTORAGE(storage);
-				cep.setNETWORKCARD(network1);
-				cep.setNETWORKCARD2(netword2);
-				cep.setMOTHERBOARD(motherboard);
-				cep.setOSNAME(osname);
-				cep.setOSTYPE(ostype);
-				cep.setOSVERSION(osversion);
-				cep.setOSID(osid);
-				cep.setUSERID(userPersistences.get(0).getUSERID());
-				cep.setISNOTICE(0);
-				cep.setGRAPHICCARD(graphiccard);
-				cep.setAUDIOCARD(audiocard);
-				Date date=new Date();
-		        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		        String time = format.format(date);
-		        cep.setTIMEREMARKS(time);
-				CurrentEquipmentHelp.update(cep);
-				//添加补丁信息
-				for(int i=0;i<PatchList.size();i++){
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
-					ccp.setCONFIGUREVERSION("");
-					ccp.setCONFIGURENAME(PatchList.get(i).toString());
-					ccp.setCONFIGURETYPE("补丁");
-					CurrentConfigureHelper.updataCurrentConfigure(ccp);
-				}
-				//添加软件信息
-				for(int i=0;i<SoftList.size();i++){
-					String[] soft = SoftList.get(i).toString().split(",");
-					String softname = soft[0];
-					String softversion = soft[1];
-					CurrentConfigurePersistence ccp = new CurrentConfigurePersistence();
-					UUID uuid2 = UUID.randomUUID();
-					ccp.setCURRENTCONFIGUREID(uuid2.toString());
-					ccp.setEQUIPMENTID(list2.get(0).getEQUIPMENTID());
-					ccp.setCONFIGUREVERSION(softversion);
-					ccp.setCONFIGURENAME(softname);
-					ccp.setCONFIGURETYPE("软件");
-					CurrentConfigureHelper.updataCurrentConfigure(ccp);
-				}
-				//添加驱动
-				CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), GraphicCard[1], GraphicCard[0], "驱动");
-				CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), AudioCard[1], AudioCard[0], "驱动");
-				if (NetwordCard1[0].length()>1) {
-					CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), NetwordCard1[1], NetwordCard1[0], "驱动");
-				}
-				if (NetwordCard2[0].length()>1) {
-					CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), NetwordCard2[1], NetwordCard2[0], "驱动");
-				}
-				CurrentConfigureHelper.updateCurrentConfigure_driver(UUID.randomUUID().toString(), list2.get(0).getEQUIPMENTID(), Storage[1], Storage[0], "驱动");
-			}
-		}
+	    
+	}
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月10日 09:09:17
+	 * abstract:添加（add）或更改（update）当前设备的软件/补丁资源信息
+	 */
+	public static void currentEquipment(String macaddress,String software[],String path[]){
+		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipment(macaddress);
+		if (!currentEquipmentPersistences.isEmpty()) {
+			List<CurrentConfigurePersistence> configurePersistences = CurrentConfigureHelper.getCurrentConfigure(currentEquipmentPersistences.get(0).getEQUIPMENTID());
+			if (configurePersistences.isEmpty()) {
 
+			}else {
+				CurrentConfigureHelper.deleteCurrentConfigure(configurePersistences.get(0).getEQUIPMENTID(),"软件");
+				CurrentConfigureHelper.deleteCurrentConfigure(configurePersistences.get(0).getEQUIPMENTID(),"补丁");
+			}
+			for(int i=0;i<software.length;i++){
+				String[] aStrings = software[i].split(";");
+				CurrentConfigurePersistence configurePersistence = new CurrentConfigurePersistence();
+				configurePersistence.setCURRENTCONFIGUREID(UUID.randomUUID().toString());
+				configurePersistence.setEQUIPMENTID(currentEquipmentPersistences.get(0).getEQUIPMENTID());
+				configurePersistence.setCONFIGURENAME(aStrings[0]);
+				configurePersistence.setCONFIGUREVERSION(aStrings[1]);
+				configurePersistence.setCONFIGURETYPE("软件");
+				CurrentConfigureHelper.saveCurrentConfigure(configurePersistence);
+			}
+			for(int i=0;i<path.length;i++){
+				String[] aStrings = path[i].split(";");
+				CurrentConfigurePersistence configurePersistence = new CurrentConfigurePersistence();
+				configurePersistence.setCURRENTCONFIGUREID(UUID.randomUUID().toString());
+				configurePersistence.setEQUIPMENTID(currentEquipmentPersistences.get(0).getEQUIPMENTID());
+				configurePersistence.setCONFIGURENAME(aStrings[0]+";"+aStrings[1]);
+				configurePersistence.setCONFIGUREVERSION(aStrings[2]);
+				configurePersistence.setCONFIGURETYPE("补丁");
+				CurrentConfigureHelper.saveCurrentConfigure(configurePersistence);
+			}
+		}
 	}
-	/*
-	 * zyq_personal3_设备信息展示
+	/**
+	 * author:zhaoyanqing
+	 * date:2017年9月10日 09:09:17
+	 * abstract:personal3.html设备信息展示
 	 */
-	public static List<Personal3_EquipmentView> personal3_EquipmentView(String email) throws UnknownHostException, SocketException{
-		LOCALMAC localmac = new LOCALMAC();
-		String macaddress = localmac.getMacAddress();
+	
+	public static List<Personal3_EquipmentView> personal3_EquipmentView(String email,String macaddress) {
 		List<Personal3_EquipmentView> personal3_EquipmentViews = new ArrayList<Personal3_EquipmentView>();
 		List<UserPersistence> uList = UserHelper.getEmail(email);
-		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipmentByID(macaddress);
+		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipment(macaddress);
 		for(CurrentEquipmentPersistence currentEquipmentPersistence:currentEquipmentPersistences){
 			List<Personal3_EquipmentConfigureView> personal3_EquipmentConfigureViews = new ArrayList<Personal3_EquipmentConfigureView>();
 			List<CurrentConfigurePersistence> configurePersistences = CurrentConfigureHelper.getCurrentConfigure(currentEquipmentPersistence.getEQUIPMENTID(),"补丁");

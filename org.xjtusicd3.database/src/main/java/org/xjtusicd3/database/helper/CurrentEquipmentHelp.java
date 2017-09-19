@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.CurrentEquipmentPersistenceMapper;
 import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
+import org.xjtusicd3.database.model.UserPersistence;
 
 public class CurrentEquipmentHelp {
 	/*
@@ -14,14 +15,7 @@ public class CurrentEquipmentHelp {
 	public static List<CurrentEquipmentPersistence> currentEquipment(String macaddress){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
-		List<CurrentEquipmentPersistence> list = mapper.currentEquipment(macaddress);
-		session.close();
-		return list;
-	}
-	public static List<CurrentEquipmentPersistence> currentEquipmentByID(String macaddress){
-		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
-		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
-		List<CurrentEquipmentPersistence> list = mapper.currentEquipmentByID(macaddress);
+		List<CurrentEquipmentPersistence> list = mapper.getCurrentEquipment(macaddress);
 		session.close();
 		return list;
 	}
@@ -37,10 +31,19 @@ public class CurrentEquipmentHelp {
 	/*
 	 * zyq_peisonal3_更新当前设备表
 	 */
-	public static void update(CurrentEquipmentPersistence currentEquipmentPersistence){
+	public static void updateCurrentEquipment(String useremail,String macAddress,String ipAddress,String equipmentModel,String equipmentTime,String CPU,String RAM,String memoryBank,
+			String hardDrive,String hardDriveModel,String networkCard,String motherBoard,String osName,String osType,String osVersion,String osId,String graphicCard,String audioCard,String time){
+		String userId ="";
+		if (useremail==null) {
+			userId = "00000000-0000-0000-0000-000000000000";
+		}else {
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			userId = userPersistences.get(0).getUSERID();
+		}
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
-		mapper.update(currentEquipmentPersistence);
+		mapper.updateCurrentEquipment(userId,macAddress,ipAddress,equipmentModel,equipmentTime,CPU,RAM,memoryBank,
+				hardDrive,hardDriveModel,networkCard,motherBoard,osName,osType,osVersion,osId,graphicCard,audioCard,time);
 		session.close();
 	}
 }

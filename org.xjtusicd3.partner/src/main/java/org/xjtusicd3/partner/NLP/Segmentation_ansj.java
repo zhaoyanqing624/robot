@@ -1,27 +1,15 @@
 package org.xjtusicd3.partner.NLP;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServletRequest;
 
 import org.ansj.domain.Result;
-import org.ansj.library.StopLibrary;
-import org.ansj.recognition.impl.NatureRecognition;
 import org.ansj.splitWord.analysis.ToAnalysis;
-import org.apache.lucene.analysis.Analyzer;
 import org.nlpcn.commons.lang.tire.domain.Forest;
 import org.nlpcn.commons.lang.tire.library.Library;
-import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
@@ -29,9 +17,16 @@ import org.xjtusicd3.database.model.NLP_Word;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.partner.view.robot_Chat;
 import org.xjtusicd3.partner.view.robot_ChatView;
+
 public class Segmentation_ansj {
+	/**
+	 * author:zhaoyanqing
+	 * abstract:利用ansj将分好的词，根据词频做VSM模型
+	 * date:2017年8月18日 18:51:34
+	 */
 	public static List<NLP_Word> similarScoreFirst(String text) throws Exception{
-		Forest forest = Library.makeForest("library/computer.dic");
+		String localurl = System.getProperty("user.dir");
+		Forest forest = Library.makeForest(localurl+"/workspace/robot-master/org.xjtusicd3.partner/library/computer.dic");
 		Result terms = ToAnalysis.parse(text,forest);
 //		Result terms = ToAnalysis.parse(text);
 //		System.out.println(terms);
@@ -49,11 +44,13 @@ public class Segmentation_ansj {
 			nlp_Word.setFrequency(0);
 			list.add(nlp_Word);
 		}
-		System.out.println(JsonUtil.toJsonString(list));
 		return list;
 	}
+	
+	
 	public static List<robot_ChatView> similarScoreSecond1() throws Exception{
-		Forest forest = Library.makeForest("library/computer.dic");
+		String localurl = System.getProperty("user.dir");
+		Forest forest = Library.makeForest(localurl+"/workspace/robot-master/org.xjtusicd3.partner/library/computer.dic");
 		List<QuestionPersistence> questionPersistences = QuestionHelper.getFaqTotal();
 		List<robot_ChatView> robot_ChatViews = new ArrayList<robot_ChatView>();
 		for(QuestionPersistence questionPersistence:questionPersistences){
@@ -114,38 +111,27 @@ public class Segmentation_ansj {
 		double score =  textSimilarity.similarScore(list, list1);
 		return score;
 	}
-	/*
-	 * 提取faq的问题开始分词加入文件
-	 */
-	public static void segmentation_txt() throws Exception{
-		Forest forest = Library.makeForest("library/computer.dic");
-		List<QuestionPersistence> questionPersistences = QuestionHelper.getFaqTotal();
-		for(QuestionPersistence questionPersistence:questionPersistences){
-			Result terms = ToAnalysis.parse(questionPersistence.getFAQTITLE(),forest);
-			String result = terms.recognition(StopLibrary.get()).toStringWithOutNature();
-			BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("E:\\faqKeywords.txt",true),"UTF-8"));
-			String string = questionPersistence.getFAQQUESTIONID() + "\t"+result+"\r\n";
-			fileWriter.write(string);
-			fileWriter.flush();
-			fileWriter.close(); 
-		}
-	}
-	/*
-	 * 与txt提取的分好的词进行余弦
+	/**
+	 * author:zhaoyanqing
+	 * abstract:聊天机器人接口，用户根据自然语言提问，利用ansj将分好的词构建词频VSM模型，随后利用余弦进行相似度计算
+	 * date:2017年8月18日 18:51:34
 	 */
 	public static List<robot_Chat> robot_Chats(String comment) throws Exception{
 		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
 		List<NLP_Word> nList = segmentation_ansj.similarScoreFirst(comment);
+ 
 		System.out.println(System.getProperty("user.dir"));
 		File file = new File("library/faqKeywords.txt");//Text文件
-		BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
+ 
+		String localurl = System.getProperty("user.dir");
+		File file1 = new File(localurl+"/workspace/robot-master/org.xjtusicd3.partner/library/faqKeywords.txt");//Text文件
+		BufferedReader br = new BufferedReader(new FileReader(file1));//构造一个BufferedReader类来读取文件
 		String s = null;
 		List<robot_Chat> robot_Chats = new ArrayList<robot_Chat>();
 		while((s = br.readLine())!=null){//使用readLine方法，一次读一行
 			robot_Chat robot_Chat = new robot_Chat();
 			String[] resultArray = s.split("\t");
 			double value = segmentation_ansj.similarScoreSecond(nList, resultArray[1]);
-			System.out.println(value);
 			if (value>=0.4) {
 				robot_Chat.setQuestionId(resultArray[0]);
 				robot_Chat.setValue(value);
@@ -153,13 +139,6 @@ public class Segmentation_ansj {
 			}
 		}
 		br.close();
-		System.out.println(JsonUtil.toJsonString(robot_Chats));
 		return robot_Chats;
 	}
-	
-	public static void main(String[] args) throws Exception {
-//		segmentation_txt();
-		similarScoreFirst("我的联想电脑无辜蓝屏了");
-	}
-	
 }

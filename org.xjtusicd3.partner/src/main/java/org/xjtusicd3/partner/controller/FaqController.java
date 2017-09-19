@@ -28,6 +28,7 @@ import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.ScorePersistence;
 import org.xjtusicd3.database.model.SharePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.lucene.LuceneIndex;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.QuestionService;
@@ -310,6 +311,56 @@ public class FaqController {
 					}
 				}
 			}
+		}
+	}
+	/**
+	 * author:zhaoyanqing
+	 * abstract:用来建立luence的知识库搜索
+	 * data:2017年8月20日 20:52:06
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/faqSearch",method=RequestMethod.POST)
+	public ModelAndView faqSearch(HttpSession session,HttpServletRequest request) throws Exception{
+		String queryStr = request.getParameter("queryString");
+		ModelAndView modelAndView = new ModelAndView("faqSearch");
+		LuceneIndex luceneIndex = new LuceneIndex();
+		List<QuestionPersistence> qList = luceneIndex.searchFAQ(queryStr);
+		List<Faq2_faqContentView> faq2List = luceneIndex.faq2_faqContentViews(qList, 0 ,qList.size());
+		String urlPath="";
+		if (request.getQueryString()==null) {
+			urlPath = request.getServletPath();
+		}else {
+			urlPath = request.getServletPath()+"?"+request.getQueryString().toString();
+		}
+		session.setAttribute("urlPath", urlPath);
+		modelAndView.addObject("faq2List", faq2List);
+		modelAndView.addObject("queryStr", queryStr);
+		modelAndView.addObject("titleNumber", qList.size());
+		return modelAndView;
+	}
+	/**
+	 * author:zhaoyanqing
+	 * abstract:查看luence搜索更多的结果
+	 * data:2017年9月13日 13:50:17
+	 * @throws Exception 
+	 */
+	@ResponseBody
+	@RequestMapping(value={"/queryMoreResult"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	public String queryMoreResult(HttpSession session,HttpServletRequest request) throws Exception{
+		String useremail = (String) session.getAttribute("UserEmail");
+		JSONObject jsonObject = new JSONObject();
+		if(useremail==null){
+			jsonObject.put("value", "0");
+			return JsonUtil.toJsonString(jsonObject);
+		}else{
+			String queryStr = request.getParameter("queryStr");
+			int starNum = Integer.parseInt(request.getParameter("starNumb"));
+			LuceneIndex luceneIndex = new LuceneIndex();
+			List<QuestionPersistence> qList = luceneIndex.searchFAQ(queryStr);
+			List<Faq2_faqContentView> faq2List = luceneIndex.faq2_faqContentViews(qList, starNum ,qList.size());
+			jsonObject.put("value", "1");
+			jsonObject.put("queryList", faq2List);
+			return JsonUtil.toJsonString(jsonObject);
 		}
 	}
 }
