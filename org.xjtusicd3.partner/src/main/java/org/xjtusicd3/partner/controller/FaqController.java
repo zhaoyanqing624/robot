@@ -31,6 +31,7 @@ import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.lucene.LuceneIndex;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
+import org.xjtusicd3.partner.service.LogService;
 import org.xjtusicd3.partner.service.QuestionService;
 import org.xjtusicd3.partner.service.RobotService;
 import org.xjtusicd3.partner.service.ScoreService;
@@ -39,6 +40,7 @@ import org.xjtusicd3.partner.view.Faq1_UserActive;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_CommentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
+import org.xjtusicd3.partner.view.Faq_CommendView;
 import org.xjtusicd3.partner.view.Faq_UserDynamics;
 import org.xjtusicd3.partner.view.robot_Chat;
 
@@ -46,7 +48,8 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 public class FaqController {
 	@RequestMapping(value="faq",method=RequestMethod.GET)
-	public ModelAndView faq(HttpSession session,HttpServletRequest request){
+	public ModelAndView faq(HttpSession session,HttpServletRequest request,String q){
+		String useremail = (String) session.getAttribute("UserEmail");
 		ModelAndView mv = new ModelAndView("faq");
 		String urlPath="";
 		if (request.getQueryString()==null) {
@@ -56,16 +59,44 @@ public class FaqController {
 		}
 		//查询所有用户发表知识的状态
 		List<Faq_UserDynamics> userDynamics = QuestionService.userDynamics();
+		List<UserPersistence> userInfo = UserHelper.getUserNameById(userDynamics.get(0).getUserId());
+		String userImage = userInfo.get(0).getAVATAR();
+		String userName = userInfo.get(0).getUSERNAME();
 		session.setAttribute("urlPath", urlPath);
+				
+		if(useremail==null){
+			//zzl_获取推荐faq_2017年9月14日21:43:52
+			int startnum = 0;
+			List<Faq_CommendView> faqlists = QuestionService.faq_recommend_Limit(startnum);
+			mv.addObject("faqlists", faqlists);
+			System.out.println("未登录用户");
+		}else{
+			//zzl_获取推荐faq_2017年9月14日21:43:52
+			System.out.println("已登录用户");
+			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
+			int startnum = 0;
+			List<Faq_CommendView> faqlists = QuestionService.user_recommend_Limit(userPersistences.get(0).getUSERID(),startnum);				
+			mv.addObject("faqlists", faqlists);
+			
+		}
+		
 		mv.addObject("userDynamics", userDynamics);
+		mv.addObject("userImage", userImage);
+		mv.addObject("userName", userName);
 		return mv;
 	}
+	
+	
+	
 	/*
 	 * faq、faq1_上侧的第二级分类
 	 */
 	@RequestMapping(value="faq1",method=RequestMethod.GET)
 	public ModelAndView classifyName2(HttpSession session,HttpServletRequest request,String p){
-		ModelAndView modelAndView = new ModelAndView("faq1");
+		ModelAndView modelAndView = new ModelAndView("faq1");		
+		//zzl_获取一级分类信息
+		List<ClassifyPersistence> classify1Info = ClassifyHelper.getInfoById(p);
+		//zzl_获取二级分类
 		List<ClassifyPersistence> list = ClassifyHelper.faq1_ClassifyName(p);
 		List<Faq1_ClassifyView> list2 = ClassifyService.faq1_ClassifyView(p);
 		List<Faq1_UserActive> faq1_UserActives = CommentService.faq1_userActive();
@@ -73,6 +104,12 @@ public class FaqController {
 		if (list == null || list.size()==0) {
 			return null;
 		}
+		
+		//zzl_推荐知识_根据收藏量推荐前4个_2017年9月17日19:45:11
+		List<Faq_CommendView> faq_list = QuestionService.faqInfo(p);
+		
+		modelAndView.addObject("faq_list", faq_list);
+		modelAndView.addObject("classifyInfo", classify1Info);
 		modelAndView.addObject("faq1_list", list);
 		modelAndView.addObject("faq1_list2", list2);
 		modelAndView.addObject("userActive", faq1_UserActives);
@@ -144,6 +181,8 @@ public class FaqController {
 		List<Faq3_faqContentView> faq3Views = QuestionService.faq3_faqcontent(q);
 		List<CommentPersistence> commentPersistences = CommentHelper.getComment(q);
 		List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(q,0);
+		//登录FAQ 增加浏览量
+		QuestionHelper.updateFAQScan(q);
 		//FAQ的总评分展示
 		List<ScorePersistence> FAQlist = ScoreHelper.getScoreList(q);
 		float totalscore = ScoreHelper.getScore(q);
@@ -177,9 +216,17 @@ public class FaqController {
 					modelAndView.addObject("IsShare", "1");
 				}
 			}
+		
+			//添加用户访问日志_2017年9月14日22:01:31
+			LogService.addLog(userPersistences.get(0).getUSERID(),"/faq3.html?q="+q);
 		}
 		//查看相似的问题
 		List<robot_Chat> robot_Chats = RobotService.getRobotAnswer(faq3Views.get(0).getFaqTitle());
+		
+		
+		
+		
+		
 		modelAndView.addObject("commentNumber", commentPersistences.size());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
@@ -363,4 +410,6 @@ public class FaqController {
 			return JsonUtil.toJsonString(jsonObject);
 		}
 	}
+	
+	
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.CommentPersistence;
+import org.xjtusicd3.database.model.QuestionPersistence;
 
 public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, String>{
 	/*
@@ -133,4 +134,12 @@ public interface CommentPersistenceMapper extends IBaseDao<CommentPersistence, S
 	 */
 	@Select("SELECT USERID,count(USERID) as NUM FROM TBL_Comment WHERE STR_TO_DATE(COMMENTTIME,'%Y-%m-%d')<STR_TO_DATE(#{0},'%Y-%m-%d') AND STR_TO_DATE(COMMENTTIME,'%Y-%m-%d')>STR_TO_DATE(#{1},'%Y-%m-%d') GROUP BY USERID ORDER BY NUM DESC LIMIT 10")
 	List<CommentPersistence> faq1_userActiveWeek(String time, String time2);
+	
+	/**
+	 * author:zzl
+	 * abstract:获取评论数
+	 * data:2017年9月15日19:22:12
+	 */
+	@Select("SELECT * FROM TBL_Comment WHERE FAQQUESTIONID=#{0}")
+	List<CommentPersistence> commentInfo(String faqquestionId);
 }

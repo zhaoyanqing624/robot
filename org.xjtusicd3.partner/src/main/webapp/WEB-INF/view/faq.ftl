@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>智能小朵-知识库</title>
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
-    
+    <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />   
     <link rel="stylesheet" type="text/css" href="new/front/style/util-rb.css">
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
@@ -76,158 +75,42 @@
                 
                 <div class="topWrapper" id="tplWrapper">
 					<!-- 第一个模块的显示 -->
+					<#list faqlists as faqlists>
 					<div class="topList clearfix">
                         <div class="imagesPotion">
+                           
                             <a href="/detail/dc_143417.html" target="_blank">
-                                <img src="images/test/21.png" alt="">
+                                <img src="images/test/2${faqlists_index+1}.jpg" alt="">
                             </a>
                         </div>
                         <ul class="topcontent">
                             <li>
                                 <p class="title">
-                                    <a href="/detail/dc_143417.html" target="_blank">如何在Windows 7安装U盘中加入USB3.0的支持</a>
+                                    <a href="faq3.html?q=${faqlists.FAQQUESTIONID} " target="_blank">${faqlists.FAQTITLE }</a>
                                 </p>
                             </li>
                             <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
+                             
+                                <span class="userPic"><img src="${userImage}"></span>
+                                <span class="username">${userName}</span>
                                 <span class="dot">-</span>
-                                <span class="time">2015/11/04</span>
+                                <span class="time">${faqlists.MODIFYTIME }</span>
                                 <span class="line">|</span>
-                                <span class="showCount">236955</span>
-                                <span class="message">34</span>
-                                <span class="collection">78</span>
+                                <span class="showCount">${faqlists.SCAN }</span>
+                                <span class="message">${faqlists.COMMENTSUM}</span>
+                                <span class="collection">${faqlists.COLLECTION }</span>
                             </li>
                             <li class="content">
-                            	原生Win7系统不包含USB3.0的驱动，所以无法使用USB3.0的U盘在USB3.0的设备上引导，且安装完系统后还需要重新安装USB3.0驱动。
+                            	${faqlists.FAQDESCRIPTION }
                             </li>
                         </ul>
                     </div>
-                    	 
-					<!-- 第二个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_039949.html" target="_blank">
-                                <img src="images/test/22.jpg" alt="新扬天电脑所配USB键盘">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_039949.html" target="_blank">新扬天电脑所配USB键盘功能键驱动问题注意事项</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2015/11/07</span>
-                                <span class="line">|</span>
-                                <span class="showCount">148932</span>
-                                <span class="message">11</span>
-                                <span class="collection">7</span>
-                            </li>
-                            <li class="content">
-                            	2010年7月上市的新扬天电脑所配的USB键盘，F1-F12系统下会默认为快捷键（功能键），而非F1-F12实际功能，本文介绍了按键的切换调整方法，供参考。
-                            </li>
-                        </ul>
-					</div>
-                    
-					<!-- 第三个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_153184.html" target="_blank">
-                                <img src="images/test/23.jpg" alt="永久关闭Windows 10的自动更新">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_153184.html" target="_blank">永久关闭Windows 10的自动更新</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2016/10/26</span>
-                                <span class="line">|</span>
-                                <span class="showCount">44195</span>
-                                <span class="message">26</span>
-                                <span class="collection">86</span>
-                            </li>
-                            <li class="content">
-                            	本文介绍了永久关闭Win10自动更新的操作方法。
-                            </li>
-                        </ul>
-					</div>
-                    
-					<!-- 第四个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_141257.html" target="_blank">
-                                <img src="images/test/24.jpg" alt="Lenovo settings下载及使用介绍">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_141257.html" target="_blank">Lenovo settings下载及使用介绍</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2015/12/11</span>
-                                <span class="line">|</span>
-                                <span class="showCount">183724</span>
-                                <span class="message">19</span>
-                                <span class="collection">36</span>
-                            </li>
-                            <li class="content">
-                            	联想随机软件Lenovo settings界面展示，下载和使用方法介绍。
-                            </li>
-                        </ul>
-					</div>
-                    
-					<!-- 第五个模块的显示 -->
-					<div class="topList clearfix">
-                        <div class="imagesPotion">
-                            <a href="/detail/dc_152752.html" target="_blank">
-                                <img src="images/test/25.jpg" alt="小新Air12 LTE版如何4G上网">
-                            </a>
-                        </div>
-                        <ul class="topcontent">
-                            <li>
-                                <p class="title">
-                                    <a href="/detail/dc_152752.html" target="_blank">小新Air12 LTE版如何4G上网？</a>
-                                </p>
-                            </li>
-                            <li class="clearfix">
-                                <span class="userPic"><img src="new/front/images/avatar.jpg"></span>
-                                <span class="username">Iknow</span>
-                                <span class="dot">-</span>
-                                <span class="time">2016/10/08</span>
-                                <span class="line">|</span>
-                                <span class="showCount">9615</span>
-                                <span class="message">0</span>
-                                <span class="collection">5</span>
-                            </li>
-                            <li class="content">
-                            	本文介绍了小新Air12 LTE版4G上网的设置方法和常见问题。
-                            </li>
-                        </ul>
-                    </div>
-				</div>
-                
-                <div class="topMoreTop" id="querymorelink">
-                
-                <div style="width: 118px;height: 32px;margin: 0 auto;padding-top: 14px;">
-                    <a href="javascript:void(0);">加载中</a>
-                    </div>
-                </div>          
+                    </#list>	 
+					
+                                 
+                  
 			</div> 
+           </div>
            
            <!-- 右侧开始 -->
            <div class="rightBarWrapper">
@@ -258,6 +141,7 @@
 	<script type="text/javascript" src="zhao/lunbo_1/js/jquery.skitter.js"></script>
 	<script type="text/javascript" src="zhao/lunbo_1/js/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="new/front/js/util.js"></script>
+	<script type="text/javascript" src="js/view/faq.js"></script>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery(".box_skitter_large").skitter({

@@ -118,4 +118,17 @@ public class CollectionHelper {
 		session.close();
 		return list;
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取faq收藏数
+	 * data:2017年9月15日19:53:58
+	 */
+	public static List<CollectionPersistence> agreeInfo(String faqquestionid) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
+		List<CollectionPersistence> list = mapper.agreeInfo(faqquestionid);
+		session.close();
+		return list;
+	}
 }

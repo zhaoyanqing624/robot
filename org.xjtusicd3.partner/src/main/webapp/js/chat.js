@@ -25,19 +25,19 @@ function robot_welcome(){
 		 url: "/org.xjtusicd3.partner/getRobotInfo.html",            
 		 dataType: "json",
 		 success: function(data){
-			 	document.getElementById("chat01_content").innerHTML = '<li class="media"><div style="width:48px;float:left;margin-left: 7px;"><div class="lhead"><img class="media-object" alt="Generic placeholder image" src="'+data[0].rOBOTIMAGE+'"></div><div style="margin-top: 5px;text-align: center;color:#3FA1F3;font-size:12px;font-weight: bold;">'+data[0].rOBOTNAME+'</div></div><div class="media-body chat-pop"><span class="pull-right"><i class="fa fa-clock-o"></i> <abbr class="timeago">'+showTime()+'</abbr> </span><p></p><div style="float:left;"><span style="">'+data[0].rOBOTWELCOME+'<img src="http://robotrs.lenovo.com.cn/animages/bq.png" class="mCS_img_loaded"><br><span style="color:blue;display:inline"><a href="javascript:void(0);" onclick="">服务网点</a></span> | <span style="color:blue;display:inline"><a href="javascript:void(0);" onclick="cancelHref(this);$client.sendTextEx("驱动下载");countQuestionsClickTimes("问候语-驱动下载");return false;">驱动下载</a></span> | <span style="color:blue;display:inline"><a href="javascript:void(0);" onclick="cancelHref(this);$client.sendTextEx("配置查询");countQuestionsClickTimes("问候语-配置查询");return false;">配置查询</a></span> | <span style="color:blue;display:inline"><a href="javascript:void(0);" onclick="cancelHref(this);$client.sendTextEx("保修查询");countQuestionsClickTimes("问候语-保修查询");return false;">软件更新</a></span> | <span style="color:blue;display:inline"><a href="javascript:void(0);" onclick="cancelHref(this);$client.sendTextEx("查看提问技巧");countQuestionsClickTimes("问候语-提问技巧");return false;">提问技巧</a></span><br>➢<span style="color:blue;display:inline"><a href="javascript:void(0);" onclick="cancelHref(this);$client.sendMessage("itnewnaijgnahcjgx");countQuestionsClickTimes("问候语-新购机常见问题");return false;">新手常见问题</a></span></span></div><p></p></div></li>';
+			 	document.getElementById("chat01_content").innerHTML = '<li class="media"><div style="width:48px;float:left;margin-left: 7px;"><div class="lhead"><img class="media-object" alt="Generic placeholder image" src="'+data[0].rOBOTIMAGE+'"></div><div style="margin-top: 5px;text-align: center;color:#3FA1F3;font-size:12px;font-weight: bold;">'+data[0].rOBOTNAME+'</div></div><div class="media-body chat-pop"><span class="pull-right"><i class="fa fa-clock-o"></i> <abbr class="timeago">'+showTime()+'</abbr> </span><p></p><div style="float:left;"><span style="">'+data[0].rOBOTWELCOME+'<img src="http://robotrs.lenovo.com.cn/animages/bq.png" class="mCS_img_loaded"><br>➢<span style="color:blue;display:inline"><a href="javascript:void(0);" onclick="questionSkill()">提问技巧</a></span></span></div><p></p></div></li>';
 		      }
 		 });
 }
 //聊天
 function chat(){
 	chatWithRobot();
-	setTimeout("scroll()",800);
+	setTimeout("scroll()",2500);
 }
 //点击列表
 function chat2(){
 	chatWithRobot2();
-	setTimeout("scroll()",800);
+	setTimeout("scroll()",2500);
 }
 function chatWithRobot(){
 	var comment = document.getElementById("textarea").value;
@@ -107,7 +107,8 @@ function chatWithRobot(){
 }
 //robot——FAQ问题
 function chatWithRobot2(){
-	var comment = event.target.innerHTML;
+	var _event= browserEvent();
+	var comment = _event.innerHTML;
 	var comments = comment.replace(/\s+/g,"");
 	var html = document.getElementById("chat01_content").innerHTML;
 	if(comment.length == 0 || comment.match(/^\s+$/g)){
@@ -174,15 +175,32 @@ function chatWithRobot2(){
 }
 //滚动
 function scroll(){
-	var number = document.getElementById("chat01_content").childElementCount-2;
+	var number = document.getElementById("chat01_content").children.length-2;
 	scrollToLocation(number);
 }
 function scrollToLocation(number) {
 	var mainContainer = $('#chat01_content');
     //var scrollToContainer = $('#chat01_content').find('.media:last');//滚动到<div id="thisMainPanel">中类名为son-panel的最后一个div处
-    scrollToContainer = $('#chat01_content').find('.media:eq('+number+')');//滚动到<div id="thisMainPanel">中类名为son-panel的第六个处
+    var scrollToContainer = $('#chat01_content').find('.media:eq('+number+')');//滚动到<div id="thisMainPanel">中类名为son-panel的第六个处
     //动画效果
     $('.chat01_content').animate({
     	scrollTop: scrollToContainer.offset().top - mainContainer.offset().top + mainContainer.scrollTop()
-    }, 1000);//1.5秒滑动到指定位置
+    }, 1500);//1.5秒滑动到指定位置
+}
+//提问技巧
+function questionSkill(){
+	var html = document.getElementById("chat01_content").innerHTML;
+	 $.ajax({
+		 type: "GET",
+		 url: "/org.xjtusicd3.partner/questionSkill.html",            
+		 dataType: "json",
+		 success: function(data){
+			 if(data.value=="0"){
+				 document.getElementById("chat01_content").innerHTML = html+'<li class="media"><div style="width:48px;float:right;margin-left: 7px;"><a><div class="lhead"><img class="media-object" alt="Generic placeholder image" src="static/image/user.png"></div></a><div style="margin-top: 5px;text-align: center;color:#3FA1F3;font-size:12px;font-weight: bold;">我</div></div><div class="media-body chat-pop2"><span class="pull-right"><i class="fa fa-clock-o"></i> <abbr class="timeago">'+showTime()+'</abbr> </span><p></p><div style="float:left;"><span style="">'+"查看提问技巧"+'<span style="color:blue"><a href="javascript:void(0);" onclick=""></a></span></span></div><p></p></div></li>'+'<li class="media"><div style="width:48px;float:left;margin-left: 7px;"><div class="lhead"><img class="media-object" alt="Generic placeholder image" src="'+data.robotInfo[0].rOBOTIMAGE+'"></div><div style="margin-top: 5px;text-align: center;color:#3FA1F3;font-size:12px;font-weight: bold;">'+data.robotInfo[0].rOBOTNAME+'</div></div><div class="media-body chat-pop"><span class="pull-right"><i class="fa fa-clock-o"></i> <abbr class="timeago">'+showTime()+'</abbr> </span><p></p><div style="float:left;"><span style=""><div style="margin-bottom: 6px;color:#000000;font-size:13px;display:none"><b>经过我的判断，方案如下：</b></div><div class="head_msg">小朵为您推荐</div><div class="content_line">为了更快的帮您解决问题，您可以试着简短描述，如输入:"<b>如何下载驱动、"CPU占用率高"</b>。您也可以直接点击右侧热点区域。<br>现在，让我们愉快的交流吧^_^ </div></span></div><p></p></div></li>';
+			 }else{
+				 document.getElementById("chat01_content").innerHTML = html+'<li class="media"><div style="width:48px;float:right;margin-left: 7px;"><a href="personal2.html?='+data.robotUser[0].uSERID+'" target="_blank"><div class="lhead"><img class="media-object" alt="Generic placeholder image" src="'+data.robotUser[0].aVATAR+'"></div></as><div style="margin-top: 5px;text-align: center;color:#3FA1F3;font-size:12px;font-weight: bold;">'+data.robotUser[0].uSERNAME+'</div></div><div class="media-body chat-pop2"><span class="pull-right"><i class="fa fa-clock-o"></i> <abbr class="timeago">'+showTime()+'</abbr> </span><p></p><div style="float:left;"><span style="">'+"查看提问技巧"+'<span style="color:blue"><a href="javascript:void(0);" onclick=""></a></span></span></div><p></p></div></li>'+'<li class="media"><div style="width:48px;float:left;margin-left: 7px;"><div class="lhead"><img class="media-object" alt="Generic placeholder image" src="'+data.robotInfo[0].rOBOTIMAGE+'"></div><div style="margin-top: 5px;text-align: center;color:#3FA1F3;font-size:12px;font-weight: bold;">'+data.robotInfo[0].rOBOTNAME+'</div></div><div class="media-body chat-pop"><span class="pull-right"><i class="fa fa-clock-o"></i> <abbr class="timeago">'+showTime()+'</abbr> </span><p></p><div style="float:left;"><span style=""><div style="margin-bottom: 6px;color:#000000;font-size:13px;display:none"><b>经过我的判断，方案如下：</b></div><div class="head_msg">小朵为您推荐</div><div class="content_line">为了更快的帮您解决问题，您可以试着简短描述，如输入:"<b>如何下载驱动、"CPU占用率高"</b>。您也可以直接点击右侧热点区域。<br>现在，让我们愉快的交流吧^_^ </div></span></div><p></p></div></li>';
+			 }
+		 }
+	 });
+	
 }

@@ -32,17 +32,18 @@ function showeditor(){
 	document.getElementsByClassName('clearfix commentScoreBtn')[0].style.display="block";
 }
 function openreply(){
-	if(event.target.parentNode.parentNode.getElementsByClassName('subCommentList')[0].style.display=="none"){
-		commentid = event.target.parentNode.parentNode.parentNode.id;
+	var _event= browserEvent();
+	if(_event.parentNode.parentNode.getElementsByClassName('subCommentList')[0].style.display=="none"){
+		commentid = _event.parentNode.parentNode.parentNode.id;
 		document.getElementById(commentid).getElementsByClassName('subCommentList')[0].style.display="block";
 		document.getElementById(commentid).getElementsByClassName('commentReplayText')[0].style.display="block";
 		document.getElementById(commentid).getElementsByClassName('ac')[0].style.display="block";
 		document.getElementById(commentid).getElementsByClassName('commentReplayUser')[0].style.display="block";
-		username = event.target.parentNode.parentNode.getElementsByClassName('username')[0].innerHTML;
+		username = _event.parentNode.parentNode.getElementsByClassName('username')[0].innerHTML;
 		document.getElementById(commentid).getElementsByClassName('username_span')[0].innerHTML=username;
 		document.getElementById(commentid).getElementsByClassName('commentReplayUser')[0].id=commentid+"_"
 	}else{
-		commentid = event.target.parentNode.parentNode.parentNode.id;
+		commentid = _event.parentNode.parentNode.parentNode.id;
 		document.getElementById(commentid).getElementsByClassName('subCommentList')[0].style.display="none";
 		document.getElementById(commentid).getElementsByClassName('commentReplayText')[0].style.display="none";
 		document.getElementById(commentid).getElementsByClassName('ac')[0].style.display="none";
@@ -50,11 +51,12 @@ function openreply(){
 	}
 }
 function replycomment(){
+	var _event= browserEvent();
 	var questionId = document.URL.split("q=")[1].split("#")[0];
-	var comment = event.target.parentNode.parentNode.getElementsByClassName("commentReplayText")[0].value;
-	var commentId = event.target.parentNode.parentNode.parentNode.id;
+	var comment = _event.parentNode.parentNode.getElementsByClassName("commentReplayText")[0].value;
+	var commentId = _event.parentNode.parentNode.parentNode.id;
 	var duo = "";
-	if(event.target.parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML==""){
+	if(_event.parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML==""){
 		duo="0";
 	}else{
 		duo="1";
@@ -124,18 +126,21 @@ function getEvent(e){
 }
 
 function showdelete(e, obj){
+	var _event= browserEvent();
     if(checkHover(e,obj)){
-	event.target.parentNode.getElementsByClassName("commentReplay")[0].style.display="block";
+	_event.parentNode.getElementsByClassName("commentReplay")[0].style.display="block";
   }
 }
 function hiddendelete(e, obj){
+	var _event= browserEvent();
 	if(checkHover(e,obj)){
-	event.target.parentNode.getElementsByClassName("commentReplay")[0].style.display="none";
+	_event.parentNode.getElementsByClassName("commentReplay")[0].style.display="none";
   }
 }
 //删除自己的回复
 function deleteComment(){
-	var commentId = event.target.parentNode.parentNode.parentNode.id;
+	var _event= browserEvent();
+	var commentId = _event.parentNode.parentNode.parentNode.id;
 	$.ajax({
 		type:"POST",
 		url:"/org.xjtusicd3.partner/deleteReply.html",
@@ -155,19 +160,20 @@ function deleteComment(){
 
 //特定回复某人的评论
 function replyOther(){
+	var _event= browserEvent();
 	var username = document.getElementById("zhao_hidden").innerHTML;
-	var content = event.target.parentNode.getElementsByClassName("text")[0].innerHTML;
+	var content = _event.parentNode.getElementsByClassName("text")[0].innerHTML;
 	if(content.length<10){
 		content = content;
 	}else{
 		content = content.substr(0,10)+"...";
 	}
-	var tousername = event.target.parentNode.parentNode.getElementsByClassName("zhao")[0].innerHTML;
-	var commentId = event.target.parentNode.parentNode.id;
+	var tousername = _event.parentNode.parentNode.getElementsByClassName("zhao")[0].innerHTML;
+	var commentId = _event.parentNode.parentNode.id;
 	if(username!=tousername){
-		event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("username_span")[0].innerHTML=tousername;
-		event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML=content;
-		event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("commentReplayUser")[0].id=commentId+"_";
+		_event.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("username_span")[0].innerHTML=tousername;
+		_event.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("content_span")[0].innerHTML=content;
+		_event.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("commentReplayUser")[0].id=commentId+"_";
 	}
 }
 //获取更多评论
@@ -207,8 +213,9 @@ function querymorecomment(){
 }
 //获取更多回复
 function querymorereply(){
-	var commentid = event.target.parentNode.parentNode.parentNode.parentNode.id;
-	startnumber = event.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("_commentlist").length;
+	var _event= browserEvent();
+	var commentid = _event.parentNode.parentNode.parentNode.parentNode.id;
+	startnumber = _event.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("_commentlist").length;
 	$.ajax({
 		type:"POST",
 		url:"/org.xjtusicd3.partner/queryMoreReply.html",
@@ -265,8 +272,9 @@ function favorite(){
 }
 //评分
 function score(){
+	var _event= browserEvent();
 	var questionId = document.URL.split("q=")[1].split("#")[0];
-	var score = event.target.parentNode.parentNode.getElementsByClassName("fenshu")[0].innerHTML;
+	var score = _event.parentNode.parentNode.getElementsByClassName("fenshu")[0].innerHTML;
 	$.ajax({
 		type:"POST",
 		url:"/org.xjtusicd3.partner/saveFAQscore.html",

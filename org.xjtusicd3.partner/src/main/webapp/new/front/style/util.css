@@ -5,7 +5,7 @@
 }
 .loginRegistHead {
     height: 30px;
-    background: #6c6c6c;
+    background: #408080;
 }
 .loginRegistHead .content {
     width: 1200px;
@@ -17,7 +17,7 @@
 .header_top_wrap_left ul li a{float:left;font-size: 14px;color: #fff;}
 .header_top_wrap_left ul li a:hover{text-decoration: none;}
 .header_top_wrap_left ul li a.new_a,.header_top_wrap_left ul li a.chat_link {width: 90px; display: block; text-align: center; color: #ddd; transition: background 0.3s;}
-.header_top_wrap_left ul li a.new_a:hover { background: #f17771; color: #fff;}
+.header_top_wrap_left ul li a.new_a:hover { background: #6c6c6c; color: #fff;}
 .header_top_wrap_left ul li a.chat_link {position: relative;}
 .header_top_wrap_left ul li a.chat_link .authority_chat_img{width: 90px; height: 127px; display: none; position: absolute; top: 26px; left: 0;background: url(../images/v-header-scan-chat.png) 0 0 no-repeat; z-index: 15;}
 
@@ -32,12 +32,12 @@
 
 .my_center .v_center_arrow {width: 15px; height: 5px; display: inline-block; background: url(../images/v-header-arrow.png) center 0 no-repeat; margin: 0 0 0 3px;transform:rotate(0deg); transition:transform 0.3s ease-out; cursor: pointer;}
 .my_center:hover .v_center_arrow {transform:rotate(180deg);}
-.my_center .my_service_list {width: 102px;  top: 26px; left: -12px; z-index: 15; display: none;margin-left: 1312px;    position: absolute;}
+.my_center .my_service_list {width: 102px;  top: 26px; z-index: 15; display: none;    position: absolute;}
 .my_center .my_service_list .top_icon {width: 100%; height: 4px; background: url(../images/v-header-arrow.png) 30px 0 no-repeat; }
 .my_center .my_service_list .ul_list{border: 1px solid #e5e5e5; border-top: 0; background: #fff;  padding: 5px 0; width: 100px; height: 111px;}
 .my_center .my_service_list .ul_list li {float: none;}
 .my_center .my_service_list .ul_list a { width: 100%; display: block; text-align: center; height: 25px; line-height: 25px; text-decoration: none; color:#000; font-size: 12px;}
-.my_center .my_service_list .ul_list a:hover {color: #ffffff; background: #f17771;}
+.my_center .my_service_list .ul_list a:hover {color: #ffffff; background: #6c6c6c;}
 
 .headContent {
     width: 1200px;
@@ -1979,7 +1979,7 @@ table a.gridLink {
 .footer {
     height: 46px;
     color: #fff;
-    background: #6c6c6c
+    background: #408080
 }
 .footerContent {
     width: 1200px;

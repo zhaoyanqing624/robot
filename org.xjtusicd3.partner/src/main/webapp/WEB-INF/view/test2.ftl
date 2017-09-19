@@ -2,6 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript">
+
 //系统信息获取 
 function getSysInfo(){
 	var zhao;
@@ -54,7 +55,7 @@ function getSysInfo(){
   for (; !h.atEnd(); h.moveNext()) {
       var p = h.item();
       if(p.Description.substring(0,8)=="Intel(R)"){
-    	  alert(p.Name);
+    	  //alert(p.Name);
       }
   }
   //获取操作系统
@@ -83,7 +84,7 @@ function getSysInfo(){
   var q =new Enumerator (service.ExecQuery("SELECT * FROM Win32_BIOS"));
   for (; !q.atEnd(); q.moveNext()) {
       var p = q.item();
-      alert(p.ReleaseDate.substring(0,8));
+      //alert(p.ReleaseDate.substring(0,8));
   }
   return {cpuType:cpuType,cpuCount:cpuCount,hostName:hostName,curUser:curUser,memCap:physicMenCap,mem:mem} 
 }
@@ -136,9 +137,19 @@ function button1_onclick() {//cpu 信息
     }
     document.write("</table>");
 }
-button1_onclick();
-
-
+readreg();
+function readreg()
+{ 
+	try {  
+	    var pnsys = new ActiveXObject("WScript.Shell");
+	    pn=pnsys.Environment("PROCESS");       
+	    alert(pn("WINDIR")); 
+	    //var ChatCallerKey=shell.Environment("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
+	    alert("该值注册表中已存在");
+	} catch (e) {
+	    alert("注册表中不存在该值");
+	}
+}
 
 </script>
 </head>

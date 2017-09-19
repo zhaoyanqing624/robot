@@ -33,4 +33,30 @@ public class LogHelper
 		mapper.log_info(logId, userId, logPermission, logTime);
 		session.close();
 	}
+	
+	
+	/*
+	 * 添加日志_2017年9月14日22:20:58
+	 */
+	public static void addLog(String logId, String userId, String faqPath, String logTime) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		LogPersistenceMapper mapper = session.getMapper(LogPersistenceMapper.class);
+		mapper.addLog(logId, userId,  faqPath, logTime);
+		session.close();
+		System.out.println("添加了一条日志信息2");
+	}
+
+	/**
+	 * author:zzl
+	 * abstract:获取用户日志
+	 * data:2017年9月15日09:16:32
+	 * @param userid 
+	 */
+	public static List<LogPersistence> getLogs(String userid) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		LogPersistenceMapper mapper = session.getMapper(LogPersistenceMapper.class);
+		List<LogPersistence> log = mapper.getLogs(userid);
+		session.close();
+		return log;
+	}
 }

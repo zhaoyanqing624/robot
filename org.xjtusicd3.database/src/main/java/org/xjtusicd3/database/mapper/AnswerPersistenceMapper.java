@@ -17,5 +17,5 @@ public interface AnswerPersistenceMapper extends IBaseDao<AnswerPersistence, Str
 	 */
 	@Select("SELECT * FROM TBL_FAQanswer WHERE USERID=#{0}")
 	public List<AnswerPersistence> notice_faqanswerList(String userId);
-
+	
 }

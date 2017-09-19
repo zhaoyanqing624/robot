@@ -16,7 +16,7 @@
 	    			}
 	    		}
 	    	})
-	    				function guanzhu(){
+	    	function guanzhu(){
 				var touserId = document.URL.split("u=")[1];
 				var userId = '${uid}';
 				if(userId!=touserId){

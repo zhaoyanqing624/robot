@@ -5,17 +5,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 import org.xjtusicd3.database.helper.AnswerHelper;
+import org.xjtusicd3.database.helper.ClassifyHelper;
+import org.xjtusicd3.database.helper.CollectionHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.ShareHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.AnswerPersistence;
+import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
+import org.xjtusicd3.database.model.LogPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 import org.xjtusicd3.partner.view.Faq2_faqContentView;
 import org.xjtusicd3.partner.view.Faq3_faqContentView;
+import org.xjtusicd3.partner.view.Faq_CommendView;
 import org.xjtusicd3.partner.view.Faq_UserDynamics;
 import org.xjtusicd3.partner.view.Faq2_faqUserView;
 import org.xjtusicd3.partner.view.Faq3_faqAnswer;
@@ -129,7 +135,7 @@ public class QuestionService {
 			faq_UserDynamics.setFaqId(questionPersistence.getFAQQUESTIONID());
 			faq_UserDynamics.setFaqTitle(questionPersistence.getFAQTITLE());
 			faq_UserDynamics.setTime(questionPersistence.getMODIFYTIME());
-			if (questionPersistence.getMODIFYNUMBER()=="1") {
+			if (questionPersistence.getMODIFYNUMBER().equals("1")) {
 				faq_UserDynamics.setHow("发布");
 			}else {
 				faq_UserDynamics.setHow("修改");
@@ -139,5 +145,126 @@ public class QuestionService {
 			userDynamics.add(faq_UserDynamics);
 		}
 		return userDynamics;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取已登录用户推荐列表
+	 * data:2017年9月15日09:19:48
+	 */
+	public static List<Faq_CommendView> user_recommend_Limit(String userid, int startnum) {
+		//Faq_CommendView中信息不全、后续可补充
+		List<Faq_CommendView> faq_CommendViews = new ArrayList<Faq_CommendView>();
+		List<LogPersistence> logPersistences = LogService.getLogs(userid);
+		if (logPersistences.size()==0) {
+			//zzl_用户首次登录时还没有log记录_依旧用faq_recommend_Limit推荐
+			List<QuestionPersistence> questionPersistences = QuestionHelper.faq_recommend_Limit(startnum);
+			for (QuestionPersistence questionPersistence:questionPersistences) {
+				Faq_CommendView faq_CommendView = new Faq_CommendView();
+				faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+				faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+				List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+				faq_CommendView.setCOLLECTION(collectionPersistences.size());
+				faq_CommendView.setSCAN(questionPersistence.getSCAN());
+				faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+				faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+				List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+				faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+				faq_CommendViews.add(faq_CommendView);
+				
+			}
+		}else {
+			String logMethod = "";
+			for(int i=0;i<logPersistences.size();i++){
+				if(logPersistences.get(i).getLogMethod().indexOf("faq3")!=-1){
+					//zzl_用户有log记录且日志前缀有faq3字样_截取/faq3.html?q=之后的ID号
+					logMethod = logPersistences.get(i).getLogMethod();
+					String questionId = logMethod.substring(13, logMethod.length()); 
+					String faq_classifyId = QuestionHelper.faqclassify(questionId);		
+					String parentId = ClassifyHelper.faq_parentId(faq_classifyId);
+					List<QuestionPersistence> questionPersistences = QuestionHelper.questionView(parentId,startnum);
+					for (QuestionPersistence questionPersistence:questionPersistences) {
+						Faq_CommendView faq_CommendView = new Faq_CommendView();
+						faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+						faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+						List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOLLECTION(collectionPersistences.size());
+						faq_CommendView.setSCAN(questionPersistence.getSCAN());
+						faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+						faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+						List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+						System.out.println(questionPersistence.getFAQTITLE());
+						faq_CommendViews.add(faq_CommendView);
+					}
+					break;
+				}else{
+					//zzl_用户有log记录且日志前缀没有faq3字样_依旧用faq_recommend_Limit推荐
+					List<QuestionPersistence> questionPersistences = QuestionHelper.faq_recommend_Limit(startnum);
+					for (QuestionPersistence questionPersistence:questionPersistences) {
+						Faq_CommendView faq_CommendView = new Faq_CommendView();
+						faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+						faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+						List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOLLECTION(collectionPersistences.size());
+						faq_CommendView.setSCAN(questionPersistence.getSCAN());
+						faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+						faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+						List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+						faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+						faq_CommendViews.add(faq_CommendView);
+				}
+			}
+			
+		}
+		}
+		return faq_CommendViews;
+	}
+	/**
+	 * author:zzl
+	 * abstract:获取未登录用户推荐列表
+	 * data:2017年9月15日19:46:03
+	 */
+	public static List<Faq_CommendView> faq_recommend_Limit(int startnum) {
+		//Faq_CommendView中信息不全、后续可补充
+		List<Faq_CommendView> faq_CommendViews = new ArrayList<Faq_CommendView>();
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faq_recommend_Limit(startnum);
+		for (QuestionPersistence questionPersistence:questionPersistences) {
+			Faq_CommendView faq_CommendView = new Faq_CommendView();
+			faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());			
+			faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+			List<CollectionPersistence> collectionPersistences = CollectionHelper.agreeInfo(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setCOLLECTION(collectionPersistences.size());
+			faq_CommendView.setSCAN(questionPersistence.getSCAN());
+			faq_CommendView.setMODIFYTIME(questionPersistence.getMODIFYTIME());;
+			faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+			List<CommentPersistence> commentPersistences = CommentHelper.commentInfo(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setCOMMENTSUM(commentPersistences.size());
+			faq_CommendViews.add(faq_CommendView);
+			
+		}
+		return faq_CommendViews;
+	}
+	/**
+	 * author:zzl
+	 * abstract:推荐知识_根据收藏量推荐前4个
+	 * data:2017年9月17日19:47:28
+	 */
+	public static List<Faq_CommendView> faqInfo(String faqParentId) {
+		System.out.println("进入推荐知识");
+		List<Faq_CommendView> faq_CommendViews = new ArrayList<Faq_CommendView>();
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faqInfo_limit(faqParentId);
+		System.out.println(questionPersistences.size());
+		for (QuestionPersistence questionPersistence:questionPersistences) {
+			Faq_CommendView faq_CommendView = new Faq_CommendView();
+			faq_CommendView.setFAQQUESTIONID(questionPersistence.getFAQQUESTIONID());
+			faq_CommendView.setFAQTITLE(questionPersistence.getFAQTITLE());
+			faq_CommendView.setFAQDESCRIPTION(questionPersistence.getFAQDESCRIPTION());
+			System.out.println(questionPersistence.getFAQTITLE());
+			faq_CommendViews.add(faq_CommendView);
+		}		
+		
+		return faq_CommendViews;
+		
 	}
 }

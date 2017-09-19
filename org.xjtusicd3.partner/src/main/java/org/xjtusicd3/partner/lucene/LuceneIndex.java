@@ -43,9 +43,10 @@ public class LuceneIndex {
      */
     private IndexWriter getWriter()throws Exception{
         /**
-         * 生成的索引我放在了C盘，可以根据自己的需要放在具体位置
+         * 生成的索引我放在了E盘，可以根据自己的需要放在具体位置
          */
-        dir= FSDirectory.open(Paths.get("E://Lucene"));
+    	String localurl = System.getProperty("user.dir");
+        dir= FSDirectory.open(Paths.get(localurl+"/workspace/robot-master/org.xjtusicd3.partner/luence"));
         SmartChineseAnalyzer analyzer=new SmartChineseAnalyzer();
         IndexWriterConfig iwc=new IndexWriterConfig(analyzer);
         IndexWriter writer=new IndexWriter(dir, iwc);
@@ -108,7 +109,8 @@ public class LuceneIndex {
         /**
          * 注意的是查询索引的位置得是存放索引的位置，不然会找不到。
          */
-        dir= FSDirectory.open(Paths.get("E://Lucene"));
+    	String localurl = System.getProperty("user.dir");
+        dir= FSDirectory.open(Paths.get(localurl+"/workspace/robot-master/org.xjtusicd3.partner/luence"));
         IndexReader reader = DirectoryReader.open(dir);
         IndexSearcher is=new IndexSearcher(reader);
         BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();

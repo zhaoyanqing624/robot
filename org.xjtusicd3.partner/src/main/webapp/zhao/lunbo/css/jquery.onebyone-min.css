@@ -6,7 +6,7 @@
 #onebyone_slider .oneByOne_item span{font-family:"Helvetica Neue",Helvetica,verdana,arial,sans-serif}
 #onebyone_slider .oneByOne_item a{text-decoration:none}
 #onebyone_slider .oneByOne_item span.ob1_title{clear:left;position:relative;float:left;margin:65px 12px 0 0;padding:8px;font-size:30px;font-weight:700;text-transform:uppercase;text-shadow:5px 5px 10px rgba(0,0,0,.3);z-index:50;width:440px;line-height: 35px;}
-#onebyone_slider .oneByOne_item span.ob1_title a{color:#fff}
+#onebyone_slider .oneByOne_item span.ob1_title a{color:#6d6868}
 #onebyone_slider .oneByOne_item span.ob1_description{clear:left;position:relative;float:left;margin:0 12px 0 0;max-width:440px;padding:8px;font-size:14px;text-shadow:5px 5px 10px rgba(0,0,0,.3);z-index:50}
 #onebyone_slider .oneByOne_item span.ob1_button{clear:left;position:relative;float:left;margin:40px 12px 0 330px;padding:5px;border:1px solid #222;background:#666;background:rgba(0,0,0,.3);-webkit-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;border-radius:3px;z-index:50}
 #onebyone_slider .oneByOne_item span.ob1_button .default_button{margin:0;padding:7px 25px;border:1px solid #222;font-size:12px;-webkit-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;border-radius:3px;color:#fff;display:block;background:#565656;}

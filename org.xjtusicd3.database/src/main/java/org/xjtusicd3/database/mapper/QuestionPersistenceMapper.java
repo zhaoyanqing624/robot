@@ -33,9 +33,11 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion WHERE FAQQUESTIONID=#{0}")
 	public List<QuestionPersistence> faq3_faqcontent(String QuestionId);
+	
 	@Select("SELECT * FROM TBL_FAQquestion WHERE FAQTITLE=#{0}")
 	public List<QuestionPersistence> faq3_faqcontent_title(String faqtitle);
 	/*
+	 * 
 	 * zyq_faq3_根据知识ID找类型classify
 	 */
 	@Select("SELECT FAQCLASSIFYID FROM TBL_FAQquestion WHERE FAQQUESTIONID=#{0}")
@@ -89,4 +91,39 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion ORDER BY MODIFYTIME DESC LIMIT 5")
 	public List<QuestionPersistence> faq_userDynamics();
+	
+	/*
+	 * faq_未登录用户推荐_2017年9月14日21:16:18
+	 */
+	//@Select("SELECT FAQTITLE, MODIFYTIME, FAQDESCRIPTION  ,sum(SCAN+COLLECTION*10) as a FROM TBL_FAQquestion  ORDER BY a DESC LIMIT #{0},5")
+	@Select("SELECT FAQQUESTIONID, FAQTITLE, MODIFYTIME, FAQDESCRIPTION ,COLLECTION,SCAN,sum(CAST(SCAN AS SIGNED)+CAST(COLLECTION AS SIGNED)*10) as a FROM TBL_FAQquestion GROUP BY FAQQUESTIONID ORDER BY a DESC LIMIT #{0},5")
+	public List<QuestionPersistence> faq_recommend_Limit(int startnum);
+	
+//	@Select("SELECT * FROM TBL_FAQquestion ORDER BY MODIFYTIME DESC LIMIT #{0},5")
+//	public List<QuestionPersistence> user_recommend_Limit(String userid, int startnum);
+	
+	
+	/**
+	 * author:zzl
+	 * abstract:获取分类下faq具体信息
+	 * data:2017年9月15日10:29:07
+	 */
+	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID ,TBL_FAQquestion.FAQTITLE,TBL_FAQquestion.COLLECTION ,TBL_FAQquestion.SCAN, TBL_FAQquestion.MODIFYTIME,TBL_FAQquestion.FAQDESCRIPTION ,sum(CAST(SCAN AS SIGNED)+CAST(COLLECTION AS SIGNED)*10) as a FROM TBL_FAQquestion ,TBL_FAQclassify WHERE TBL_FAQclassify.FAQPARENTID=#{0} AND TBL_FAQclassify.FAQCLASSIFYID = TBL_FAQquestion.FAQCLASSIFYID GROUP BY TBL_FAQquestion.FAQQUESTIONID ORDER BY a DESC LIMIT #{1},5")
+	public List<QuestionPersistence> questionView(String parentId,int startnum);
+	
+	/**
+	 * author:zzl
+	 * abstract:推荐知识_根据收藏量推荐前4个
+	 * data:2017年9月17日19:53:48
+	 */
+	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID ,TBL_FAQquestion.FAQTITLE,TBL_FAQquestion.FAQDESCRIPTION FROM TBL_FAQquestion ,TBL_FAQclassify WHERE TBL_FAQclassify.FAQPARENTID=#{0} AND TBL_FAQclassify.FAQCLASSIFYID = TBL_FAQquestion.FAQCLASSIFYID ORDER BY TBL_FAQquestion.COLLECTION DESC LIMIT 4")
+	public List<QuestionPersistence> faqInfo_limit(String faqParentId);
+	/**
+	 * author:zhaoyanqing
+	 * abstract:对访问FAQ页面的浏览量进行增加
+	 * data:2017年9月18日 16:12:59
+	 */
+	@Update("UPDATE TBL_FAQquestion SET TBL_FAQquestion.SCAN=#{1} WHERE TBL_FAQquestion.FAQQUESTIONID=#{0}")
+	public void updateFAQScan(String faqquestionId,String faqScan);
+	
 }

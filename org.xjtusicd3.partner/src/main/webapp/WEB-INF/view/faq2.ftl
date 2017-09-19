@@ -90,8 +90,8 @@
 				    <#list userActive as userActive>
 			            <li>
 			                <div id="ranking" class="first">${userActive_index+1}</div>
-			                <div id="user-pic"><a target="_blank" href="personal2.html?q=${userActive.userId}"><img style="display: block;height: 100%;" src="${userActive.userImage}"></a></div><!--.user-pic end-->
-			                <div id="user-name"><a target="_blank" href="personal2.html?q=${userActive.userId}">${userActive.userName}</a></div><!--.user-name end-->
+			                <div id="user-pic"><a target="_blank" href="personal2.html?u=${userActive.userId}"><img style="display: block;height: 100%;" src="${userActive.userImage}"></a></div><!--.user-pic end-->
+			                <div id="user-name"><a target="_blank" href="personal2.html?u=${userActive.userId}">${userActive.userName}</a></div><!--.user-name end-->
 			                <div id="user-info" class="clearfix"><span id="role">${userActive.work}</span><span id="answer-num">${userActive.faqNumber}评论</span></div><!--.user-info end-->
             			</li>
             		</#list>
@@ -100,8 +100,8 @@
 				    <#list userActiveWeek as userActiveWeek>
 			            <li>
 			                <div id="ranking" class="second">${userActiveWeek_index+1}</div>
-			                <div id="user-pic"><a target="_blank" href="personal2.html?q=${userActiveWeek.userId}"><img style="display: block;height: 100%;" src="${userActiveWeek.userImage}"></a></div><!--.user-pic end-->
-			                <div id="user-name"><a target="_blank" href="personal2.html?q=${userActiveWeek.userId}">${userActiveWeek.userName}</a></div><!--.user-name end-->
+			                <div id="user-pic"><a target="_blank" href="personal2.html?u=${userActiveWeek.userId}"><img style="display: block;height: 100%;" src="${userActiveWeek.userImage}"></a></div><!--.user-pic end-->
+			                <div id="user-name"><a target="_blank" href="personal2.html?u=${userActiveWeek.userId}">${userActiveWeek.userName}</a></div><!--.user-name end-->
 			                <div id="user-info" class="clearfix"><span id="role">${userActiveWeek.work}</span><span id="answer-num">${userActiveWeek.faqNumber}评论</span></div><!--.user-info end-->
             			</li>
             		</#list>

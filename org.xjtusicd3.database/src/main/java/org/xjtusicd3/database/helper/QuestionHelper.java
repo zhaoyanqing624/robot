@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
-import org.xjtusicd3.database.mapper.AdvisePersistenceMapper;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
@@ -33,6 +32,7 @@ public class QuestionHelper {
 	/*
 	 * faq2_知识列表
 	 */
+	
 	public static List<QuestionPersistence> faq2_faqlist(String ClassifyId,int pageNow){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
@@ -189,6 +189,78 @@ public class QuestionHelper {
 		return list;
 	}
 	/*
-	 * zyq_faq3_查看问题相似的问题
+	 * faq_按时间推荐
 	 */
+	public static List<QuestionPersistence> faq_recommend_Limit(int startnum) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faq_recommend_Limit(startnum);
+		session.close();
+		return list;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取分类下faq具体信息
+	 * data:2017年9月15日10:27:38
+	 */
+	public static List<QuestionPersistence> questionView(String parentId, int startnum) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.questionView(parentId,startnum);
+		session.close();
+		return list;
+	}
+
+	/**
+	 * author:zzl
+	 * abstract:通过一个问题分类获取其父分类下的所有子分类
+	 * data:2017年9月15日10:07:11
+	 */
+//	public static String faqclassifies(String faq_classifyId) {
+//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+//		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+//		List<ClassifyPersistence> list = mapper.faq_classifyIds(parentId);
+//		session.close();
+//		return list;
+//	}
+
+	
+//	/*
+//	 * 2017年9月14日23:00:08
+//	 */
+//	public static List<QuestionPersistence> user_recommend_Limit(String userid, int startnum) {
+//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+//		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+//		List<QuestionPersistence> list = mapper.user_recommend_Limit(userid,startnum);
+//		session.close();
+//		return list;
+//	}
+	
+	/**
+	 * author:zzl
+	 * abstract:推荐知识_根据收藏量推荐前4个
+	 * data:2017年9月17日19:53:14
+	 */
+	public static List<QuestionPersistence> faqInfo_limit(String faqParentId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faqInfo_limit(faqParentId);
+		session.close();
+		return list;
+	}
+	/**
+	 * author:zhaoyanqing
+	 * abstract:对访问FAQ页面的浏览量进行增加
+	 * data:2017年9月18日 16:12:59
+	 */
+	public static void updateFAQScan(String faqquestionid){
+		List<QuestionPersistence> questionPersistences = QuestionHelper.faq3_faqcontent(faqquestionid);
+		int faqScan = Integer.parseInt(questionPersistences.get(0).getSCAN());
+		faqScan++;
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		mapper.updateFAQScan(faqquestionid,Integer.toString(faqScan));
+		session.close();
+	}
 }

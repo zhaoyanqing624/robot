@@ -118,4 +118,46 @@ public class ClassifyHelper {
 		session.close();
 		return list;
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取当前问题分类的上一级分类
+	 * data:2017年9月15日09:58:36
+	 */
+	public static String faq_parentId(String faq_classifyId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		String classifyParentId = mapper.faq_parentId(faq_classifyId);
+		session.close();
+		return classifyParentId;
+	}
+	/**
+	 * author:zzl
+	 * abstract:获取该父分类下的所有子分类
+	 * data:2017年9月15日10:07:11
+	 */
+	public static List<ClassifyPersistence> faq_classifyIds(String parentId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.faq_classifyIds(parentId);
+		session.close();
+		return list;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取一级分类信息
+	 * data:2017年9月17日19:33:19
+	 */
+	public static List<ClassifyPersistence> getInfoById(String classifyId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
+		List<ClassifyPersistence> list = mapper.getInfoById(classifyId);
+		session.close();
+		return list;
+	}
+	
+
+	
+	
 }
