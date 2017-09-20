@@ -98,6 +98,7 @@ public class UserController {
 			}else {
 				if (UserService.validateEmail(e)==true) {
 					UserHelper.updateUserState(e);
+					//UserService.addGeneralUser(e, "", "");
 					session.setAttribute("UserEmail", e);
 					return "redirect:robot.html";
 				}else {
@@ -111,7 +112,6 @@ public class UserController {
 	 */
 	@RequestMapping(value="/saveLogin",method=RequestMethod.POST)
 	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-		String useremail = (String) session.getAttribute("UserEmail");
 		String urlPath = (String) session.getAttribute("urlPath");
 		if (urlPath==null) {
 			urlPath = "robot.html";

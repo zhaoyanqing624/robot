@@ -23,11 +23,10 @@ import org.xjtusicd3.database.mapper.CurrentConfigurePersistenceMapper;
 import org.xjtusicd3.database.mapper.CurrentEquipmentPersistenceMapper;
 import org.xjtusicd3.database.mapper.DriversPersistenceMapper;
 import org.xjtusicd3.database.mapper.EquipmentPersistenceMapper;
+import org.xjtusicd3.database.mapper.GeneraluserPersistenceMapper;
 import org.xjtusicd3.database.mapper.ITPersistenceMapper;
 import org.xjtusicd3.database.mapper.LogPersistenceMapper;
-import org.xjtusicd3.database.mapper.LogPersistenceMapper;
 import org.xjtusicd3.database.mapper.MessageHistoryPersistenceMapper;
-import org.xjtusicd3.database.mapper.MessagePersistenceMapper;
 import org.xjtusicd3.database.mapper.MessagePersistenceMapper;
 import org.xjtusicd3.database.mapper.PatchPersistenceMapper;
 import org.xjtusicd3.database.mapper.PayPersistenceMapper;
@@ -43,7 +42,6 @@ import org.xjtusicd3.database.mapper.SoftPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserPersistenceMapper;
 import org.xjtusicd3.database.mapper.UserQuestionPersistenceMapper;
 import org.xjtusicd3.database.mapper.User_Equipment_HistoryPersistenceMapper;
-import org.xjtusicd3.database.model.RolePermissionPersistence;
 
 
 
@@ -102,6 +100,7 @@ public class SqlSessionManager {
 			configuration.addMapper(MessagePersistenceMapper.class);
 			configuration.addMapper(MessageHistoryPersistenceMapper.class);
 			configuration.addMapper(SharePersistenceMapper.class);
+			configuration.addMapper(GeneraluserPersistenceMapper.class);
 			configuration.addInterceptor(new BasePlugin());
 			bizSqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 		return bizSqlSessionFactory;

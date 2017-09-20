@@ -62,6 +62,17 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	public void updateUser(String userid,String username);
 	
 	//zpz_通过id获取用户名
-			@Select("SELECT * FROM TBL_User WHERE USERID=#{0}")
-			public List<UserPersistence> getUserNameById(String UserId);
+	@Select("SELECT * FROM TBL_User WHERE USERID=#{0}")
+	public List<UserPersistence> getUserNameById(String UserId);
+	/**
+	 * author:zhaoyanqing
+	 * abstract:注册的用户信息同时添加到普通用户表
+	 * data:2017年9月19日 19:49:45
+	 */
+	public List<UserPersistence> addGeneralUser(String userid);
+	
+	
+	@Insert("INSERT INTO TBL_User(TBL_User.USERID,TBL_User.USERPASSWORD,TBL_User.USERNAME,TBL_User.USERSTATE,TBL_User.AVATAR,TBL_User.ROLEID) VALUES (#{0},#{1},#{2},#{3},#{4},#{5})")
+	public void login_register2(String userid, String password, String username, int userstate, String userimage,
+			String roleid);
 }
