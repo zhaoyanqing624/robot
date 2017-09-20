@@ -9,6 +9,9 @@ import java.security.NoSuchAlgorithmException;
  *  date  2017年8月1日 09:32:13
  */
 public class MD5 {
+	public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		EncoderByMd5("000000");
+	}
     public static String EncoderByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
         //确定计算方法
         MessageDigest md5=MessageDigest.getInstance("MD5");
@@ -24,6 +27,7 @@ public class MD5 {
     		result += tmp;
     	    }
     	}
+    	System.out.println(result);
         return result;
     }
 }

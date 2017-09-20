@@ -31,6 +31,7 @@ import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
+import org.xjtusicd3.database.model.GeneraluserPersistence;
 import org.xjtusicd3.database.model.ITPersistence;
 import org.xjtusicd3.database.model.PayPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
@@ -53,6 +54,8 @@ public class UserService {
 		password = md5.EncoderByMd5(password);
 		List<UserPersistence> list = UserHelper.getEmail2(email, password);
 		if (list.isEmpty()) {
+			return false;
+		}else if (list.get(0).getUSERSTATE()==0) {
 			return false;
 		}else {
 			return true;
@@ -928,5 +931,20 @@ public class UserService {
 			personal2_CommunityViews.add(personal2_CommunityView);
 		}
 		return personal2_CommunityViews;
+	}
+	/**
+	 * author:zhaoyanqing
+	 * abstract:注册的用户信息同时添加到普通用户表
+	 * data:2017年9月19日 19:49:45
+	 */
+	public static void addGeneralUser(String email,String employer,String department){
+		List<UserPersistence> uList = UserHelper.getEmail(email);
+		if (!uList.isEmpty()) {
+			GeneraluserPersistence generaluserPersistence = new GeneraluserPersistence();
+			generaluserPersistence.setUSERID(uList.get(0).getUSERID());
+			generaluserPersistence.setEMPLOYER(employer);
+			generaluserPersistence.setDEPARTMENT(department);
+			UserHelper.addGeneralUser(generaluserPersistence);
+		}
 	}
 }
