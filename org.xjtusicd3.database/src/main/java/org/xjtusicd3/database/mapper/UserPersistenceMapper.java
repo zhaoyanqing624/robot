@@ -71,7 +71,6 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	 */
 	public List<UserPersistence> addGeneralUser(String userid);
 	
-	
 	@Insert("INSERT INTO TBL_User(TBL_User.USERID,TBL_User.USERPASSWORD,TBL_User.USERNAME,TBL_User.USERSTATE,TBL_User.AVATAR,TBL_User.ROLEID) VALUES (#{0},#{1},#{2},#{3},#{4},#{5})")
 	public void login_register2(String userid, String password, String username, int userstate, String userimage,
 			String roleid);
