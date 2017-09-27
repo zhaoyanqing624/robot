@@ -13,10 +13,10 @@
                 </div>
 				<div class="header_top_wrap_right">
 					<ul>
-						<#if UserEmail??>
+						<#if UserName??>
 						<div class="unlogin">
 							<li class="loginLinkLi"><span class="person_icon"></span></li>
-							<li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
+							<li class="loginLinkLi" id="userNameText">您好：${UserName}</li>
 							<li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 								<div class="my_service_list" >
 									<div class="top_icon"></div>

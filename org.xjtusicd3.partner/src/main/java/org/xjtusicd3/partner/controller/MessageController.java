@@ -37,8 +37,9 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/getUserName"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="text/plain;charset=UTF-8")
 	public String getUserName(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
-		List<UserPersistence> list = UserHelper.getEmail(useremail);
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
+		List<UserPersistence> list = UserHelper.getUserInfo(username);
 		String result = JsonUtil.toJsonString(list);
 		return result;
 	}
@@ -58,9 +59,10 @@ public class MessageController {
 	 */
 	@RequestMapping(value="notice",method=RequestMethod.GET)
 	public ModelAndView notice(HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String userid = (String) session.getAttribute("UserId");
-		if (useremail==null) {
+		if (username==null) {
 			return new ModelAndView("login");
 		}else {
 			ModelAndView mv = new ModelAndView("notice");
@@ -76,9 +78,10 @@ public class MessageController {
 	}
 	@RequestMapping(value="notice2",method=RequestMethod.GET)
 	public ModelAndView notice2(HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String userid = (String) session.getAttribute("UserId");
-		if (useremail==null) {
+		if (username==null) {
 			return new ModelAndView("login");
 		}else {
 			ModelAndView mv = new ModelAndView("notice2");
@@ -96,12 +99,13 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/updateNotice"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String updateNotice(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String type = request.getParameter("type");
 		String type2 = request.getParameter("type2");
 		String id = request.getParameter("id");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -118,12 +122,13 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/deleteNotice"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String deleteNotice(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String type = request.getParameter("type");
 		String type2 = request.getParameter("type2");
 		String id = request.getParameter("id");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -139,9 +144,10 @@ public class MessageController {
 	 */
 	@RequestMapping(value="message",method=RequestMethod.GET)
 	public ModelAndView message(String u,HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String userid = (String) session.getAttribute("UserId");
-		if (useremail==null) {
+		if (username==null) {
 			return new ModelAndView("login");
 		}else {
 			ModelAndView mv = new ModelAndView("message");
@@ -175,16 +181,17 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/saveMessage"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveMessage(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String content = request.getParameter("content");
 		String touserId = request.getParameter("touserId");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			Message_MessageView message_MessageViews = MessageService.message_MessageView(useremail, touserId, content);
+			Message_MessageView message_MessageViews = MessageService.message_MessageView(username, touserId, content);
 			jsonObject.put("value", "1");
 			jsonObject.put("messageList", message_MessageViews);
 			String result = JsonUtil.toJsonString(jsonObject);
@@ -197,19 +204,20 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/getMessage"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String getMessage(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String postuserId = request.getParameter("touserId");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
 			//查看是否之前关闭过聊天
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			List<MessageHistoryPersistence> historyPersistences = MessageHelper.getMessageHistoryList(postuserId, userPersistences.get(0).getUSERID());
 			if (historyPersistences.size()==0) {
-				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,useremail);
+				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,username);
 				List<MessagePersistence> mList = MessageHelper.getMessageContent1(postuserId, userPersistences.get(0).getUSERID(), 2);
 				if (mList.size()!=0) {
 					List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory(postuserId, userPersistences.get(0).getUSERID(), 2, 0);
@@ -227,7 +235,7 @@ public class MessageController {
 				String result = JsonUtil.toJsonString(jsonObject);
 				return result;
 			}else {
-				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,useremail);
+				List<Message_MessageView> message_MessageViews = MessageService.message_getMessage(postuserId,username);
 				List<MessagePersistence> mList = MessageHelper.getMessageContent1_time(postuserId, userPersistences.get(0).getUSERID(), 2,historyPersistences.get(0).getTIMEMARK());
 				if (mList.size()!=0) {
 					List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory_time(postuserId, userPersistences.get(0).getUSERID(), 2, 0,historyPersistences.get(0).getTIMEMARK());
@@ -254,16 +262,17 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/getMoreMessageHistory"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String getMoreMessageHistory(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String date = request.getParameter("date");
 		String postuserId = request.getParameter("touserId");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			List<MessagePersistence> mList = MessageHelper.getMessageContent11(postuserId, userPersistences.get(0).getUSERID(), 2,date);
 			if (mList.size()!=0) {
 				List<Message_MessageView> message_MessageViews2 = MessageService.message_getMessageHistory2(postuserId, userPersistences.get(0).getUSERID(), 2, date);
@@ -287,15 +296,16 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value={"/deleteMessageList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String deleteMessageList(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String postuserId = request.getParameter("id");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			MessageService.deleteMessageList(postuserId,userPersistences.get(0).getUSERID());
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject);

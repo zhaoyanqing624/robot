@@ -68,15 +68,16 @@ public class RobotController {
 	public String questionSkill(HttpSession session,HttpServletResponse response){
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		JSONObject jsonObject = new JSONObject();
 		List<RobotPersistence> robotPersistences = RobotHelper.robotinfo();
 		jsonObject.put("robotInfo", robotPersistences);
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 		}else {
 			jsonObject.put("value", "1");
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			jsonObject.put("robotUser", userPersistences);
 		}
 		String result = JsonUtil.toJsonString(jsonObject);

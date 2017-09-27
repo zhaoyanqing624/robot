@@ -49,7 +49,9 @@ import com.alibaba.fastjson.JSONObject;
 public class FaqController {
 	@RequestMapping(value="faq",method=RequestMethod.GET)
 	public ModelAndView faq(HttpSession session,HttpServletRequest request,String q){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		//zzl_获取登录用户
+		String username = (String) session.getAttribute("UserName");
 		ModelAndView mv = new ModelAndView("faq");
 		String urlPath="";
 		if (request.getQueryString()==null) {
@@ -59,12 +61,13 @@ public class FaqController {
 		}
 		//查询所有用户发表知识的状态
 		List<Faq_UserDynamics> userDynamics = QuestionService.userDynamics();
+		System.out.println("userDynamics:"+userDynamics.size());
 		List<UserPersistence> userInfo = UserHelper.getUserNameById(userDynamics.get(0).getUserId());
 		String userImage = userInfo.get(0).getAVATAR();
 		String userName = userInfo.get(0).getUSERNAME();
 		session.setAttribute("urlPath", urlPath);
 				
-		if(useremail==null){
+		if(username==null){
 			//zzl_获取推荐faq_2017年9月14日21:43:52
 			int startnum = 0;
 			List<Faq_CommendView> faqlists = QuestionService.faq_recommend_Limit(startnum);
@@ -73,7 +76,8 @@ public class FaqController {
 		}else{
 			//zzl_获取推荐faq_2017年9月14日21:43:52
 			System.out.println("已登录用户");
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
+			//List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			int startnum = 0;
 			List<Faq_CommendView> faqlists = QuestionService.user_recommend_Limit(userPersistences.get(0).getUSERID(),startnum);				
 			mv.addObject("faqlists", faqlists);
@@ -84,6 +88,7 @@ public class FaqController {
 		mv.addObject("userImage", userImage);
 		mv.addObject("userName", userName);
 		return mv;
+		
 	}
 	
 	
@@ -172,15 +177,19 @@ public class FaqController {
 	 */
 	@RequestMapping(value="faq3",method=RequestMethod.GET)
 	public ModelAndView faqContent(HttpSession session,HttpServletRequest request,String q) throws Exception{
-		String useremail = (String) session.getAttribute("UserEmail");
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
+		//List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
+		System.out.println("username"+username);
 		ModelAndView modelAndView = new ModelAndView("faq3");
 		String classifyId = QuestionHelper.faqclassify(q);
 		List<ClassifyPersistence> classify2 = ClassifyService.faq2_classify2(classifyId);
 		List<ClassifyPersistence> classify = ClassifyService.faq2_classify(classifyId);
 		List<Faq3_faqContentView> faq3Views = QuestionService.faq3_faqcontent(q);
 		List<CommentPersistence> commentPersistences = CommentHelper.getComment(q);
-		List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(q,0);
+		List<Faq3_CommentView> faq3_CommentViews = CommentService.faq3_comment(q,0);		
+		
 		//登录FAQ 增加浏览量
 		QuestionHelper.updateFAQScan(q);
 		//FAQ的总评分展示
@@ -194,10 +203,11 @@ public class FaqController {
 		}
 		float score = totalscore/number;
 		modelAndView.addObject("score", score);
-		if (useremail!=null) {
+		if (username!=null) {	
 			modelAndView.addObject("userName", userPersistences.get(0).getUSERNAME());
 			//判断用户是否收藏
-			List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(useremail, q);
+			//List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(useremail, q);
+			List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection3(username, q);		
 			modelAndView.addObject("collection", collectionPersistences.size());
 			//判断用户是否评分
 			List<ScorePersistence> scorePersistences = ScoreHelper.getScoreList(q);
@@ -222,11 +232,7 @@ public class FaqController {
 		}
 		//查看相似的问题
 		List<robot_Chat> robot_Chats = RobotService.getRobotAnswer(faq3Views.get(0).getFaqTitle());
-		
-		
-		
-		
-		
+				
 		modelAndView.addObject("commentNumber", commentPersistences.size());
 		modelAndView.addObject("classify", classify);
 		modelAndView.addObject("classify2", classify2);
@@ -248,9 +254,10 @@ public class FaqController {
 	@ResponseBody
 	@RequestMapping(value={"/saveFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
 	public String saveFAQ(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String url = (String) session.getAttribute("urlPath");
-		if (useremail==null) {
+		if (username==null) {
 			return "0";
 		}else {
 			String title = request.getParameter("title");
@@ -259,10 +266,14 @@ public class FaqController {
 			String description = request.getParameter("description");
 			String risk_prompt = request.getParameter("risk_prompt");
 			String faqcontent = request.getParameter("faqcontent");
-			List<QuestionPersistence> questionPersistences = QuestionHelper.faqadd_iscurrent(title,useremail);
+			//List<QuestionPersistence> questionPersistences = QuestionHelper.faqadd_iscurrent(title,useremail);
+			//zzl_faqadd_校验知识是否重复增添
+			List<QuestionPersistence> questionPersistences = QuestionHelper.faqadd_iscurrent2(title,username);
 			JSONObject jsonObject = new JSONObject();
-			if (questionPersistences.size()==0) {
-				QuestionService.saveFAQ(useremail,title,keywords,subspecialCategoryId,description,risk_prompt,faqcontent);
+			if (questionPersistences.size()==0) {				
+				//QuestionService.saveFAQ(useremail,title,keywords,subspecialCategoryId,description,risk_prompt,faqcontent);
+				//zzl_保存知识
+				QuestionService.saveFAQ2(username,title,keywords,subspecialCategoryId,description,risk_prompt,faqcontent);
 				jsonObject.put("value", "1");
 				jsonObject.put("url", url);
 				String result = JsonUtil.toJsonString(jsonObject);
@@ -291,16 +302,17 @@ public class FaqController {
 	@ResponseBody
 	@RequestMapping(value={"/saveFAQscore"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveFAQscore(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
 		float score = Float.parseFloat(request.getParameter("score"));
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			ScoreService.saveFAQscore(questionId, userPersistences.get(0).getUSERID(), score);
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject);
@@ -313,14 +325,15 @@ public class FaqController {
 	@ResponseBody
 	@RequestMapping(value={"/saveShare"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveShare(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
 		String state = request.getParameter("state");
 		String from = request.getParameter("from");
 		System.out.println(from);
 		JSONObject jsonObject = new JSONObject();
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
-		if (useremail==null) {
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -394,9 +407,10 @@ public class FaqController {
 	@ResponseBody
 	@RequestMapping(value={"/queryMoreResult"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String queryMoreResult(HttpSession session,HttpServletRequest request) throws Exception{
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		JSONObject jsonObject = new JSONObject();
-		if(useremail==null){
+		if(username==null){
 			jsonObject.put("value", "0");
 			return JsonUtil.toJsonString(jsonObject);
 		}else{

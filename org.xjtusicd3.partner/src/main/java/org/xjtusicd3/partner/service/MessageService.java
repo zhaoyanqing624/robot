@@ -21,8 +21,8 @@ public class MessageService {
 	/*
 	 * zyq_message_ajax_添加私信
 	 */
-	public static Message_MessageView message_MessageView(String useremail, String touserId, String content) {
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+	public static Message_MessageView message_MessageView(String username, String touserId, String content) {
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		String userId = userPersistences.get(0).getUSERID();
 		//保存私信
 		MessagePersistence messagePersistence = new MessagePersistence();
@@ -134,9 +134,9 @@ public class MessageService {
 	/*
 	 * zyq_message_ajax_查询私信内容
 	 */
-	public static List<Message_MessageView> message_getMessage(String postuserId, String useremail) {
+	public static List<Message_MessageView> message_getMessage(String postuserId, String username) {
 		List<Message_MessageView> message_MessageViews = new ArrayList<Message_MessageView>();
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		String getuserId = userPersistences.get(0).getUSERID();
 		List<MessagePersistence> messagePersistences = MessageHelper.getMessageContent(postuserId,getuserId,1);
 		if (messagePersistences.size()!=0) {

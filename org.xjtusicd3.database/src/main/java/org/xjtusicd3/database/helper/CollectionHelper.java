@@ -18,10 +18,15 @@ public class CollectionHelper {
 	/*
 	 * zyq_question2_ajax_收藏
 	 */
-	public static List<CollectionPersistence> getCollection(String useremail,String answerId){
+	/**
+	 * author:zzl
+	 * abstract:question2_收藏
+	 * data:2017年9月22日15:06:43
+	 */
+	public static List<CollectionPersistence> getCollection(String username,String answerId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		List<CollectionPersistence> list = mapper.getCollection(userPersistences.get(0).getUSERID(),answerId);
 		session.close();
 		return list;
@@ -29,21 +34,20 @@ public class CollectionHelper {
 	/*
 	 * zyq_faq3_ajxa_收藏
 	 */
-	public static List<CollectionPersistence> getCollection2(String useremail,String questionId){
+	public static List<CollectionPersistence> getCollection2(String username,String questionId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
-		List<CollectionPersistence> list = mapper.getCollection2(userPersistences.get(0).getUSERID(),questionId);
+		List<CollectionPersistence> list = mapper.getCollection2(username,questionId);
 		session.close();
 		return list;
 	}
 	/*
 	 * zyq_question2_ajax_添加收藏
 	 */
-	public static void saveCollection(String useremail,String communityanswerId){
+	public static void saveCollection(String username,String communityanswerId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		Date date=new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
@@ -70,18 +74,19 @@ public class CollectionHelper {
 	/*
 	 * zyq_faq3_ajax_添加收藏
 	 */
-	public static void saveCollection2(String useremail,String questionId){
+	public static void saveCollection2(String username,String questionId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		Date date=new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
 	    //判断是否为自己收藏
 	    List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(questionId);
 	    int isnotice = 0;
-	    if(userPersistences.get(0).getUSERID().equals(answerPersistences.get(0).getUSERID())){
+	    if((userPersistences.get(0).getUSERID()).equals(answerPersistences.get(0).getUSERID())){
 	    	isnotice = 0;
+	    	mapper.saveCollection2(UUID.randomUUID().toString(),questionId,userPersistences.get(0).getUSERID(),time,isnotice);
 	    }else {
 			isnotice = 1;
 			mapper.saveCollection2(UUID.randomUUID().toString(),questionId,userPersistences.get(0).getUSERID(),time,isnotice);
@@ -128,6 +133,20 @@ public class CollectionHelper {
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
 		List<CollectionPersistence> list = mapper.agreeInfo(faqquestionid);
+		session.close();
+		return list;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:根据用户名和问题Id查看收藏
+	 * data:2017年9月21日11:57:34
+	 */
+	public static List<CollectionPersistence> getCollection3(String username, String questionId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
+		List<UserPersistence> userlist = UserHelper.getUserInfo(username);
+		List<CollectionPersistence> list = mapper.getCollection2(userlist.get(0).getUSERID(),questionId);
 		session.close();
 		return list;
 	}

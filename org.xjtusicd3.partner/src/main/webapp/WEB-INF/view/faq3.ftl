@@ -20,6 +20,7 @@
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/starScore.js"></script>
+    <script type="text/javascript" src="js/browserEvent.js"></script>
 	<script type="text/javascript">
     $(function(){
     	if(document.URL.indexOf("n=")>0){
@@ -328,7 +329,7 @@
     <script type="text/javascript" src="new/front/js/util.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/view/ueditor.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/view/faq3.js"></script>
-	<script type="text/javascript" src="js/browserEvent.js"></script>
+
 	<script>
 	     scoreFun($("#startone"))
 	     scoreFun($("#starttwo"),{

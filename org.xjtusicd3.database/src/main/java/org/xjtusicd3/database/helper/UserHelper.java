@@ -1,5 +1,7 @@
 package org.xjtusicd3.database.helper;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Savepoint;
 import java.util.List;
 
@@ -83,10 +85,10 @@ public class UserHelper {
 
 	}
 	//zyq_图片上传
-	public static void updateUserImage(String email,String path){
+	public static void updateUserImage(String username,String path){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		mapper.updateUserImage(email,path);
+		mapper.updateUserImage(username,path);
 		session.close();
 	}
 	//zyq_用户个人信息完善
@@ -96,6 +98,8 @@ public class UserHelper {
 		mapper.updateUserInfo(email,username,usersex,userbirthday,address,userbrief);
 		session.close();
 	}
+	
+
 	//zyq_个人密码修改
 	public static void updateUserPassword(String email,String password){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
@@ -173,4 +177,83 @@ public class UserHelper {
 		mapper.login_register2(userid, password, username, userstate,userimage,roleid);
 		session.close();
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:判断用户是否登录成功
+	 * data:2017年9月21日09:37:13
+	 */
+	public static List<UserPersistence> isLogin(String username, String password) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		List<UserPersistence> list = mapper.isLogin(username, password);
+		session.close();
+		return list;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户id
+	 * data:2017年9月21日10:15:23
+	 */
+	public static String loginUserInfo(String nameOrEmail) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		String userId = mapper.loginUserInfo(nameOrEmail);
+		session.close();
+		return userId;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户名
+	 * data:2017年9月21日10:21:20
+	 */
+	public static List<UserPersistence> getUserNameById2(String nameOrEmail) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		List<UserPersistence> list = mapper.getUserNameById2(nameOrEmail);
+		session.close();
+		return list;
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:修改用户信息
+	 * data:2017年9月21日10:21:20
+	 */
+	public static void updateUserInfo2(String userid, String username, String usersex, String userbirthday,
+			String address, String userbrief) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		mapper.updateUserInfo2(userid,username,usersex,userbirthday,address,userbrief);
+		session.close();	
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:修改密码
+	 * data:2017年9月21日17:45:18
+	 */
+	public static void updateUserPassword2(String username, String password) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		mapper.updateUserPassword2(username,password);
+		session.close();
+		
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户信息
+	 * data:2017年9月26日16:46:27
+	 */
+	public static List<UserPersistence> loginUser(String nameOrEmail, String password) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+		List<UserPersistence> list = mapper.loginUser(nameOrEmail,password);
+		session.close();
+		return list;
+	}
+
 }

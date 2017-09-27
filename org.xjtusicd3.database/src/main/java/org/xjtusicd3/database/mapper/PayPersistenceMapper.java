@@ -23,7 +23,7 @@ public interface PayPersistenceMapper extends IBaseDao<PayPersistence, String>{
 	 * zyq_personal2_查看关注列表
 	 */
 	@Select("SELECT * FROM TBL_Pay WHERE PAYUSERID=#{0} AND BEPAYUSERID=#{1}")
-	List<PayPersistence> getpayList(String userId, String touserId);
+	List<PayPersistence> getpayList(String username, String touserId);
 	/*
 	 * zyq_personal2_取消关注
 	 */

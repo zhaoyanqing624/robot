@@ -31,13 +31,13 @@ public class CurrentEquipmentHelp {
 	/*
 	 * zyq_peisonal3_更新当前设备表
 	 */
-	public static void updateCurrentEquipment(String useremail,String macAddress,String ipAddress,String equipmentModel,String equipmentTime,String CPU,String RAM,String memoryBank,
+	public static void updateCurrentEquipment(String username,String macAddress,String ipAddress,String equipmentModel,String equipmentTime,String CPU,String RAM,String memoryBank,
 			String hardDrive,String hardDriveModel,String networkCard,String motherBoard,String osName,String osType,String osVersion,String osId,String graphicCard,String audioCard,String time){
 		String userId ="";
-		if (useremail==null) {
+		if (username==null) {
 			userId = "00000000-0000-0000-0000-000000000000";
 		}else {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			userId = userPersistences.get(0).getUSERID();
 		}
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);

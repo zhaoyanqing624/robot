@@ -55,7 +55,7 @@ public class LoginFilter implements Filter {
 			
 			String url = request.getServletPath() + (request.getPathInfo() == null ? "" : request.getPathInfo());
 			HttpSession session = request.getSession();
-			Object object = session.getAttribute("UserEmail");
+			Object object = session.getAttribute("UserName");
 			
 			//没有登录就不允许访问页面的的链接
 			if (object==null&&(url.contains("advise")||url.contains("faqadd")||url.contains("message")||url.contains("notice")||url.contains("personal")||url.contains("personal2")||url.contains("personal3")||url.contains("personal4")||url.contains("question2"))) {

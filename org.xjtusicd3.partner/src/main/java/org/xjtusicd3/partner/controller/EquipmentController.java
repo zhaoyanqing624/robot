@@ -26,9 +26,10 @@ public class EquipmentController {
 	 */
 	@RequestMapping(value="personal3",method=RequestMethod.GET)
 	public ModelAndView personal3(HttpSession session,HttpServletRequest request,String e) throws UnknownHostException, SocketException, SigarException {
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		ModelAndView mv = new ModelAndView("personal3");
-		List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(useremail,e);
+		List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(username,e);
 		mv.addObject("personal3_list", list);
 		return mv;
 	}
@@ -40,7 +41,8 @@ public class EquipmentController {
 	@ResponseBody
 	@RequestMapping(value={"/getInformation"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public void getInformation(HttpServletRequest request,HttpSession session,final String[] softWare,final String[] path){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String macAddress = request.getParameter("macAddress");
 		String ipAddress = request.getParameter("ipAddress");
 		String equipmentModel = request.getParameter("equipmentModel");
@@ -59,7 +61,7 @@ public class EquipmentController {
 		String graphicCard = request.getParameter("graphicCard");
 		String audioCard = request.getParameter("audioCard");
 		//硬件信息
-		EquipmentService.currentEquipment(useremail,macAddress,ipAddress,equipmentModel,equipmentTime,CPU,RAM,memoryBank,
+		EquipmentService.currentEquipment(username,macAddress,ipAddress,equipmentModel,equipmentTime,CPU,RAM,memoryBank,
 				hardDrive,hardDriveModel,networkCard,motherBoard,osName,osType,osVersion,osId,graphicCard,audioCard);
 		//软件、补丁信息
 		EquipmentService.currentEquipment(macAddress,softWare,path);

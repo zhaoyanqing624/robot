@@ -18,6 +18,15 @@ public class UserView {
 	private String City;
 	private String District;
 	
+	//zzl_用户名或密码
+	private String nameOrEmail;
+		
+	public String getNameOrEmail() {
+		return nameOrEmail;
+	}
+	public void setNameOrEmail(String nameOrEmail) {
+		this.nameOrEmail = nameOrEmail;
+	}
 	public String getUserSex2() {
 		return UserSex2;
 	}

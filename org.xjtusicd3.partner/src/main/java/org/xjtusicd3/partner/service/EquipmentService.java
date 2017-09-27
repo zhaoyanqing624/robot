@@ -35,7 +35,7 @@ public class EquipmentService {
 	 * date:2017年9月9日 21:31:03
 	 * abstract:如果当前设备不存在当前设备表，将获取的计算机信息添加（add）到当前设备表;如果存在，则update
 	 */
-	public static void currentEquipment(String useremail,String macAddress,String ipAddress,String equipmentModel,String equipmentTime,String CPU,String RAM,String memoryBank,
+	public static void currentEquipment(String username,String macAddress,String ipAddress,String equipmentModel,String equipmentTime,String CPU,String RAM,String memoryBank,
 			String hardDrive,String hardDriveModel,String networkCard,String motherBoard,String osName,String osType,String osVersion,String osId,String graphicCard,String audioCard){
 	    //判断当前设备表是否包含此计算机
 	  	Date date=new Date();
@@ -60,10 +60,10 @@ public class EquipmentService {
 			currentEquipmentPersistence.setOSTYPE(osType);
 			currentEquipmentPersistence.setOSVERSION(osVersion);
 			currentEquipmentPersistence.setOSID(osId);
-			if (useremail==null) {
+			if (username==null) {
 				currentEquipmentPersistence.setUSERID("00000000-0000-0000-0000-000000000000");
 			}else {
-				List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+				List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 				currentEquipmentPersistence.setUSERID(userPersistences.get(0).getUSERID());
 			}
 			currentEquipmentPersistence.setISNOTICE(0);
@@ -72,7 +72,7 @@ public class EquipmentService {
 		    currentEquipmentPersistence.setTIMEREMARKS(time);
 	    	CurrentEquipmentHelp.save(currentEquipmentPersistence);
 		}else {
-			CurrentEquipmentHelp.updateCurrentEquipment(useremail,macAddress,ipAddress,equipmentModel,equipmentTime,CPU,RAM,memoryBank,
+			CurrentEquipmentHelp.updateCurrentEquipment(username,macAddress,ipAddress,equipmentModel,equipmentTime,CPU,RAM,memoryBank,
 					hardDrive,hardDriveModel,networkCard,motherBoard,osName,osType,osVersion,osId,graphicCard,audioCard,time);
 		}
 	    
@@ -120,9 +120,9 @@ public class EquipmentService {
 	 * abstract:personal3.html设备信息展示
 	 */
 	
-	public static List<Personal3_EquipmentView> personal3_EquipmentView(String email,String macaddress) {
+	public static List<Personal3_EquipmentView> personal3_EquipmentView(String username,String macaddress) {
 		List<Personal3_EquipmentView> personal3_EquipmentViews = new ArrayList<Personal3_EquipmentView>();
-		List<UserPersistence> uList = UserHelper.getEmail(email);
+		List<UserPersistence> uList = UserHelper.getUserInfo(username);
 		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipment(macaddress);
 		for(CurrentEquipmentPersistence currentEquipmentPersistence:currentEquipmentPersistences){
 			List<Personal3_EquipmentConfigureView> personal3_EquipmentConfigureViews = new ArrayList<Personal3_EquipmentConfigureView>();

@@ -14,8 +14,8 @@ public class AdviseService {
 	/*
 	 * zyq_advise_添加意见建议
 	 */
-	public static void saveAdvise(String useremail,String email,String name,String phone,String text){
-		List<UserPersistence> list = UserHelper.getEmail(useremail);
+	public static void saveAdvise(String username,String email,String name,String phone,String text){
+		List<UserPersistence> list = UserHelper.getUserInfo(username);
 		AdvisePersistence advisePersistence = new AdvisePersistence();
 		advisePersistence.setADVISEID(UUID.randomUUID().toString());
 		advisePersistence.setEMAIL(email);

@@ -1,9 +1,3 @@
-	/**
-	 * author:zzl
-	 * abstract:记载中...
-	 * data:2017年9月15日14:59:30
-	 */
-
 function queryMoreTop(){ 
 	var startnum = document.getElementById("tplWrapper").childElementCount;	
 	$.ajax({

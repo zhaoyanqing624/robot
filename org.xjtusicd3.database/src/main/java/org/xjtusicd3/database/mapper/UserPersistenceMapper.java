@@ -42,8 +42,8 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 
 	
 	//zyq_上传图片
-	@Update("UPDATE TBL_User SET TBL_User.AVATAR=#{1} WHERE USEREMAIL=#{0}")
-	public void updateUserImage(String param2, String param1);
+	@Update("UPDATE TBL_User SET TBL_User.AVATAR=#{1} WHERE USERNAME=#{0}")
+	public void updateUserImage(String username, String path);
 	//zyq_用户个人信息完善
 	@Update("UPDATE TBL_User SET USERNAME=#{1},GENDER=#{2},USERBIRTHDAY=#{3},USERADDRESS=#{4},USERSIGNATURE=#{5} WHERE USEREMAIL=#{0}")
 	public void updateUserInfo(String email, String username, String usersex, String userbirthday, String address,String userbrief);
@@ -75,4 +75,51 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	@Insert("INSERT INTO TBL_User(TBL_User.USERID,TBL_User.USERPASSWORD,TBL_User.USERNAME,TBL_User.USERSTATE,TBL_User.AVATAR,TBL_User.ROLEID) VALUES (#{0},#{1},#{2},#{3},#{4},#{5})")
 	public void login_register2(String userid, String password, String username, int userstate, String userimage,
 			String roleid);
+	/**
+	 * author:zzl
+	 * abstract:判断用户是否登录成功
+	 * data:2017年9月21日09:39:35
+	 */
+	@Select("SELECT * FROM TBL_User WHERE USERNAME=#{0} AND USERPASSWORD=#{1}")
+	public List<UserPersistence> isLogin(String username, String password);
+	
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户id
+	 * data:2017年9月21日10:18:57
+	 */
+	@Select("SELECT USERID FROM TBL_User WHERE USERNAME=#{0} OR USEREMAIL=#{0}")
+	public String loginUserInfo(String nameOrEmail);
+	
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户名
+	 * data:2017年9月21日10:21:20
+	 */
+	@Select("SELECT * FROM TBL_User WHERE USERNAME=#{0} OR USEREMAIL=#{0}")
+	public List<UserPersistence> getUserNameById2(String nameOrEmail);
+	
+	/**
+	 * author:zzl
+	 * abstract:修改用户信息
+	 * data:2017年9月21日10:21:20
+	 */
+	@Update("UPDATE TBL_User SET USERNAME=#{1},GENDER=#{2},USERBIRTHDAY=#{3},USERADDRESS=#{4},USERSIGNATURE=#{5} WHERE USERID=#{0}")
+	public void updateUserInfo2(String userid, String username, String usersex, String userbirthday, String address,String userbrief);
+	
+	/**
+	 * author:zzl
+	 * abstract:修改密码
+	 * data:2017年9月21日17:46:18
+	 */
+	@Update("UPDATE TBL_User SET USERPASSWORD=#{1} WHERE USERNAME=#{0}")
+	public void updateUserPassword2(String userid, String password);
+	
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户信息
+	 * data:2017年9月26日16:48:15
+	 */
+	@Select("SELECT * FROM TBL_User WHERE (USERNAME=#{0} OR USEREMAIL=#{0}) AND USERPASSWORD=#{1}")
+	public List<UserPersistence> loginUser(String nameOrEmail, String password);
 }

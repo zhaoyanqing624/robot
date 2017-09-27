@@ -48,9 +48,9 @@
         <form  action="saveLogin.html" method="post">
         <div class="cont_form_login"> <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
           <h2>LOGIN</h2>
-          <input type="text" placeholder="邮箱" id="me2" name="UserEmail" oninput="_email1()"/>
+          <input type="text" placeholder="请输入用户名/邮箱" id="me2" name="nameOrEmail" oninput="_email1()"/>
           <div><div class="validate_faqadd spa5"></div></div>
-          <input type="password" id="password2" placeholder="密码" name="UserPassword" oninput="_password1()"/>
+          <input type="password" id="password2" placeholder="请输入密码" name="UserPassword" oninput="_password1()"/>
           <div><div class="validate_faqadd spa6" id="me_password"></div></div>
           <button class="btn_login"  data-dialog="somedialog" id="login">登录</button>
         </div>
@@ -83,8 +83,9 @@
 	<div class="reveal-modal-bg" id="modal_bg" style="display: display; cursor: pointer;"></div>
 	
 	<script src="js/jquery-1.6.2.js"></script>
+	<!--  
 	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete.js"></script>
-	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete2.js"></script>
+	<script src="zhao/login_register/login_emaiautocomplete/emailAutoComplete2.js"></script> -->
 	<script src="js/login_bg/cav.js"></script>
 	<script src="js/login_bg/getStart.js"></script>
 	<script src="zhao/login_register/index.js"></script>

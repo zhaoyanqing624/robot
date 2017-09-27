@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.xml.registry.infomodel.User;
 
 import org.xjtusicd3.common.util.JsonUtil;
 import org.xjtusicd3.database.helper.AnswerHelper;
@@ -49,10 +50,29 @@ public class UserService {
 	/*
 	 * zyq_MD5加密判断是否登录
 	 */
-	public static boolean isLogin(String email,String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-		MD5 md5 = new MD5();
-		password = md5.EncoderByMd5(password);
-		List<UserPersistence> list = UserHelper.getEmail2(email, password);
+//	public static boolean isLogin(String email,String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+//		MD5 md5 = new MD5();
+//		password = md5.EncoderByMd5(password);
+//		List<UserPersistence> list = UserHelper.getEmail2(email, password);
+//		if (list.isEmpty()) {
+//			return false;
+//		}else if (list.get(0).getUSERSTATE()==0) {
+//			return false;
+//		}else {
+//			return true;
+//		}
+//	}
+	/**
+	 * author:zzl
+	 * abstract:判断用户是否登录成功
+	 * data:2017年9月21日09:34:09
+	 * @throws UnsupportedEncodingException 
+	 */
+	public static boolean isLogin(String username,String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+		password = MD5.EncoderByMd5(password);
+		//List<UserPersistence> list = UserHelper.getEmail2(email, password);
+		List<UserPersistence> list = UserHelper.isLogin(username,password);
+		System.out.println("登录用户信息"+list.size());
 		if (list.isEmpty()) {
 			return false;
 		}else if (list.get(0).getUSERSTATE()==0) {
@@ -61,6 +81,12 @@ public class UserService {
 			return true;
 		}
 	}
+	
+	
+	
+	
+	
+	
 	/*
 	 * zyq_MD5加密_密码修改 新密码加密
 	 */
@@ -150,9 +176,9 @@ public class UserService {
     /*
      * zyq_personal2_展示自己的主页
      */
-	public static List<Personal2_indexList> personal2_indexList(String useremail) {
+	public static List<Personal2_indexList> personal2_indexList(String username) {
 		List<Personal2_indexList> personal2_indexLists = new ArrayList<Personal2_indexList>();
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		/*
 		 * 查看自己
 		 */
@@ -229,6 +255,7 @@ public class UserService {
 				List<UserPersistence> userPersistences2 = UserHelper.getEmail_id(payPersistence.getPAYUSERID());
 				for(UserPersistence userPersistence:userPersistences2){
 					//查看关注的人专注了who
+					//zzl_查看共同关注
 					List<PayPersistence> list = PayHelper.getpayList(userPersistences.get(0).getUSERID(), userPersistence.getUSERID());
 					if (list.size()!=0) {
 						List<PayPersistence> payPersistences2 = PayHelper.payList_time_Limit(userPersistence.getUSERID(),list.get(0).getTIME(),0,5);
@@ -300,6 +327,7 @@ public class UserService {
 		List<Personal2_indexList> list = ListSort(personal2_indexLists);
 		return list;
 	}
+	
 	//对list里面的元素进行time的排序
 	private static List<Personal2_indexList> ListSort(List<Personal2_indexList> list){
 		Collections.sort(list,new Comparator<Personal2_indexList>() {
@@ -325,6 +353,8 @@ public class UserService {
 		});
 		return list;
 	}
+	
+	
 	/*
 	 * zyq_personal2_关注
 	 */
@@ -470,9 +500,9 @@ public class UserService {
 	/*
 	 * zyq_personal2_ajax_获取更多的个人主页信息
 	 */
-	public static List<Personal2_indexList> personal2_indexList_Limit(String useremail, String time1, String time2,String time3, String time11, String time22, String time33) {
+	public static List<Personal2_indexList> personal2_indexList_Limit(String username, String time1, String time2,String time3, String time11, String time22, String time33) {
 		List<Personal2_indexList> personal2_indexLists = new ArrayList<Personal2_indexList>();
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		/*
 		 * 查看自己
 		 */
@@ -947,4 +977,38 @@ public class UserService {
 			UserHelper.addGeneralUser(generaluserPersistence);
 		}
 	}
+
+
+
+
+
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户信息
+	 * data:2017年9月21日10:11:48
+	 */
+	public static List<UserPersistence> loginUserInfo(String nameOrEmail) {
+		List<UserPersistence> loginUser = UserHelper.getUserNameById2(nameOrEmail);
+		return loginUser;
+	}
+
+
+
+
+
+	/**
+	 * author:zzl
+	 * abstract:获取登录用户信息
+	 * data:2017年9月26日16:07:39
+	 * @throws UnsupportedEncodingException 
+	 * @throws NoSuchAlgorithmException 
+	 */
+	public static List<UserPersistence> loginUser(String nameOrEmail, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		password = MD5.EncoderByMd5(password);
+		List<UserPersistence> loginUser = UserHelper.loginUser(nameOrEmail, password);
+		return loginUser;
+	}
+
+
+
 }

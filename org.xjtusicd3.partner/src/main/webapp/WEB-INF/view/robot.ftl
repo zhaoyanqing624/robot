@@ -20,6 +20,8 @@
 	<script src="zhao/classify/js/jquery-1.9.1.min.js"></script>
 	<script src="zhao/classify/js/jquery.aimmenu.js"></script>
 	<script src="zhao/classify/js/knockout.js"></script>
+	<script type="text/javascript" src="js/chat.js"></script>
+	<script type="text/javascript" src="js/browserEvent.js"></script>
 	<script>
 	$(function(){
 		var navData=[${string}];
@@ -57,10 +59,11 @@
                 </div>
                 <div class="header_top_wrap_right" style="height: 100%;;width: 30%">
 		              <ul>
-		              <#if UserEmail??>
+		              <#if UserName??>
 		                <div class="unlogin">
 		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
+		                    <li class="loginLinkLi" id="${UserId}" hidden=""></li>
+		                    <li class="loginLinkLi" id="userNameText">您好：${UserName}</li>
 		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
 		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 		                            <div class="top_icon"></div>
@@ -109,7 +112,9 @@
 								<!--效果html开始-->
     							<div class="content">
         							<div class="chatBox">
+										<!-- 自动问答左侧区 begin -->
 										<div class="chatLeft" style="height: 117%;width: 60%;">
+                							<!-- 自动问答显示区 begin -->
                 							<div class="chat01">
                     							<div class="chat01_title"></div>
                     							<div class="chat01_content">
@@ -120,6 +125,9 @@
 													</ul>
 							                    </div>
 							                </div>
+							                <!-- 自动问答显示区 end -->
+							                
+							                <!-- 自动问答提问区 begin -->
 						                	<div class="chat02">
 						                    	<div class="chat02_title">
 						                        	<a class="chat02_title_btn ctb01" href="javascript:;"></a>
@@ -149,7 +157,11 @@
 							                        </ul>
 							                    </div>
 						                	</div>
+						                	 <!-- 自动问答提问区 end -->
             							</div>
+            							<!-- 自动问答左侧区 end -->
+            							
+            							<!-- 自动问答右侧区 begin -->
 										<div class="chatRight" style="height: 12%;width: 28%;">
 											<div class="container clearfix mt-40">
 												<div class="wp navbar">
@@ -195,7 +207,8 @@
 													</div>
 												</div>
 											</div>
-            							</div>           
+            							</div>
+            							<!-- 自动问答右侧区 end -->           
         							</div>
     							</div>
 								<!--效果html结束-->
@@ -257,8 +270,8 @@
     <script type="text/javascript" src="zhao/lunbo/js/jquery.plugins-min.js"></script>
     <script src="zhao/classify/js/navbar.js"></script>
     <script src="js/view/getInformation.js"  async="async"></script>
-	<script type="text/javascript" src="js/chat.js"></script>
-	<script type="text/javascript" src="js/browserEvent.js"></script>
+	
+	
 	
 </body>
 </html>

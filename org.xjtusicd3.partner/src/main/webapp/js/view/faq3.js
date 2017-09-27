@@ -249,7 +249,7 @@ function querymorereply(){
 		}
 	})
 }
-//点赞
+//收藏
 function favorite(){
 	var questionId = document.URL.split("q=")[1].split("#")[0];
 	$.ajax({

@@ -195,7 +195,7 @@
 					                            <div class="form-group" style="width: 370px;height: 37px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>生日：</span></div>
 					                                <div style="float:right;width:314px;height:50px;">
-														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.USERBIRTHDAY}" readonly ></li>
+														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.USERBIRTHDAY}"  ></li>
 					                                </div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height:40px;">
@@ -231,7 +231,7 @@
 											                    <div class="item col-xs-12" style="margin-top: 30px;">
 											                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>密码：</span>    
 											                        <div class="f-fl item-ifo">
-											                            <input type="password" id="password2"  class="txt03 f-r3 required""return  false" oninput="_password2()" />
+											                            <input type="password" id="password2"  class="txt03 f-r3 required"  oninput="_password2()" />
 											                            <label class="focus valid error spa2"></label>
 											                        </div>
 											                    </div>
@@ -264,7 +264,7 @@
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
     
-    <div id="myModal" class="reveal-modal" style="visibility:hidden">			
+    <div id="myModal" class="reveal-modal" style="visibility: hidden;">			
 		<h1>密码修改成功</h1>
 		<br/>			
 		<a class="close-reveal-modal" id="cancelModal">&#215;</a>

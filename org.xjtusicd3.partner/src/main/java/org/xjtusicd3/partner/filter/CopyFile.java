@@ -3,9 +3,9 @@ package org.xjtusicd3.partner.filter;
 import java.io.File;
 
 public class CopyFile {
-	public String copyFile(String path,String useremail,String time) {
+	public String copyFile(String path,String username,String time) {
 		File fold = new File(path);
-		String newPath="E:\\eclipse\\workspace\\robot-master\\org.xjtusicd3.partner\\src\\main\\webapp\\robot\\user\\"+useremail+"\\userImage\\"+time+"\\";
+		String newPath="E:\\eclipse\\workspace\\robot-master\\org.xjtusicd3.partner\\src\\main\\webapp\\robot\\user\\"+username+"\\userImage\\"+time+"\\";
 		File file = new File(newPath);
 		if(!file.exists()){
 			file.mkdirs();

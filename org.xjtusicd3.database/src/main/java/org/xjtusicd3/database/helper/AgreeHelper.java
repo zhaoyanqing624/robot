@@ -16,10 +16,10 @@ public class AgreeHelper {
 	/*
 	 * zyq_question2_对于答案点赞
 	 */
-	public static void saveAgree(String useremail,String communityanswerId){
+	public static void saveAgree(String username,String communityanswerId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		AgreePersistenceMapper mapper = session.getMapper(AgreePersistenceMapper.class);
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		Date date=new Date();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String time = format.format(date);
@@ -34,18 +34,22 @@ public class AgreeHelper {
 		mapper.saveAgree(UUID.randomUUID().toString(),communityanswerId,userPersistences.get(0).getUSERID(),communityAnswerPersistences.get(0).getUSERID(),time,isnotice);
 		session.close();
 	}
-	/*
-	 * zyq_question2_查看点赞表
+
+
+	/**
+	 * author:zzl
+	 * abstract:question2_查看点赞表
+	 * data:2017年9月22日14:47:45
 	 */
-	
-	public static List<AgreePersistence> getAgree(String useremail,String communityanswerId){
+	public static List<AgreePersistence> getAgree(String username,String communityanswerId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		AgreePersistenceMapper mapper = session.getMapper(AgreePersistenceMapper.class);
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		List<AgreePersistence> list = mapper.getAgree(communityanswerId,userPersistences.get(0).getUSERID());
 		session.close();
 		return list;
 	}
+
 	public static List<AgreePersistence> getAgree_id(String communityanswerId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		AgreePersistenceMapper mapper = session.getMapper(AgreePersistenceMapper.class);

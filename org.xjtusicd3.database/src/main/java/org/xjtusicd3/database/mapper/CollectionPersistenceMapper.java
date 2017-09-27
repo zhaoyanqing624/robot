@@ -18,7 +18,7 @@ public interface CollectionPersistenceMapper extends IBaseDao<CollectionPersiste
 	 * zyq_faq3_ajax_收藏
 	 */
 	@Select("SELECT * FROM TBL_Collection WHERE USERID=#{0} AND FAQQUESTIONID=#{1}")
-	List<CollectionPersistence> getCollection2(String userid, String questionId);
+	List<CollectionPersistence> getCollection2(String userId, String questionId);
 	/*
 	 * zyq_question2_ajax_添加收藏
 	 */

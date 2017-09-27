@@ -39,9 +39,11 @@ public class CommunityController {
 	 */
 	@RequestMapping(value="question",method=RequestMethod.GET)
 	public ModelAndView question(String c,String type,HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.classifyName1();
-		List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(useremail,0,type,c);
+		List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(username,0,type,c);
+		
 		ModelAndView mv = new ModelAndView("question");
 		mv.addObject("classifyList", classifyPersistences);
 		mv.addObject("communityViews", question_CommunityViews);
@@ -54,7 +56,7 @@ public class CommunityController {
 			typename="待回答";
 		}
 		mv.addObject("typename", typename);
-		mv.addObject("userEmail", useremail);
+		mv.addObject("userName", username);
 		String urlPath="";
 		if (request.getQueryString()==null) {
 			urlPath = request.getServletPath();
@@ -70,17 +72,18 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value={"/getMoreCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String getMoreCommunity(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
 		String type = request.getParameter("type");
 		String c = request.getParameter("c");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else{
-			List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(useremail,startnumber,type,c);
+			List<Question_CommunityView> question_CommunityViews = CommunityService.Question_CommunityView(username,startnumber,type,c);
 			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.question_ClassifyListByName(c, "0");
 			List<CommunityQuestionPersistence> communityQuestionPersistences = null;
 			if (type=="all") {
@@ -106,24 +109,38 @@ public class CommunityController {
 	 */
 	@RequestMapping(value="question2",method=RequestMethod.GET)
 	public ModelAndView question2(HttpServletRequest request,HttpServletResponse response,String q,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		ModelAndView mv = new ModelAndView("question2");
-		List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
+		System.out.println("userPersistences:"+userPersistences.get(0).getUSERNAME());
+		
 		List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question2_getCommunity(q);
 		List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistences.get(0).getCLASSIFYID());
-		List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews_best(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
+		
+		List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews_best(username,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID());
+		System.out.println("有无最佳答案:"+question2_CommunityViews.size());
+		
 		int startNumber = 0;
-		List<Question2_CommunityView> question2_CommunityViews2 = CommunityService.question2_CommunityViews_other(useremail,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID(),startNumber);
+		List<Question2_CommunityView> question2_CommunityViews2 = CommunityService.question2_CommunityViews_other(username,communityQuestionPersistences.get(0).getCOMMUNITYQUESTIONID(),startNumber);
+		System.out.println("非最佳答案个数:"+question2_CommunityViews2.size());
+		
 		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_CommunityAnswer(q);
+		System.out.println("问题答案个数:"+communityAnswerPersistences.size());
 		//判断是否有分享内容的权利
 		List<ITPersistence> list = ITHelper.IT(userPersistences.get(0).getUSERID());
+		System.out.println("用户是否为IT运维人员:"+list.size());
 		if (list.size()==0) {
 			mv.addObject("IsIT", "0");
 		}else{
+			System.out.println("IT运维人员：有权分享内容");
 			mv.addObject("IsIT", "1");
 			List<SharePersistence> sharePersistences = ShareHelper.getShareList_ID2(userPersistences.get(0).getUSERID(),q);
+			
 			List<CommunityAnswerPersistence> communityAnswerPersistences2 = CommunityAnswerHelper.question_iscurrentAnswer(q, 1);
+			System.out.println("判断问题是否有最佳答案："+communityAnswerPersistences2.size());
 			if (communityAnswerPersistences2.size()!=0) {
+				System.out.println("IT运维人员是否分享内容："+sharePersistences.size());
 				if (sharePersistences.size()==0) {
 					mv.addObject("IsShare", "0");
 				}else {
@@ -149,10 +166,11 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value={"/saveCommunityQuestion"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
 	public String saveCommunityQuestion(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String url = (String) session.getAttribute("urlPath");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -161,11 +179,12 @@ public class CommunityController {
 			String content = request.getParameter("description");
 			String classifyId = request.getParameter("check_val");
 			
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.question_iscurrent(userPersistences.get(0).getUSERID(), title);
 
 			if (communityQuestionPersistences.size()==0) {
-				CommunityService.savaCommunityQuestion(useremail, title, content, classifyId);
+				//CommunityService.savaCommunityQuestion(useremail, title, content, classifyId);
+				CommunityService.savaCommunityQuestion2(username, title, content, classifyId);
 				jsonObject.put("value", "1");
 				jsonObject.put("url",url);
 				String result = JsonUtil.toJsonString(jsonObject); 
@@ -184,20 +203,21 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value={"/saveReplyQuestion"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
 	public String saveReplyQuestion(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		JSONObject jsonObject = new JSONObject();
 		String url = request.getParameter("url");
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject);
 			return result;
 		}else {
 			String content = request.getParameter("content");
 			String questionId = request.getParameter("questionId");
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_IsCommunityAnswer(userPersistences.get(0).getUSERID(), content, questionId);
 			if (communityAnswerPersistences.size()==0) {
-				CommunityService.saveReplyQuestion(useremail, content, questionId);
+				CommunityService.saveReplyQuestion(username, content, questionId);
 				jsonObject.put("value", "1");
 				jsonObject.put("url", url);
 				String result = JsonUtil.toJsonString(jsonObject);
@@ -218,17 +238,18 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value={"/queryMoreComment2"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String queryMoreComment2(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
+		//String useremail = (String) session.getAttribute("UserEmail");
 		String questionId = request.getParameter("questionId");
 		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else{
 			List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(questionId);
-			List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews_other(useremail, questionId, startnumber);
+			List<Question2_CommunityView> question2_CommunityViews = CommunityService.question2_CommunityViews_other(username, questionId, startnumber);
 			jsonObject.put("value", "1");
 			jsonObject.put("endnumber", startnumber+question2_CommunityViews.size());
 			jsonObject.put("totalnumber", answerPersistences.size());

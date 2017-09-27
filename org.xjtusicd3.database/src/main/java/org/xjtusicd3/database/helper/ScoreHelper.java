@@ -43,4 +43,12 @@ public class ScoreHelper {
 		session.close();
 		return score;
 	}
+	
+	public static void saveFAQscore(String scoreId, String userId, String fAQquestionId, float score, String time) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		ScorePersistenceMapper mapper = session.getMapper(ScorePersistenceMapper.class);
+		mapper.saveFAQscore( scoreId,  userId,  fAQquestionId,  score,  time);
+		session.close();
+		
+	}
 }

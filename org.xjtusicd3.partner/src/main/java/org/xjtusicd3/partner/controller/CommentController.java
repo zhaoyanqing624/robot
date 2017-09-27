@@ -41,12 +41,12 @@ public class CommentController {
 		String faqtitle = request.getParameter("faqtitle");
 		String comment = request.getParameter("comment");
 		String faqusername = request.getParameter("faqusername");
-		String useremail = (String) session.getAttribute("UserEmail");
-		if (useremail==null) {
+		String username = (String) session.getAttribute("UserName");
+		if (username==null) {
 			return "0";
 		}else {
 			//查看评论是否重复提交
-			List<UserPersistence> uList = UserHelper.getEmail(useremail);
+			List<UserPersistence> uList = UserHelper.getUserInfo(username);
 			List<QuestionPersistence> faqlist = QuestionHelper.faq3_faqcontent_title(faqtitle);
 			List<UserPersistence> userPersistences = UserHelper.getEmail_name(faqusername);
 			CommentService.addComment(uList.get(0).getUSERID(),faqlist.get(0).getFAQQUESTIONID(),comment,userPersistences.get(0).getUSERID());
@@ -59,18 +59,19 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/addComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
 	public String addComment(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail"); 
+		//String useremail = (String) session.getAttribute("UserEmail"); 
+		String username = (String) session.getAttribute("UserName"); 
 		String url = (String) session.getAttribute("urlPath");
 		String questionId = request.getParameter("questionId");
 		String commentContent = request.getParameter("commentContent");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
 			//判断评论是否重复提交
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail); 
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username); 
 			List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_IsCommunityAnswer(userPersistences.get(0).getUSERID(), commentContent,questionId);
 			if (communityAnswerPersistences.size()==0) {
 				CommunityService.addComment(userPersistences.get(0).getUSERID(), commentContent, questionId);
@@ -93,17 +94,18 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/saveCommunityComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
 	public String saveCommunityComment(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail"); 
+		//String useremail = (String) session.getAttribute("UserEmail"); 
+		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
 		String answerId = request.getParameter("answerId");
 		String content = request.getParameter("content");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			//判断回复是否重复提交
 			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment2(answerId, userPersistences.get(0).getUSERID(), content,questionId);
 			if (commentPersistences.size()==0) {
@@ -125,18 +127,19 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/saveCommunityReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
 	public String saveCommunityReply(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail"); 
+		//String useremail = (String) session.getAttribute("UserEmail"); 
+		String username = (String) session.getAttribute("UserName"); 		
 		String questionId = request.getParameter("questionId");
 		String answerId = request.getParameter("answerId");
 		String content = request.getParameter("content");
 		String toUserName = request.getParameter("tousername");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			//判断回复的回复是否重复提交
 			List<UserPersistence> userPersistences2 = UserHelper.getEmail_name(toUserName);
 			List<CommentPersistence> commentPersistences = CommentHelper.question2_getComment3(answerId, userPersistences.get(0).getUSERID(), content,questionId,userPersistences2.get(0).getUSERID());
@@ -159,18 +162,18 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/saveFaqComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveFaqComment(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail"); 
+		String username = (String) session.getAttribute("UserName");  
 		String questionId = request.getParameter("questionId");
 		String commentId = request.getParameter("commentId");
 		String content = request.getParameter("comment");
 		String duo = request.getParameter("duo");//判断是回复评论还是回复回复
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			//判断回复是否重复提交
 			List<CommentPersistence> commentPersistences = CommentHelper.faq3_getComment(commentId,userPersistences.get(0).getUSERID(), content,questionId);
 			if (commentPersistences.size()==0) {
@@ -192,12 +195,13 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/getMoreComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String getMoreComment(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
 		String answerId = request.getParameter("answerId");
 		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -218,11 +222,12 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/queryMoreComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String queryMoreComment(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
 		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -237,17 +242,19 @@ public class CommentController {
 			return result;
 		}
 	}
+
 	/*
 	 * zyq_faq3_ajax_获得更多回复
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/queryMoreReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String queryMoreReply(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String commentId = request.getParameter("commentid");
 		int startnumber = Integer.parseInt(request.getParameter("startnumber"));
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -268,17 +275,20 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/saveAgreeAnswer"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveAgreeAnswer(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String answerId = request.getParameter("answerId");
-		List<AgreePersistence> agreePersistences = AgreeHelper.getAgree(useremail, answerId);
+		System.out.println("进入点赞模块");
+		List<AgreePersistence> agreePersistences = AgreeHelper.getAgree(username, answerId);
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
 			if (agreePersistences.size()==0) {
-				AgreeHelper.saveAgree(useremail, answerId);
+				System.out.println("点赞数量"+agreePersistences.size());
+				AgreeHelper.saveAgree(username, answerId);
 				jsonObject.put("value", "1");
 				String result = JsonUtil.toJsonString(jsonObject); 
 				return result;
@@ -296,19 +306,20 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/saveAgreeAnswer2"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveAgreeAnswer2(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
 		List<CommunityAnswerPersistence> communityAnswerPersistences = CommunityAnswerHelper.question_iscurrentAnswer(questionId, 1);
 		String answerId = communityAnswerPersistences.get(0).getCOMMUNITYANSWERID();
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
-			List<AgreePersistence> agreePersistences = AgreeHelper.getAgree(useremail, answerId);
+			List<AgreePersistence> agreePersistences = AgreeHelper.getAgree(username, answerId);
 			if (agreePersistences.size()==0) {
-				AgreeHelper.saveAgree(useremail, answerId);
+				AgreeHelper.saveAgree(username, answerId);
 				jsonObject.put("value", "1");
 				String result = JsonUtil.toJsonString(jsonObject); 
 				return result;
@@ -326,17 +337,18 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/saveCollectionAnswer"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveCollectionAnswer(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String answerId = request.getParameter("answerId");
-		List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection(useremail, answerId);
+		List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection(username, answerId);
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
 			if (collectionPersistences.size()==0) {
-				CollectionHelper.saveCollection(useremail, answerId);
+				CollectionHelper.saveCollection(username, answerId);
 				jsonObject.put("value", "1");
 				String result = JsonUtil.toJsonString(jsonObject); 
 				return result;
@@ -350,21 +362,23 @@ public class CommentController {
 	}
 	/*
 	 * zyq_question2_ajax_收藏
+	 * faq3_收藏
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveCollectionFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveCollectionFAQ(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
-		List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(useremail, questionId);
+		List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(username, questionId);
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
 			if (collectionPersistences.size()==0) {
-				CollectionHelper.saveCollection2(useremail, questionId);
+				CollectionHelper.saveCollection2(username, questionId);
 				jsonObject.put("value", "1");
 				String result = JsonUtil.toJsonString(jsonObject); 
 				return result;
@@ -382,15 +396,18 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/saveBestAnswer"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String saveBestAnswer(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		System.out.println("设置最佳答案用户："+username);
 		String answerId = request.getParameter("answerId");
 		String quesitonId = request.getParameter("quesitonId");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
 		}else {
+			System.out.println("设置最佳答案");
 			CommentService.saveBestAnswer(quesitonId,answerId);
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject); 
@@ -403,10 +420,11 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping(value={"/deleteReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String deleteReply(HttpServletRequest request,HttpSession session){
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		String commentId = request.getParameter("commentId");
 		JSONObject jsonObject = new JSONObject();
-		if (useremail==null) {
+		if (username==null) {
 			jsonObject.put("value", "0");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;

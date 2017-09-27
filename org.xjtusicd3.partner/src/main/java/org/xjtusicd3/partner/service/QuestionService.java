@@ -107,6 +107,40 @@ public class QuestionService {
 		answerPersistence.setUSERID(list.get(0).getUSERID());
 		AnswerHelper.save(answerPersistence);
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:FAQ的增加
+	 * data:2017年9月22日12:00:25
+	 */
+	public static void saveFAQ2(String username, String title, String keywords, String subspecialCategoryId,String description, String risk_prompt, String faqcontent) {
+		QuestionPersistence questionPersistence = new QuestionPersistence();
+		String questionid = UUID.randomUUID().toString();
+		questionPersistence.setFAQQUESTIONID(questionid);
+		questionPersistence.setFAQTITLE(title);
+		questionPersistence.setFAQKEYWORDS(keywords);
+		questionPersistence.setFAQCLASSIFYID(subspecialCategoryId);
+		questionPersistence.setCOLLECTION("0");
+		questionPersistence.setSCAN("0");
+    	Date date=new Date();
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	String time = format.format(date);
+		questionPersistence.setMODIFYTIME(time);
+		questionPersistence.setFAQDESCRIPTION(description);
+		questionPersistence.setMODIFYNUMBER("1");
+		questionPersistence.setFAQSTATE(1);
+		QuestionHelper.save(questionPersistence);
+		
+		AnswerPersistence answerPersistence = new AnswerPersistence();
+		answerPersistence.setFAQANSWERID(UUID.randomUUID().toString());
+		answerPersistence.setFAQCONTENT(faqcontent);
+		answerPersistence.setFAQQUESTIONID(questionid);
+		List<UserPersistence> list = UserHelper.getUserInfo(username);
+		answerPersistence.setUSERID(list.get(0).getUSERID());
+		AnswerHelper.save(answerPersistence);
+		
+	}
+	
 	/*
 	 * zyq_faq3_ajax_分享的增加
 	 */
@@ -128,6 +162,7 @@ public class QuestionService {
 	public static List<Faq_UserDynamics> userDynamics(){
 		List<Faq_UserDynamics> userDynamics = new ArrayList<Faq_UserDynamics>();
 		List<QuestionPersistence> questionPersistences = QuestionHelper.faq_userDynamics();
+		System.out.println("questionPersistences："+questionPersistences.size());
 		for(QuestionPersistence questionPersistence:questionPersistences){
 			Faq_UserDynamics faq_UserDynamics = new Faq_UserDynamics();
 			List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(questionPersistence.getFAQQUESTIONID());
@@ -135,6 +170,8 @@ public class QuestionService {
 			faq_UserDynamics.setFaqId(questionPersistence.getFAQQUESTIONID());
 			faq_UserDynamics.setFaqTitle(questionPersistence.getFAQTITLE());
 			faq_UserDynamics.setTime(questionPersistence.getMODIFYTIME());
+			System.out.println("修改次数："+questionPersistence.getMODIFYNUMBER());
+			
 			if (questionPersistence.getMODIFYNUMBER().equals("1")) {
 				faq_UserDynamics.setHow("发布");
 			}else {
@@ -267,4 +304,5 @@ public class QuestionService {
 		return faq_CommendViews;
 		
 	}
+	
 }

@@ -20,54 +20,12 @@
 </head>
 <body>
 	<div class="header" id="head">      
-        <div class="loginRegistHead" role="banner">
-            <div class="content clearfix">
-                <div class="header_top_wrap_left">
-		            <ul>
-		                <li><a class="new_a" href="robot.html" data-pos="categorys_1_1">智能小朵</a></li>
-		                <li><a class="new_a" href="faq.html" data-pos="categorys_1_1" >知识库</a></li>
-		                <li><a class="new_a" href="question.html" data-pos="categorys_1_1">问题中心</a></li>
-		                <li>
-		                    <a class="new_a" href="service.html">关于我们</a>
-		                </li>
-		            </ul> 
-                </div>
-                <div class="header_top_wrap_right">
-		            <ul>
-		              <#if UserEmail??>
-		                <div class="unlogin">
-		                    <li class="loginLinkLi"><span class="person_icon"></span></li>
-		                    <li class="loginLinkLi" id="userNameText">您好：${UserEmail}</li>
-		                    <li class="left_margin my_center loginLinkLi" id="my_center" onmouseover="Util.showPersonCenter()" onmouseout="Util.hidePersonCenter()">个人中心<span class="v_center_arrow"></span>
-		                        <div class="my_service_list" style="display: none; height: 116px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-		                            <div class="top_icon"></div>
-		                            <ul class="ul_list">
-		                                <li><a href="personal.html">个人信息</a></li>
-		                                <li><a href="personal3.html">我的设备</a></li>
-		                                <li><a href="personal2.html">我的主页</a></li>
-		                                <li><a href="notice.html">消息通知</a></li>
-		                            </ul>
-		                        </div>
-		                    </li>
-		                    <li class="left_margin loginLinkLi"><a href="loginout.html" id="headExit">退出</a>
-		                    </li>
-		                </div>
-		             <#else>
-				       	<div class="unlogin">
-		                    <li class="unloginLinkLi">
-		                        <a href="login.html" id="headLogin" class="listen_btn" data-pos="categorys_1_2">登录/注册</a>
-		                        </li>
-		                    </li>
-		                </div>
-		             </#if>
-		            </ul> 
-                </div>
-            </div>
-        </div>
+       <#include "inc/incTop.ftl">
     </div>
 	
 	<section id="shortcodes">
 		<div id="main">
+			<!-- 顶部栏 -->
 			<div class="bg-other user-head-info">
 				<#list personal2_list as list>
     			<div class="user-info" id="${list.USERID}">
@@ -99,8 +57,10 @@
     			</#list>
 			</div><!-- .big-pic end -->
 			
+			<!-- 主体信息 -->
 			<div class="wrap">
 			<#list personal2_list as picture>
+				<!-- 左侧栏 -->
 				<div class="slider">
         			<div class="user-pic" data-is-fans="" data-is-follows="">
             			<div class="user-pic-bg"></div><!--user-pic-big end-->
@@ -146,7 +106,10 @@
 		</div><!-- .slider end -->
 		</#list>
 	</div>	
-<div class="u-container" id="zhao1" style="display:block;">
+
+		<!-- 显示区域 -->
+		<!-- 主页显示区域 -->
+		<div class="u-container" id="zhao1" style="display:block;">
 		<div class=" page-home js-usercard-box" id="notices">
 			<div class="dyanmic-title-wrap">
 	    		<p class="dynamic-title">Ta的动态 </p>
@@ -267,8 +230,8 @@
     </#if>
 </div><!-- .container end -->
 
-
-<div class="u-container" id="zhao2" style="display:none">
+				<!-- 知识库显示区域 -->
+				<div class="u-container" id="zhao2" style="display:none">
 					<div class="investment_f">
 			  			<div class="investment_title">
 			    			<div class="on">我的知识</div>
@@ -288,9 +251,10 @@
 						    </div>
 			  			</div>
 					</div>
-</div><!-- .container end -->
-
-<div class="u-container" id="zhao3" style="display:none;">
+				</div><!-- .container end -->
+				
+				<!-- 问吧显示区域 -->
+				<div class="u-container" id="zhao3" style="display:none;">
 					<div class="investment_f">
 			  			<div class="investment_title">
 			    			<div class="on">我的提问</div>
@@ -306,9 +270,9 @@
 						    </div>
 			  			</div>
 					</div>
-</div><!-- .container end -->
-
-<div class="u-container" id="zhao4" style="display:none;">
+				</div><!-- .container end -->
+				
+				<div class="u-container" id="zhao4" style="display:none;">
 					<div class="investment_f">
 			  			<div class="investment_title" id="investment_title">
 			    			<div class="on" onclick="guanzhubutton()">我的关注</div>

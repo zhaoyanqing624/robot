@@ -90,6 +90,23 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+	
+	/**
+	 * author:zzl
+	 * abstract:faqadd_校验知识是否重复增添
+	 * data:2017年9月22日11:54:01
+	 */
+	public static List<QuestionPersistence> faqadd_iscurrent2(String faqtitle,String username){
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.faqadd_iscurrent(faqtitle,userPersistences.get(0).getUSERID());
+		session.close();
+		return list;
+	}
+	
+	
+	
 	/*
 	 * faq3_根据知识ID找类型classify
 	 */

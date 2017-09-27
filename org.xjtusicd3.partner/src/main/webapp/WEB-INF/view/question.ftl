@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,7 +21,7 @@
     <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
-   
+   <script type="text/javascript" src="js/view/question.js"></script>
 </head>
 <body>
 	<div class="header" id="head">      
@@ -120,7 +119,7 @@
 							<div class="options">
 								<ul>
 									<li class="special">
-										<#if userEmail ??>
+										<#if userName ??>
 											<#if communityViews.isLike="1">
 											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
 											<#else>
@@ -205,7 +204,7 @@
     
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
-    </div>
+    </div>F
    
     <div id="questionForm" class="popup" style="display: none;">		
     	<div class="fade"></div>			
@@ -246,7 +245,7 @@
     	<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script type="text/javascript" src="js/view/ueditor.js"></script>
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-		<script type="text/javascript" src="js/view/question.js"></script>
+		
 		<script type="text/javascript">
 			function DropDown(el) {
 				this.dd = el;
