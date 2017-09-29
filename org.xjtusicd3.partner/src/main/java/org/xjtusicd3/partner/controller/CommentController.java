@@ -379,6 +379,9 @@ public class CommentController {
 		}else {
 			if (collectionPersistences.size()==0) {
 				CollectionHelper.saveCollection2(username, questionId);
+				//List<CollectionPersistence> faqcollection = CollectionHelper.getfaqCollection(questionId);
+				//List<CollectionPersistence> faqcollection = CollectionHelper.agreeInfo(questionId);
+				//QuestionHelper.updateFAQCollection(questionId,Integer.toString(faqcollection.size()));
 				jsonObject.put("value", "1");
 				String result = JsonUtil.toJsonString(jsonObject); 
 				return result;

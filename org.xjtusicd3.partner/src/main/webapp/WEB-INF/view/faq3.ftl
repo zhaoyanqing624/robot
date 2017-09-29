@@ -10,7 +10,7 @@
     <link href="/org.xjtusicd3.partner/ico/zyq.ico" type="image/x-icon" rel="shortcut icon">
     <link rel="stylesheet" type="text/css" href="new/front/style/reset.css" />
     <link rel="stylesheet" type="text/css" href="new/front/style/util.css" />
-    <link rel="stylesheet" type="text/css" href="new/front/style/utilDetails.css" />
+        <link rel="stylesheet" type="text/css" href="new/front/style/utilDetails.css" />
     <link href="zhao/lunbo/css/jquery.onebyone-min.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/starScore.css" rel="stylesheet">

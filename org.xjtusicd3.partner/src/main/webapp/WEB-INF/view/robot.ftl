@@ -39,7 +39,7 @@
         }
     </style>
 </head>
-<body style="height: 100%">
+<body style="margin: 0px;padding: 0px;height: 100%">
 <style>
 	.container .wp .macth_xv_categorys .macth_xv_cat_catlist{display:block;}
 </style>
@@ -102,7 +102,7 @@
     </div>
   
   
-	<div class="mainContent" style="height: 79%;width: 100%">
+	<div class="mainContent" style="height: 79%;width: 100%" >
 		<div class="contentWra clearfix"  style="height: 72%;width: 68%;">
 			<div id="login" >
     			<div class="wrapper" >
@@ -167,7 +167,7 @@
 												<div class="wp navbar">
 													<div class="macth_xv_navlist">
 														<div class="macth_xv_menu">
-															<!--左侧导航 start-->
+															<!--右侧导航 start-->
 															<div class="macth_xv_categorys">
 																<div class="macth_xv_cat_title">
 																	<h2 class="macth_cat_name">
@@ -220,7 +220,7 @@
         </div>
     </div>
         
-    <div id="foot" class="footer" style="margin-bottom: 1px">
+    <div id="foot" class="footer" >
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
         

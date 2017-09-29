@@ -126,4 +126,21 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	@Update("UPDATE TBL_FAQquestion SET TBL_FAQquestion.SCAN=#{1} WHERE TBL_FAQquestion.FAQQUESTIONID=#{0}")
 	public void updateFAQScan(String faqquestionId,String faqScan);
 	
+	/**
+	 * author:zzl
+	 * abstract:对访问FAQ页面的收藏进行增加
+	 * data:2017年9月27日10:08:23
+	 */
+	@Update("UPDATE TBL_FAQquestion SET COLLECTION=#{1} WHERE FAQQUESTIONID=#{0}")
+	public void updateFAQCollection(String questionId, String faqCollection);
+	
+	/**
+	 * author:zzl
+	 * abstract:获取faq对应问题的信息
+	 * data:2017年9月29日08:52:34
+	 * @return 
+	 */
+	@Select("SELECT * FROM TBL_FAQquestion  WHERE FAQQUESTIONID=#{0}")
+	public List<QuestionPersistence> faqcollection(String questionId);
+	
 }

@@ -29,7 +29,7 @@ public class Segmentation_ansj {
 		Forest forest = Library.makeForest(localurl+"/workspace/robot-master/org.xjtusicd3.partner/library/computer.dic");
 		Result terms = ToAnalysis.parse(text,forest);
 //		Result terms = ToAnalysis.parse(text);
-//		System.out.println(terms);
+		System.out.println("获取当前路径"+localurl);
 //		System.out.println(StopLibrary.get());
 //		System.out.println(StopLibrary.get("stop"));
 		Result result = terms.recognition(StopLibrary.get());
@@ -120,7 +120,7 @@ public class Segmentation_ansj {
 		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
 		List<NLP_Word> nList = segmentation_ansj.similarScoreFirst(comment);
  
-		System.out.println(System.getProperty("user.dir"));
+		System.out.println(System.getProperty("用户目录：user.dir"));
 		File file = new File("library/faqKeywords.txt");//Text文件
  
 		String localurl = System.getProperty("user.dir");

@@ -24,31 +24,37 @@ public class ReadExcel {
 		for(int i=0;i<sEs.size();i++){
 			for(int j=0;j<sEs.get(i).size();j++){
 				if (sEs.get(i).size()==3) {
-					String uuid = UUID.randomUUID().toString();
-					String password = "670b14728ad9902aecba32e22fa4f6bd";
-					String username = sEs.get(i).get(1).toString();
-					String roleid = "168ab2db-ea09-44d9-bf50-af9879cb43cb";
-					String userimage = "images/user.png";
-					UserHelper.login_register2(uuid, password, username, 1, userimage, roleid);
-					GeneraluserPersistence generaluserPersistence = new GeneraluserPersistence();
-					generaluserPersistence.setUSERID(uuid);
-					generaluserPersistence.setEMPLOYER("西安市区(分公司)");
-					generaluserPersistence.setDEPARTMENT(sEs.get(i).get(0).toString());
-					generaluserPersistence.setREALNAME(sEs.get(i).get(2).toString());
-					UserHelper.addGeneralUser(generaluserPersistence);
+					List<UserPersistence> userPersistences = UserHelper.getEmail_name(sEs.get(i).get(1).toString());
+					if (userPersistences.size()==0) {
+						String uuid = UUID.randomUUID().toString();
+						String password = "670b14728ad9902aecba32e22fa4f6bd";
+						String username = sEs.get(i).get(1).toString();
+						String roleid = "168ab2db-ea09-44d9-bf50-af9879cb43cb";
+						String userimage = "images/user.png";
+						UserHelper.login_register2(uuid, password, username, 1, userimage, roleid);
+						GeneraluserPersistence generaluserPersistence = new GeneraluserPersistence();
+						generaluserPersistence.setUSERID(uuid);
+						generaluserPersistence.setEMPLOYER("西安市区(分公司)");
+						generaluserPersistence.setDEPARTMENT(sEs.get(i).get(0).toString());
+						generaluserPersistence.setREALNAME(sEs.get(i).get(2).toString());
+						UserHelper.addGeneralUser(generaluserPersistence);
+					}
 				}else if (sEs.get(i).size()==4) {
-					String uuid = UUID.randomUUID().toString();
-					String password = "670b14728ad9902aecba32e22fa4f6bd";
-					String username = sEs.get(i).get(2).toString();
-					String roleid = "168ab2db-ea09-44d9-bf50-af9879cb43cb";
-					String userimage = "images/user.png";
-					UserHelper.login_register2(uuid, password, username, 1, userimage, roleid);
-					GeneraluserPersistence generaluserPersistence = new GeneraluserPersistence();
-					generaluserPersistence.setUSERID(uuid);
-					generaluserPersistence.setEMPLOYER(sEs.get(i).get(0).toString());
-					generaluserPersistence.setDEPARTMENT(sEs.get(i).get(1).toString());
-					generaluserPersistence.setREALNAME(sEs.get(i).get(3).toString());
-					UserHelper.addGeneralUser(generaluserPersistence);
+					List<UserPersistence> userPersistences = UserHelper.getEmail_name(sEs.get(i).get(2).toString());
+					if (userPersistences.size()==0) {
+						String uuid = UUID.randomUUID().toString();
+						String password = "670b14728ad9902aecba32e22fa4f6bd";
+						String username = sEs.get(i).get(2).toString();
+						String roleid = "168ab2db-ea09-44d9-bf50-af9879cb43cb";
+						String userimage = "images/user.png";
+						UserHelper.login_register2(uuid, password, username, 1, userimage, roleid);
+						GeneraluserPersistence generaluserPersistence = new GeneraluserPersistence();
+						generaluserPersistence.setUSERID(uuid);
+						generaluserPersistence.setEMPLOYER(sEs.get(i).get(0).toString());
+						generaluserPersistence.setDEPARTMENT(sEs.get(i).get(1).toString());
+						generaluserPersistence.setREALNAME(sEs.get(i).get(3).toString());
+						UserHelper.addGeneralUser(generaluserPersistence);
+					}
 				}
 			}
 		}

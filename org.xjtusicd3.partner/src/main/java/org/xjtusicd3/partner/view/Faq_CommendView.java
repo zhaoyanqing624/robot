@@ -13,15 +13,11 @@ public class Faq_CommendView {
 	private String FAQTITLE;
 	private String MODIFYTIME;
 	private String FAQDESCRIPTION;
-	private int COLLECTION;
+	private String COLLECTION;
 	private String SCAN;
 	private String FAQCLASSIFYIMAGE;
 	private int COMMENTSUM;
 	
-	
-	
-	
-
 	public int getCOMMENTSUM() {
 		return COMMENTSUM;
 	}
@@ -73,10 +69,11 @@ public class Faq_CommendView {
 		FAQDESCRIPTION = fAQDESCRIPTION;
 	}
 	
-	public int getCOLLECTION() {
+	
+	public String getCOLLECTION() {
 		return COLLECTION;
 	}
-	public void setCOLLECTION(int cOLLECTION) {
+	public void setCOLLECTION(String cOLLECTION) {
 		COLLECTION = cOLLECTION;
 	}
 	public String getSCAN() {

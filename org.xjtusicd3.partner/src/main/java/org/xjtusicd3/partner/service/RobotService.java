@@ -32,11 +32,13 @@ public class RobotService {
 	public static List<robot_Chat> getRobotAnswer(String comment) throws Exception {
 		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
 		List<robot_Chat> robot_Chats = segmentation_ansj.robot_Chats(comment);
+		//System.out.println("robot_Chats的大小："+robot_Chats.size());
 		List<robot_Chat> list = new ArrayList<robot_Chat>();
 		if (robot_Chats.size()==0) {
 			
 		}else if (robot_Chats.size()==1) {
 			robot_Chat robot_Chat = new robot_Chat();
+			System.out.println("机器人提问问题号："+robot_Chats.get(0).getQuestionId());
 			robot_Chat.setQuestionId(robot_Chats.get(0).getQuestionId());
 			List<AnswerPersistence> answerPersistences = AnswerHelper.faq3_faqContent(robot_Chats.get(0).getQuestionId());
 			robot_Chat.setAnswer(answerPersistences.get(0).getFAQCONTENT());

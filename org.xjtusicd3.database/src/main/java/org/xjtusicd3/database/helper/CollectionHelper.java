@@ -34,10 +34,10 @@ public class CollectionHelper {
 	/*
 	 * zyq_faq3_ajxa_收藏
 	 */
-	public static List<CollectionPersistence> getCollection2(String username,String questionId){
+	public static List<CollectionPersistence> getCollection2(String userid,String questionId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		CollectionPersistenceMapper mapper = session.getMapper(CollectionPersistenceMapper.class);
-		List<CollectionPersistence> list = mapper.getCollection2(username,questionId);
+		List<CollectionPersistence> list = mapper.getCollection2(userid,questionId);
 		session.close();
 		return list;
 	}
@@ -150,4 +150,5 @@ public class CollectionHelper {
 		session.close();
 		return list;
 	}
+	
 }

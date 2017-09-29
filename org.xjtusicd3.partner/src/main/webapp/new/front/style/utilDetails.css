@@ -176,9 +176,9 @@
 }
 
 .barBox {
-	position: initial;
+	position: absolute;
     margin-bottom: 20px;
-    padding: 18px 0 20px 20px;
+    padding: 18px 18px 20px 20px;
     background: #fff;
 }
 .barBox .box-title {
@@ -188,6 +188,19 @@
     color: #3a3a3a;
     font-size: 16px;
 }
+/*扫一扫*/
+.barAdBox {
+    position: absolute;
+    margin-top: 20px;
+    padding: 18px 18px 20px 20px;
+    background: #fff;
+}
+.barAdBox img {
+    display: block;
+    width: 360px !important;
+    height: 230px;
+}
+
 
 /*---- 知识专区 ---*/
 .knowledge li {
@@ -199,6 +212,7 @@
     height: 22px;
     margin-right: 10px;
     margin-bottom: 10px;
+    margin-top20px
     padding: 0 10px;
     line-height: 22px;
     border-radius: 12px;
@@ -456,6 +470,56 @@
     /*height: 70px;*/
     overflow-y: hidden;
 }
+
+
+/*-- 我想贡献 ---*/
+.contribution {
+    height: 218px;
+    background: url(../images/img_001.png) no-repeat;
+}
+.contribution .box-title {
+    border-left : 3px solid #fff; 
+    color: #fff;
+}
+.contribution .textp {
+    margin-bottom: 18px;
+    padding-right: 18px;
+    line-height: 22px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.contribution .linkWrapper {
+    padding-left: 6px;
+}
+.contribution .linkWrapper a {
+    display: inline-block;
+    width: 134px;
+    height: 34px;
+    margin-bottom: 14px;
+    margin-right: 24px;
+    line-height: 32px;
+    border: 3px solid #fff;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+}
+.contribution .linkWrapper a.writer {
+    background: url("../images/contribution_1.png") 18px 10px no-repeat;
+}
+.contribution .linkWrapper a.question {
+    background: url("../images/contribution_2.png") 18px 10px no-repeat;
+}
+.contribution .linkWrapper a.rask {
+    background: url("../images/contribution_3.png") 18px 10px no-repeat;
+}
+.contribution .linkWrapper a.gift {
+    background: url("../images/contribution_4.png") 18px 10px no-repeat;
+}
+
+
+
+
 /*--- 知识详情页面CSS ----*/
 .countList {
     padding-left: 10px;

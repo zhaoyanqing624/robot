@@ -41,15 +41,16 @@ public class RobotController {
 	@RequestMapping(value={"/chatWithRobot"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
 	public String ChatWithRobot(HttpServletRequest request, HttpSession session) throws Exception{
 		String comment = request.getParameter("comment");
-		String useremail = (String) session.getAttribute("UserEmail");
+		//String useremail = (String) session.getAttribute("UserEmail");
+		String username = (String) session.getAttribute("UserName");
 		JSONObject jsonObject = new JSONObject();
 		List<robot_Chat> robot_Chats = RobotService.getRobotAnswer(comment);
 		List<RobotPersistence> robotPersistences = RobotHelper.robotinfo();
 		jsonObject.put("value", "1");
 		jsonObject.put("robotChat", robot_Chats);
 		jsonObject.put("robotInfo", robotPersistences);
-		if (useremail!=null) {
-			List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);
+		if (username!=null) {
+			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 			jsonObject.put("robotUser", userPersistences);
 		}else {
 			List<UserPersistence> userPersistences = new ArrayList<UserPersistence>();

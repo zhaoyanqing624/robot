@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
 import org.xjtusicd3.database.mapper.QuestionPersistenceMapper;
+import org.xjtusicd3.database.model.CollectionPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
 
@@ -279,5 +280,33 @@ public class QuestionHelper {
 		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
 		mapper.updateFAQScan(faqquestionid,Integer.toString(faqScan));
 		session.close();
+	}
+	/**
+	 * author:zzl
+	 * abstract:对访问FAQ页面的收藏进行增加
+	 * data:2017年9月27日10:04:40
+	 * @param faqcollection 
+	 */
+	public static void updateFAQCollection(String questionId, String faqcollection) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		System.out.println("faq3问题收藏数："+faqcollection);
+		mapper.updateFAQCollection(questionId,faqcollection);
+		session.close();
+		
+	}
+	
+	/**
+	 * author:zzl
+	 * abstract:获取faq对应问题的信息
+	 * data:2017年9月29日08:51:28
+	 */
+	public static List<QuestionPersistence> faqcollection(String questionId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		System.out.println("faq3问题号："+questionId);
+		List<QuestionPersistence> list = mapper.faqcollection(questionId);
+		session.close();
+		return list;
 	}
 }

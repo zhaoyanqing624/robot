@@ -186,26 +186,26 @@
 					                    <div class="project-name overflow">
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>用户名：</span></div>
-					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.USERNAME}"></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserName" class="form-control"  required="required" value="${userinfo.USERNAME}" readonly="readonly"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 36px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>性别：</span></div>
-													<div style="float:right;width:314px;height:50px;"><input type="text" name="UserSex" class="form-control"  required="required" value="${userinfo.GENDER}"></div>
+													<div style="float:right;width:314px;height:50px;"><input type="text" name="UserSex" class="form-control"  required="required" value="${userinfo.GENDER}" readonly="readonly"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 37px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>生日：</span></div>
 					                                <div style="float:right;width:314px;height:50px;">
-														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.USERBIRTHDAY}"  ></li>
+														<li class="datep"><input class="datainp wicon" id="date03" type="text" placeholder="YYYY-MM-DD" name="UserBirthday" value="${userinfo.USERBIRTHDAY}"  readonly="readonly"></li>
 					                                </div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height:40px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>所在地：</span></div>
-					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserAddress" class="form-control"  required="required" value="${address}"></div>
+					                                <div style="float:right;width:314px;height:50px;"><input type="text" name="UserAddress" class="form-control"  required="required" value="${address}" readonly="readonly"></div>
 					                            </div>
 					                            <div class="form-group" style="width: 370px;height: 77px;">
 					                            	<div style="float:left;margin-top:10px;width:56px;"><span>简介：</span></div>
 					                            	<div style="float:right;width:314px;height:130px;">
-					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" >${userinfo.USERSIGNATURE}</textarea>
+					                                	<textarea name="UserBrief" id="message" required="required" class="form-control" rows="8" placeholder="请留下你的个性签名" readonly="readonly">${userinfo.USERSIGNATURE}</textarea>
 					                            	</div>
 					                            </div>                        
 					                            <div class="form-group">
