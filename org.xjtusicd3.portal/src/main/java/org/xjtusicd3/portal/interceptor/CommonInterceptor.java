@@ -77,7 +77,9 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
 //					System.out.println(user.getUSERID());
 					String userId = user.getUSERID();
 					String logPermission = rp.getPERMISSIONLOGICNAME();
-					LogService.saveLog(userId, logPermission);
+					
+					//注释_2017年10月22日14:52:12
+					//LogService.saveLog(userId, logPermission);
 					return true;
 				}
 			}			

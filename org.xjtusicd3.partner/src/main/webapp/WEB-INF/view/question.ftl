@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,7 +22,7 @@
     <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
-   <script type="text/javascript" src="js/view/question.js"></script>
+   
 </head>
 <body>
 	<div class="header" id="head">      
@@ -119,7 +120,7 @@
 							<div class="options">
 								<ul>
 									<li class="special">
-										<#if userName ??>
+										<#if userEmail ??>
 											<#if communityViews.isLike="1">
 											<a data-fun="toVote" class="unVoted" onclick="getAgreeAnswer()"><span class="status">已点赞</span>  |  <span class="number">${communityViews.likesNumber}</span></a>
 											<#else>
@@ -193,7 +194,7 @@
 					<!-- 问题标签列表 -->
 					<ul id="tagFilter">
 					<#list classifyList as classifyList>
-						<li><a class="fm_ele" onclick="getClassify()">${classifyList.FAQCLASSIFYNAME}</a></li>
+						<li><a class="fm_ele" onclick="getClassify()" >${classifyList.FAQCLASSIFYNAME}</a></li>
 					</#list>
 					</ul>
 				</div>
@@ -204,7 +205,7 @@
     
     <div id="foot" class="footer">
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
-    </div>F
+    </div>
    
     <div id="questionForm" class="popup" style="display: none;">		
     	<div class="fade"></div>			
@@ -245,6 +246,8 @@
     	<script type="text/javascript" src="new/front/js/util.js"></script>
 		<script type="text/javascript" src="js/view/ueditor.js"></script>
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/view/question.js"></script>
+		<script type="text/javascript" src="js/browserEvent.js"></script>
 		
 		<script type="text/javascript">
 			function DropDown(el) {
@@ -279,6 +282,6 @@
 		</script>
 		<div class="success" id="success" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/true.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">提交成功</h2></div></div>
 		<div class="success" id="chongfu" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">切勿重复提交</h2></div></div>
-
+		<div class="success" id="noclassify" style="z-index:1001;position:fixed;top:40%;left:45%;width:220px;background: #f3f3f3;text-align: center;border:1px solid black;border-radius:3px;display:none"><div style="margin-top:30px; margin-bottom:30px;"><img src="images/cuo.png" style="width:20px;height:20px;margin-right:10px;"><h2 style="font-size:16px;display:inline-block;line-height:22px;vertical-align:top">请选择分类</h2></div></div>
 </body>
 </html>

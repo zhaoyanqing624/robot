@@ -46,4 +46,12 @@ public class CurrentEquipmentHelp {
 				hardDrive,hardDriveModel,networkCard,motherBoard,osName,osType,osVersion,osId,graphicCard,audioCard,time);
 		session.close();
 	}
+	//zzl_2017年9月30日15:20:41
+	public static List<CurrentEquipmentPersistence> getMacAdress(String userid) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CurrentEquipmentPersistenceMapper mapper = session.getMapper(CurrentEquipmentPersistenceMapper.class);
+		List<CurrentEquipmentPersistence> list = mapper.getMacAdress(userid);
+		session.close();
+		return list;
+	}
 }

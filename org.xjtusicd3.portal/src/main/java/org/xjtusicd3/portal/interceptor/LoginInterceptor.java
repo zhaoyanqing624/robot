@@ -8,10 +8,10 @@ public class LoginInterceptor implements MethodInterceptor {
     public Object invoke(MethodInvocation arg0) throws Throwable {
         String name = (String)arg0.getArguments()[0];
         if (name.equals("flash")) {
-            System.out.println("Õâ²ÅÊÇÕæÕıµÄÓÃ»§£¡ ");
+            System.out.println("è¿™æ‰æ˜¯çœŸæ­£çš„ç”¨æˆ·ï¼ ");
             return arg0.proceed();
         } else {
-            System.out.println("·Ç·¨µÄÓÃ»§~~~ ");
+            System.out.println("éæ³•çš„ç”¨æˆ·~~~ ");
             return null;
         }
     }

@@ -16,49 +16,49 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter
 		String user = (String)request.getSession().getAttribute("user");
 //		 MethodNameResolver methodNameResolver = new InternalPathMethodNameResolver();
 //	     String    method = methodNameResolver.getHandlerMethodName(request);
-		System.out.println("½øÈëÀ¹½ØÆ÷ÁËo adf£¬µ±Ç°ÓÃ»§ÊÇ£º" + request.getSession().getAttribute("user") + " £¬µ±Ç°uriÊÇ£º" );
+		System.out.println("è¿›å…¥æ‹¦æˆªå™¨äº†o adfï¼Œå½“å‰ç”¨æˆ·æ˜¯ï¼š" + request.getSession().getAttribute("user") + " ï¼Œå½“å‰uriæ˜¯ï¼š" );
 		 
 		 
-		 // 2. Ã»µÇÂ¼£¬µÇÂ¼È¥
-//	        if (user == null) {
-//	            request.setAttribute("message", "ÇëÏÈµÇÂ¼£¡£¡£¡");
-//	            request.getRequestDispatcher("/message.jsp").forward(request, response);
-//	            return false;
-//	        }
+		 // 2. æ²¡ç™»å½•ï¼Œç™»å½•å»
+//        if (user == null) {
+//            request.setAttribute("message", "è¯·å…ˆç™»å½•ï¼ï¼ï¼");
+//            request.getRequestDispatcher("/message.jsp").forward(request, response);
+//            return false;
+//        }
 
-	        // 3. µÃµ½ÓÃ»§Ïë·ÃÎÊµÄ×ÊÔ´
-	        String uri = request.getRequestURI();
-	       
-	        System.out.println("µ±Ç°uriÊÇ£º" + request.getRequestURI());
-	        System.out.println("µ±Ç°uriÊÇ£º" + request.getContextPath());
-	        return super.preHandle(request, response, handler);
-	        // 4. µÃµ½·ÃÎÊ¸Ã×ÊÔ´ĞèÒªµÄÈ¨ÏŞ
-//	        SecurityService service = new SecurityService();
-//	        Resource r = service.findResource(uri);
-	        /*
-	         * ÄãÒª·ÃÎÊµÄ×ÊÔ´£¬ÎÒÔÚÈ¨ÏŞ¹ÜÀíÏµÍ³ÀïÃæÃ»ÓĞËµ·ÃÎÊÕâ¸ö×ÊÔ´ĞèÒªÈ¨ÏŞ£¬
-	         * Ò²¼´Õâ¸ö×ÊÔ´²»ĞèÒª±»È¨ÏŞÏµÍ³¿ØÖÆ£¬Ö»ÓĞ±»È¨ÏŞÏµÍ³¿ØÖÆµÄ×ÊÔ´£¬ÔÚÊı¾İ¿âÀïÃæ
-	         * ²ÅÓĞ£¬Èç¹ûÎªnull£¬Õâ¸ö×ÊÔ´²»ÊÜÈ¨ÏŞÏµÍ³¿ØÖÆ¡£
-	         */
+        // 3. å¾—åˆ°ç”¨æˆ·æƒ³è®¿é—®çš„èµ„æº
+        String uri = request.getRequestURI();
+       
+        System.out.println("å½“å‰uriæ˜¯ï¼š" + request.getRequestURI());
+        System.out.println("å½“å‰uriæ˜¯ï¼š" + request.getContextPath());
+        return super.preHandle(request, response, handler);
+        // 4. å¾—åˆ°è®¿é—®è¯¥èµ„æºéœ€è¦çš„æƒé™
+//        SecurityService service = new SecurityService();
+//        Resource r = service.findResource(uri);
+        /*
+         * ä½ è¦è®¿é—®çš„èµ„æºï¼Œæˆ‘åœ¨æƒé™ç®¡ç†ç³»ç»Ÿé‡Œé¢æ²¡æœ‰è¯´è®¿é—®è¿™ä¸ªèµ„æºéœ€è¦æƒé™ï¼Œ
+         * ä¹Ÿå³è¿™ä¸ªèµ„æºä¸éœ€è¦è¢«æƒé™ç³»ç»Ÿæ§åˆ¶ï¼Œåªæœ‰è¢«æƒé™ç³»ç»Ÿæ§åˆ¶çš„èµ„æºï¼Œåœ¨æ•°æ®åº“é‡Œé¢
+         * æ‰æœ‰ï¼Œå¦‚æœä¸ºnullï¼Œè¿™ä¸ªèµ„æºä¸å—æƒé™ç³»ç»Ÿæ§åˆ¶ã€‚
+         */
 //	        if (r == null) {
 //	            chain.doFilter(request, response);
 //	            return;
 //	        }
-//	        Privilege required_Privilege = r.getPrivilege(); // µÃµ½·ÃÎÊ×ÊÔ´ĞèÒªµÄÈ¨ÏŞ
+//        Privilege required_Privilege = r.getPrivilege(); // å¾—åˆ°è®¿é—®èµ„æºéœ€è¦çš„æƒé™
 //
-//	        // 5. ÅĞ¶ÏÓÃ»§ÊÇ·ñÓĞÏàÓ¦È¨ÏŞ
-//	        List<Privilege> list = service.getUserAllPrivilege(user.getId()); // µÃµ½ÓÃ»§ËùÓĞÈ¨ÏŞ
-//	        if (!list.contains(required_Privilege)) {
-//	            // 6. Ã»ÓĞÈ¨ÏŞ£¬ÔòÌáÊ¾ÓÃ»§È¨ÏŞ²»×ã£¬ÁªÏµ¹ÜÀíÔ±
-//	            request.setAttribute("message", "¶Ô²»Æğ£¬ÄúÃ»ÓĞÈ¨ÏŞ£¬ÇëÁªÏµ¹ÜÀíÔ±£¡£¡£¡");
-//	            request.getRequestDispatcher("/message.jsp").forward(request, response);
-//	            return;
-//	        }
+//        // 5. åˆ¤æ–­ç”¨æˆ·æ˜¯å¦æœ‰ç›¸åº”æƒé™
+//        List<Privilege> list = service.getUserAllPrivilege(user.getId()); // å¾—åˆ°ç”¨æˆ·æ‰€æœ‰æƒé™
+//        if (!list.contains(required_Privilege)) {
+//            // 6. æ²¡æœ‰æƒé™ï¼Œåˆ™æç¤ºç”¨æˆ·æƒé™ä¸è¶³ï¼Œè”ç³»ç®¡ç†å‘˜
+//            request.setAttribute("message", "å¯¹ä¸èµ·ï¼Œæ‚¨æ²¡æœ‰æƒé™ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼ï¼ï¼");
+//            request.getRequestDispatcher("/message.jsp").forward(request, response);
+//            return;
+//        }
 //
-//	        // 7. Èç¹ûÓĞ£¬ÔòÔò·ÅĞĞ
-//	        chain.doFilter(request, response);
+//        // 7. å¦‚æœæœ‰ï¼Œåˆ™åˆ™æ”¾è¡Œ
+//        chain.doFilter(request, response);
 
-	    }
+    }
 
 	 
 	

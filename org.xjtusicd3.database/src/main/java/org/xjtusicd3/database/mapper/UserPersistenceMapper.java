@@ -121,4 +121,7 @@ public interface UserPersistenceMapper extends IBaseDao<UserPersistence, String>
 	 */
 	@Select("SELECT * FROM TBL_User WHERE (USERNAME=#{0} OR USEREMAIL=#{0}) AND USERPASSWORD=#{1}")
 	public List<UserPersistence> loginUser(String nameOrEmail, String password);
+	
+//	@Insert("INSERT INTO TBL_User(TBL_User.USERNAME,TBL_User.USERPASSWORD,) VALUES (#{0},#{1})")
+//	public List<UserPersistence> addUser(String userName, String password);
 }

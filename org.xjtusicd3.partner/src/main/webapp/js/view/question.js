@@ -88,6 +88,11 @@
 		var box=document.getElementById("chongfu");
 		box.style.display="none"; 
 	}
+	function codefans3(){
+		var box=document.getElementById("noclassify");
+		box.style.display="none"; 
+	}
+	
 	function saveCommunityQuestion(){
 		var title = document.getElementById("title").value;
 		var description = UE.getEditor('editor').getContent();
@@ -114,14 +119,21 @@
 						document.getElementById('lasturl').innerHTML=data.url;
 						document.getElementById('questionForm').style.display='none';
 						document.getElementById('success').style.display='block';
-						setTimeout("codefans()",3000);
+						setTimeout("codefans()",5000);
 						
-					}else{
+					}else if(data.value=="2"){
 					setTimeout("location.reload()",1000)
 						document.getElementById('lasturl').innerHTML=data.url;
 						document.getElementById('questionForm').style.display='none';
 						document.getElementById('chongfu').style.display='block';
-						setTimeout("codefans2()",3000);
+						setTimeout("codefans2()",5000);
+						
+					}else{
+						setTimeout("location.reload()",1000)
+						document.getElementById('lasturl').innerHTML=data.url;
+						document.getElementById('questionForm').style.display='none';
+						document.getElementById('noclassify').style.display='block';
+						setTimeout("codefans3()",5000);
 						
 					}
 				}

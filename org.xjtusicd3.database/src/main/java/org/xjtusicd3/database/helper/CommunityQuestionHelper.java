@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.xjtusicd3.database.logic.SqlSessionManager;
+import org.xjtusicd3.database.mapper.CommunityAnswerPersistenceMapper;
 import org.xjtusicd3.database.mapper.CommunityQuestionPersistenceMapper;
+import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.CommunityQuestionPersistence;
 
 public class CommunityQuestionHelper{
@@ -145,6 +147,22 @@ public class CommunityQuestionHelper{
 		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
 		mapper.updateBestAnswer(questionId);
 		session.close();
+	}
+	//zzl_2017年10月11日20:04:00
+	public static List<CommunityQuestionPersistence> getAllCommunityQuestion2() {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> communityquestionlist = mapper.getAllCommunityQuestion2();
+		session.close();
+		return communityquestionlist;
+	}
+	//zzl_2017年10月24日20:08:36
+	public static List<CommunityQuestionPersistence> CommunityQuestion(String questionId) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		CommunityQuestionPersistenceMapper mapper = session.getMapper(CommunityQuestionPersistenceMapper.class);
+		List<CommunityQuestionPersistence> list = mapper.CommunityQuestion(questionId);
+		session.close();
+		return list;
 	}
 		
 	

@@ -91,8 +91,8 @@
                             </li>
                             <li class="clearfix">
                              
-                                <span class="userPic"><img src="${userImage}"></span>
-                                <span class="username">${userName}</span>
+                                <span class="userPic"><img src="${faqlists.FAQUSERIMAGE}"></span>
+                                <span class="username">${faqlists.FAQUSERNAME}</span>
                                 <span class="dot">-</span>
                                 <span class="time">${faqlists.MODIFYTIME }</span>
                                 <span class="line">|</span>

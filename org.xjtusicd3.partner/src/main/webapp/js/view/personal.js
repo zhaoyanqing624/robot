@@ -34,11 +34,14 @@ $("#submitupdatePassword").click(function(){
 		success:function(data){
 			if(data=="0"){
 				$(".spa2").text('新密码不能与原密码相同');
-			}if(data="1"){
+			}if(data=="1"){
 				$(".spa1").text('原密码错误');
-			}if(data="2"){
+				document.getElementById("modal_bg").style.display="none";
+				document.getElementById("myModal").style.display="none";
+			}if(data=="2"){
 				document.getElementById("modal_bg").style.display="block";
-				document.getElementById("myModal").style.visibility = "visible";
+				document.getElementById("myModal").style.display="";
+				document.getElementById("myModal").style.visibility="visible";
 			}
 		}
 		})
@@ -48,7 +51,7 @@ $("#submitupdatePassword").click(function(){
 		$(".spa1").text('请填写密码');
 	}
 	if($("#password2").val()==""){
-		$(".spa2").text('请填写密码');
+		$(".spa2").text('请填写新密码');
 	}
 	if($("#repassword2").val()==""){
 		$(".spa3").text('请再次填写密码');

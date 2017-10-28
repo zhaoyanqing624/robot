@@ -14,7 +14,7 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	 * zyq_spider_按照分类名称查找
 	 */
 	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQCLASSIFYNAME=#{0} AND FAQPARENTID=#{1}")
-	public List<ClassifyPersistence> spider_ClassifyListByName(String ClassifyName,String type);
+	public List<ClassifyPersistence> spider_ClassifyListByName(String ClassifyName,String parentId);
 	/*
 	 * zyq_robot_分类
 	 */
@@ -49,6 +49,10 @@ public interface ClassifyPersistenceMapper  extends IBaseDao<ClassifyPersistence
 	public String faq2_classifyParentId(String ClassifyId);
 	/*
 	 * zyq_question_查看问答模块的分类
+	 * 
+	 * 根据 分类名  查找该分类的全部数据
+	 * 
+	 *    ！！！          返回值肯定是一条记录，不应该是LIST 
 	 */
 	@Select("SELECT * FROM TBL_FAQclassify WHERE FAQCLASSIFYNAME=#{0} AND FAQPARENTID=#{1}")
 	public List<ClassifyPersistence> question_ClassifyListByName(String ClassifyName,String type);

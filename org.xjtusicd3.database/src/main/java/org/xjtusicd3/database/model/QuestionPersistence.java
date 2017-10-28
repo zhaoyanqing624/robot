@@ -28,6 +28,16 @@ public class QuestionPersistence {
 	private String MODIFYNUMBER;
 	@TableField(columnName="FAQSTATE")
 	private int FAQSTATE;
+	@TableField(columnName="USERID")
+	private String USERID;
+
+	
+	public String getUSERID() {
+		return USERID;
+	}
+	public void setUSERID(String uSERID) {
+		USERID = uSERID;
+	}
 	public String getFAQQUESTIONID() {
 		return FAQQUESTIONID;
 	}

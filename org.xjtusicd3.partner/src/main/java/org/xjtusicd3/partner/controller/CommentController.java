@@ -14,6 +14,7 @@ import org.xjtusicd3.database.helper.AgreeHelper;
 import org.xjtusicd3.database.helper.CollectionHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
+import org.xjtusicd3.database.helper.CommunityQuestionHelper;
 import org.xjtusicd3.database.helper.QuestionHelper;
 import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.AgreePersistence;
@@ -22,6 +23,7 @@ import org.xjtusicd3.database.model.CommentPersistence;
 import org.xjtusicd3.database.model.CommunityAnswerPersistence;
 import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.annotation.SystemControllerLog;
 import org.xjtusicd3.partner.service.CommentService;
 import org.xjtusicd3.partner.service.CommunityService;
 import org.xjtusicd3.partner.view.Faq3_CommentReplyView;
@@ -37,6 +39,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	@SystemControllerLog(description = "faq3添加评论")
 	public String saveComment(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		String faqtitle = request.getParameter("faqtitle");
 		String comment = request.getParameter("comment");
@@ -58,6 +61,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/addComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	@SystemControllerLog(description = "社区问题添加评论")
 	public String addComment(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail"); 
 		String username = (String) session.getAttribute("UserName"); 
@@ -93,6 +97,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveCommunityComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	@SystemControllerLog(description = "社区问题添加评论的回复")
 	public String saveCommunityComment(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail"); 
 		String username = (String) session.getAttribute("UserName");
@@ -126,6 +131,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveCommunityReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	@SystemControllerLog(description = "社区问题添加评论的回复的回复")
 	public String saveCommunityReply(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail"); 
 		String username = (String) session.getAttribute("UserName"); 		
@@ -161,6 +167,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveFaqComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "faq3添加知识库评论")
 	public String saveFaqComment(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");  
 		String questionId = request.getParameter("questionId");
@@ -194,6 +201,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "社区问题查看更多回复")
 	public String getMoreComment(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -221,6 +229,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/queryMoreComment"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "faq3获得更多评论")
 	public String queryMoreComment(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -248,6 +257,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/queryMoreReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "faq3获得更多回复")
 	public String queryMoreReply(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -274,6 +284,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveAgreeAnswer"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "社区具体问题点赞")
 	public String saveAgreeAnswer(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -305,6 +316,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveAgreeAnswer2"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "社区问题点赞")
 	public String saveAgreeAnswer2(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -336,6 +348,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveCollectionAnswer"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "社区问题收藏")
 	public String saveCollectionAnswer(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -366,11 +379,15 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveCollectionFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "FAQ问题收藏")
 	public String saveCollectionFAQ(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
 		String questionId = request.getParameter("questionId");
-		List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(username, questionId);
+		
+		List<UserPersistence> list = UserHelper.getUserInfo(username);
+		List<CollectionPersistence> collectionPersistences = CollectionHelper.getCollection2(list.get(0).getUSERID(), questionId);
+		System.out.println("收藏数："+collectionPersistences.size());
 		JSONObject jsonObject = new JSONObject();
 		if (username==null) {
 			jsonObject.put("value", "0");
@@ -382,6 +399,7 @@ public class CommentController {
 				//List<CollectionPersistence> faqcollection = CollectionHelper.getfaqCollection(questionId);
 				//List<CollectionPersistence> faqcollection = CollectionHelper.agreeInfo(questionId);
 				//QuestionHelper.updateFAQCollection(questionId,Integer.toString(faqcollection.size()));
+				System.out.println("shoucang");
 				jsonObject.put("value", "1");
 				String result = JsonUtil.toJsonString(jsonObject); 
 				return result;
@@ -398,12 +416,14 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveBestAnswer"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "社区问题设置最佳答案")
 	public String saveBestAnswer(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		//String useremail = (String) session.getAttribute("UserEmail");
 		System.out.println("设置最佳答案用户："+username);
 		String answerId = request.getParameter("answerId");
-		String quesitonId = request.getParameter("quesitonId");
+		String questionId = request.getParameter("questionId");
+		System.out.println("设置最佳答案question："+questionId);
 		JSONObject jsonObject = new JSONObject();
 		if (username==null) {
 			jsonObject.put("value", "0");
@@ -411,7 +431,8 @@ public class CommentController {
 			return result;
 		}else {
 			System.out.println("设置最佳答案");
-			CommentService.saveBestAnswer(quesitonId,answerId);
+			CommentService.saveBestAnswer(questionId,answerId);
+			CommunityQuestionHelper.updateBestAnswer(questionId);
 			jsonObject.put("value", "1");
 			String result = JsonUtil.toJsonString(jsonObject); 
 			return result;
@@ -422,6 +443,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/deleteReply"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "faq3删除自己的回复")
 	public String deleteReply(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.xjtusicd3.database.helper.CurrentConfigureHelper;
 import org.xjtusicd3.database.logic.IBaseDao;
 import org.xjtusicd3.database.model.CurrentEquipmentPersistence;
 
@@ -25,5 +26,9 @@ public interface CurrentEquipmentPersistenceMapper extends IBaseDao<CurrentEquip
 			String equipmentTime, String cPU, String rAM, String memoryBank, String hardDrive,
 			String hardDriveModel, String networkCard, String motherBoard, String osName, String osType,
 			String osVersion, String osId, String graphicCard, String audioCard,String time);
+	
+	//zzl_2017年9月30日15:20:41
+	@Select("SELECT * FROM TBL_CurrentEquipment WHERE USERID=#{0}")
+	List<CurrentEquipmentPersistence> getMacAdress(String userid);
 
 }

@@ -26,6 +26,9 @@ public class CommunityQuestionController {
 		ModelAndView mv = new ModelAndView("problemindex");
 		List<ProblemindexView> communityquestionlist = CommunityQuestionService.problemindexViews();
 		mv.addObject("cqlist",communityquestionlist);
+		//zzl_2017年10月11日19:59:49_未解决
+		List<ProblemindexView> communityquestionlist2 = CommunityQuestionService.problemindexViews2();
+		mv.addObject("cqlist1",communityquestionlist2);
 		return mv;
 		
 	}
@@ -41,4 +44,15 @@ public class CommunityQuestionController {
 		return modelAndView;
 	}
 	 
+	/**
+	 * author:
+	 * abstract:社区问题列表显示_有最佳答案
+	 * data:2017年10月12日17:46:34
+	 */
+	@RequestMapping(value="showProblemInfo",method=RequestMethod.GET)
+    public ModelAndView  showProblemInfo(){
+ 	   ModelAndView mv=new ModelAndView("showProblemInfo");
+ 	   return mv;
+    }
+	
 }

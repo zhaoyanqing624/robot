@@ -20,11 +20,11 @@ public class Client {
  String loginUserId = "zyg";
  String pwd = "1232";
  try {
- if(loginValid(loginUserId,pwd)){
- System.out.println("»¶Ó­µÇÂ½£¡£¡£¡");
- }else{
- System.out.println("¿ÚÁî´íÎó£¬ÇëÖØĞÂÊäÈë£¡£¡£¡");
- }
+	 if(loginValid(loginUserId,pwd)){
+	 System.out.println("æ¬¢è¿ç™»é™†ï¼ï¼ï¼");
+	 }else{
+	 System.out.println("å£ä»¤é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼ï¼ï¼");
+	 }
  } catch (NoSuchAlgorithmException e) {
  // TODO Auto-generated catch block
  e.printStackTrace();
@@ -35,7 +35,7 @@ public class Client {
  }
   
  /**
- * ×¢²áÓÃ»§
+ * æ³¨å†Œç”¨æˆ·
  * 
  * @param userName
  * @param password
@@ -57,7 +57,7 @@ public class Client {
  }
   
  /**
- * ÑéÖ¤µÇÂ½
+ * éªŒè¯ç™»é™†
  * 
  * @param userName
  * @param password
@@ -68,10 +68,10 @@ public class Client {
  public static boolean loginValid(String userName,String password) 
  throws NoSuchAlgorithmException, UnsupportedEncodingException{
  String pwdInDb = (String)users.get(userName);
- if(null!=pwdInDb){ // ¸ÃÓÃ»§´æÔÚ
+ if(null!=pwdInDb){  // è¯¥ç”¨æˆ·å­˜åœ¨
  return EncoderByMd5.validPassword(password, pwdInDb);
  }else{
- System.out.println("²»´æÔÚ¸ÃÓÃ»§£¡£¡£¡");
+ System.out.println("ä¸å­˜åœ¨è¯¥ç”¨æˆ·ï¼ï¼ï¼");
  return false;
  }
  }

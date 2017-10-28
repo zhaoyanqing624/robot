@@ -117,13 +117,14 @@ public class Segmentation_ansj {
 	 * date:2017年8月18日 18:51:34
 	 */
 	public static List<robot_Chat> robot_Chats(String comment) throws Exception{
-		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
-		List<NLP_Word> nList = segmentation_ansj.similarScoreFirst(comment);
+		//Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
+		List<NLP_Word> nList = Segmentation_ansj.similarScoreFirst(comment);
  
-		System.out.println(System.getProperty("用户目录：user.dir"));
-		File file = new File("library/faqKeywords.txt");//Text文件
+		
+		//File file = new File("library/faqKeywords.txt");//Text文件
  
 		String localurl = System.getProperty("user.dir");
+		System.out.println("用户目录："+localurl);
 		File file1 = new File(localurl+"/workspace/robot-master/org.xjtusicd3.partner/library/faqKeywords.txt");//Text文件
 		BufferedReader br = new BufferedReader(new FileReader(file1));//构造一个BufferedReader类来读取文件
 		String s = null;
@@ -131,7 +132,7 @@ public class Segmentation_ansj {
 		while((s = br.readLine())!=null){//使用readLine方法，一次读一行
 			robot_Chat robot_Chat = new robot_Chat();
 			String[] resultArray = s.split("\t");
-			double value = segmentation_ansj.similarScoreSecond(nList, resultArray[1]);
+			double value = Segmentation_ansj.similarScoreSecond(nList, resultArray[1]);
 			if (value>=0.4) {
 				robot_Chat.setQuestionId(resultArray[0]);
 				robot_Chat.setValue(value);

@@ -9,9 +9,9 @@ public class Question_CommunityView {
 	private String communityQuestion;
 	private String time;
 	private String classifyName;
+	private String communityNumber; //评论数
 	private String answer;
 	private String likesNumber; //点赞数
-	private String communityNumber; //评论数
 	private String userImage;
 	private String userName;
 	private String userId;

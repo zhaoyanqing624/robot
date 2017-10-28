@@ -21,18 +21,37 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	 */
 	@Insert("INSERT INTO TBL_CommunityQuestion(COMMUNITYQUESTIONID,TIME,TITLE,CONTENT,CLASSIFYID,USERID,SCAN,USERQUESTIONID,ISANSWER) VALUES (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8})")
 	void saveCommunityQuestion(String id, String time, String title, String content, String classifyid, String userid, String scan, String userquestionid,int isanswer);
-	/*
-	 * zyq_question_问题展示_根据类别ID
+	/* 
+	 * 返回  对应分类   的全部问题
 	 */
 	@Select("SELECT * FROM TBL_CommunityQuestion WHERE CLASSIFYID=#{0} ORDER BY TIME DESC")
 	List<CommunityQuestionPersistence> question_getCommunity(String classifyid);
+	
+	/* 
+	 * 返回  对应分类   的全部问题数目
+	 */
+	@Select("SELECT count(1) FROM TBL_CommunityQuestion WHERE CLASSIFYID=#{0}")
+	int getCommunityQuestionNumberByClassify(String classifyid);
+	/*
+	 * 返回  对应分类  的   已解决或未解决  的全部问题
+	 */
 	@Select("SELECT * FROM TBL_CommunityQuestion WHERE CLASSIFYID=#{0} AND ISANSWER=#{1} ORDER BY TIME DESC")
 	List<CommunityQuestionPersistence> question_getCommunity2(String classifyid,int isanswer);
+	
+	
+	/*
+	 * 返回  对应分类  的   已解决或未解决  的全部问题的数目
+	 */
+	@Select("SELECT count(1) FROM TBL_CommunityQuestion WHERE CLASSIFYID=#{0} AND ISANSWER=#{1}")
+	int getCommunityQuestionNumberByClassifyAndAnswerflag(String classifyid,int isanswer);
+	
 	/*
 	 * zyq_question_问题展示_根据是否有答案
 	 */
 	@Select("SELECT * FROM TBL_CommunityQuestion  ORDER BY TIME DESC LIMIT #{0},5")
 	List<CommunityQuestionPersistence> question_getCommunity_isanswer(int startnumber);
+	
+	
 	@Select("SELECT * FROM TBL_CommunityQuestion WHERE ISANSWER=#{1} ORDER BY TIME DESC")
 	List<CommunityQuestionPersistence> question_getCommunity2_isanswer(int isanswer);
 	/*
@@ -52,7 +71,7 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	/*
 	 * zpz_get all community question
 	 */
-	@Select("SELECT * FROM TBL_CommunityQuestion")
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE ISANSWER='1'")
 	List<CommunityQuestionPersistence> getAllCommunityQuestion();
 	/*
 	 * zyq_question2_设为最佳答案
@@ -66,4 +85,10 @@ public interface CommunityQuestionPersistenceMapper extends IBaseDao<CommunityQu
 	public void deleteCommunityQuestion(String questionId);
 	@Select("DELETE  FROM TBL_CommunityAnswer WHERE COMMUNITYQUESTIONID=#{0}")
 	public void deleteCommunityAnswer(String questionId);
+	
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE ISANSWER='0'")
+	List<CommunityQuestionPersistence> getAllCommunityQuestion2();
+	
+	@Select("SELECT * FROM TBL_CommunityQuestion WHERE COMMUNITYQUESTIONID=#{0} ORDER BY TIME ASC")
+	List<CommunityQuestionPersistence> CommunityQuestion(String questionId);
 } 

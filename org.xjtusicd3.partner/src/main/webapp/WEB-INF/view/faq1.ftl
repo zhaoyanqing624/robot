@@ -106,7 +106,7 @@
 				<#include "inc/incRight.ftl">
 				<div class="barBox2 " id="" data="1" style="left:0px;top:645px;z-index:1;width:340px;">
             		<h3 class="box-title">活跃用户
-            			<span class="leifeng-tab js-leifeng-tab week" data-type="week">一周</span>
+            			<span class="leifeng-tab js-leifeng-tab week" data-type="week" style="margin-right: 30px">一周</span>
             			<span class="leifeng-tab js-leifeng-tab day active" data-type="day">今日</span>
             		</h3>
 				    <ul class="leifeng-tab-box-min day" style="display:block">
@@ -115,7 +115,10 @@
 			                <div id="ranking" class="first">${userActive_index+1}</div>
 			                <div id="user-pic"><a target="_blank" href="personal2.html?q=${userActive.userId}"><img style="display: block;height: 100%;" src="${userActive.userImage}"></a></div><!--.user-pic end-->
 			                <div id="user-name"><a target="_blank" href="personal2.html?q=${userActive.userId}">${userActive.userName}</a></div><!--.user-name end-->
-			                <div id="user-info" class="clearfix"><span id="role">${userActive.work}</span><span id="answer-num">${userActive.faqNumber}评论</span></div><!--.user-info end-->
+			                <div id="user-info" class="clearfix">
+			                	<span id="role">${userActive.work}</span>
+			                	<span id="answer-num"  style="margin-right: 30px">${userActive.faqNumber}评论</span>
+			                </div><!--.user-info end-->
             			</li>
             		</#list>
                     </ul>
@@ -125,7 +128,7 @@
 			                <div id="ranking" class="second">${userActiveWeek_index+1}</div>
 			                <div id="user-pic"><a target="_blank" href="personal2.html?q=${userActiveWeek.userId}"><img style="display: block;height: 100%;" src="${userActiveWeek.userImage}"></a></div><!--.user-pic end-->
 			                <div id="user-name"><a target="_blank" href="personal2.html?q=${userActiveWeek.userId}">${userActiveWeek.userName}</a></div><!--.user-name end-->
-			                <div id="user-info" class="clearfix"><span id="role">${userActiveWeek.work}</span><span id="answer-num">${userActiveWeek.faqNumber}评论</span></div><!--.user-info end-->
+			                <div id="user-info" class="clearfix"><span id="role">${userActiveWeek.work}</span><span id="answer-num"  style="margin-right: 30px">${userActiveWeek.faqNumber}评论</span></div><!--.user-info end-->
             			</li>
             		</#list>
                     </ul>

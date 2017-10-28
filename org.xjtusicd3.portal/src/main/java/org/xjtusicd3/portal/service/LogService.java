@@ -47,15 +47,15 @@ public class LogService {
 	/*
 	 * zpz_add_log
 	 */
-	public static void saveLog(String userId,String logPermission)
-	{
-		logindexView logindexView = new logindexView();
-		String logId = UUID.randomUUID().toString();
-		logindexView.setLogUersId(userId);
-		Date date=new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String logTime = format.format(date);
-		logindexView.setLogTime(logTime);
-		LogHelper.getLog(logId, userId, logPermission, logTime);
-	}
+//	public static void saveLog(String userId,String logPermission)
+//	{
+//		logindexView logindexView = new logindexView();
+//		String logId = UUID.randomUUID().toString();
+//		logindexView.setLogUersId(userId);
+//		Date date=new Date();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String logTime = format.format(date);
+//		logindexView.setLogTime(logTime);
+//		LogHelper.getLog(logId, userId, logPermission, logTime);
+//	}
 }

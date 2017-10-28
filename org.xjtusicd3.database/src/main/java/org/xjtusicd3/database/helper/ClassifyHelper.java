@@ -22,10 +22,10 @@ public class ClassifyHelper {
 	/*
 	 * spider_按照分类名称查找
 	 */
-	public static List<ClassifyPersistence> spider_ClassifyListByName(String ClassifyName,String type){
+	public static List<ClassifyPersistence> spider_ClassifyListByName(String ClassifyName,String parentId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
-		List<ClassifyPersistence> list = mapper.spider_ClassifyListByName(ClassifyName,type);
+		List<ClassifyPersistence> list = mapper.spider_ClassifyListByName(ClassifyName,parentId);
 		session.close();
 		return list;
 	}
@@ -100,8 +100,13 @@ public class ClassifyHelper {
 	}
 	/*
 	 * zyq_question_查看问答模块的分类
+	 * 
+	 *  ClassifyName   type
+	 *  
+	 *  List<ClassifyPersistence>
 	 */
-	public static List<ClassifyPersistence> question_ClassifyListByName(String ClassifyName,String type){
+	public static List<ClassifyPersistence> question_ClassifyListByName(String ClassifyName,String type)
+	{
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		ClassifyPersistenceMapper mapper = session.getMapper(ClassifyPersistenceMapper.class);
 		List<ClassifyPersistence> list = mapper.question_ClassifyListByName(ClassifyName,type);

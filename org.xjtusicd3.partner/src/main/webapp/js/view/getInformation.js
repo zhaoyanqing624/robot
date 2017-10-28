@@ -90,10 +90,12 @@ function getInformationOfHardware(){
 	var a = new Enumerator (service.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration"));
 	for (; !a.atEnd(); a.moveNext()) {
 	    var p = a.item();
+	    
 	    if (p.IPAddress==null) {
 	         continue;
 	    }else{
 	    	if(p.Description.substring(0,8)=="Intel(R)"){
+	    		
 	            macAddress = p.MACAddress;
 	            ipAddress = p.IPAddress(0);
 	    	}

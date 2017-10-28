@@ -1,18 +1,15 @@
 package org.xjtusicd3.portal.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.xjtusicd3.database.model.UserPersistence;
-import org.xjtusicd3.portal.service.UserService;
 
 @Controller
 public class PageController {
+
 	
 	@RequestMapping(value="userdetail",method=RequestMethod.GET)
     public ModelAndView  userdetail(){
@@ -26,12 +23,7 @@ public class PageController {
  	   ModelAndView mv=new ModelAndView("problemdetail");
  	   return mv;
     }
-	
-	@RequestMapping(value="changeindex",method=RequestMethod.GET)
-    public ModelAndView  change(){
- 	   ModelAndView mv=new ModelAndView("changeindex");
- 	   return mv;
-    }
+
 	@RequestMapping(value="fileindex",method=RequestMethod.GET)
     public ModelAndView  file(){
  	   ModelAndView mv=new ModelAndView("fileindex");

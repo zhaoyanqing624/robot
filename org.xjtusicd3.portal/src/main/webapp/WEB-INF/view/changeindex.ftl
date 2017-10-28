@@ -403,7 +403,6 @@
 												<div class="portlet-body">
 
 												
-
 													<table
 														class="table table-striped table-hover table-bordered"
 														id="sample_editable_2">
@@ -412,46 +411,33 @@
 
 															<tr>
 
-																<th>FAQ分类</th>
+																<th>ID</th>
 
-																<th>FAQ名称</th>
+																<th>配置名</th>
 
-																<th>FAQ关键词</th>
+																<th>更新版本</th>
 
-																<th>操作</th>
+																<th>url</th>
 												
-																<th>操作</th>
+																<th>更新时间</th>
 
-																<th>操作</th>
-
-																<th>查看FAQ详情</th>
+																<th>备注</th>
 
 															</tr>
 
 														</thead>
 
 														<tbody>
-															<#list allUserList as userlist2>
-															<tr class="">
-
-																<td>${userlist2.USERNAME}</td>
-																<td>${userlist2.USEREMAIL}</td>
-
-																<td class="center">${userlist2.USERADDRESS}</td>
-
-																<td><a class="userinfo"
-																	href="/org.xjtusicd3.portal/editUserInformation.html?u=${userlist2.USERID}">添加至FAQ</a></td>
-
-																<td><a class="userinfo"
-																	href="/org.xjtusicd3.portal/editUserInformation.html?u=${userlist2.USERID}">编辑</a></td>
-
-																<td><a onclick="deleteUser()">删除</a></td>
-
-																<td><a class="userinfo"
-																	href="/org.xjtusicd3.portal/showUserInfo.html?u=${userlist2.USERID}">查看用户信息</a></td>
-
-															</tr>
-															</#list>
+															<#list cfg_update_list as a>
+										                        <tr>
+										                          <td>${a_index }</td>                     
+										                          <td>${a.CONFIGURENAME}</td>
+										                          <td>${a.VERSION }</td>
+										                          <td>${a.URL }</td>
+										                          <td>${a.UPDATETIME }</td>
+										                          <td>${a.REMARKS }</td>
+										                        </tr> 
+										                        </#list>  
 
 
 														</tbody>

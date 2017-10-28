@@ -99,6 +99,9 @@
 
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
+		<div style="visibility: hidden;">
+		您好：${UserName}
+		</div>
 		<div class="row">
 			<div class="col-sm-10">
 				<div class="row">
@@ -415,12 +418,11 @@
 
 																				<td><a onclick="addProblemtoFAQ()">加入至FAQ</a></td>
 
-																				<td><a class="faq"
-																					href="/org.xjtusicd3.portal/showUserInfo.html?u=${communityquestionlist.USERID}">查看问题详情</a></td>
+																				<td><a class="faq" 
+																					href="/org.xjtusicd3.portal/showProblemInfo.html?u=${cqlist.problemId}">查看问题详情</a></td>
 
 																			</tr>
 																			</#list>
-
 
 																		</tbody>
 

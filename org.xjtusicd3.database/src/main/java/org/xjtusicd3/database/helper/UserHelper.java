@@ -142,7 +142,7 @@ public class UserHelper {
 	public static List<UserPersistence> getUserNameById(String UserId){
 		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
 		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
-		List<UserPersistence> list = mapper.getEmail_id(UserId);
+		List<UserPersistence> list = mapper.getUserNameById(UserId);
 		session.close();
 		return list;
 	}
@@ -255,5 +255,12 @@ public class UserHelper {
 		session.close();
 		return list;
 	}
+//	public static void addUser(String userName, String password) {
+//		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+//		UserPersistenceMapper mapper = session.getMapper(UserPersistenceMapper.class);
+//		List<UserPersistence> list = mapper.addUser(userName,password);
+//		session.close();
+//		
+//	}
 
 }

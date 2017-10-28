@@ -44,7 +44,7 @@
                     </div>
                 </li>
                 <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                    <span class="ng-scope">管理员界面</span>
+                    <span class="ng-scope">管理员</span>
                 </li>
                 <li>
                     <a class="J_menuItem" href="elementindex.html">

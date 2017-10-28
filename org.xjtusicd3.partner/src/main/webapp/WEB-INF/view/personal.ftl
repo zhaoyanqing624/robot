@@ -264,7 +264,7 @@
     	<p style="color: #ffffff;text-align: center;">© 西安交通大学社会智能与复杂数据处理实验室  2017.</p>
     </div>
     
-    <div id="myModal" class="reveal-modal" style="visibility: hidden;">			
+    <div id="myModal" class="reveal-modal" style="display: none;">			
 		<h1>密码修改成功</h1>
 		<br/>			
 		<a class="close-reveal-modal" id="cancelModal">&#215;</a>

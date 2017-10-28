@@ -14,16 +14,16 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-//ÉùÃ÷ÕâÊÇÒ»¸ö×é¼ş
+//å£°æ˜è¿™æ˜¯ä¸€ä¸ªç»„ä»¶
 @Component
-// ÉùÃ÷ÕâÊÇÒ»¸öÇĞÃæBean
+//å£°æ˜è¿™æ˜¯ä¸€ä¸ªåˆ‡é¢Bean
 @Aspect
 public class LogInterceptor
 {
 
 	private final static Log log = LogFactory.getLog(LogInterceptor.class);
 
-	// ÅäÖÃÇĞÈëµã,¸Ã·½·¨ÎŞ·½·¨Ìå,Ö÷ÒªÎª·½±ãÍ¬ÀàÖĞÆäËû·½·¨Ê¹ÓÃ´Ë´¦ÅäÖÃµÄÇĞÈëµã
+	// é…ç½®åˆ‡å…¥ç‚¹,è¯¥æ–¹æ³•æ— æ–¹æ³•ä½“,ä¸»è¦ä¸ºæ–¹ä¾¿åŒç±»ä¸­å…¶ä»–æ–¹æ³•ä½¿ç”¨æ­¤å¤„é…ç½®çš„åˆ‡å…¥ç‚¹
 	@Pointcut("execution(public * *(..))")
 	public void aspect()
 	{
@@ -31,23 +31,23 @@ public class LogInterceptor
 	
 
 	/*
-	 * ÅäÖÃÇ°ÖÃÍ¨Öª,Ê¹ÓÃÔÚ·½·¨aspect()ÉÏ×¢²áµÄÇĞÈëµã Í¬Ê±½ÓÊÜJoinPointÇĞÈëµã¶ÔÏó,¿ÉÒÔÃ»ÓĞ¸Ã²ÎÊı
+	 * é…ç½®å‰ç½®é€šçŸ¥,ä½¿ç”¨åœ¨æ–¹æ³•aspect()ä¸Šæ³¨å†Œçš„åˆ‡å…¥ç‚¹ åŒæ—¶æ¥å—JoinPointåˆ‡å…¥ç‚¹å¯¹è±¡,å¯ä»¥æ²¡æœ‰è¯¥å‚æ•°
 	 */
 	@Before("aspect()")
 	public void before(JoinPoint joinPoint)
 	{
 		String name = ((MethodSignature)(joinPoint.getSignature())).getMethod().getName();
-		System.out.println("·½·¨Ãû£º" +  name);
+		System.out.println("æ–¹æ³•åï¼š" +  name);
 		if (log.isInfoEnabled())
 		{
 			System.out.println(joinPoint.getKind());
 			log.info("hello");
 			log.debug("hello");
-			// È¨ÏŞĞ£Ñé
+			// æƒé™æ ¡éªŒ
 		}
 	}
 
-	// ÅäÖÃºóÖÃÍ¨Öª,Ê¹ÓÃÔÚ·½·¨aspect()ÉÏ×¢²áµÄÇĞÈëµã
+	// é…ç½®åç½®é€šçŸ¥,ä½¿ç”¨åœ¨æ–¹æ³•aspect()ä¸Šæ³¨å†Œçš„åˆ‡å…¥ç‚¹
 	@After("aspect()")
 	public void after(JoinPoint joinPoint)
 	{
@@ -57,7 +57,7 @@ public class LogInterceptor
 		}
 	}
 
-	// ÅäÖÃ»·ÈÆÍ¨Öª,Ê¹ÓÃÔÚ·½·¨aspect()ÉÏ×¢²áµÄÇĞÈëµã
+	// é…ç½®ç¯ç»•é€šçŸ¥,ä½¿ç”¨åœ¨æ–¹æ³•aspect()ä¸Šæ³¨å†Œçš„åˆ‡å…¥ç‚¹
 	@Around("aspect()")
 	public void around(JoinPoint joinPoint)
 	{
@@ -81,7 +81,7 @@ public class LogInterceptor
 		}
 	}
 
-	// ÅäÖÃºóÖÃ·µ»ØÍ¨Öª,Ê¹ÓÃÔÚ·½·¨aspect()ÉÏ×¢²áµÄÇĞÈëµã
+	// é…ç½®åç½®è¿”å›é€šçŸ¥,ä½¿ç”¨åœ¨æ–¹æ³•aspect()ä¸Šæ³¨å†Œçš„åˆ‡å…¥ç‚¹
 	@AfterReturning("aspect()")
 	public void afterReturn(JoinPoint joinPoint)
 	{
@@ -91,7 +91,7 @@ public class LogInterceptor
 		}
 	}
 
-	// ÅäÖÃÅ×³öÒì³£ºóÍ¨Öª,Ê¹ÓÃÔÚ·½·¨aspect()ÉÏ×¢²áµÄÇĞÈëµã
+	// é…ç½®æŠ›å‡ºå¼‚å¸¸åé€šçŸ¥,ä½¿ç”¨åœ¨æ–¹æ³•aspect()ä¸Šæ³¨å†Œçš„åˆ‡å…¥ç‚¹
 	@AfterThrowing(pointcut = "aspect()", throwing = "ex")
 	public void afterThrow(JoinPoint joinPoint, Exception ex)
 	{

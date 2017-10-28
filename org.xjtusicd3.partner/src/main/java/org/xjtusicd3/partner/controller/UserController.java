@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,8 @@ import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.ITPersistence;
 import org.xjtusicd3.database.model.PayPersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.annotation.Log;
+import org.xjtusicd3.partner.annotation.SystemControllerLog;
 import org.xjtusicd3.partner.filter.CopyFile;
 import org.xjtusicd3.partner.filter.MD5;
 import org.xjtusicd3.partner.filter.RegexAddress;
@@ -43,7 +46,7 @@ import org.xjtusicd3.partner.view.UserView;
 import com.alibaba.fastjson.JSONObject;
 
 @Controller
-public class UserController {
+public class UserController {	
 	/*
 	 * login_ajax_注册
 	 */
@@ -116,6 +119,7 @@ public class UserController {
 	 * data:2017年9月21日10:07:37
 	 */
 	@RequestMapping(value="/saveLogin",method=RequestMethod.POST)
+	@SystemControllerLog(description = "用户登录")
 	public String loginlist(UserView userView,HttpSession session,HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		String urlPath = (String) session.getAttribute("urlPath");
 		if (urlPath==null) {
@@ -142,6 +146,7 @@ public class UserController {
 	 * 用户退出
 	 */
 	@RequestMapping(value="/loginout",method=RequestMethod.GET)
+	@SystemControllerLog(description = "用户推出")
 	public String loginout(HttpSession session,HttpServletRequest request){
 		String urlPath = (String) session.getAttribute("urlPath");
 		session.invalidate();
@@ -152,6 +157,7 @@ public class UserController {
 	 * personal_个人信息
 	 */
 	@RequestMapping(value="personal",method=RequestMethod.GET)
+	@SystemControllerLog(description = "个人基本信息")
 	public ModelAndView personal(UserView userView ,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		//String useremail = (String) session.getAttribute("UserEmail");
@@ -181,6 +187,7 @@ public class UserController {
 	 * personal_个人信息添加
 	 */
 	@RequestMapping(value="/addUserInfo",method=RequestMethod.POST)
+	@SystemControllerLog(description = "个人信息添加")
 	public String addUserInfo(UserView userView,HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		//zzl_获得前台用户名
@@ -223,6 +230,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/updateUserPassword"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/html;charset=UTF-8")
+	@SystemControllerLog(description = "密码修改")
 	public String updateUserPassword(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		String username = (String) session.getAttribute("UserName");
 		String password = request.getParameter("password");
@@ -251,6 +259,21 @@ public class UserController {
 					return "2";
 				}
 			}
+//			boolean islogin = UserService.isLogin(username, password);
+//			if (islogin==false) {
+//				System.out.println("返回1");
+//				return "1";
+//			}else {
+//				if (password.equals(password2)) {
+//					System.out.println("返回0");
+//					return "0";
+//				}
+//				//List<UserPersistence> list = UserService.loginUserInfo(userId);
+//				password2 = MD5.EncoderByMd5(password2);
+//				UserHelper.updateUserPassword2(username, password2);
+//				System.out.println("返回2");
+//				return "2";
+//			}
 		}
 	}
 	
@@ -258,6 +281,7 @@ public class UserController {
 	//头像上传
 	@ResponseBody
 	@RequestMapping(value = "/uploadUserImage",method=RequestMethod.POST)
+	@SystemControllerLog(description = "头像上传")
     public String uploadUserImage(HttpServletRequest request,HttpSession session) throws IOException {
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -309,6 +333,7 @@ public class UserController {
 	 * zyq_personal2_个人信息
 	 */
 	@RequestMapping(value="personal2",method=RequestMethod.GET)
+	@SystemControllerLog(description = "个人主页")
 	public ModelAndView personal2(String u,HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -379,6 +404,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/savePay"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "用户关注")
 	public String savePay(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -405,6 +431,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/deletePay"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "取消关注")
 	public String deletePay(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -431,6 +458,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getPay"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取关注列表")
 	public String getPay(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -453,6 +481,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getbePay"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取被关注列表")
 	public String getbePay(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -476,6 +505,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getpersonalFaq"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取知识库列表")
 	public String getpersonalFaq(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -498,6 +528,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreIndex"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多的个人主页信息")
 	public String getMoreIndex(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -526,6 +557,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreFaq1"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多的个人FAQ")
 	public String getMoreFaq1(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
@@ -548,6 +580,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getCollectFaq"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取收藏FAQ")
 	public String getCollectFaq(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -570,6 +603,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreCollectFaq"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多的收藏FAQ")
 	public String getMoreCollectFaq(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
@@ -592,9 +626,11 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getCommentFaq"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取FAQ的评论")
 	public String getCommentFaq(HttpServletRequest request,HttpSession session){		
 		String username = (String) session.getAttribute("UserName");
-		List<UserPersistence> userPersistences = UserHelper.getEmail(username);
+		//List<UserPersistence> userPersistences = UserHelper.getEmail(username);
+		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
 		JSONObject jsonObject = new JSONObject();
 		if (username==null) {
 			jsonObject.put("value", "0");
@@ -613,6 +649,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreCommentFaq"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多FAQ的评论")
 	public String getMoreCommentFaq(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
@@ -635,6 +672,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getpersonalCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取问吧的问题")
 	public String getpersonalCommunity(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		String userId = request.getParameter("userId");
@@ -656,6 +694,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreCommunity1"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多问吧的问题")
 	public String getMoreCommunity1(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
@@ -678,6 +717,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getPayCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取问吧的关注答案")
 	public String getPayCommunity(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		String userId = request.getParameter("userId");
@@ -699,6 +739,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMorePayCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多问吧的关注答案")
 	public String getMorePayCommunity(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
@@ -721,6 +762,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getReplyCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取问吧的回答")
 	public String getReplyCommunity(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		String userId = request.getParameter("userId");
@@ -742,6 +784,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreReplyCommunity"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多问吧的回答")
 	public String getMoreReplyCommunity(HttpServletRequest request,HttpSession session){
 		String username = (String) session.getAttribute("UserName");
 		List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);

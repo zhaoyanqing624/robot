@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.poi.hwpf.usermodel.DateAndTime;
 import org.xjtusicd3.database.helper.AnswerHelper;
 import org.xjtusicd3.database.helper.CommentHelper;
 import org.xjtusicd3.database.helper.CommunityAnswerHelper;
@@ -212,10 +213,20 @@ public class CommentService {
 	public static List<Faq1_UserActive> faq1_userActive_week() {
 		List<Faq1_UserActive> faq1_UserActives = new ArrayList<Faq1_UserActive>();
   	    Date date=new Date();
+
+  	    Calendar c = Calendar.getInstance();
+  	    c.setTime(date);
+  	    c.add(Calendar.DAY_OF_MONTH, 1);
+  	    
+  	    Date tomorrow = c.getTime();
   	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-  	    String time = format.format(date);
+  	    String time = format.format(tomorrow);
+  	    
   	    String time2 = getdate(-7);
+  	    System.out.println("time1:"+time);
+  	    System.out.println("time2:"+time2);
 		List<CommentPersistence> commentPersistences = CommentHelper.faq1_userActiveWeek(time,time2);
+		System.out.println("周活跃用户："+commentPersistences.size());
 		for(CommentPersistence commentPersistence:commentPersistences){
 			Faq1_UserActive faq1_UserActive = new Faq1_UserActive();
 			faq1_UserActive.setUserId(commentPersistence.getUSERID());

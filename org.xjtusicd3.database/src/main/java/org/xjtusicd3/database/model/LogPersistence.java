@@ -17,6 +17,12 @@ public class LogPersistence
 	private String LogMethod;
 	@TableField(columnName="LOGTIME")
 	private String LogTime;
+	@TableField(columnName="OPERATION")
+	private String Operation;
+	@TableField(columnName="URL")
+	private String Url;
+	@TableField(columnName="IP")
+	private String Ip;	
 	public String getLogId()
 	{
 		return LogId;
@@ -49,4 +55,25 @@ public class LogPersistence
 	{
 		LogTime = logTime;
 	}
+	public String getOperation() {
+		return Operation;
+	}
+	public void setOperation(String operation) {
+		Operation = operation;
+	}
+	
+	public String getUrl() {
+		return Url;
+	}
+	public void setUrl(String urlPath) {
+		Url = urlPath;
+	}
+	public String getIp() {
+		return Ip;
+	}
+	public void setIp(String ip) {
+		Ip = ip;
+	}
+	
+	
 }

@@ -24,6 +24,15 @@ public interface ConfigurePersistenceMapper extends IBaseDao<ConfigurePersistenc
 	 */
 	@Update("UPDATE TBL_Configure SET FILESIZE=#{1},URL=#{2},DOWNLOADTIMES=#{3},PRODUCER=#{4},CONFIGURETIME=#{5} WHERE CONFIGURENAME=#{0}")
 	public List<ConfigurePersistence> update_Configure(String configurename,String filesize,String url,String downloadtimes,String producer,String configuretime);
+	
+	/**
+	 * author:
+	 * abstract:获取配置信息
+	 * data:2017年10月12日18:03:19
+	 * @param startNumber 
+	 */
+	@Select("SELECT * FROM TBL_Configure ORDER BY CONFIGURETIME DESC LIMIT #{0},100")
+	public List<ConfigurePersistence> getCfgs(int startNumber);
 
 	
 }

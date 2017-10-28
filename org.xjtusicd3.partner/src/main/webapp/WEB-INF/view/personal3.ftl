@@ -44,7 +44,7 @@
     		<div class="headTop clearfix">
 	        	<a href="" class="logoCon">
 	            	<img src="images/logo.jpg" class="logo">
-	            	<span>设备信息${macaddress}</span>
+	            	<span>设备信息${macAddress}</span>
 	        	</a>
     		</div>
 		</div>

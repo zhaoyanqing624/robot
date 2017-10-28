@@ -30,9 +30,9 @@ public class RobotService {
 	 * robot_ajax_和机器人聊天
 	 */
 	public static List<robot_Chat> getRobotAnswer(String comment) throws Exception {
-		Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
-		List<robot_Chat> robot_Chats = segmentation_ansj.robot_Chats(comment);
-		//System.out.println("robot_Chats的大小："+robot_Chats.size());
+		//Segmentation_ansj segmentation_ansj = new Segmentation_ansj();
+		List<robot_Chat> robot_Chats = Segmentation_ansj.robot_Chats(comment);
+		System.out.println("robot_Chats的大小："+robot_Chats.size());
 		List<robot_Chat> list = new ArrayList<robot_Chat>();
 		if (robot_Chats.size()==0) {
 			

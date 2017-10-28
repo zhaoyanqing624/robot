@@ -1,0 +1,377 @@
+@charset 'utf-8'; 
+
+article .description a:hover, article .title a:hover {
+	text-decoration: underline
+}
+
+em {
+	font-style: italic
+}
+
+strong {
+	font-weight: 700
+}
+
+article {
+	width: 820px;
+	padding: 10px 30px;
+	border-bottom: 1px solid #efefef
+}
+
+article .tag {
+	line-height: 20px;
+	height: 25px;
+	margin: 10px 0
+}
+
+article .tag ul {
+	line-height: 20px;
+	display: block;
+	float: left
+}
+
+article .tag ul li {
+	font-size: 12px;
+	line-height: 20px;
+	display: inline-block;
+	min-width: 45px;
+	margin-right: 10px;
+	padding: 1px 8px;
+	text-align: center;
+	color: #579dc5;
+	border: 1px solid #d7f1ff;
+	border-radius: 24px;
+	background: #d7f1ff
+}
+
+article .tag ul li.type {
+	background: 0 0
+}
+
+article .tag .time {
+	font-size: 12px;
+	float: right;
+	height: 20px
+}
+
+article .tag .time p {
+	line-height: 20px;
+	margin: 0;
+	color: #777
+}
+
+article .title {
+	line-height: 30px;
+	margin: 5px 0
+}
+
+article .title h2 a {
+	font-size: 15px;
+	font-weight: 700;
+	color: #3472af;
+	padding-bottom: 2px
+}
+
+article .description {
+	font-size: 14px
+}
+
+article .description div.answerer {
+	font-size: 12px;
+	height: 40px;
+	margin-bottom: 10px;
+	color: #999
+}
+
+article .description div.answerer div {
+	height: 20px;
+	line-height: 20px;
+	width: 350px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden
+}
+
+article .description div.answerer a {
+	color: #999
+}
+
+article .description div.answerer .user_name {
+	color: #666
+}
+
+article .description div.answerer .answerImg {
+	float: left;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	border-radius: 5px
+}
+
+article .description div.answerer .bluepoint {
+	float: left;
+	width: 14px;
+	height: 14px;
+	margin-top: 3px;
+	margin-right: 5px
+}
+
+article .detail .detailImg {
+	display: table-cell;
+	width: 120px;
+	height: 90px;
+	padding-right: 8px
+}
+
+article .detail .detailP {
+	line-height: 22px;
+	display: table-cell;
+	vertical-align: top
+}
+
+article .detail .detailImg img {
+	max-width: 120px;
+	max-height: 80px
+}
+
+article .fullDetail {
+	line-height: 22px
+}
+
+article .options {
+	width: 99%;
+	padding-bottom: 10px;
+	background: #fff
+}
+
+.options.float {
+	position: fixed;
+	bottom: 0;
+	border-top: 1px solid #dfdfdf;
+	background-image: -webkit-linear-gradient(270deg, #fff, #f6f6f6);
+	background-image: linear-gradient(180deg, #fff, #f6f6f6);
+	box-shadow: 0 -3px 2px -2px rgba(200, 200, 200, .3)
+}
+
+article .options ul {
+	font-size: 12px;
+	margin-top: 10px
+}
+
+article .options ul li {
+	line-height: 26px;
+	display: inline-block;
+	height: 26px;
+	cursor: pointer;
+	text-align: center
+}
+
+.special {
+	margin-right: 5px
+}
+
+article .options ul li a {
+	padding: 5px 13px;
+	white-space: pre;
+	border-radius: 5px
+}
+
+article .options ul li a span {
+	line-height: 20px;
+	height: 20px
+}
+
+article .options ul li.special a {
+	padding: 4px 12px;
+	border: 1px solid #579dc5
+}
+
+article .options ul li a.unVoted, article .options ul li:nth-child(2) a span.number
+	{
+	color: #579dc5
+}
+
+article .options ul li a.voted {
+	color: #9e9d9d;
+	border-color: #9e9d9d
+}
+
+article .options ul li a.unFocused {
+	color: #579dc5
+}
+
+article .options ul li a.focused {
+	color: #9e9d9d;
+	border-color: #9e9d9d
+}
+
+article .comment img.deco {
+	position: relative;
+	top: 2px;
+	left: 19px
+}
+
+article .comment .comment-outer {
+	border: 1px solid #efefef;
+	border-radius: 5px;
+	background: #fbfbfb
+}
+
+.commentList, article .comment .comment-Editor {
+	margin: 20px
+}
+
+article .comment img.userImg {
+	width: 30px;
+	height: 30px;
+	vertical-align: top;
+	border-radius: 5px
+}
+
+article .comment input.comment-Editor-input {
+	font-size: 12px;
+	overflow-x: visible;
+	overflow-y: visible;
+	width: 430px;
+	height: 30px;
+	margin: 0 15px;
+	padding: 0 15px;
+	vertical-align: middle;
+	border: 1px solid #ececec;
+	border-radius: 5px
+}
+
+article .comment button.submitComment {
+	font-size: 14px;
+	width: 60px;
+	height: 30px;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	background: #579dc5
+}
+
+article .comment div.commentDetail {
+	display: inline-block;
+	width: 550px;
+	margin-left: 15px
+}
+
+article .comment p {
+	font-size: 12px;
+	line-height: 18px
+}
+
+article .comment p.userName {
+	font-weight: 700;
+	color: #6b6b6b
+}
+
+article .comment p.content {
+	color: #6b6b6b;
+	cursor: pointer;
+}
+
+article .comment p.commentTime {
+	color: #d3d3d3
+}
+
+article .comment .commentList li {
+	margin-top: 10px
+}
+
+article .answer-editor img.deco {
+	position: relative;
+	top: 5px;
+	left: 113px
+}
+
+article .answer-editor .answer-editor-outer {
+	overflow: hidden;
+	border: 1px solid #d8d8d8;
+	border-radius: 5px
+}
+
+article .answer-editor .answerer {
+	line-height: 40px;
+	height: 40px;
+	padding: 5px 0;
+	border-bottom: 1px solid #d8d8d8;
+	background: #fbfbfb
+}
+
+article .answer-editor .answerer img {
+	width: 30px;
+	height: 30px;
+	margin: 0 10px 0 15px;
+	vertical-align: middle;
+	border-radius: 5px
+}
+
+article .answer-editor .answerer p {
+	font-size: 14px;
+	display: inline;
+	color: #555
+}
+
+article .answer-editor textarea {
+	font-size: 14px;
+	line-height: 20px;
+	width: 690px;
+	height: 140px;
+	padding: 10px;
+	border: none
+}
+
+article .answer-editor .submitDiv {
+	height: 50px;
+	border-top: 1px solid #dfdfdf;
+	background: #fbfbfb
+}
+
+article .answer-editor .answerSubmit {
+	font-size: 14px;
+	width: 64px;
+	height: 26px;
+	margin: 12px 10px 12px 15px;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	background: #579dc5
+}
+
+article .answer-editor .saveDraft {
+	font-size: 14px;
+	margin: 10px 5px 10px 0;
+	color: #579dc5;
+	border: none;
+	background: 0 0
+}
+
+article .answer-editor .draftStatus {
+	font-size: 12px;
+	color: #999
+}
+
+.fold {
+	line-height: 26px;
+	display: none;
+	float: right;
+	height: 26px
+}
+
+.foldicon {
+	position: relative;
+	top: 5px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+	background-image: url(../img/fold.png)
+}
+.replyOther_div{
+	margin-left: 48px;
+    margin-top: -20px;
+    height: 30px;
+    display: none;
+}

@@ -26,25 +26,25 @@ public class privilegeInterceptor implements MethodInterceptor{
     @Override  
     public Object invoke(MethodInvocation invocation) throws Throwable {  
           
-        Method method = invocation.getMethod();//»ñÈ¡±»À¹½ØµÄ·½·¨  
-        Object[] arguments = invocation.getArguments();//»ñÈ¡À¹½Ø·½·¨µÄ²ÎÊı  
-        PrivilegeInfo privilegeInfo = AnnotationUtils.findAnnotation(method, PrivilegeInfo.class);//¸ù¾İ·½·¨ÕÒµ½×¢½â£¬Õâ¸ö×¢½âÊÇÎÒÃÇ×Ô¶¨ÒåµÄ×¢½â£¬ÏÂÃæ»á½²  
+        Method method = invocation.getMethod();//è·å–è¢«æ‹¦æˆªçš„æ–¹æ³•    
+        Object[] arguments = invocation.getArguments();//è·å–æ‹¦æˆªæ–¹æ³•çš„å‚æ•°  
+        PrivilegeInfo privilegeInfo = AnnotationUtils.findAnnotation(method, PrivilegeInfo.class);//æ ¹æ®æ–¹æ³•æ‰¾åˆ°æ³¨è§£ï¼Œè¿™ä¸ªæ³¨è§£æ˜¯æˆ‘ä»¬è‡ªå®šä¹‰çš„æ³¨è§£ï¼Œä¸‹é¢ä¼šè®²  
         if(privilegeInfo!=null) {  
-            String value = (String) AnnotationUtils.getAnnotationAttributes(privilegeInfo).get("value");//»ñÈ¡È¨ÏŞÖµ  
+            String value = (String) AnnotationUtils.getAnnotationAttributes(privilegeInfo).get("value");//è·å–æƒé™å€¼  
             boolean isAccessed = false;  
-            MenuCondition isPrivilege = new MenuCondition();//ÕâÊÇÒ»¸öÈ¨ÏŞÀà  
-            //´ÓsessionÖĞ»ñÈ¡È¨ÏŞ  
+            MenuCondition isPrivilege = new MenuCondition();//è¿™æ˜¯ä¸€ä¸ªæƒé™ç±»   
+            //ä»sessionä¸­è·å–æƒé™  
             for (MenuCondition privilege : privileges) {  
                  
-                 * Èç¹ûÄ¿±ê·½·¨Ã»ÓĞÊ¹ÓÃPrivilegeInfo×¢½â£¬Ôò½âÎö³öÀ´µÄÈ¨ÏŞ×Ö·û´®¾ÍÎª¿Õ×Ö·û´® 
-                 * ÔòÄ¬ÈÏÓÃ»§ÓµÓĞÕâ¸öÈ¨ÏŞ 
+                  * å¦‚æœç›®æ ‡æ–¹æ³•æ²¡æœ‰ä½¿ç”¨PrivilegeInfoæ³¨è§£ï¼Œåˆ™è§£æå‡ºæ¥çš„æƒé™å­—ç¬¦ä¸²å°±ä¸ºç©ºå­—ç¬¦ä¸² 
+                 * åˆ™é»˜è®¤ç”¨æˆ·æ‹¥æœ‰è¿™ä¸ªæƒé™ 
                    
                 if ("".equals(methodAccess)) {  
                     isAccessed = true;  
                     break;  
                 }  
                  
-                 * ÓÃ»§Ô­ÓĞÈ¨ÏŞÁĞ±íÖĞÓĞµÄÈ¨ÏŞÓëÄ¿±ê·½·¨ÉÏPrivilegeInfo×¢½âÅäÖÃµÄÈ¨ÏŞ½øĞĞÆ¥Åä 
+                 * ç”¨æˆ·åŸæœ‰æƒé™åˆ—è¡¨ä¸­æœ‰çš„æƒé™ä¸ç›®æ ‡æ–¹æ³•ä¸ŠPrivilegeInfoæ³¨è§£é…ç½®çš„æƒé™è¿›è¡ŒåŒ¹é…
                    
                 String truePrivikey = privilege.getlPrivyKey()+"";  
                 if (truePrivikey!= null &&   
@@ -55,17 +55,17 @@ public class privilegeInterceptor implements MethodInterceptor{
                 }  
             }  
              
-             * 3.Èç¹ûÓÃ»§ÓµÓĞÈ¨ÏŞ£¬Ôòµ÷ÓÃÄ¿±ê·½·¨¡¡£¬Èç¹ûÃ»ÓĞ£¬Ôò²»µ÷ÓÃÄ¿±ê·½·¨£¬Ö»¸ø³öÌáÊ¾ 
+            * 3.å¦‚æœç”¨æˆ·æ‹¥æœ‰æƒé™ï¼Œåˆ™è°ƒç”¨ç›®æ ‡æ–¹æ³•ã€€ï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™ä¸è°ƒç”¨ç›®æ ‡æ–¹æ³•ï¼Œåªç»™å‡ºæç¤º 
                
             if (isAccessed) {  
                  
-                 * ÌØÊâ£¬Ä³Ğ©È¨ÏŞĞèÒª×öÌØÊâ´¦Àí 
-                 * ±ÈÈçÓÃ»§ĞÅÏ¢È¨ÏŞ£¬ÔÚ·½·¨Ö´ĞĞÍê±Ï·µ»ØµÄÊ±ºò£¬Òª½«µç»°ºÅÂëÓëÓÊÏäÄ¨³ı 
+                  * ç‰¹æ®Šï¼ŒæŸäº›æƒé™éœ€è¦åšç‰¹æ®Šå¤„ç† 
+                 * æ¯”å¦‚ç”¨æˆ·ä¿¡æ¯æƒé™ï¼Œåœ¨æ–¹æ³•æ‰§è¡Œå®Œæ¯•è¿”å›çš„æ—¶å€™ï¼Œè¦å°†ç”µè¯å·ç ä¸é‚®ç®±æŠ¹é™¤ 
                    
-                //»·ÈÆÍ¨ÖªÇ°ÖÃÌØÊâ´¦Àí  
+               //ç¯ç»•é€šçŸ¥å‰ç½®ç‰¹æ®Šå¤„ç†  
                 this.beforeReslove();  
-                Object proceed = invocation.proceed();//µ÷ÓÃÄ¿±ê·½·¨  
-                //»·ÈÆÍ¨ÖªºóÖÃÌØÊâ´¦Àí  
+                Object proceed = invocation.proceed();//è°ƒç”¨ç›®æ ‡æ–¹æ³•  
+                //ç¯ç»•é€šçŸ¥åç½®ç‰¹æ®Šå¤„ç†  
                 proceed =  this.afterReslove();  
                 return proceed;  
                   

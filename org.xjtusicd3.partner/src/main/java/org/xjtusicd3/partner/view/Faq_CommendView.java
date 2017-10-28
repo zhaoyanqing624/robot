@@ -7,7 +7,7 @@ package org.xjtusicd3.partner.view;
  * data:2017年9月15日09:05:05
  */
 public class Faq_CommendView {
-	private	String userId;
+	private	String userId;//登录用户
 	private String FAQQUESTIONID;
 	private String faqParentId;
 	private String FAQTITLE;
@@ -17,7 +17,23 @@ public class Faq_CommendView {
 	private String SCAN;
 	private String FAQCLASSIFYIMAGE;
 	private int COMMENTSUM;
+	private String FAQUSERNAME;
+	private String FAQUSERIMAGE;
 	
+	
+	
+	public String getFAQUSERNAME() {
+		return FAQUSERNAME;
+	}
+	public void setFAQUSERNAME(String fAQUSERNAME) {
+		FAQUSERNAME = fAQUSERNAME;
+	}
+	public String getFAQUSERIMAGE() {
+		return FAQUSERIMAGE;
+	}
+	public void setFAQUSERIMAGE(String fAQUSERIMAGE) {
+		FAQUSERIMAGE = fAQUSERIMAGE;
+	}
 	public int getCOMMENTSUM() {
 		return COMMENTSUM;
 	}

@@ -28,6 +28,7 @@ import org.xjtusicd3.database.model.QuestionPersistence;
 import org.xjtusicd3.database.model.ScorePersistence;
 import org.xjtusicd3.database.model.SharePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.annotation.SystemControllerLog;
 import org.xjtusicd3.partner.lucene.LuceneIndex;
 import org.xjtusicd3.partner.service.ClassifyService;
 import org.xjtusicd3.partner.service.CommentService;
@@ -48,6 +49,7 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 public class FaqController {
 	@RequestMapping(value="faq",method=RequestMethod.GET)
+	@SystemControllerLog(description = "faq首页面")
 	public ModelAndView faq(HttpSession session,HttpServletRequest request,String q){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		//zzl_获取登录用户
@@ -62,19 +64,19 @@ public class FaqController {
 		//查询所有用户发表知识的状态
 		List<Faq_UserDynamics> userDynamics = QuestionService.userDynamics();
 		System.out.println("userDynamics:"+userDynamics.size());
-		List<UserPersistence> userInfo = UserHelper.getUserNameById(userDynamics.get(0).getUserId());
-		String userImage = userInfo.get(0).getAVATAR();
-		String userName = userInfo.get(0).getUSERNAME();
+		//List<UserPersistence> userInfo = UserHelper.getUserNameById(userDynamics.get(0).getUserId());
+		//String userImage = userInfo.get(0).getAVATAR();
+		//String userName = userInfo.get(0).getUSERNAME();
 		session.setAttribute("urlPath", urlPath);
 				
 		if(username==null){
-			//zzl_获取推荐faq_2017年9月14日21:43:52
+			//zzl未登录用户获取推荐faq_2017年9月14日21:43:52
 			int startnum = 0;
 			List<Faq_CommendView> faqlists = QuestionService.faq_recommend_Limit(startnum);
 			mv.addObject("faqlists", faqlists);
 			System.out.println("未登录用户");
 		}else{
-			//zzl_获取推荐faq_2017年9月14日21:43:52
+			//zzl_已登录用户获取推荐faq_2017年9月14日21:43:52
 			System.out.println("已登录用户");
 			//List<UserPersistence> userPersistences = UserHelper.getEmail(useremail);	
 			List<UserPersistence> userPersistences = UserHelper.getUserInfo(username);
@@ -85,8 +87,8 @@ public class FaqController {
 		}
 		
 		mv.addObject("userDynamics", userDynamics);
-		mv.addObject("userImage", userImage);
-		mv.addObject("userName", userName);
+		//mv.addObject("userImage", userImage);
+		//mv.addObject("userName", userName);
 		return mv;
 		
 	}
@@ -97,6 +99,7 @@ public class FaqController {
 	 * faq、faq1_上侧的第二级分类
 	 */
 	@RequestMapping(value="faq1",method=RequestMethod.GET)
+	@SystemControllerLog(description = "faq、faq1_上侧的第二级分类")
 	public ModelAndView classifyName2(HttpSession session,HttpServletRequest request,String p){
 		ModelAndView modelAndView = new ModelAndView("faq1");		
 		//zzl_获取一级分类信息
@@ -132,6 +135,7 @@ public class FaqController {
 	 * faq2_知识列表
 	 */
 	@RequestMapping(value="faq2",method=RequestMethod.GET)
+	@SystemControllerLog(description = "faq2_知识列表")
 	public ModelAndView faqList(HttpSession session,HttpServletRequest request,String c){
 		ModelAndView modelAndView = new ModelAndView("faq2");
 		List<ClassifyPersistence> classify2 = ClassifyService.faq2_classify2(c);
@@ -158,6 +162,7 @@ public class FaqController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreFaqList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "faq2_ajax请求更多知识列表")
 	public String faq2list(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		int pagenow = Integer.parseInt(request.getParameter("pagenow"));
 		int pageNow = pagenow+1;
@@ -176,6 +181,7 @@ public class FaqController {
 	 * faq3_知识内容
 	 */
 	@RequestMapping(value="faq3",method=RequestMethod.GET)
+	@SystemControllerLog(description = "faq3_知识内容")
 	public ModelAndView faqContent(HttpSession session,HttpServletRequest request,String q) throws Exception{
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -226,9 +232,6 @@ public class FaqController {
 					modelAndView.addObject("IsShare", "1");
 				}
 			}
-		
-			//添加用户访问日志_2017年9月14日22:01:31
-			LogService.addLog(userPersistences.get(0).getUSERID(),"/faq3.html?q="+q);
 		}
 		//查看相似的问题
 		List<robot_Chat> robot_Chats = RobotService.getRobotAnswer(faq3Views.get(0).getFaqTitle());
@@ -253,6 +256,7 @@ public class FaqController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveFAQ"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
+	@SystemControllerLog(description = "FAQ的增加")
 	public String saveFAQ(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -290,6 +294,7 @@ public class FaqController {
 	 * zyq_faqadd_FAQ的增加页面
 	 */
 	@RequestMapping(value="faqadd",method=RequestMethod.GET)
+	@SystemControllerLog(description = "FAQ的增加页面")
 	public ModelAndView faqadd(HttpSession session,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("faqadd");
 		String urlPath = request.getHeader("REFERER");
@@ -301,6 +306,7 @@ public class FaqController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveFAQscore"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "FAQ评分")
 	public String saveFAQscore(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -320,10 +326,11 @@ public class FaqController {
 		}
 	}
 	/*
-	 * zyq_faq3_ajax_FAQ推荐
+	 * zyq_faq3_ajax_FAQ分享
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveShare"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "FAQ分享")
 	public String saveShare(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -380,6 +387,7 @@ public class FaqController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value="/faqSearch",method=RequestMethod.POST)
+	@SystemControllerLog(description = "FAQ查找")
 	public ModelAndView faqSearch(HttpSession session,HttpServletRequest request) throws Exception{
 		String queryStr = request.getParameter("queryString");
 		ModelAndView modelAndView = new ModelAndView("faqSearch");
@@ -406,6 +414,7 @@ public class FaqController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/queryMoreResult"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取更多FAQ结果")
 	public String queryMoreResult(HttpSession session,HttpServletRequest request) throws Exception{
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");

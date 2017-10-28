@@ -1,0 +1,387 @@
+@charset 'utf-8'; 
+
+#backToTop, #backToTopP {
+	bottom: 88px
+}
+
+#question .description .fullDetail, #question .title {
+	margin: 10px 0
+}
+
+#searchResult, #sort {
+	border-top: 1px solid #ddd
+}
+
+.QRCode-bulb, .QRCode-word, .answer_name {
+	display: inline-block
+}
+
+.head h1, .head img {
+	vertical-align: middle
+}
+
+#question {
+	padding-top: 0;
+	border-bottom: none
+}
+
+#question .tag {
+	height: auto
+}
+
+#question .tag ul {
+	float: none
+}
+
+#question .tag ul li {
+	height: 20px
+}
+
+#question .title a:hover {
+	cursor: default;
+	text-decoration: none
+}
+
+article .options ul li a {
+	color: #818181
+}
+
+#sort {
+	line-height: 30px;
+	height: 30px;
+	margin: 15px 0 0;
+	padding: 7px 0;
+	border-bottom: 1px solid #ddd
+}
+
+#sort h2 {
+	font-size: 12px;
+	font-weight: 700;
+	float: left;
+	margin-left: 30px;
+	color: #606060
+}
+
+#sort select {
+	float: right;
+	margin-right: 30px;
+	padding: 3px;
+	color: #888;
+	border: none
+}
+
+#answer-edit {
+	padding: 15px 20px 20px 30px;
+	border-radius: 5px;
+	background: #f7f7f7
+}
+
+#answer-edit #answerer {
+	height: 40px;
+	margin-bottom: 15px;
+	color: #999
+}
+
+#answer-edit #answerer img {
+	float: left;
+	width: 40px;
+	height: 40px;
+	margin-right: 20px;
+	border-radius: 5px
+}
+
+#answer-edit #answerer p {
+	font-size: 12px;
+	line-height: 40px;
+	height: 40px;
+	vertical-align: middle;
+	color: #000
+}
+
+#answer-edit input {
+	font-size: 12px;
+	width: 620px;
+	height: 40px;
+	padding: 0 10px;
+	border: 1px solid #ececec
+}
+
+#answerSubmit {
+	font-size: 14px;
+	width: 64px;
+	height: 26px;
+	margin: 12px 10px;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	background: #579dc5
+}
+
+#saveDraft {
+	font-size: 14px;
+	margin: 10px 5px 10px 0;
+	color: #579dc5;
+	border: none;
+	background: 0 0
+}
+
+#draftStatus {
+	font-size: 12px;
+	color: #999
+}
+
+#searchResult .noAnswer {
+	font-size: 14px;
+	line-height: 30px;
+	margin-top: 20px;
+	text-align: center
+}
+
+.answerArticle {
+	margin: 20px 0 10px;
+	padding: 0 30px;
+	border-bottom: none
+}
+
+.answer_name {
+	height: 20px line-height: 20px;
+	width: 480px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.answer_time {
+	height: 20px;
+	line-height: 20px;
+	margin-left:33%
+}
+
+#backToAnswer, #backToTop, .cancelAnswerEdit {
+	height: 26px;
+	border: none
+}
+
+#searchResult>li {
+	border-bottom: 1px solid #ddd
+}
+
+#searchResult>li:last-child {
+	border-bottom: none
+}
+
+.hideComments, article .comment .allComments {
+	position: relative;
+	top: -10px;
+	padding: 0 20px;
+	color: #74abcd;
+	border: none;
+	left:40%
+}
+
+.cancelAnswerEdit {
+	font-size: 13px;
+	width: 64px;
+	margin: 12px 10px 12px 5px;
+	color: #579dc5;
+	border-radius: 5px;
+	background: 0 0
+}
+
+.QRCode p, .head h1, .rightWrap p {
+	font-size: 14px
+}
+
+.rightWrap {
+	margin-top: 10px;
+	margin-bottom: 30px
+}
+
+.QRCode {
+	margin-bottom: 50px;
+	text-align: center
+}
+
+.QRCode-img {
+	width: 150px;
+	height: 150px;
+	margin-bottom: 10px;
+	border: 3px solid #b7dceb;
+	border-radius: 10px
+}
+
+.head, .rightWrap li, .rightWrap p {
+	margin-bottom: 15px
+}
+
+.QRCode-word {
+	margin-left: 10px;
+	text-align: right
+}
+
+.QRCode p {
+	line-height: 20px;
+	color: #b3b3b3
+}
+
+.head img {
+	width: 20px;
+	margin-right: 10px
+}
+
+.head h1 {
+	display: inline;
+	color: #262626
+}
+
+.rightWrap li a {
+	font-size: 14px;
+	line-height: 20px;
+	color: #83b5d3
+}
+
+.rightWrap li a:hover {
+	text-decoration: underline
+}
+
+.rightWrap span.status {
+	display: inline-block;
+	width: 50px;
+	color: #262626
+}
+
+.rightWrap span.number {
+	color: #999
+}
+
+.deleteForm {
+	position: fixed;
+	z-index: 11;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%
+}
+
+.delete-f {
+	position: fixed;
+	z-index: 1001;
+	top: 25%;
+	left: 50%
+}
+
+.delete-s {
+	position: relative;
+	left: -50%;
+	width: 340px;
+	height: 190px;
+	border-radius: 10px;
+	background: #f3f3f3
+}
+
+#backToAnswer, #backToTop {
+	width: 26px;
+	margin-left: 236px
+}
+
+.deleteForm h1 {
+	font-size: 16px;
+	font-weight: 700;
+	position: absolute;
+	top: 60px;
+	left: 120px
+}
+
+.deleteForm .cancelDelete, .deleteForm .confirmDelete {
+	position: absolute;
+	top: 110px;
+	padding: 10px 20px;
+	color: #fff;
+	border-radius: 5px;
+	background: #579dc5
+}
+
+.deleteForm .confirmDelete {
+	left: 85px
+}
+
+.deleteForm .cancelDelete {
+	left: 185px
+}
+
+#backToAnswer, #backToAnswerP, #backToTop, #backToTopP {
+	position: fixed;
+	left: 50%;
+	display: none
+}
+
+.deleteForm .cancelDelete:hover, .deleteForm .confirmDelete:hover {
+	background: #83b5d3
+}
+
+#backToAnswerP, #backToTopP {
+	font-size: 14px;
+	line-height: 28px;
+	width: 80px;
+	height: 28px;
+	margin-left: 286px;
+	text-indent: 14px;
+	color: #5c8fbf;
+	background: url(../img/backTop.png) -120px 0
+}
+
+#backToTop {
+	background: url(../img/backTop.png)
+}
+
+#backToTop:hover {
+	cursor: pointer;
+	background-position: -31px 0
+}
+
+#backToAnswer {
+	bottom: 50px;
+	background: url(../img/backTop.png) -61px 0
+}
+
+#backToAnswer:hover {
+	cursor: pointer;
+	background-position: -91px 0
+}
+
+#backToAnswerP {
+	bottom: 50px
+}
+.iknow-qb_home_icons {
+    font-family: iknow-qb_home_icons!important;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    outline: 0;
+}
+.answer-best {
+    width: 21px;
+    height: 28px;
+    display: -moz-inline-box;
+    -moz-box-orient: vertical;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    color: #4ACA5D;
+    font-size: 28px;
+    zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe68f;' );
+}
+.answer-title {
+    margin-top: 2px;
+    height: 26px;
+    font-size: 22px;
+    color: #35b558;
+    font-weight: 100;
+}
+.answer-title {
+    font-weight: 400;
+}

@@ -96,7 +96,7 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 * faq_未登录用户推荐_2017年9月14日21:16:18
 	 */
 	//@Select("SELECT FAQTITLE, MODIFYTIME, FAQDESCRIPTION  ,sum(SCAN+COLLECTION*10) as a FROM TBL_FAQquestion  ORDER BY a DESC LIMIT #{0},5")
-	@Select("SELECT FAQQUESTIONID, FAQTITLE, MODIFYTIME, FAQDESCRIPTION ,COLLECTION,SCAN,sum(CAST(SCAN AS SIGNED)+CAST(COLLECTION AS SIGNED)*10) as a FROM TBL_FAQquestion GROUP BY FAQQUESTIONID ORDER BY a DESC LIMIT #{0},5")
+	@Select("SELECT FAQQUESTIONID, FAQTITLE, MODIFYTIME, FAQDESCRIPTION ,COLLECTION,SCAN,USERID,sum(CAST(SCAN AS SIGNED)+CAST(COLLECTION AS SIGNED)*10) as a FROM TBL_FAQquestion GROUP BY FAQQUESTIONID ORDER BY a DESC LIMIT #{0},5")
 	public List<QuestionPersistence> faq_recommend_Limit(int startnum);
 	
 //	@Select("SELECT * FROM TBL_FAQquestion ORDER BY MODIFYTIME DESC LIMIT #{0},5")
@@ -108,7 +108,7 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 * abstract:获取分类下faq具体信息
 	 * data:2017年9月15日10:29:07
 	 */
-	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID ,TBL_FAQquestion.FAQTITLE,TBL_FAQquestion.COLLECTION ,TBL_FAQquestion.SCAN, TBL_FAQquestion.MODIFYTIME,TBL_FAQquestion.FAQDESCRIPTION ,sum(CAST(SCAN AS SIGNED)+CAST(COLLECTION AS SIGNED)*10) as a FROM TBL_FAQquestion ,TBL_FAQclassify WHERE TBL_FAQclassify.FAQPARENTID=#{0} AND TBL_FAQclassify.FAQCLASSIFYID = TBL_FAQquestion.FAQCLASSIFYID GROUP BY TBL_FAQquestion.FAQQUESTIONID ORDER BY a DESC LIMIT #{1},5")
+	@Select("SELECT TBL_FAQquestion.FAQQUESTIONID ,TBL_FAQquestion.FAQTITLE,TBL_FAQquestion.COLLECTION ,TBL_FAQquestion.SCAN, TBL_FAQquestion.MODIFYTIME,TBL_FAQquestion.FAQDESCRIPTION ,TBL_FAQquestion.USERID,sum(CAST(SCAN AS SIGNED)+CAST(COLLECTION AS SIGNED)*10) as a FROM TBL_FAQquestion ,TBL_FAQclassify WHERE TBL_FAQclassify.FAQPARENTID=#{0} AND TBL_FAQclassify.FAQCLASSIFYID = TBL_FAQquestion.FAQCLASSIFYID GROUP BY TBL_FAQquestion.FAQQUESTIONID ORDER BY a DESC LIMIT #{1},5")
 	public List<QuestionPersistence> questionView(String parentId,int startnum);
 	
 	/**
@@ -142,5 +142,9 @@ public interface QuestionPersistenceMapper extends IBaseDao<QuestionPersistence,
 	 */
 	@Select("SELECT * FROM TBL_FAQquestion  WHERE FAQQUESTIONID=#{0}")
 	public List<QuestionPersistence> faqcollection(String questionId);
+	
+	//zzl_记录用户提问记录_查看用户提问是否为faq中的内容_2017年10月22日11:43:43
+	@Select("SELECT * FROM TBL_FAQquestion  WHERE FAQTITLE=#{0}")
+	public List<QuestionPersistence> getFaqQuestion(String comment);
 	
 }

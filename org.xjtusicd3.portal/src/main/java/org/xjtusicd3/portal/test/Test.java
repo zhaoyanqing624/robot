@@ -1,6 +1,5 @@
 package org.xjtusicd3.portal.test;
 
-import java.io.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.xjtusicd3.portal.test.ILogin;
@@ -9,6 +8,6 @@ public class Test {
     {
 		ApplicationContext ctx = new FileSystemXmlApplicationContext("ApplicationContext.XML");
         ILogin login = (ILogin)ctx.getBean("login");
-        login.login("flash"); //用户为flash是正确用户，否则是错误的
+        login.login("flash"); //鐢ㄦ埛涓篺lash鏄纭敤鎴凤紝鍚﹀垯鏄敊璇殑
     }
 }

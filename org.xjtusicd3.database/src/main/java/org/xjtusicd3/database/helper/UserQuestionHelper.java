@@ -45,5 +45,18 @@ public class UserQuestionHelper
 			session.close();
 			
 		}
+		
+		/**
+		 * author:zzl
+		 * abstract:记录用户提问记录
+		 * data:2017年10月22日18:43:47
+		 */
+		public static void addUserQuestion(String userQuestionId, String userQuestionTitle, String time, int isFaq, String userId) {
+			SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+			UserQuestionPersistenceMapper mapper = session.getMapper(UserQuestionPersistenceMapper.class);
+			mapper.addUserQuestion(userQuestionId,userQuestionTitle,time,isFaq,userId);
+			session.close();
+			
+		}
 	
 }

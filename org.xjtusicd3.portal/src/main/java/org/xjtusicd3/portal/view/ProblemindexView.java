@@ -11,6 +11,18 @@ public class ProblemindexView
 	private String problemAnswerId;
 	private String problemAnswer;
 	private String problemAnswerTime;
+	//zzl_2017年10月11日15:27:21
+	private String isanswer;
+	
+	
+	public String getIsanswer() {
+		return isanswer;
+	}
+	public void setIsanswer(String isanswer) {
+		this.isanswer = isanswer;
+	}
+	
+	
 	public String getProblemAnswerId()
 	{
 		return problemAnswerId;

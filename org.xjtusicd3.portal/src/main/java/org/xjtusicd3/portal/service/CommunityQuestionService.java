@@ -23,6 +23,11 @@ public class CommunityQuestionService {
 		
 	}
 	
+	/**
+	 * author:
+	 * abstract:获取前台社区问题
+	 * data:2017年10月11日11:08:20
+	 */
 	public static List<ProblemindexView> problemindexViews(){
 		List<ProblemindexView> problemindexViews = new ArrayList<ProblemindexView>();
 		List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.getAllCommunityQuestion();
@@ -36,10 +41,15 @@ public class CommunityQuestionService {
 			problemindexView.setProblemUser(userPersistences.get(0).getUSERNAME());
 			problemindexView.setProblemTime(communityQuestionPersistence.getTIME());
 			problemindexView.setProblemContent(communityQuestionPersistence.getCONTENT());
+			//zzl_2017年10月11日15:29:41
+			problemindexView.setIsanswer(communityQuestionPersistence.getISANSWER());
+			System.out.println("Isanswer:"+communityQuestionPersistence.getISANSWER());
 			problemindexViews.add(problemindexView);
 		}
 		return problemindexViews;
 	}
+	
+	
 	/*
 	 * get community problem by id
 	 */
@@ -57,6 +67,28 @@ public class CommunityQuestionService {
 			 
 			problemindexView.setProblemTime(communityQuestionPersistence.getTIME());
 			problemindexView.setProblemContent(communityQuestionPersistence.getCONTENT());
+			problemindexViews.add(problemindexView);
+		}
+		return problemindexViews;
+	}
+
+	//zzl_2017年10月11日20:03:30
+	public static List<ProblemindexView> problemindexViews2() {
+		List<ProblemindexView> problemindexViews = new ArrayList<ProblemindexView>();
+		List<CommunityQuestionPersistence> communityQuestionPersistences = CommunityQuestionHelper.getAllCommunityQuestion2();
+		for(CommunityQuestionPersistence communityQuestionPersistence:communityQuestionPersistences){
+			ProblemindexView problemindexView = new ProblemindexView();
+			problemindexView.setProblemId(communityQuestionPersistence.getCOMMUNITYQUESTIONID()); 
+			problemindexView.setProblemTitle(communityQuestionPersistence.getTITLE()); 
+			List<ClassifyPersistence> classifyPersistences = ClassifyHelper.faq2_classify(communityQuestionPersistence.getCLASSIFYID());
+			problemindexView.setProblemClassify(classifyPersistences.get(0).getFAQCLASSIFYNAME());
+			List<UserPersistence> userPersistences = UserHelper.getUserNameById(communityQuestionPersistence.getUSERID());
+			problemindexView.setProblemUser(userPersistences.get(0).getUSERNAME());
+			problemindexView.setProblemTime(communityQuestionPersistence.getTIME());
+			problemindexView.setProblemContent(communityQuestionPersistence.getCONTENT());
+			//zzl_2017年10月11日15:29:41
+			problemindexView.setIsanswer(communityQuestionPersistence.getISANSWER());
+			System.out.println("Isanswer2:"+communityQuestionPersistence.getISANSWER());
 			problemindexViews.add(problemindexView);
 		}
 		return problemindexViews;

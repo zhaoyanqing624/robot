@@ -122,8 +122,11 @@ public class EquipmentService {
 	
 	public static List<Personal3_EquipmentView> personal3_EquipmentView(String username,String macaddress) {
 		List<Personal3_EquipmentView> personal3_EquipmentViews = new ArrayList<Personal3_EquipmentView>();
-		List<UserPersistence> uList = UserHelper.getUserInfo(username);
-		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipment(macaddress);
+		List<UserPersistence> uList = UserHelper.getUserInfo(username);		
+		//zzl_获取macaddress
+		List<CurrentEquipmentPersistence> configure = CurrentEquipmentHelp.getMacAdress(uList.get(0).getUSERID());
+		
+		List<CurrentEquipmentPersistence> currentEquipmentPersistences = CurrentEquipmentHelp.currentEquipment(configure.get(0).getMACADDRESS());
 		for(CurrentEquipmentPersistence currentEquipmentPersistence:currentEquipmentPersistences){
 			List<Personal3_EquipmentConfigureView> personal3_EquipmentConfigureViews = new ArrayList<Personal3_EquipmentConfigureView>();
 			List<CurrentConfigurePersistence> configurePersistences = CurrentConfigureHelper.getCurrentConfigure(currentEquipmentPersistence.getEQUIPMENTID(),"补丁");

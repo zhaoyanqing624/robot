@@ -309,4 +309,16 @@ public class QuestionHelper {
 		session.close();
 		return list;
 	}
+	/**
+	 * author:zzl
+	 * abstract:记录用户提问记录_查看用户提问是否为faq中的内容
+	 * data:2017年10月22日11:42:29
+	 */
+	public static List<QuestionPersistence> getFaqQuestion(String comment) {
+		SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession(true);
+		QuestionPersistenceMapper mapper = session.getMapper(QuestionPersistenceMapper.class);
+		List<QuestionPersistence> list = mapper.getFaqQuestion(comment);
+		session.close();
+		return list;
+	}
 }

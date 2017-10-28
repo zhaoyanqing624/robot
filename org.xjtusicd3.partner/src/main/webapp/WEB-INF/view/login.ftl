@@ -58,11 +58,11 @@
         
         <div class="cont_form_sign_up"> <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
           <h2>SIGN UP</h2>
-          <input type="text" class="inputElem" id="me" placeholder="邮箱" oninput="_email2()"/>
+          <input type="text" class="inputElem" id="me" placeholder="此处注册功能留空" oninput="_email2()"/>
           <div><div class="validate_faqadd spa1"></div></div>
-          <input type="password" id="password" placeholder="密码" "/>
+          <input type="password" id="password" placeholder="此处注册功能留空_密码" "/>
           <div><div class="validate_faqadd spa3" id="_password"></div></div>
-          <input type="password" id="repassword" placeholder="再次输入密码" oninput="_repassword2()"/>
+          <input type="password" id="repassword" placeholder="此处注册功能留空_再次输入密码" oninput="_repassword2()"/>
           <div><div class="validate_faqadd spa4" id="_repassword" ></div></div>
           <button class="btn_sign_up" id="register" data-dialog="somedialog">注册</button>
         </div>

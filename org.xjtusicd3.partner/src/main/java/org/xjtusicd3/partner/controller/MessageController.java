@@ -17,6 +17,7 @@ import org.xjtusicd3.database.helper.UserHelper;
 import org.xjtusicd3.database.model.MessageHistoryPersistence;
 import org.xjtusicd3.database.model.MessagePersistence;
 import org.xjtusicd3.database.model.UserPersistence;
+import org.xjtusicd3.partner.annotation.SystemControllerLog;
 import org.xjtusicd3.partner.service.MessageService;
 import org.xjtusicd3.partner.service.NoticeService;
 import org.xjtusicd3.partner.view.Message_MessageView;
@@ -27,6 +28,7 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 public class MessageController {
 	@RequestMapping(value="main",method={org.springframework.web.bind.annotation.RequestMethod.GET})
+	@SystemControllerLog(description = "意见建议主界面")
 	public String messageIndexPage() {
 		return "liuyan/index";
 	}
@@ -36,6 +38,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getUserName"},method={org.springframework.web.bind.annotation.RequestMethod.GET},produces="text/plain;charset=UTF-8")
+	@SystemControllerLog(description = "意见建议获得用户名")
 	public String getUserName(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -48,6 +51,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getUserInfo"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="text/plain;charset=UTF-8")
+	@SystemControllerLog(description = "意见建议获得用户基本信息")
 	public String getUserInfo(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		String username = request.getParameter("username");
 		List<UserPersistence> list = UserHelper.getUserInfo(username);
@@ -58,6 +62,7 @@ public class MessageController {
 	 * zyq_notice_消息通知
 	 */
 	@RequestMapping(value="notice",method=RequestMethod.GET)
+	@SystemControllerLog(description = "notice_消息通知")
 	public ModelAndView notice(HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -77,6 +82,7 @@ public class MessageController {
 		}
 	}
 	@RequestMapping(value="notice2",method=RequestMethod.GET)
+	@SystemControllerLog(description = "消息通知2")
 	public ModelAndView notice2(HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -98,6 +104,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/updateNotice"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "更改消息通知的被查阅后的状态")
 	public String updateNotice(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -121,6 +128,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/deleteNotice"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "把列表的消息通知删除")
 	public String deleteNotice(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -143,6 +151,7 @@ public class MessageController {
 	 * zyq_message_消息通知
 	 */
 	@RequestMapping(value="message",method=RequestMethod.GET)
+	@SystemControllerLog(description = "message_消息通知")
 	public ModelAndView message(String u,HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -180,6 +189,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/saveMessage"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "发送私信")
 	public String saveMessage(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -203,6 +213,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMessage"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "查询私信内容")
 	public String getMessage(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -261,6 +272,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getMoreMessageHistory"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "message_获取更多私信的历史记录")
 	public String getMoreMessageHistory(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
@@ -295,6 +307,7 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/deleteMessageList"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "message_删除私信列表")
 	public String deleteMessageList(HttpServletRequest request,HttpSession session){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");

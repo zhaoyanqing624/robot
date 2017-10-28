@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.xjtusicd3.partner.annotation.SystemControllerLog;
 import org.xjtusicd3.partner.service.EquipmentService;
 import org.xjtusicd3.partner.view.Personal3_EquipmentView;
 
@@ -25,10 +26,12 @@ public class EquipmentController {
 	 * abstract:展示personal3当前设备信息
 	 */
 	@RequestMapping(value="personal3",method=RequestMethod.GET)
+	@SystemControllerLog(description = "展示personal3当前设备信息")
 	public ModelAndView personal3(HttpSession session,HttpServletRequest request,String e) throws UnknownHostException, SocketException, SigarException {
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");
 		ModelAndView mv = new ModelAndView("personal3");
+		System.out.println("eeeeee:"+e);
 		List<Personal3_EquipmentView> list = EquipmentService.personal3_EquipmentView(username,e);
 		mv.addObject("personal3_list", list);
 		return mv;
@@ -40,6 +43,7 @@ public class EquipmentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/getInformation"},method={org.springframework.web.bind.annotation.RequestMethod.POST},produces="application/json;charset=UTF-8")
+	@SystemControllerLog(description = "获取客户端的信息")
 	public void getInformation(HttpServletRequest request,HttpSession session,final String[] softWare,final String[] path){
 		//String useremail = (String) session.getAttribute("UserEmail");
 		String username = (String) session.getAttribute("UserName");

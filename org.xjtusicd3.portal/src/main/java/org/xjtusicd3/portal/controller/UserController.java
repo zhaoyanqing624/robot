@@ -60,6 +60,7 @@ public class UserController
 		}else 
 		{
 			session.setAttribute("useremail", email);
+			session.setAttribute("UserName", list.get(0).getUSERNAME());
 			request.getSession().setAttribute("user", list.get(0));
 			return "redirect:index.html" ;
 		}	
